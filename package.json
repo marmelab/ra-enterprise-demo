@@ -5,6 +5,7 @@
     "dependencies": {
         "@material-ui/core": "^4.9.0",
         "@material-ui/icons": "^4.5.1",
+    "@react-admin/ra-markdown": "^0.0.2",
         "data-generator-retail": "^3.0.0",
         "fakerest": "~2.1.0",
     "fetch-mock": "~9.4.0",
@@ -31,8 +32,7 @@
     "scripts": {
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "start": "react-scripts start",
-        "build": "react-scripts build",
-        "eject": "react-scripts eject"
+    "build": "react-scripts build"
     },
     "homepage": "https://marmelab.com/react-admin-demo",
     "browserslist": [

@@ -16,7 +16,7 @@ import {
 } from 'react-admin';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RichTextInput from 'ra-input-rich-text';
+import { MarkdownInput } from '@react-admin/ra-markdown';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
@@ -93,7 +93,7 @@ const ProductEdit = props => {
                     label="resources.products.tabs.description"
                     path="description"
                 >
-                    <RichTextInput source="description" label="" />
+                    <MarkdownInput source="description" label="" />
                 </FormTab>
                 <FormTab label="resources.products.tabs.reviews" path="reviews">
                     <ReferenceManyField
