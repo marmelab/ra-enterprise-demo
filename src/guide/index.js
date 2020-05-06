@@ -1,12 +1,11 @@
 import React, { useReducer, createContext, useContext } from "react";
 import { useRedirect, useNotify } from "react-admin";
 import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
-import { makeStyles } from "@material-ui/core/styles";
 
 import Tooltip from "./Tooltip";
 
-const StateContext = React.createContext();
-const DispatchContext = React.createContext();
+const StateContext = createContext();
+const DispatchContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -138,7 +137,7 @@ class ErrorBoundary extends React.Component {
 
 const Guide = () => {
   const { run, stepIndex, activeGuide, guides } = useGuide();
-  const { start, stop, next, previous } = usePlayback();
+  const { stop, next, previous } = usePlayback();
   const redirect = useRedirect();
   const notify = useNotify();
 
@@ -150,7 +149,7 @@ const Guide = () => {
   const { steps } = guides[activeGuide];
 
   const handleJoyrideCallback = (data) => {
-    const { action, index, status, type, step } = data;
+    const { action, index, type, step } = data;
 
     const target = document.querySelector(step.target);
 
@@ -193,6 +192,7 @@ const Guide = () => {
         break;
       case EVENTS.TOOLTIP_CLOSE:
         break;
+      default:
     }
   };
 

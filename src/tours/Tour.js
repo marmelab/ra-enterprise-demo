@@ -4,14 +4,12 @@ import classnames from "classnames";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PlayIcon from "@material-ui/icons/PlayArrow";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import { markdownToReact } from "@react-admin/ra-markdown";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
@@ -64,7 +62,7 @@ export default ({ record }) => {
   const refresh = useRefresh();
   const { start } = usePlayback();
 
-  const [setPlayed, { loading }] = useMutation(
+  const [setPlayed] = useMutation(
     {
       type: "update",
       resource: "tours",

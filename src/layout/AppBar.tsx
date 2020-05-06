@@ -53,7 +53,7 @@ const CustomAppBar = (props: any) => {
   const classes = useStyles();
 
   const version = useVersion();
-  const { data, loading, error } = useQuery(
+  const { data } = useQuery(
     {
       type: "getList",
       resource: "tours",

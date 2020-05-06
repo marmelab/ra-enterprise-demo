@@ -1,27 +1,16 @@
 import React, { cloneElement } from "react";
-import MuiGridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { makeStyles } from "@material-ui/core/styles";
-import withWidth from "@material-ui/core/withWidth";
 import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
-import { Link } from "react-router-dom";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
 import {
   TopToolbar,
-  CreateButton,
-  ExportButton,
   Button,
   sanitizeListRestProps,
-  NumberField,
   List,
   Pagination,
   useMutation,
   useRefresh,
 } from "react-admin";
-
-import { useDispatch } from "react-redux";
-import { linkToRecord } from "ra-core";
 
 import Tour from "./Tour";
 

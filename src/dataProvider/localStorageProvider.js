@@ -1,5 +1,3 @@
-import { HttpError } from "react-admin";
-
 const VALID_UNTIL = new Date() + 3600 * 24 * 365;
 
 const mergeById = (a, b) => {
@@ -10,7 +8,7 @@ const mergeById = (a, b) => {
     ...notInB,
     ...inBoth.map((aItem) => {
       const bItem = b.find((bItem) => aItem.id === bItem.id);
-      return { ...aItem, status: bItem.status, playedOn: bItem.playedOn };
+      return { ...aItem, playedOn: bItem.playedOn };
     }),
     ...notInA,
   ].sort((c, d) => c.id - d.id);
@@ -145,8 +143,6 @@ export default (defaultState = {}) => {
 
     update,
     updateMany: (resource, { ids, data }) => {
-      let collection = get(resource);
-
       const updateResults = ids.map((id) => update(resource, { id, data }));
 
       return {
@@ -177,8 +173,6 @@ export default (defaultState = {}) => {
     delete: remove,
 
     deleteMany: (resource, { ids }) => {
-      let collection = get(resource);
-
       const deleteResults = ids.map((id) => remove(resource, { id }));
 
       return {
