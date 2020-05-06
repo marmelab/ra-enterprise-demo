@@ -92,6 +92,7 @@ const ProductEdit = props => {
                 <FormTab
                     label="resources.products.tabs.description"
                     path="description"
+                    data-tour-id="description-tab"
                 >
                     <MarkdownInput source="description" label="" />
                 </FormTab>

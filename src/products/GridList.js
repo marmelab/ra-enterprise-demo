@@ -78,6 +78,7 @@ const LoadedGridList = ({ ids, data, basePath, width }) => {
                         component={Link}
                         key={id}
                         to={linkToRecord(basePath, data[id].id)}
+                        data-tour-id="grid-line"
                     >
                         <img src={data[id].thumbnail} alt="" />
                         <GridListTileBar
