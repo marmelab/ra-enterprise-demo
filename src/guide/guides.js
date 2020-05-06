@@ -13,10 +13,9 @@ const guides = {
     steps: [
       {
         target: `[data-tour-id='grid-line']:nth-child(${getRandomInt(1, 5)})`,
-        event: "click",
+        event: "hover",
         content:
           "This is a poster, one of the products our shop is selling, let's go to its details",
-        event: "hover",
         joyrideProps: {
           styles: {
             beacon: {

@@ -60,7 +60,7 @@ const ListActions = ({
 }) => {
   const refresh = useRefresh();
 
-  const [reset, { resetLoading }] = useMutation(
+  const [reset, { loading: resetLoading }] = useMutation(
     {
       type: "updateMany",
       resource: "tours",
@@ -73,7 +73,7 @@ const ListActions = ({
     }
   );
 
-  const [markAsPlayed, { markAsPlayedLoading }] = useMutation(
+  const [markAsPlayed, { loading: markAsPlayedLoading }] = useMutation(
     {
       type: "updateMany",
       resource: "tours",

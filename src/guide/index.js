@@ -83,7 +83,6 @@ const GuideProvider = ({ guides = {}, children }) => {
         }, 1000);
       }
       dispatch({ type: "stop" });
-      dispatch({ type: "stop" });
     },
     next: () => dispatch({ type: "next" }),
     previous: () => dispatch({ type: "previous" }),
