@@ -195,10 +195,6 @@ const Guide = () => {
       case EVENTS.TOOLTIP_CLOSE:
         break;
     }
-
-    console.groupCollapsed(type);
-    console.log(data); //eslint-disable-line no-console
-    console.groupEnd();
   };
 
   if (!run) {
