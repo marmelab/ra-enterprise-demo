@@ -11,7 +11,7 @@ import {
 } from 'react-admin';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import RichTextInput from 'ra-input-rich-text';
+import { MarkdownInput } from '@react-admin/ra-markdown';
 
 export const styles = {
     price: { width: '7em' },
@@ -99,7 +99,7 @@ const ProductCreate = props => {
                     label="resources.products.tabs.description"
                     path="description"
                 >
-                    <RichTextInput source="description" label="" />
+                    <MarkdownInput source="description" label="" />
                 </FormTab>
             </TabbedForm>
         </Create>
