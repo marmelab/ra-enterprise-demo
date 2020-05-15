@@ -9,6 +9,7 @@ export default {
 For applications that need to display and edit Markdown content.
       `,
       href: "http://marmelab.com/react-admin",
+      playedOn: null
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ For applications that need to display and edit Markdown content.
 This module provides a way to store and persist user preferences in local storage. These preferences are device dependent, so this module is particularly fitted for UI preferences.
       `,
       href: "http://marmelab.com/react-admin",
+      playedOn: null
     },
   ],
 };
