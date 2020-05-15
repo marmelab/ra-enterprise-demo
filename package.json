@@ -35,7 +35,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build"
   },
-  "homepage": "https://marmelab.com/react-admin-demo",
+  "homepage": "https://marmelab.com/ra-enterprise-demo",
   "browserslist": [
     ">0.2%",
     "not dead",
