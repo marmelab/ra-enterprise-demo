@@ -170,7 +170,6 @@ export default ({
     `${preferenceKey}.density`,
     defaultDensity
   );
-  console.log("density", density);
 
   const childrenElements = children({ columns: visibleColumns, density });
 
