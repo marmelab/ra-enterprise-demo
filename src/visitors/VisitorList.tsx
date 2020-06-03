@@ -12,7 +12,7 @@ import {
 
 import { useMediaQuery, Theme } from "@material-ui/core";
 
-import EnterpriseList from "../EnterpriseList";
+import EnterpriseList from "../ra-enterprise/List";
 import SegmentsField from "./SegmentsField";
 import SegmentInput from "./SegmentInput";
 import CustomerLinkField from "./CustomerLinkField";
