@@ -67,9 +67,7 @@ const App = () => {
 
   return (
     <PreferencesBasedThemeProvider
-      themeFromType={(type) =>
-        type === "dark" ? darkTheme : lightTheme
-      }
+      themeFromType={(type) => (type === "dark" ? darkTheme : lightTheme)}
     >
       <Admin
         title=""

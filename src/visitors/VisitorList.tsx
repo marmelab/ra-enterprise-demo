@@ -58,22 +58,19 @@ const VisitorList = (props: any) => {
     <EnterpriseList
       {...props}
       preferenceKey="visitors.list"
-
       hasColumnsSelector
       defaultColumns={visitorListColumn}
       defaultOmittedColumns={["last_seen"]}
-
       hasDensitySelector
-
       filters={<VisitorFilter />}
       sort={{ field: "last_seen", order: "DESC" }}
       perPage={25}
     >
-      {({ columns, density }) => {
+      {({ columns, density, ...rest }) => {
         return isXsmall ? (
           <MobileGrid />
         ) : (
-          <Datagrid rowClick="edit" size={density}>
+          <Datagrid rowClick="edit" size={density} {...rest}>
             {columns}
           </Datagrid>
         );

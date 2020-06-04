@@ -1,4 +1,4 @@
-import React, { cloneElement } from "react";
+import React, { cloneElement, useMemo } from "react";
 
 import {
   List,
@@ -9,9 +9,11 @@ import {
   ExportButton,
 } from "react-admin";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 
 import {
-  SelectColumnsButton,
+  SelectColumnsMenu,
   useSelectedColumns,
   usePreferences,
 } from "@react-admin/ra-preferences";
@@ -22,6 +24,93 @@ import ZoomInIcon from "@material-ui/icons/ZoomIn";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+const useStyles = makeStyles({
+  menuPaper: {
+    padding: "1rem 0",
+  },
+  menuList: {
+    "&> * > *": {
+      padding: "0 2rem",
+    },
+  },
+  toolContainer: {
+    margin: "20px 0",
+    "&:first-child": {
+      marginTop: 0,
+    },
+    "&:last-child": {
+      marginBottom: 0,
+    },
+  },
+  columnsList: {
+    maxHeight: "250px",
+    overflowY: "auto",
+    margin: 0,
+    background: "#eee",
+  },
+});
+
+const ToolContainer = ({ children }) => {
+  const classes = useStyles();
+
+  return <div className={classes.toolContainer}>{children}</div>;
+};
+
+const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
+  const classes = useStyles();
+
+  return (
+    <>
+      <Typography
+        variant="overline"
+        gutterBottom
+        key="columns-selector-tool-title"
+        component="div"
+      >
+        Columns to display
+      </Typography>
+      <SelectColumnsMenu
+        key="columns-selector-tool-menu"
+        anchorEl
+        preference={preferenceKey}
+        columns={defaultColumns}
+        label=""
+        className={classes.columnsList}
+      />
+    </>
+  );
+};
+
+const DensityTool = ({ preferenceKey, density, setDensity }) => (
+  <>
+    <Typography
+      variant="overline"
+      gutterBottom
+      key="density-selector-tool-title"
+      component="div"
+    >
+      Density
+    </Typography>
+
+    <ButtonGroup key="density-selector-tool-menu">
+      <Button
+        color={density === "small" ? "primary" : "default"}
+        onClick={() => setDensity("small")}
+        label="small"
+      >
+        <ZoomOutIcon />
+      </Button>
+      <Button
+        color={density === "medium" ? "primary" : "default"}
+        onClick={() => setDensity("medium")}
+        label="medium"
+      >
+        <ZoomInIcon />
+      </Button>
+    </ButtonGroup>
+  </>
+);
 
 const Actions = ({
   preferenceKey,
@@ -41,12 +130,14 @@ const Actions = ({
   maxResults,
   total,
   hasColumnsSelector,
-  columns,
+  defaultColumns,
   hasDensitySelector,
+  density,
   setDensity,
   ...rest
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -56,6 +147,27 @@ const Actions = ({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const tools = [];
+
+  if (hasColumnsSelector) {
+    tools.push(
+      <ColumnsTool
+        preferenceKey={preferenceKey}
+        defaultColumns={defaultColumns}
+      />
+    );
+  }
+
+  if (hasDensitySelector) {
+    tools.push(
+      <DensityTool
+        preferenceKey={preferenceKey}
+        density={density}
+        setDensity={setDensity}
+      />
+    );
+  }
 
   return (
     <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
@@ -79,7 +191,7 @@ const Actions = ({
         />
       )}
 
-      {(hasColumnsSelector || hasDensitySelector) && (
+      {tools.length && (
         <>
           <IconButton
             aria-label="more"
@@ -96,23 +208,11 @@ const Actions = ({
             keepMounted
             open={open}
             onClose={handleClose}
+            classes={{ paper: classes.menuPaper, list: classes.menuList }}
           >
-            {hasColumnsSelector && (
-              <SelectColumnsButton
-                preference={preferenceKey}
-                columns={columns}
-              />
-            )}
-            {hasDensitySelector && (
-              <ButtonGroup>
-                <Button onClick={() => setDensity("small")}>
-                  <ZoomOutIcon />
-                </Button>
-                <Button onClick={() => setDensity("medium")}>
-                  <ZoomInIcon />
-                </Button>
-              </ButtonGroup>
-            )}
+            {tools.map((tool) => (
+              <ToolContainer>{tool}</ToolContainer>
+            ))}
           </Menu>
         </>
       )}
@@ -147,19 +247,20 @@ const hasChildren = (element, type, props) => {
   return hasChildrenOfType;
 };
 
-export default ({
-  preferenceKey,
+export default (props) => {
+  const {
+    preferenceKey,
 
-  hasColumnsSelector = true,
-  defaultColumns = [],
-  defaultOmittedColumns = [],
+    hasColumnsSelector = true,
+    defaultColumns = [],
+    defaultOmittedColumns = [],
 
-  hasDensitySelector = true,
-  defaultDensity = "small",
+    hasDensitySelector = true,
+    defaultDensity = "small",
 
-  children,
-  ...rest
-}) => {
+    children,
+    ...rest
+  } = props;
   const visibleColumns = useSelectedColumns({
     preferences: `${preferenceKey}.columns`,
     columns: defaultColumns,
@@ -171,7 +272,10 @@ export default ({
     defaultDensity
   );
 
-  const childrenElements = children({ columns: visibleColumns, density });
+  const childrenElements = useMemo(
+    () => children({ ...rest, columns: visibleColumns, density }),
+    [visibleColumns, density, children, rest]
+  );
 
   if (process.env.NODE_ENV === "development") {
     if (
@@ -191,8 +295,9 @@ export default ({
         <Actions
           preferenceKey={`${preferenceKey}.columns`}
           hasColumnsSelector={hasColumnsSelector}
-          columns={defaultColumns}
+          defaultColumns={defaultColumns}
           hasDensitySelector={hasDensitySelector}
+          density={density}
           setDensity={setDensity}
         />
       }

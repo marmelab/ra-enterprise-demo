@@ -17,12 +17,7 @@ export default (props: any) => {
     <GuideProvider guides={guides}>
       <Guide />
       <SidebarOpenPreferenceSync />
-      <Layout
-        {...props}
-        appBar={AppBar}
-        sidebar={CustomSidebar}
-        menu={Menu}
-      />
+      <Layout {...props} appBar={AppBar} sidebar={CustomSidebar} menu={Menu} />
     </GuideProvider>
   );
 };
