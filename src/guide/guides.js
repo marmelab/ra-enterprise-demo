@@ -23,7 +23,7 @@ const guides = {
             },
           },
         },
-        after: ({ target, notify, redirect }) => {
+        after: ({ target, redirect }) => {
           const productUrl = target.getAttribute("href").slice(1);
           redirect(productUrl);
         },
@@ -31,8 +31,69 @@ const guides = {
       {
         target: "[data-tour-id='description-tab']",
         content: "The markdown editor is in the description tab",
-        after: ({ target, notify, redirect }) => {
+        after: ({ target }) => {
           target.click();
+        },
+      },
+    ],
+  },
+  "ra-preferences": {
+    steps: [
+      {
+        target: "button[aria-label='Toggle Theme']",
+        disableBeacon: true,
+        content:
+          "ra-preferences comes with a lot of built-in modules, like this theme switcher, try it, it works",
+      },
+      {
+        target: "button[aria-label='Toggle Theme'] + button",
+        content: "Or this language switcher...",
+        after: ({ redirect }) => {
+          redirect("/customers");
+        },
+      },
+      {
+        target: "button[aria-controls=user-preference-menu]",
+        content: "Even more advanced ones like this list customization tool.",
+        disableBeacon: false,
+        after: ({ target }) => {
+          target.click();
+        },
+      },
+      {
+        target: "#user-preference-menu .MuiPaper-root",
+        content:
+          "Where you can select the columns you want to see, or set how dense you want this list to be.",
+        joyrideProps: {
+          styles: {
+            options: {
+              zIndex: 10000,
+            },
+          },
+        },
+        after: () => {
+          const menuOverlay = document.querySelector(
+            "body > .MuiPopover-root div[aria-hidden=true]"
+          );
+          menuOverlay.click();
+        },
+      },
+      {
+        before: ({ saveTourState }) => {
+          saveTourState();
+        },
+        target: "body",
+        content:
+          "It exposes simple hooks so that you can actually save whatever you want, too. By instance, the state of this particular ride. Try to reload the page!",
+        joyrideProps: {
+          styles: {
+            options: {
+              arrowColor: "transparent",
+            },
+          },
+        },
+        after: ({ resetSavedTourState }) => {
+          resetSavedTourState();
         },
       },
     ],
