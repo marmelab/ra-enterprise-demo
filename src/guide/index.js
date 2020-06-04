@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect, createContext, useContext } from "react";
+import React, { useReducer, createContext, useContext } from "react";
 import { useRedirect, useNotify } from "react-admin";
 import { usePreferences } from "@react-admin/ra-preferences";
 import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
@@ -39,12 +39,6 @@ const reducer = (state, action) => {
       }
       return { ...state, stepIndex: state.stepIndex - 1 };
     }
-    case "override": {
-      return {
-        ...state,
-        ...action.payload,
-      };
-    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -55,7 +49,7 @@ const GuideProvider = ({ guides = {}, children }) => {
   const redirect = useRedirect();
   const notify = useNotify();
 
-  const [preferences, setPreferences] = usePreferences("tour");
+  const [preferences] = usePreferences("tour");
 
   const tools = {
     redirect,
@@ -95,7 +89,6 @@ const GuideProvider = ({ guides = {}, children }) => {
     },
     next: () => dispatch({ type: "next" }),
     previous: () => dispatch({ type: "previous" }),
-    override: (state) => dispatch({ type: "override", payload: state }),
   };
 
   return (
@@ -148,11 +141,11 @@ class ErrorBoundary extends React.Component {
 
 const Guide = () => {
   const { run, stepIndex, activeGuide, guides } = useGuide();
-  const { stop, next, previous, override } = usePlayback();
+  const { stop, next, previous } = usePlayback();
   const redirect = useRedirect();
   const notify = useNotify();
 
-  const [preferences, setPreferences] = usePreferences("tour", {});
+  const [_, setPreferences] = usePreferences("tour", {}); // eslint-disable-line no-unused-vars
 
   const saveTourState = () => {
     setPreferences({ run, stepIndex, activeGuide });
@@ -171,8 +164,6 @@ const Guide = () => {
 
   const handleJoyrideCallback = (data) => {
     const { action, index, type, step } = data;
-
-    // ici ? run stepIndex activeGuide
 
     const target = document.querySelector(step.target);
 
