@@ -84,7 +84,7 @@ const guides = {
         },
         target: "body",
         content:
-          "It exposes simple hooks so that you can actually save whatever you want, too. By instance, the state of this particular ride. Try to reload the page!",
+          "It exposes simple hooks so that you can actually save whatever you want, too. By instance, the state of this particular step. Try to reload the page!",
         joyrideProps: {
           styles: {
             options: {
