@@ -110,30 +110,7 @@ const DesktopGrid: FC<Props> = ({ ids, data, basePath, fields }) => {
                   </div>
                 );
               })}
-            {/* <div>
-              {translate("resources.commands.name", data[id].nb_commands || 1)}
-              &nbsp;:&nbsp;
-              <NumberField
-                record={data[id]}
-                source="nb_commands"
-                label="resources.customers.fields.commands"
-              />
-            </div>
-            <div>
-              {translate("resources.customers.fields.total_spent")}
-              &nbsp; :{" "}
-              <ColoredNumberField
-                record={data[id]}
-                source="total_spent"
-                options={{ style: "currency", currency: "USD" }}
-              />
-            </div> */}
           </CardContent>
-          {/* {data[id].groups && data[id].groups.length > 0 && (
-            <CardContent className={classes.cardContent}>
-              <SegmentsField record={data[id]} />
-            </CardContent>
-          )} */}
         </Card>
       ))}
     </div>
