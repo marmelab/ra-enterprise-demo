@@ -1,15 +1,12 @@
 import React, { FC, cloneElement } from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
 
-import { DateField, EditButton, useTranslate, NumberField } from "react-admin";
+import { useTranslate } from "react-admin";
 
 import AvatarField from "./AvatarField";
-import ColoredNumberField from "./ColoredNumberField";
-import SegmentsField from "./SegmentsField";
 import { Identifier, linkToRecord } from "ra-core";
 import { Customer } from "../types";
 
