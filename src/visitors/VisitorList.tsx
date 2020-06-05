@@ -18,6 +18,7 @@ import SegmentInput from "./SegmentInput";
 import CustomerLinkField from "./CustomerLinkField";
 import ColoredNumberField from "./ColoredNumberField";
 import MobileGrid from "./MobileGrid";
+import DesktopGrid from "./DesktopGrid";
 
 const VisitorFilter = (props: any) => (
   <Filter {...props}>
@@ -61,16 +62,21 @@ const VisitorList = (props: any) => {
       hasColumnsSelector
       defaultColumns={visitorListColumn}
       defaultOmittedColumns={["last_seen"]}
-      hasDensitySelector
+      hasViewSelector
+      defaultView
       filters={<VisitorFilter />}
       sort={{ field: "last_seen", order: "DESC" }}
       perPage={25}
     >
-      {({ columns, density, ...rest }) => {
-        return isXsmall ? (
-          <MobileGrid />
-        ) : (
-          <Datagrid rowClick="edit" size={density} {...rest}>
+      {({ columns, view, ...rest }) => {
+        if (isXsmall) {
+          return <MobileGrid />;
+        }
+        if (view === "grid") {
+          return <DesktopGrid fields={columns} />;
+        }
+        return (
+          <Datagrid rowClick="edit" {...rest}>
             {columns}
           </Datagrid>
         );

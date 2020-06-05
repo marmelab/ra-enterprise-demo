@@ -18,8 +18,8 @@ import {
   usePreferences,
 } from "@react-admin/ra-preferences";
 
-import ZoomOutIcon from "@material-ui/icons/ZoomOut";
-import ZoomInIcon from "@material-ui/icons/ZoomIn";
+import TableChartIcon from "@material-ui/icons/TableChart";
+import AppsIcon from "@material-ui/icons/Apps";
 
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -82,31 +82,31 @@ const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
   );
 };
 
-const DensityTool = ({ preferenceKey, density, setDensity }) => (
+const GridOrListTool = ({ preferenceKey, view, setView }) => (
   <>
     <Typography
       variant="overline"
       gutterBottom
-      key="density-selector-tool-title"
+      key="view-selector-tool-title"
       component="div"
     >
-      Density
+      Layout
     </Typography>
 
-    <ButtonGroup key="density-selector-tool-menu">
+    <ButtonGroup key="view-selector-tool-menu">
       <Button
-        color={density === "small" ? "primary" : "default"}
-        onClick={() => setDensity("small")}
-        label="small"
+        color={view === "table" ? "primary" : "default"}
+        onClick={() => setView("table")}
+        label="table"
       >
-        <ZoomOutIcon />
+        <TableChartIcon />
       </Button>
       <Button
-        color={density === "medium" ? "primary" : "default"}
-        onClick={() => setDensity("medium")}
-        label="medium"
+        color={view === "grid" ? "primary" : "default"}
+        onClick={() => setView("grid")}
+        label="grid"
       >
-        <ZoomInIcon />
+        <AppsIcon />
       </Button>
     </ButtonGroup>
   </>
@@ -131,9 +131,9 @@ const Actions = ({
   total,
   hasColumnsSelector,
   defaultColumns,
-  hasDensitySelector,
-  density,
-  setDensity,
+  hasViewSelector,
+  view,
+  setView,
   ...rest
 }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -150,21 +150,21 @@ const Actions = ({
 
   const tools = [];
 
+  if (hasViewSelector) {
+    tools.push(
+      <GridOrListTool
+        preferenceKey={preferenceKey}
+        view={view}
+        setView={setView}
+      />
+    );
+  }
+
   if (hasColumnsSelector) {
     tools.push(
       <ColumnsTool
         preferenceKey={preferenceKey}
         defaultColumns={defaultColumns}
-      />
-    );
-  }
-
-  if (hasDensitySelector) {
-    tools.push(
-      <DensityTool
-        preferenceKey={preferenceKey}
-        density={density}
-        setDensity={setDensity}
       />
     );
   }
@@ -247,7 +247,7 @@ const hasChildren = (element, type, props) => {
   return hasChildrenOfType;
 };
 
-export default (props) => {
+const EnterpriseList = (props) => {
   const {
     preferenceKey,
 
@@ -255,8 +255,8 @@ export default (props) => {
     defaultColumns = [],
     defaultOmittedColumns = [],
 
-    hasDensitySelector = true,
-    defaultDensity = "small",
+    hasViewSelector = true,
+    defaultView = "small",
 
     children,
     ...rest
@@ -267,14 +267,11 @@ export default (props) => {
     omit: defaultOmittedColumns,
   });
 
-  const [density, setDensity] = usePreferences(
-    `${preferenceKey}.density`,
-    defaultDensity
-  );
+  const [view, setView] = usePreferences(`${preferenceKey}.view`, defaultView);
 
   const childrenElements = useMemo(
-    () => children({ ...rest, columns: visibleColumns, density }),
-    [visibleColumns, density, children, rest]
+    () => children({ ...rest, columns: visibleColumns, view }),
+    [visibleColumns, view, children, rest]
   );
 
   if (process.env.NODE_ENV === "development") {
@@ -296,9 +293,9 @@ export default (props) => {
           preferenceKey={`${preferenceKey}.columns`}
           hasColumnsSelector={hasColumnsSelector}
           defaultColumns={defaultColumns}
-          hasDensitySelector={hasDensitySelector}
-          density={density}
-          setDensity={setDensity}
+          hasViewSelector={hasViewSelector}
+          view={view}
+          setView={setView}
         />
       }
     >
@@ -306,3 +303,5 @@ export default (props) => {
     </List>
   );
 };
+
+export default EnterpriseList;

@@ -58,6 +58,7 @@ const customFrenchMessages: TranslationMessages = {
                 zipcode: 'Code postal',
                 password: 'Mot de passe',
                 confirm_password: 'Confirmez le mot de passe',
+                nb_commands: 'Commandes',
             },
             fieldGroups: {
                 identity: 'Identité',

@@ -63,7 +63,7 @@ const guides = {
       {
         target: "#user-preference-menu .MuiPaper-root",
         content:
-          "Where you can select the columns you want to see, or set how dense you want this list to be.",
+          "Where you can select how you want the list to be displayed, or the information you want to see.",
         joyrideProps: {
           styles: {
             options: {
