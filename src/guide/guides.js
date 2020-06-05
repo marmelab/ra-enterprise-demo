@@ -43,7 +43,7 @@ const guides = {
         target: "button[aria-label='Toggle Theme']",
         disableBeacon: true,
         content:
-          "ra-preferences comes with a lot of built-in modules, like this theme switcher, try it, it works",
+          "ra-preferences comes with a lot of built-in modules, like this theme switcher. Try it: it works!",
       },
       {
         target: "button[aria-label='Toggle Theme'] + button",
