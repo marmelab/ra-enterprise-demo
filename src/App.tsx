@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Admin, Resource } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 
+import { PreferencesBasedThemeProvider } from "@react-admin/ra-preferences";
+
 import "./App.css";
 
+import { darkTheme, lightTheme } from "./layout/themes";
 import authProvider from "./authProvider";
-import themeReducer from "./themeReducer";
 import { Login, Layout } from "./layout";
 import { Dashboard } from "./dashboard";
 import customRoutes from "./routes";
@@ -64,10 +66,12 @@ const App = () => {
   }
 
   return (
+    <PreferencesBasedThemeProvider
+      themeFromType={(type) => (type === "dark" ? darkTheme : lightTheme)}
+    >
       <Admin
         title=""
         dataProvider={dataProvider}
-        customReducers={{ theme: themeReducer }}
         customRoutes={customRoutes}
         authProvider={authProvider}
         dashboard={Dashboard}
@@ -83,6 +87,7 @@ const App = () => {
         <Resource name="reviews" {...reviews} />
         <Resource name="tours" {...tours} />
       </Admin>
+    </PreferencesBasedThemeProvider>
   );
 };
 

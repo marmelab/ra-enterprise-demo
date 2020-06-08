@@ -13,6 +13,11 @@ import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import { Link } from "react-router-dom";
 
+import {
+  ToggleThemeButton,
+  LanguageSwitcher,
+} from "@react-admin/ra-preferences";
+
 import SettingsIcon from "@material-ui/icons/Settings";
 import TourIcon from "@material-ui/icons/HelpOutline";
 
@@ -84,6 +89,14 @@ const CustomAppBar = (props: any) => {
           <TourIcon />
         </Badge>
       </IconButton>
+      <ToggleThemeButton />
+      <LanguageSwitcher
+        languages={[
+          { locale: "en", name: "English" },
+          { locale: "fr", name: "Français" },
+        ]}
+        defaultLanguage="English"
+      />
     </AppBar>
   );
 };

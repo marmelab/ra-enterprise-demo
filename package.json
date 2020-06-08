@@ -6,6 +6,7 @@
     "@material-ui/core": "^4.9.0",
     "@material-ui/icons": "^4.5.1",
     "@react-admin/ra-markdown": "^0.0.2",
+    "@react-admin/ra-preferences": "^0.0.1",
     "data-generator-retail": "^3.0.0",
     "fakerest": "~2.1.0",
     "fetch-mock": "~9.4.0",
@@ -18,10 +19,10 @@
     "ra-input-rich-text": "^3.0.0",
     "ra-language-english": "^3.0.0",
     "ra-language-french": "^3.0.0",
-    "react": "^16.9.0",
-    "react-admin": "^3.0.0",
+    "react": "^16.12.0",
+    "react-admin": "^3.5.0",
     "react-app-polyfill": "^1.0.4",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.12.0",
     "react-joyride": "^2.2.1",
     "react-redux": "^7.1.0",
     "react-router": "^5.1.0",
@@ -32,8 +33,8 @@
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
-    "build": "react-scripts build"
+    "start": "export NPM_TOKEN=$NPM_TOKEN && react-scripts start",
+    "build": "export NPM_TOKEN=$NPM_TOKEN && react-scripts build"
   },
   "homepage": "https://marmelab.com/ra-enterprise-demo",
   "browserslist": [
@@ -47,8 +48,8 @@
     "@types/jest": "^25.2.1",
     "@types/node": "^13.13.4",
     "@types/query-string": "^6.3.0",
-    "@types/react": "^16.9.13",
-    "@types/react-dom": "^16.9.4",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "source-map-explorer": "^2.0.0",
     "typescript": "^3.7.2"

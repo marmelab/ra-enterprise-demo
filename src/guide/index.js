@@ -1,5 +1,6 @@
 import React, { useReducer, createContext, useContext } from "react";
 import { useRedirect, useNotify } from "react-admin";
+import { usePreferences } from "@react-admin/ra-preferences";
 import Joyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
 
 import Tooltip from "./Tooltip";
@@ -48,6 +49,8 @@ const GuideProvider = ({ guides = {}, children }) => {
   const redirect = useRedirect();
   const notify = useNotify();
 
+  const [preferences] = usePreferences("tour");
+
   const tools = {
     redirect,
     notify,
@@ -57,6 +60,7 @@ const GuideProvider = ({ guides = {}, children }) => {
     run: false,
     stepIndex: 0,
     activeGuide: null,
+    ...preferences,
     guides,
   });
 
@@ -141,7 +145,17 @@ const Guide = () => {
   const redirect = useRedirect();
   const notify = useNotify();
 
-  const tools = { redirect, notify };
+  const [_, setPreferences] = usePreferences("tour", {}); // eslint-disable-line no-unused-vars
+
+  const saveTourState = () => {
+    setPreferences({ run, stepIndex, activeGuide });
+  };
+
+  const resetSavedTourState = () => {
+    setPreferences({});
+  };
+
+  const tools = { redirect, notify, saveTourState, resetSavedTourState };
 
   if (!activeGuide) {
     return null;
