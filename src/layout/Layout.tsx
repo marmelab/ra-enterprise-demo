@@ -1,23 +1,37 @@
 import React from "react";
-import { Layout, Sidebar } from "react-admin";
+import { Layout, Sidebar, useNotify, useRedirect } from "react-admin";
 
 import { SidebarOpenPreferenceSync } from "@react-admin/ra-preferences";
 
 import AppBar from "./AppBar";
 import Menu from "./Menu";
 
-import { Guide } from "../guide";
-import { GuideProvider } from "../guide";
-import guides from "../guide/guides";
+import { GuideProvider } from "@react-admin/ra-tour-guide";
+import { usePreferences } from "@react-admin/ra-preferences";
+
+import guides from "../guides";
 
 const CustomSidebar = (props: any) => <Sidebar {...props} size={200} />;
 
 export default (props: any) => {
+  const notify = useNotify();
+  const redirect = useRedirect();
+  const [tourPreferences, setTourPreferences] = usePreferences("tour");
   return (
-    <GuideProvider guides={guides}>
-      <Guide />
-      <SidebarOpenPreferenceSync />
-      <Layout {...props} appBar={AppBar} sidebar={CustomSidebar} menu={Menu} />
+    <GuideProvider
+      guides={guides}
+      tools={{ notify, redirect, setTourPreferences }}
+      initialState={tourPreferences}
+    >
+      <>
+        <SidebarOpenPreferenceSync />
+        <Layout
+          {...props}
+          appBar={AppBar}
+          sidebar={CustomSidebar}
+          menu={Menu}
+        />
+      </>
     </GuideProvider>
   );
 };
