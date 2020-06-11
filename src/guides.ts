@@ -1,14 +1,19 @@
+import { GuideType } from "@react-admin/ra-tour-guide";
+
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const guides = {
+const timeout = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const guides: { [id: string]: GuideType } = {
   "ra-markdown": {
-    before: ({ notify, redirect }) => {
+    before: async ({ notify, redirect }) => {
       notify("Taking you to the product page");
       redirect("/products");
+      await timeout(1000); // would be so awesome if redirect was awaitable!
     },
     steps: [
       {
@@ -72,15 +77,18 @@ const guides = {
           },
         },
         after: () => {
-          const menuOverlay = document.querySelector(
+          const menuOverlay: HTMLElement | null = document.querySelector(
             "body > .MuiPopover-root div[aria-hidden=true]"
           );
+          if (!menuOverlay) {
+            return;
+          }
           menuOverlay.click();
         },
       },
       {
-        before: ({ saveTourState }) => {
-          saveTourState();
+        before: ({ setTourPreferences, state }) => {
+          setTourPreferences(state);
         },
         target: "body",
         content:
@@ -92,8 +100,8 @@ const guides = {
             },
           },
         },
-        after: ({ resetSavedTourState }) => {
-          resetSavedTourState();
+        after: ({ setTourPreferences }) => {
+          setTourPreferences({});
         },
       },
     ],

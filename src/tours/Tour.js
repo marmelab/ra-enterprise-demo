@@ -14,7 +14,7 @@ import { markdownToReact } from "@react-admin/ra-markdown";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
-import { usePlayback } from "../guide";
+import { usePlayback } from "@react-admin/ra-tour-guide";
 
 const useStyles = makeStyles({
   root: {
