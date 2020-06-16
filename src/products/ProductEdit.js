@@ -13,8 +13,6 @@ import {
   TabbedForm,
   TextField,
   TextInput,
-  EditView,
-  useEditController,
   FormDataConsumer,
   FormWithRedirect,
 } from "react-admin";

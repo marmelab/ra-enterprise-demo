@@ -73,7 +73,7 @@ const Preview = ({
         <div className={classes.frame}>
           <div className={classes.mat}>
             <div className={classes.art}>
-              <img src={image} />
+              <img src={image} alt="" />
             </div>
           </div>
         </div>
