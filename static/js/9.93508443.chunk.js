@@ -1,0 +1,2 @@
+(this.webpackJsonpdemo=this.webpackJsonpdemo||[]).push([[9],{1534:function(e,t,n){"use strict";n.r(t);var o=n(1528),r=n.n(o),i=n(1366),a=n(1360),s=n.n(a);t.default=function(){var e=s()({serializeDate:!0}),t=new r.a.FetchServer("http://localhost:4000");return window&&(window.restServer=t),t.init(e),t.toggleLogging(),i.a.mock("begin:http://localhost:4000",t.getHandler()),function(){return i.a.restore()}}}}]);
+//# sourceMappingURL=9.93508443.chunk.js.map
