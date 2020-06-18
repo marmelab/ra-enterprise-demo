@@ -40,6 +40,14 @@ const guides: { [id: string]: GuideType } = {
           target.click();
         },
       },
+      {
+        target: ".rc-md-editor ",
+        content: "Right here. Try playing with its markdown, make it bold, add headlines!",
+      },
+      {
+        target: "[data-testid=product-edit-preview]",
+        content: "Parsed markdown can then be displayed in a preview or wherever you want.",
+      },
     ],
   },
   "ra-preferences": {

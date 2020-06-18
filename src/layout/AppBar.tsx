@@ -84,7 +84,7 @@ const CustomAppBar = (props: any) => {
       />
       <Logo />
       <span className={classes.spacer} />
-      <IconButton to="tours" component={Link} color="inherit">
+      <IconButton to="/tours" component={Link} color="inherit">
         <Badge badgeContent={numberOfTours} color="error" variant="dot">
           <TourIcon />
         </Badge>
