@@ -21,8 +21,8 @@ import categories from "./categories";
 import reviews from "./reviews";
 import tours from "./tours";
 
-import dataProviderFactory from "./dataProvider";
-import fakeServerFactory from "./fakeServer";
+import dataProvider from "./dataProvider";
+import fakeServer from "./fakeServer";
 
 const i18nProvider = polyglotI18nProvider((locale) => {
   if (locale === "fr") {
@@ -34,36 +34,12 @@ const i18nProvider = polyglotI18nProvider((locale) => {
 }, "en");
 
 const App = () => {
-  const [dataProvider, setDataProvider] = useState(null);
-
   useEffect(() => {
-    let restoreFetch;
-
-    const fetchDataProvider = async () => {
-      restoreFetch = await fakeServerFactory(
-        process.env.REACT_APP_DATA_PROVIDER
-      );
-      const dataProviderInstance = await dataProviderFactory(
-        process.env.REACT_APP_DATA_PROVIDER
-      );
-      setDataProvider(
-        // GOTCHA: dataProviderInstance can be a function
-        () => dataProviderInstance
-      );
+    const restoreFetch = fakeServer();
+    return () => {
+      restoreFetch();
     };
-
-    fetchDataProvider();
-
-    return restoreFetch;
   }, []);
-
-  if (!dataProvider) {
-    return (
-      <div className="loader-container">
-        <div className="loader">Loading...</div>
-      </div>
-    );
-  }
 
   return (
     <PreferencesBasedThemeProvider
