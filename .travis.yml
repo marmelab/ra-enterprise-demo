@@ -1,23 +1,24 @@
 language: node_js
 node_js:
   - 10
-
+env:
+  - GENERATE_SOURCEMAP=false
 cache:
-    directories:
-        - node_modules
-        - build
+  directories:
+    - node_modules
+    - build
 
 before_script:
-    - yarn install
+  - yarn install
 
 script:
-    - yarn build
+  - yarn build
 
 deploy:
-    provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    local_dir: build
-    keep_history: true
-    on:
-        branch: master
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: build
+  keep_history: true
+  on:
+    branch: master
