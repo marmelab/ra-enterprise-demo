@@ -1069,10 +1069,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.0", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.10.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.2.tgz#d103f21f2602497d38348a32e008637d506db839"
   integrity sha512-6sF3uQw2ivImfVIl62RZ7MXhO2tap69WeWK57vAaimT6AZbE4FbqjdEJIN1UqoD6wI6B+1n9UiagafH1sxjOtg==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.9.6":
+  version "7.10.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.10.3.tgz#670d002655a7c366540c67f6fd3342cd09500364"
+  integrity sha512-RzGO0RLSdokm9Ipe/YD+7ww8X2Ro79qiXZF3HU9ljrM+qnJmH1Vqth+hbiQZy761LnMJTMitHDuKVYTk3k4dLw==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1428,10 +1435,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-0.0.1.tgz#3484cefeaf730e9a57b9f5d1815c7757778b786e"
   integrity sha512-/8Rw2YTovTg/3OSzF2hiL+H+Sc33SwPiWdb0k/H+cIyJhTBskKIMUdhc55l2RFFggqg/j0CspaNNn74gWhBD7w==
 
-"@react-admin/ra-tour-guide@^0.0.1":
+"@react-admin/ra-tour@^0.0.1":
   version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tour-guide/-/ra-tour-guide-0.0.1.tgz#d09d0891ebb19fd501c4060998039d17f68e13bb"
-  integrity sha512-YInPEqmtxBsf9UT+++djFtHO9yz1nc/U83M7qDXzTnIPJzW7yUvCtDB58ET4I1IV4KG++2FviZtjy/FM59gHDQ==
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-0.0.1.tgz#d9bd375d994970cba4f8b600a05728285fb04000"
+  integrity sha512-Y1w/v2iDd6yi1okmC34AVzGpDOCvAG9HpBASzclOt3ja5hn+55y8xfzTXCcppJ/okMpgs3ou/pzpdvOv+1YxqA==
   dependencies:
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
@@ -10018,9 +10025,9 @@ react-dropzone@^10.1.7:
     prop-types "^15.7.2"
 
 react-error-boundary@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-2.2.2.tgz#ed2c2f0770edb3223d71ffc18ac29546ebae903b"
-  integrity sha512-P6gKUS1eTTYIWJKyjhIH5MZzgXbI5lrAL0BkIMpHZaaen+ZPaEfZrdnnXILUqDFzI+WwIPDesyzQvhRbxuvjcg==
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-2.2.3.tgz#34c8238012d3b4148cec47a1b3cec669d5206578"
+  integrity sha512-Jiaiu6CJ4ho3sMCVI7gg+O/JB5vlFFZGwlnpFBTCOSyheYRTzz+FhBMo7tfnCTB/ZR0LaMzAPGbZGrEzAOd0eg==
   dependencies:
     "@babel/runtime" "^7.9.6"
 

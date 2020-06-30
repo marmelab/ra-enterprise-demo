@@ -86,7 +86,7 @@ const DesktopGrid: FC<Props> = ({ ids, data, basePath, fields }) => {
                 const fieldName = field.props.source;
 
                 return (
-                  <div style={{ display: "flex", flexWrap: "wrap" }}>
+                  <div key={fieldName} style={{ display: "flex", flexWrap: "wrap" }}>
                     <div
                       style={{
                         marginRight: "1em",

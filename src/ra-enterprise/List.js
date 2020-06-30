@@ -51,11 +51,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ToolContainer = ({ children }) => {
+const ToolContainer = React.forwardRef(({ children }, ref) => {
   const classes = useStyles();
 
   return <div className={classes.toolContainer}>{children}</div>;
-};
+});
 
 const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
   const classes = useStyles();
@@ -72,7 +72,6 @@ const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
       </Typography>
       <SelectColumnsMenu
         key="columns-selector-tool-menu"
-        anchorEl
         preference={preferenceKey}
         columns={defaultColumns}
         label=""
@@ -122,6 +121,8 @@ const Actions = ({
   exporter, // you can hide ExportButton if exporter = (null || false)
   filterValues,
   permanentFilter,
+  hasList,
+  hasShow,
   hasCreate, // you can hide CreateButton if hasCreate = false
   basePath,
   selectedIds,
@@ -148,26 +149,7 @@ const Actions = ({
     setAnchorEl(null);
   };
 
-  const tools = [];
-
-  if (hasViewSelector) {
-    tools.push(
-      <GridOrListTool
-        preferenceKey={preferenceKey}
-        view={view}
-        setView={setView}
-      />
-    );
-  }
-
-  if (hasColumnsSelector) {
-    tools.push(
-      <ColumnsTool
-        preferenceKey={preferenceKey}
-        defaultColumns={defaultColumns}
-      />
-    );
-  }
+  const hasTools = hasColumnsSelector || hasViewSelector;
 
   return (
     <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
@@ -191,7 +173,7 @@ const Actions = ({
         />
       )}
 
-      {tools.length && (
+      {hasTools && (
         <>
           <IconButton
             aria-label="more"
@@ -210,9 +192,23 @@ const Actions = ({
             onClose={handleClose}
             classes={{ paper: classes.menuPaper, list: classes.menuList }}
           >
-            {tools.map((tool) => (
-              <ToolContainer>{tool}</ToolContainer>
-            ))}
+            {hasViewSelector && (
+              <ToolContainer>
+                <GridOrListTool
+                  preferenceKey={preferenceKey}
+                  view={view}
+                  setView={setView}
+                />
+              </ToolContainer>
+            )}
+            {hasColumnsSelector && (
+              <ToolContainer>
+                <ColumnsTool
+                  preferenceKey={preferenceKey}
+                  defaultColumns={defaultColumns}
+                />
+              </ToolContainer>
+            )}
           </Menu>
         </>
       )}

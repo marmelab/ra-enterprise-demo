@@ -14,7 +14,7 @@ import { markdownToReact } from "@react-admin/ra-markdown";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
-import { usePlayback } from "@react-admin/ra-tour-guide";
+import { useTour } from "@react-admin/ra-tour";
 
 const useStyles = makeStyles({
   root: {
@@ -60,7 +60,7 @@ const useStyles = makeStyles({
 export default ({ record }) => {
   const classes = useStyles();
   const refresh = useRefresh();
-  const { start } = usePlayback();
+  const [_, { start }] = useTour();
 
   const [setPlayed] = useMutation(
     {

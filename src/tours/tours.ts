@@ -1,4 +1,4 @@
-import { GuideType } from "@react-admin/ra-tour-guide";
+import { TourType } from "@react-admin/ra-tour";
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -6,9 +6,9 @@ const getRandomInt = (min, max) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const timeout = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const guides: { [id: string]: GuideType } = {
+const tours: { [id: string]: TourType } = {
   "ra-markdown": {
     before: async ({ notify, redirect }) => {
       notify("Taking you to the product page");
@@ -42,11 +42,13 @@ const guides: { [id: string]: GuideType } = {
       },
       {
         target: ".rc-md-editor ",
-        content: "Right here. Try playing with its markdown, make it bold, add headlines!",
+        content:
+          "Right here. Try playing with its markdown, make it bold, add headlines!",
       },
       {
         target: "[data-testid=product-edit-preview]",
-        content: "Parsed markdown can then be displayed in a preview or wherever you want.",
+        content:
+          "Parsed markdown can then be displayed in a preview or wherever you want.",
       },
     ],
   },
@@ -116,4 +118,4 @@ const guides: { [id: string]: GuideType } = {
   },
 };
 
-export default guides;
+export default tours;

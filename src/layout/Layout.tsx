@@ -6,10 +6,10 @@ import { SidebarOpenPreferenceSync } from "@react-admin/ra-preferences";
 import AppBar from "./AppBar";
 import Menu from "./Menu";
 
-import { GuideProvider } from "@react-admin/ra-tour-guide";
+import { TourProvider } from "@react-admin/ra-tour";
 import { usePreferences } from "@react-admin/ra-preferences";
 
-import guides from "../guides";
+import tours from "../tours/tours";
 
 const CustomSidebar = (props: any) => <Sidebar {...props} size={200} />;
 
@@ -18,8 +18,8 @@ export default (props: any) => {
   const redirect = useRedirect();
   const [tourPreferences, setTourPreferences] = usePreferences("tour");
   return (
-    <GuideProvider
-      guides={guides}
+    <TourProvider
+      tours={tours}
       tools={{ notify, redirect, setTourPreferences }}
       initialState={tourPreferences}
     >
@@ -32,6 +32,6 @@ export default (props: any) => {
           menu={Menu}
         />
       </>
-    </GuideProvider>
+    </TourProvider>
   );
 };
