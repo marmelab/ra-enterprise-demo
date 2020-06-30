@@ -60,6 +60,7 @@ const useStyles = makeStyles({
 export default ({ record }) => {
   const classes = useStyles();
   const refresh = useRefresh();
+  // eslint-disable-next-line no-unused-vars
   const [_, { start }] = useTour();
 
   const [setPlayed] = useMutation(
