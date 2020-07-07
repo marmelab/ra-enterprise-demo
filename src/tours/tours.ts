@@ -7,6 +7,14 @@ const getRandomInt = (min, max) => {
 };
 
 const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const interval = (callback, intervalMs, expirationMs) =>
+  new Promise((resolve) => {
+    const intervalRef = setInterval(callback, intervalMs);
+    setTimeout(() => {
+      clearInterval(intervalRef);
+      resolve();
+    }, expirationMs);
+  });
 
 const tours: { [id: string]: TourType } = {
   "ra-markdown": {
@@ -113,6 +121,56 @@ const tours: { [id: string]: TourType } = {
         after: ({ setTourPreferences }) => {
           setTourPreferences({});
         },
+      },
+    ],
+  },
+  "ra-tree": {
+    before: async ({ notify, redirect }) => {
+      redirect("/categories/5");
+      await timeout(1000); // would be so awesome if redirect was awaitable!
+    },
+    steps: [
+      {
+        target: ".rc-tree",
+        content:
+          "ra-tree helps handling trees with ease, no matter the data structure you use on the backend",
+      },
+      {
+        before: ({ target }) => {
+          const openTreeInterval = setInterval(() => {
+            target
+              .querySelector(".rc-tree-switcher.rc-tree-switcher_close")
+              .click();
+          }, 500);
+          setTimeout(() => {
+            clearInterval(openTreeInterval);
+          }, 4000);
+        },
+        target: ".rc-tree",
+        content:
+          "It supports expanding or collapsing nodes for an infinite amount of levels",
+        after: async ({ target }) => {
+          await interval(
+            () => {
+              target
+                // not the first line or it collapses all the tree
+                .querySelector(".rc-tree-treenode:not(:nth-child(1)) .rc-tree-switcher.rc-tree-switcher_open")
+                .click();
+            },
+            500,
+            2000
+          );
+        },
+      },
+      {
+        before: ({ redirect }) => {
+          setTimeout(() => {
+            redirect("/categories/create");
+          }, 4000);
+        },
+        target: '[aria-label="Add root"]',
+        content:
+          "You can even add a new category, with your own form, or even a prompt, try it!",
       },
     ],
   },
