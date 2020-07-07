@@ -1,5 +1,6 @@
 import simpleRestProvider from "ra-data-simple-rest";
-import { addTreeMethodsBasedOnChildren } from "@react-admin/ra-tree";
+// import { addTreeMethodsBasedOnChildren } from "@react-admin/ra-tree";
+import addTreeMethodsBasedOnChildren from "./addTreeMethodsBasedOnChildren";
 
 import localStorageProvider from "./localStorageProvider";
 import defaultState from "../tours/data";

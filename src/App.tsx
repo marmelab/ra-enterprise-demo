@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Admin, Resource } from "react-admin";
+import React, { useEffect } from "react";
+import { Admin, Resource, mergeTranslations } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 
 import { PreferencesBasedThemeProvider } from "@react-admin/ra-preferences";
+import {
+  reducer as tree,
+  raTreeLanguageFrench,
+  raTreeLanguageEnglish,
+} from "@react-admin/ra-tree";
 
 import "./App.css";
 
@@ -26,11 +31,11 @@ import fakeServer from "./fakeServer";
 
 const i18nProvider = polyglotI18nProvider((locale) => {
   if (locale === "fr") {
-    return import("./i18n/fr").then((messages) => messages.default);
+    return import("./i18n/fr").then((messages) =>
+      mergeTranslations(messages.default, raTreeLanguageFrench)
+    );
   }
-
-  // Always fallback on english
-  return englishMessages;
+  return mergeTranslations(englishMessages, raTreeLanguageEnglish);
 }, "en");
 
 const App = () => {
@@ -49,6 +54,7 @@ const App = () => {
         title=""
         dataProvider={dataProvider}
         customRoutes={customRoutes}
+        customReducers={{ tree }}
         authProvider={authProvider}
         dashboard={Dashboard}
         loginPage={Login}
