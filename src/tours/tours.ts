@@ -134,6 +134,7 @@ const tours: { [id: string]: TourType } = {
         target: ".rc-tree",
         content:
           "ra-tree helps handling trees with ease, no matter the data structure you use on the backend",
+        disableBeacon: true,
       },
       {
         before: ({ target }) => {
