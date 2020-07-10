@@ -24,6 +24,13 @@ object-assign
  */
 
 /*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+
+/*!
  * inflection
  * Copyright(c) 2011 Ben Lin <ben@dreamerslab.com>
  * MIT Licensed
@@ -38,6 +45,8 @@ object-assign
  * Copyright (c) 2014-2015, Jon Schlinkert.
  * Licensed under the MIT License.
  */
+
+/*! http://mths.be/endswith v0.2.0 by @mathias */
 
 /**
  * A better abstraction over CSS.
