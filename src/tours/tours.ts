@@ -154,7 +154,9 @@ const tours: { [id: string]: TourType } = {
             () => {
               target
                 // not the first line or it collapses all the tree
-                .querySelector(".rc-tree-treenode:not(:nth-child(1)) .rc-tree-switcher.rc-tree-switcher_open")
+                .querySelector(
+                  ".rc-tree-treenode:not(:nth-child(1)) .rc-tree-switcher.rc-tree-switcher_open"
+                )
                 .click();
             },
             500,
@@ -169,8 +171,7 @@ const tours: { [id: string]: TourType } = {
           }, 4000);
         },
         target: '[aria-label="Add root"]',
-        content:
-          "You can even add a new category, with your own form, or even a prompt, try it!",
+        content: "You can even add a new category, or reorder them, try it!",
       },
     ],
   },
