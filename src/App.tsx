@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Admin, Resource } from "react-admin";
+import React, { useEffect } from "react";
+import { Admin, Resource, mergeTranslations } from "react-admin";
 import polyglotI18nProvider from "ra-i18n-polyglot";
 
 import { PreferencesBasedThemeProvider } from "@react-admin/ra-preferences";
+import {
+  reducer as tree,
+  raTreeLanguageFrench,
+  raTreeLanguageEnglish,
+} from "@react-admin/ra-tree";
 
 import "./App.css";
 
@@ -21,49 +26,25 @@ import categories from "./categories";
 import reviews from "./reviews";
 import tours from "./tours";
 
-import dataProviderFactory from "./dataProvider";
-import fakeServerFactory from "./fakeServer";
+import dataProvider from "./dataProvider";
+import fakeServer from "./fakeServer";
 
 const i18nProvider = polyglotI18nProvider((locale) => {
   if (locale === "fr") {
-    return import("./i18n/fr").then((messages) => messages.default);
+    return import("./i18n/fr").then((messages) =>
+      mergeTranslations(messages.default, raTreeLanguageFrench)
+    );
   }
-
-  // Always fallback on english
-  return englishMessages;
+  return mergeTranslations(englishMessages, raTreeLanguageEnglish);
 }, "en");
 
 const App = () => {
-  const [dataProvider, setDataProvider] = useState(null);
-
   useEffect(() => {
-    let restoreFetch;
-
-    const fetchDataProvider = async () => {
-      restoreFetch = await fakeServerFactory(
-        process.env.REACT_APP_DATA_PROVIDER
-      );
-      const dataProviderInstance = await dataProviderFactory(
-        process.env.REACT_APP_DATA_PROVIDER
-      );
-      setDataProvider(
-        // GOTCHA: dataProviderInstance can be a function
-        () => dataProviderInstance
-      );
+    const restoreFetch = fakeServer();
+    return () => {
+      restoreFetch();
     };
-
-    fetchDataProvider();
-
-    return restoreFetch;
   }, []);
-
-  if (!dataProvider) {
-    return (
-      <div className="loader-container">
-        <div className="loader">Loading...</div>
-      </div>
-    );
-  }
 
   return (
     <PreferencesBasedThemeProvider
@@ -73,6 +54,7 @@ const App = () => {
         title=""
         dataProvider={dataProvider}
         customRoutes={customRoutes}
+        customReducers={{ tree }}
         authProvider={authProvider}
         dashboard={Dashboard}
         loginPage={Login}

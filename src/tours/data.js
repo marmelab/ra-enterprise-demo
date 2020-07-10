@@ -5,9 +5,7 @@ export default {
       image: "images/tours/ra-markdown.jpg",
       title: "ra-markdown",
       tour: "ra-markdown",
-      comment: `
-For applications that need to display and edit Markdown content.
-      `,
+      comment: `Read Markdown data, and edit it using a WYSIWYG editor in your admin`,
       href: "http://marmelab.com/react-admin",
       playedOn: null
     },
@@ -16,9 +14,16 @@ For applications that need to display and edit Markdown content.
       image: "images/tours/ra-preferences.jpg",
       title: "ra-preferences",
       tour: "ra-preferences",
-      comment: `
-This module provides a way to store and persist user preferences in local storage. These preferences are device dependent, so this module is particularly fitted for UI preferences.
-      `,
+      comment: `Persist user preferences (language, ui, filters, displayed columns, etc) in local storage`,
+      href: "http://marmelab.com/react-admin",
+      playedOn: null
+    },
+    {
+      id: 3,
+      image: "images/tours/ra-tree.jpg",
+      title: "ra-tree",
+      tour: "ra-tree",
+      comment: `Edit and visualize tree structures. Reorganize by drag and drop. Adapts to any data structure on the backend (parent_id, children, nested sets, etc)..`,
       href: "http://marmelab.com/react-admin",
       playedOn: null
     },
