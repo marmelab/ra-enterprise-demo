@@ -1,31 +1,5 @@
 import React, { FC, useEffect } from "react";
-import PropTypes from "prop-types";
-import {
-  Datagrid,
-  Create,
-  EditButton,
-  NumberField,
-  ReferenceManyField,
-  SimpleForm,
-  TextInput,
-  useTranslate,
-  useRefresh,
-  useRedirect,
-} from "react-admin";
-
-import ThumbnailField from "../products/ThumbnailField";
-import ProductRefField from "../products/ProductRefField";
-import { FieldProps, Category } from "../types";
-
-const CategoryTitle: FC<FieldProps<Category>> = ({ record }) => {
-  const translate = useTranslate();
-  return record ? (
-    <span>
-      {translate("resources.categories.name", { smart_count: 1 })} &quot;
-      {record.name}&quot;
-    </span>
-  ) : null;
-};
+import { Create, useRefresh, useRedirect } from "react-admin";
 
 interface PromptProps {
   label: string;
@@ -42,7 +16,7 @@ const Prompt: FC<PromptProps> = ({
   useEffect(() => {
     const result = window.prompt("Category", record.name);
     save({ ...record, name: result, children: [], isRoot: true });
-  }, []);
+  }, [record, save]);
   return null;
 };
 

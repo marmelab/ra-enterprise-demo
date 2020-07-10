@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
-import { Datagrid, EditButton, List, TextField } from "react-admin";
-import {
-  CreateNode,
-  EditNode,
-  TreeWithDetails,
-  useTreeController,
-} from "@react-admin/ra-tree";
+import { TreeWithDetails, useTreeController } from "@react-admin/ra-tree";
 
-import LinkToRelatedProducts from "./LinkToRelatedProducts";
 import CategoryEdit from "./CategoryEdit";
 import CategoryCreate from "./CategoryCreate";
 
@@ -16,9 +9,11 @@ const CategoryList = (props: any) => {
     resource: props.resource,
     titleField: "name",
   });
+
   useEffect(() => {
     handleExpand(["5"]);
-  }, []);
+  }, [handleExpand]);
+
   return (
     <TreeWithDetails
       create={CategoryCreate}
