@@ -1,7 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Create, useTranslate, useRefresh, useRedirect } from "react-admin";
-
-import { FieldProps, Category } from "../types";
+import { Create, useRefresh, useRedirect } from "react-admin";
 
 interface PromptProps {
   label: string;

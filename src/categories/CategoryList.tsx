@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { TreeWithDetails, useTreeController } from "@react-admin/ra-tree";
 
-import LinkToRelatedProducts from "./LinkToRelatedProducts";
 import CategoryEdit from "./CategoryEdit";
 import CategoryCreate from "./CategoryCreate";
 

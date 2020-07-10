@@ -1,9 +1,4 @@
-import React, { FC } from "react";
-import {
-  useTranslate,
-} from "react-admin";
-
-import { FieldProps, Category } from "../types";
+import React from "react";
 
 import ProductList from "../products/ProductList";
 
