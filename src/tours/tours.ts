@@ -138,14 +138,15 @@ const tours: { [id: string]: TourType } = {
       },
       {
         before: ({ target }) => {
-          const openTreeInterval = setInterval(() => {
-            target
+          interval(
+            () => {
+              target
               .querySelector(".rc-tree-switcher.rc-tree-switcher_close")
-              .click();
-          }, 500);
-          setTimeout(() => {
-            clearInterval(openTreeInterval);
-          }, 4000);
+                .click();
+            },
+            500,
+            4000
+          );
         },
         target: ".rc-tree",
         content:

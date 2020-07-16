@@ -12,7 +12,8 @@ const CategoryList = (props: any) => {
 
   useEffect(() => {
     handleExpand(["5"]);
-  }, [handleExpand]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <TreeWithDetails

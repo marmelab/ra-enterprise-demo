@@ -16,7 +16,8 @@ const Prompt: FC<PromptProps> = ({
   useEffect(() => {
     const result = window.prompt("Category", record.name);
     save({ ...record, name: result, children: [], isRoot: true });
-  }, [record, save]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return null;
 };
 
