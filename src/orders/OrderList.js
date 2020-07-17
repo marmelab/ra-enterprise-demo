@@ -13,7 +13,6 @@ import {
   SearchInput,
   TextField,
   TextInput,
-  useDataProvider,
 } from "react-admin";
 import {
   makeStyles,
