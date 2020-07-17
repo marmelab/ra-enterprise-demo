@@ -8,6 +8,10 @@ import {
   raTreeLanguageFrench,
   raTreeLanguageEnglish,
 } from "@react-admin/ra-tree";
+import {
+  raRealTimeLanguageEnglish,
+  raRealTimeLanguageFrench,
+} from "@react-admin/ra-realtime";
 
 import "./App.css";
 
@@ -16,7 +20,9 @@ import authProvider from "./authProvider";
 import { Login, Layout } from "./layout";
 import { Dashboard } from "./dashboard";
 import customRoutes from "./routes";
+
 import englishMessages from "./i18n/en";
+import frenchMessages from "./i18n/fr";
 
 import visitors from "./visitors";
 import orders from "./orders";
@@ -29,14 +35,20 @@ import tours from "./tours";
 import dataProvider from "./dataProvider";
 import fakeServer from "./fakeServer";
 
-const i18nProvider = polyglotI18nProvider((locale) => {
-  if (locale === "fr") {
-    return import("./i18n/fr").then((messages) =>
-      mergeTranslations(messages.default, raTreeLanguageFrench)
-    );
-  }
-  return mergeTranslations(englishMessages, raTreeLanguageEnglish);
-}, "en");
+const messages = {
+  en: [
+    englishMessages,
+    raTreeLanguageFrench,
+    raRealTimeLanguageEnglish,
+  ],
+  fr: [
+    frenchMessages,
+    raTreeLanguageEnglish,
+    raRealTimeLanguageFrench,
+  ],
+};
+
+const i18nProvider = polyglotI18nProvider((locale) => mergeTranslations(...messages[locale]), "en");
 
 const App = () => {
   useEffect(() => {

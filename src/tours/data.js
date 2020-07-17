@@ -27,5 +27,14 @@ export default {
       href: "http://marmelab.com/react-admin",
       playedOn: null
     },
+    {
+      id: 4,
+      image: "images/tours/ra-realtime.jpg",
+      title: "ra-realtime",
+      tour: "ra-realtime",
+      comment: `In some teams, several people work in parallel on a common task. Admins for these tasks need to allow real-time notifications, and prevent data loss when two editors work on the same resource concurrently. ra-realtime provides solutions for these problems.`,
+      href: "http://marmelab.com/react-admin",
+      playedOn: null
+    },
   ],
 };

@@ -5,8 +5,10 @@
   "dependencies": {
     "@material-ui/core": "^4.9.0",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@react-admin/ra-markdown": "^0.0.2",
     "@react-admin/ra-preferences": "^0.0.1",
+    "@react-admin/ra-realtime": "^0.0.1",
     "@react-admin/ra-tour": "^0.0.1",
     "@react-admin/ra-tree": "^0.0.1",
     "data-generator-retail": "^3.0.0",
