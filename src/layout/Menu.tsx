@@ -56,7 +56,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
       >
         <RealTimeMenuItemLink
           resource="commands"
-          to={`/commands`}
+          to="/commands"
           primaryText={translate(`resources.commands.name`, {
             smart_count: 2,
           })}
@@ -65,7 +65,7 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
           sidebarIsOpen={open}
           dense={dense}
           data-testid="commands-menu"
-          badgeColor={"primary"}
+          badgeColor="primary"
         />
         <MenuItemLink
           to={`/invoices`}
