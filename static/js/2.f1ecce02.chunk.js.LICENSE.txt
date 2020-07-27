@@ -64,6 +64,12 @@ object-assign
 * Copyright (c) 2014-2015 Olivier Scherrer <pode.fr@gmail.com>
 */
 
+/** @license
+ * eventsource.js
+ * Available under MIT License (MIT)
+ * https://github.com/Yaffle/EventSource/
+ */
+
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
