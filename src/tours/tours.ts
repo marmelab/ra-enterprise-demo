@@ -141,7 +141,7 @@ const tours: { [id: string]: TourType } = {
           interval(
             () => {
               target
-              .querySelector(".rc-tree-switcher.rc-tree-switcher_close")
+                .querySelector(".rc-tree-switcher.rc-tree-switcher_close")
                 .click();
             },
             500,
@@ -174,6 +174,61 @@ const tours: { [id: string]: TourType } = {
         },
         target: '[aria-label="Add root"]',
         content: "You can even add a new category, or reorder them, try it!",
+      },
+    ],
+  },
+  "ra-realtime": {
+    before: ({ redirect }) => {
+      localStorage.setItem("batchLevel", "0");
+      const closedSaledMenu: HTMLElement | null = document.querySelector(
+        '[data-testid="sales-menu-closed"]'
+      );
+      if (!closedSaledMenu) {
+        return;
+      }
+      closedSaledMenu.click();
+    },
+    steps: [
+      {
+        before: async ({ dataProvider }) => {
+          localStorage.setItem("batchLevel", "0");
+          dataProvider.publish("resource/commands", {
+            type: "created",
+            topic: "resource/commands",
+            payload: { ids: [1, 2, 3, 4, 5] },
+            date: new Date(),
+          });
+          await timeout(2000);
+        },
+        disableBeacon: true,
+        target: '[data-testid="commands-menu"]',
+        content: "Seems like you just had new orders, let's check...",
+        after: ({ redirect }) => {
+          redirect("/commands");
+        },
+      },
+      {
+        before: ({ dataProvider }) => {
+          localStorage.setItem("batchLevel", "1");
+        },
+        target: "[class^=RaList-main]",
+        content: "Your new orders can stand-out from others",
+      },
+      {
+        before: ({ dataProvider }) => {
+          localStorage.setItem("batchLevel", "2");
+          dataProvider.publish("resource/commands", {
+            type: "created",
+            topic: "resource/commands",
+            payload: { ids: [6, 7, 8, 9] },
+            date: new Date(),
+          });
+        },
+        target: "[class^=RaList-main]",
+        content: "And newest orders even appear while you're on the page",
+        after: ({ dataProvider }) => {
+          localStorage.setItem("batchLevel", "0");
+        },
       },
     ],
   },

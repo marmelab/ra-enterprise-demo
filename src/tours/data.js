@@ -27,5 +27,14 @@ export default {
       href: "http://marmelab.com/react-admin",
       playedOn: null
     },
+    {
+      id: 4,
+      image: "images/tours/ra-realtime.jpg",
+      title: "ra-realtime",
+      tour: "ra-realtime",
+      comment: `Enable realtime on menu, list, show and edit views - or anywhere you want.`,
+      href: "http://marmelab.com/react-admin",
+      playedOn: null
+    },
   ],
 };

@@ -39,12 +39,13 @@ const SubMenu: FC<Props> = ({
     icon,
     children,
     dense,
+    ...rest
 }) => {
     const translate = useTranslate();
     const classes = useStyles();
 
     const header = (
-        <MenuItem dense={dense} button onClick={handleToggle}>
+        <MenuItem dense={dense} button onClick={handleToggle} {...rest}>
             <ListItemIcon className={classes.icon}>
                 {isOpen ? <ExpandMore /> : icon}
             </ListItemIcon>

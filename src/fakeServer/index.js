@@ -6,10 +6,6 @@ import demoData from "./demo-data";
 
 const getAllChildrenCategories = (categories, parentId) => {
   const parentCategory = categories.find(({ id }) => id === parentId);
-  console.log("getting all child of " + parentId, {
-    parentCategory,
-    categories,
-  });
   const children = parentCategory.children.map((childId) =>
     getAllChildrenCategories(categories, childId)
   );

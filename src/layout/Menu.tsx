@@ -4,6 +4,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import LabelIcon from "@material-ui/icons/Label";
 import { useMediaQuery, Theme } from "@material-ui/core";
 import { useTranslate, DashboardMenuItem, MenuItemLink } from "react-admin";
+import { RealTimeMenuItemLink } from "@react-admin/ra-realtime";
 
 import visitors from "../visitors";
 import orders from "../orders";
@@ -49,9 +50,13 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         name="pos.menu.sales"
         icon={<orders.icon />}
         dense={dense}
+        data-testid={
+          state.menuSales ? "sales-menu-opened" : "sales-menu-closed"
+        }
       >
-        <MenuItemLink
-          to={`/commands`}
+        <RealTimeMenuItemLink
+          resource="commands"
+          to="/commands"
           primaryText={translate(`resources.commands.name`, {
             smart_count: 2,
           })}
@@ -59,6 +64,8 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
           onClick={onMenuClick}
           sidebarIsOpen={open}
           dense={dense}
+          data-testid="commands-menu"
+          badgeColor="primary"
         />
         <MenuItemLink
           to={`/invoices`}

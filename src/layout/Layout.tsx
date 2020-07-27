@@ -1,5 +1,11 @@
 import React from "react";
-import { Layout, Sidebar, useNotify, useRedirect } from "react-admin";
+import {
+  Layout,
+  Sidebar,
+  useNotify,
+  useRedirect,
+  useDataProvider,
+} from "react-admin";
 
 import { SidebarOpenPreferenceSync } from "@react-admin/ra-preferences";
 
@@ -17,10 +23,12 @@ export default (props: any) => {
   const notify = useNotify();
   const redirect = useRedirect();
   const [tourPreferences, setTourPreferences] = usePreferences("tour");
+  const dataProvider = useDataProvider();
+
   return (
     <TourProvider
       tours={tours}
-      tools={{ notify, redirect, setTourPreferences }}
+      tools={{ notify, redirect, setTourPreferences, dataProvider }}
       initialState={tourPreferences}
     >
       <>
