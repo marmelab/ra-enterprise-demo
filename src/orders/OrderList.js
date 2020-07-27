@@ -51,14 +51,18 @@ const useDatagridStyles = makeStyles({
 
 const orderRowStyle = (batchLevel) => (record, index) => {
   let backgroundColor;
-  if (record.batch === 0) {
-    backgroundColor = "white";
-  } else if (record.batch === batchLevel) {
-    backgroundColor = "#e6fbff";
-  } else if (record.batch === 1) {
-    backgroundColor = "#e6fbff40";
-  } else {
-    backgroundColor = "white";
+  switch(record.batch){
+    case 0:
+      backgroundColor = "white";
+      break;
+    case batchLevel:
+      backgroundColor = "#e6fbff";
+      break;
+    case 1:
+      backgroundColor = "#e6fbff40";
+      break;
+    default:
+      backgroundColor = "white";
   }
 
   return {
