@@ -211,7 +211,7 @@ const tours: { [id: string]: TourType } = {
         before: ({ dataProvider }) => {
           localStorage.setItem("batchLevel", "1");
         },
-        target: "[class^=RaList-main]",
+        target: "[data-testid=order-ordered-datagrid]",
         content: "Your new orders can stand-out from others",
       },
       {
@@ -224,7 +224,7 @@ const tours: { [id: string]: TourType } = {
             date: new Date(),
           });
         },
-        target: "[class^=RaList-main]",
+        target: "[data-testid=order-ordered-datagrid]",
         content: "And newest orders even appear while you're on the page",
         after: ({ dataProvider }) => {
           localStorage.setItem("batchLevel", "0");

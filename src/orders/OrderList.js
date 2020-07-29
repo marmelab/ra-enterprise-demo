@@ -125,6 +125,7 @@ class TabbedDatagrid extends React.Component {
                 optimized
                 rowClick="edit"
                 rowStyle={orderRowStyle(batchLevel)}
+                data-testid="order-ordered-datagrid"
               >
                 <TextField source="id" />
                 <NumberField source="batch" />
