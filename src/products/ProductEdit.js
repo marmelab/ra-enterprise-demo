@@ -62,7 +62,7 @@ const TabbedFormWithPreview = (props) => {
           <div className={classes.preview} data-testid="product-edit-preview">
             <FormDataConsumer>
               {({ formData, ...rest }) => {
-                return <Preview poster={formData} />;
+                return <Preview record={formData} />;
               }}
             </FormDataConsumer>
           </div>

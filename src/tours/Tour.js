@@ -10,7 +10,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PlayIcon from "@material-ui/icons/PlayArrow";
-import { markdownToReact } from "@react-admin/ra-markdown";
+import { MarkdownField } from "@react-admin/ra-markdown";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
@@ -102,7 +102,7 @@ export default ({ record }) => {
         <Typography gutterBottom variant="h5" component="h2">
           {record.title}
         </Typography>
-        {markdownToReact(record.comment)}
+        <MarkdownField record={record} source="comment" />
       </CardContent>
       <CardActions className={classes.actions}>
         <Button size="small" startIcon={<PlayIcon />} color="primary">

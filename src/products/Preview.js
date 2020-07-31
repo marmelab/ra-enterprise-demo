@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { markdownToReact } from "@react-admin/ra-markdown";
+import { MarkdownField } from "@react-admin/ra-markdown";
 
 const styles = {
   container: {
@@ -62,10 +62,10 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-const Preview = ({
-  poster: { description, image, height, width, price, reference, stock },
-}) => {
+const Preview = ({ record }) => {
+  const { image, height, width, price, reference, stock } = record;
   const classes = useStyles();
+
   return (
     <div className={classes.container}>
       <p>Preview</p>
@@ -84,7 +84,7 @@ const Preview = ({
           {width}x{height}
         </h2>
         <h2>{price} €</h2>
-        <p>{markdownToReact(description)}</p>
+        <MarkdownField record={record} source="description" />
       </div>
     </div>
   );
