@@ -5,6 +5,11 @@ object-assign
 */
 
 /*!
+       * to-mark
+       * @version 1.0.1 | Wed Jul 29 2020
+       */
+
+/*!
   Copyright (c) 2015 Jed Watson.
   Based on code that is Copyright 2013-2015, Facebook, Inc.
   All rights reserved.
@@ -17,10 +22,17 @@ object-assign
 */
 
 /*!
- * Determine if an object is a Buffer
- *
- * @author   Feross Aboukhadijeh <https://feross.org>
- * @license  MIT
+ * @toast-ui/editor
+ * @version 2.3.1 | Wed Jul 29 2020
+ * @author NHN FE Development Lab <dl_javascript@nhn.com>
+ * @license MIT
+ */
+
+/*!
+ * TOAST UI Editor : React Wrapper
+ * @version 2.3.1 | Wed Jul 29 2020
+ * @author NHN. FE Development Lab <dl_javascript@nhn.com>
+ * @license MIT
  */
 
 /*!
@@ -39,14 +51,24 @@ object-assign
  * A port of inflection-js to node.js module.
  */
 
-/*!
- * repeat-string <https://github.com/jonschlinkert/repeat-string>
- *
- * Copyright (c) 2014-2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
+/*! *****************************************************************************
+        Copyright (c) Microsoft Corporation.
+        
+        Permission to use, copy, modify, and/or distribute this software for any
+        purpose with or without fee is hereby granted.
+        
+        THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+        REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+        AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+        INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+        LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+        OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+        PERFORMANCE OF THIS SOFTWARE.
+        ***************************************************************************** */
 
 /*! http://mths.be/endswith v0.2.0 by @mathias */
+
+/*! http://mths.be/fromcodepoint v0.2.1 by @mathias */
 
 /**
  * A better abstraction over CSS.
