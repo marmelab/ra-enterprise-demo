@@ -8,7 +8,6 @@ const styles = {
         flexDirection: 'column',
         padding: '0 20px',
         width: 350,
-
         '& > p': {
             fontSize: 12,
             color: '#777',
@@ -53,7 +52,6 @@ const styles = {
         bottom: '16.129%',
         left: '13.158%',
         right: '13.158%',
-
         '& img': {
             width: '100%',
         },
@@ -63,7 +61,7 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 const Preview = ({ record }) => {
-    const { image, height, width, price, reference, stock } = record;
+    const { image, height, width, price, reference } = record;
     const classes = useStyles();
 
     return (
