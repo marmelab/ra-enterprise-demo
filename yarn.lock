@@ -9993,7 +9993,7 @@ rc-virtual-list@^1.1.0:
     raf "^3.4.1"
     rc-util "^5.0.0"
 
-react-admin@^3.5.0:
+react-admin@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-3.7.1.tgz#315573908361678125085005589c51512be2235e"
   integrity sha512-eVOdvh7HIc83BmoFjZNTcRU5l9XNhk6rHn5vBu1zcl5i//91jPw0NTS1uxG18STjiERckh/DVphELC5tFRIGwA==
