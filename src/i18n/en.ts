@@ -11,7 +11,7 @@ interface RaTreeTranslationMessages {
 }
 export interface TranslationMessages
   extends RaTreeTranslationMessages,
-    BaseTranslationMessages {}
+  BaseTranslationMessages { }
 
 const customEnglishMessages: TranslationMessages = {
   ...englishMessages,
@@ -196,6 +196,15 @@ const customEnglishMessages: TranslationMessages = {
         regular: "Regular",
         returns: "Returns",
         reviewer: "Reviewer",
+      },
+    },
+    stores: {
+      name: "Stores",
+      fields: {
+        city: "City",
+        country: "Country",
+        address: "Address",
+        created_at: "Created at",
       },
     },
   },

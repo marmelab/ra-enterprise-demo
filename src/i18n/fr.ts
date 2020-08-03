@@ -188,6 +188,15 @@ const customFrenchMessages: TranslationMessages = {
                 reviewer: 'Commentateur',
             },
         },
+        stores: {
+            name: "Magasins",
+            fields: {
+                city: "Ville",
+                country: "Parys",
+                address: "Adresse",
+                created_at: "Ouvert le",
+            },
+        },
     },
 };
 

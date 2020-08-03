@@ -11,6 +11,7 @@ import orders from "../orders";
 import invoices from "../invoices";
 import products from "../products";
 import reviews from "../reviews";
+import stores from "../stores";
 import SubMenu from "./SubMenu";
 import { AppState } from "../types";
 
@@ -123,6 +124,16 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
           smart_count: 2,
         })}
         leftIcon={<reviews.icon />}
+        onClick={onMenuClick}
+        sidebarIsOpen={open}
+        dense={dense}
+      />
+      <MenuItemLink
+        to={`/stores`}
+        primaryText={translate(`resources.stores.name`, {
+          smart_count: 2,
+        })}
+        leftIcon={<stores.icon />}
         onClick={onMenuClick}
         sidebarIsOpen={open}
         dense={dense}
