@@ -1,4 +1,5 @@
 import { TourType } from "@react-admin/ra-tour";
+import { fireEvent } from '@testing-library/react';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -230,6 +231,37 @@ const tours: { [id: string]: TourType } = {
           localStorage.setItem("batchLevel", "0");
         },
       },
+    ],
+  },
+  "ra-editable-datagrid": {
+    before: async ({ redirect }) => {
+      redirect("/stores");
+      await timeout(1000); // would be so awesome if redirect was awaitable!
+    },
+    steps: [
+      {
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+        content: "Hovering a row will show its quick toolbar allowing to either edit it or delete it. Let see what happen on edition which is also activable on row click",
+      },
+      {
+        before: ({ target }) => {
+          target.querySelector('td:nth-child(2)').click();
+        },
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+        content: "You can edit your data without leaving the datagrid! Let's change the address",
+        after: ({ target }) => {
+          fireEvent.change(target.querySelector('#address'), {
+            target: { value: '10 rue de Rivoli' }
+          })
+        },
+      },
+      {
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+        content: "Now we can save!",
+        after: ({ target }) => {
+          target.click();
+        }
+      }
     ],
   },
 };

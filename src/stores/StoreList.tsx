@@ -21,7 +21,7 @@ const StoreForm = props => (
 
 export const StoreList = (props: any) => (
     <List {...props} perPage={25}>
-        <EditableDatagrid editForm={<StoreForm />}>
+        <EditableDatagrid data-testid="store-datagrid" rowClick="edit" editForm={<StoreForm />}>
             <TextField source="id" />
             <TextField source="city" />
             <TextField source="country" />
