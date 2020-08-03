@@ -8,14 +8,8 @@ import {
   SelectInput,
   SimpleForm,
   useTranslate,
-  ArrayField,
-  ReferenceField,
-  NumberField,
-  TextField
 } from "react-admin";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { EditableDatagrid } from "@react-admin/ra-editable-datagrid";
 
 import Basket from "./Basket";
 
@@ -64,20 +58,6 @@ const OrderEdit = (props) => {
           ]}
         />
         <BooleanInput source="returned" />
-
-        <ArrayField source="basket">
-          <EditableDatagrid undoable rowClick="edit">
-            <ReferenceField
-              label="User"
-              source="product_id"
-              reference="products"
-            >
-              <TextField source="reference" />
-            </ReferenceField>
-            <NumberField source="quantity" />
-            <NumberField source="total" />
-          </EditableDatagrid>
-        </ArrayField>
       </SimpleForm>
     </Edit>
   );
