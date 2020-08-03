@@ -9984,9 +9984,9 @@ rc-animate@^3.1.0:
     rc-util "^5.0.1"
 
 rc-tree@^3.1.5:
-  version "3.8.4"
-  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-3.8.4.tgz#cc3895353cd5b50be088a40f4e1a97d3b48169b8"
-  integrity sha512-zEwC+fck9mXF2eMNaEGWhiMJSroJwcxRw9d64GHf5NR7AbzsUhqrkYiAD3VQkZ8utpV7zezwByE85ATE+KdaXw==
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/rc-tree/-/rc-tree-3.8.2.tgz#e22c0a4e11726ee676a83227099f16634c5feb7f"
+  integrity sha512-4RLJhiGpt/Wvj7O9mm0IX+Bv9PrcdKL3j2BIpGLQX3Xd+n4p5PcqL46mRRdGoWvvTJcZ6ZEiZDg46nSyTYLdHA==
   dependencies:
     "@babel/runtime" "^7.10.1"
     classnames "2.x"
