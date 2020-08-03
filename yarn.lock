@@ -1480,18 +1480,18 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@react-admin/ra-markdown@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-0.0.1.tgz#a714303150913e668b9062bec803670a22099f42"
-  integrity sha512-72UxRekRxwGhswTvdYUyCvawr6zjNZnf44Fnixkppsu21STMbXlRjakkFdjjn2gEZ8ncySqWZFAMGuUd9Qnskw==
+"@react-admin/ra-markdown@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.0.0.tgz#865c4bb0f42488e80acdd544fbc5fa8842e6b6c2"
+  integrity sha512-xZkHiwsMlRV/0x6Hx2NigbzNf8lYHOve/aHfNjApG1Lkx3y1ejz5ss8Ma6bWPNAIB+x2JJc2etkVHUncPbYZAw==
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
     lodash "~4.17.5"
 
-"@react-admin/ra-preferences@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-0.0.1.tgz#93d42c03b43dcbc8751362724baeb2764e6b460f"
-  integrity sha512-H9YvQsCIrTdbN5lFRAwoUEu+wTtQUHu2cYgnDjhfiN2F622fbFYI5sVByhCQsHckwQYmqXFBTHQaAmsPhqPcjQ==
+"@react-admin/ra-preferences@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.0.tgz#23edb69f6f85332205126a4a31ae7d6e5bd11b60"
+  integrity sha512-VO2GadgtqDyq4x1dIg/3D5A6dmRAD+TB6Tk7YEDbx9LYQyDSpf26x5S+mXa0I9pxT0pZVOz18gvQjNuZUWzT8w==
 
 "@react-admin/ra-realtime@^0.0.1":
   version "0.0.1"
@@ -1503,18 +1503,18 @@
     querystring "^0.2.0"
     whatwg-fetch "^3.0.0"
 
-"@react-admin/ra-tour@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-0.0.1.tgz#0163e5a9b16f0574a148a56ca8cde535e4ebcd9e"
-  integrity sha512-dRxM4MJJ+qZAjel4K9GMiD7fnE3zUaiguNF15hReTdQngnTYcWCS4RPXH4RjGzr6hIFy5Urj1nrRTOZBo9xSKQ==
+"@react-admin/ra-tour@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.0.0.tgz#7dad924e221afea3551dd11770276f5d27616398"
+  integrity sha512-FwD3FqXCHMhXZFwGLvXv3tWYwLkqD7WEcn8xy0iOJSgbDI8NZ2dmmgNtoGfgyTtWVgsUDHq8nVaEu0TboTeP9g==
   dependencies:
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-0.0.1.tgz#e9628bbc41df5ea8c818d79516b60db418558023"
-  integrity sha512-NnSmjsMrbBXAtL4Nsk+gqzDRJjUD3a6rDgdINV89f3/jWa+zH73kx+6AFixiOJczZdR+Ozr/zLb11ywAAyLeQw==
+"@react-admin/ra-tree@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.0.0.tgz#7687484809c9028d49975759bdf4de2055cac8a5"
+  integrity sha512-d/jZRBjOReW6reVWgLAT9yJIoaP36Y/bAO0Ai+VyVi/DeUmZ1VONHg+mWOvM6raidvlRlIgbIYFDT5zwTmgzmw==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
     lodash "^4.17.10"
