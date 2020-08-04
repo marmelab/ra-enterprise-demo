@@ -8,8 +8,11 @@ cache:
         - node_modules
         - build
 
-before_script:
-    - cp .npmrc.dist .npmrc && echo "Hello Julien" && yarn install
+before_install:
+    - cp .npmrc.dist .npmrc
+
+install:
+    - yarn install
 
 script:
     - yarn build
