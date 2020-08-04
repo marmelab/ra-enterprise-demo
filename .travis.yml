@@ -9,7 +9,7 @@ cache:
         - build
 
 before_script:
-    - cp .npmrc.dist .npmrc && yarn install
+    - cp .npmrc.dist .npmrc && echo "Hello Julien" && yarn install
 
 script:
     - yarn build
