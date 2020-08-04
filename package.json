@@ -38,7 +38,7 @@
     "scripts": {
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "start": "export NPM_TOKEN=$NPM_TOKEN && react-scripts start",
-        "build": "export NPM_TOKEN=$NPM_TOKEN && react-scripts build"
+        "build": "cp .npmrc.dist .npmrc && export NPM_TOKEN=$NPM_TOKEN && react-scripts build"
     },
     "homepage": "https://marmelab.com/ra-enterprise-demo",
     "browserslist": [
