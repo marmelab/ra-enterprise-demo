@@ -241,14 +241,14 @@ const tours: { [id: string]: TourType } = {
     steps: [
       {
         target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
-        content: "Hovering a row will show its quick toolbar allowing to either edit it or delete it. Let see what happen on edition which is also activable on row click",
+        content: "Hovering on a row shows a toolbar allowing to either edit or delete the record. Let's see what happens when editing a row by clicking on the Edit button (or by directly clicking inside the row)",
       },
       {
         before: ({ target }) => {
           target.querySelector('td:nth-child(2)').click();
         },
         target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
-        content: "You can edit your data without leaving the datagrid! Let's change the address",
+        content: "You can edit a record without leaving the Datagrid! Let's change the address.",
         after: ({ target }) => {
           fireEvent.change(target.querySelector('#address'), {
             target: { value: '10 rue de Rivoli' }
@@ -257,14 +257,14 @@ const tours: { [id: string]: TourType } = {
       },
       {
         target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
-        content: "Now we can save!",
+        content: "After edition, just click on the Save button in the row",
         after: ({ target }) => {
           target.click();
         }
       },
       {
         target: '[aria-label="Create"]',
-        content: "It also supports inline creation",
+        content: "The Editable Datagrid also supports inline creation",
         after: ({ target }) => {
           target.click();
         }
@@ -285,11 +285,11 @@ const tours: { [id: string]: TourType } = {
           });
         },
         target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
-        content: "All react-admin inputs are supported as well",
+        content: "A row edition / creation form can contain Inputs of any type (text, date, number, etc.).",
       },
       {
         target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
-        content: "Now we can save!",
+        content: "Click on the Save button to submit the form and create a new record.",
         after: ({ target }) => {
           target.click();
         }
