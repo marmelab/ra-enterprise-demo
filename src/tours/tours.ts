@@ -252,7 +252,7 @@ const tours: { [id: string]: TourType } = {
         after: ({ target }) => {
           fireEvent.change(target.querySelector('#address'), {
             target: { value: '10 rue de Rivoli' }
-          })
+          });
         },
       },
       {
@@ -261,7 +261,39 @@ const tours: { [id: string]: TourType } = {
         after: ({ target }) => {
           target.click();
         }
-      }
+      },
+      {
+        target: '[aria-label="Create"]',
+        content: "It also supports inline creation",
+        after: ({ target }) => {
+          target.click();
+        }
+      },
+      {
+        before: ({ target }) => {
+          fireEvent.change(target.querySelector('#city'), {
+            target: { value: 'Nantes' }
+          });
+          fireEvent.change(target.querySelector('#country'), {
+            target: { value: 'France' }
+          });
+          fireEvent.change(target.querySelector('#address'), {
+            target: { value: '5 rue du château' }
+          });
+          fireEvent.change(target.querySelector('#created_at'), {
+            target: { value: '2020-08-04' }
+          });
+        },
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+        content: "All react-admin inputs are supported as well",
+      },
+      {
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+        content: "Now we can save!",
+        after: ({ target }) => {
+          target.click();
+        }
+      },
     ],
   },
 };
