@@ -2803,4 +2803,49 @@ export default {
       stock: 130,
     },
   ],
+  stores: [
+    {
+        id: 0,
+        city: 'Paris',
+        country: 'France',
+        address: '8 rue de Rivoli',
+        created_at: new Date(1988, 4, 20),
+    },
+    {
+        id: 1,
+        city: 'Lyon',
+        country: 'France',
+        address: '14 rue de la République',
+        created_at: new Date(1992, 3, 11),
+    },
+    {
+        id: 2,
+        city: 'Nice',
+        country: 'France',
+        address: '5 cours Saleya',
+        created_at: new Date(1993, 6, 27),
+    },
+    {
+        id: 3,
+        city: 'Toulouse',
+        country: 'France',
+        address: '43 rue de la Pomme',
+        created_at: new Date(1994, 1, 2),
+    },
+    {
+
+        id: 4,
+        city: 'Dijon',
+        country: 'France',
+        address: '89 rue de la liberté',
+        created_at: new Date(2001, 11, 5),
+    },
+    {
+        id: 5,
+        city: 'Nancy',
+        country: 'France',
+        address: '27 rue Ordener',
+        created_at: new Date(2008, 7, 15),
+    }
+  ]
 };

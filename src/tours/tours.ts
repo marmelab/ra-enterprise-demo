@@ -1,4 +1,5 @@
 import { TourType } from "@react-admin/ra-tour";
+import { fireEvent } from '@testing-library/react';
 
 const getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -229,6 +230,69 @@ const tours: { [id: string]: TourType } = {
         after: ({ dataProvider }) => {
           localStorage.setItem("batchLevel", "0");
         },
+      },
+    ],
+  },
+  "ra-editable-datagrid": {
+    before: async ({ redirect }) => {
+      redirect("/stores");
+      await timeout(1000); // would be so awesome if redirect was awaitable!
+    },
+    steps: [
+      {
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+        content: "Hovering on a row shows a toolbar allowing to either edit or delete the record. Let's see what happens when editing a row by clicking on the Edit button (or by directly clicking inside the row)",
+      },
+      {
+        before: ({ target }) => {
+          target.querySelector('td:nth-child(2)').click();
+        },
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+        content: "You can edit a record without leaving the Datagrid! Let's change the address.",
+        after: ({ target }) => {
+          fireEvent.change(target.querySelector('#address'), {
+            target: { value: '10 rue de Rivoli' }
+          });
+        },
+      },
+      {
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+        content: "After edition, just click on the Save button in the row",
+        after: ({ target }) => {
+          target.click();
+        }
+      },
+      {
+        target: '[aria-label="Create"]',
+        content: "The Editable Datagrid also supports inline creation",
+        after: ({ target }) => {
+          target.click();
+        }
+      },
+      {
+        before: ({ target }) => {
+          fireEvent.change(target.querySelector('#city'), {
+            target: { value: 'Nantes' }
+          });
+          fireEvent.change(target.querySelector('#country'), {
+            target: { value: 'France' }
+          });
+          fireEvent.change(target.querySelector('#address'), {
+            target: { value: '5 rue du château' }
+          });
+          fireEvent.change(target.querySelector('#created_at'), {
+            target: { value: '2020-08-04' }
+          });
+        },
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+        content: "A row edition / creation form can contain Inputs of any type (text, date, number, etc.).",
+      },
+      {
+        target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+        content: "Click on the Save button to submit the form and create a new record.",
+        after: ({ target }) => {
+          target.click();
+        }
       },
     ],
   },

@@ -36,5 +36,14 @@ export default {
       href: "http://marmelab.com/react-admin",
       playedOn: null
     },
+    {
+      id: 5,
+      image: "images/tours/ra-editable-datagrid.jpg",
+      title: "ra-editable-datagrid",
+      tour: "ra-editable-datagrid",
+      comment: `Quickly edit your data without leaving your datagrid.`,
+      href: "http://marmelab.com/react-admin",
+      playedOn: null
+    },
   ],
 };
