@@ -1,5 +1,3 @@
-import { AccordionDetails } from "@material-ui/core";
-
 export default {
   commands: [
     {
