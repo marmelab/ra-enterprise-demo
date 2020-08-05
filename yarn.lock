@@ -1480,10 +1480,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@react-admin/ra-editable-datagrid@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-0.0.1.tgz#24e47dbb9d28c5ea9df2a3770cd3ec60aaab8501"
-  integrity sha512-sjprkh6wmBGoIswhwgd+PHUUZv9uk4uDXhfpLS6OBql4TnbGP8FeNz02N69/EgRoau5biPcj5TKtl9UZTHiNGQ==
+"@react-admin/ra-editable-datagrid@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.0.tgz#800031727dbe52119fa417ca5b03d0ffc1707507"
+  integrity sha512-7/6LMH6Uztcj0LHBHpToo3BEe+fh56Hk/lCrEEamHRWwNo9c81+LMdQbmLNE26z9bS6RmOIY6ioFtuMTIHXn6g==
 
 "@react-admin/ra-markdown@^1.0.0":
   version "1.0.0"
