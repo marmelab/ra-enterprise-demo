@@ -19,6 +19,7 @@ import CustomerLinkField from './CustomerLinkField';
 import ColoredNumberField from './ColoredNumberField';
 import MobileGrid from './MobileGrid';
 import DesktopGrid from './DesktopGrid';
+import VisitorListAside from './VisitorListAside';
 
 const VisitorFilter = (props: any) => (
     <Filter {...props}>
@@ -50,6 +51,8 @@ const VisitorList = (props: any) => {
         theme.breakpoints.down('xs')
     );
 
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
+
     return (
         <EnterpriseList
             {...props}
@@ -59,7 +62,8 @@ const VisitorList = (props: any) => {
             defaultOmittedColumns={['last_seen']}
             hasViewSelector
             defaultView
-            filters={<VisitorFilter />}
+            filters={isSmall ? <VisitorFilter /> : null}
+            aside={<VisitorListAside />}
             sort={{ field: 'last_seen', order: 'DESC' }}
             perPage={25}
         >

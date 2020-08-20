@@ -14,6 +14,7 @@ import NbNewOrders from './NbNewOrders';
 import PendingOrders from './PendingOrders';
 import PendingReviews from './PendingReviews';
 import NewCustomers from './NewCustomers';
+import OrderChart from './OrderChart';
 
 import { Customer, Order, Review } from '../types';
 
@@ -34,16 +35,20 @@ interface State {
     pendingOrdersCustomers?: CustomerData;
     pendingReviews?: Review[];
     pendingReviewsCustomers?: CustomerData;
+    recentOrders?: Order[];
     revenue?: number;
 }
 
 const styles = {
     flex: { display: 'flex' },
     flexColumn: { display: 'flex', flexDirection: 'column' },
-    leftCol: { flex: 1, marginRight: '1em' },
-    rightCol: { flex: 1, marginLeft: '1em' },
-    singleCol: { marginTop: '2em', marginBottom: '2em' },
+    leftCol: { flex: 1, marginRight: '0.5em' },
+    rightCol: { flex: 1, marginLeft: '0.5em' },
+    singleCol: { marginTop: '1em', marginBottom: '1em' },
 };
+
+const Spacer = () => <span style={{ width: '1em' }} />;
+const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
 const Dashboard: FC = () => {
     const [state, setState] = useState<State>({});
@@ -53,7 +58,7 @@ const Dashboard: FC = () => {
         theme.breakpoints.down('xs')
     );
     const isSmall = useMediaQuery((theme: Theme) =>
-        theme.breakpoints.down('sm')
+        theme.breakpoints.down('md')
     );
 
     const fetchOrders = useCallback(async () => {
@@ -85,6 +90,7 @@ const Dashboard: FC = () => {
             );
         setState(state => ({
             ...state,
+            recentOrders,
             revenue: aggregations.revenue.toLocaleString(undefined, {
                 style: 'currency',
                 currency: 'USD',
@@ -148,23 +154,20 @@ const Dashboard: FC = () => {
         pendingReviews,
         pendingReviewsCustomers,
         revenue,
+        recentOrders,
     } = state;
     return isXSmall ? (
         <div>
             <div style={styles.flexColumn as CSSProperties}>
-                <div style={{ marginBottom: '2em' }}>
-                    <Welcome />
-                </div>
-                <div style={styles.flex}>
-                    <MonthlyRevenue value={revenue} />
-                    <NbNewOrders value={nbNewOrders} />
-                </div>
-                <div style={styles.singleCol}>
-                    <PendingOrders
-                        orders={pendingOrders}
-                        customers={pendingOrdersCustomers}
-                    />
-                </div>
+                <Welcome />
+                <MonthlyRevenue value={revenue} />
+                <VerticalSpacer />
+                <NbNewOrders value={nbNewOrders} />
+                <VerticalSpacer />
+                <PendingOrders
+                    orders={pendingOrders}
+                    customers={pendingOrdersCustomers}
+                />
             </div>
         </div>
     ) : isSmall ? (
@@ -174,7 +177,11 @@ const Dashboard: FC = () => {
             </div>
             <div style={styles.flex}>
                 <MonthlyRevenue value={revenue} />
+                <Spacer />
                 <NbNewOrders value={nbNewOrders} />
+            </div>
+            <div style={styles.singleCol}>
+                <OrderChart orders={recentOrders} />
             </div>
             <div style={styles.singleCol}>
                 <PendingOrders
@@ -184,33 +191,38 @@ const Dashboard: FC = () => {
             </div>
         </div>
     ) : (
-        <div style={styles.flex}>
-            <div style={styles.leftCol}>
-                <div style={styles.flex}>
-                    <MonthlyRevenue value={revenue} />
-                    <NbNewOrders value={nbNewOrders} />
+        <>
+            <Welcome />
+            <div style={styles.flex}>
+                <div style={styles.leftCol}>
+                    <div style={styles.flex}>
+                        <MonthlyRevenue value={revenue} />
+                        <Spacer />
+                        <NbNewOrders value={nbNewOrders} />
+                    </div>
+                    <div style={styles.singleCol}>
+                        <OrderChart orders={recentOrders} />
+                    </div>
+                    <div style={styles.singleCol}>
+                        <PendingOrders
+                            orders={pendingOrders}
+                            customers={pendingOrdersCustomers}
+                        />
+                    </div>
                 </div>
-                <div style={styles.singleCol}>
-                    <Welcome />
-                </div>
-                <div style={styles.singleCol}>
-                    <PendingOrders
-                        orders={pendingOrders}
-                        customers={pendingOrdersCustomers}
-                    />
+                <div style={styles.rightCol}>
+                    <div style={styles.flex}>
+                        <PendingReviews
+                            nb={nbPendingReviews}
+                            reviews={pendingReviews}
+                            customers={pendingReviewsCustomers}
+                        />
+                        <Spacer />
+                        <NewCustomers />
+                    </div>
                 </div>
             </div>
-            <div style={styles.rightCol}>
-                <div style={styles.flex}>
-                    <PendingReviews
-                        nb={nbPendingReviews}
-                        reviews={pendingReviews}
-                        customers={pendingReviewsCustomers}
-                    />
-                    <NewCustomers />
-                </div>
-            </div>
-        </div>
+        </>
     );
 };
 

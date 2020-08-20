@@ -14,6 +14,7 @@ const customFrenchMessages: TranslationMessages = {
         },
         dashboard: {
             monthly_revenue: 'CA à 30 jours',
+            month_history: "Chiffre d'affaire sur 30 jours",
             new_orders: 'Nouvelles commandes',
             pending_reviews: 'Commentaires à modérer',
             new_customers: 'Nouveaux clients',
@@ -23,7 +24,7 @@ const customFrenchMessages: TranslationMessages = {
                     'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
             },
             welcome: {
-                title: 'Bienvenue sur la démo de react-admin',
+                title: 'Bienvenue sur la démo e-commerce de react-admin',
                 subtitle:
                     "Ceci est le back-office d'un magasin de posters imaginaire. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
                 aor_button: 'Site web de react-admin',
@@ -59,6 +60,18 @@ const customFrenchMessages: TranslationMessages = {
                 password: 'Mot de passe',
                 confirm_password: 'Confirmez le mot de passe',
                 nb_commands: 'Commandes',
+            },
+            filters: {
+                last_visited: 'Dernière visite',
+                today: "Aujourd'hui",
+                this_week: 'Cette semaine',
+                last_week: 'La semaine dernière',
+                this_month: 'Ce mois-ci',
+                last_month: 'Le mois dernier',
+                earlier: 'Plus tôt',
+                has_ordered: 'A déjà commandé',
+                has_newsletter: 'Abonné newsletter',
+                group: 'Segment',
             },
             fieldGroups: {
                 identity: 'Identité',
