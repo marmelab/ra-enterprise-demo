@@ -104,6 +104,8 @@ object-assign
 
 /*! color-name */
 
+/*! decimal.js-light v2.5.0 https://github.com/MikeMcl/decimal.js-light/LICENCE */
+
 /*! http://mths.be/endswith v0.2.0 by @mathias */
 
 /*! http://mths.be/fromcodepoint v0.2.1 by @mathias */
