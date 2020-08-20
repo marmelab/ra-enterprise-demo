@@ -75,7 +75,7 @@ const CustomAppBar = (props: any) => {
   }
 
   return (
-    <AppBar {...props} userMenu={<CustomUserMenu />}>
+    <AppBar {...props} elevation={1} userMenu={<CustomUserMenu />}>
       <Typography
         variant="h6"
         color="inherit"
