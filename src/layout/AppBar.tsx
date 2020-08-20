@@ -1,9 +1,6 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import {
   AppBar,
-  UserMenu,
-  MenuItemLink,
-  useTranslate,
   useQuery,
   useVersion,
 } from "react-admin";
@@ -18,7 +15,6 @@ import {
   LanguageSwitcher,
 } from "@react-admin/ra-preferences";
 
-import SettingsIcon from "@material-ui/icons/Settings";
 import TourIcon from "@material-ui/icons/HelpOutline";
 
 import Logo from "./Logo";
@@ -34,25 +30,6 @@ const useStyles = makeStyles({
     flex: 1,
   },
 });
-
-const ConfigurationMenu = forwardRef<any, any>((props, ref) => {
-  const translate = useTranslate();
-  return (
-    <MenuItemLink
-      ref={ref}
-      to="/configuration"
-      primaryText={translate("pos.configuration")}
-      leftIcon={<SettingsIcon />}
-      onClick={props.onClick}
-    />
-  );
-});
-
-const CustomUserMenu = (props: any) => (
-  <UserMenu {...props}>
-    <ConfigurationMenu />
-  </UserMenu>
-);
 
 const CustomAppBar = (props: any) => {
   const classes = useStyles();
@@ -75,7 +52,7 @@ const CustomAppBar = (props: any) => {
   }
 
   return (
-    <AppBar {...props} elevation={1} userMenu={<CustomUserMenu />}>
+    <AppBar {...props} elevation={1}>
       <Typography
         variant="h6"
         color="inherit"

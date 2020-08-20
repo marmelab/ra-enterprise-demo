@@ -1,6 +1,5 @@
 import React, { FC, useState } from "react";
 import { useSelector } from "react-redux";
-import SettingsIcon from "@material-ui/icons/Settings";
 import LabelIcon from "@material-ui/icons/Label";
 import { useMediaQuery, Theme } from "@material-ui/core";
 import { useTranslate, DashboardMenuItem, MenuItemLink } from "react-admin";
@@ -138,16 +137,6 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
         sidebarIsOpen={open}
         dense={dense}
       />
-      {isXSmall && (
-        <MenuItemLink
-          to="/configuration"
-          primaryText={translate("pos.configuration")}
-          leftIcon={<SettingsIcon />}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-      )}
       {isXSmall && logout}
     </div>
   );
