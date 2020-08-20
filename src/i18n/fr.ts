@@ -61,6 +61,18 @@ const customFrenchMessages: TranslationMessages = {
                 confirm_password: 'Confirmez le mot de passe',
                 nb_commands: 'Commandes',
             },
+            filters: {
+                last_visited: 'Dernière visite',
+                today: "Aujourd'hui",
+                this_week: 'Cette semaine',
+                last_week: 'La semaine dernière',
+                this_month: 'Ce mois-ci',
+                last_month: 'Le mois dernier',
+                earlier: 'Plus tôt',
+                has_ordered: 'A déjà commandé',
+                has_newsletter: 'Abonné newsletter',
+                group: 'Segment',
+            },
             fieldGroups: {
                 identity: 'Identité',
                 address: 'Adresse',

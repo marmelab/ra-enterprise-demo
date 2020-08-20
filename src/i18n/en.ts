@@ -78,6 +78,18 @@ const customEnglishMessages: TranslationMessages = {
         zipcode: "Postal code",
         nb_commands: "Orders",
       },
+      filters: {
+        last_visited: 'Last visited',
+        today: 'Today',
+        this_week: 'This week',
+        last_week: 'Last week',
+        this_month: 'This month',
+        last_month: 'Last month',
+        earlier: 'Earlier',
+        has_ordered: 'Has ordered',
+        has_newsletter: 'Has newsletter',
+        group: 'Segment',
+      },
       fieldGroups: {
         identity: "Identity",
         address: "Address",
