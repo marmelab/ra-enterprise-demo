@@ -10,8 +10,9 @@ import {
     FilterList,
     FilterListItem,
     FilterLiveSearch,
-    useGetList,
 } from 'react-admin';
+import { useListFilterContext } from 'ra-core';
+import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,12 +27,36 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Aside: FC = () => {
-    const { data, ids } = useGetList(
-        'categories',
-        { page: 1, perPage: 100 },
-        { field: 'name', order: 'ASC' }
+const Aside: FC = props => {
+    const { setFilters, filterValues, displayedFilters } = useListFilterContext(props);
+
+    const { data } = useGetTree(
+        'categories'
     );
+
+    const tree = data
+        ? getRCTree(data, 'name')
+        : undefined;
+
+    const defaultExpandedKeys = filterValues.category_id
+        ? [filterValues.category_id.toString()]
+        : !!tree
+            ? [tree[0].key]
+            : undefined;
+
+    const defaultSelectedKeys = filterValues.category_id
+        ? [filterValues.category_id.toString()]
+        : [];
+
+    const handleSelectCategory = (selectedKeys, { selectedNodes }) => {
+        const [{ id }] = selectedNodes;
+
+        setFilters({
+            ...filterValues,
+            category_id: id
+        }, displayedFilters);
+    };
+
     const classes = useStyles();
     return (
         <Card className={classes.root}>
@@ -118,13 +143,18 @@ const Aside: FC = () => {
                     label="resources.products.filters.categories"
                     icon={<LocalOfferIcon />}
                 >
-                    {ids.map((id: any) => (
-                        <FilterListItem
-                            label={inflection.humanize(data[id].name)}
-                            key={data[id].id}
-                            value={{ category_id: data[id].id }}
-                        />
-                    ))}
+                    <Tree
+                        // HACK: ensure the tree is updated and expland nodes correctly
+                        // see https://github.com/react-component/tree/issues/234#issuecomment-599297897
+                        // I tried passing a JSON.stringify version of
+                        // defaultSelectedKeys and defaultExpandedKeys without success
+                        key={Math.random()}
+                        treeData={tree}
+                        onSelect={handleSelectCategory}
+                        defaultSelectedKeys={defaultSelectedKeys}
+                        defaultExpandedKeys={defaultExpandedKeys}
+                        autoExpandParent
+                    />
                 </FilterList>
             </CardContent>
         </Card>
