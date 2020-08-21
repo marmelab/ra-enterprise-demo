@@ -7,7 +7,7 @@ import demoData from "./demo-data";
 
 const getAllChildrenCategories = (categories, parentId) => {
   const parentCategory = categories.find(({ id }) => id === parentId);
-  const children = parentCategory.children.map((childId) =>
+  const children = parentCategory.children.flatMap((childId) =>
     getAllChildrenCategories(categories, childId)
   );
 
@@ -79,7 +79,7 @@ export default () => {
       request.method === "GET" &&
       request.url.includes("/products") &&
       request.params.filter &&
-      request.params.filter.category_id
+      request.params.filter.category_id != undefined
     ) {
       // to include all sub categories of the selected category in the filter
       request.params.filter.category_id = getAllChildrenCategories(
