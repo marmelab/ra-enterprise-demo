@@ -27,7 +27,7 @@ const rebindProductToCategories = (originalCategories, newCategories) => product
     };
   }
 
-  const newCategoryId = random.arrayElement(matchingNewCategory.children);
+  const newCategoryId = random.arrayElement(matchingNewCategory.children || []);
 
   return {
     ...product,
