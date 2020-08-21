@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     Datagrid,
     DateField,
@@ -27,9 +27,17 @@ import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import { styles as createStyles } from './ProductCreate';
 import Preview from './Preview';
-const ProductTitle = ({ record }) => <span>Poster #{record.reference}</span>;
+import { Product } from '../types';
 
-const styles = {
+interface ProductTitleProps {
+    record?: Product;
+}
+
+const ProductTitle: FC<ProductTitleProps> = ({ record }) =>
+    record ? <span>Poster #{record.reference}</span> : null;
+
+
+const useStyles = makeStyles({
     ...createStyles,
     comment: {
         overflow: 'hidden',
@@ -41,9 +49,7 @@ const styles = {
         justifyContent: 'space-between',
     },
     root: { padding: '0 !important' },
-};
-
-const useStyles = makeStyles(styles);
+});
 
 const TabbedFormWithPreview = props => {
     const classes = useStyles();
@@ -59,7 +65,6 @@ const TabbedFormWithPreview = props => {
                         </CardContent>
                     </Card>
                     <div
-                        className={classes.preview}
                         data-testid="product-edit-preview"
                     >
                         <FormDataConsumer>

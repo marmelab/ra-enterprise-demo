@@ -37,9 +37,9 @@ const Basket: FC<FieldProps<Order>> = ({ record }) => {
 
             return productIds
                 .map<Product>(
-                    (productId: string) =>
+                    productId =>
                         state.admin.resources.products.data[
-                            productId
+                        productId
                         ] as Product
                 )
                 .filter(r => typeof r !== 'undefined')

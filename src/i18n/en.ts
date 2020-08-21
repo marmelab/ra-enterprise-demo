@@ -11,7 +11,7 @@ interface RaTreeTranslationMessages {
 }
 export interface TranslationMessages
     extends RaTreeTranslationMessages,
-        BaseTranslationMessages {}
+    BaseTranslationMessages { }
 
 const customEnglishMessages: TranslationMessages = {
     ...englishMessages,
@@ -20,40 +20,100 @@ const customEnglishMessages: TranslationMessages = {
             add_root: 'Add a category of products',
         },
     },
-    pos: {
-        search: 'Search',
-        configuration: 'Configuration',
-        language: 'Language',
-        theme: {
-            name: 'Theme',
-            light: 'Light',
-            dark: 'Dark',
+    invoices: {
+        name: "Invoice |||| Invoices",
+        fields: {
+            date: "Invoice date",
+            customer_id: "Customer",
+            command_id: "Order",
+            date_gte: "Passed Since",
+            date_lte: "Passed Before",
+            total_gte: "Min amount",
+            address: "Address",
         },
-        dashboard: {
-            monthly_revenue: 'Monthly Revenue',
-            month_history: '30 Day Revenue History',
-            new_orders: 'New Orders',
-            pending_reviews: 'Pending Reviews',
-            new_customers: 'New Customers',
-            pending_orders: 'Pending Orders',
-            order: {
-                items:
-                    'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
-            },
-            welcome: {
-                title: 'Welcome to the react-admin e-commerce demo',
-                subtitle:
-                    "This is the admin of an imaginary poster shop. Feel free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
-                aor_button: 'react-admin site',
-                demo_button: 'Source for this demo',
-            },
+    },
+    products: {
+        name: "Poster |||| Posters",
+        fields: {
+            category_id: "Category",
+            height_gte: "Min height",
+            height_lte: "Max height",
+            height: "Height",
+            image: "Image",
+            price: "Price",
+            reference: "Reference",
+            stock_lte: "Low Stock",
+            stock: "Stock",
+            thumbnail: "Thumbnail",
+            width_gte: "Min width",
+            width_lte: "Max width",
+            width: "Width",
         },
-        menu: {
+        tabs: {
+            image: "Image",
+            details: "Details",
+            description: "Description",
+            reviews: "Reviews",
+        },
+        filters: {
+            categories: 'Categories',
+            stock: 'Stock',
+            no_stock: 'Out of stock',
+            low_stock: '1 - 9 items',
+            average_stock: '10 - 49 items',
+            enough_stock: '50 items & more',
             sales: 'Sales',
-            catalog: 'Catalog',
-            audience: 'Audience',
-            new_customers: 'Newcomers',
-            former_customers: 'Former Customers',
+            best_sellers: 'Best sellers',
+            average_sellers: 'Average',
+            low_sellers: 'Low',
+            never_sold: 'Never sold',
+        },
+    },
+    categories: {
+        name: "Category |||| Categories",
+        fields: {
+            products: "Products",
+        },
+    },
+    reviews: {
+        name: "Review |||| Reviews",
+        amount: "1 review |||| %{smart_count} reviews",
+        relative_to_poster: "Review on poster",
+        detail: "Review detail",
+        fields: {
+            customer_id: "Customer",
+            command_id: "Order",
+            product_id: "Product",
+            date_gte: "Posted since",
+            date_lte: "Posted before",
+            date: "Date",
+            comment: "Comment",
+            rating: "Rating",
+        },
+        action: {
+            accept: "Accept",
+            reject: "Reject",
+        },
+        notification: {
+            approved_success: "Review approved",
+            approved_error: "Error: Review not approved",
+            rejected_success: "Review rejected",
+            rejected_error: "Error: Review not rejected",
+        },
+    },
+    segments: {
+        name: "Segments",
+        fields: {
+            customers: "Customers",
+            name: "Name",
+        },
+        data: {
+            compulsive: "Compulsive",
+            collector: "Collector",
+            ordered_once: "Ordered once",
+            regular: "Regular",
+            returns: "Returns",
+            reviewer: "Reviewer",
         },
     },
     resources: {
