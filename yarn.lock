@@ -4192,10 +4192,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-data-generator-retail@^3.0.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/data-generator-retail/-/data-generator-retail-3.7.0.tgz#e815587fe8dd5140861f6f44f6af4bf15b321543"
-  integrity sha512-ro9LQB5llB7qoUHdC890j2bs4MdOpXJepr3W6gSyqFB8y6UBMCkMd/kvwwBdhHsxvRiTxJX6zY/+zr8F0EV6AA==
+data-generator-retail@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/data-generator-retail/-/data-generator-retail-3.8.0.tgz#572effea4063cf0a19a4b502947987db00b52d71"
+  integrity sha512-WbvF7dC1DgIQNcuWInVOdxGLuDyPNSt9oc6MJtsGsIwwKrNgbygf0FQXcCjIxIjmr2eFbPzeZyHdDqk8IPPdlg==
   dependencies:
     date-fns "~1.29.0"
     faker "^4.1.0"
