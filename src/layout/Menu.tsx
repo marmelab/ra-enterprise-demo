@@ -29,6 +29,7 @@ import {
     Badge,
 } from '@material-ui/core';
 
+import categories from '../categories';
 import visitors from '../visitors';
 import orders from '../orders';
 import invoices from '../invoices';
@@ -108,12 +109,36 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                 label="Dashboard"
             />
             <MenuItemCategory
-                to={`/categories/5`}
+                to="/products"
                 name="products"
                 icon={<products.icon />}
                 onClick={onMenuClick}
                 label={translate(`resources.products.name`, { smart_count: 2 })}
-            />
+            >
+                <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`resources.products.name`, {
+                            smart_count: 2,
+                        })}
+                    </Typography>
+                    <NavigationMenu>
+                        <MenuItem
+                            name="products"
+                            to="/products"
+                            icon={<products.icon />}
+                            onClick={onMenuClick}
+                            label={translate(`resources.products.name`, { smart_count: 2 })}
+                        />
+                        <MenuItem
+                            name="categories"
+                            to="/categories/5"
+                            icon={<categories.icon />}
+                            onClick={onMenuClick}
+                            label={translate(`resources.categories.name`, { smart_count: 2 })}
+                        />
+                    </NavigationMenu>
+                </CardContent>
+            </MenuItemCategory>
             <StyledBadgeForText
                 badgeContent={commandsChangeCount}
                 color="primary"
