@@ -34,7 +34,9 @@ const customFrenchMessages: TranslationMessages = {
         menu: {
             sales: 'Ventes',
             catalog: 'Catalogue',
-            customers: 'Clients',
+            audience: 'Audience',
+            new_customers: 'Nouveaux clients',
+            former_customers: 'Anciens Clients',
         },
     },
     resources: {
@@ -202,12 +204,12 @@ const customFrenchMessages: TranslationMessages = {
             },
         },
         stores: {
-            name: "Magasins",
+            name: 'Magasins',
             fields: {
-                city: "Ville",
-                country: "Parys",
-                address: "Adresse",
-                created_at: "Ouvert le",
+                city: 'Ville',
+                country: 'Parys',
+                address: 'Adresse',
+                created_at: 'Ouvert le',
             },
         },
     },

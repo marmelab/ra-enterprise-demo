@@ -179,27 +179,30 @@ const tours: { [id: string]: TourType } = {
     ],
   },
   "ra-realtime": {
-    before: ({ redirect }) => {
+    before: async () => {
       localStorage.setItem("batchLevel", "0");
-      const closedSaledMenu: HTMLElement | null = document.querySelector(
-        '[data-testid="sales-menu-closed"]'
-      );
-      if (!closedSaledMenu) {
-        return;
-      }
-      closedSaledMenu.click();
     },
     steps: [
       {
         before: async ({ dataProvider }) => {
           localStorage.setItem("batchLevel", "0");
-          dataProvider.publish("resource/commands", {
-            type: "created",
-            topic: "resource/commands",
-            payload: { ids: [1, 2, 3, 4, 5] },
-            date: new Date(),
-          });
-          await timeout(2000);
+
+          await timeout(300);
+          
+          [[1], [2, 3], [4], [5, 6]].reduce(
+            (acc, ids) =>
+                acc
+                    .then(() =>
+                        dataProvider.publish('resource/commands', {
+                            type: 'created',
+                            topic: 'resource/commands',
+                            payload: { ids },
+                            date: new Date(),
+                        })
+                    ).then(() => timeout(300))
+                   ,
+            timeout(1000)
+          );
         },
         disableBeacon: true,
         target: '[data-testid="commands-menu"]',
