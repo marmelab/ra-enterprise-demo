@@ -97,7 +97,7 @@ const ProductListView: FC<{ isSmall: boolean, aside: boolean | undefined }> = ({
     <>
       <Title defaultTitle={defaultTitle} />
       <ListActions isSmall={isSmall} />
-      {isSmall || aside === false && (
+      {(isSmall || aside === false) && (
         <Box m={1}>
           <ProductFilter context="form" />
         </Box>

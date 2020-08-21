@@ -79,7 +79,7 @@ export default () => {
       request.method === "GET" &&
       request.url.includes("/products") &&
       request.params.filter &&
-      request.params.filter.category_id != undefined
+      request.params.filter.category_id !== undefined
     ) {
       // to include all sub categories of the selected category in the filter
       request.params.filter.category_id = getAllChildrenCategories(

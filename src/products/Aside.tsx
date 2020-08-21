@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { FC } from 'react';
-import inflection from 'inflection';
 import { Card, CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LocalOfferIcon from '@material-ui/icons/LocalOfferOutlined';
