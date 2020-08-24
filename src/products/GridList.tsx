@@ -53,7 +53,6 @@ const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
       cols={getColsForWidth(width)}
       className={classes.gridList}
     >
-      {' '}
       {times(nbItems, key => (
         <GridListTile key={key}>
           <div className={classes.placeholder} />
