@@ -88,7 +88,7 @@ const StyledBadgeForText = withStyles(theme => ({
     },
 }))(Badge);
 
-const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
+const Menu: FC<Props> = ({ onMenuClick, logout }) => {
     const translate = useTranslate();
     const commandsChangeCount = useResourceChangeCounter('commands');
 
@@ -127,14 +127,18 @@ const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
                             to="/products"
                             icon={<products.icon />}
                             onClick={onMenuClick}
-                            label={translate(`resources.products.name`, { smart_count: 2 })}
+                            label={translate(`resources.products.name`, {
+                                smart_count: 2,
+                            })}
                         />
                         <MenuItem
                             name="categories"
                             to="/categories/5"
                             icon={<categories.icon />}
                             onClick={onMenuClick}
-                            label={translate(`resources.categories.name`, { smart_count: 2 })}
+                            label={translate(`resources.categories.name`, {
+                                smart_count: 2,
+                            })}
                         />
                     </NavigationMenu>
                 </CardContent>

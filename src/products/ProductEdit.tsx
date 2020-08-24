@@ -36,7 +36,6 @@ interface ProductTitleProps {
 const ProductTitle: FC<ProductTitleProps> = ({ record }) =>
     record ? <span>Poster #{record.reference}</span> : null;
 
-
 const useStyles = makeStyles({
     ...createStyles,
     comment: {
@@ -64,11 +63,9 @@ const TabbedFormWithPreview = props => {
                             <TabbedForm {...formProps} />
                         </CardContent>
                     </Card>
-                    <div
-                        data-testid="product-edit-preview"
-                    >
+                    <div data-testid="product-edit-preview">
                         <FormDataConsumer>
-                            {({ formData, ...rest }) => {
+                            {({ formData }) => {
                                 return <Preview record={formData} />;
                             }}
                         </FormDataConsumer>

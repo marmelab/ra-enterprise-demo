@@ -5,11 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import LocalOfferIcon from '@material-ui/icons/LocalOfferOutlined';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import {
-    FilterList,
-    FilterListItem,
-    FilterLiveSearch,
-} from 'react-admin';
+import { FilterList, FilterListItem, FilterLiveSearch } from 'react-admin';
 import { useListFilterContext } from 'ra-core';
 import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
 
@@ -27,21 +23,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Aside: FC = props => {
-    const { setFilters, filterValues, displayedFilters } = useListFilterContext(props);
-
-    const { data } = useGetTree(
-        'categories'
+    const { setFilters, filterValues, displayedFilters } = useListFilterContext(
+        props
     );
 
-    const tree = data
-        ? getRCTree(data, 'name')
-        : undefined;
+    const { data } = useGetTree('categories');
+
+    const tree = data ? getRCTree(data, 'name') : undefined;
 
     const defaultExpandedKeys = filterValues.category_id
         ? [filterValues.category_id.toString()]
         : !!tree
-            ? [tree[0].key]
-            : undefined;
+        ? [tree[0].key]
+        : undefined;
 
     const defaultSelectedKeys = filterValues.category_id
         ? [filterValues.category_id.toString()]
@@ -50,10 +44,13 @@ const Aside: FC = props => {
     const handleSelectCategory = (selectedKeys, { selectedNodes }) => {
         const [{ id }] = selectedNodes;
 
-        setFilters({
-            ...filterValues,
-            category_id: id
-        }, displayedFilters);
+        setFilters(
+            {
+                ...filterValues,
+                category_id: id,
+            },
+            displayedFilters
+        );
     };
 
     const classes = useStyles();

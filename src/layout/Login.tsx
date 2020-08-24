@@ -133,7 +133,6 @@ const Login = () => {
                             <div className={classes.form}>
                                 <div className={classes.input}>
                                     <Field
-                                        autoFocus
                                         name="username"
                                         // @ts-ignore
                                         component={renderInput}
