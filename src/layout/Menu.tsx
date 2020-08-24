@@ -1,145 +1,265 @@
-import React, { FC, useState } from "react";
-import { useSelector } from "react-redux";
-import LabelIcon from "@material-ui/icons/Label";
-import { useMediaQuery, Theme } from "@material-ui/core";
-import { useTranslate, DashboardMenuItem, MenuItemLink } from "react-admin";
-import { RealTimeMenuItemLink } from "@react-admin/ra-realtime";
+import React, { FC, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useTranslate } from 'react-admin';
+import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import LabelIcon from '@material-ui/icons/Label';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import AVTimerIcon from '@material-ui/icons/AvTimer';
+import BlockIcon from '@material-ui/icons/Block';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import GroupsIcon from '@material-ui/icons/GroupWork';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
 
-import visitors from "../visitors";
-import orders from "../orders";
-import invoices from "../invoices";
-import products from "../products";
-import reviews from "../reviews";
-import stores from "../stores";
-import SubMenu from "./SubMenu";
-import { AppState } from "../types";
+import {
+    MultiLevelMenu,
+    MenuItem,
+    MenuItemCategory,
+    Menu as NavigationMenu,
+    useAppLocationMatcher,
+    useResourceAppLocation,
+} from '@react-admin/ra-navigation';
 
-type MenuName = "menuCatalog" | "menuSales" | "menuCustomers";
+import {
+    useMediaQuery,
+    Theme,
+    CardContent,
+    Typography,
+    withStyles,
+    Badge,
+} from '@material-ui/core';
+
+import visitors from '../visitors';
+import orders from '../orders';
+import invoices from '../invoices';
+import products from '../products';
+import reviews from '../reviews';
+import stores from '../stores';
+import { AppState } from '../types';
+import { segments } from '../visitors/segments';
 
 interface Props {
-  dense: boolean;
-  logout: () => void;
-  onMenuClick: () => void;
+    dense: boolean;
+    logout: () => void;
+    onMenuClick: () => void;
 }
 
-const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
-  const [state, setState] = useState({
-    menuCatalog: false,
-    menuSales: false,
-    menuCustomers: false,
-  });
-  const translate = useTranslate();
-  const isXSmall = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("xs")
-  );
-  const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
-  useSelector((state: AppState) => state.theme); // force rerender on theme change
+const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
+const formerCustomerFilter = { last_seen_lte: '2020-06-30T22:00:00.000Z' };
 
-  const handleToggle = (menu: MenuName) => {
-    setState((state) => ({ ...state, [menu]: !state[menu] }));
-  };
+const useResourceChangeCounter = (resource: string) => {
+    const match = useAppLocationMatcher();
+    const location = useResourceAppLocation();
+    const [countEvent, setCountEvent] = useState(0);
 
-  return (
-    <div>
-      {" "}
-      <DashboardMenuItem onClick={onMenuClick} sidebarIsOpen={open} />
-      <SubMenu
-        handleToggle={() => handleToggle("menuSales")}
-        isOpen={state.menuSales}
-        sidebarIsOpen={open}
-        name="pos.menu.sales"
-        icon={<orders.icon />}
-        dense={dense}
-        data-testid={
-          state.menuSales ? "sales-menu-opened" : "sales-menu-closed"
+    useSubscribeToRecordList(resource, ({ payload: { ids } }) => {
+        let count = ids.length;
+
+        if (location && match(resource)) {
+            const { record } = location && (location.values || {});
+            if (!record || record.id == null) {
+                return;
+            }
+
+            count = ids.filter(id => id !== record.id).length;
         }
-      >
-        <RealTimeMenuItemLink
-          resource="commands"
-          to="/commands"
-          primaryText={translate(`resources.commands.name`, {
-            smart_count: 2,
-          })}
-          leftIcon={<orders.icon />}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-          data-testid="commands-menu"
-          badgeColor="primary"
-        />
-        <MenuItemLink
-          to={`/invoices`}
-          primaryText={translate(`resources.invoices.name`, {
-            smart_count: 2,
-          })}
-          leftIcon={<invoices.icon />}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-      </SubMenu>
-      <MenuItemLink
-        to={`/categories/5`}
-        primaryText={translate(`resources.products.name`, {
-          smart_count: 2,
-        })}
-        leftIcon={<products.icon />}
-        onClick={onMenuClick}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
-      <SubMenu
-        handleToggle={() => handleToggle("menuCustomers")}
-        isOpen={state.menuCustomers}
-        sidebarIsOpen={open}
-        name="pos.menu.customers"
-        icon={<visitors.icon />}
-        dense={dense}
-      >
-        <MenuItemLink
-          to={`/customers`}
-          primaryText={translate(`resources.customers.name`, {
-            smart_count: 2,
-          })}
-          leftIcon={<visitors.icon />}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-        <MenuItemLink
-          to={`/segments`}
-          primaryText={translate(`resources.segments.name`, {
-            smart_count: 2,
-          })}
-          leftIcon={<LabelIcon />}
-          onClick={onMenuClick}
-          sidebarIsOpen={open}
-          dense={dense}
-        />
-      </SubMenu>
-      <MenuItemLink
-        to={`/reviews`}
-        primaryText={translate(`resources.reviews.name`, {
-          smart_count: 2,
-        })}
-        leftIcon={<reviews.icon />}
-        onClick={onMenuClick}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
-      <MenuItemLink
-        to={`/stores`}
-        primaryText={translate(`resources.stores.name`, {
-          smart_count: 2,
-        })}
-        leftIcon={<stores.icon />}
-        onClick={onMenuClick}
-        sidebarIsOpen={open}
-        dense={dense}
-      />
-      {isXSmall && logout}
-    </div>
-  );
+
+        if (count) {
+            setCountEvent(previous => previous + count);
+        }
+    });
+
+    useEffect(() => {
+        if (match(resource)) {
+            setCountEvent(0);
+        }
+    }, [match, resource]);
+
+    return countEvent;
+};
+
+const StyledBadgeForText = withStyles(theme => ({
+    badge: {
+        top: 13,
+        right: 13,
+        border: `1px solid ${theme.palette.background.paper}`,
+        padding: '0 4px',
+    },
+}))(Badge);
+
+const Menu: FC<Props> = ({ onMenuClick, dense, logout }) => {
+    const translate = useTranslate();
+    const commandsChangeCount = useResourceChangeCounter('commands');
+
+    const isXSmall = useMediaQuery((theme: Theme) =>
+        theme.breakpoints.down('xs')
+    );
+
+    useSelector((state: AppState) => state.theme); // force rerender on theme change
+
+    return (
+        <MultiLevelMenu variant="categories">
+            <MenuItemCategory
+                name="dashboard"
+                to="/"
+                exact
+                icon={<DashboardIcon />}
+                onClick={onMenuClick}
+                label="Dashboard"
+            />
+            <MenuItemCategory
+                to={`/categories/5`}
+                name="products"
+                icon={<products.icon />}
+                onClick={onMenuClick}
+                label={translate(`resources.products.name`, { smart_count: 2 })}
+            />
+            <StyledBadgeForText
+                badgeContent={commandsChangeCount}
+                color="primary"
+            >
+                <MenuItemCategory
+                    name="commands"
+                    to="/commands"
+                    icon={<orders.icon />}
+                    onClick={onMenuClick}
+                    label={translate(`resources.commands.name`, {
+                        smart_count: 2,
+                    })}
+                    data-testid="commands-menu"
+                />
+            </StyledBadgeForText>
+            <MenuItemCategory
+                name="invoices"
+                to="/invoices?filter={}"
+                icon={<invoices.icon />}
+                onClick={onMenuClick}
+                label={translate(`resources.invoices.name`, {
+                    smart_count: 2,
+                })}
+            />
+            <MenuItemCategory
+                to={`/customers`}
+                name="customers"
+                icon={<visitors.icon />}
+                onClick={onMenuClick}
+                label={translate(`pos.menu.audience`, { smart_count: 2 })}
+            >
+                <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`pos.menu.audience`, {
+                            smart_count: 2,
+                        })}
+                    </Typography>
+                    <NavigationMenu>
+                        <MenuItem
+                            name="customers"
+                            to="/customers?filter={}"
+                            icon={<visitors.icon />}
+                            onClick={onMenuClick}
+                            label={translate(`resources.customers.name`, {
+                                smart_count: 2,
+                            })}
+                        >
+                            <MenuItem
+                                name="customers.newcomers"
+                                to={`/customers?filter=${JSON.stringify(
+                                    newCustomerFilter
+                                )}`}
+                                icon={<GroupAddIcon />}
+                                onClick={onMenuClick}
+                                label={translate(`pos.menu.new_customers`, {
+                                    smart_count: 2,
+                                })}
+                            />
+                            <MenuItem
+                                name="customers.former_customers"
+                                to={`/customers?filter=${JSON.stringify(
+                                    formerCustomerFilter
+                                )}`}
+                                icon={<GroupsIcon />}
+                                onClick={onMenuClick}
+                                label={translate(`pos.menu.former_customers`, {
+                                    smart_count: 2,
+                                })}
+                            />
+                        </MenuItem>
+                        <MenuItem
+                            name="segments"
+                            to="/segments"
+                            icon={<LabelIcon />}
+                            onClick={onMenuClick}
+                            label={translate(`resources.segments.name`, {
+                                smart_count: 2,
+                            })}
+                        >
+                            {segments.map(segment => (
+                                <MenuItem
+                                    key={segment}
+                                    name={`segments.${segment}`}
+                                    to={`/customers?filter={"groups": "${segment}"}`}
+                                    icon={<BookmarkIcon />}
+                                    onClick={onMenuClick}
+                                    label={translate(
+                                        `resources.segments.data.${segment}`,
+                                        {
+                                            smart_count: 2,
+                                        }
+                                    )}
+                                />
+                            ))}
+                        </MenuItem>
+                    </NavigationMenu>
+                </CardContent>
+            </MenuItemCategory>
+            <MenuItemCategory
+                name="reviews"
+                to="/reviews?filter={}"
+                icon={<reviews.icon />}
+                onClick={onMenuClick}
+                label={translate(`resources.reviews.name`, { smart_count: 2 })}
+            >
+                <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`resources.reviews.name`, {
+                            smart_count: 2,
+                        })}
+                    </Typography>{' '}
+                    <NavigationMenu>
+                        <MenuItem
+                            name="reviews.accepted"
+                            to={'/reviews?filter={"status": "accepted"}'}
+                            icon={<CheckCircleOutlineIcon />}
+                            onClick={onMenuClick}
+                            label="Accepted"
+                        />
+                        <MenuItem
+                            name="reviews.rejected"
+                            to={'/reviews?filter={"status": "rejected"}'}
+                            icon={<BlockIcon />}
+                            onClick={onMenuClick}
+                            label="Rejected"
+                        />
+                        <MenuItem
+                            name="reviews.pending"
+                            to={'/reviews?filter={"status": "pending"}'}
+                            icon={<AVTimerIcon />}
+                            onClick={onMenuClick}
+                            label="Pending"
+                        />
+                    </NavigationMenu>
+                </CardContent>
+            </MenuItemCategory>
+            <MenuItemCategory
+                name="stores"
+                to="/stores"
+                icon={<stores.icon />}
+                onClick={onMenuClick}
+                label={translate(`resources.stores.name`, { smart_count: 2 })}
+            />
+            {isXSmall && logout}
+        </MultiLevelMenu>
+    );
 };
 
 export default Menu;

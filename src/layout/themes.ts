@@ -5,6 +5,42 @@ export const darkTheme = {
         },
         type: 'dark', // Switching the dark mode on is a single property value change.
     },
+    overrides: {
+        RaAppBar: {
+            menuButton: {
+                // Since sub-<Menu /> hide labels when sidebar is closed
+                // We need to disallow sidebar closing (hiding button is simpler)
+                display: 'none',
+            },
+        },
+        RaSidebar: {
+            drawerPaper: {
+                paddingRight: 16,
+                width: 'auto',
+            },
+        },
+        MuiAppBar: {
+            // Hide MenuItemCategory shadow behind the appbar
+            zIndex: 9999,
+        },
+        RaMenuItemCategory: {
+            popoverPaper: {
+                backgroundColor: 'white',
+                color: '#303030',
+            },
+        },
+        RaMenuItem: {
+            link: {
+                color: '#303030',
+            },
+            icon: {
+                color: '#303030',
+            },
+            active: {
+                color: 'black',
+            },
+        },
+    },
 };
 
 export const lightTheme = {
@@ -26,12 +62,29 @@ export const lightTheme = {
         borderRadius: 10,
     },
     overrides: {
+        RaAppBar: {
+            menuButton: {
+                // Since sub-<Menu /> hide labels when sidebar is closed
+                // We need to disallow sidebar closing (hiding button is simpler)
+                display: 'none',
+            },
+        },
         RaMenuItemLink: {
             root: {
                 borderLeft: '3px solid #fff',
             },
             active: {
-                borderLeft: '3px solid #4f3cc9',
+                borderLeft: '3px solid #808080',
+            },
+        },
+        RaMenuItemCategory: {
+            root: {
+                color: '#808080',
+            },
+        },
+        RaMultiLevelMenu: {
+            navWithCategories: {
+                backgroundColor: '#fff',
             },
         },
         MuiPaper: {
@@ -51,6 +104,8 @@ export const lightTheme = {
             },
         },
         MuiAppBar: {
+            // Hide MenuItemCategory shadow behind the appbar
+            root: { zIndex: 9999 },
             colorSecondary: {
                 color: '#808080',
                 backgroundColor: '#fff',
@@ -70,6 +125,12 @@ export const lightTheme = {
                 '&$disabled': {
                     backgroundColor: 'rgba(0, 0, 0, 0.04)',
                 },
+            },
+        },
+        RaSidebar: {
+            drawerPaper: {
+                paddingRight: 16,
+                width: 'auto',
             },
         },
     },

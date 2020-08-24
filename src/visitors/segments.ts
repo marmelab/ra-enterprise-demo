@@ -1,4 +1,4 @@
-const segments = [
+export const segments = [
     'compulsive',
     'collector',
     'ordered_once',
