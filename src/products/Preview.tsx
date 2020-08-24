@@ -2,7 +2,7 @@ import React from 'react';
 import { MarkdownField } from '@react-admin/ra-markdown';
 import { makeStyles } from '@material-ui/core/styles';
 
-const styles = {
+const useStyles = makeStyles({
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -56,9 +56,7 @@ const styles = {
             width: '100%',
         },
     },
-};
-
-const useStyles = makeStyles(styles);
+});
 
 const Preview = ({ record }) => {
     const { image, height, width, price, reference } = record;

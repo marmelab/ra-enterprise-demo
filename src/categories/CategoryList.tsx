@@ -26,6 +26,7 @@ const CategoryList = (props: any) => {
             titleField="name"
             draggable
             allowMultipleRoots
+            defaultSelectedKeys={['5']}
             {...props}
         />
     );
