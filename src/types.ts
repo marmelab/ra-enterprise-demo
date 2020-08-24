@@ -9,7 +9,7 @@ import {
 } from 'ra-core';
 import { RouteComponentProps } from 'react-router-dom';
 import { StaticContext } from 'react-router';
-import * as H from 'history';
+import { LocationState } from 'history';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { ListControllerProps } from 'ra-core/esm/controller/useListController';
 import { FormRenderProps } from 'react-final-form';
@@ -145,7 +145,7 @@ export interface DatagridProps<RecordType = Record>
 export interface ResourceComponentProps<
     Params extends { [K in keyof Params]?: string } = {},
     C extends StaticContext = StaticContext,
-    S = H.LocationState
+    S = LocationState
     > extends RouteComponentProps<Params, C, S> {
     basePath: string;
     resource: string;
@@ -167,7 +167,7 @@ export interface ListComponentProps<Params = {}>
 export interface EditComponentProps<
     Params extends ResourceMatch = { id: string },
     C extends StaticContext = StaticContext,
-    S = H.LocationState
+    S = LocationState
     > extends ResourceComponentProps<Params, C, S> {
     id: string;
 }
@@ -175,7 +175,7 @@ export interface EditComponentProps<
 export interface ShowComponentProps<
     Params extends ResourceMatch = { id: string },
     C extends StaticContext = StaticContext,
-    S = H.LocationState
+    S = LocationState
     > extends ResourceComponentProps<Params, C, S> {
     id: string;
 }
@@ -183,7 +183,7 @@ export interface ShowComponentProps<
 export interface CreateComponentProps<
     Params extends ResourceMatch = { id: string },
     C extends StaticContext = StaticContext,
-    S = H.LocationState
+    S = LocationState
     > extends ResourceComponentProps<Params, C, S> {
     id: string;
 }
