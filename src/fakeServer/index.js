@@ -7,7 +7,7 @@ import demoData from "./demo-data";
 
 const getAllChildrenCategories = (categories, parentId) => {
   const parentCategory = categories.find(({ id }) => id === parentId);
-  const children = parentCategory.children.flatMap((childId) =>
+  const children = parentCategory.children.map((childId) =>
     getAllChildrenCategories(categories, childId)
   );
 
