@@ -63,9 +63,7 @@ const ReviewMobileList = ({ basePath, data, ids, loading, total }) => {
                                         >
                                             <FunctionField
                                                 render={record =>
-                                                    `${record.first_name} ${
-                                                        record.last_name
-                                                    }`
+                                                    `${record.first_name} ${record.last_name}`
                                                 }
                                                 variant="subtitle1"
                                                 className={classes.inline}

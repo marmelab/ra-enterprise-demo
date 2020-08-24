@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
             color: 'inherit',
         },
     },
-    main: (props: Props) => ({
+    main: {
         overflow: 'inherit',
         padding: 16,
         background: `url(${
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         '& .icon': {
             color: theme.palette.type === 'dark' ? 'inherit' : '#dc2440',
         },
-    }),
+    },
     title: {},
 }));
 

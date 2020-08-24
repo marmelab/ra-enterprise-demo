@@ -57,7 +57,6 @@ const VisitorCreate = (props: any) => {
             <SimpleForm validate={validatePasswords}>
                 <SectionTitle label="resources.customers.fieldGroups.identity" />
                 <TextInput
-                    autoFocus
                     source="first_name"
                     formClassName={classes.first_name}
                     validate={requiredValidate}

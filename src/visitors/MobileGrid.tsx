@@ -1,5 +1,5 @@
 // in src/comments.js
-import React from 'react';
+import React, { FC } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -12,7 +12,6 @@ import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
 import { Identifier } from 'ra-core';
 import { Customer } from '../types';
-import { FC } from 'react';
 
 const useStyles = makeStyles(theme => ({
     root: { margin: '1em' },
@@ -56,9 +55,7 @@ const MobileGrid: FC<Props> = ({ ids, data, basePath }) => {
                     <CardHeader
                         title={
                             <div className={classes.cardTitleContent}>
-                                <h2>{`${data[id].first_name} ${
-                                    data[id].last_name
-                                }`}</h2>
+                                <h2>{`${data[id].first_name} ${data[id].last_name}`}</h2>
                                 <EditButton
                                     resource="visitors"
                                     basePath={basePath}

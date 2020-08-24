@@ -146,7 +146,7 @@ export interface ResourceComponentProps<
     Params extends { [K in keyof Params]?: string } = {},
     C extends StaticContext = StaticContext,
     S = LocationState
-    > extends RouteComponentProps<Params, C, S> {
+> extends RouteComponentProps<Params, C, S> {
     basePath: string;
     resource: string;
     options: object;
@@ -168,7 +168,7 @@ export interface EditComponentProps<
     Params extends ResourceMatch = { id: string },
     C extends StaticContext = StaticContext,
     S = LocationState
-    > extends ResourceComponentProps<Params, C, S> {
+> extends ResourceComponentProps<Params, C, S> {
     id: string;
 }
 
@@ -176,7 +176,7 @@ export interface ShowComponentProps<
     Params extends ResourceMatch = { id: string },
     C extends StaticContext = StaticContext,
     S = LocationState
-    > extends ResourceComponentProps<Params, C, S> {
+> extends ResourceComponentProps<Params, C, S> {
     id: string;
 }
 
@@ -184,7 +184,7 @@ export interface CreateComponentProps<
     Params extends ResourceMatch = { id: string },
     C extends StaticContext = StaticContext,
     S = LocationState
-    > extends ResourceComponentProps<Params, C, S> {
+> extends ResourceComponentProps<Params, C, S> {
     id: string;
 }
 

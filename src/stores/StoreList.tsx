@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    List,
-    DateField,
-    DateInput,
-    TextField,
-    TextInput,
-} from 'react-admin';
+import { List, DateField, DateInput, TextField, TextInput } from 'react-admin';
 
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
 
@@ -17,7 +11,7 @@ const StoreForm = props => (
         <TextInput source="address" />
         <DateInput source="created_at" />
     </RowForm>
-)
+);
 
 export const StoreList = (props: any) => (
     <List {...props} hasCreate perPage={25}>
