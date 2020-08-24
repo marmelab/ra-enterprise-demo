@@ -91,7 +91,7 @@ const ProductList: FC<ListComponentProps> = props => {
   );
 };
 
-const ProductListView: FC<{ isSmall: boolean, aside: boolean | undefined }> = ({ aside, isSmall }) => {
+const ProductListView: FC<{ isSmall: boolean, aside?: boolean }> = ({ aside, isSmall }) => {
   const { defaultTitle } = useListContext();
   return (
     <>
