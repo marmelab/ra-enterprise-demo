@@ -91,6 +91,9 @@ const ProductList: FC<ListComponentProps> = props => {
   );
 };
 
+// The aside prop is only used to disable the aside here if explicitly set to false
+// If undefined, we consider the aside is not explicitly disabled an display the filter
+// vertical bar
 const ProductListView: FC<{ isSmall: boolean, aside?: boolean }> = ({ aside, isSmall }) => {
   const { defaultTitle } = useListContext();
   return (
