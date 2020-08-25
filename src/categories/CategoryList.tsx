@@ -7,7 +7,7 @@ import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 const CategoryList = (props: any) => {
     // We need to override the "category" location to highlight menu item in the sidebar
-    useDefineAppLocation('products');
+    useDefineAppLocation('products.categories');
 
     const { handleExpand } = useTreeController({
         resource: props.resource,
