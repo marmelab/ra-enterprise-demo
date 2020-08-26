@@ -85,7 +85,7 @@ const Preview = ({ record }) => {
                 </div>
             </div>
             <div className={classes.description}>
-                <h1>Poster #${reference}</h1>
+                <h1>{reference}</h1>
                 <h2>
                     {width}x{height}
                 </h2>
