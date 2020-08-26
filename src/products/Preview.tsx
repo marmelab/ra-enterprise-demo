@@ -1,6 +1,6 @@
 import React from 'react';
 import { MarkdownField } from '@react-admin/ra-markdown';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, lighten, darken } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -10,20 +10,30 @@ const useStyles = makeStyles(theme => ({
         width: 350,
         '& > p': {
             fontSize: 12,
-            color: theme.palette.text,
+            color: theme.palette.text.primary,
             textAlign: 'right',
+        },
+        // Temporary until darkmode is correctly implemented in ra-markdown
+        '& .tui-editor-contents p': {
+            color:
+                theme.palette.type === 'light'
+                    ? lighten(theme.palette.text.primary, 0.38)
+                    : darken(theme.palette.text.primary, 0.38),
         },
     },
     description: {
         padding: '0 20px',
         '& h1': {
             fontSize: 18,
-            color: theme.palette.text,
+            color: theme.palette.text.primary,
             fontWeight: 'normal',
         },
         '& h2': {
             fontSize: 14,
-            color: theme.palette.text,
+            color:
+                theme.palette.type === 'light'
+                    ? lighten(theme.palette.text.primary, 0.38)
+                    : darken(theme.palette.text.primary, 0.38),
             fontWeight: 'normal',
         },
     },
