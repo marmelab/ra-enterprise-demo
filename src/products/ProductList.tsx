@@ -115,7 +115,13 @@ const ProductListView: FC<{
             )}
             <Box display="flex">
                 {aside !== false ? <Aside /> : null}
-                <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
+                <Box
+                    width={
+                        isSmall || aside === false
+                            ? 'auto'
+                            : 'calc(100% - 16em)'
+                    }
+                >
                     <GridList />
                     <Pagination rowsPerPageOptions={[10, 20, 40]} />
                 </Box>
