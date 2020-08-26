@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, darken, fade, lighten } from '@material-ui/core/styles';
 import { useShowController, ReferenceField, TextField } from 'react-admin';
 
 import Basket from '../orders/Basket';
@@ -105,8 +105,17 @@ const InvoiceShow = (props: any) => {
 
 export default InvoiceShow;
 
-const useStyles = makeStyles({
-    root: { width: 600, margin: 'auto' },
+const useStyles = makeStyles(theme => ({
+    root: {
+        width: 600,
+        margin: 'auto',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor:
+            theme.palette.type === 'light'
+                ? lighten(fade(theme.palette.divider, 1), 0.88)
+                : darken(fade(theme.palette.divider, 1), 0.68),
+    },
     spacer: { height: 20 },
     invoices: { margin: '10px 0' },
-});
+}));
