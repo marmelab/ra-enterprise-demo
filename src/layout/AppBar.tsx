@@ -16,6 +16,9 @@ import TourIcon from '@material-ui/icons/HelpOutline';
 import Logo from './Logo';
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        position: 'relative',
+    },
     title: {
         flex: 1,
         textOverflow: 'ellipsis',
@@ -23,8 +26,13 @@ const useStyles = makeStyles(theme => ({
         overflow: 'hidden',
         paddingLeft: theme.spacing(1),
     },
-    spacer: {
-        flex: 1,
+    logo: {
+        [theme.breakpoints.up('md')]: {
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+        },
     },
 }));
 
@@ -56,8 +64,7 @@ const CustomAppBar = (props: any) => {
                 className={classes.title}
                 id="react-admin-title"
             />
-            <Logo />
-            <span className={classes.spacer} />
+            <Logo className={classes.logo} />
             <IconButton to="/tours" component={Link} color="inherit">
                 <Badge badgeContent={numberOfTours} color="error" variant="dot">
                     <TourIcon />
