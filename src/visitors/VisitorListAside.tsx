@@ -19,6 +19,7 @@ import segments from '../segments/data';
 
 const Card = withStyles(theme => ({
     root: {
+        flexShrink: 0,
         [theme.breakpoints.up('sm')]: {
             order: -1,
             width: '15em',
