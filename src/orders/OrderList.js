@@ -20,6 +20,10 @@ import {
     Divider,
     Tabs,
     Tab,
+    useTheme,
+    lighten,
+    darken,
+    fade,
 } from '@material-ui/core';
 import { RealTimeList } from '@react-admin/ra-realtime';
 import NbItemsField from './NbItemsField';
@@ -50,19 +54,23 @@ const useDatagridStyles = makeStyles({
 });
 
 const orderRowStyle = batchLevel => record => {
+    const theme = useTheme();
     let backgroundColor;
     switch (record.batch) {
         case 0:
-            backgroundColor = 'white';
+            backgroundColor = theme.palette.background.paper;
             break;
         case batchLevel:
-            backgroundColor = '#e6fbff';
+            backgroundColor =
+                theme.palette.type === 'light'
+                    ? lighten(fade(theme.palette.info.light, 1), 0.68)
+                    : darken(fade(theme.palette.info.dark, 1), 0.88);
             break;
         case 1:
-            backgroundColor = '#e6fbff40';
+            backgroundColor = theme.palette.info;
             break;
         default:
-            backgroundColor = 'white';
+            backgroundColor = theme.palette.background.paper;
     }
 
     return {
