@@ -161,6 +161,7 @@ export interface ResourceComponentProps<
 
 export interface ListComponentProps<Params = {}>
     extends ResourceComponentProps<Params> {
+    title?: string;
     aside?: boolean;
 }
 

@@ -86,7 +86,11 @@ const ProductList: FC<ListComponentProps> = props => {
             sort={{ field: 'reference', order: 'ASC' }}
             {...props}
         >
-            <ProductListView isSmall={isSmall} aside={props.aside} />
+            <ProductListView
+                isSmall={isSmall}
+                aside={props.aside}
+                title={props.title}
+            />
         </ListBase>
     );
 };
@@ -94,14 +98,15 @@ const ProductList: FC<ListComponentProps> = props => {
 // The aside prop is only used to disable the aside here if explicitly set to false
 // If undefined, we consider the aside is not explicitly disabled an display the filter
 // vertical bar
-const ProductListView: FC<{ isSmall: boolean; aside?: boolean }> = ({
-    aside,
-    isSmall,
-}) => {
+const ProductListView: FC<{
+    isSmall: boolean;
+    aside?: boolean;
+    title?: string;
+}> = ({ aside, isSmall, title }) => {
     const { defaultTitle } = useListContext();
     return (
         <>
-            <Title defaultTitle={defaultTitle} />
+            <Title defaultTitle={title || defaultTitle} />
             <ListActions isSmall={isSmall} />
             {(isSmall || aside === false) && (
                 <Box m={1}>

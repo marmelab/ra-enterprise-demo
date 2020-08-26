@@ -28,6 +28,7 @@ const CategoryEdit = props => {
 const CategoryEditAside: FC<EditComponentProps> = ({ id, ...rest }) => (
     <ProductList
         {...rest}
+        title=" "
         basePath="/products"
         resource="products"
         hasCreate
