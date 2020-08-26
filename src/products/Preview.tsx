@@ -2,7 +2,7 @@ import React from 'react';
 import { MarkdownField } from '@react-admin/ra-markdown';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -10,7 +10,7 @@ const useStyles = makeStyles({
         width: 350,
         '& > p': {
             fontSize: 12,
-            color: '#777',
+            color: theme.palette.text,
             textAlign: 'right',
         },
     },
@@ -18,12 +18,12 @@ const useStyles = makeStyles({
         padding: '0 20px',
         '& h1': {
             fontSize: 18,
-            color: '#333',
+            color: theme.palette.text,
             fontWeight: 'normal',
         },
         '& h2': {
             fontSize: 14,
-            color: '#666',
+            color: theme.palette.text,
             fontWeight: 'normal',
         },
     },
@@ -34,12 +34,12 @@ const useStyles = makeStyles({
         position: 'relative',
         width: '100%',
         paddingBottom: '82.5%',
-        background: 'black',
+        background: theme.palette.background.paper,
         boxShadow: '0 10px 7px -5px rgba(0, 0, 0, 0.3)',
     },
     mat: {
         position: 'absolute',
-        background: 'white',
+        background: theme.palette.background.paper,
         top: '3.0303%',
         bottom: '3.0303%',
         left: '2.5%',
@@ -56,7 +56,7 @@ const useStyles = makeStyles({
             width: '100%',
         },
     },
-});
+}));
 
 const Preview = ({ record }) => {
     const { image, height, width, price, reference } = record;
