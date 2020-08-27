@@ -54,6 +54,9 @@ const customEnglishMessages: TranslationMessages = {
             audience: 'Audience',
             new_customers: 'Nouveaux clients',
             former_customers: 'Anciens Clients',
+            accepted_reviews: 'Accepted',
+            rejected_reviews: 'Rejected',
+            pending_reviews: 'Pending',
         },
     },
     resources: {
@@ -125,9 +128,11 @@ const customEnglishMessages: TranslationMessages = {
                 customer_id: 'Customer',
                 date_gte: 'Passed Since',
                 date_lte: 'Passed Before',
-                total_gte: 'Min amount',
-                status: 'Status',
+                nb_items: 'Nb articles',
+                reference: 'Référence',
                 returned: 'Returned',
+                status: 'Status',
+                total_gte: 'Min amount',
             },
         },
         invoices: {
