@@ -260,21 +260,21 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                             to={'/reviews?filter={"status": "accepted"}'}
                             icon={<CheckCircleOutlineIcon />}
                             onClick={onMenuClick}
-                            label="Accepted"
+                            label="pos.menu.accepted_reviews"
                         />
                         <MenuItem
                             name="reviews.rejected"
                             to={'/reviews?filter={"status": "rejected"}'}
                             icon={<BlockIcon />}
                             onClick={onMenuClick}
-                            label="Rejected"
+                            label="pos.menu.rejected_reviews"
                         />
                         <MenuItem
                             name="reviews.pending"
                             to={'/reviews?filter={"status": "pending"}'}
                             icon={<AVTimerIcon />}
                             onClick={onMenuClick}
-                            label="Pending"
+                            label="pos.menu.pending_reviews"
                         />
                     </NavigationMenu>
                 </CardContent>

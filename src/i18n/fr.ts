@@ -37,6 +37,9 @@ const customFrenchMessages: TranslationMessages = {
             audience: 'Audience',
             new_customers: 'Nouveaux clients',
             former_customers: 'Anciens Clients',
+            accepted_reviews: 'Acceptées',
+            rejected_reviews: 'Rejetées',
+            pending_reviews: 'En attente',
         },
     },
     resources: {
