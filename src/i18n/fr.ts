@@ -224,7 +224,7 @@ const customFrenchMessages: TranslationMessages = {
             name: 'Magasins',
             fields: {
                 city: 'Ville',
-                country: 'Parys',
+                country: 'Pays',
                 address: 'Adresse',
                 created_at: 'Ouvert le',
             },
