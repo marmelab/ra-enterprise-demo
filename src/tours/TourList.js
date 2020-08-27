@@ -16,6 +16,7 @@ import Tour from './Tour';
 
 const useStyles = makeStyles({
     content: {
+        border: 'none',
         background: 'none',
         boxShadow: 'none',
     },

@@ -42,10 +42,13 @@ const useStyles = makeStyles({
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+        maxWidth: 256,
     },
     container: {
         display: 'flex',
-        justifyContent: 'space-between',
+        '& > :first-child': {
+            flex: 1,
+        },
     },
     root: { padding: '0 !important' },
 });

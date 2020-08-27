@@ -145,7 +145,7 @@ const Aside: FC = props => {
                         // I tried passing a JSON.stringify version of
                         // defaultSelectedKeys and defaultExpandedKeys without success
                         key={Math.random()}
-                        treeData={tree}
+                        treeData={tree ? tree[0].children : []}
                         onSelect={handleSelectCategory}
                         defaultSelectedKeys={defaultSelectedKeys}
                         defaultExpandedKeys={defaultExpandedKeys}
