@@ -48,6 +48,12 @@ const useStyles = makeStyles({
         display: 'flex',
         '& > :first-child': {
             flex: 1,
+            minWidth: '60%',
+            maxWidth: '70%',
+        },
+        '& > :last-child': {
+            width: '25%',
+            flexShrink: 0,
         },
     },
     root: { padding: '0 !important' },
