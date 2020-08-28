@@ -37,9 +37,10 @@ const Aside: FC = props => {
         ? [tree[0].key]
         : undefined;
 
-    const defaultSelectedKeys = filterValues.category_id
-        ? [filterValues.category_id.toString()]
-        : [];
+    const defaultSelectedKeys =
+        filterValues.category_id !== undefined
+            ? [filterValues.category_id.toString()]
+            : [];
 
     const handleSelectCategory = (selectedKeys, { selectedNodes }) => {
         const [{ id }] = selectedNodes;
