@@ -5,29 +5,35 @@ import {
     BreadcrumbItem,
     ResourceBreadcrumbItems,
 } from '@react-admin/ra-navigation';
-import { linkToRecord } from 'ra-core';
+import { linkToRecord, useTranslate } from 'ra-core';
 
 const CustomBreadcrumb = () => {
     const classes = useStyles();
+    const translate = useTranslate();
+
+    const editLabel = translate('ra.action.edit');
+    const createLabel = translate('ra.action.create');
     return (
         <div className={classes.root}>
             <Breadcrumb>
                 <ResourceBreadcrumbItems
-                    resources={[
-                        'commands',
-                        'customers',
-                        'invoices',
-                        'reviews',
-                        'stores',
-                        'tours',
-                    ]}
+                    resources={['invoices', 'reviews', 'stores', 'tours']}
                 />
-                <BreadcrumbItem name="products" label="Posters" to="/products">
-                    <BreadcrumbItem name="categories" label="Categories" />
+                <BreadcrumbItem
+                    name="products"
+                    label={translate('resources.products.name', 2)}
+                    to="/products"
+                >
+                    <BreadcrumbItem
+                        name="categories"
+                        label={translate('resources.categories.name', 2)}
+                    />
                     <BreadcrumbItem
                         name="edit"
                         label={({ record }) =>
-                            `Edit ${record ? `"${record.reference}"` : '...'}`
+                            `${editLabel} ${
+                                record ? `"${record.reference}"` : '...'
+                            }`
                         }
                         to={({ record }): string =>
                             record &&
@@ -36,8 +42,55 @@ const CustomBreadcrumb = () => {
                     />
                     <BreadcrumbItem
                         name="create"
-                        label="Create"
+                        label={createLabel}
                         to="/products/create"
+                    />
+                </BreadcrumbItem>
+                <BreadcrumbItem
+                    name="commands"
+                    label={translate('resources.commands.name', 2)}
+                    to="/commands"
+                >
+                    <BreadcrumbItem
+                        name="edit"
+                        label={({ record }) =>
+                            `${editLabel} ${
+                                record ? `"${record.reference}"` : '...'
+                            }`
+                        }
+                        to={({ record }): string =>
+                            record &&
+                            `${linkToRecord('/products', record.id)}/edit`
+                        }
+                    />
+                </BreadcrumbItem>
+                <BreadcrumbItem
+                    name="customers"
+                    label={translate('resources.customers.name', 2)}
+                    to="/customers"
+                >
+                    <BreadcrumbItem
+                        name="segments"
+                        label={translate('resources.segments.name', 2)}
+                    />
+                    <BreadcrumbItem
+                        name="edit"
+                        label={({ record }) =>
+                            `${editLabel} ${
+                                record
+                                    ? `"${record.first_name} ${record.last_name}"`
+                                    : '...'
+                            }`
+                        }
+                        to={({ record }): string =>
+                            record &&
+                            `${linkToRecord('/customers', record.id)}/edit`
+                        }
+                    />
+                    <BreadcrumbItem
+                        name="create"
+                        label={createLabel}
+                        to="/customers/create"
                     />
                 </BreadcrumbItem>
             </Breadcrumb>

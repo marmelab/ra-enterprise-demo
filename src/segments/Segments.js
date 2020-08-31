@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Card from '@material-ui/core/Card';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate, Title } from 'react-admin';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
+import { useAppLocationState } from '@react-admin/ra-navigation';
 import segments from './data';
 
 const useStyles = makeStyles({
@@ -20,6 +21,10 @@ const useStyles = makeStyles({
 const Segments = () => {
     const translate = useTranslate();
     const classes = useStyles();
+    const [, setLocation] = useAppLocationState();
+    useEffect(() => {
+        setLocation('customers.segments');
+    }, []);
     return (
         <Card className={classes.root}>
             <Title title={translate('resources.segments.name')} />
