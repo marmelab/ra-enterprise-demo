@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FC } from 'react';
 import { Box, Card, CardActions, Button, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import CodeIcon from '@material-ui/icons/Code';
+import TourIcon from '@material-ui/icons/Flag';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from 'react-admin';
 
@@ -55,17 +55,17 @@ const Welcome: FC = () => {
                     <CardActions className={classes.actions}>
                         <Button
                             variant="contained"
-                            href="https://marmelab.com/react-admin"
-                            startIcon={<HomeIcon />}
+                            href="#/tours"
+                            startIcon={<TourIcon />}
                         >
-                            {translate('pos.dashboard.welcome.aor_button')}
+                            {translate('pos.dashboard.welcome.demo_button')}
                         </Button>
                         <Button
                             variant="contained"
-                            href="https://github.com/marmelab/react-admin/tree/master/examples/demo"
-                            startIcon={<CodeIcon />}
+                            href="https://marmelab.com/ra-enterprise/"
+                            startIcon={<HomeIcon />}
                         >
-                            {translate('pos.dashboard.welcome.demo_button')}
+                            {translate('pos.dashboard.welcome.aor_button')}
                         </Button>
                     </CardActions>
                 </Box>

@@ -11,7 +11,7 @@ import {
     LanguageSwitcher,
 } from '@react-admin/ra-preferences';
 
-import TourIcon from '@material-ui/icons/HelpOutline';
+import TourIcon from '@material-ui/icons/Flag';
 
 import Logo from './Logo';
 
