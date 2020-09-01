@@ -1,8 +1,15 @@
 import React, { FC } from 'react';
 import { useTranslate } from 'ra-core';
+import {
+    ListActionsProps,
+    TopToolbar,
+    CreateButton,
+    ExportButton,
+    SortButton,
+} from 'ra-ui-materialui';
 import { Edit, SimpleForm, TextInput } from 'react-admin';
 
-import ProductList from '../products/ProductList';
+import ProductList, { ProductFilter } from '../products/ProductList';
 import { Typography, makeStyles } from '@material-ui/core';
 import { EditComponentProps } from '../types';
 
@@ -38,7 +45,20 @@ const CategoryEditAside: FC<EditComponentProps> = ({ id, ...rest }) => (
         filter={{ category_id: id }}
         exporter={null}
         aside={false}
+        actions={<ProductListActions />}
     />
+);
+
+const ProductListActions: FC<ListActionsProps> = ({ isSmall }) => (
+    <TopToolbar>
+        {isSmall && <ProductFilter context="button" />}
+        <SortButton fields={['reference', 'sales', 'stock']} />
+        <CreateButton
+            label="resources.categories.actions.create_product"
+            basePath="/products"
+        />
+        <ExportButton />
+    </TopToolbar>
 );
 
 export default CategoryEdit;
