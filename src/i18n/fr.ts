@@ -24,11 +24,12 @@ const customFrenchMessages: TranslationMessages = {
                     'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
             },
             welcome: {
-                title: 'Bienvenue sur la démo e-commerce de react-admin',
+                title:
+                    'Bienvenue sur la démo de react-admin enterprise edition',
                 subtitle:
-                    "Ceci est le back-office d'un magasin de posters imaginaire. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
-                aor_button: 'Site web de react-admin',
-                demo_button: 'Code source de cette démo',
+                    "Ceci est le back-office d'un magasin de posters imaginaire mettant en oeuvre les modules de l'édition entreprise. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
+                aor_button: 'Site web de react-admin entreprise',
+                demo_button: 'Voir tous les modules',
             },
         },
         menu: {

@@ -41,11 +41,11 @@ const customEnglishMessages: TranslationMessages = {
                     'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
             },
             welcome: {
-                title: 'Welcome to the react-admin e-commerce demo',
+                title: 'Welcome to the react-admin enterprise edition demo',
                 subtitle:
-                    "This is the admin of an imaginary poster shop. Feel free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
-                aor_button: 'react-admin site',
-                demo_button: 'Source for this demo',
+                    "This is the admin of an imaginary poster shop showcasing enterprise edition private modules usage. Feel free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
+                aor_button: 'react-admin enterprise edition site',
+                demo_button: 'See the showcase',
             },
         },
         menu: {
