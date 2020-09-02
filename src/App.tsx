@@ -37,8 +37,8 @@ import dataProvider from './dataProvider';
 import fakeServer from './fakeServer';
 
 const messages = {
-    en: [englishMessages, raTreeLanguageFrench, raRealTimeLanguageEnglish],
-    fr: [frenchMessages, raTreeLanguageEnglish, raRealTimeLanguageFrench],
+    en: [raTreeLanguageEnglish, raRealTimeLanguageEnglish, englishMessages],
+    fr: [raTreeLanguageFrench, raRealTimeLanguageFrench, frenchMessages],
 };
 
 const i18nProvider = polyglotI18nProvider(
