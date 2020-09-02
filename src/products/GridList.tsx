@@ -73,6 +73,7 @@ const LoadedGridList: FC<GridProps> = ({ width }) => {
             cellHeight={180}
             cols={getColsForWidth(width)}
             className={classes.gridList}
+            data-tour-id="grid-line"
         >
             {ids.map((id: string) => (
                 <GridListTile

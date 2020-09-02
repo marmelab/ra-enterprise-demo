@@ -19,18 +19,17 @@ const interval = (callback, intervalMs, expirationMs) =>
 
 const tours: { [id: string]: TourType } = {
     'ra-markdown': {
-        before: async ({ notify, redirect }) => {
-            notify('Taking you to the product page');
+        before: async ({ redirect }) => {
             redirect('/products');
             await timeout(1000); // would be so awesome if redirect was awaitable!
         },
         steps: [
             {
-                target: `[data-tour-id='grid-line']:nth-child(${getRandomInt(
+                target: `[data-tour-id='grid-line'] > a:nth-child(${getRandomInt(
                     1,
                     5
                 )})`,
-                event: 'hover',
+                disableBeacon: true,
                 content:
                     "This is a poster, one of the products our shop is selling, let's go to its details",
                 joyrideProps: {
