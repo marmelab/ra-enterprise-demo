@@ -12,6 +12,11 @@ export interface TranslationMessages
 const customFrenchMessages: TranslationMessages = mergeTranslations(
     frenchMessages,
     {
+        'ra-tree': {
+            action: {
+                add_root: 'Ajouter une catégorie de produits',
+            },
+        },
         pos: {
             search: 'Rechercher',
             configuration: 'Configuration',
