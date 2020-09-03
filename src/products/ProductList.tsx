@@ -77,7 +77,7 @@ const ListActions: FC<any> = ({ isSmall }) => (
     </TopToolbar>
 );
 
-const ProductList: FC<ListComponentProps> = props => {
+const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
     return (
         <ListBase
@@ -87,6 +87,7 @@ const ProductList: FC<ListComponentProps> = props => {
             {...props}
         >
             <ProductListView
+                actions={actions}
                 isSmall={isSmall}
                 aside={props.aside}
                 title={props.title}
@@ -100,14 +101,20 @@ const ProductList: FC<ListComponentProps> = props => {
 // vertical bar
 const ProductListView: FC<{
     isSmall: boolean;
+    actions?: any;
     aside?: boolean;
     title?: string;
-}> = ({ aside, isSmall, title }) => {
+}> = ({
+    isSmall,
+    actions = <ListActions isSmall={isSmall} />,
+    aside,
+    title,
+}) => {
     const { defaultTitle } = useListContext();
     return (
         <>
             <Title defaultTitle={title || defaultTitle} />
-            <ListActions isSmall={isSmall} />
+            {actions}
             {(isSmall || aside === false) && (
                 <Box m={1}>
                     <ProductFilter context="form" />
