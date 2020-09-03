@@ -9,7 +9,7 @@ import {
 } from 'ra-ui-materialui';
 import { Edit, SimpleForm, TextInput } from 'react-admin';
 
-import ProductList, { ProductFilter } from '../products/ProductList';
+import ProductList from '../products/ProductList';
 import { Typography, makeStyles } from '@material-ui/core';
 import { EditComponentProps } from '../types';
 
@@ -49,9 +49,8 @@ const CategoryEditAside: FC<EditComponentProps> = ({ id, ...rest }) => (
     />
 );
 
-const ProductListActions: FC<ListActionsProps> = ({ isSmall }) => (
+const ProductListActions: FC<ListActionsProps> = () => (
     <TopToolbar>
-        {isSmall && <ProductFilter context="button" />}
         <SortButton fields={['reference', 'sales', 'stock']} />
         <CreateButton
             label="resources.categories.actions.create_product"
