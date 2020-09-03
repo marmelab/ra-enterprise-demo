@@ -357,6 +357,52 @@ const tours: { [id: string]: TourType } = {
             },
         ],
     },
+    'ra-navigation-breadcrumb': {
+        before: async ({ notify, redirect }) => {
+            notify('Taking you to the product page');
+            redirect('/products');
+            await timeout(1000); // would be so awesome if redirect was awaitable!
+        },
+        steps: [
+            {
+                target: `[data-tour-id='grid-line']:nth-child(${getRandomInt(
+                    1,
+                    5
+                )})`,
+                event: 'hover',
+                content:
+                    "This is a poster, one of the products our shop is selling, let's go to its details",
+                joyrideProps: {
+                    styles: {
+                        beacon: {
+                            marginTop: -100,
+                        },
+                    },
+                },
+                after: ({ target, redirect }) => {
+                    const productUrl = target.getAttribute('href').slice(1);
+                    redirect(productUrl);
+                },
+            },
+            {
+                target: "[data-tour-id='description-tab']",
+                content: 'The markdown editor is in the description tab',
+                after: ({ target }) => {
+                    target.click();
+                },
+            },
+            {
+                target: '.rc-md-editor ',
+                content:
+                    'Right here. Try playing with its markdown, make it bold, add headlines!',
+            },
+            {
+                target: '[data-testid=product-edit-preview]',
+                content:
+                    'Parsed markdown can then be displayed in a preview or wherever you want.',
+            },
+        ],
+    },
 };
 
 export default tours;

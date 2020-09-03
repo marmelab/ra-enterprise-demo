@@ -45,5 +45,14 @@ export default {
             href: 'http://marmelab.com/react-admin',
             playedOn: null,
         },
+        {
+            id: 6,
+            image: 'images/tours/ra-navigation-breadcrumb.jpg',
+            title: 'ra-navigation: Breadcrumb',
+            tour: 'ra-navigation-breadcrumb',
+            comment: `Keep a track of your location in the site and navigate easily.`,
+            href: 'http://marmelab.com/react-admin',
+            playedOn: null,
+        },
     ],
 };
