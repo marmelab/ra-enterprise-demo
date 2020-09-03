@@ -361,44 +361,78 @@ const tours: { [id: string]: TourType } = {
         before: async ({ redirect }) => {
             redirect('/products');
             await timeout(1000); // would be so awesome if redirect was awaitable!
+            window.scrollTo(0, 0);
         },
         steps: [
             {
-                target: `[data-tour-id='grid-line']:nth-child(${getRandomInt(
+                target: "[aria-label='Breadcrumb'] li:nth-child(2)",
+                content:
+                    'The breadcrumb indicates that we are on the posters page',
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+            },
+            {
+                target: `[data-tour-id='grid-line'] > a:nth-child(${getRandomInt(
                     1,
                     5
                 )})`,
-                event: 'hover',
-                content:
-                    "This is a poster, one of the products our shop is selling, let's go to its details",
-                joyrideProps: {
-                    styles: {
-                        beacon: {
-                            marginTop: -100,
-                        },
-                    },
-                },
+                disableBeacon: true,
+                content: "Let's edit one of these posters",
                 after: ({ target, redirect }) => {
                     const productUrl = target.getAttribute('href').slice(1);
                     redirect(productUrl);
                 },
             },
             {
-                target: "[data-tour-id='description-tab']",
-                content: 'The markdown editor is in the description tab',
-                after: ({ target }) => {
-                    target.click();
+                target: "[aria-label='Breadcrumb'] li:nth-child(3)",
+                content:
+                    'The breadcrumb have changed to follow us to this Edit page',
+                disableBeacon: true,
+                joyrideProps: {
+                    scrollOffset: 50,
                 },
             },
             {
-                target: '.rc-md-editor ',
-                content:
-                    'Right here. Try playing with its markdown, make it bold, add headlines!',
+                target: '[data-testid="commands-menu"]',
+                content: "Let's try to change by the Menu entry",
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+                after: ({ redirect }) => {
+                    redirect('/commands');
+                },
             },
             {
-                target: '[data-testid=product-edit-preview]',
+                target: "[aria-label='Breadcrumb'] li:nth-child(2)",
+                content: 'The breadcrumb keeps following us everywhere.',
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+            },
+            {
+                target: "[aria-label='Breadcrumb'] li:nth-child(1)",
                 content:
-                    'Parsed markdown can then be displayed in a preview or wherever you want.',
+                    "We can click on it directly to navigate.\nLet's go to the home",
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+                after: ({ redirect }) => {
+                    redirect('/');
+                },
+            },
+            {
+                target: "[aria-label='Breadcrumb']",
+                content:
+                    'By default, there is no breacrumb on home, but you can now try implement it and decide where to configure it',
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
             },
         ],
     },
