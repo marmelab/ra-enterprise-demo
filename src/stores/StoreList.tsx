@@ -6,7 +6,8 @@ import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
 const StoreForm = props => (
     <RowForm {...props}>
         <TextField source="id" />
-        <TextInput source="city" />
+        {/* eslint-disable-next-line */}
+        <TextInput source="city" autoFocus />
         <TextInput source="country" />
         <TextInput source="address" />
         <DateInput source="created_at" />
