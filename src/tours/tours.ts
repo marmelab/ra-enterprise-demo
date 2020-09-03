@@ -358,8 +358,7 @@ const tours: { [id: string]: TourType } = {
         ],
     },
     'ra-navigation-breadcrumb': {
-        before: async ({ notify, redirect }) => {
-            notify('Taking you to the product page');
+        before: async ({ redirect }) => {
             redirect('/products');
             await timeout(1000); // would be so awesome if redirect was awaitable!
         },

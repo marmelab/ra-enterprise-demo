@@ -1486,10 +1486,10 @@
     "@toast-ui/react-editor" "^2.2.0"
     lodash "^4.17.19"
 
-"@react-admin/ra-navigation@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.0.3.tgz#30fb6264e6866c85079239899072ad1566f41b22"
-  integrity sha512-7LKt6d16fBjZ92EDJPOdEFTFy+masH6kT+vs+QkXZptE6OBmrFaPhVI/UjK3/26QCz/XHarwuyZVFj7Zf+RoYw==
+"@react-admin/ra-navigation@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.0.4.tgz#e7ac79227c33863fc41085cc8d63bb5d68973a79"
+  integrity sha512-cv9mq6x5O5B6Pn2cqlJpiMTV/uhj3XxSeCq0DGL9xlfHlF2vABgCgaoYJ8dn1+CBzdBMHrJzc13IhB8EDfYGFQ==
 
 "@react-admin/ra-preferences@^1.0.0":
   version "1.0.0"
