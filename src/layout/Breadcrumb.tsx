@@ -7,14 +7,14 @@ import {
 } from '@react-admin/ra-navigation';
 import { linkToRecord, useTranslate } from 'ra-core';
 
-const CustomBreadcrumb = () => {
+const CustomBreadcrumb = props => {
     const classes = useStyles();
     const translate = useTranslate();
 
     const editLabel = translate('ra.action.edit');
     const createLabel = translate('ra.action.create');
     return (
-        <Breadcrumb className={classes.root}>
+        <Breadcrumb className={classes.root} {...props}>
             <ResourceBreadcrumbItems
                 resources={['invoices', 'reviews', 'stores', 'tours']}
             />

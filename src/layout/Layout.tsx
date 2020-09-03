@@ -7,10 +7,7 @@ import {
     useDataProvider,
 } from 'react-admin';
 
-import {
-    AppLocationContext,
-    useAppLocationState,
-} from '@react-admin/ra-navigation';
+import { AppLocationContext } from '@react-admin/ra-navigation';
 import {
     SidebarOpenPreferenceSync,
     usePreferences,
@@ -47,19 +44,13 @@ const CustomLayout = (props: any) => {
                         sidebar={CustomSidebar}
                         menu={Menu}
                     >
-                        <CustomBreadcrumb />
+                        <Breadcrumb {...props} />
                         {props.children}
                     </Layout>
                 </>
             </TourProvider>
         </AppLocationContext>
     );
-};
-
-const CustomBreadcrumb = () => {
-    const [location] = useAppLocationState();
-    if (!location.path) return null;
-    return <Breadcrumb />;
 };
 
 export default CustomLayout;

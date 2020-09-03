@@ -24,7 +24,7 @@ const Segments = () => {
     const [, setLocation] = useAppLocationState();
     useEffect(() => {
         setLocation('customers.segments');
-    }, []);
+    }, [setLocation]);
     return (
         <Card className={classes.root}>
             <Title title={translate('resources.segments.name')} />
