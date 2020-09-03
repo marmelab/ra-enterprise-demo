@@ -113,13 +113,11 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 name="products"
                 icon={<products.icon />}
                 onClick={onMenuClick}
-                label={translate(`resources.products.name`, { smart_count: 2 })}
+                label={translate(`pos.menu.catalog`, { smart_count: 1 })}
             >
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
-                        {translate(`resources.products.name`, {
-                            smart_count: 2,
-                        })}
+                        {translate(`pos.menu.catalog`, { smart_count: 1 })}
                     </Typography>
                     <NavigationMenu>
                         <MenuItem

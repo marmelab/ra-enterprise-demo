@@ -19,29 +19,35 @@ const CustomBreadcrumb = props => {
                 resources={['invoices', 'reviews', 'stores', 'tours']}
             />
             <BreadcrumbItem
-                name="products"
-                label={translate('resources.products.name', 2)}
-                to="/products"
+                name="catalog"
+                label={translate('pos.menu.catalog', 1)}
             >
+                <BreadcrumbItem
+                    name="products"
+                    label={translate('resources.products.name', 2)}
+                    to="/products"
+                >
+                    <BreadcrumbItem
+                        name="edit"
+                        label={({ record }) =>
+                            `${editLabel} ${
+                                record ? `"${record.reference}"` : '...'
+                            }`
+                        }
+                        to={({ record }): string =>
+                            record &&
+                            `${linkToRecord('/products', record.id)}/edit`
+                        }
+                    />
+                    <BreadcrumbItem
+                        name="create"
+                        label={createLabel}
+                        to="/products/create"
+                    />
+                </BreadcrumbItem>
                 <BreadcrumbItem
                     name="categories"
                     label={translate('resources.categories.name', 2)}
-                />
-                <BreadcrumbItem
-                    name="edit"
-                    label={({ record }) =>
-                        `${editLabel} ${
-                            record ? `"${record.reference}"` : '...'
-                        }`
-                    }
-                    to={({ record }): string =>
-                        record && `${linkToRecord('/products', record.id)}/edit`
-                    }
-                />
-                <BreadcrumbItem
-                    name="create"
-                    label={createLabel}
-                    to="/products/create"
                 />
             </BreadcrumbItem>
             <BreadcrumbItem

@@ -12,6 +12,7 @@ import {
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { MarkdownInput } from '@react-admin/ra-markdown';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 export const styles = {
     price: { width: '7em' },
@@ -25,6 +26,7 @@ export const styles = {
 const useStyles = makeStyles(styles);
 
 const ProductCreate = props => {
+    useDefineAppLocation('catalog.products.create');
     const classes = useStyles();
     return (
         <Create {...props}>

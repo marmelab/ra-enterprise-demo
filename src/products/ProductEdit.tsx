@@ -21,6 +21,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
@@ -74,7 +75,7 @@ const useStyles = makeStyles({
 
 const TabbedFormWithPreview = props => {
     const classes = useStyles();
-
+    useDefineAppLocation('catalog.products.edit', props);
     return (
         <FormWithRedirect
             {...props}
@@ -97,6 +98,11 @@ const TabbedFormWithPreview = props => {
         />
     );
 };
+
+/*const LocatedForm = (props, children) => {
+    useDefineAppLocation('catalog.products.edit', props.record);
+    return <TabbedFormWithPreview {...props}>{children}</TabbedFormWithPreview>;
+};*/
 
 const ProductEdit = props => {
     const classes = useStyles();

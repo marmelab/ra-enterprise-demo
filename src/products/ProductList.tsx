@@ -19,6 +19,7 @@ import {
     useTranslate,
     useListContext,
 } from 'react-admin';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import { FilterProps, ListComponentProps } from '../types';
 import GridList from './GridList';
@@ -78,6 +79,7 @@ const ListActions: FC<any> = ({ isSmall }) => (
 );
 
 const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
+    useDefineAppLocation('catalog.products');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
     return (
         <ListBase
