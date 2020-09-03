@@ -388,7 +388,7 @@ const tours: { [id: string]: TourType } = {
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(3)",
                 content:
-                    'The breadcrumb have changed to follow us to this Edit page',
+                    'The breadcrumb has changed to follow us to this Edit page',
                 disableBeacon: true,
                 joyrideProps: {
                     scrollOffset: 50,
@@ -396,7 +396,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '[data-testid="commands-menu"]',
-                content: "Let's try to change by the Menu entry",
+                content: "Let's try to navigate away using the Menu entry",
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -407,7 +407,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(2)",
-                content: 'The breadcrumb keeps following us everywhere.',
+                content: 'The breadcrumb keeps showing our exact location.',
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -416,7 +416,7 @@ const tours: { [id: string]: TourType } = {
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(1)",
                 content:
-                    "We can click on it directly to navigate.\nLet's go to the home",
+                    "Users can click on the breadcrumb items directly to navigate.\nLet's go to the home page",
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -428,7 +428,7 @@ const tours: { [id: string]: TourType } = {
             {
                 target: "[aria-label='Breadcrumb']",
                 content:
-                    'By default, there is no breacrumb on home, but you can now try implement it and decide where to configure it',
+                    "By default, there is no breacrumb displayed on the home.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
