@@ -361,7 +361,6 @@ const tours: { [id: string]: TourType } = {
         before: async ({ redirect }) => {
             redirect('/products');
             await timeout(1000); // would be so awesome if redirect was awaitable!
-            window.scrollTo(0, 0);
         },
         steps: [
             {
@@ -428,7 +427,7 @@ const tours: { [id: string]: TourType } = {
             {
                 target: "[aria-label='Breadcrumb']",
                 content:
-                    "By default, there is no breacrumb displayed on the home.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
+                    "By default, there is no breacrumb displayed on the home page.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
