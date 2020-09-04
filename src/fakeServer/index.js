@@ -44,39 +44,13 @@ const rebindProductToCategories = (
     };
 };
 
-// Batch is used to simulate realtime for the tour
-const addBatchToCommands = commands =>
-    commands
-        .sort((a, z) => new Date(z.date) - new Date(a.date))
-        .map(addBatchToCommand);
-
-const addBatchToCommand = (command, index) => {
-    if (command.returned) {
-        return command;
-    }
-
-    return {
-        ...command,
-        batch:
-            // The 5 most recent command should have the higher batch
-            index < 5
-                ? 2
-                : // The next 5 most recent command should have a lower batch
-                index < 10
-                ? 1
-                : // All other should have a 0 batch
-                  0,
-    };
-};
-
 export default () => {
     const data = generateData({ serializeDate: true });
     const products = data.products.map(
         rebindProductToCategories(data.categories, demoData.categories)
     );
-    const commands = addBatchToCommands(data.commands);
 
-    const mergedData = { ...data, ...demoData, products, commands };
+    const mergedData = { ...data, ...demoData, products };
 
     const restServer = new FakeRest.FetchServer('http://localhost:4000');
     if (window) {

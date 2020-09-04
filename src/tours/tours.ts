@@ -1,5 +1,6 @@
 import { TourType } from '@react-admin/ra-tour';
 import { fireEvent } from '@testing-library/react';
+import commandBuilder from './commandBuilder';
 
 const getRandomInt = (min, max) => {
     min = Math.ceil(min);
@@ -193,22 +194,27 @@ const tours: { [id: string]: TourType } = {
                 before: async ({ dataProvider }) => {
                     localStorage.setItem('batchLevel', '0');
 
-                    await timeout(300);
-
-                    [[1], [2, 3], [4], [5, 6]].reduce(
-                        (acc, ids) =>
-                            acc
-                                .then(() =>
-                                    dataProvider.publish('resource/commands', {
-                                        type: 'created',
-                                        topic: 'resource/commands',
-                                        payload: { ids },
-                                        date: new Date(),
-                                    })
-                                )
-                                .then(() => timeout(300)),
-                        timeout(1000)
+                    [[1], [2], [3], [4]].reduce(
+                        acc =>
+                            acc.then(async () => {
+                                // Add a new Order
+                                const {
+                                    data: newCommand,
+                                } = await dataProvider.create('commands', {
+                                    data: commandBuilder(1),
+                                });
+                                // Then notify the Real-time dataProvider
+                                const topic = 'resource/commands';
+                                dataProvider.publish(topic, {
+                                    type: 'created',
+                                    topic: topic,
+                                    payload: { ids: [newCommand.id] },
+                                    date: new Date(),
+                                });
+                            }),
+                        timeout(1)
                     );
+                    await timeout(1500); // would be so awesome if redirect was awaitable!
                 },
                 disableBeacon: true,
                 target: '[data-testid="commands-menu"]',
@@ -218,21 +224,38 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                before: () => {
+                before: async () => {
                     localStorage.setItem('batchLevel', '1');
+                    await timeout(500);
                 },
                 target: '[data-testid=order-ordered-datagrid]',
                 content: 'Your new orders can stand-out from others',
             },
             {
-                before: ({ dataProvider }) => {
+                before: async ({ dataProvider }) => {
                     localStorage.setItem('batchLevel', '2');
-                    dataProvider.publish('resource/commands', {
+                    // Add a new Order
+                    const { data: newCommand1 } = await dataProvider.create(
+                        'commands',
+                        {
+                            data: commandBuilder(2),
+                        }
+                    );
+                    const { data: newCommand2 } = await dataProvider.create(
+                        'commands',
+                        {
+                            data: commandBuilder(2),
+                        }
+                    );
+                    // Then notify the Real-time dataProvider
+                    const topic = 'resource/commands';
+                    dataProvider.publish(topic, {
                         type: 'created',
-                        topic: 'resource/commands',
-                        payload: { ids: [6, 7, 8, 9] },
+                        topic,
+                        payload: { ids: [newCommand1.id, newCommand2.id] },
                         date: new Date(),
                     });
+                    await timeout(1000);
                 },
                 target: '[data-testid=order-ordered-datagrid]',
                 content:
