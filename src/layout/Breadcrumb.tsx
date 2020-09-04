@@ -82,32 +82,37 @@ const CustomBreadcrumb = props => {
                 />
             </BreadcrumbItem>
             <BreadcrumbItem
-                name="customers"
-                label={translate('resources.customers.name', 2)}
-                to="/customers"
+                name="audience"
+                label={translate('pos.menu.audience', 1)}
             >
+                <BreadcrumbItem
+                    name="customers"
+                    label={translate('resources.customers.name', 2)}
+                    to="/customers"
+                >
+                    <BreadcrumbItem
+                        name="edit"
+                        label={({ record }) =>
+                            `${editLabel} ${
+                                record
+                                    ? `"${record.first_name} ${record.last_name}"`
+                                    : '...'
+                            }`
+                        }
+                        to={({ record }): string =>
+                            record &&
+                            `${linkToRecord('/customers', record.id)}/edit`
+                        }
+                    />
+                    <BreadcrumbItem
+                        name="create"
+                        label={createLabel}
+                        to="/customers/create"
+                    />
+                </BreadcrumbItem>
                 <BreadcrumbItem
                     name="segments"
                     label={translate('resources.segments.name', 2)}
-                />
-                <BreadcrumbItem
-                    name="edit"
-                    label={({ record }) =>
-                        `${editLabel} ${
-                            record
-                                ? `"${record.first_name} ${record.last_name}"`
-                                : '...'
-                        }`
-                    }
-                    to={({ record }): string =>
-                        record &&
-                        `${linkToRecord('/customers', record.id)}/edit`
-                    }
-                />
-                <BreadcrumbItem
-                    name="create"
-                    label={createLabel}
-                    to="/customers/create"
                 />
             </BreadcrumbItem>
         </Breadcrumb>

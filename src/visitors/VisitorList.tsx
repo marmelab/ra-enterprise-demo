@@ -9,7 +9,7 @@ import {
     NumberField,
     SearchInput,
 } from 'react-admin';
-
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { useMediaQuery, Theme } from '@material-ui/core';
 
 import EnterpriseList from '../ra-enterprise/List';
@@ -50,7 +50,7 @@ const VisitorList = (props: any) => {
     const isXsmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('xs')
     );
-
+    useDefineAppLocation('audience.customers');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
     return (
@@ -67,7 +67,15 @@ const VisitorList = (props: any) => {
             sort={{ field: 'last_seen', order: 'DESC' }}
             perPage={25}
         >
-            {({ columns, view, hasEdit, hasList, hasShow, ...rest }) => {
+            {({
+                columns,
+                view,
+                hasShow,
+                hasList,
+                hasEdit,
+                hasCreate,
+                ...rest
+            }) => {
                 if (isXsmall) {
                     return <MobileGrid />;
                 }
