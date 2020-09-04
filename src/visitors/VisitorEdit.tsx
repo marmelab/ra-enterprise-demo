@@ -9,6 +9,7 @@ import {
     useTranslate,
     FormWithRedirect,
 } from 'react-admin';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { Box, Card, CardContent, Typography } from '@material-ui/core';
 
 import Aside from './Aside';
@@ -35,6 +36,7 @@ const VisitorTitle: FC<FieldProps<Customer>> = ({ record }) =>
 
 const VisitorForm = (props: any) => {
     const translate = useTranslate();
+    useDefineAppLocation('audience.customers.edit', props);
 
     return (
         <FormWithRedirect
