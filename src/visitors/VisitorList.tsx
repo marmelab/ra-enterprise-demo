@@ -4,7 +4,6 @@ import {
     Datagrid,
     DateField,
     DateInput,
-    Filter,
     NullableBooleanInput,
     NumberField,
     SearchInput,
@@ -12,6 +11,7 @@ import {
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { useMediaQuery, Theme } from '@material-ui/core';
 
+import Filter from '../layout/Filter';
 import EnterpriseList from '../ra-enterprise/List';
 import SegmentsField from './SegmentsField';
 import SegmentInput from './SegmentInput';

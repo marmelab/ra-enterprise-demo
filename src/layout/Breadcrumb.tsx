@@ -123,6 +123,9 @@ const useStyles = makeStyles(theme => ({
     root: {
         paddingTop: theme.spacing(1),
         fontSize: 'small',
+        '& a': {
+            pointerEvents: 'visible',
+        },
     },
 }));
 

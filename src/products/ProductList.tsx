@@ -4,7 +4,6 @@ import { Box, Chip, useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputProps } from 'ra-core';
 import {
-    Filter,
     ListBase,
     NumberInput,
     Pagination,
@@ -20,6 +19,7 @@ import {
     useListContext,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import Filter from '../layout/Filter';
 
 import { FilterProps, ListComponentProps } from '../types';
 import GridList from './GridList';

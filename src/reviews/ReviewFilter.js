@@ -2,13 +2,13 @@ import React from 'react';
 import {
     AutocompleteInput,
     DateInput,
-    Filter,
     ReferenceInput,
     SearchInput,
     SelectInput,
 } from 'react-admin';
 import { useTranslate } from 'ra-core';
 import { makeStyles } from '@material-ui/core/styles';
+import Filter from '../layout/Filter';
 
 const useFilterStyles = makeStyles({
     status: { width: 150 },

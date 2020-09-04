@@ -6,7 +6,6 @@ import {
     DateField,
     DateInput,
     EditButton,
-    Filter,
     NullableBooleanInput,
     NumberField,
     ReferenceInput,
@@ -26,6 +25,7 @@ import {
     fade,
 } from '@material-ui/core';
 import { RealTimeList } from '@react-admin/ra-realtime';
+import Filter from '../layout/Filter';
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import MobileGrid from './MobileGrid';
