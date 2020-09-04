@@ -64,10 +64,12 @@ const orderRowStyle = batchLevel => record => {
                     : darken(fade(theme.palette.info.dark, 1), 0.88);
             break;
         case 1:
-            backgroundColor =
-                theme.palette.type === 'light'
-                    ? lighten(fade(theme.palette.info.light, 1), 0.78)
-                    : darken(fade(theme.palette.info.dark, 1), 0.78);
+            if (batchLevel != 0) {
+                backgroundColor =
+                    theme.palette.type === 'light'
+                        ? lighten(fade(theme.palette.info.light, 1), 0.78)
+                        : darken(fade(theme.palette.info.dark, 1), 0.78);
+            }
             break;
         default:
             backgroundColor = theme.palette.background.paper;
@@ -143,7 +145,6 @@ class TabbedDatagrid extends React.Component {
                                 data-testid="order-ordered-datagrid"
                             >
                                 <TextField source="id" />
-                                <NumberField source="batch" />
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
                                 <CustomerReferenceField />
