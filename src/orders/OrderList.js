@@ -64,7 +64,7 @@ const orderRowStyle = batchLevel => record => {
                     : darken(fade(theme.palette.info.dark, 1), 0.88);
             break;
         case 1:
-            if (batchLevel != 0) {
+            if (batchLevel > 0) {
                 backgroundColor =
                     theme.palette.type === 'light'
                         ? lighten(fade(theme.palette.info.light, 1), 0.78)
