@@ -16,7 +16,7 @@ const CustomBreadcrumb = props => {
     return (
         <Breadcrumb className={classes.root} {...props}>
             <ResourceBreadcrumbItems
-                resources={['invoices', 'reviews', 'stores', 'tours']}
+                resources={['invoices', 'stores', 'tours']}
             />
             <BreadcrumbItem
                 name="catalog"
@@ -48,6 +48,20 @@ const CustomBreadcrumb = props => {
                 <BreadcrumbItem
                     name="categories"
                     label={translate('resources.categories.name', 2)}
+                />
+            </BreadcrumbItem>
+            <BreadcrumbItem
+                name="reviews"
+                label={translate('resources.reviews.name', 2)}
+                to="/reviews"
+            >
+                <BreadcrumbItem
+                    name="status_filter"
+                    label={({ status }) =>
+                        `${translate('pos.filter')} status "${translate(
+                            `pos.reviews.${status}`
+                        )}"`
+                    }
                 />
             </BreadcrumbItem>
             <BreadcrumbItem

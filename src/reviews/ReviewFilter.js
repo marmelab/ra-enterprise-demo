@@ -7,6 +7,7 @@ import {
     SearchInput,
     SelectInput,
 } from 'react-admin';
+import { useTranslate } from 'ra-core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useFilterStyles = makeStyles({
@@ -15,15 +16,16 @@ const useFilterStyles = makeStyles({
 
 const ReviewFilter = props => {
     const classes = useFilterStyles();
+    const translate = useTranslate();
     return (
         <Filter {...props}>
             <SearchInput source="q" alwaysOn />
             <SelectInput
                 source="status"
                 choices={[
-                    { id: 'accepted', name: 'Accepted' },
-                    { id: 'pending', name: 'Pending' },
-                    { id: 'rejected', name: 'Rejected' },
+                    { id: 'accepted', name: translate(`pos.reviews.accepted`) },
+                    { id: 'pending', name: translate(`pos.reviews.pending`) },
+                    { id: 'rejected', name: translate(`pos.reviews.rejected`) },
                 ]}
                 className={classes.status}
             />

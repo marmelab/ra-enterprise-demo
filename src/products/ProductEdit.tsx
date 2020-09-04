@@ -99,11 +99,6 @@ const TabbedFormWithPreview = props => {
     );
 };
 
-/*const LocatedForm = (props, children) => {
-    useDefineAppLocation('catalog.products.edit', props.record);
-    return <TabbedFormWithPreview {...props}>{children}</TabbedFormWithPreview>;
-};*/
-
 const ProductEdit = props => {
     const classes = useStyles();
     return (

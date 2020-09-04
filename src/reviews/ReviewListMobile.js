@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,6 +12,10 @@ import {
     FunctionField,
     TextField,
 } from 'react-admin';
+import {
+    useAppLocationState,
+    useResourceAppLocation,
+} from '@react-admin/ra-navigation';
 
 import AvatarField from '../visitors/AvatarField';
 
@@ -28,8 +32,33 @@ const useStyles = makeStyles({
     },
 });
 
-const ReviewMobileList = ({ basePath, data, ids, loading, total }) => {
+const ReviewMobileList = ({
+    basePath,
+    data,
+    ids,
+    loading,
+    total,
+    ...props
+}) => {
     const classes = useStyles();
+    const [, setLocation] = useAppLocationState();
+    const resourceLocation = useResourceAppLocation();
+    useEffect(() => {
+        const { status } = props.filterValues;
+        if (typeof status !== 'undefined') {
+            setLocation('reviews.status_filter', { status });
+        } else {
+            setLocation('reviews');
+        }
+    }, [
+        setLocation,
+        props.filterValues,
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        JSON.stringify({
+            resourceLocation,
+            filter: props.filterValues,
+        }),
+    ]);
     return (
         (loading || total > 0) && (
             <List className={classes.root}>
@@ -53,7 +82,7 @@ const ReviewMobileList = ({ basePath, data, ids, loading, total }) => {
                             </ListItemAvatar>
                             <ListItemText
                                 primary={
-                                    <Fragment>
+                                    <>
                                         <ReferenceField
                                             record={data[id]}
                                             source="customer_id"
@@ -83,7 +112,7 @@ const ReviewMobileList = ({ basePath, data, ids, loading, total }) => {
                                                 className={classes.inline}
                                             />
                                         </ReferenceField>
-                                    </Fragment>
+                                    </>
                                 }
                                 secondary={data[id].comment}
                                 secondaryTypographyProps={{ noWrap: true }}

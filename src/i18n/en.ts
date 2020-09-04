@@ -26,6 +26,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 light: 'Light',
                 dark: 'Dark',
             },
+            filter: 'Filtered by',
             dashboard: {
                 monthly_revenue: 'Monthly Revenue',
                 month_history: '30 Day Revenue History',
@@ -51,9 +52,11 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 audience: 'Audience',
                 new_customers: 'New Customers',
                 former_customers: 'Former Customers',
-                accepted_reviews: 'Accepted',
-                rejected_reviews: 'Rejected',
-                pending_reviews: 'Pending',
+            },
+            reviews: {
+                accepted: 'Accepted',
+                rejected: 'Rejected',
+                pending: 'Pending',
             },
         },
         resources: {
