@@ -16,23 +16,7 @@ const customProviders = {
     tours: localStorageProvider(defaultState),
 };
 
-const customMethods = {
-    commands: provider => ({
-        getList: (resource, params) => {
-            const batchLevel =
-                parseInt(localStorage.getItem('batchLevel'), 0) || 0;
-            const data = provider.getList(resource, {
-                ...params,
-                filter: {
-                    batch_lte: batchLevel,
-                    batch_gte: 0,
-                    ...params.filter,
-                },
-            });
-            return data;
-        },
-    }),
-};
+const customMethods = {};
 
 const delayedDataProvider = new Proxy(restProvider, {
     get: (target, name, self) => {
