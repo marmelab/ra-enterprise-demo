@@ -56,7 +56,20 @@ const useStyles = makeStyles({
             flexShrink: 0,
         },
     },
-    root: { padding: '0 !important' },
+    root: {
+        padding: '0 !important',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        '& .tabbed-form': {
+            display: 'flex',
+            flexDirection: 'column',
+            flex: 1,
+        },
+        '& .toolbar': {
+            marginTop: 'auto',
+        },
+    },
 });
 
 const TabbedFormWithPreview = props => {
