@@ -6,7 +6,6 @@ import TourIcon from '@material-ui/icons/Flag';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from 'react-admin';
 
-import backgroundImage from './welcome_bg.png';
 import publishArticleImage from './welcome_illustration.svg';
 
 const useStyles = makeStyles(theme => ({
@@ -14,7 +13,7 @@ const useStyles = makeStyles(theme => ({
         background:
             theme.palette.type === 'dark'
                 ? '#535353'
-                : `url(${backgroundImage}) no-repeat #6f4ceb`,
+                : `linear-gradient(to right, #8975fb 0%, #746be7 35%), linear-gradient(to bottom, #8975fb 0%, #6f4ceb 50%), #6f4ceb`,
         color: '#fff',
         padding: 20,
         marginTop: theme.spacing(2),
@@ -72,11 +71,11 @@ const Welcome: FC = () => {
 
                 <Box
                     display={{ xs: 'none', sm: 'none', md: 'block' }}
-                    width="15em"
+                    className={classes.media}
+                    width="16em"
+                    height="9em"
                     overflow="hidden"
-                >
-                    <Box height="9em" width="15em" className={classes.media} />
-                </Box>
+                />
             </Box>
         </Card>
     );
