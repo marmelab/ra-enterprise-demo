@@ -55,7 +55,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: '.rc-md-editor ',
+                target: '.tui-editor-defaultUI',
                 content:
                     'Right here. Try playing with its markdown, make it bold, add headlines!',
             },
