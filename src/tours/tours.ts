@@ -1,6 +1,6 @@
 import { TourType } from '@react-admin/ra-tour';
 import { fireEvent } from '@testing-library/react';
-import commandBuilder from './commandBuilder';
+import randomCommandBuilder from './randomCommandBuilder';
 
 const getRandomInt = (min, max) => {
     min = Math.ceil(min);
@@ -17,6 +17,8 @@ const interval = (callback, intervalMs, expirationMs) =>
             resolve();
         }, expirationMs);
     });
+
+let newCommandsIds: number[] = [];
 
 const tours: { [id: string]: TourType } = {
     'ra-markdown': {
@@ -201,8 +203,10 @@ const tours: { [id: string]: TourType } = {
                                 const {
                                     data: newCommand,
                                 } = await dataProvider.create('commands', {
-                                    data: commandBuilder(1),
+                                    data: randomCommandBuilder(1),
                                 });
+
+                                newCommandsIds.push(newCommand.id);
                                 // Then notify the Real-time dataProvider
                                 const topic = 'resource/commands';
                                 dataProvider.publish(topic, {
@@ -238,15 +242,17 @@ const tours: { [id: string]: TourType } = {
                     const { data: newCommand1 } = await dataProvider.create(
                         'commands',
                         {
-                            data: commandBuilder(2),
+                            data: randomCommandBuilder(2),
                         }
                     );
+                    newCommandsIds.push(newCommand1.id);
                     const { data: newCommand2 } = await dataProvider.create(
                         'commands',
                         {
-                            data: commandBuilder(2),
+                            data: randomCommandBuilder(2),
                         }
                     );
+                    newCommandsIds.push(newCommand2.id);
                     // Then notify the Real-time dataProvider
                     const topic = 'resource/commands';
                     dataProvider.publish(topic, {
@@ -260,11 +266,18 @@ const tours: { [id: string]: TourType } = {
                 target: '[data-testid=order-ordered-datagrid]',
                 content:
                     "And newest orders even appear while you're on the page",
-                after: () => {
-                    localStorage.setItem('batchLevel', '0');
-                },
             },
         ],
+        after: async ({ dataProvider }) => {
+            localStorage.setItem('batchLevel', '0');
+            // Reset new Orders
+            await dataProvider.updateMany('commands', {
+                ids: newCommandsIds,
+                data: { batch: 0 },
+            });
+
+            newCommandsIds = [];
+        },
     },
     'ra-editable-datagrid': {
         before: async ({ redirect }) => {

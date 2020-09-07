@@ -1,4 +1,4 @@
-const commandBuilder = batchLevel => {
+const randomCommandBuilder = batchLevel => {
     //This generator assume that:
     // - Customers id exists until 50
     // - Products id exists until 20
@@ -22,4 +22,4 @@ const commandBuilder = batchLevel => {
     };
 };
 
-export default commandBuilder;
+export default randomCommandBuilder;
