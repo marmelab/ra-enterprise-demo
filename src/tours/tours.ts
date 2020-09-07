@@ -327,7 +327,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                before: ({ target }) => {
+                after: ({ target }) => {
                     fireEvent.change(target.querySelector('#city'), {
                         target: { value: 'Nantes' },
                     });
