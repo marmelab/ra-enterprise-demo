@@ -161,8 +161,7 @@ const ProductEdit = props => {
                     <ReferenceManyField
                         reference="reviews"
                         target="product_id"
-                        addLabel={false}
-                        pagination={<Pagination />}
+                        pagination={<ReferenceManyFieldPagination />}
                         fullWidth
                     >
                         <Datagrid>
@@ -184,3 +183,16 @@ const ProductEdit = props => {
 };
 
 export default ProductEdit;
+
+// There is an issue with the ReferenceManyField or the Pagination component
+// which do not sanitize some props (addLabel, fullWidth)
+// TODO: Fix react-admin and remove this component
+const ReferenceManyFieldPagination = ({
+    addLabel,
+    fullWidth,
+    ...props
+}: {
+    addLabel?: boolean;
+    fullWidth?: boolean;
+    [key: string]: any;
+}) => <Pagination {...props} />;

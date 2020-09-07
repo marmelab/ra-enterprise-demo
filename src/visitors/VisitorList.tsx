@@ -67,7 +67,7 @@ const VisitorList = (props: any) => {
             sort={{ field: 'last_seen', order: 'DESC' }}
             perPage={25}
         >
-            {({ columns, view, ...rest }) => {
+            {({ columns, view, hasEdit, hasList, hasShow, ...rest }) => {
                 if (isXsmall) {
                     return <MobileGrid />;
                 }

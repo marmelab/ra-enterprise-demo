@@ -1,4 +1,4 @@
-import React, { cloneElement, useMemo } from 'react';
+import React, { cloneElement, useMemo, forwardRef } from 'react';
 
 import {
     List,
@@ -51,11 +51,16 @@ const useStyles = makeStyles({
     },
 });
 
-const ToolContainer = ({ children }) => {
+const ToolContainer = forwardRef(({ children }, ref) => {
     const classes = useStyles();
 
-    return <div className={classes.toolContainer}>{children}</div>;
-};
+    return (
+        <div ref={ref} className={classes.toolContainer}>
+            {children}
+        </div>
+    );
+});
+ToolContainer.displayName = 'ToolContainer';
 
 const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
     const classes = useStyles();
