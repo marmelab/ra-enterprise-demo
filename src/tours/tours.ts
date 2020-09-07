@@ -55,7 +55,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: '.rc-md-editor ',
+                target: '.tui-editor-defaultUI',
                 content:
                     'Right here. Try playing with its markdown, make it bold, add headlines!',
             },
@@ -147,11 +147,13 @@ const tours: { [id: string]: TourType } = {
                 before: ({ target }) => {
                     interval(
                         () => {
-                            target
-                                .querySelector(
-                                    '.rc-tree-switcher.rc-tree-switcher_close'
-                                )
-                                .click();
+                            const switcher = target.querySelector(
+                                '.rc-tree-switcher.rc-tree-switcher_close'
+                            );
+
+                            if (switcher) {
+                                switcher.click();
+                            }
                         },
                         500,
                         4000
@@ -163,12 +165,15 @@ const tours: { [id: string]: TourType } = {
                 after: async ({ target }) => {
                     await interval(
                         () => {
-                            target
+                            const switcher = target
                                 // not the first line or it collapses all the tree
                                 .querySelector(
                                     '.rc-tree-treenode:not(:nth-child(1)) .rc-tree-switcher.rc-tree-switcher_open'
-                                )
-                                .click();
+                                );
+
+                            if (switcher) {
+                                switcher.click();
+                            }
                         },
                         500,
                         2000
@@ -181,7 +186,7 @@ const tours: { [id: string]: TourType } = {
                         redirect('/categories/create');
                     }, 4000);
                 },
-                target: '[aria-label="Add root"]',
+                target: '[aria-label="Add a category of products"]',
                 content:
                     'You can even add a new category, or reorder them, try it!',
             },
@@ -322,7 +327,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                before: ({ target }) => {
+                after: ({ target }) => {
                     fireEvent.change(target.querySelector('#city'), {
                         target: { value: 'Nantes' },
                     });
