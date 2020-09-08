@@ -64,7 +64,7 @@ const Welcome: FC = () => {
                             href="https://marmelab.com/ra-enterprise/"
                             startIcon={<HomeIcon />}
                         >
-                            {translate('pos.dashboard.welcome.aor_button')}
+                            {translate('pos.dashboard.welcome.ra_button')}
                         </Button>
                     </CardActions>
                 </Box>

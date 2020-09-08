@@ -41,7 +41,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     title: 'Welcome to the react-admin enterprise edition demo',
                     subtitle:
                         "This is the admin of an imaginary poster shop showcasing enterprise edition private modules usage. Feel free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
-                    aor_button: 'react-admin enterprise edition site',
+                    ra_button: 'react-admin enterprise edition site',
                     demo_button: 'See the showcase',
                 },
             },

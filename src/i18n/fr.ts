@@ -42,7 +42,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                         'Bienvenue sur la démo de react-admin enterprise edition',
                     subtitle:
                         "Ceci est le back-office d'un magasin de posters imaginaire mettant en oeuvre les modules de l'édition entreprise. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
-                    aor_button: 'Site web de react-admin entreprise',
+                    ra_button: 'Site web de react-admin entreprise',
                     demo_button: 'Voir tous les modules',
                 },
             },
