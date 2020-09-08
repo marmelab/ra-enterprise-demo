@@ -17,9 +17,9 @@ import {
     Title,
     useTranslate,
     useListContext,
+    Filter,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import Filter from '../layout/Filter';
 
 import { FilterProps, ListComponentProps } from '../types';
 import GridList from './GridList';

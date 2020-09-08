@@ -7,11 +7,11 @@ import {
     NullableBooleanInput,
     NumberField,
     SearchInput,
+    Filter,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { useMediaQuery, Theme } from '@material-ui/core';
 
-import Filter from '../layout/Filter';
 import EnterpriseList from '../ra-enterprise/List';
 import SegmentsField from './SegmentsField';
 import SegmentInput from './SegmentInput';

@@ -12,6 +12,7 @@ import {
     SearchInput,
     TextField,
     TextInput,
+    Filter,
 } from 'react-admin';
 import {
     makeStyles,
@@ -25,7 +26,6 @@ import {
     fade,
 } from '@material-ui/core';
 import { RealTimeList } from '@react-admin/ra-realtime';
-import Filter from '../layout/Filter';
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import MobileGrid from './MobileGrid';

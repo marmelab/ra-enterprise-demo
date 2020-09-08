@@ -7,8 +7,8 @@ import {
     ReferenceField,
     NumberField,
     DateInput,
+    Filter,
 } from 'react-admin';
-import Filter from '../layout/Filter';
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';

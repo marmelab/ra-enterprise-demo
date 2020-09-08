@@ -5,9 +5,9 @@ import {
     ReferenceInput,
     SearchInput,
     SelectInput,
+    Filter,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
-import Filter from '../layout/Filter';
 
 const useFilterStyles = makeStyles({
     status: { width: 150 },
