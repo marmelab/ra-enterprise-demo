@@ -40,6 +40,12 @@ export const darkTheme = {
                 color: 'black',
             },
         },
+        RaFilterFormInput: {
+            body: {
+                // Fixes search filter breadcrumb overlap
+                '& > div': { marginTop: 8 },
+            },
+        },
     },
 };
 
@@ -131,6 +137,12 @@ export const lightTheme = {
             drawerPaper: {
                 paddingRight: 16,
                 width: 'auto',
+            },
+        },
+        RaFilterFormInput: {
+            body: {
+                // Fixes search filter breadcrumb overlap
+                '& > div': { marginTop: 8 },
             },
         },
     },
