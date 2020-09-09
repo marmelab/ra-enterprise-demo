@@ -26,6 +26,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 light: 'Clair',
                 dark: 'Obscur',
             },
+            filter: 'Filtré par',
             dashboard: {
                 monthly_revenue: 'CA à 30 jours',
                 month_history: "Chiffre d'affaire sur 30 jours",
@@ -52,9 +53,11 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 audience: 'Audience',
                 new_customers: 'Nouveaux clients',
                 former_customers: 'Anciens Clients',
-                accepted_reviews: 'Acceptées',
-                rejected_reviews: 'Rejetées',
-                pending_reviews: 'En attente',
+            },
+            reviews: {
+                accepted: 'Acceptés',
+                rejected: 'Rejetés',
+                pending: 'En attente',
             },
         },
         resources: {
@@ -146,46 +149,6 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     total_ex_taxes: 'Montant HT',
                     delivery_fees: 'Frais de livraison',
                     taxes: 'TVA',
-                },
-            },
-            pos: {
-                search: 'Rechercher',
-                configuration: 'Configuration',
-                language: 'Langue',
-                theme: {
-                    name: 'Theme',
-                    light: 'Clair',
-                    dark: 'Obscur',
-                },
-                dashboard: {
-                    monthly_revenue: 'CA à 30 jours',
-                    month_history: "Chiffre d'affaire sur 30 jours",
-                    new_orders: 'Nouvelles commandes',
-                    pending_reviews: 'Commentaires à modérer',
-                    new_customers: 'Nouveaux clients',
-                    pending_orders: 'Commandes à traiter',
-                    order: {
-                        items:
-                            'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
-                    },
-                    welcome: {
-                        title:
-                            'Bienvenue sur la démo e-commerce de react-admin',
-                        subtitle:
-                            "Ceci est le back-office d'un magasin de posters imaginaire. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
-                        aor_button: 'Site web de react-admin',
-                        demo_button: 'Code source de cette démo',
-                    },
-                },
-                menu: {
-                    sales: 'Ventes',
-                    catalog: 'Catalogue',
-                    audience: 'Audience',
-                    new_customers: 'Nouveaux clients',
-                    former_customers: 'Anciens Clients',
-                    accepted_reviews: 'Acceptées',
-                    rejected_reviews: 'Rejetées',
-                    pending_reviews: 'En attente',
                 },
             },
             products: {

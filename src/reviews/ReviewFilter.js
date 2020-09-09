@@ -2,10 +2,10 @@ import React from 'react';
 import {
     AutocompleteInput,
     DateInput,
-    Filter,
     ReferenceInput,
     SearchInput,
     SelectInput,
+    Filter,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,9 +21,9 @@ const ReviewFilter = props => {
             <SelectInput
                 source="status"
                 choices={[
-                    { id: 'accepted', name: 'Accepted' },
-                    { id: 'pending', name: 'Pending' },
-                    { id: 'rejected', name: 'Rejected' },
+                    { id: 'accepted', name: 'pos.reviews.accepted' },
+                    { id: 'pending', name: 'pos.reviews.pending' },
+                    { id: 'rejected', name: 'pos.reviews.rejected' },
                 ]}
                 className={classes.status}
             />

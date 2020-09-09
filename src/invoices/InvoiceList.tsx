@@ -6,10 +6,9 @@ import {
     DateField,
     ReferenceField,
     NumberField,
-    Filter,
     DateInput,
+    Filter,
 } from 'react-admin';
-
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';

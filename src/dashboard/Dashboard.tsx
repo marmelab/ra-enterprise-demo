@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import { useVersion, useDataProvider } from 'react-admin';
 import { useMediaQuery, Theme } from '@material-ui/core';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -52,8 +51,6 @@ const Spacer = () => <span style={{ width: '1em' }} />;
 const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
 const Dashboard: FC = () => {
-    useDefineAppLocation('dashboard');
-
     const [state, setState] = useState<State>({});
     const version = useVersion();
     const dataProvider = useDataProvider();

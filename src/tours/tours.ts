@@ -357,6 +357,84 @@ const tours: { [id: string]: TourType } = {
             },
         ],
     },
+    'ra-navigation-breadcrumb': {
+        before: async ({ redirect }) => {
+            redirect('/products');
+            await timeout(1000); // would be so awesome if redirect was awaitable!
+        },
+        steps: [
+            {
+                target: "[aria-label='Breadcrumb'] li:nth-child(2)",
+                content:
+                    'The breadcrumb indicates that we are on the posters page',
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+            },
+            {
+                target: `[data-tour-id='grid-line'] > a:nth-child(${getRandomInt(
+                    1,
+                    5
+                )})`,
+                disableBeacon: true,
+                content: "Let's edit one of these posters",
+                after: ({ target, redirect }) => {
+                    const productUrl = target.getAttribute('href').slice(1);
+                    redirect(productUrl);
+                },
+            },
+            {
+                target: "[aria-label='Breadcrumb'] li:nth-child(3)",
+                content:
+                    'The breadcrumb has changed to follow us to this Edit page',
+                disableBeacon: true,
+                joyrideProps: {
+                    scrollOffset: 50,
+                },
+            },
+            {
+                target: '[data-testid="commands-menu"]',
+                content: "Let's try to navigate away using the Menu entry",
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+                after: ({ redirect }) => {
+                    redirect('/commands');
+                },
+            },
+            {
+                target: "[aria-label='Breadcrumb'] li:nth-child(2)",
+                content: 'The breadcrumb keeps showing our exact location.',
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+            },
+            {
+                target: "[aria-label='Breadcrumb'] li:nth-child(1)",
+                content:
+                    "Users can click on the breadcrumb items directly to navigate.\nLet's go to the home page",
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+                after: ({ redirect }) => {
+                    redirect('/');
+                },
+            },
+            {
+                target: "[aria-label='Breadcrumb']",
+                content:
+                    "By default, there is no breacrumb displayed on the home page.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
+                },
+            },
+        ],
+    },
 };
 
 export default tours;

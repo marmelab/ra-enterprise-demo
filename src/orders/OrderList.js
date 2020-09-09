@@ -6,13 +6,13 @@ import {
     DateField,
     DateInput,
     EditButton,
-    Filter,
     NullableBooleanInput,
     NumberField,
     ReferenceInput,
     SearchInput,
     TextField,
     TextInput,
+    Filter,
 } from 'react-admin';
 import {
     makeStyles,

@@ -4,7 +4,6 @@ import { Box, Chip, useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputProps } from 'ra-core';
 import {
-    Filter,
     ListBase,
     NumberInput,
     Pagination,
@@ -18,7 +17,9 @@ import {
     Title,
     useTranslate,
     useListContext,
+    Filter,
 } from 'react-admin';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import { FilterProps, ListComponentProps } from '../types';
 import GridList from './GridList';
@@ -78,6 +79,7 @@ const ListActions: FC<any> = ({ isSmall }) => (
 );
 
 const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
+    useDefineAppLocation('catalog.products');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
     return (
         <ListBase

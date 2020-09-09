@@ -110,16 +110,14 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
             />
             <MenuItemCategory
                 to="/products"
-                name="products"
+                name="catalog"
                 icon={<products.icon />}
                 onClick={onMenuClick}
-                label={translate(`resources.products.name`, { smart_count: 2 })}
+                label={translate(`pos.menu.catalog`, { smart_count: 1 })}
             >
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
-                        {translate(`resources.products.name`, {
-                            smart_count: 2,
-                        })}
+                        {translate(`pos.menu.catalog`, { smart_count: 1 })}
                     </Typography>
                     <NavigationMenu>
                         <MenuItem
@@ -169,7 +167,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
             />
             <MenuItemCategory
                 to={`/customers`}
-                name="customers"
+                name="audience"
                 icon={<visitors.icon />}
                 onClick={onMenuClick}
                 label={translate(`pos.menu.audience`, { smart_count: 2 })}
@@ -260,21 +258,21 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                             to={'/reviews?filter={"status": "accepted"}'}
                             icon={<CheckCircleOutlineIcon />}
                             onClick={onMenuClick}
-                            label="pos.menu.accepted_reviews"
+                            label="pos.reviews.accepted"
                         />
                         <MenuItem
                             name="reviews.rejected"
                             to={'/reviews?filter={"status": "rejected"}'}
                             icon={<BlockIcon />}
                             onClick={onMenuClick}
-                            label="pos.menu.rejected_reviews"
+                            label="pos.reviews.rejected"
                         />
                         <MenuItem
                             name="reviews.pending"
                             to={'/reviews?filter={"status": "pending"}'}
                             icon={<AVTimerIcon />}
                             onClick={onMenuClick}
-                            label="pos.menu.pending_reviews"
+                            label="pos.reviews.pending"
                         />
                     </NavigationMenu>
                 </CardContent>

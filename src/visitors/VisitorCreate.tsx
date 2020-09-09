@@ -8,6 +8,7 @@ import {
     PasswordInput,
     required,
 } from 'react-admin';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { Typography, Box } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Styles } from '@material-ui/styles/withStyles';
@@ -51,6 +52,7 @@ export const validatePasswords = ({
 
 const VisitorCreate = (props: any) => {
     const classes = useStyles();
+    useDefineAppLocation('audience.customers.create');
 
     return (
         <Create {...props}>

@@ -15,6 +15,7 @@ import {
 
 import AppBar from './AppBar';
 import Menu from './Menu';
+import Breadcrumb from './Breadcrumb';
 
 import { TourProvider } from '@react-admin/ra-tour';
 
@@ -42,7 +43,10 @@ const CustomLayout = (props: any) => {
                         appBar={AppBar}
                         sidebar={CustomSidebar}
                         menu={Menu}
-                    />
+                    >
+                        <Breadcrumb {...props} />
+                        {props.children}
+                    </Layout>
                 </>
             </TourProvider>
         </AppLocationContext>

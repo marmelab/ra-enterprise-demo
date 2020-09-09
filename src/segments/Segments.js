@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate, Title } from 'react-admin';
 
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import segments from './data';
 
 const useStyles = makeStyles({
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 const Segments = () => {
     const translate = useTranslate();
     const classes = useStyles();
+    useDefineAppLocation('audience.segments');
     return (
         <Card className={classes.root}>
             <Title title={translate('resources.segments.name')} />
