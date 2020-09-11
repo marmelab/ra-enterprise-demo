@@ -273,14 +273,14 @@ const tours: { [id: string]: TourType } = {
                     "And newest orders even appear while you're on the page",
             },
         ],
-        after: async ({ dataProvider }) => {
+        after: async ({ dataProvider, refresh }) => {
             localStorage.setItem('batchLevel', '0');
             // Reset new Orders
-            await dataProvider.updateMany('commands', {
+            await dataProvider.deleteMany('commands', {
                 ids: newCommandsIds,
-                data: { batch: 0 },
             });
 
+            refresh();
             newCommandsIds = [];
         },
     },
