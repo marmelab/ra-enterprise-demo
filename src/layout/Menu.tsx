@@ -23,7 +23,7 @@ import {
     Typography,
     withStyles,
     Badge,
-    makeStyles,
+    Box,
 } from '@material-ui/core';
 
 import categories from '../categories';
@@ -224,70 +224,64 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
 export default Menu;
 
 const AudienceMenu = ({ onMenuClick }) => {
-    const classes = useStyles();
     const translate = useTranslate();
 
     return (
-        <CardContent className={classes.root}>
-            <div>
-                <Typography variant="h6" gutterBottom>
-                    {translate(`resources.customers.name`, {
-                        smart_count: 2,
-                    })}
-                </Typography>
-                <NavigationMenu>
-                    <MenuItem
-                        name="customers.newcomers"
-                        to={`/customers?filter=${JSON.stringify(
-                            newCustomerFilter
-                        )}`}
-                        onClick={onMenuClick}
-                        label={translate(`pos.menu.new_customers`, {
+        <CardContent>
+            <Box display="flex" justifyContent="space-between">
+                <Box marginRight={2}>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`resources.customers.name`, {
                             smart_count: 2,
                         })}
-                    />
-                    <MenuItem
-                        name="customers.former_customers"
-                        to={`/customers?filter=${JSON.stringify(
-                            formerCustomerFilter
-                        )}`}
-                        onClick={onMenuClick}
-                        label={translate(`pos.menu.former_customers`, {
-                            smart_count: 2,
-                        })}
-                    />
-                </NavigationMenu>
-            </div>
-            <div>
-                <Typography variant="h6" gutterBottom>
-                    {translate(`resources.segments.name`, {
-                        smart_count: 2,
-                    })}
-                </Typography>
-                <NavigationMenu>
-                    {segments.map(segment => (
+                    </Typography>
+                    <NavigationMenu>
                         <MenuItem
-                            key={segment}
-                            name={`segments.${segment}`}
-                            to={`/customers?filter={"groups": "${segment}"}`}
+                            name="customers.newcomers"
+                            to={`/customers?filter=${JSON.stringify(
+                                newCustomerFilter
+                            )}`}
                             onClick={onMenuClick}
-                            label={translate(
-                                `resources.segments.data.${segment}`,
-                                {
-                                    smart_count: 2,
-                                }
-                            )}
+                            label={translate(`pos.menu.new_customers`, {
+                                smart_count: 2,
+                            })}
                         />
-                    ))}
-                </NavigationMenu>
-            </div>
+                        <MenuItem
+                            name="customers.former_customers"
+                            to={`/customers?filter=${JSON.stringify(
+                                formerCustomerFilter
+                            )}`}
+                            onClick={onMenuClick}
+                            label={translate(`pos.menu.former_customers`, {
+                                smart_count: 2,
+                            })}
+                        />
+                    </NavigationMenu>
+                </Box>
+                <Box>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`resources.segments.name`, {
+                            smart_count: 2,
+                        })}
+                    </Typography>
+                    <NavigationMenu>
+                        {segments.map(segment => (
+                            <MenuItem
+                                key={segment}
+                                name={`segments.${segment}`}
+                                to={`/customers?filter={"groups": "${segment}"}`}
+                                onClick={onMenuClick}
+                                label={translate(
+                                    `resources.segments.data.${segment}`,
+                                    {
+                                        smart_count: 2,
+                                    }
+                                )}
+                            />
+                        ))}
+                    </NavigationMenu>
+                </Box>
+            </Box>
         </CardContent>
     );
 };
-
-const useStyles = makeStyles({
-    root: {
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-});
