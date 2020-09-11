@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/ra-enterprise-demo/static/css/main.af3584c1.chunk.css",
-    "main.js": "/ra-enterprise-demo/static/js/main.55004374.chunk.js",
+    "main.js": "/ra-enterprise-demo/static/js/main.f07ecd65.chunk.js",
     "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.5d6bb614.js",
     "static/css/2.7d01ac18.chunk.css": "/ra-enterprise-demo/static/css/2.7d01ac18.chunk.css",
-    "static/js/2.c6d46d56.chunk.js": "/ra-enterprise-demo/static/js/2.c6d46d56.chunk.js",
+    "static/js/2.829a1588.chunk.js": "/ra-enterprise-demo/static/js/2.829a1588.chunk.js",
     "index.html": "/ra-enterprise-demo/index.html",
-    "precache-manifest.fe99c5e21681fd237e81b6e87f7c24b5.js": "/ra-enterprise-demo/precache-manifest.fe99c5e21681fd237e81b6e87f7c24b5.js",
+    "precache-manifest.53aa7829686a2ae015f6cbcbfb149313.js": "/ra-enterprise-demo/precache-manifest.53aa7829686a2ae015f6cbcbfb149313.js",
     "service-worker.js": "/ra-enterprise-demo/service-worker.js",
-    "static/js/2.c6d46d56.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.c6d46d56.chunk.js.LICENSE.txt",
+    "static/js/2.829a1588.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.829a1588.chunk.js.LICENSE.txt",
     "static/media/welcome_illustration.svg": "/ra-enterprise-demo/static/media/welcome_illustration.87ada4be.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.5d6bb614.js",
     "static/css/2.7d01ac18.chunk.css",
-    "static/js/2.c6d46d56.chunk.js",
+    "static/js/2.829a1588.chunk.js",
     "static/css/main.af3584c1.chunk.css",
-    "static/js/main.55004374.chunk.js"
+    "static/js/main.f07ecd65.chunk.js"
   ]
 }
