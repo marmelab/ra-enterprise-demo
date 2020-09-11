@@ -3,13 +3,9 @@ import { useSelector } from 'react-redux';
 import { useTranslate } from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import LabelIcon from '@material-ui/icons/Label';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AVTimerIcon from '@material-ui/icons/AvTimer';
 import BlockIcon from '@material-ui/icons/Block';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import GroupsIcon from '@material-ui/icons/GroupWork';
-import BookmarkIcon from '@material-ui/icons/Bookmark';
 
 import {
     MultiLevelMenu,
@@ -27,6 +23,7 @@ import {
     Typography,
     withStyles,
     Badge,
+    Box,
 } from '@material-ui/core';
 
 import categories from '../categories';
@@ -172,72 +169,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 onClick={onMenuClick}
                 label={translate(`pos.menu.audience`, { smart_count: 2 })}
             >
-                <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                        {translate(`pos.menu.audience`, {
-                            smart_count: 2,
-                        })}
-                    </Typography>
-                    <NavigationMenu>
-                        <MenuItem
-                            name="customers"
-                            to="/customers?filter={}"
-                            icon={<visitors.icon />}
-                            onClick={onMenuClick}
-                            label={translate(`resources.customers.name`, {
-                                smart_count: 2,
-                            })}
-                        >
-                            <MenuItem
-                                name="customers.newcomers"
-                                to={`/customers?filter=${JSON.stringify(
-                                    newCustomerFilter
-                                )}`}
-                                icon={<GroupAddIcon />}
-                                onClick={onMenuClick}
-                                label={translate(`pos.menu.new_customers`, {
-                                    smart_count: 2,
-                                })}
-                            />
-                            <MenuItem
-                                name="customers.former_customers"
-                                to={`/customers?filter=${JSON.stringify(
-                                    formerCustomerFilter
-                                )}`}
-                                icon={<GroupsIcon />}
-                                onClick={onMenuClick}
-                                label={translate(`pos.menu.former_customers`, {
-                                    smart_count: 2,
-                                })}
-                            />
-                        </MenuItem>
-                        <MenuItem
-                            name="segments"
-                            to="/segments"
-                            icon={<LabelIcon />}
-                            onClick={onMenuClick}
-                            label={translate(`resources.segments.name`, {
-                                smart_count: 2,
-                            })}
-                        >
-                            {segments.map(segment => (
-                                <MenuItem
-                                    key={segment}
-                                    name={`segments.${segment}`}
-                                    to={`/customers?filter={"groups": "${segment}"}`}
-                                    icon={<BookmarkIcon />}
-                                    onClick={onMenuClick}
-                                    label={translate(
-                                        `resources.segments.data.${segment}`,
-                                        {
-                                            smart_count: 2,
-                                        }
-                                    )}
-                                />
-                            ))}
-                        </MenuItem>
-                    </NavigationMenu>
-                </CardContent>
+                <AudienceMenu onMenuClick={onMenuClick} />
             </MenuItemCategory>
             <MenuItemCategory
                 name="reviews"
@@ -290,3 +222,66 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
 };
 
 export default Menu;
+
+const AudienceMenu = ({ onMenuClick }) => {
+    const translate = useTranslate();
+
+    return (
+        <CardContent>
+            <Box display="flex" justifyContent="space-between">
+                <Box marginRight={2}>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`resources.customers.name`, {
+                            smart_count: 2,
+                        })}
+                    </Typography>
+                    <NavigationMenu>
+                        <MenuItem
+                            name="customers.newcomers"
+                            to={`/customers?filter=${JSON.stringify(
+                                newCustomerFilter
+                            )}`}
+                            onClick={onMenuClick}
+                            label={translate(`pos.menu.new_customers`, {
+                                smart_count: 2,
+                            })}
+                        />
+                        <MenuItem
+                            name="customers.former_customers"
+                            to={`/customers?filter=${JSON.stringify(
+                                formerCustomerFilter
+                            )}`}
+                            onClick={onMenuClick}
+                            label={translate(`pos.menu.former_customers`, {
+                                smart_count: 2,
+                            })}
+                        />
+                    </NavigationMenu>
+                </Box>
+                <Box>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`resources.segments.name`, {
+                            smart_count: 2,
+                        })}
+                    </Typography>
+                    <NavigationMenu>
+                        {segments.map(segment => (
+                            <MenuItem
+                                key={segment}
+                                name={`segments.${segment}`}
+                                to={`/customers?filter={"groups": "${segment}"}`}
+                                onClick={onMenuClick}
+                                label={translate(
+                                    `resources.segments.data.${segment}`,
+                                    {
+                                        smart_count: 2,
+                                    }
+                                )}
+                            />
+                        ))}
+                    </NavigationMenu>
+                </Box>
+            </Box>
+        </CardContent>
+    );
+};
