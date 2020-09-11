@@ -276,6 +276,7 @@ const tours: { [id: string]: TourType } = {
         after: async ({ dataProvider, refresh }) => {
             localStorage.setItem('batchLevel', '0');
             // Reset new Orders
+            // We have to delete them to avoid having them reappear if the tour is restarted
             await dataProvider.deleteMany('commands', {
                 ids: newCommandsIds,
             });
