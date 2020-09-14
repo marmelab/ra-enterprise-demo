@@ -4,6 +4,7 @@ import {
     Sidebar,
     useNotify,
     useRedirect,
+    useRefresh,
     useDataProvider,
 } from 'react-admin';
 
@@ -26,6 +27,7 @@ const CustomSidebar = (props: any) => <Sidebar {...props} size={200} />;
 const CustomLayout = (props: any) => {
     const notify = useNotify();
     const redirect = useRedirect();
+    const refresh = useRefresh();
     const [tourPreferences, setTourPreferences] = usePreferences('tour');
     const dataProvider = useDataProvider();
 
@@ -33,7 +35,13 @@ const CustomLayout = (props: any) => {
         <AppLocationContext>
             <TourProvider
                 tours={tours}
-                tools={{ notify, redirect, setTourPreferences, dataProvider }}
+                tools={{
+                    notify,
+                    redirect,
+                    refresh,
+                    setTourPreferences,
+                    dataProvider,
+                }}
                 initialState={tourPreferences}
             >
                 <>
