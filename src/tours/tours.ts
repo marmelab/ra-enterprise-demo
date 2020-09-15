@@ -228,15 +228,13 @@ const tours: { [id: string]: TourType } = {
                 disableBeacon: true,
                 target: '[data-testid="commands-menu"]',
                 content: "Seems like you just had new orders, let's check...",
-                after: ({ redirect }) => {
+                after: async ({ redirect }) => {
+                    localStorage.setItem('batchLevel', '1');
+                    await timeout(500);
                     redirect('/commands');
                 },
             },
             {
-                before: async () => {
-                    localStorage.setItem('batchLevel', '1');
-                    await timeout(500);
-                },
                 target: '[data-testid=order-ordered-datagrid]',
                 content: 'Your new orders can stand-out from others',
             },
