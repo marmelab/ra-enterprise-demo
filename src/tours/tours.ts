@@ -313,7 +313,7 @@ const tours: { [id: string]: TourType } = {
                 },
                 target: '[data-testid=productlocktile]',
                 content:
-                    'You can lock resources in realtime (this one will be unlock in few seconds)',
+                    'You can lock resources in realtime (this one will be unlocked in a few seconds)',
             },
         ],
         after: async ({ dataProvider, refresh }) => {
