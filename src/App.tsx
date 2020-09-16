@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react';
 import { Admin, Resource, mergeTranslations } from 'react-admin';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-
 import { PreferencesBasedThemeProvider } from '@react-admin/ra-preferences';
+
 import {
     reducer as tree,
     raTreeLanguageFrench,
     raTreeLanguageEnglish,
 } from '@react-admin/ra-tree';
+
 import {
     raRealTimeLanguageEnglish,
     raRealTimeLanguageFrench,
+    reducer as locks,
 } from '@react-admin/ra-realtime';
 
 import './App.css';
@@ -62,7 +64,7 @@ const App = () => {
                 title=""
                 dataProvider={dataProvider}
                 customRoutes={customRoutes}
-                customReducers={{ tree }}
+                customReducers={{ tree, locks }}
                 authProvider={authProvider}
                 dashboard={Dashboard}
                 loginPage={Login}
@@ -81,6 +83,7 @@ const App = () => {
                 <Resource name="reviews" {...reviews} />
                 <Resource name="stores" {...stores} />
                 <Resource name="tours" {...tours} />
+                <Resource name="locks" />
             </Admin>
         </PreferencesBasedThemeProvider>
     );

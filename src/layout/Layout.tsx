@@ -1,4 +1,8 @@
 import React from 'react';
+import { AppLocationContext } from '@react-admin/ra-navigation';
+import { TourProvider } from '@react-admin/ra-tour';
+import { useDispatch } from 'react-redux';
+
 import {
     Layout,
     Sidebar,
@@ -8,7 +12,6 @@ import {
     useDataProvider,
 } from 'react-admin';
 
-import { AppLocationContext } from '@react-admin/ra-navigation';
 import {
     SidebarOpenPreferenceSync,
     usePreferences,
@@ -17,8 +20,6 @@ import {
 import AppBar from './AppBar';
 import Menu from './Menu';
 import Breadcrumb from './Breadcrumb';
-
-import { TourProvider } from '@react-admin/ra-tour';
 
 import tours from '../tours/tours';
 
@@ -30,6 +31,7 @@ const CustomLayout = (props: any) => {
     const refresh = useRefresh();
     const [tourPreferences, setTourPreferences] = usePreferences('tour');
     const dataProvider = useDataProvider();
+    const dispatch = useDispatch();
 
     return (
         <AppLocationContext>
@@ -39,8 +41,9 @@ const CustomLayout = (props: any) => {
                     notify,
                     redirect,
                     refresh,
-                    setTourPreferences,
                     dataProvider,
+                    setTourPreferences,
+                    dispatch,
                 }}
                 initialState={tourPreferences}
             >

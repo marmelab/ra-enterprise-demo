@@ -24,20 +24,21 @@ export const darkTheme = {
             zIndex: 9999,
         },
         RaMenuItemCategory: {
+            closeButton: { color: 'white' },
             popoverPaper: {
-                backgroundColor: 'white',
-                color: '#303030',
+                backgroundColor: '#424242',
+                color: 'white',
             },
         },
         RaMenuItem: {
             link: {
-                color: '#303030',
+                color: 'white',
             },
             icon: {
-                color: '#303030',
+                color: 'white',
             },
             active: {
-                color: 'black',
+                color: 'white',
             },
         },
         RaFilterFormInput: {

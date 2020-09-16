@@ -15,11 +15,19 @@ import {
     TextInput,
     FormDataConsumer,
     FormWithRedirect,
+    useNotify,
+    SaveButton,
+    Toolbar,
 } from 'react-admin';
 import { MarkdownInput } from '@react-admin/ra-markdown';
+import { useLock, useHasLock } from '@react-admin/ra-realtime';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import { InputAdornment } from '@material-ui/core';
+import {
+    InputAdornment,
+    Typography,
+    CircularProgress,
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
@@ -101,9 +109,28 @@ const TabbedFormWithPreview = props => {
 
 const ProductEdit = props => {
     const classes = useStyles();
+    const { resource, id } = props;
+    const notify = useNotify();
+
+    const { loading } = useLock(resource, id, 'todousername', {
+        onSuccess: () => {
+            notify('ra-realtime.notification.lock.lockedByMe');
+        },
+        onFailure: () => {
+            notify('ra-realtime.notification.lock.lockedBySomeoneElse');
+        },
+        onUnlockSuccess: () => {
+            notify('ra-realtime.notification.lock.unlocked');
+        },
+    });
+
+    if (loading) {
+        return <CircularProgress />;
+    }
+
     return (
         <Edit {...props} title={<ProductTitle />} component="div">
-            <TabbedFormWithPreview>
+            <TabbedFormWithPreview toolbar={<CustomToolbar />}>
                 <FormTab label="resources.products.tabs.image">
                     <Poster />
                     <TextInput source="image" fullWidth />
@@ -180,6 +207,37 @@ const ProductEdit = props => {
                 </FormTab>
             </TabbedFormWithPreview>
         </Edit>
+    );
+};
+
+const CustomToolbar: FC<any> = props => {
+    const { resource, record } = props;
+    const { data: lock } = useHasLock(resource, record.id);
+
+    const isMeLocker = lock?.identity === 'todousername';
+
+    return (
+        <Toolbar {...props}>
+            <SaveButton disabled={!isMeLocker} />
+            {!isMeLocker && <LockMessage identity={lock?.identity} />}
+        </Toolbar>
+    );
+};
+
+const useLockMessageStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(0, 1),
+    },
+}));
+
+const LockMessage: FC<any> = props => {
+    const { identity, variant = 'body1' } = props;
+    const classes = useLockMessageStyles(props);
+
+    return (
+        <Typography className={classes.root} variant={variant}>
+            This record is locked by another user: {identity}.
+        </Typography>
     );
 };
 

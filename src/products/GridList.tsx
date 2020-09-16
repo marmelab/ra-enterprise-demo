@@ -7,12 +7,32 @@ import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { WithWidth } from '@material-ui/core/withWidth';
 import { linkToRecord, NumberField, useListContext } from 'react-admin';
 import { Link } from 'react-router-dom';
-import { DatagridProps, Product } from '../types';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+import { Lock, useHasLocks } from '@react-admin/ra-realtime';
+import LockIcon from '@material-ui/icons/Lock';
+
+import { DatagridProps, Product } from '../types';
 
 const useStyles = makeStyles(theme => ({
     gridList: {
         margin: 0,
+    },
+    tile: {
+        position: 'relative',
+    },
+    lockOverlay: {
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        background: 'rgba(0, 0, 0, 0.9)',
+        position: 'absolute',
+        textAlign: 'center',
+        color: 'white',
+        padding: '25% 0',
+    },
+    lockIdentity: {
+        paddingTop: '1em',
     },
     tileBar: {
         background:
@@ -47,6 +67,7 @@ const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
     nbItems = 20,
 }) => {
     const classes = useStyles();
+
     return (
         <MuiGridList
             cellHeight={180}
@@ -62,9 +83,56 @@ const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
     );
 };
 
-const LoadedGridList: FC<GridProps> = ({ width }) => {
-    const { ids, data, basePath } = useListContext();
+const ProductTile = ({ record }) => {
     const classes = useStyles();
+
+    return (
+        <>
+            <img src={record.thumbnail} alt="" />
+            <GridListTileBar
+                className={classes.tileBar}
+                title={record.reference}
+                subtitle={
+                    <span>
+                        {record.width}x{record.height},{' '}
+                        <NumberField
+                            className={classes.price}
+                            source="price"
+                            record={record}
+                            color="inherit"
+                            options={{
+                                style: 'currency',
+                                currency: 'USD',
+                            }}
+                        />
+                    </span>
+                }
+            />
+        </>
+    );
+};
+
+const LockOverlay: FC<any> = ({ lock, ...rest }) => {
+    const classes = useStyles();
+
+    return (
+        <div className={classes.lockOverlay} {...rest}>
+            <LockIcon />
+            <div className={classes.lockIdentity}>
+                Locked by
+                <br />
+                {lock.identity}
+            </div>
+        </div>
+    );
+};
+
+const LoadedGridList: FC<GridProps> = ({ width }) => {
+    const { ids, data, basePath, resource } = useListContext();
+    const { data: locks } = useHasLocks(resource);
+    const classes = useStyles();
+
+    const firstLockRecordId = React.useRef();
 
     if (!ids || !data) return null;
 
@@ -75,34 +143,31 @@ const LoadedGridList: FC<GridProps> = ({ width }) => {
             className={classes.gridList}
             data-tour-id="grid-line"
         >
-            {ids.map((id: string) => (
-                <GridListTile
-                    component={Link}
-                    key={id}
-                    to={linkToRecord(basePath, data[id].id)}
-                >
-                    <img src={data[id].thumbnail} alt="" />
-                    <GridListTileBar
-                        className={classes.tileBar}
-                        title={data[id].reference}
-                        subtitle={
-                            <span>
-                                {data[id].width}x{data[id].height},{' '}
-                                <NumberField
-                                    className={classes.price}
-                                    source="price"
-                                    record={data[id]}
-                                    color="inherit"
-                                    options={{
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }}
-                                />
-                            </span>
+            {ids.map((id: string) => {
+                const lock = locks.find((l: Lock) => l.recordId === id);
+                if (lock && !firstLockRecordId.current) {
+                    firstLockRecordId.current = lock.recordId;
+                }
+
+                const isFirstLock = firstLockRecordId.current === id;
+
+                return (
+                    <GridListTile
+                        key={id}
+                        component={lock ? 'span' : Link}
+                        to={linkToRecord(basePath, id)}
+                        className={classes.tile}
+                        data-productid={id}
+                        data-lockidentity={lock ? lock.identity : undefined}
+                        data-testid={
+                            isFirstLock ? 'productlocktile' : undefined
                         }
-                    />
-                </GridListTile>
-            ))}
+                    >
+                        <ProductTile record={data[id]} />
+                        {lock && <LockOverlay lock={lock} />}
+                    </GridListTile>
+                );
+            })}
         </MuiGridList>
     );
 };
@@ -111,6 +176,7 @@ interface GridProps extends DatagridProps<Product>, WithWidth {}
 
 const GridList: FC<WithWidth> = ({ width }) => {
     const { loaded } = useListContext();
+
     return loaded ? (
         <LoadedGridList width={width} />
     ) : (
