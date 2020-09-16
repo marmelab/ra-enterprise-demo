@@ -269,6 +269,51 @@ const tours: { [id: string]: TourType } = {
                 target: '[data-testid=order-ordered-datagrid]',
                 content:
                     "And newest orders even appear while you're on the page",
+                after: ({ redirect }) => {
+                    redirect('/products');
+                },
+            },
+            {
+                before: async ({ dataProvider, dispatch }) => {
+                    await timeout(100);
+
+                    const lockTile = global.document.querySelector(
+                        '[data-testid=productlocktile]'
+                    );
+
+                    if (lockTile instanceof HTMLElement) {
+                        const recordId = parseInt(
+                            lockTile.dataset.productid + '',
+                            10
+                        );
+
+                        const identity = lockTile.dataset.lockidentity;
+
+                        setTimeout(() => {
+                            dataProvider
+                                .unlock('products', {
+                                    recordId,
+                                    identity,
+                                })
+                                .then(({ data: lock }) => {
+                                    dispatch({
+                                        type: 'RA/UNLOCK_SUCCESS',
+                                        payload: {
+                                            data: lock,
+                                        },
+                                        meta: {
+                                            fetchResponse: 'RA/UNLOCK',
+                                            resource: 'products',
+                                            recordId,
+                                        },
+                                    });
+                                });
+                        }, 4000);
+                    }
+                },
+                target: '[data-testid=productlocktile]',
+                content:
+                    'You can lock resources in realtime (this one will be unlock in few seconds)',
             },
         ],
         after: async ({ dataProvider, refresh }) => {

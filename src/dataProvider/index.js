@@ -19,7 +19,6 @@ const customProviders = {
 };
 
 const customMethods = {};
-
 const delayedDataProvider = new Proxy(restProvider, {
     get: (target, name, self) => {
         if (name === 'then') {

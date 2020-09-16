@@ -127,9 +127,10 @@ const ProductEdit = props => {
     if (loading) {
         return <CircularProgress />;
     }
+
     return (
         <Edit {...props} title={<ProductTitle />} component="div">
-            <TabbedFormWithPreview toolbar={CustomToolbar}>
+            <TabbedFormWithPreview toolbar={<CustomToolbar />}>
                 <FormTab label="resources.products.tabs.image">
                     <Poster />
                     <TextInput source="image" fullWidth />
@@ -211,12 +212,7 @@ const ProductEdit = props => {
 
 const CustomToolbar: FC<any> = props => {
     const { resource, record } = props;
-
-    const { loading, data: lock } = useHasLock(resource, record.id);
-
-    if (loading) {
-        return <CircularProgress />;
-    }
+    const { data: lock } = useHasLock(resource, record.id);
 
     const isMeLocker = lock?.identity === 'todousername';
 

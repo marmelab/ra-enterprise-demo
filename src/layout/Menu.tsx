@@ -50,8 +50,12 @@ const useResourceChangeCounter = (resource: string) => {
     const location = useResourceAppLocation();
     const [countEvent, setCountEvent] = useState(0);
 
-    useSubscribeToRecordList(resource, ({ payload: { ids } }) => {
-        let count = ids.length;
+    useSubscribeToRecordList(resource, ({ payload }) => {
+        if (!payload || !payload.ids) {
+            return;
+        }
+
+        let count = payload.ids.length;
 
         if (location && match(resource)) {
             const { record } = location && (location.values || {});
@@ -59,7 +63,7 @@ const useResourceChangeCounter = (resource: string) => {
                 return;
             }
 
-            count = ids.filter(id => id !== record.id).length;
+            count = payload.ids.filter(id => id !== record.id).length;
         }
 
         if (count) {
