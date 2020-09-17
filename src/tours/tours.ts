@@ -60,6 +60,15 @@ const tours: { [id: string]: TourType } = {
                     'Right here. Try playing with its markdown, make it bold, add headlines!',
             },
             {
+                target: '.te-switch-button.wysiwyg',
+                content: 'By default, you are in WYSIWYG mode.',
+            },
+            {
+                target: '.te-switch-button.markdown',
+                content:
+                    'But you can switch to raw markdown edition with this button.',
+            },
+            {
                 target: '[data-testid=product-edit-preview]',
                 content:
                     'Parsed markdown can then be displayed in a preview or wherever you want.',
