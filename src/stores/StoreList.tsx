@@ -2,6 +2,7 @@ import React from 'react';
 import { List, DateField, DateInput, TextField, TextInput } from 'react-admin';
 
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
+import { makeStyles } from '@material-ui/core';
 
 const StoreForm = props => (
     <RowForm {...props}>
@@ -14,19 +15,34 @@ const StoreForm = props => (
     </RowForm>
 );
 
-export const StoreList = (props: any) => (
-    <List {...props} hasCreate empty={false} perPage={25}>
-        <EditableDatagrid
-            data-testid="store-datagrid"
-            rowClick="edit"
-            createForm={<StoreForm />}
-            editForm={<StoreForm />}
+export const StoreList = (props: any) => {
+    const classes = useStyles();
+    return (
+        <List
+            {...props}
+            className={classes.root}
+            hasCreate
+            empty={false}
+            perPage={25}
         >
-            <TextField source="id" />
-            <TextField source="city" />
-            <TextField source="country" />
-            <TextField source="address" />
-            <DateField source="created_at" />
-        </EditableDatagrid>
-    </List>
-);
+            <EditableDatagrid
+                data-testid="store-datagrid"
+                rowClick="edit"
+                createForm={<StoreForm />}
+                editForm={<StoreForm />}
+            >
+                <TextField source="id" />
+                <TextField source="city" />
+                <TextField source="country" />
+                <TextField source="address" />
+                <DateField source="created_at" />
+            </EditableDatagrid>
+        </List>
+    );
+};
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: -theme.spacing(6),
+    },
+}));

@@ -253,6 +253,7 @@ const hasChildren = (element, type, props) => {
 
 const EnterpriseList = props => {
     const {
+        className,
         preferenceKey,
 
         hasColumnsSelector = true,
@@ -295,6 +296,7 @@ const EnterpriseList = props => {
     return (
         <List
             {...rest}
+            className={className}
             actions={
                 <Actions
                     preferenceKey={`${preferenceKey}.columns`}

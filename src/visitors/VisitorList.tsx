@@ -10,7 +10,7 @@ import {
     Filter,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import { useMediaQuery, Theme } from '@material-ui/core';
+import { useMediaQuery, Theme, makeStyles } from '@material-ui/core';
 
 import EnterpriseList from '../ra-enterprise/List';
 import SegmentsField from './SegmentsField';
@@ -53,9 +53,12 @@ const VisitorList = (props: any) => {
     useDefineAppLocation('audience.customers');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
+    const classes = useStyles();
+
     return (
         <EnterpriseList
             {...props}
+            className={classes.root}
             preferenceKey="visitors.list"
             hasColumnsSelector
             defaultColumns={visitorListColumn}
@@ -93,3 +96,9 @@ const VisitorList = (props: any) => {
 };
 
 export default VisitorList;
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: -theme.spacing(6),
+    },
+}));
