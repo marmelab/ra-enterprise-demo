@@ -5,7 +5,7 @@ import {
     BreadcrumbItem,
     ResourceBreadcrumbItems,
 } from '@react-admin/ra-navigation';
-import { linkToRecord, useTranslate } from 'ra-core';
+import { linkToRecord, useTranslate, Record } from 'ra-core';
 
 const CustomBreadcrumb = props => {
     const classes = useStyles();
@@ -29,14 +29,15 @@ const CustomBreadcrumb = props => {
                 >
                     <BreadcrumbItem
                         name="edit"
-                        label={({ record }) =>
+                        label={({ record }: { record?: Record }) =>
                             `${editLabel} ${
                                 record ? `"${record.reference}"` : '...'
                             }`
                         }
-                        to={({ record }): string =>
-                            record &&
-                            `${linkToRecord('/products', record.id)}/edit`
+                        to={({ record }: { record?: Record }) =>
+                            record
+                                ? `${linkToRecord('/products', record.id)}/edit`
+                                : ''
                         }
                     />
                     <BreadcrumbItem
@@ -71,13 +72,15 @@ const CustomBreadcrumb = props => {
             >
                 <BreadcrumbItem
                     name="edit"
-                    label={({ record }) =>
+                    label={({ record }: { record?: Record }) =>
                         `${editLabel} ${
                             record ? `"${record.reference}"` : '...'
                         }`
                     }
-                    to={({ record }): string =>
-                        record && `${linkToRecord('/products', record.id)}/edit`
+                    to={({ record }: { record?: Record }) =>
+                        record
+                            ? `${linkToRecord('/products', record.id)}/edit`
+                            : ''
                     }
                 />
             </BreadcrumbItem>
@@ -92,16 +95,20 @@ const CustomBreadcrumb = props => {
                 >
                     <BreadcrumbItem
                         name="edit"
-                        label={({ record }) =>
+                        label={({ record }: { record?: Record }) =>
                             `${editLabel} ${
                                 record
                                     ? `"${record.first_name} ${record.last_name}"`
                                     : '...'
                             }`
                         }
-                        to={({ record }): string =>
-                            record &&
-                            `${linkToRecord('/customers', record.id)}/edit`
+                        to={({ record }: { record?: Record }) =>
+                            record
+                                ? `${linkToRecord(
+                                      '/customers',
+                                      record.id
+                                  )}/edit`
+                                : ''
                         }
                     />
                     <BreadcrumbItem
