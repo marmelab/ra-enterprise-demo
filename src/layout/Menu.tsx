@@ -110,7 +110,6 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 label="Dashboard"
             />
             <MenuItemCategory
-                to="/products"
                 name="catalog"
                 icon={<products.icon />}
                 onClick={onMenuClick}
@@ -177,7 +176,6 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
             </MenuItemCategory>
             <MenuItemCategory
                 name="reviews"
-                to="/reviews?filter={}"
                 icon={<reviews.icon />}
                 onClick={onMenuClick}
                 label={translate(`resources.reviews.name`, { smart_count: 2 })}
