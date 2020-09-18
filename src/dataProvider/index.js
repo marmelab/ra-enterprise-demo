@@ -2,7 +2,7 @@ import simpleRestProvider from 'ra-data-simple-rest';
 import compose from 'recompose/compose';
 import { addLocksMethodsBasedOnALockResource } from '@react-admin/ra-realtime';
 
-import addTreeMethodsBasedOnChildren from './addTreeMethodsBasedOnChildren';
+import { addTreeMethodsBasedOnChildren } from '@react-admin/ra-tree';
 import addRealtimeMethodsWithFakeTransport from './addRealtimeMethodsWithFakeTransport';
 
 import localStorageProvider from './localStorageProvider';

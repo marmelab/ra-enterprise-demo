@@ -1514,10 +1514,10 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.0.2.tgz#48aea3bf5e3d06c21e4fb7319857cfafb3356df5"
-  integrity sha512-lbAyDj++BjShzA4D7iwfuffnqDi1W8CYV9jOkiFH/0RP5PD4KydINib0OyS5nm8E//GisMj9APjSVfvi8cptOg==
+"@react-admin/ra-tree@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.1.1.tgz#a8074e7d15d03ac07e3055d3c60fb812952ca596"
+  integrity sha512-Ib7liB06wHJxMYBIreYArA2zdc3YmADd4ZvBA7bTJwdzoyZGXiMZFQSQA2F1jU6/sotpemitPiKSQFEC//D5AQ==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
     lodash "^4.17.19"
