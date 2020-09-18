@@ -82,7 +82,6 @@ const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
     useDefineAppLocation('catalog.products');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
-    const classes = useStyles();
     return (
         <ListBase
             filters={isSmall ? <ProductFilter /> : null}
@@ -91,7 +90,6 @@ const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
             {...props}
         >
             <ProductListView
-                className={classes.root}
                 actions={actions}
                 isSmall={isSmall}
                 aside={props.aside}
@@ -105,21 +103,20 @@ const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
 // If undefined, we consider the aside is not explicitly disabled an display the filter
 // vertical bar
 const ProductListView: FC<{
-    className?: string;
     isSmall: boolean;
     actions?: any;
     aside?: boolean;
     title?: string;
 }> = ({
-    className,
     isSmall,
     actions = <ListActions isSmall={isSmall} />,
     aside,
     title,
 }) => {
     const { defaultTitle } = useListContext();
+    const classes = useStyles();
     return (
-        <div className={className}>
+        <div className={classes.root}>
             <Title defaultTitle={title || defaultTitle} />
             {actions}
             {(isSmall || aside === false) && (
