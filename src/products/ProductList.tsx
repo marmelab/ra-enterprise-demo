@@ -81,6 +81,7 @@ const ListActions: FC<any> = ({ isSmall }) => (
 const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
     useDefineAppLocation('catalog.products');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
+
     return (
         <ListBase
             filters={isSmall ? <ProductFilter /> : null}
@@ -113,8 +114,9 @@ const ProductListView: FC<{
     title,
 }) => {
     const { defaultTitle } = useListContext();
+    const classes = useStyles();
     return (
-        <>
+        <div className={classes.root}>
             <Title defaultTitle={title || defaultTitle} />
             {actions}
             {(isSmall || aside === false) && (
@@ -135,7 +137,14 @@ const ProductListView: FC<{
                     <Pagination rowsPerPageOptions={[10, 20, 40]} />
                 </Box>
             </Box>
-        </>
+        </div>
     );
 };
+
 export default ProductList;
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        marginTop: -theme.spacing(6),
+    },
+}));
