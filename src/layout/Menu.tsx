@@ -21,6 +21,7 @@ import {
     Theme,
     CardContent,
     Typography,
+    makeStyles,
     withStyles,
     Badge,
     Box,
@@ -89,7 +90,16 @@ const StyledBadgeForText = withStyles(theme => ({
     },
 }))(Badge);
 
-const Menu: FC<Props> = ({ onMenuClick, logout }) => {
+const useMenuItemCategoryStyles = makeStyles(theme => ({
+    root: {
+        '&:hover': {
+            color: theme.palette.common.black,
+            backgroundColor: theme.palette.grey[300],
+        },
+    },
+}));
+
+const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
     const translate = useTranslate();
     const commandsChangeCount = useResourceChangeCounter('commands');
 
@@ -97,11 +107,14 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
         theme.breakpoints.down('xs')
     );
 
+    const menuItemCategoryClasses = useMenuItemCategoryStyles(rest);
+
     useSelector((state: AppState) => state.theme); // force rerender on theme change
 
     return (
         <MultiLevelMenu variant="categories">
             <MenuItemCategory
+                classes={menuItemCategoryClasses}
                 name="dashboard"
                 to="/"
                 exact
@@ -110,7 +123,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 label="Dashboard"
             />
             <MenuItemCategory
-                to="/products"
+                classes={menuItemCategoryClasses}
                 name="catalog"
                 icon={<products.icon />}
                 onClick={onMenuClick}
@@ -147,6 +160,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 color="primary"
             >
                 <MenuItemCategory
+                    classes={menuItemCategoryClasses}
                     name="commands"
                     to="/commands"
                     icon={<orders.icon />}
@@ -158,6 +172,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 />
             </StyledBadgeForText>
             <MenuItemCategory
+                classes={menuItemCategoryClasses}
                 name="invoices"
                 to="/invoices?filter={}"
                 icon={<invoices.icon />}
@@ -167,6 +182,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 })}
             />
             <MenuItemCategory
+                classes={menuItemCategoryClasses}
                 to={`/customers`}
                 name="audience"
                 icon={<visitors.icon />}
@@ -176,8 +192,8 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 <AudienceMenu onMenuClick={onMenuClick} />
             </MenuItemCategory>
             <MenuItemCategory
+                classes={menuItemCategoryClasses}
                 name="reviews"
-                to="/reviews?filter={}"
                 icon={<reviews.icon />}
                 onClick={onMenuClick}
                 label={translate(`resources.reviews.name`, { smart_count: 2 })}
@@ -214,6 +230,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 </CardContent>
             </MenuItemCategory>
             <MenuItemCategory
+                classes={menuItemCategoryClasses}
                 name="stores"
                 to="/stores"
                 icon={<stores.icon />}

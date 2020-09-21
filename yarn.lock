@@ -1507,17 +1507,17 @@
     "@toast-ui/react-editor" "^2.2.0"
     lodash "^4.17.19"
 
-"@react-admin/ra-navigation@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.0.tgz#a6404c895571084ddec03486ac70cb0b34e469c8"
-  integrity sha512-9Bg9Txn4AkAH61X2qo3gk7GY14IQf2LTjUoPbdAjTWsyBBS/HYGOuIno1XqXJch5fqzp9AVZsadeXRuhxtN9FA==
+"@react-admin/ra-navigation@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.1.tgz#7f8d48d69ea6c84b2d3f9e2fd00aca1d41aa3877"
+  integrity sha512-AFCVZjWOfgR2mv3fyzA5xOKo6/w8H+BagMxYvDj2Gn6YDvWCnB/+TMhRQDyyC2mGZg2QG5cj9hd45dOck8velw==
 
 "@react-admin/ra-preferences@^1.0.1":
   version "1.0.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.1.tgz#94fdd40305c61037d00e8511a5f0ece1d861323b"
   integrity sha512-EneOl6unXmEJw9pt/2GGQLybGif8WplwSRCl+lwAxKkp8K+c47+NxerHm4rzG+vcn2aSTWYHA3qKRqL0XZHXyg==
 
-"@react-admin/ra-realtime@^1.0.5":
+"@react-admin/ra-realtime@^1.0.4":
   version "1.0.5"
   resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.0.5.tgz#3f95756f6352e8baf1f51999d65383af32f4bf8a"
   integrity sha512-c5Pk943gbsYPF67wKW5kelmU0pm0GIYAQh29nG5VzEpe/26ZwrFbYGBOCD8Q6c5TLRQRCVBzoqVvMZinye/7xQ==
