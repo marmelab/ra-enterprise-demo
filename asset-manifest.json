@@ -4,17 +4,17 @@
     "main.js": "/ra-enterprise-demo/static/js/main.889b6369.chunk.js",
     "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.5d6bb614.js",
     "static/css/2.5c4dc53a.chunk.css": "/ra-enterprise-demo/static/css/2.5c4dc53a.chunk.css",
-    "static/js/2.e9ad986d.chunk.js": "/ra-enterprise-demo/static/js/2.e9ad986d.chunk.js",
+    "static/js/2.7b6d285e.chunk.js": "/ra-enterprise-demo/static/js/2.7b6d285e.chunk.js",
     "index.html": "/ra-enterprise-demo/index.html",
-    "precache-manifest.8d69d825defb7c01bb84ddc9811b897e.js": "/ra-enterprise-demo/precache-manifest.8d69d825defb7c01bb84ddc9811b897e.js",
+    "precache-manifest.43a462c7dd2489c7803553e02d6822bd.js": "/ra-enterprise-demo/precache-manifest.43a462c7dd2489c7803553e02d6822bd.js",
     "service-worker.js": "/ra-enterprise-demo/service-worker.js",
-    "static/js/2.e9ad986d.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.e9ad986d.chunk.js.LICENSE.txt",
+    "static/js/2.7b6d285e.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.7b6d285e.chunk.js.LICENSE.txt",
     "static/media/welcome_illustration.svg": "/ra-enterprise-demo/static/media/welcome_illustration.87ada4be.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.5d6bb614.js",
     "static/css/2.5c4dc53a.chunk.css",
-    "static/js/2.e9ad986d.chunk.js",
+    "static/js/2.7b6d285e.chunk.js",
     "static/css/main.af3584c1.chunk.css",
     "static/js/main.889b6369.chunk.js"
   ]
