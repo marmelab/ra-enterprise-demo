@@ -1496,10 +1496,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.1.tgz#94fdd40305c61037d00e8511a5f0ece1d861323b"
   integrity sha512-EneOl6unXmEJw9pt/2GGQLybGif8WplwSRCl+lwAxKkp8K+c47+NxerHm4rzG+vcn2aSTWYHA3qKRqL0XZHXyg==
 
-"@react-admin/ra-realtime@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.0.4.tgz#711f7193b35b6ec4f55d2d908f21b7ec08bbbed1"
-  integrity sha512-3apwvFOUZOgOIPkZ5/5Ax61xzWPinSzoxXIujw5Y1QYdLC4TIfrKpNseqJNdFmpA53nv8ii21fRWeztuicsOfA==
+"@react-admin/ra-realtime@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.0.5.tgz#3f95756f6352e8baf1f51999d65383af32f4bf8a"
+  integrity sha512-c5Pk943gbsYPF67wKW5kelmU0pm0GIYAQh29nG5VzEpe/26ZwrFbYGBOCD8Q6c5TLRQRCVBzoqVvMZinye/7xQ==
   dependencies:
     event-source-polyfill "^1.0.15"
     lodash.debounce "4.0.8"
