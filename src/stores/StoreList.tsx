@@ -1,10 +1,17 @@
-import React from 'react';
-import { List, DateField, DateInput, TextField, TextInput } from 'react-admin';
+import React, { FC } from 'react';
+import {
+    List,
+    ListActions,
+    DateField,
+    DateInput,
+    TextField,
+    TextInput,
+} from 'react-admin';
 
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
 import { makeStyles } from '@material-ui/core';
 
-const StoreForm = props => (
+const StoreForm: FC = props => (
     <RowForm {...props}>
         <TextField source="id" />
         {/* eslint-disable-next-line */}
@@ -15,11 +22,24 @@ const StoreForm = props => (
     </RowForm>
 );
 
-export const StoreList = (props: any) => {
+const StoreListActions: FC = props => {
+    const classes = useListActionsStyles();
+    return <ListActions {...props} className={classes.root} />;
+};
+
+const useListActionsStyles = makeStyles(theme => ({
+    root: {
+        paddingBottom: 0,
+        paddingTop: theme.spacing(4),
+    },
+}));
+
+export const StoreList: FC = (props: any) => {
     const classes = useStyles();
     return (
         <List
             {...props}
+            actions={<StoreListActions />}
             className={classes.root}
             hasCreate
             empty={false}
@@ -43,6 +63,6 @@ export const StoreList = (props: any) => {
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: -theme.spacing(6),
+        marginTop: -theme.spacing(7),
     },
 }));
