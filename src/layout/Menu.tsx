@@ -46,7 +46,7 @@ interface Props {
 const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
 const formerCustomerFilter = { last_seen_lte: '2020-06-30T22:00:00.000Z' };
 
-const useResourceChangeCounter = (resource: string) => {
+const useResourceChangeCounter = (resource: string): number => {
     const match = useAppLocationMatcher();
     const location = useResourceAppLocation();
     const [countEvent, setCountEvent] = useState(0);
@@ -120,7 +120,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
                 exact
                 icon={<DashboardIcon />}
                 onClick={onMenuClick}
-                label="Dashboard"
+                label="ra.page.dashboard"
             />
             <MenuItemCategory
                 classes={menuItemCategoryClasses}
@@ -244,7 +244,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
 
 export default Menu;
 
-const AudienceMenu = ({ onMenuClick }) => {
+const AudienceMenu: FC<{ onMenuClick: () => void }> = ({ onMenuClick }) => {
     const translate = useTranslate();
 
     return (
