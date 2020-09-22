@@ -8,6 +8,7 @@ import {
     sanitizeListRestProps,
     ExportButton,
 } from 'react-admin';
+import classnames from 'classnames';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +26,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+    root: {
+        paddingBottom: 0,
+        paddingTop: theme.spacing(4),
+    },
     menuPaper: {
         padding: '1rem 0',
     },
@@ -49,7 +54,7 @@ const useStyles = makeStyles({
         margin: 0,
         background: '#eee',
     },
-});
+}));
 
 const ToolContainer = forwardRef(({ children }, ref) => {
     const classes = useStyles();
@@ -157,7 +162,10 @@ const Actions = ({
     const hasTools = hasColumnsSelector || hasViewSelector;
 
     return (
-        <TopToolbar className={className} {...sanitizeListRestProps(rest)}>
+        <TopToolbar
+            className={classnames(className, classes.root)}
+            {...sanitizeListRestProps(rest)}
+        >
             {filters &&
                 cloneElement(filters, {
                     resource,

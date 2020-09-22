@@ -21,7 +21,7 @@ import MobileGrid from './MobileGrid';
 import DesktopGrid from './DesktopGrid';
 import VisitorListAside from './VisitorListAside';
 
-const VisitorFilter = (props: any) => (
+const VisitorFilter: FC = (props: any) => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
         <DateInput source="last_seen_gte" />
@@ -46,7 +46,7 @@ const visitorListColumn = {
     segments: <SegmentsField />,
 };
 
-const VisitorList = (props: any) => {
+const VisitorList: FC = (props: any) => {
     const isXsmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('xs')
     );
@@ -58,7 +58,7 @@ const VisitorList = (props: any) => {
     return (
         <EnterpriseList
             {...props}
-            className={classes.root}
+            classes={classes}
             preferenceKey="visitors.list"
             hasColumnsSelector
             defaultColumns={visitorListColumn}
@@ -78,7 +78,7 @@ const VisitorList = (props: any) => {
                 hasEdit,
                 hasCreate,
                 ...rest
-            }) => {
+            }): JSX.Element => {
                 if (isXsmall) {
                     return <MobileGrid />;
                 }
@@ -99,6 +99,6 @@ export default VisitorList;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: -theme.spacing(6),
+        marginTop: -theme.spacing(7),
     },
 }));

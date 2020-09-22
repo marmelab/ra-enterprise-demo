@@ -69,14 +69,25 @@ export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
     </Filter>
 );
 
-const ListActions: FC<any> = ({ isSmall }) => (
-    <TopToolbar>
-        {isSmall && <ProductFilter context="button" />}
-        <SortButton fields={['reference', 'sales', 'stock']} />
-        <CreateButton basePath="/products" />
-        <ExportButton />
-    </TopToolbar>
-);
+const ListActions: FC<any> = ({ isSmall }) => {
+    const classes = useListActionsStyles();
+
+    return (
+        <TopToolbar className={classes.root}>
+            {isSmall && <ProductFilter context="button" />}
+            <SortButton fields={['reference', 'sales', 'stock']} />
+            <CreateButton basePath="/products" />
+            <ExportButton />
+        </TopToolbar>
+    );
+};
+
+const useListActionsStyles = makeStyles(theme => ({
+    root: {
+        paddingBottom: 0,
+        paddingTop: theme.spacing(4),
+    },
+}));
 
 const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
     useDefineAppLocation('catalog.products');
@@ -145,6 +156,6 @@ export default ProductList;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        marginTop: -theme.spacing(6),
+        marginTop: -theme.spacing(7),
     },
 }));
