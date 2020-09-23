@@ -12,7 +12,7 @@
         "@react-admin/ra-preferences": "^1.0.1",
         "@react-admin/ra-realtime": "^1.0.4",
         "@react-admin/ra-tour": "^1.0.1",
-        "@react-admin/ra-tree": "^1.1.1",
+        "@react-admin/ra-tree": "^1.2.1",
         "data-generator-retail": "^3.8.3",
         "fakerest": "~2.1.0",
         "fetch-mock": "~9.4.0",
