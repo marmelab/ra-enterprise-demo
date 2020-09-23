@@ -7,7 +7,10 @@ interface PromptProps {
     save?: (data) => {};
 }
 
-const Prompt: FC<PromptProps> = ({ save = () => undefined, record = {} }) => {
+const Prompt: FC<PromptProps> = ({
+    save = (): any => undefined,
+    record = {},
+}) => {
     useEffect(() => {
         const result = window.prompt('Category', record.name);
         save({ ...record, name: result, children: [], isRoot: true });
@@ -16,11 +19,11 @@ const Prompt: FC<PromptProps> = ({ save = () => undefined, record = {} }) => {
     return null;
 };
 
-const CategoryCreate = props => {
+const CategoryCreate: FC<any> = props => {
     const refresh = useRefresh();
     const redirect = useRedirect();
 
-    const onSuccess = () => {
+    const onSuccess = (): void => {
         redirect(props.basePath);
         refresh();
     };

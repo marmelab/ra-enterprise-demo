@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useTranslate } from 'ra-core';
+import { Identifier, useTranslate } from 'ra-core';
 import {
     ListActionsProps,
     TopToolbar,
@@ -7,13 +7,14 @@ import {
     ExportButton,
     SortButton,
 } from 'ra-ui-materialui';
-import { Edit, SimpleForm, TextInput } from 'react-admin';
+import { Edit, TextInput } from 'react-admin';
+import { SimpleForm } from '@react-admin/ra-tree';
 
 import ProductList from '../products/ProductList';
 import { Typography, makeStyles } from '@material-ui/core';
-import { EditComponentProps } from '../types';
+import { EditComponentProps, ListComponentProps } from '../types';
 
-const CategoryEdit = props => {
+const CategoryEdit: FC<EditComponentProps> = props => {
     const translate = useTranslate();
     const classes = useStyles();
 
@@ -32,7 +33,10 @@ const CategoryEdit = props => {
     );
 };
 
-const CategoryEditAside: FC<EditComponentProps> = ({ id, ...rest }) => (
+const CategoryEditAside: FC<ListComponentProps & { id: Identifier }> = ({
+    id,
+    ...rest
+}) => (
     <ProductList
         {...rest}
         title=" "

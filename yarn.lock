@@ -1535,13 +1535,12 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.1.1.tgz#a8074e7d15d03ac07e3055d3c60fb812952ca596"
-  integrity sha512-Ib7liB06wHJxMYBIreYArA2zdc3YmADd4ZvBA7bTJwdzoyZGXiMZFQSQA2F1jU6/sotpemitPiKSQFEC//D5AQ==
+"@react-admin/ra-tree@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.1.tgz#ecb49d1ac4d8687bc26cbb9b9fe9151c49774392"
+  integrity sha512-mmgz+1fuRT1M0aBnu5HD2xaptNuWbEdU0hCT/Dp/pvpXJ0s2x5SZOwpOmP0Z+ac7dh2dH0k51XHyENs6gV7bFA==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
-    lodash "^4.17.19"
     prop-types "^15.6.1"
     rc-tree "^3.1.5"
     react-dnd "^5.0.0"
