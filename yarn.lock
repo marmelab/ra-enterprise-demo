@@ -1499,12 +1499,13 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.3.tgz#57613d10d2be61d4f53a22259a7cd7609411e95e"
   integrity sha512-vmv3X5KD23c4SaTgY+E0qYEpS9xHWWsC7l7OsV907BBSPrPiOoUwGdSmIImVgzsNm6hVeyxhNgjWgrVZFA9DAA==
 
-"@react-admin/ra-enterprise@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.0.1.tgz#c32a127df67a135277f4ae180f983bbf94c26423"
-  integrity sha512-5Oigyl8Agx7naDc6KDT7QZ+xWCaKZgZ81X/OqtsmgtU2WglYeP6MpEgvO4L3IjeMNanSVRKcIDZahdOhZ/Uu7Q==
+"@react-admin/ra-enterprise@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.0.2.tgz#f8ca6c6e5ca0e3664719136b7f6c703af4df4f0c"
+  integrity sha512-WJgMeUbWwqQOugsZ26SDfKdi7udVU7lhOR+m1SVW71mvE5iBf0HD6wwFJ15EQkGKIySr8nlSnygLsPZYiqDiUA==
   dependencies:
     "@react-admin/ra-editable-datagrid" "^1.0.0"
+    "@react-admin/ra-form-layout" "^1.0.0"
     "@react-admin/ra-markdown" "^1.0.0"
     "@react-admin/ra-navigation" "^1.0.0"
     "@react-admin/ra-preferences" "^1.0.0"
@@ -1512,6 +1513,11 @@
     "@react-admin/ra-relationships" "^1.0.0"
     "@react-admin/ra-tour" "^1.0.0"
     "@react-admin/ra-tree" "^1.0.0"
+
+"@react-admin/ra-form-layout@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.0.1.tgz#8330c7cbc49c3a610b9265467a14585b3f664297"
+  integrity sha512-1mOH7t24urnKRaaCPqxUlPxacbcvZvCXMsuDhlZWMXn/Xxm1yTdBLBiJvwr30BxN6gH2KO2bsJt1Z6FNd+Tt0A==
 
 "@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.0.2":
   version "1.0.2"
