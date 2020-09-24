@@ -1,19 +1,7 @@
-import React, { useEffect } from 'react';
-import { Admin, Resource, mergeTranslations } from 'react-admin';
-import polyglotI18nProvider from 'ra-i18n-polyglot';
-import { PreferencesBasedThemeProvider } from '@react-admin/ra-preferences';
+import React, { FC, useEffect } from 'react';
+import { Resource } from 'react-admin';
 
-import {
-    reducer as tree,
-    raTreeLanguageFrench,
-    raTreeLanguageEnglish,
-} from '@react-admin/ra-tree';
-
-import {
-    raRealTimeLanguageEnglish,
-    raRealTimeLanguageFrench,
-    reducer as locks,
-} from '@react-admin/ra-realtime';
+import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 
 import './App.css';
 
@@ -39,53 +27,48 @@ import dataProvider from './dataProvider';
 import fakeServer from './fakeServer';
 
 const messages = {
-    en: [raTreeLanguageEnglish, raRealTimeLanguageEnglish, englishMessages],
-    fr: [raTreeLanguageFrench, raRealTimeLanguageFrench, frenchMessages],
+    en: englishMessages,
+    fr: frenchMessages,
 };
 
-const i18nProvider = polyglotI18nProvider(
-    locale => mergeTranslations(...messages[locale]),
-    'en'
-);
+const i18nProvider = buildI18nProvider(messages, 'en');
 
-const App = () => {
+const App: FC = () => {
     useEffect(() => {
         const restoreFetch = fakeServer();
-        return () => {
+        return (): void => {
             restoreFetch();
         };
     }, []);
 
     return (
-        <PreferencesBasedThemeProvider
-            themeFromType={type => (type === 'dark' ? darkTheme : lightTheme)}
+        <Admin
+            title=""
+            dataProvider={dataProvider}
+            customRoutes={customRoutes}
+            authProvider={authProvider}
+            dashboard={Dashboard}
+            loginPage={Login}
+            layout={Layout}
+            i18nProvider={i18nProvider}
+            // Ra-enterprise confirguration
+            lightTheme={lightTheme}
+            darkTheme={darkTheme}
         >
-            <Admin
-                title=""
-                dataProvider={dataProvider}
-                customRoutes={customRoutes}
-                customReducers={{ tree, locks }}
-                authProvider={authProvider}
-                dashboard={Dashboard}
-                loginPage={Login}
-                layout={Layout}
-                i18nProvider={i18nProvider}
-            >
-                <Resource name="customers" {...visitors} />
-                <Resource
-                    name="commands"
-                    {...orders}
-                    options={{ label: 'Orders' }}
-                />
-                <Resource name="invoices" {...invoices} />
-                <Resource name="products" {...products} />
-                <Resource name="categories" {...categories} />
-                <Resource name="reviews" {...reviews} />
-                <Resource name="stores" {...stores} />
-                <Resource name="tours" {...tours} />
-                <Resource name="locks" />
-            </Admin>
-        </PreferencesBasedThemeProvider>
+            <Resource name="customers" {...visitors} />
+            <Resource
+                name="commands"
+                {...orders}
+                options={{ label: 'Orders' }}
+            />
+            <Resource name="invoices" {...invoices} />
+            <Resource name="products" {...products} />
+            <Resource name="categories" {...categories} />
+            <Resource name="reviews" {...reviews} />
+            <Resource name="stores" {...stores} />
+            <Resource name="tours" {...tours} />
+            <Resource name="locks" />
+        </Admin>
     );
 };
 
