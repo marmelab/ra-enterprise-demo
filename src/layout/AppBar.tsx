@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { AppBar, useQuery, useVersion } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const CustomAppBar = (props: any) => {
+const CustomAppBar: FC = props => {
     const classes = useStyles();
 
     const version = useVersion();
