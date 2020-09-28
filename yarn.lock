@@ -1570,10 +1570,10 @@
     react-dnd "^5.0.0"
     react-dnd-touch-backend "^0.5.1"
 
-"@react-admin/ra-tree@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.2.tgz#060c6dc322cfc0a250986424024d73663e5aaca2"
-  integrity sha512-Xeeyii2TKvgwWXfahH4zs4vKNj0zv/8+YubZetpDchX6JglZd/sTenLKp4o63aT160QPoqQYXxhSWWbv7FLElA==
+"@react-admin/ra-tree@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.4.tgz#92110b1cf450c37511ac4996c4ecd445802752d8"
+  integrity sha512-iSKpZmWpki3tX2JV6jEp8LsBBTCLI5BmQp78sVBSJM40ku1sIgUTJgzB+mK8Q6Z0v/IzEBiYis6sD+L2CuvqzA==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
     prop-types "^15.6.1"
