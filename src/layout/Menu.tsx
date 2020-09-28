@@ -183,7 +183,6 @@ const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
             />
             <MenuItemCategory
                 classes={menuItemCategoryClasses}
-                to={`/customers`}
                 name="audience"
                 icon={<visitors.icon />}
                 onClick={onMenuClick}
