@@ -1559,18 +1559,7 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.0.0":
-  version "1.2.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.1.tgz#ecb49d1ac4d8687bc26cbb9b9fe9151c49774392"
-  integrity sha512-mmgz+1fuRT1M0aBnu5HD2xaptNuWbEdU0hCT/Dp/pvpXJ0s2x5SZOwpOmP0Z+ac7dh2dH0k51XHyENs6gV7bFA==
-  dependencies:
-    "@atlaskit/tree" "^6.0.5"
-    prop-types "^15.6.1"
-    rc-tree "^3.1.5"
-    react-dnd "^5.0.0"
-    react-dnd-touch-backend "^0.5.1"
-
-"@react-admin/ra-tree@^1.2.4":
+"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.2.4":
   version "1.2.4"
   resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.4.tgz#92110b1cf450c37511ac4996c4ecd445802752d8"
   integrity sha512-iSKpZmWpki3tX2JV6jEp8LsBBTCLI5BmQp78sVBSJM40ku1sIgUTJgzB+mK8Q6Z0v/IzEBiYis6sD+L2CuvqzA==
