@@ -56,11 +56,7 @@ const App: FC = () => {
             darkTheme={darkTheme}
         >
             <Resource name="customers" {...visitors} />
-            <Resource
-                name="commands"
-                {...orders}
-                options={{ label: 'Orders' }}
-            />
+            <Resource name="commands" {...orders} />
             <Resource name="invoices" {...invoices} />
             <Resource name="products" {...products} />
             <Resource name="categories" {...categories} />
