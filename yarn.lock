@@ -1494,12 +1494,32 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@react-admin/ra-editable-datagrid@^1.0.3":
+"@react-admin/ra-editable-datagrid@^1.0.0", "@react-admin/ra-editable-datagrid@^1.0.3":
   version "1.0.3"
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.3.tgz#57613d10d2be61d4f53a22259a7cd7609411e95e"
   integrity sha512-vmv3X5KD23c4SaTgY+E0qYEpS9xHWWsC7l7OsV907BBSPrPiOoUwGdSmIImVgzsNm6hVeyxhNgjWgrVZFA9DAA==
 
-"@react-admin/ra-markdown@^1.0.2":
+"@react-admin/ra-enterprise@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.0.3.tgz#7858c1de8f71f0b0182800f063d4935a910522e9"
+  integrity sha512-1NSkIHFQKLrbIM1Cgb1hYOFr03WWdN4sOd8k63cMLgRi102CouGAyARbD6Ws/v6rNv7qCbi9npz+Hi62zRmD/g==
+  dependencies:
+    "@react-admin/ra-editable-datagrid" "^1.0.0"
+    "@react-admin/ra-form-layout" "^1.0.0"
+    "@react-admin/ra-markdown" "^1.0.0"
+    "@react-admin/ra-navigation" "^1.0.0"
+    "@react-admin/ra-preferences" "^1.0.0"
+    "@react-admin/ra-realtime" "^1.0.0"
+    "@react-admin/ra-relationships" "^1.0.0"
+    "@react-admin/ra-tour" "^1.0.0"
+    "@react-admin/ra-tree" "^1.0.0"
+
+"@react-admin/ra-form-layout@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.0.1.tgz#8330c7cbc49c3a610b9265467a14585b3f664297"
+  integrity sha512-1mOH7t24urnKRaaCPqxUlPxacbcvZvCXMsuDhlZWMXn/Xxm1yTdBLBiJvwr30BxN6gH2KO2bsJt1Z6FNd+Tt0A==
+
+"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.0.2":
   version "1.0.2"
   resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.0.2.tgz#49bb572afc72ddae7530e4b63e1c25d5442feedd"
   integrity sha512-Fy2IhJN9TwAVNm4e8zAXVtEBz+lxq+QvGh0RP7XMpmXjun0QUU5bxAeJFfemutQb781j5cfEIVzjC0TEKsk0Ew==
@@ -1507,27 +1527,36 @@
     "@toast-ui/react-editor" "^2.2.0"
     lodash "^4.17.19"
 
-"@react-admin/ra-navigation@^1.1.1":
+"@react-admin/ra-navigation@^1.0.0":
   version "1.1.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.1.tgz#7f8d48d69ea6c84b2d3f9e2fd00aca1d41aa3877"
   integrity sha512-AFCVZjWOfgR2mv3fyzA5xOKo6/w8H+BagMxYvDj2Gn6YDvWCnB/+TMhRQDyyC2mGZg2QG5cj9hd45dOck8velw==
 
-"@react-admin/ra-preferences@^1.0.1":
+"@react-admin/ra-navigation@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.2.tgz#ed9db2b45e86c1e98659341bda1a288318d58945"
+  integrity sha512-4Xnwiyc6qG1te4LCszycSNtspmaeygCebnw1ppwwZBIPEWuZ6reZr2HqVV4Y5E6JgXIDIVjhpoTdXRhMJpRa5A==
+
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.0.1":
   version "1.0.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.1.tgz#94fdd40305c61037d00e8511a5f0ece1d861323b"
   integrity sha512-EneOl6unXmEJw9pt/2GGQLybGif8WplwSRCl+lwAxKkp8K+c47+NxerHm4rzG+vcn2aSTWYHA3qKRqL0XZHXyg==
 
-"@react-admin/ra-realtime@^1.0.4":
-  version "1.0.5"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.0.5.tgz#3f95756f6352e8baf1f51999d65383af32f4bf8a"
-  integrity sha512-c5Pk943gbsYPF67wKW5kelmU0pm0GIYAQh29nG5VzEpe/26ZwrFbYGBOCD8Q6c5TLRQRCVBzoqVvMZinye/7xQ==
+"@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.1.0.tgz#a452cc3e5b6fc3c7e13f377886c70ce8378cb6ba"
+  integrity sha512-Epsw2VX5Baq2d6yWF0W1jbR1kXluhii3587L5ka0Z+UtGERXYwNh7r7Ku0oxBKCX9QtQr4nKrZm1f0/BOfXPsg==
   dependencies:
     event-source-polyfill "^1.0.15"
-    lodash.debounce "4.0.8"
     querystring "^0.2.0"
     whatwg-fetch "^3.0.0"
 
-"@react-admin/ra-tour@^1.0.1":
+"@react-admin/ra-relationships@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-1.0.0.tgz#8723dee9298c5ebdd992c45fa3fc36405f259733"
+  integrity sha512-DDoNhGhkdpImjT6DQ9LhjWPiiilvkKu2GeJYo47QNmJ1KIIZJWyy++H88U78Zo7+qTKwUfuYrTk9DC+EfTzl3g==
+
+"@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.0.1":
   version "1.0.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.0.1.tgz#d3ddc81ba47813f1bba1dcf9fdaee3d8efdc980b"
   integrity sha512-mrlUbQMFKOJcnaAAXzXdMcR1RZKs393fG8bt46IplRLk7ep12WKJd7tC2+nlXL5jjxhZf5m7O6SeU+361abj3Q==
@@ -1535,10 +1564,21 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.2.1":
+"@react-admin/ra-tree@^1.0.0":
   version "1.2.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.1.tgz#ecb49d1ac4d8687bc26cbb9b9fe9151c49774392"
   integrity sha512-mmgz+1fuRT1M0aBnu5HD2xaptNuWbEdU0hCT/Dp/pvpXJ0s2x5SZOwpOmP0Z+ac7dh2dH0k51XHyENs6gV7bFA==
+  dependencies:
+    "@atlaskit/tree" "^6.0.5"
+    prop-types "^15.6.1"
+    rc-tree "^3.1.5"
+    react-dnd "^5.0.0"
+    react-dnd-touch-backend "^0.5.1"
+
+"@react-admin/ra-tree@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.2.tgz#060c6dc322cfc0a250986424024d73663e5aaca2"
+  integrity sha512-Xeeyii2TKvgwWXfahH4zs4vKNj0zv/8+YubZetpDchX6JglZd/sTenLKp4o63aT160QPoqQYXxhSWWbv7FLElA==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
     prop-types "^15.6.1"
@@ -8123,7 +8163,7 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
-lodash.debounce@4.0.8, lodash.debounce@^4.0.8:
+lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=

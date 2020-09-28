@@ -1,9 +1,11 @@
-export const darkTheme = {
+import { ThemeOptions } from '@react-admin/ra-enterprise';
+
+export const darkTheme: ThemeOptions = {
     palette: {
+        type: 'dark', // Switching the dark mode on is a single property value change.
         primary: {
             main: '#90caf9',
         },
-        type: 'dark', // Switching the dark mode on is a single property value change.
     },
     overrides: {
         RaAppBar: {
@@ -50,8 +52,9 @@ export const darkTheme = {
     },
 };
 
-export const lightTheme = {
+export const lightTheme: ThemeOptions = {
     palette: {
+        type: 'light',
         primary: {
             main: '#4f3cc9',
         },
