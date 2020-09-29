@@ -1,25 +1,3 @@
-const fakeLocks = Array(100)
-    .fill(0)
-    .filter((_, i) => i % (1 + Math.floor(Math.random() * 6)) === 0)
-    .map((_, i) => ({
-        id: i,
-        resource: 'products',
-        recordId: i + 1,
-        identity: [
-            'Stacey Warner',
-            'Jasmine Morgan',
-            'Constance Bullock',
-            'Talia King',
-            'Haleema Andrews',
-            'Laila Robinson',
-            'Abigail Bryan',
-            'Felix Mccoy',
-            'Charlie Bradshaw',
-            'Yasmine Hoffman',
-        ][i % 10],
-        createdAt: new Date(),
-    }));
-
 export default {
     categories: [
         {
@@ -63,7 +41,6 @@ export default {
         { id: 110, name: 'travel', isRoot: false, children: [] },
         { id: 120, name: 'water', isRoot: false, children: [] },
     ],
-    locks: fakeLocks,
     stores: [
         {
             id: 0,
@@ -108,4 +85,5 @@ export default {
             created_at: new Date(2008, 7, 15),
         },
     ],
+    locks: [],
 };
