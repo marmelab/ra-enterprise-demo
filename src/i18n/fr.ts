@@ -250,6 +250,9 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     created_at: 'Ouvert le',
                 },
             },
+            locks: {
+                overlay: "En cours d'édition par %{name}",
+            },
         },
     }
 );

@@ -244,6 +244,9 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     created_at: 'Created at',
                 },
             },
+            locks: {
+                overlay: 'Currently Edited by %{name}',
+            },
         },
     }
 );
