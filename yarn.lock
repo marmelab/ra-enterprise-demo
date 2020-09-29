@@ -1499,10 +1499,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.3.tgz#57613d10d2be61d4f53a22259a7cd7609411e95e"
   integrity sha512-vmv3X5KD23c4SaTgY+E0qYEpS9xHWWsC7l7OsV907BBSPrPiOoUwGdSmIImVgzsNm6hVeyxhNgjWgrVZFA9DAA==
 
-"@react-admin/ra-enterprise@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.0.3.tgz#7858c1de8f71f0b0182800f063d4935a910522e9"
-  integrity sha512-1NSkIHFQKLrbIM1Cgb1hYOFr03WWdN4sOd8k63cMLgRi102CouGAyARbD6Ws/v6rNv7qCbi9npz+Hi62zRmD/g==
+"@react-admin/ra-enterprise@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.0.4.tgz#f09d17b0a4bfaabdd7259a56881d035affbdd0c5"
+  integrity sha512-IlybH3Qxi3ZKYeuuEcS8+78TBmoRotBvZ7yV55Y/3ZWVipIBKsqCot7jh+yOMK9kf2hM8KNnP0cyr4kP6TYvXQ==
   dependencies:
     "@react-admin/ra-editable-datagrid" "^1.0.0"
     "@react-admin/ra-form-layout" "^1.0.0"
@@ -1527,10 +1527,10 @@
     "@toast-ui/react-editor" "^2.2.0"
     lodash "^4.17.19"
 
-"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.2.tgz#ed9db2b45e86c1e98659341bda1a288318d58945"
-  integrity sha512-4Xnwiyc6qG1te4LCszycSNtspmaeygCebnw1ppwwZBIPEWuZ6reZr2HqVV4Y5E6JgXIDIVjhpoTdXRhMJpRa5A==
+"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.3.tgz#ad36180d98b272491c79fbb5fe8fff3d2b6d28a2"
+  integrity sha512-ZCHkhXa7BIH+Jh7VtTaI5zQGATydzwoTckjfMm1YoPne42SnNBwKADk3xqil0KY6zmYmHZM4bxgIHHJAK48j6Q==
 
 "@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.0.1":
   version "1.0.1"
