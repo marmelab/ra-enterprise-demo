@@ -154,6 +154,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
             products: {
                 name: 'Poster |||| Posters',
                 fields: {
+                    id: 'Identifiant',
                     category_id: 'Catégorie',
                     height_gte: 'Hauteur mini',
                     height_lte: 'Hauteur maxi',
@@ -249,6 +250,9 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     address: 'Adresse',
                     created_at: 'Ouvert le',
                 },
+            },
+            locks: {
+                overlay: "En cours d'édition par %{name}",
             },
         },
     }

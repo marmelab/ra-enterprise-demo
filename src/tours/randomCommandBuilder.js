@@ -1,7 +1,11 @@
+/**
+ * Generate random commands
+ *
+ * This generator assumes that:
+ * - Customer ids exist until 50
+ * - Product ids exist until 20
+ */
 const randomCommandBuilder = batchLevel => {
-    //This generator assume that:
-    // - Customers id exists until 50
-    // - Products id exists until 20
     const basket = new Array(Math.round(Math.random() * 2) + 1).map(() => ({
         product_id: Math.round(Math.random() * 20),
         quantity: Math.round(Math.random() * 2) + 1,

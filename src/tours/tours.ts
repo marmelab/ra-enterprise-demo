@@ -1,6 +1,7 @@
 import { TourType } from '@react-admin/ra-tour';
 import { fireEvent } from '@testing-library/react';
 import randomCommandBuilder from './randomCommandBuilder';
+import { generateIdentity } from './randomLockBuilder';
 
 const getRandomInt = (min, max) => {
     min = Math.ceil(min);
@@ -278,16 +279,43 @@ const tours: { [id: string]: TourType } = {
                 target: '[data-testid=order-ordered-datagrid]',
                 content:
                     "And newest orders even appear while you're on the page",
-                after: ({ redirect }) => {
-                    redirect('/products');
+                after: async ({ dataProvider, dispatch, redirect }) => {
+                    // Generate a lock on Products #1, #2 and #5
+                    await Promise.all(
+                        [1, 2, 5].map(recordId => {
+                            return dataProvider
+                                .lock('products', {
+                                    recordId,
+                                    identity: generateIdentity(),
+                                })
+                                .then(({ data: lock }) => {
+                                    dispatch({
+                                        type: 'RA/LOCK_SUCCESS',
+                                        payload: {
+                                            data: lock,
+                                        },
+                                        meta: {
+                                            fetchResponse: 'RA/LOCK',
+                                            resource: 'products',
+                                            recordId,
+                                        },
+                                    });
+                                });
+                        })
+                    );
+
+                    // Sort by id because the locked product has the id #0
+                    redirect('/products?order=ASC&page=1&perPage=20&sort=id');
                 },
             },
             {
                 before: async ({ dataProvider, dispatch }) => {
                     await timeout(100);
 
+                    // Unlock the Products #1 after a few seconds
+
                     const lockTile = global.document.querySelector(
-                        '[data-testid=productlocktile]'
+                        '[data-productid="1"]'
                     );
 
                     if (lockTile instanceof HTMLElement) {
@@ -323,6 +351,42 @@ const tours: { [id: string]: TourType } = {
                 target: '[data-testid=productlocktile]',
                 content:
                     'You can lock resources in realtime (this one will be unlocked in a few seconds)',
+                after: async ({ dataProvider, dispatch, refresh }) => {
+                    // Reset the locks on Products #2 and #5
+                    // The lock on Procuct #1 has been deleted during the scenario
+                    await Promise.all(
+                        [2, 5].map(recordId => {
+                            const lockTile = global.document.querySelector(
+                                `[data-productid="${recordId}"]`
+                            );
+                            if (lockTile instanceof HTMLElement) {
+                                const identity = lockTile.dataset.lockidentity;
+
+                                return dataProvider
+                                    .unlock('products', {
+                                        recordId,
+                                        identity,
+                                    })
+                                    .then(({ data: lock }) => {
+                                        dispatch({
+                                            type: 'RA/UNLOCK_SUCCESS',
+                                            payload: {
+                                                data: lock,
+                                            },
+                                            meta: {
+                                                fetchResponse: 'RA/UNLOCK',
+                                                resource: 'products',
+                                                recordId,
+                                            },
+                                        });
+                                    });
+                            }
+                            return Promise.resolve();
+                        })
+                    ).then(() => {
+                        refresh();
+                    });
+                },
             },
         ],
         after: async ({ dataProvider, refresh }) => {

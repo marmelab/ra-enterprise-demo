@@ -6,11 +6,12 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { WithWidth } from '@material-ui/core/withWidth';
 import { linkToRecord, NumberField, useListContext } from 'react-admin';
+import { Record } from 'ra-core';
 import { Link } from 'react-router-dom';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 import { Lock, useHasLocks } from '@react-admin/ra-realtime';
-import LockIcon from '@material-ui/icons/Lock';
 
+import { LockOverlay } from './LockOverlay';
 import { DatagridProps, Product } from '../types';
 
 const useStyles = makeStyles(theme => ({
@@ -19,20 +20,6 @@ const useStyles = makeStyles(theme => ({
     },
     tile: {
         position: 'relative',
-    },
-    lockOverlay: {
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        background: 'rgba(0, 0, 0, 0.9)',
-        position: 'absolute',
-        textAlign: 'center',
-        color: 'white',
-        padding: '25% 0',
-    },
-    lockIdentity: {
-        paddingTop: '1em',
     },
     tileBar: {
         background:
@@ -51,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const getColsForWidth = (width: Breakpoint) => {
+const getColsForWidth = (width: Breakpoint): number => {
     if (width === 'xs') return 2;
     if (width === 'sm') return 3;
     if (width === 'md') return 4;
@@ -59,7 +46,7 @@ const getColsForWidth = (width: Breakpoint) => {
     return 6;
 };
 
-const times = (nbChildren: number, fn: (key: number) => any) =>
+const times = (nbChildren: number, fn: (key: number) => any): Array<any> =>
     Array.from({ length: nbChildren }, (_, key) => fn(key));
 
 const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
@@ -83,7 +70,11 @@ const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
     );
 };
 
-const ProductTile = ({ record }) => {
+type ProductTitleProps = {
+    record: Record;
+};
+
+const ProductTile: FC<ProductTitleProps> = ({ record }) => {
     const classes = useStyles();
 
     return (
@@ -109,21 +100,6 @@ const ProductTile = ({ record }) => {
                 }
             />
         </>
-    );
-};
-
-const LockOverlay: FC<any> = ({ lock, ...rest }) => {
-    const classes = useStyles();
-
-    return (
-        <div className={classes.lockOverlay} {...rest}>
-            <LockIcon />
-            <div className={classes.lockIdentity}>
-                Locked by
-                <br />
-                {lock.identity}
-            </div>
-        </div>
     );
 };
 

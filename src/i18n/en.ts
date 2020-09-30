@@ -150,6 +150,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
             products: {
                 name: 'Poster |||| Posters',
                 fields: {
+                    id: 'Identifier',
                     category_id: 'Category',
                     height_gte: 'Min height',
                     height_lte: 'Max height',
@@ -243,6 +244,9 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     address: 'Address',
                     created_at: 'Created at',
                 },
+            },
+            locks: {
+                overlay: 'Currently Edited by %{name}',
             },
         },
     }
