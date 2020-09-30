@@ -1,16 +1,22 @@
+const defaultIdentities = [
+    'Stacey Warner',
+    'Jasmine Morgan',
+    'Gildas Bullock',
+    'Adrien King',
+    'Julien Andrews',
+    'Laila Robinson',
+    'Abigail Bryan',
+    'Felix Mccoy',
+    'Charlie Bradshaw',
+    'Yasmine Hoffman',
+];
+
+export function generateIdentity(identities = defaultIdentities) {
+    return identities[Math.floor(Math.random() * identities.length)];
+}
+
 export function generateLock({ id = 0, resource = 'products', recordId = 0 }) {
-    const identity = [
-        'Stacey Warner',
-        'Jasmine Morgan',
-        'Gildas Bullock',
-        'Adrien King',
-        'Julien Andrews',
-        'Laila Robinson',
-        'Abigail Bryan',
-        'Felix Mccoy',
-        'Charlie Bradshaw',
-        'Yasmine Hoffman',
-    ][Math.floor(Math.random() * 10)];
+    const identity = generateIdentity();
     const createdAt = new Date();
 
     return {
