@@ -1494,10 +1494,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@react-admin/ra-editable-datagrid@^1.0.0", "@react-admin/ra-editable-datagrid@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.3.tgz#57613d10d2be61d4f53a22259a7cd7609411e95e"
-  integrity sha512-vmv3X5KD23c4SaTgY+E0qYEpS9xHWWsC7l7OsV907BBSPrPiOoUwGdSmIImVgzsNm6hVeyxhNgjWgrVZFA9DAA==
+"@react-admin/ra-editable-datagrid@^1.0.0", "@react-admin/ra-editable-datagrid@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.4.tgz#37e8e2f0570dac837be87ad9b3d43aafcd02ea63"
+  integrity sha512-tXmAEtKanscSvFCvNK7d1Px2YMaeqRwUx3BnWQZnPqAS3JOrPyFByYWgpOwnnu/0z6/t/y91WehNrO9jaddyTg==
 
 "@react-admin/ra-enterprise@^0.0.4":
   version "0.0.4"
@@ -1519,28 +1519,27 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.0.1.tgz#8330c7cbc49c3a610b9265467a14585b3f664297"
   integrity sha512-1mOH7t24urnKRaaCPqxUlPxacbcvZvCXMsuDhlZWMXn/Xxm1yTdBLBiJvwr30BxN6gH2KO2bsJt1Z6FNd+Tt0A==
 
-"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.0.2.tgz#49bb572afc72ddae7530e4b63e1c25d5442feedd"
-  integrity sha512-Fy2IhJN9TwAVNm4e8zAXVtEBz+lxq+QvGh0RP7XMpmXjun0QUU5bxAeJFfemutQb781j5cfEIVzjC0TEKsk0Ew==
+"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.0.3.tgz#b99fc24752766cb66131f3bdf013dd801c9e5934"
+  integrity sha512-q0PCYiGKJv9XsYZEOSrEp7Z07bri4sCFgkfAs09NRUys2/UmFr/CcuYoXPmxiaJBWoMuMxxj1pItYVR5aCf7QQ==
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
-    lodash "^4.17.19"
 
-"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.1.3":
+"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.4.tgz#2b30fdf439b2bf5c61ec7a29254e2d4060ced0ec"
+  integrity sha512-f7UdHXHw6ieCHm1ZqHXL98t1JbBdKxWutnaTQzmgP3ai+ZiIZL8HKfcvU1s4imNHu3N7WsXcQTAopcrYjD3KOw==
+
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.2.tgz#a71a3e0eff3d84ed5308efdf9802f8f83716a500"
+  integrity sha512-4pPtRXUBRKdpcaVfIup+OYqEalyIeKsj7yTgcVE9om5JBcnXMVtbLEixKzwIx/lhj8jt9XkrZVboKl9qF9DWSg==
+
+"@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.1.3":
   version "1.1.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.1.3.tgz#ad36180d98b272491c79fbb5fe8fff3d2b6d28a2"
-  integrity sha512-ZCHkhXa7BIH+Jh7VtTaI5zQGATydzwoTckjfMm1YoPne42SnNBwKADk3xqil0KY6zmYmHZM4bxgIHHJAK48j6Q==
-
-"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.1.tgz#94fdd40305c61037d00e8511a5f0ece1d861323b"
-  integrity sha512-EneOl6unXmEJw9pt/2GGQLybGif8WplwSRCl+lwAxKkp8K+c47+NxerHm4rzG+vcn2aSTWYHA3qKRqL0XZHXyg==
-
-"@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.1.1.tgz#9b94dedfe9c20af0313faa620d88770fdf80a8af"
-  integrity sha512-OJeCXUS4lPExM7CDBiLRXxhH8P7zaWC9lN6QssQzbe6LrQ6tNFTiiJKKtWaBcVT7ER2uGx/3XI6vRoj/kfBnvQ==
+  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.1.3.tgz#06b714d053aacd3edfbdf138e2062cc4597360aa"
+  integrity sha512-2/qaeECFR5CX+QhsOLNSKPucVyjvKdy8LrxzseIIHM60FYKKfFz6rBDE4pfpKzVAAAQpAWsSTXtZ4HwUiGXMIA==
   dependencies:
     event-source-polyfill "^1.0.15"
     querystring "^0.2.0"
@@ -1559,10 +1558,10 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.4.tgz#92110b1cf450c37511ac4996c4ecd445802752d8"
-  integrity sha512-iSKpZmWpki3tX2JV6jEp8LsBBTCLI5BmQp78sVBSJM40ku1sIgUTJgzB+mK8Q6Z0v/IzEBiYis6sD+L2CuvqzA==
+"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.2.6.tgz#5c02c7f143d56c1cee81ed9475320c617e75ed5a"
+  integrity sha512-0G4CaMhPCrwbNS41Qe3/O5xlQIu2NeNaIt11p6rrXedjysmoqQYA5hOfCJjK1PAnf4KN6/A86AYnF2xHHSWtSg==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
     prop-types "^15.6.1"
