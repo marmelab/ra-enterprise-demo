@@ -1,6 +1,5 @@
 import React from 'react';
 import { useMutation, useRefresh } from 'react-admin';
-import { MarkdownField } from '@react-admin/ra-markdown';
 import { useTour } from '@react-admin/ra-tour';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -87,7 +86,7 @@ export default ({ record }) => {
                 className={classes.media}
                 image={`${process.env.PUBLIC_URL}/${record.image}`}
                 title={record.title}
-            ></CardMedia>
+            />
             <CardContent className={classes.content}>
                 {!record.playedOn && (
                     <NewReleasesIcon
@@ -96,10 +95,12 @@ export default ({ record }) => {
                         className={classes.newIcon}
                     />
                 )}
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography variant="h5" component="h2" gutterBottom>
                     {record.title}
                 </Typography>
-                <MarkdownField record={record} source="comment" />
+                <Typography variant="body2" gutterBottom>
+                    {record.comment}
+                </Typography>
             </CardContent>
             <CardActions className={classes.actions}>
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
