@@ -34,6 +34,7 @@ const useStyles = makeStyles({
     },
     content: {
         position: 'relative',
+        minHeight: 125,
     },
     newIcon: {
         position: 'absolute',
