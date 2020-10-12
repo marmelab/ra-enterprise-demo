@@ -11,7 +11,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayArrow';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
 const useStyles = makeStyles({
@@ -105,15 +104,6 @@ export default ({ record }) => {
             <CardActions className={classes.actions}>
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
                     Play
-                </Button>
-                <Button
-                    size="small"
-                    startIcon={<ShoppingCartIcon />}
-                    color="secondary"
-                    className={classes.buyIcon}
-                    href={record.href}
-                >
-                    Buy
                 </Button>
             </CardActions>
             <div className={classes.playedOnIndicator}>
