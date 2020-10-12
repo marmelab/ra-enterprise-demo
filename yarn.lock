@@ -1550,10 +1550,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-1.0.0.tgz#8723dee9298c5ebdd992c45fa3fc36405f259733"
   integrity sha512-DDoNhGhkdpImjT6DQ9LhjWPiiilvkKu2GeJYo47QNmJ1KIIZJWyy++H88U78Zo7+qTKwUfuYrTk9DC+EfTzl3g==
 
-"@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.0.1.tgz#d3ddc81ba47813f1bba1dcf9fdaee3d8efdc980b"
-  integrity sha512-mrlUbQMFKOJcnaAAXzXdMcR1RZKs393fG8bt46IplRLk7ep12WKJd7tC2+nlXL5jjxhZf5m7O6SeU+361abj3Q==
+"@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.1.0.tgz#b3d7e05ee2de85dae8ed23459a4c5dacdde8af3f"
+  integrity sha512-S3yEHiHxJYYlkoGr4Sb+MNc9GCGW+W2xM0fnkU/8rgbLHwJNP8aKMrzYl5OBtfOfWUvWSyoWebS5UCpk9K4lBQ==
   dependencies:
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
