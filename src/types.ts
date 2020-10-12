@@ -138,7 +138,7 @@ export interface FilterProps<Params = {}> {
 }
 
 export interface DatagridProps<RecordType = Record>
-    extends Partial<ListControllerProps<RecordType>> {
+    extends Partial<ListControllerProps<Record>> {
     hasBulkActions?: boolean;
 }
 
