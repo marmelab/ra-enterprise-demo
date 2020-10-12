@@ -1519,10 +1519,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.0.1.tgz#8330c7cbc49c3a610b9265467a14585b3f664297"
   integrity sha512-1mOH7t24urnKRaaCPqxUlPxacbcvZvCXMsuDhlZWMXn/Xxm1yTdBLBiJvwr30BxN6gH2KO2bsJt1Z6FNd+Tt0A==
 
-"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.0.3.tgz#b99fc24752766cb66131f3bdf013dd801c9e5934"
-  integrity sha512-q0PCYiGKJv9XsYZEOSrEp7Z07bri4sCFgkfAs09NRUys2/UmFr/CcuYoXPmxiaJBWoMuMxxj1pItYVR5aCf7QQ==
+"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.1.0.tgz#ed83115e4fe2318db95e9930eb6ffe8e037c2de3"
+  integrity sha512-EhYt7uVsX+dZcscCQLhB4AGNImDdrfp0uN+k4RsDWaidMmVv0TJcEXQwk7fq9PTyqIh78HXaH1U5O7u5TvjzkQ==
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
