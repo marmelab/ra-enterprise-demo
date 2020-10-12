@@ -1494,10 +1494,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@react-admin/ra-editable-datagrid@^1.0.0", "@react-admin/ra-editable-datagrid@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.0.4.tgz#37e8e2f0570dac837be87ad9b3d43aafcd02ea63"
-  integrity sha512-tXmAEtKanscSvFCvNK7d1Px2YMaeqRwUx3BnWQZnPqAS3JOrPyFByYWgpOwnnu/0z6/t/y91WehNrO9jaddyTg==
+"@react-admin/ra-editable-datagrid@^1.0.0", "@react-admin/ra-editable-datagrid@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.0.tgz#662747ac5545b2255c84ef45ffa9ccb7d969d797"
+  integrity sha512-OBqX0SxE2WJKveVhA2fEUdlGuDJ5xsq8ZXdOY0Aj1WieCjW9nUP7YI3mf5wTzCYif713bGeRqvtO6QNzmUA8XQ==
 
 "@react-admin/ra-enterprise@^0.0.4":
   version "0.0.4"
