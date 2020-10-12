@@ -1,6 +1,5 @@
 import React from 'react';
 import { useMutation, useRefresh } from 'react-admin';
-import { MarkdownField } from '@react-admin/ra-markdown';
 import { useTour } from '@react-admin/ra-tour';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,7 +10,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayArrow';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 
 const useStyles = makeStyles({
@@ -36,6 +34,7 @@ const useStyles = makeStyles({
     },
     content: {
         position: 'relative',
+        minHeight: 125,
     },
     newIcon: {
         position: 'absolute',
@@ -88,7 +87,7 @@ export default ({ record }) => {
                 className={classes.media}
                 image={`${process.env.PUBLIC_URL}/${record.image}`}
                 title={record.title}
-            ></CardMedia>
+            />
             <CardContent className={classes.content}>
                 {!record.playedOn && (
                     <NewReleasesIcon
@@ -97,23 +96,16 @@ export default ({ record }) => {
                         className={classes.newIcon}
                     />
                 )}
-                <Typography gutterBottom variant="h5" component="h2">
+                <Typography variant="h5" component="h2" gutterBottom>
                     {record.title}
                 </Typography>
-                <MarkdownField record={record} source="comment" />
+                <Typography variant="body2" gutterBottom>
+                    {record.comment}
+                </Typography>
             </CardContent>
             <CardActions className={classes.actions}>
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
                     Play
-                </Button>
-                <Button
-                    size="small"
-                    startIcon={<ShoppingCartIcon />}
-                    color="secondary"
-                    className={classes.buyIcon}
-                    href={record.href}
-                >
-                    Buy
                 </Button>
             </CardActions>
             <div className={classes.playedOnIndicator}>
