@@ -1531,10 +1531,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.0.tgz#c7bb432dac7b70e18a75aab0443cf1d9a0879835"
   integrity sha512-sArtafqm2mJfPVfWoQHQZV8PuEqaWxKwOP76lIXqpOXQ3ETGpjML1Xs7UGOdSzk6myn/O7gIhqgI2VmRfmWC+w==
 
-"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.0.2.tgz#a71a3e0eff3d84ed5308efdf9802f8f83716a500"
-  integrity sha512-4pPtRXUBRKdpcaVfIup+OYqEalyIeKsj7yTgcVE9om5JBcnXMVtbLEixKzwIx/lhj8jt9XkrZVboKl9qF9DWSg==
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.1.0.tgz#5358994ab9bdbf35134ba1c5858db2c82c3cf3f0"
+  integrity sha512-eAWvl1t5qsronrYQbZKeMmzZ5WKH+qmpc5fVCQtFmUWnXdqgXjUsuEZRLPyLE5yni47cO5v6OcGWkWZf0gd/Ug==
 
 "@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.1.3":
   version "1.1.3"
