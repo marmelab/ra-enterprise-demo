@@ -36,7 +36,7 @@ const CategoryEdit: FC<EditProps> = props => {
     );
 };
 
-const CategoryEditAside: FC<ListProps & { id: Identifier }> = ({
+const CategoryEditAside: FC<ListProps & { id?: Identifier }> = ({
     id,
     ...rest
 }) => (
