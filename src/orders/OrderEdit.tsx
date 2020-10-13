@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import { FC } from 'react';
 import {
     AutocompleteInput,
     BooleanInput,
@@ -8,27 +9,33 @@ import {
     SelectInput,
     SimpleForm,
     useTranslate,
+    EditProps,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
+import { Order, Customer } from '../types';
 
 import Basket from './Basket';
 
-const OrderTitle = ({ record }) => {
+interface OrderTitleProps {
+    record?: Order;
+}
+
+const OrderTitle: FC<OrderTitleProps> = ({ record }) => {
     const translate = useTranslate();
-    return (
+    return record ? (
         <span>
             {translate('resources.commands.title', {
                 reference: record.reference,
             })}
         </span>
-    );
+    ) : null;
 };
 
 const useEditStyles = makeStyles({
     root: { alignItems: 'flex-start' },
 });
 
-const OrderEdit = props => {
+const OrderEdit: FC<EditProps> = props => {
     const classes = useEditStyles();
     return (
         <Edit
@@ -41,7 +48,7 @@ const OrderEdit = props => {
                 <DateInput source="date" />
                 <ReferenceInput source="customer_id" reference="customers">
                     <AutocompleteInput
-                        optionText={choice =>
+                        optionText={(choice: Customer): string =>
                             `${choice.first_name} ${choice.last_name}`
                         }
                     />

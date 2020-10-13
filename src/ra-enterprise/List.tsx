@@ -1,5 +1,4 @@
-import React, { cloneElement, useMemo, forwardRef } from 'react';
-
+import React, { FC, cloneElement, useMemo, forwardRef } from 'react';
 import {
     List,
     Button,
@@ -67,7 +66,7 @@ const ToolContainer = forwardRef(({ children }, ref) => {
 });
 ToolContainer.displayName = 'ToolContainer';
 
-const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
+const ColumnsTool: FC = ({ preferenceKey, defaultColumns }) => {
     const classes = useStyles();
 
     return (
@@ -91,7 +90,7 @@ const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
     );
 };
 
-const GridOrListTool = ({ view, setView }) => (
+const GridOrListTool: FC = ({ view, setView }) => (
     <>
         <Typography
             variant="overline"
@@ -105,14 +104,18 @@ const GridOrListTool = ({ view, setView }) => (
         <ButtonGroup key="view-selector-tool-menu">
             <Button
                 color={view === 'table' ? 'primary' : 'default'}
-                onClick={() => setView('table')}
+                onClick={(): void => {
+                    setView('table');
+                }}
                 label="table"
             >
                 <TableChartIcon />
             </Button>
             <Button
                 color={view === 'grid' ? 'primary' : 'default'}
-                onClick={() => setView('grid')}
+                onClick={(): void => {
+                    setView('grid');
+                }}
                 label="grid"
             >
                 <AppsIcon />
@@ -121,7 +124,7 @@ const GridOrListTool = ({ view, setView }) => (
     </>
 );
 
-const Actions = ({
+const Actions: FC = ({
     preferenceKey,
     currentSort,
     className,
@@ -151,11 +154,11 @@ const Actions = ({
     const classes = useStyles();
     const open = Boolean(anchorEl);
 
-    const handleClick = event => {
+    const handleClick = (event): void => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = (): void => {
         setAnchorEl(null);
     };
 
@@ -231,10 +234,10 @@ const Actions = ({
         </TopToolbar>
     );
 };
-const elementHasProp = (element, name, value) =>
+const elementHasProp = (element, name, value): boolean =>
     element.props[name] && element.props[name] === value;
 
-const hasChildren = (element, type, props) => {
+const hasChildren = (element, type, props): boolean => {
     if (!React.isValidElement(element)) return false;
 
     let hasChildrenOfType = false;
@@ -259,7 +262,7 @@ const hasChildren = (element, type, props) => {
     return hasChildrenOfType;
 };
 
-const EnterpriseList = props => {
+const EnterpriseList: FC = props => {
     const {
         className,
         preferenceKey,

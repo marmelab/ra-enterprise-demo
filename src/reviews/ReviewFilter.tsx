@@ -1,19 +1,23 @@
-import React from 'react';
+import * as React from 'react';
+import { FC } from 'react';
 import {
     AutocompleteInput,
     DateInput,
+    Filter,
     ReferenceInput,
     SearchInput,
     SelectInput,
-    Filter,
+    FilterProps,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
+
+import { Customer } from '../types';
 
 const useFilterStyles = makeStyles({
     status: { width: 150 },
 });
 
-const ReviewFilter = props => {
+const ReviewFilter: FC<Omit<FilterProps, 'children'>> = props => {
     const classes = useFilterStyles();
     return (
         <Filter {...props}>
@@ -21,15 +25,15 @@ const ReviewFilter = props => {
             <SelectInput
                 source="status"
                 choices={[
-                    { id: 'accepted', name: 'pos.reviews.accepted' },
-                    { id: 'pending', name: 'pos.reviews.pending' },
-                    { id: 'rejected', name: 'pos.reviews.rejected' },
+                    { id: 'accepted', name: 'Accepted' },
+                    { id: 'pending', name: 'Pending' },
+                    { id: 'rejected', name: 'Rejected' },
                 ]}
                 className={classes.status}
             />
             <ReferenceInput source="customer_id" reference="customers">
                 <AutocompleteInput
-                    optionText={choice =>
+                    optionText={(choice: Customer): string =>
                         `${choice.first_name} ${choice.last_name}`
                     }
                 />

@@ -1,22 +1,23 @@
 import React, { FC } from 'react';
 import {
-    Identifier,
     useTranslate,
     Edit,
+    EditProps,
+    ListProps,
     TextInput,
-    ListActionsProps,
     TopToolbar,
     CreateButton,
     ExportButton,
     SortButton,
 } from 'react-admin';
+import { Identifier } from 'ra-core';
+import { ListActionsProps } from 'ra-ui-materialui';
 import { Typography, makeStyles } from '@material-ui/core';
 import { SimpleForm } from '@react-admin/ra-tree';
 
 import ProductList from '../products/ProductList';
-import { EditComponentProps, ListComponentProps } from '../types';
 
-const CategoryEdit: FC<EditComponentProps> = props => {
+const CategoryEdit: FC<EditProps> = props => {
     const translate = useTranslate();
     const classes = useStyles();
 
@@ -35,7 +36,7 @@ const CategoryEdit: FC<EditComponentProps> = props => {
     );
 };
 
-const CategoryEditAside: FC<ListComponentProps & { id: Identifier }> = ({
+const CategoryEditAside: FC<ListProps & { id: Identifier }> = ({
     id,
     ...rest
 }) => (

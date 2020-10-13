@@ -1,9 +1,15 @@
 import green from '@material-ui/core/colors/green';
 import orange from '@material-ui/core/colors/orange';
 import red from '@material-ui/core/colors/red';
+import { Theme } from '@material-ui/core';
+import { Identifier } from 'react-admin';
 
-const rowStyle = (selectedRow, theme) => (record, index, defaultStyle = {}) => {
-    let style = defaultStyle;
+import { Review } from './../types';
+
+const rowStyle = (selectedRow: Identifier, theme: Theme) => (
+    record: Review
+): any => {
+    let style = {};
     if (selectedRow === record.id) {
         style = {
             ...style,

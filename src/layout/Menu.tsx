@@ -99,6 +99,15 @@ const useMenuItemCategoryStyles = makeStyles(theme => ({
     },
 }));
 
+const useMenuItemStyles = makeStyles(theme => ({
+    root: {
+        '&:hover': {
+            color: theme.palette.common.black,
+            backgroundColor: theme.palette.grey[300],
+        },
+    },
+}));
+
 const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
     const translate = useTranslate();
     const commandsChangeCount = useResourceChangeCounter('commands');
@@ -108,6 +117,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
     );
 
     const menuItemCategoryClasses = useMenuItemCategoryStyles(rest);
+    const menuItemClasses = useMenuItemStyles(rest);
 
     useSelector((state: AppState) => state.theme); // force rerender on theme change
 
@@ -135,6 +145,7 @@ const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
                     </Typography>
                     <NavigationMenu>
                         <MenuItem
+                            classes={menuItemClasses}
                             name="products"
                             to="/products"
                             icon={<products.icon />}

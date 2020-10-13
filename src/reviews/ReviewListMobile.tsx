@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import * as React from 'react';
+import { FC, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,13 +12,12 @@ import {
     ReferenceField,
     FunctionField,
     TextField,
+    useListContext,
+    Record,
 } from 'react-admin';
-import {
-    useAppLocationState,
-    useResourceAppLocation,
-} from '@react-admin/ra-navigation';
 
 import AvatarField from '../visitors/AvatarField';
+import { Review, Customer } from './../types';
 
 const useStyles = makeStyles({
     root: {
@@ -32,37 +32,17 @@ const useStyles = makeStyles({
     },
 });
 
-const ReviewMobileList = ({
-    basePath,
-    data,
-    ids,
-    loading,
-    total,
-    ...props
-}) => {
+const ReviewListMobile: FC = () => {
     const classes = useStyles();
-    const [, setLocation] = useAppLocationState();
-    const resourceLocation = useResourceAppLocation();
-    useEffect(() => {
-        const { status } = props.filterValues;
-        if (typeof status !== 'undefined') {
-            setLocation('reviews.status_filter', { status });
-        } else {
-            setLocation('reviews');
-        }
-    }, [
-        setLocation,
-        props.filterValues,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        JSON.stringify({
-            resourceLocation,
-            filter: props.filterValues,
-        }),
-    ]);
-    return (
-        (loading || total > 0) && (
-            <List className={classes.root}>
-                {ids.map(id => (
+    const { basePath, data, ids, loaded, total } = useListContext<Review>();
+
+    return loaded || Number(total) > 0 ? (
+        <List className={classes.root}>
+            {(ids as Exclude<typeof ids, undefined>).map(id => {
+                const item = (data as Exclude<typeof data, undefined>)[id];
+                if (!item) return null;
+
+                return (
                     <Link
                         to={linkToRecord(basePath, id)}
                         className={classes.link}
@@ -71,28 +51,38 @@ const ReviewMobileList = ({
                         <ListItem button>
                             <ListItemAvatar>
                                 <ReferenceField
-                                    record={data[id]}
+                                    record={item}
                                     source="customer_id"
                                     reference="customers"
                                     basePath={basePath}
-                                    linkType={false}
+                                    link={false}
                                 >
-                                    <AvatarField size={40} />
+                                    <AvatarField size="40" />
                                 </ReferenceField>
                             </ListItemAvatar>
                             <ListItemText
                                 primary={
-                                    <>
+                                    <Fragment>
                                         <ReferenceField
-                                            record={data[id]}
+                                            record={item}
                                             source="customer_id"
                                             reference="customers"
                                             basePath={basePath}
-                                            linkType={false}
+                                            link={false}
                                         >
                                             <FunctionField
-                                                render={record =>
-                                                    `${record.first_name} ${record.last_name}`
+                                                render={(
+                                                    record?: Record
+                                                ): string =>
+                                                    record
+                                                        ? `${
+                                                              (record as Customer)
+                                                                  .first_name
+                                                          } ${
+                                                              (record as Customer)
+                                                                  .last_name
+                                                          }`
+                                                        : ''
                                                 }
                                                 variant="subtitle1"
                                                 className={classes.inline}
@@ -100,11 +90,11 @@ const ReviewMobileList = ({
                                         </ReferenceField>{' '}
                                         on{' '}
                                         <ReferenceField
-                                            record={data[id]}
+                                            record={item}
                                             source="product_id"
                                             reference="products"
                                             basePath={basePath}
-                                            linkType={false}
+                                            link={false}
                                         >
                                             <TextField
                                                 source="reference"
@@ -112,41 +102,31 @@ const ReviewMobileList = ({
                                                 className={classes.inline}
                                             />
                                         </ReferenceField>
-                                    </>
+                                    </Fragment>
                                 }
-                                secondary={data[id].comment}
+                                secondary={item.comment}
                                 secondaryTypographyProps={{ noWrap: true }}
                             />
                         </ListItem>
                     </Link>
-                ))}
-            </List>
-        )
-    );
+                );
+            })}
+        </List>
+    ) : null;
 };
 
-ReviewMobileList.propTypes = {
+ReviewListMobile.propTypes = {
     basePath: PropTypes.string,
-    data: PropTypes.object,
+    data: PropTypes.any,
     hasBulkActions: PropTypes.bool.isRequired,
     ids: PropTypes.array,
-    leftAvatar: PropTypes.func,
-    leftIcon: PropTypes.func,
-    linkType: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
-        .isRequired,
     onToggleItem: PropTypes.func,
-    primaryText: PropTypes.func,
-    rightAvatar: PropTypes.func,
-    rightIcon: PropTypes.func,
-    secondaryText: PropTypes.func,
     selectedIds: PropTypes.arrayOf(PropTypes.any).isRequired,
-    tertiaryText: PropTypes.func,
 };
 
-ReviewMobileList.defaultProps = {
-    linkType: 'edit',
+ReviewListMobile.defaultProps = {
     hasBulkActions: false,
     selectedIds: [],
 };
 
-export default ReviewMobileList;
+export default ReviewListMobile;

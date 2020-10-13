@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { Resource } from 'react-admin';
-
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 
 import './App.css';

@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react';
-import { Datagrid, DateField, TextField } from 'react-admin';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import * as React from 'react';
+import { FC } from 'react';
 import {
-    useAppLocationState,
-    useResourceAppLocation,
-} from '@react-admin/ra-navigation';
+    Identifier,
+    Datagrid,
+    DateField,
+    TextField,
+    DatagridProps,
+} from 'react-admin';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+
 import ProductReferenceField from '../products/ProductReferenceField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from './StarRatingField';
-
 import rowStyle from './rowStyle';
 
 const useListStyles = makeStyles({
@@ -31,32 +34,20 @@ const useListStyles = makeStyles({
     },
 });
 
-const ReviewListDesktop = ({ selectedRow, ...props }) => {
+export interface ReviewListDesktopProps extends DatagridProps {
+    selectedRow?: Identifier;
+}
+
+const ReviewListDesktop: FC<ReviewListDesktopProps> = ({
+    selectedRow,
+    ...props
+}) => {
     const classes = useListStyles();
     const theme = useTheme();
-    const [, setLocation] = useAppLocationState();
-    const resourceLocation = useResourceAppLocation();
-
-    useEffect(() => {
-        const { status } = props.filterValues;
-        if (typeof status !== 'undefined') {
-            setLocation('reviews.status_filter', { status });
-        } else {
-            setLocation('reviews');
-        }
-    }, [
-        setLocation,
-        props.filterValues,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        JSON.stringify({
-            resourceLocation,
-            filter: props.filterValues,
-        }),
-    ]);
     return (
         <Datagrid
             rowClick="edit"
-            rowStyle={rowStyle(selectedRow, theme)}
+            rowStyle={selectedRow ? rowStyle(selectedRow, theme) : undefined}
             classes={{
                 headerRow: classes.headerRow,
                 headerCell: classes.headerCell,

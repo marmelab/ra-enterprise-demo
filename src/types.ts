@@ -1,18 +1,4 @@
-import { ReactChildren } from 'react';
-import {
-    useListController,
-    ReduxState,
-    Record,
-    Identifier,
-    usePermissions,
-    RedirectionSideEffect,
-    ListControllerProps,
-} from 'react-admin';
-import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import { RouteComponentProps } from 'react-router-dom';
-import { StaticContext } from 'react-router';
-import { LocationState } from 'history';
-import { FormRenderProps } from 'react-final-form';
+import { ReduxState, Record, Identifier } from 'react-admin';
 
 export type ThemeName = 'light' | 'dark';
 
@@ -21,10 +7,12 @@ export interface AppState extends ReduxState {
 }
 
 export interface Category extends Record {
+    id: Identifier;
     name: string;
 }
 
 export interface Product extends Record {
+    id: Identifier;
     category_id: Identifier;
     description: string;
     height: number;
@@ -37,6 +25,7 @@ export interface Product extends Record {
 }
 
 export interface Customer extends Record {
+    id: Identifier;
     first_name: string;
     last_name: string;
     address: string;
@@ -57,10 +46,12 @@ export interface Customer extends Record {
 export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';
 
 export interface Order extends Record {
+    id: Identifier;
     status: OrderStatus;
     basket: BasketItem[];
     date: Date;
     total: number;
+    customer_id: Identifier;
 }
 
 export interface BasketItem {
@@ -68,126 +59,15 @@ export interface BasketItem {
     quantity: number;
 }
 
-/**
- * Types to eventually add in react-admin
- */
-export interface FieldProps<T extends Record = Record> {
-    addLabel?: boolean;
-    label?: string;
-    record?: T;
-    source?: string;
-    resource?: string;
-    basePath?: string;
-    formClassName?: string;
-}
-
-export interface ReferenceFieldProps<T extends Record = Record>
-    extends FieldProps<T> {
-    reference: string;
-    children: ReactChildren;
-    link?: string | false;
-    sortBy?: string;
-}
-
 export type ReviewStatus = 'accepted' | 'pending' | 'rejected';
 
 export interface Review extends Record {
+    id: Identifier;
     date: Date;
     status: ReviewStatus;
     customer_id: Identifier;
     product_id: Identifier;
-}
-
-export interface ResourceMatch {
-    id: string;
-    [k: string]: string;
-}
-
-type FilterClassKey = 'button' | 'form';
-
-export interface ToolbarProps<T extends Record = Record> {
-    handleSubmitWithRedirect?: (redirect: RedirectionSideEffect) => void;
-    handleSubmit?: FormRenderProps['handleSubmit'];
-    invalid?: boolean;
-    pristine?: boolean;
-    saving?: boolean;
-    submitOnEnter?: boolean;
-    redirect?: RedirectionSideEffect;
-    basePath?: string;
-    record?: T;
-    resource?: string;
-    undoable?: boolean;
-}
-
-export interface BulkActionProps<Params = {}> {
-    basePath?: string;
-    filterValues?: Params;
-    resource?: string;
-    selectedIds?: Identifier[];
-}
-
-export interface FilterProps<Params = {}> {
-    classes?: ClassNameMap<FilterClassKey>;
-    context?: 'form' | 'button';
-    displayedFilters?: { [K in keyof Params]?: boolean };
-    filterValues?: Params;
-    hideFilter?: ReturnType<typeof useListController>['hideFilter'];
-    setFilters?: ReturnType<typeof useListController>['setFilters'];
-    showFilter?: ReturnType<typeof useListController>['showFilter'];
-    resource?: string;
-}
-
-export interface DatagridProps<RecordType extends Record = Record>
-    extends Partial<ListControllerProps<Record>> {
-    hasBulkActions?: boolean;
-}
-
-export interface ResourceComponentProps<
-    Params extends { [K in keyof Params]?: string } = {},
-    C extends StaticContext = StaticContext,
-    S = LocationState
-> extends RouteComponentProps<Params, C, S> {
-    basePath: string;
-    resource: string;
-    options: object;
-    hasList: boolean;
-    hasEdit: boolean;
-    hasShow: boolean;
-    hasCreate: boolean;
-    permissions: ReturnType<typeof usePermissions>['permissions'];
-    filter: any;
-    exporter: any;
-}
-
-export interface ListComponentProps<Params = {}>
-    extends ResourceComponentProps<Params> {
-    title?: string;
-    aside?: boolean;
-    actions?: any;
-}
-
-export interface EditComponentProps<
-    Params extends ResourceMatch = { id: string },
-    C extends StaticContext = StaticContext,
-    S = LocationState
-> extends ResourceComponentProps<Params, C, S> {
-    id: string;
-}
-
-export interface ShowComponentProps<
-    Params extends ResourceMatch = { id: string },
-    C extends StaticContext = StaticContext,
-    S = LocationState
-> extends ResourceComponentProps<Params, C, S> {
-    id: string;
-}
-
-export interface CreateComponentProps<
-    Params extends ResourceMatch = { id: string },
-    C extends StaticContext = StaticContext,
-    S = LocationState
-> extends ResourceComponentProps<Params, C, S> {
-    id: string;
+    comment: any;
 }
 
 declare global {

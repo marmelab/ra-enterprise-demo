@@ -47,8 +47,8 @@ const styles = {
     singleCol: { marginTop: '1em', marginBottom: '1em' },
 };
 
-const Spacer = () => <span style={{ width: '1em' }} />;
-const VerticalSpacer = () => <span style={{ height: '1em' }} />;
+const Spacer: FC = () => <span style={{ width: '1em' }} />;
+const VerticalSpacer: FC = () => <span style={{ height: '1em' }} />;
 
 const Dashboard: FC = () => {
     const [state, setState] = useState<State>({});

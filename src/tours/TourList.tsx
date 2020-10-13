@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React, { FC, cloneElement } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
@@ -29,7 +29,7 @@ const useListStyles = makeStyles({
     },
 });
 
-const ListActions = ({
+const ListActions: FC = ({
     currentSort,
     className,
     resource,
@@ -101,7 +101,7 @@ const ListActions = ({
     );
 };
 
-const GridList = ({ ids, data }) => {
+const GridList: FC = ({ ids, data }) => {
     const classes = useListStyles();
     return (
         <div className={classes.gridContainer}>
@@ -112,7 +112,7 @@ const GridList = ({ ids, data }) => {
     );
 };
 
-const TourList = props => {
+const TourList: FC = props => {
     const classes = useStyles();
 
     return (

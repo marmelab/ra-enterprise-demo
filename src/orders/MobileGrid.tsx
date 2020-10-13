@@ -1,8 +1,7 @@
 // in src/comments.js
-import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
+import * as React from 'react';
+import { FC } from 'react';
+import { Card, CardHeader, CardContent } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     DateField,
@@ -11,6 +10,9 @@ import {
     TextField,
     BooleanField,
     useTranslate,
+    RecordMap,
+    Identifier,
+    Record,
 } from 'react-admin';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
@@ -24,22 +26,33 @@ const useListStyles = makeStyles(theme => ({
     },
     cardTitleContent: {
         display: 'flex',
-        flexDirection: 'rows',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
     cardContent: theme.typography.body1,
     cardContentRow: {
         display: 'flex',
-        flexDirection: 'rows',
+        flexDirection: 'row',
         alignItems: 'center',
         margin: '0.5rem 0',
     },
 }));
 
-const MobileGrid = ({ ids, data, basePath }) => {
+interface MobileGridProps {
+    ids?: Identifier[];
+    data?: RecordMap<Record>;
+    basePath?: string;
+}
+
+const MobileGrid: FC<MobileGridProps> = ({ ids, data, basePath }) => {
     const translate = useTranslate();
     const classes = useListStyles();
+
+    if (!ids || !data || !basePath) {
+        return null;
+    }
+
     return (
         <div style={{ margin: '1em' }}>
             {ids.map(id => (
@@ -88,7 +101,6 @@ const MobileGrid = ({ ids, data, basePath }) => {
                                 record={data[id]}
                                 source="total"
                                 options={{ style: 'currency', currency: 'USD' }}
-                                className={classes.total}
                             />
                         </span>
                         <span className={classes.cardContentRow}>
