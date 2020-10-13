@@ -1508,10 +1508,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.0.tgz#662747ac5545b2255c84ef45ffa9ccb7d969d797"
   integrity sha512-OBqX0SxE2WJKveVhA2fEUdlGuDJ5xsq8ZXdOY0Aj1WieCjW9nUP7YI3mf5wTzCYif713bGeRqvtO6QNzmUA8XQ==
 
-"@react-admin/ra-enterprise@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.1.1.tgz#91ee6738d91b3ca9ea007c5686c49b92a4e04781"
-  integrity sha512-0R1ToG3bzAje1vPllVUUsZx0b43Mvfw4R0z5XZhHDChOlHFatS1xB4vxlXQ3eKIfF4/u3Mah2WGjA8bFC2B0Ng==
+"@react-admin/ra-enterprise@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.1.2.tgz#cd68a9f169a9928b97f3a18c10a3eb6243ca77a4"
+  integrity sha512-PVZCEf0r6WETvSrYc2DExSvk/OBemwuKgYK136Rt0ToJhKMXNlrtAAMROmsEYmDy70CRCayM2NbAubYy7hPtGQ==
   dependencies:
     "@react-admin/ra-editable-datagrid" "^1.0.0"
     "@react-admin/ra-form-layout" "^1.0.0"
