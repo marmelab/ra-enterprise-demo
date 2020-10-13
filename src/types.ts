@@ -6,12 +6,12 @@ import {
     Identifier,
     usePermissions,
     RedirectionSideEffect,
-} from 'ra-core';
+    ListControllerProps,
+} from 'react-admin';
+import { ClassNameMap } from '@material-ui/core/styles/withStyles';
 import { RouteComponentProps } from 'react-router-dom';
 import { StaticContext } from 'react-router';
 import { LocationState } from 'history';
-import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import { ListControllerProps } from 'ra-core/esm/controller/useListController';
 import { FormRenderProps } from 'react-final-form';
 
 export type ThemeName = 'light' | 'dark';

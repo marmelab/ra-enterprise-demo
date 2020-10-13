@@ -1,7 +1,7 @@
 import {
     mergeTranslations,
     TranslationMessages as BaseTranslationMessages,
-} from 'ra-core';
+} from 'react-admin';
 import frenchMessages from 'ra-language-french';
 import { RaTreeTranslationMessages } from '@react-admin/ra-tree';
 

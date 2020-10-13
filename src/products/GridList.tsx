@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import MuiGridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { WithWidth } from '@material-ui/core/withWidth';
-import { linkToRecord, NumberField, useListContext } from 'react-admin';
-import { Record } from 'ra-core';
-import { Link } from 'react-router-dom';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
+import { linkToRecord, NumberField, useListContext, Record } from 'react-admin';
 import { Lock, useHasLocks } from '@react-admin/ra-realtime';
 
 import { LockOverlay } from './LockOverlay';

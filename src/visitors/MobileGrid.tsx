@@ -4,13 +4,17 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
-
-import { DateField, EditButton, useTranslate, NumberField } from 'react-admin';
+import {
+    DateField,
+    EditButton,
+    useTranslate,
+    NumberField,
+    Identifier,
+} from 'react-admin';
 
 import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
-import { Identifier } from 'ra-core';
 import { Customer } from '../types';
 
 const useStyles = makeStyles(theme => ({

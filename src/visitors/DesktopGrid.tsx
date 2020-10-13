@@ -3,11 +3,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
-
-import { useTranslate } from 'react-admin';
+import { Identifier, linkToRecord, useTranslate } from 'react-admin';
 
 import AvatarField from './AvatarField';
-import { Identifier, linkToRecord } from 'ra-core';
 import { Customer } from '../types';
 
 import EditIcon from '@material-ui/icons/Edit';

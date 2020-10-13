@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field, withTypes } from 'react-final-form';
 import { useLocation } from 'react-router-dom';
-
+import { Notification, useTranslate, useLogin, useNotify } from 'react-admin';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
@@ -13,8 +13,6 @@ import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import LockIcon from '@material-ui/icons/Lock';
 
-import { Notification } from 'react-admin';
-import { useTranslate, useLogin, useNotify } from 'ra-core';
 import { lightTheme } from './themes';
 
 const useStyles = makeStyles(theme => ({
@@ -61,7 +59,7 @@ const renderInput = ({
     meta: { touched, error } = { touched: false, error: undefined },
     input: { ...inputProps },
     ...props
-}) => (
+}): JSX.Element => (
     <TextField
         error={!!(touched && error)}
         helperText={touched && error}
@@ -78,7 +76,7 @@ interface FormValues {
 
 const { Form } = withTypes<FormValues>();
 
-const Login = () => {
+const Login: FC = () => {
     const [loading, setLoading] = useState(false);
     const translate = useTranslate();
     const classes = useStyles();
@@ -86,7 +84,7 @@ const Login = () => {
     const login = useLogin();
     const location = useLocation<{ nextPathname: string } | null>();
 
-    const handleSubmit = (auth: FormValues) => {
+    const handleSubmit = (auth: FormValues): void => {
         setLoading(true);
         login(auth, location.state ? location.state.nextPathname : '/').catch(
             (error: Error) => {
@@ -103,7 +101,7 @@ const Login = () => {
         );
     };
 
-    const validate = (values: FormValues) => {
+    const validate = (values: FormValues): FormValues => {
         const errors: FormValues = {};
         if (!values.username) {
             errors.username = translate('ra.validation.required');
@@ -118,7 +116,7 @@ const Login = () => {
         <Form
             onSubmit={handleSubmit}
             validate={validate}
-            render={({ handleSubmit }) => (
+            render={({ handleSubmit }): JSX.Element => (
                 <form onSubmit={handleSubmit} noValidate>
                     <div className={classes.main}>
                         <Card className={classes.card}>
@@ -134,7 +132,6 @@ const Login = () => {
                                 <div className={classes.input}>
                                     <Field
                                         name="username"
-                                        // @ts-ignore
                                         component={renderInput}
                                         label={translate('ra.auth.username')}
                                         disabled={loading}
@@ -143,7 +140,6 @@ const Login = () => {
                                 <div className={classes.input}>
                                     <Field
                                         name="password"
-                                        // @ts-ignore
                                         component={renderInput}
                                         label={translate('ra.auth.password')}
                                         type="password"
@@ -185,7 +181,7 @@ Login.propTypes = {
 // We need to put the ThemeProvider decoration in another component
 // Because otherwise the useStyles() hook used in Login won't get
 // the right theme
-const LoginWithTheme = (props: any) => (
+const LoginWithTheme = (props: any): JSX.Element => (
     <ThemeProvider theme={createMuiTheme(lightTheme)}>
         <Login {...props} />
     </ThemeProvider>

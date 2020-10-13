@@ -1,4 +1,4 @@
-import { DataProvider } from 'ra-core';
+import { DataProvider } from 'react-admin';
 import { RealTimeDataProvider, Subscriptions } from '@react-admin/ra-realtime';
 
 let subscriptions: Subscriptions = [];

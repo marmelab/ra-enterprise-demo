@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
-import { Identifier, useTranslate } from 'ra-core';
 import {
+    Identifier,
+    useTranslate,
+    Edit,
+    TextInput,
     ListActionsProps,
     TopToolbar,
     CreateButton,
     ExportButton,
     SortButton,
-} from 'ra-ui-materialui';
-import { Edit, TextInput } from 'react-admin';
+} from 'react-admin';
+import { Typography, makeStyles } from '@material-ui/core';
 import { SimpleForm } from '@react-admin/ra-tree';
 
 import ProductList from '../products/ProductList';
-import { Typography, makeStyles } from '@material-ui/core';
 import { EditComponentProps, ListComponentProps } from '../types';
 
 const CategoryEdit: FC<EditComponentProps> = props => {
