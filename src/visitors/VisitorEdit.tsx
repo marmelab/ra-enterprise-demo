@@ -8,6 +8,7 @@ import {
     Toolbar,
     useTranslate,
     FormWithRedirect,
+    FieldProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { Box, Card, CardContent, Typography } from '@material-ui/core';
@@ -16,9 +17,9 @@ import Aside from './Aside';
 import FullNameField from './FullNameField';
 import SegmentsInput from './SegmentsInput';
 import { validatePasswords } from './VisitorCreate';
-import { Customer, FieldProps } from '../types';
+import { Customer } from '../types';
 
-const VisitorEdit = (props: any) => {
+const VisitorEdit: FC = props => {
     return (
         <Edit
             title={<VisitorTitle />}
@@ -34,7 +35,7 @@ const VisitorEdit = (props: any) => {
 const VisitorTitle: FC<FieldProps<Customer>> = ({ record }) =>
     record ? <FullNameField record={record} size="32" /> : null;
 
-const VisitorForm = (props: any) => {
+const VisitorForm: FC = props => {
     const translate = useTranslate();
     useDefineAppLocation('audience.customers.edit', props);
 
@@ -42,7 +43,7 @@ const VisitorForm = (props: any) => {
         <FormWithRedirect
             {...props}
             validate={validatePasswords}
-            render={(formProps: any) => (
+            render={(formProps: any): JSX.Element => (
                 <Card>
                     <form>
                         <CardContent>

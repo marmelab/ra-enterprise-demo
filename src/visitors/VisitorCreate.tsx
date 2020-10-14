@@ -1,14 +1,17 @@
-import React from 'react';
+import * as React from 'react';
+import { FC } from 'react';
 import {
     Create,
+    CreateProps,
     DateInput,
     SimpleForm,
     TextInput,
     useTranslate,
     PasswordInput,
     required,
+    email,
 } from 'react-admin';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { AnyObject } from 'react-final-form';
 import { Typography, Box } from '@material-ui/core';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Styles } from '@material-ui/styles/withStyles';
@@ -35,10 +38,7 @@ const useStyles = makeStyles(styles);
 export const validatePasswords = ({
     password,
     confirm_password,
-}: {
-    password: string;
-    confirm_password: string;
-}) => {
+}: AnyObject): {} => {
     const errors = {} as any;
 
     if (password && confirm_password && password !== confirm_password) {
@@ -50,9 +50,8 @@ export const validatePasswords = ({
     return errors;
 };
 
-const VisitorCreate = (props: any) => {
+const VisitorCreate: FC<CreateProps> = props => {
     const classes = useStyles();
-    useDefineAppLocation('audience.customers.create');
 
     return (
         <Create {...props}>
@@ -62,6 +61,8 @@ const VisitorCreate = (props: any) => {
                     source="first_name"
                     formClassName={classes.first_name}
                     validate={requiredValidate}
+                    // eslint-disable-next-line
+                    autoFocus
                 />
                 <TextInput
                     source="last_name"
@@ -72,9 +73,9 @@ const VisitorCreate = (props: any) => {
                     type="email"
                     source="email"
                     validation={{ email: true }}
-                    fullWidth={true}
+                    fullWidth
                     formClassName={classes.email}
-                    validate={requiredValidate}
+                    validate={[required(), email()]}
                 />
                 <DateInput source="birthday" />
                 <Separator />
@@ -82,11 +83,20 @@ const VisitorCreate = (props: any) => {
                 <TextInput
                     source="address"
                     formClassName={classes.address}
-                    multiline={true}
-                    fullWidth={true}
+                    multiline
+                    fullWidth
+                    helperText={false}
                 />
-                <TextInput source="zipcode" formClassName={classes.zipcode} />
-                <TextInput source="city" formClassName={classes.city} />
+                <TextInput
+                    source="zipcode"
+                    formClassName={classes.zipcode}
+                    helperText={false}
+                />
+                <TextInput
+                    source="city"
+                    formClassName={classes.city}
+                    helperText={false}
+                />
                 <Separator />
                 <SectionTitle label="resources.customers.fieldGroups.password" />
                 <PasswordInput
@@ -104,7 +114,7 @@ const VisitorCreate = (props: any) => {
 
 const requiredValidate = [required()];
 
-const SectionTitle = ({ label }: { label: string }) => {
+const SectionTitle: FC<{ label: string }> = ({ label }) => {
     const translate = useTranslate();
 
     return (
@@ -114,6 +124,6 @@ const SectionTitle = ({ label }: { label: string }) => {
     );
 };
 
-const Separator = () => <Box pt="1em" />;
+const Separator: FC = () => <Box pt="1em" />;
 
 export default VisitorCreate;

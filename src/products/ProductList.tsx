@@ -18,10 +18,11 @@ import {
     useTranslate,
     useListContext,
     Filter,
+    FilterProps,
+    ListProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-import { FilterProps, ListComponentProps } from '../types';
 import GridList from './GridList';
 import Aside from './Aside';
 
@@ -47,7 +48,7 @@ interface FilterParams {
     stock_lte?: number;
 }
 
-export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
+export const ProductFilter: FC<Omit<FilterProps, 'children'>> = props => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
         <ReferenceInput
@@ -89,7 +90,10 @@ const useListActionsStyles = makeStyles(theme => ({
     },
 }));
 
-const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
+const ProductList: FC<ListProps & { title?: string }> = ({
+    actions,
+    ...props
+}) => {
     useDefineAppLocation('catalog.products');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
@@ -103,7 +107,7 @@ const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
             <ProductListView
                 actions={actions}
                 isSmall={isSmall}
-                aside={props.aside}
+                aside={!!props.aside}
                 title={props.title}
             />
         </ListBase>

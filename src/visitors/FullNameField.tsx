@@ -1,9 +1,10 @@
-import React, { FC } from 'react';
+import * as React from 'react';
+import { FC, memo } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import pure from 'recompose/pure';
 
+import { FieldProps } from 'react-admin';
 import AvatarField from './AvatarField';
-import { FieldProps, Customer } from '../types';
+import { Customer } from '../types';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -13,6 +14,8 @@ const useStyles = makeStyles(theme => ({
     },
     avatar: {
         marginRight: theme.spacing(1),
+        marginTop: -theme.spacing(0.5),
+        marginBottom: -theme.spacing(0.5),
     },
 }));
 
@@ -34,11 +37,9 @@ const FullNameField: FC<Props> = ({ record, size }) => {
     ) : null;
 };
 
-const PureFullNameField = pure(FullNameField);
-
-PureFullNameField.defaultProps = {
+FullNameField.defaultProps = {
     source: 'last_name',
     label: 'resources.customers.fields.name',
 };
 
-export default PureFullNameField;
+export default memo<Props>(FullNameField);

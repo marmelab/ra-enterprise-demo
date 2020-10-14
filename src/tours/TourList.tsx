@@ -7,6 +7,7 @@ import {
     Button,
     sanitizeListRestProps,
     List,
+    ListProps,
     Pagination,
     useMutation,
     useRefresh,
@@ -29,7 +30,7 @@ const useListStyles = makeStyles({
     },
 });
 
-const ListActions: FC = ({
+const ListActions: FC<any> = ({
     currentSort,
     className,
     resource,
@@ -101,7 +102,7 @@ const ListActions: FC = ({
     );
 };
 
-const GridList: FC = ({ ids, data }) => {
+const GridList: FC<any> = ({ ids, data }) => {
     const classes = useListStyles();
     return (
         <div className={classes.gridContainer}>
@@ -112,7 +113,7 @@ const GridList: FC = ({ ids, data }) => {
     );
 };
 
-const TourList: FC = props => {
+const TourList: FC<ListProps> = props => {
     const classes = useStyles();
 
     return (

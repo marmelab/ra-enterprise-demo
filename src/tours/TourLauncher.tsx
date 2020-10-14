@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { useTour } from '@react-admin/ra-tour';
 
-const TourLauncher = () => {
-    const { tour } = useParams();
+const TourLauncher: FC = () => {
+    const { tour } = useParams<{ tour: string }>();
     const [, { start }] = useTour();
 
     useEffect(() => {

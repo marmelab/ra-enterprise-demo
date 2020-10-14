@@ -1,5 +1,5 @@
-// in src/comments.js
-import React, { FC } from 'react';
+import * as React from 'react';
+import { FC } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -75,11 +75,7 @@ const MobileGrid: FC<Props> = ({ ids, data, basePath }) => {
                                 'resources.customers.fields.last_seen_gte'
                             )}
                             &nbsp;
-                            <DateField
-                                record={data[id]}
-                                source="last_seen"
-                                type="date"
-                            />
+                            <DateField record={data[id]} source="last_seen" />
                         </div>
                         <div>
                             {translate(

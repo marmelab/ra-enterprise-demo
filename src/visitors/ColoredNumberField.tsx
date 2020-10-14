@@ -1,27 +1,18 @@
-import React, { ComponentType } from 'react';
-import { NumberField } from 'react-admin';
-import { FieldProps } from '../types';
+import * as React from 'react';
+import { FC } from 'react';
+import { NumberField, NumberFieldProps } from 'react-admin';
 
-const colored = <T extends FieldProps>(
-    WrappedComponent: ComponentType<T>
-): ComponentType<T> => {
-    const Colored = (props: T) =>
-        props.record && props.source ? (
-            props.record[props.source] > 500 ? (
-                <span style={{ color: 'red' }}>
-                    <WrappedComponent {...props} />
-                </span>
-            ) : (
-                <WrappedComponent {...props} />
-            )
-        ) : null;
+const ColoredNumberField: FC<NumberFieldProps> = props =>
+    props.record && props.source ? (
+        props.record[props.source] > 500 ? (
+            <span style={{ color: 'red' }}>
+                <NumberField {...props} />
+            </span>
+        ) : (
+            <NumberField {...props} />
+        )
+    ) : null;
 
-    Colored.displayName = `Colored(${WrappedComponent.displayName})`;
-
-    return Colored;
-};
-
-const ColoredNumberField = colored<typeof NumberField>(NumberField);
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
 export default ColoredNumberField;
