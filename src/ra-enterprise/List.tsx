@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ToolContainer = forwardRef(({ children }, ref) => {
+const ToolContainer = forwardRef<any, any>(({ children }, ref) => {
     const classes = useStyles();
 
     return (
@@ -66,7 +66,10 @@ const ToolContainer = forwardRef(({ children }, ref) => {
 });
 ToolContainer.displayName = 'ToolContainer';
 
-const ColumnsTool: FC = ({ preferenceKey, defaultColumns }) => {
+const ColumnsTool: FC<{ preferenceKey: string; defaultColumns: any }> = ({
+    preferenceKey,
+    defaultColumns,
+}) => {
     const classes = useStyles();
 
     return (
@@ -83,6 +86,7 @@ const ColumnsTool: FC = ({ preferenceKey, defaultColumns }) => {
                 key="columns-selector-tool-menu"
                 preference={preferenceKey}
                 columns={defaultColumns}
+                // @ts-ignore
                 label=""
                 className={classes.columnsList}
             />
@@ -90,7 +94,7 @@ const ColumnsTool: FC = ({ preferenceKey, defaultColumns }) => {
     );
 };
 
-const GridOrListTool: FC = ({ view, setView }) => (
+const GridOrListTool: FC<{ view: any; setView: any }> = ({ view, setView }) => (
     <>
         <Typography
             variant="overline"
@@ -124,7 +128,7 @@ const GridOrListTool: FC = ({ view, setView }) => (
     </>
 );
 
-const Actions: FC = ({
+const Actions: FC<any> = ({
     preferenceKey,
     currentSort,
     className,
@@ -183,6 +187,7 @@ const Actions: FC = ({
                     disabled={total === 0}
                     resource={resource}
                     sort={currentSort}
+                    // @ts-ignore
                     filter={{ ...filterValues, ...permanentFilter }}
                     exporter={exporter}
                     maxResults={maxResults}
@@ -213,11 +218,7 @@ const Actions: FC = ({
                     >
                         {hasViewSelector && (
                             <ToolContainer>
-                                <GridOrListTool
-                                    preferenceKey={preferenceKey}
-                                    view={view}
-                                    setView={setView}
-                                />
+                                <GridOrListTool view={view} setView={setView} />
                             </ToolContainer>
                         )}
                         {hasColumnsSelector && (
@@ -234,6 +235,7 @@ const Actions: FC = ({
         </TopToolbar>
     );
 };
+
 const elementHasProp = (element, name, value): boolean =>
     element.props[name] && element.props[name] === value;
 
@@ -247,6 +249,7 @@ const hasChildren = (element, type, props): boolean => {
         if (!React.isValidElement(child)) return;
 
         if (
+            // @ts-ignore
             child.type.name === type &&
             Object.keys(props).every(propName =>
                 elementHasProp(child, propName, props[propName])
@@ -255,18 +258,17 @@ const hasChildren = (element, type, props): boolean => {
             hasChildrenOfType = true;
             return;
         }
-
+        // @ts-ignore
         hasChildrenOfType = hasChildren(child.props.children, type, props);
     });
 
     return hasChildrenOfType;
 };
 
-const EnterpriseList: FC = props => {
+const EnterpriseList: FC<any> = props => {
     const {
         className,
         preferenceKey,
-
         hasColumnsSelector = true,
         defaultColumns = [],
         defaultOmittedColumns = [],

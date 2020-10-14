@@ -37,12 +37,6 @@ import stores from '../stores';
 import { AppState } from '../types';
 import { segments } from '../visitors/segments';
 
-interface Props {
-    dense: boolean;
-    logout: () => void;
-    onMenuClick: () => void;
-}
-
 const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
 const formerCustomerFilter = { last_seen_lte: '2020-06-30T22:00:00.000Z' };
 
@@ -108,7 +102,7 @@ const useMenuItemStyles = makeStyles(theme => ({
     },
 }));
 
-const Menu: FC<Props> = ({ onMenuClick, logout, ...rest }) => {
+const Menu: FC<any> = ({ onMenuClick, logout, ...rest }) => {
     const translate = useTranslate();
     const commandsChangeCount = useResourceChangeCounter('commands');
 

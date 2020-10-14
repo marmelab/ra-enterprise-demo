@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
-import { AppBar, useQuery, useVersion } from 'react-admin';
+import { AppBar, useQuery } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import { Link } from 'react-router-dom';
-
 import {
     ToggleThemeButton,
     LanguageSwitcher,
 } from '@react-admin/ra-preferences';
-
 import TourIcon from '@material-ui/icons/Flag';
 
 import Logo from './Logo';
@@ -39,17 +37,11 @@ const useStyles = makeStyles(theme => ({
 const CustomAppBar: FC = props => {
     const classes = useStyles();
 
-    const version = useVersion();
-    const { data } = useQuery(
-        {
-            type: 'getList',
-            resource: 'tours',
-            payload: { filter: { playedOn: null } },
-        },
-        {
-            version,
-        }
-    );
+    const { data } = useQuery({
+        type: 'getList',
+        resource: 'tours',
+        payload: { filter: { playedOn: null } },
+    });
 
     let numberOfTours = 0;
     if (data) {

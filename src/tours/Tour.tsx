@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useMutation, useRefresh } from 'react-admin';
+import { useMutation, useRefresh, Identifier } from 'react-admin';
 import { useTour } from '@react-admin/ra-tour';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -54,11 +54,19 @@ const useStyles = makeStyles({
     },
 });
 
-const Tour: FC = ({ record }) => {
+export interface TourRecord {
+    id: Identifier;
+    title: string;
+    comment: string;
+    tour: any;
+    playedOn: any;
+    image: string;
+}
+
+const Tour: FC<{ record: TourRecord }> = ({ record }) => {
     const classes = useStyles();
     const refresh = useRefresh();
-    // eslint-disable-next-line no-unused-vars
-    const [_, { start }] = useTour();
+    const [, { start }] = useTour();
 
     const [setPlayed] = useMutation(
         {
@@ -72,6 +80,7 @@ const Tour: FC = ({ record }) => {
     );
 
     const handlePlayClicked = (): void => {
+        // @ts-ignore
         start(record.tour);
         setPlayed();
     };
