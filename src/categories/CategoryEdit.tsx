@@ -50,8 +50,7 @@ const CategoryEditAside: FC<ListProps & { id?: Identifier }> = ({
         hasList={false}
         hasShow={false}
         filter={{ category_id: id }}
-        exporter={null}
-        aside={false}
+        exporter={false}
         actions={<ProductListActions />}
     />
 );

@@ -36,7 +36,7 @@ interface State {
     pendingReviews?: Review[];
     pendingReviewsCustomers?: CustomerData;
     recentOrders?: Order[];
-    revenue?: number;
+    revenue?: string;
 }
 
 const styles = {
@@ -64,7 +64,9 @@ const Dashboard: FC = () => {
     const fetchOrders = useCallback(async () => {
         const aMonthAgo = new Date();
         aMonthAgo.setDate(aMonthAgo.getDate() - 30);
-        const { data: recentOrders } = await dataProvider.getList('commands', {
+        const {
+            data: recentOrders,
+        }: { data: Order[] } = await dataProvider.getList('commands', {
             filter: { date_gte: aMonthAgo.toISOString() },
             sort: { field: 'date', order: 'DESC' },
             pagination: { page: 1, perPage: 50 },
@@ -100,7 +102,9 @@ const Dashboard: FC = () => {
             nbNewOrders: aggregations.nbNewOrders,
             pendingOrders: aggregations.pendingOrders,
         }));
-        const { data: customers } = await dataProvider.getMany('customers', {
+        const {
+            data: customers,
+        }: { data: Customer[] } = await dataProvider.getMany('customers', {
             ids: aggregations.pendingOrders.map(
                 (order: Order) => order.customer_id
             ),
@@ -118,7 +122,9 @@ const Dashboard: FC = () => {
     }, [dataProvider]);
 
     const fetchReviews = useCallback(async () => {
-        const { data: reviews } = await dataProvider.getList('reviews', {
+        const {
+            data: reviews,
+        }: { data: Review[] } = await dataProvider.getList('reviews', {
             filter: { status: 'pending' },
             sort: { field: 'date', order: 'DESC' },
             pagination: { page: 1, perPage: 100 },
@@ -126,7 +132,9 @@ const Dashboard: FC = () => {
         const nbPendingReviews = reviews.reduce((nb: number) => ++nb, 0);
         const pendingReviews = reviews.slice(0, Math.min(10, reviews.length));
         setState(state => ({ ...state, pendingReviews, nbPendingReviews }));
-        const { data: customers } = await dataProvider.getMany('customers', {
+        const {
+            data: customers,
+        }: { data: Customer[] } = await dataProvider.getMany('customers', {
             ids: pendingReviews.map((review: Review) => review.customer_id),
         });
         setState(state => ({
