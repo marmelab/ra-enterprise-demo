@@ -1,4 +1,5 @@
 import { ThemeOptions } from '@react-admin/ra-enterprise';
+import { grey } from '@material-ui/core/colors';
 
 export const darkTheme: ThemeOptions = {
     palette: {
@@ -26,21 +27,32 @@ export const darkTheme: ThemeOptions = {
             zIndex: 9999,
         },
         RaMenuItemCategory: {
-            closeButton: { color: 'white' },
+            closeButton: {
+                color: 'white',
+            },
             popoverPaper: {
                 backgroundColor: '#424242',
-                color: 'white',
             },
         },
         RaMenuItem: {
-            link: {
+            root: {
                 color: 'white',
+                '&:hover': {
+                    color: 'black',
+                    backgroundColor: grey[300],
+                },
+            },
+            link: {
+                color: 'inherit',
             },
             icon: {
-                color: 'white',
+                color: 'inherit',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
             },
             active: {
-                color: 'white',
+                color: 'inherit',
             },
         },
         RaFilterFormInput: {
@@ -90,6 +102,31 @@ export const lightTheme: ThemeOptions = {
         RaMenuItemCategory: {
             root: {
                 color: '#808080',
+                '&:hover': {
+                    color: 'black',
+                    backgroundColor: grey[300],
+                },
+            },
+        },
+        RaMenuItem: {
+            root: {
+                color: '#808080',
+                '&:hover': {
+                    color: 'black',
+                    backgroundColor: grey[300],
+                },
+            },
+            link: {
+                color: 'inherit',
+            },
+            icon: {
+                color: 'inherit',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+            },
+            active: {
+                color: 'inherit',
             },
         },
         RaMultiLevelMenu: {
