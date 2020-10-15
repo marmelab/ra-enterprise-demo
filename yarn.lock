@@ -1560,7 +1560,7 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-1.0.0.tgz#8723dee9298c5ebdd992c45fa3fc36405f259733"
   integrity sha512-DDoNhGhkdpImjT6DQ9LhjWPiiilvkKu2GeJYo47QNmJ1KIIZJWyy++H88U78Zo7+qTKwUfuYrTk9DC+EfTzl3g==
 
-"@react-admin/ra-search@^1.0.0":
+"@react-admin/ra-search@^1.0.0", "@react-admin/ra-search@^1.1.0":
   version "1.1.0"
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.0.tgz#4f71d923b3508f39f62b6e8aa4e32de8c2846ee6"
   integrity sha512-5LkNmP/nyet9WDapjoBHuNTDSedhaVBzJ7bYzl8MZT4/O0czuofHekNPOkqpDBtuoqW+gyXYl2mwlGcXs34bGA==
