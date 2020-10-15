@@ -1535,10 +1535,10 @@
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
-"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.0.tgz#c7bb432dac7b70e18a75aab0443cf1d9a0879835"
-  integrity sha512-sArtafqm2mJfPVfWoQHQZV8PuEqaWxKwOP76lIXqpOXQ3ETGpjML1Xs7UGOdSzk6myn/O7gIhqgI2VmRfmWC+w==
+"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.1.tgz#02b2dd36fd07646c3c970501a33aebbca598d0cf"
+  integrity sha512-2Dz/3nmrcK6pvovtutdHaA6eu2rzOISFrMyeG7/aTYpLjZv1iFv/9s2z3tCzac63yyFbcdwYPWYBCkluICaG6g==
 
 "@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.1.0":
   version "1.1.0"
