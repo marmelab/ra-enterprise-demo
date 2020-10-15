@@ -235,9 +235,12 @@ const tours: { [id: string]: TourType } = {
                     );
                     await timeout(1500); // would be so awesome if redirect was awaitable!
                 },
-                disableBeacon: true,
                 target: '[data-testid="commands-menu"]',
                 content: "Seems like you just had new orders, let's check...",
+                disableBeacon: true,
+                joyrideProps: {
+                    hideBackButton: true,
+                },
                 after: async ({ redirect }) => {
                     localStorage.setItem('batchLevel', '1');
                     await timeout(500);
@@ -247,6 +250,9 @@ const tours: { [id: string]: TourType } = {
             {
                 target: '[data-testid=order-ordered-datagrid]',
                 content: 'Your new orders can stand-out from others',
+                joyrideProps: {
+                    hideBackButton: true,
+                },
             },
             {
                 before: async ({ dataProvider }) => {
@@ -279,6 +285,9 @@ const tours: { [id: string]: TourType } = {
                 target: '[data-testid=order-ordered-datagrid]',
                 content:
                     "And newest orders even appear while you're on the page",
+                joyrideProps: {
+                    hideBackButton: true,
+                },
                 after: async ({ dataProvider, dispatch, redirect }) => {
                     // Generate a lock on Products #1, #2 and #5
                     await Promise.all(
@@ -351,6 +360,9 @@ const tours: { [id: string]: TourType } = {
                 target: '[data-testid=productlocktile]',
                 content:
                     'You can lock resources in realtime (this one will be unlocked in a few seconds)',
+                joyrideProps: {
+                    hideBackButton: true,
+                },
                 after: async ({ dataProvider, dispatch, refresh }) => {
                     // Reset the locks on Products #2 and #5
                     // The lock on Procuct #1 has been deleted during the scenario
