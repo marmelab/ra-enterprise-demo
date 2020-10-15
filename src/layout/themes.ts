@@ -37,22 +37,12 @@ export const darkTheme: ThemeOptions = {
         RaMenuItem: {
             root: {
                 color: 'white',
-                '&:hover': {
-                    color: 'black',
-                    backgroundColor: grey[300],
-                },
             },
             link: {
-                color: 'inherit',
-            },
-            icon: {
-                color: 'inherit',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-            },
-            active: {
-                color: 'inherit',
+                '&:hover': {
+                    color: 'black',
+                    backgroundColor: grey[200],
+                },
             },
         },
         RaFilterFormInput: {
@@ -104,29 +94,13 @@ export const lightTheme: ThemeOptions = {
                 color: '#808080',
                 '&:hover': {
                     color: 'black',
-                    backgroundColor: grey[300],
+                    backgroundColor: grey[200],
                 },
             },
         },
         RaMenuItem: {
             root: {
                 color: '#808080',
-                '&:hover': {
-                    color: 'black',
-                    backgroundColor: grey[300],
-                },
-            },
-            link: {
-                color: 'inherit',
-            },
-            icon: {
-                color: 'inherit',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-            },
-            active: {
-                color: 'inherit',
             },
         },
         RaMultiLevelMenu: {
