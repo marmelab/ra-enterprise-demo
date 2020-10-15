@@ -22,7 +22,7 @@
         "@material-ui/icons": "^4.5.1",
         "@material-ui/lab": "^4.0.0-alpha.56",
         "@react-admin/ra-editable-datagrid": "^1.1.0",
-        "@react-admin/ra-enterprise": "^0.1.1",
+        "@react-admin/ra-enterprise": "^1.0.0",
         "@react-admin/ra-markdown": "^1.1.0",
         "@react-admin/ra-navigation": "^1.2.1",
         "@react-admin/ra-preferences": "^1.1.0",
@@ -82,7 +82,7 @@
     },
     "resolutions": {
         "@react-admin/ra-editable-datagrid": "^1.1.0",
-        "@react-admin/ra-enterprise": "^0.1.1",
+        "@react-admin/ra-enterprise": "^1.0.0",
         "@react-admin/ra-markdown": "^1.1.0",
         "@react-admin/ra-navigation": "^1.2.1",
         "@react-admin/ra-preferences": "^1.1.0",
