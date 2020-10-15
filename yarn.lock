@@ -1508,10 +1508,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.0.tgz#662747ac5545b2255c84ef45ffa9ccb7d969d797"
   integrity sha512-OBqX0SxE2WJKveVhA2fEUdlGuDJ5xsq8ZXdOY0Aj1WieCjW9nUP7YI3mf5wTzCYif713bGeRqvtO6QNzmUA8XQ==
 
-"@react-admin/ra-enterprise@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-0.1.1.tgz#91ee6738d91b3ca9ea007c5686c49b92a4e04781"
-  integrity sha512-0R1ToG3bzAje1vPllVUUsZx0b43Mvfw4R0z5XZhHDChOlHFatS1xB4vxlXQ3eKIfF4/u3Mah2WGjA8bFC2B0Ng==
+"@react-admin/ra-enterprise@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-1.0.0.tgz#aba18379e5a040e9b2589946c90b899497ebe8d5"
+  integrity sha512-HdEhsrjCyvwwKf7V7rU8LyKQjnMPQhfVlD63edDrODbPoyvQDrcbql8JYKwpxWiT3dUUOGsj0f+6YNA7ChMQbg==
   dependencies:
     "@react-admin/ra-editable-datagrid" "^1.0.0"
     "@react-admin/ra-form-layout" "^1.0.0"
@@ -1520,6 +1520,7 @@
     "@react-admin/ra-preferences" "^1.0.0"
     "@react-admin/ra-realtime" "^1.0.0"
     "@react-admin/ra-relationships" "^1.0.0"
+    "@react-admin/ra-search" "^1.0.0"
     "@react-admin/ra-tour" "^1.0.0"
     "@react-admin/ra-tree" "^1.0.0"
 
@@ -1535,10 +1536,10 @@
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
-"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.0.tgz#c7bb432dac7b70e18a75aab0443cf1d9a0879835"
-  integrity sha512-sArtafqm2mJfPVfWoQHQZV8PuEqaWxKwOP76lIXqpOXQ3ETGpjML1Xs7UGOdSzk6myn/O7gIhqgI2VmRfmWC+w==
+"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.1.tgz#02b2dd36fd07646c3c970501a33aebbca598d0cf"
+  integrity sha512-2Dz/3nmrcK6pvovtutdHaA6eu2rzOISFrMyeG7/aTYpLjZv1iFv/9s2z3tCzac63yyFbcdwYPWYBCkluICaG6g==
 
 "@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.1.0":
   version "1.1.0"
@@ -1558,6 +1559,11 @@
   version "1.0.0"
   resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-1.0.0.tgz#8723dee9298c5ebdd992c45fa3fc36405f259733"
   integrity sha512-DDoNhGhkdpImjT6DQ9LhjWPiiilvkKu2GeJYo47QNmJ1KIIZJWyy++H88U78Zo7+qTKwUfuYrTk9DC+EfTzl3g==
+
+"@react-admin/ra-search@^1.0.0", "@react-admin/ra-search@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.0.tgz#4f71d923b3508f39f62b6e8aa4e32de8c2846ee6"
+  integrity sha512-5LkNmP/nyet9WDapjoBHuNTDSedhaVBzJ7bYzl8MZT4/O0czuofHekNPOkqpDBtuoqW+gyXYl2mwlGcXs34bGA==
 
 "@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.0":
   version "1.1.0"
