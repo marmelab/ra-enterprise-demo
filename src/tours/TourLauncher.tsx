@@ -4,13 +4,15 @@ import { useTour } from '@react-admin/ra-tour';
 
 const TourLauncher = () => {
     const { tour } = useParams();
-    const [, { start }] = useTour();
+    const [{ running }, { start }] = useTour();
 
     useEffect(() => {
-        if (start) {
+        if (start && !running) {
             start(tour);
+            return;
         }
-    }, [start, tour]);
+    });
+
     return null;
 };
 
