@@ -1,5 +1,5 @@
-import { FC, useEffect } from 'react';
-import { useParams } from 'react-router';
+import React, { FC, useEffect } from 'react';
+import { Redirect, useParams } from 'react-router';
 import { useTour } from '@react-admin/ra-tour';
 
 const TourLauncher: FC = () => {
@@ -13,7 +13,7 @@ const TourLauncher: FC = () => {
         }
     });
 
-    return null;
+    return running ? <Redirect to="/" /> : null;
 };
 
 export default TourLauncher;
