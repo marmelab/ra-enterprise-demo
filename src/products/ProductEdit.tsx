@@ -21,21 +21,22 @@ import {
 } from 'react-admin';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useLock, useHasLock } from '@react-admin/ra-realtime';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import {
+    Card,
+    CardContent,
     InputAdornment,
     Typography,
     CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import { styles as createStyles } from './ProductCreate';
 import Preview from './Preview';
+
 import { Product } from '../types';
 
 interface ProductTitleProps {
