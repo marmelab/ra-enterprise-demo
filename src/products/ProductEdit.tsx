@@ -214,18 +214,30 @@ const ProductEdit: FC = props => {
 };
 
 const CustomToolbar: FC<any> = props => {
-    const { resource, record } = props;
+    const { resource, record, ...rest } = props;
+
+    const classes = useCustomToolbarStyles(rest);
     const { data: lock } = useHasLock(resource, record.id);
 
     const isMeLocker = lock?.identity === 'todousername';
 
     return (
-        <Toolbar {...props}>
+        <Toolbar className={classes.root} {...props}>
             <SaveButton disabled={!isMeLocker} />
             {!isMeLocker && <LockMessage identity={lock?.identity} />}
         </Toolbar>
     );
 };
+
+const useCustomToolbarStyles = makeStyles(theme => ({
+    root: {
+        backgroundColor: 'transparent',
+        padding: theme.spacing(0),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
+}));
 
 const useLockMessageStyles = makeStyles(theme => ({
     root: {
