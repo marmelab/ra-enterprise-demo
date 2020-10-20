@@ -82,33 +82,35 @@ const useStyles = makeStyles({
     },
 });
 
-const TabbedFormWithPreview = props => {
+const TabbedFormWithPreview: FC = props => {
     const classes = useStyles();
     useDefineAppLocation('catalog.products.edit', props);
     return (
         <FormWithRedirect
             {...props}
-            render={formProps => (
-                <div className={classes.container}>
-                    <Card>
-                        <CardContent className={classes.root}>
-                            <TabbedForm {...formProps} />
-                        </CardContent>
-                    </Card>
-                    <div data-testid="product-edit-preview">
-                        <FormDataConsumer>
-                            {({ formData }) => {
-                                return <Preview record={formData} />;
-                            }}
-                        </FormDataConsumer>
+            render={(formProps): JSX.Element => {
+                return (
+                    <div className={classes.container}>
+                        <Card>
+                            <CardContent className={classes.root}>
+                                <TabbedForm {...formProps} />
+                            </CardContent>
+                        </Card>
+                        <div data-testid="product-edit-preview">
+                            <FormDataConsumer>
+                                {({ formData }): JSX.Element => {
+                                    return <Preview record={formData} />;
+                                }}
+                            </FormDataConsumer>
+                        </div>
                     </div>
-                </div>
-            )}
+                );
+            }}
         />
     );
 };
 
-const ProductEdit = props => {
+const ProductEdit: FC = props => {
     const classes = useStyles();
     const { resource, id } = props;
     const notify = useNotify();
@@ -247,7 +249,7 @@ export default ProductEdit;
 // There is an issue with the ReferenceManyField or the Pagination component
 // which do not sanitize some props (addLabel, fullWidth)
 // TODO: Fix react-admin and remove this component
-const ReferenceManyFieldPagination = ({
+const ReferenceManyFieldPagination: FC = ({
     addLabel,
     fullWidth,
     ...props
@@ -255,4 +257,6 @@ const ReferenceManyFieldPagination = ({
     addLabel?: boolean;
     fullWidth?: boolean;
     [key: string]: any;
-}) => <Pagination {...props} />;
+}) => {
+    return <Pagination {...props} />;
+};
