@@ -54,7 +54,7 @@ const CustomBreadcrumb: FC = props => {
             <BreadcrumbItem
                 name="reviews"
                 label={translate('resources.reviews.name', 2)}
-                to="/reviews"
+                to="/reviews?filter={}"
             >
                 <BreadcrumbItem
                     name="status_filter"
