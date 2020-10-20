@@ -1524,10 +1524,10 @@
     "@react-admin/ra-tour" "^1.0.0"
     "@react-admin/ra-tree" "^1.0.0"
 
-"@react-admin/ra-form-layout@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.0.1.tgz#8330c7cbc49c3a610b9265467a14585b3f664297"
-  integrity sha512-1mOH7t24urnKRaaCPqxUlPxacbcvZvCXMsuDhlZWMXn/Xxm1yTdBLBiJvwr30BxN6gH2KO2bsJt1Z6FNd+Tt0A==
+"@react-admin/ra-form-layout@^1.0.0", "@react-admin/ra-form-layout@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.3.0.tgz#1426d818ebdf681c6fb934207ad44a7fc4a4ad25"
+  integrity sha512-sghH7ih4j0iAE02+YtjHVZWUqTbyvxAO5J3+v2QVrSZ9aLwppOjzlomucUzvEAFsiCsrBinQO/bokWIYwwecNQ==
 
 "@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.1.0":
   version "1.1.0"
