@@ -4,13 +4,12 @@ import {
     DateField,
     Edit,
     EditButton,
-    FormTab,
+    SimpleForm,
     NumberInput,
     Pagination,
     ReferenceInput,
     ReferenceManyField,
     SelectInput,
-    TabbedForm,
     TextField,
     TextInput,
     FormDataConsumer,
@@ -19,9 +18,11 @@ import {
     SaveButton,
     Toolbar,
 } from 'react-admin';
+import { Identifier } from 'ra-core';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useLock, useHasLock } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { AccordionSection } from '@react-admin/ra-form-layout';
 import {
     Card,
     CardContent,
@@ -46,7 +47,7 @@ interface ProductTitleProps {
 const ProductTitle: FC<ProductTitleProps> = ({ record }) =>
     record ? <span>Poster #{record.reference}</span> : null;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     ...createStyles,
     comment: {
         overflow: 'hidden',
@@ -79,10 +80,30 @@ const useStyles = makeStyles({
         '& .toolbar': {
             marginTop: 'auto',
         },
+        '& .MuiAccordionSummary-root': {
+            backgroundColor: 'transparent',
+            borderBottom: '0px',
+        },
+        '& .MuiAccordion-root': {
+            backgroundColor: theme.palette.grey[100],
+        },
+        '& .MuiAccordion-rounded': {
+            '&:first-child': {
+                borderTopLeftRadius: theme.spacing(0.5),
+                borderTopRightRadius: theme.spacing(0.5),
+            },
+            '&:last-child': {
+                borderBottomLeftRadius: theme.spacing(0.5),
+                borderBottomRightRadius: theme.spacing(0.5),
+            },
+        },
+        '& .MuiCollapse-container': {
+            backgroundColor: theme.palette.background.paper,
+        },
     },
-});
+}));
 
-const TabbedFormWithPreview: FC = props => {
+const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
     const classes = useStyles();
     useDefineAppLocation('catalog.products.edit', props);
     return (
@@ -93,7 +114,7 @@ const TabbedFormWithPreview: FC = props => {
                     <div className={classes.container}>
                         <Card>
                             <CardContent className={classes.root}>
-                                <TabbedForm {...formProps} />
+                                <SimpleForm {...formProps} />
                             </CardContent>
                         </Card>
                         <div data-testid="product-edit-preview">
@@ -110,7 +131,7 @@ const TabbedFormWithPreview: FC = props => {
     );
 };
 
-const ProductEdit: FC = props => {
+const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
     const classes = useStyles();
     const { resource, id } = props;
     const notify = useNotify();
@@ -133,13 +154,23 @@ const ProductEdit: FC = props => {
 
     return (
         <Edit {...props} title={<ProductTitle />} component="div">
-            <TabbedFormWithPreview toolbar={<CustomToolbar />}>
-                <FormTab label="resources.products.tabs.image">
-                    <Poster />
-                    <TextInput source="image" fullWidth />
-                    <TextInput source="thumbnail" fullWidth />
-                </FormTab>
-                <FormTab label="resources.products.tabs.details" path="details">
+            <ProductEditFormWithPreview toolbar={<CustomToolbar />}>
+                <Poster />
+                <TextInput source="image" fullWidth />
+                <TextInput source="thumbnail" fullWidth />
+                <AccordionSection
+                    label="resources.products.tabs.description"
+                    path="description"
+                    data-tour-id="description-tab"
+                    fullWidth
+                >
+                    <MarkdownInput source="description" label="" />
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.details"
+                    path="details"
+                    fullWidth
+                >
                     <TextInput source="reference" />
                     <NumberInput
                         source="price"
@@ -180,16 +211,14 @@ const ProductEdit: FC = props => {
                         <SelectInput source="name" />
                     </ReferenceInput>
                     <NumberInput source="stock" className={classes.stock} />
-                </FormTab>
-                <FormTab
-                    label="resources.products.tabs.description"
-                    path="description"
-                    data-tour-id="description-tab"
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.reviews"
+                    path="reviews"
+                    fullWidth
                 >
-                    <MarkdownInput source="description" label="" />
-                </FormTab>
-                <FormTab label="resources.products.tabs.reviews" path="reviews">
                     <ReferenceManyField
+                        label=""
                         reference="reviews"
                         target="product_id"
                         pagination={<ReferenceManyFieldPagination />}
@@ -207,37 +236,25 @@ const ProductEdit: FC = props => {
                             <EditButton />
                         </Datagrid>
                     </ReferenceManyField>
-                </FormTab>
-            </TabbedFormWithPreview>
+                </AccordionSection>
+            </ProductEditFormWithPreview>
         </Edit>
     );
 };
 
 const CustomToolbar: FC<any> = props => {
-    const { resource, record, ...rest } = props;
+    const { resource, record } = props;
 
-    const classes = useCustomToolbarStyles(rest);
     const { data: lock } = useHasLock(resource, record.id);
-
     const isMeLocker = lock?.identity === 'todousername';
 
     return (
-        <Toolbar className={classes.root} {...props}>
+        <Toolbar {...props}>
             <SaveButton disabled={!isMeLocker} />
             {!isMeLocker && <LockMessage identity={lock?.identity} />}
         </Toolbar>
     );
 };
-
-const useCustomToolbarStyles = makeStyles(theme => ({
-    root: {
-        backgroundColor: 'transparent',
-        padding: theme.spacing(0),
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-    },
-}));
 
 const useLockMessageStyles = makeStyles(theme => ({
     root: {
