@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { MarkdownField } from '@react-admin/ra-markdown';
 import { makeStyles, lighten, darken } from '@material-ui/core/styles';
+import { Identifier } from 'ra-core';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -68,7 +69,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Preview = ({ record }) => {
+const Preview: FC<{ record: Identifier }> = ({ record }) => {
     const { image, height, width, price, reference } = record;
     const classes = useStyles();
 

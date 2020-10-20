@@ -36,7 +36,7 @@ import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import { styles as createStyles } from './ProductCreate';
-import Preview from './Preview';
+import ProductPreview from './ProductPreview';
 
 import { Product } from '../types';
 
@@ -120,7 +120,7 @@ const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
                         <div data-testid="product-edit-preview">
                             <FormDataConsumer>
                                 {({ formData }): JSX.Element => {
-                                    return <Preview record={formData} />;
+                                    return <ProductPreview record={formData} />;
                                 }}
                             </FormDataConsumer>
                         </div>
