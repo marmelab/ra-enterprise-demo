@@ -132,7 +132,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: 'small',
         // Display the Breadcrumb over the custom Layout of some pages by adding a zIndex and a maxWidth
         // @see "src/products/ProductList.tsx" or "src/visitors/VisitorList.tsx"
-        maxWidth: '400px',
+        maxWidth: '700px',
         zIndex: 1,
         '& a': {
             pointerEvents: 'visible',
