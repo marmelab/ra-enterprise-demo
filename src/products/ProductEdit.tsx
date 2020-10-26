@@ -47,7 +47,7 @@ interface ProductTitleProps {
 const ProductTitle: FC<ProductTitleProps> = ({ record }) =>
     record ? <span>Poster #{record.reference}</span> : null;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     ...createStyles,
     comment: {
         overflow: 'hidden',
@@ -80,25 +80,18 @@ const useStyles = makeStyles(theme => ({
         '& .toolbar': {
             marginTop: 'auto',
         },
-        '& .MuiAccordionSummary-root': {
-            backgroundColor: 'transparent',
-            borderBottom: '0px',
+    },
+}));
+
+const useAccordionStyles = makeStyles(theme => ({
+    rounded: {
+        '&:first-child': {
+            borderTopLeftRadius: theme.spacing(0.5),
+            borderTopRightRadius: theme.spacing(0.5),
         },
-        '& .MuiAccordion-root': {
-            backgroundColor: theme.palette.grey[100],
-        },
-        '& .MuiAccordion-rounded': {
-            '&:first-child': {
-                borderTopLeftRadius: theme.spacing(0.5),
-                borderTopRightRadius: theme.spacing(0.5),
-            },
-            '&:last-child': {
-                borderBottomLeftRadius: theme.spacing(0.5),
-                borderBottomRightRadius: theme.spacing(0.5),
-            },
-        },
-        '& .MuiCollapse-container': {
-            backgroundColor: theme.palette.background.paper,
+        '&:last-child': {
+            borderBottomLeftRadius: theme.spacing(0.5),
+            borderBottomRightRadius: theme.spacing(0.5),
         },
     },
 }));
@@ -132,8 +125,10 @@ const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
 };
 
 const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
-    const classes = useStyles();
     const { resource, id } = props;
+
+    const classes = useStyles();
+    const accordionClasses = useAccordionStyles();
     const notify = useNotify();
 
     const { loading } = useLock(resource, id, 'todousername', {
@@ -161,6 +156,9 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 <AccordionSection
                     label="resources.products.tabs.description"
                     path="description"
+                    classes={{
+                        accordion: accordionClasses,
+                    }}
                     data-tour-id="description-tab"
                     fullWidth
                 >
@@ -169,6 +167,9 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 <AccordionSection
                     label="resources.products.tabs.details"
                     path="details"
+                    classes={{
+                        accordion: accordionClasses,
+                    }}
                     fullWidth
                 >
                     <TextInput source="reference" />
@@ -215,6 +216,9 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 <AccordionSection
                     label="resources.products.tabs.reviews"
                     path="reviews"
+                    classes={{
+                        accordion: accordionClasses,
+                    }}
                     fullWidth
                 >
                     <ReferenceManyField
