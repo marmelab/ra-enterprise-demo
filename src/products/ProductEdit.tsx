@@ -4,13 +4,12 @@ import {
     DateField,
     Edit,
     EditButton,
-    FormTab,
+    SimpleForm,
     NumberInput,
     Pagination,
     ReferenceInput,
     ReferenceManyField,
     SelectInput,
-    TabbedForm,
     TextField,
     TextInput,
     FormDataConsumer,
@@ -19,23 +18,26 @@ import {
     SaveButton,
     Toolbar,
 } from 'react-admin';
+import { Identifier } from 'ra-core';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useLock, useHasLock } from '@react-admin/ra-realtime';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { AccordionSection } from '@react-admin/ra-form-layout';
 import {
+    Card,
+    CardContent,
     InputAdornment,
     Typography,
     CircularProgress,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import { styles as createStyles } from './ProductCreate';
-import Preview from './Preview';
+import ProductPreview from './ProductPreview';
+
 import { Product } from '../types';
 
 interface ProductTitleProps {
@@ -81,35 +83,52 @@ const useStyles = makeStyles({
     },
 });
 
-const TabbedFormWithPreview = props => {
+const useAccordionStyles = makeStyles(theme => ({
+    rounded: {
+        '&:first-child': {
+            borderTopLeftRadius: theme.spacing(0.5),
+            borderTopRightRadius: theme.spacing(0.5),
+        },
+        '&:last-child': {
+            borderBottomLeftRadius: theme.spacing(0.5),
+            borderBottomRightRadius: theme.spacing(0.5),
+        },
+    },
+}));
+
+const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
     const classes = useStyles();
     useDefineAppLocation('catalog.products.edit', props);
     return (
         <FormWithRedirect
             {...props}
-            render={formProps => (
-                <div className={classes.container}>
-                    <Card>
-                        <CardContent className={classes.root}>
-                            <TabbedForm {...formProps} />
-                        </CardContent>
-                    </Card>
-                    <div data-testid="product-edit-preview">
-                        <FormDataConsumer>
-                            {({ formData }) => {
-                                return <Preview record={formData} />;
-                            }}
-                        </FormDataConsumer>
+            render={(formProps): JSX.Element => {
+                return (
+                    <div className={classes.container}>
+                        <Card>
+                            <CardContent className={classes.root}>
+                                <SimpleForm {...formProps} />
+                            </CardContent>
+                        </Card>
+                        <div data-testid="product-edit-preview">
+                            <FormDataConsumer>
+                                {({ formData }): JSX.Element => {
+                                    return <ProductPreview record={formData} />;
+                                }}
+                            </FormDataConsumer>
+                        </div>
                     </div>
-                </div>
-            )}
+                );
+            }}
         />
     );
 };
 
-const ProductEdit = props => {
-    const classes = useStyles();
+const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
     const { resource, id } = props;
+
+    const classes = useStyles();
+    const accordionClasses = useAccordionStyles();
     const notify = useNotify();
 
     const { loading } = useLock(resource, id, 'todousername', {
@@ -130,13 +149,29 @@ const ProductEdit = props => {
 
     return (
         <Edit {...props} title={<ProductTitle />} component="div">
-            <TabbedFormWithPreview toolbar={<CustomToolbar />}>
-                <FormTab label="resources.products.tabs.image">
-                    <Poster />
-                    <TextInput source="image" fullWidth />
-                    <TextInput source="thumbnail" fullWidth />
-                </FormTab>
-                <FormTab label="resources.products.tabs.details" path="details">
+            <ProductEditFormWithPreview toolbar={<CustomToolbar />}>
+                <Poster />
+                <TextInput source="image" fullWidth />
+                <TextInput source="thumbnail" fullWidth />
+                <AccordionSection
+                    label="resources.products.tabs.description"
+                    path="description"
+                    classes={{
+                        accordion: accordionClasses,
+                    }}
+                    data-tour-id="description-tab"
+                    fullWidth
+                >
+                    <MarkdownInput source="description" label="" />
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.details"
+                    path="details"
+                    classes={{
+                        accordion: accordionClasses,
+                    }}
+                    fullWidth
+                >
                     <TextInput source="reference" />
                     <NumberInput
                         source="price"
@@ -177,16 +212,17 @@ const ProductEdit = props => {
                         <SelectInput source="name" />
                     </ReferenceInput>
                     <NumberInput source="stock" className={classes.stock} />
-                </FormTab>
-                <FormTab
-                    label="resources.products.tabs.description"
-                    path="description"
-                    data-tour-id="description-tab"
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.reviews"
+                    path="reviews"
+                    classes={{
+                        accordion: accordionClasses,
+                    }}
+                    fullWidth
                 >
-                    <MarkdownInput source="description" label="" />
-                </FormTab>
-                <FormTab label="resources.products.tabs.reviews" path="reviews">
                     <ReferenceManyField
+                        label=""
                         reference="reviews"
                         target="product_id"
                         pagination={<ReferenceManyFieldPagination />}
@@ -204,16 +240,16 @@ const ProductEdit = props => {
                             <EditButton />
                         </Datagrid>
                     </ReferenceManyField>
-                </FormTab>
-            </TabbedFormWithPreview>
+                </AccordionSection>
+            </ProductEditFormWithPreview>
         </Edit>
     );
 };
 
 const CustomToolbar: FC<any> = props => {
     const { resource, record } = props;
-    const { data: lock } = useHasLock(resource, record.id);
 
+    const { data: lock } = useHasLock(resource, record.id);
     const isMeLocker = lock?.identity === 'todousername';
 
     return (
@@ -246,7 +282,7 @@ export default ProductEdit;
 // There is an issue with the ReferenceManyField or the Pagination component
 // which do not sanitize some props (addLabel, fullWidth)
 // TODO: Fix react-admin and remove this component
-const ReferenceManyFieldPagination = ({
+const ReferenceManyFieldPagination: FC = ({
     addLabel,
     fullWidth,
     ...props
@@ -254,4 +290,6 @@ const ReferenceManyFieldPagination = ({
     addLabel?: boolean;
     fullWidth?: boolean;
     [key: string]: any;
-}) => <Pagination {...props} />;
+}) => {
+    return <Pagination {...props} />;
+};

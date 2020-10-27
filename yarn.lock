@@ -1524,10 +1524,10 @@
     "@react-admin/ra-tour" "^1.0.0"
     "@react-admin/ra-tree" "^1.0.0"
 
-"@react-admin/ra-form-layout@^1.0.0":
-  version "1.0.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.0.1.tgz#8330c7cbc49c3a610b9265467a14585b3f664297"
-  integrity sha512-1mOH7t24urnKRaaCPqxUlPxacbcvZvCXMsuDhlZWMXn/Xxm1yTdBLBiJvwr30BxN6gH2KO2bsJt1Z6FNd+Tt0A==
+"@react-admin/ra-form-layout@^1.0.0", "@react-admin/ra-form-layout@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.4.0.tgz#cba375caf84726fd413443ea2c0d80d82f31ccc2"
+  integrity sha512-p+29Ax282pG2/DYJnIbMSX2BL9uoaRfmg08kRlAdabVJNq/a7mC0GghNa5jysdVAwakb3/LNxwJPtFyFGqiuzg==
 
 "@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.1.0":
   version "1.1.0"
@@ -1536,10 +1536,10 @@
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
-"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.1.tgz#02b2dd36fd07646c3c970501a33aebbca598d0cf"
-  integrity sha512-2Dz/3nmrcK6pvovtutdHaA6eu2rzOISFrMyeG7/aTYpLjZv1iFv/9s2z3tCzac63yyFbcdwYPWYBCkluICaG6g==
+"@react-admin/ra-navigation@^1.0.0", "@react-admin/ra-navigation@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.2.tgz#54b1e1afb5ca78946ed491c028ebaba539bb438f"
+  integrity sha512-V1PbvzT4bVzQZCg7qpVSmi3wFokVacx16vNN9hjv2bYsrALUgCG9xWdd1CVR6GCUiAOzNM/0mZO36qzZRB5fHA==
 
 "@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.1.0":
   version "1.1.0"
@@ -1560,10 +1560,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-1.0.0.tgz#8723dee9298c5ebdd992c45fa3fc36405f259733"
   integrity sha512-DDoNhGhkdpImjT6DQ9LhjWPiiilvkKu2GeJYo47QNmJ1KIIZJWyy++H88U78Zo7+qTKwUfuYrTk9DC+EfTzl3g==
 
-"@react-admin/ra-search@^1.0.0", "@react-admin/ra-search@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.0.tgz#4f71d923b3508f39f62b6e8aa4e32de8c2846ee6"
-  integrity sha512-5LkNmP/nyet9WDapjoBHuNTDSedhaVBzJ7bYzl8MZT4/O0czuofHekNPOkqpDBtuoqW+gyXYl2mwlGcXs34bGA==
+"@react-admin/ra-search@^1.0.0", "@react-admin/ra-search@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.1.tgz#c6180dcf332da818b2fe376e343e04d4f3f81afc"
+  integrity sha512-CWNJ+GzQ4yahmBAZlDLivXylW1IG47NSfNNMMSgdxHwCF0+9/q9XDrATRsjbqAn59CSObUUe0ZrlidXLDrPo4Q==
 
 "@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.0":
   version "1.1.0"
