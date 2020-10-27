@@ -1,17 +1,25 @@
 import simpleRestProvider from 'ra-data-simple-rest';
 import compose from 'recompose/compose';
 import { addLocksMethodsBasedOnALockResource } from '@react-admin/ra-realtime';
-
 import { addTreeMethodsBasedOnChildren } from '@react-admin/ra-tree';
-import addRealtimeMethodsWithFakeTransport from './addRealtimeMethodsWithFakeTransport';
+import { addSearchMethod } from '@react-admin/ra-search';
 
+import addRealtimeMethodsWithFakeTransport from './addRealtimeMethodsWithFakeTransport';
 import localStorageProvider from './localStorageProvider';
+
 import defaultState from '../tours/data';
 
 const restProvider = compose(
     addLocksMethodsBasedOnALockResource,
     addRealtimeMethodsWithFakeTransport,
-    addTreeMethodsBasedOnChildren
+    addTreeMethodsBasedOnChildren,
+    dataProvider =>
+        addSearchMethod(dataProvider, [
+            'customers',
+            'orders',
+            'products',
+            'reviews',
+        ])
 )(simpleRestProvider('http://localhost:4000'));
 
 const customProviders = {
