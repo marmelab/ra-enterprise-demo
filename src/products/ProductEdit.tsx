@@ -47,7 +47,7 @@ interface ProductTitleProps {
 const ProductTitle: FC<ProductTitleProps> = ({ record }) =>
     record ? <span>Poster #{record.reference}</span> : null;
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles({
     ...createStyles,
     comment: {
         overflow: 'hidden',
@@ -81,7 +81,7 @@ const useStyles = makeStyles(() => ({
             marginTop: 'auto',
         },
     },
-}));
+});
 
 const useAccordionStyles = makeStyles(theme => ({
     rounded: {
