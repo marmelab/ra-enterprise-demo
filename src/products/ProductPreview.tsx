@@ -100,7 +100,7 @@ const Preview: FC<{ record: any }> = ({ record }) => {
                     <Typography variant="caption">
                         {width} x {height}
                     </Typography>
-                    <Typography variant="caption">{price} €</Typography>
+                    <Typography variant="caption">{price}€</Typography>
                 </div>
                 <MarkdownField record={record} label="" source="description" />
             </div>
