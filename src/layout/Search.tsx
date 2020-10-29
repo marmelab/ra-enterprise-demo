@@ -9,6 +9,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Rating } from '@material-ui/lab';
 import { Link as RouterLink } from 'react-router-dom';
 import {
     Search,
@@ -40,6 +41,8 @@ const CustomSearchResultItem = props => {
             return <CustomerListItem {...rest} data={data} onClick={onClose} />;
         case 'products':
             return <ProductListItem {...rest} data={data} onClick={onClose} />;
+        case 'reviews':
+            return <ReviewListItem {...rest} data={data} onClick={onClose} />;
         default:
             return null;
     }
@@ -177,6 +180,37 @@ const useProductListItemStyles = makeStyles(theme => ({
         },
     },
 }));
+
+const ReviewListItem = props => {
+    const { data, onClick } = props;
+
+    const {
+        content: { record },
+    } = data;
+
+    if (!record) {
+        return null;
+    }
+
+    return (
+        <ListItem
+            button
+            component={CustomLink}
+            data={data}
+            onClick={onClick}
+            alignItems="flex-start"
+        >
+            <ListItemText
+                primary={<Rating value={record.rating} readOnly />}
+                secondary={
+                    <Typography variant="caption" color="textPrimary">
+                        {record.comment}
+                    </Typography>
+                }
+            />
+        </ListItem>
+    );
+};
 
 const CustomLink = props => {
     const { data, onClick, ...rest } = props;
