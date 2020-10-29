@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: theme.spacing(1),
     },
     logo: {
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('lg')]: {
             position: 'absolute',
             left: '50%',
             top: '50%',
