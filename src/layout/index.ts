@@ -1,7 +1,8 @@
 import AppBar from './AppBar';
+import Breadcrumb from './Breadcrumb';
 import Layout from './Layout';
 import Login from './Login';
 import Menu from './Menu';
-import Breadcrumb from './Breadcrumb';
+import Search from './Search';
 
-export { AppBar, Layout, Login, Menu, Breadcrumb };
+export { AppBar, Breadcrumb, Layout, Login, Menu, Search };

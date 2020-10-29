@@ -6,12 +6,12 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import TourIcon from '@material-ui/icons/Flag';
 import { Link } from 'react-router-dom';
-import { Search } from '@react-admin/ra-search';
 import {
     ToggleThemeButton,
     LanguageSwitcher,
 } from '@react-admin/ra-preferences';
 
+import { Search } from './index';
 import Logo from './Logo';
 
 const useStyles = makeStyles(theme => ({
