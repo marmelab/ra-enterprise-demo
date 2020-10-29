@@ -41,6 +41,8 @@ const CustomSearchResultItem = props => {
             return <CustomerListItem {...rest} data={data} onClick={onClose} />;
         case 'products':
             return <ProductListItem {...rest} data={data} onClick={onClose} />;
+        case 'commands':
+            return <CommandListItem {...rest} data={data} onClick={onClose} />;
         case 'reviews':
             return <ReviewListItem {...rest} data={data} onClick={onClose} />;
         default:
@@ -180,6 +182,47 @@ const useProductListItemStyles = makeStyles(theme => ({
         },
     },
 }));
+
+const CommandListItem = props => {
+    const { data, onClick } = props;
+
+    const {
+        content: { record },
+    } = data;
+
+    if (!record) {
+        return null;
+    }
+
+    return (
+        <ListItem
+            button
+            component={CustomLink}
+            data={data}
+            onClick={onClick}
+            alignItems="flex-start"
+        >
+            <Box>
+                <Box>
+                    <Typography variant="caption" color="textPrimary">
+                        {record.date}
+                    </Typography>
+                    <Typography variant="caption" color="textPrimary">
+                        {record.status}
+                    </Typography>
+                </Box>
+                <Box>
+                    <Typography variant="caption" color="textPrimary">
+                        {record.reference}
+                    </Typography>
+                    <Typography variant="caption" color="textPrimary">
+                        {record.total}€
+                    </Typography>
+                </Box>
+            </Box>
+        </ListItem>
+    );
+};
 
 const ReviewListItem = props => {
     const { data, onClick } = props;
