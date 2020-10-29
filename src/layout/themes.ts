@@ -40,6 +40,7 @@ export const darkTheme: ThemeOptions = {
             },
             inputBase: {
                 background: fade(darkPalette.common.black, 0.04),
+                borderRadius: 10,
                 '&:hover': {
                     background: fade(darkPalette.common.black, 0.1),
                 },
@@ -129,6 +130,7 @@ export const lightTheme: ThemeOptions = {
             },
             inputBase: {
                 background: fade(lightPalette.common.black, 0.04),
+                borderRadius: 10,
                 '&:hover': {
                     background: fade(lightPalette.common.black, 0.1),
                 },
