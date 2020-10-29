@@ -6,6 +6,7 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemText,
+    Tooltip,
     Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -246,9 +247,17 @@ const ReviewListItem = props => {
             <ListItemText
                 primary={<Rating value={record.rating} readOnly />}
                 secondary={
-                    <Typography variant="caption" color="textPrimary">
-                        {record.comment}
-                    </Typography>
+                    record.comment.length <= 150 ? (
+                        <Typography variant="caption" color="textPrimary">
+                            {record.comment}
+                        </Typography>
+                    ) : (
+                        <Tooltip title={record.comment}>
+                            <Typography variant="caption" color="textPrimary">
+                                {truncateString(record.comment, 150)}
+                            </Typography>
+                        </Tooltip>
+                    )
                 }
             />
         </ListItem>
@@ -267,3 +276,13 @@ const CustomLink = props => {
         />
     );
 };
+
+function truncateString(text: string, max: number): string {
+    // If the length of text is less than or equal to num
+    // just return text--don't truncate it.
+    if (text.length <= max) {
+        return text;
+    }
+    // Return text truncated with '...' concatenated to the end of text.
+    return text.slice(0, max) + '...';
+}
