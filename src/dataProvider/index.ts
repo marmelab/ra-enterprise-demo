@@ -13,13 +13,7 @@ const restProvider = compose(
     addLocksMethodsBasedOnALockResource,
     addRealtimeMethodsWithFakeTransport,
     addTreeMethodsBasedOnChildren,
-    dataProvider =>
-        addSearchMethod(dataProvider, [
-            'customers',
-            'orders',
-            'products',
-            'reviews',
-        ])
+    dataProvider => addSearchMethod(dataProvider, ['customers', 'products'])
 )(simpleRestProvider('http://localhost:4000'));
 
 const customProviders = {
