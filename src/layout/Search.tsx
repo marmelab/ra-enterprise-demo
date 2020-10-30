@@ -332,7 +332,7 @@ const CommandListItem: FC<any> = props => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <OrderStatus status={record.status} />
+                        <CommandStatus status={record.status} />
                     </Grid>
                 </Grid>
                 <Grid container item xs>
@@ -357,8 +357,8 @@ const useCommandListItemStyles = makeStyles(theme => ({
     },
 }));
 
-const OrderStatus: FC<{ status: string }> = ({ status }) => {
-    const classes = useOrderStatusStyles();
+const CommandStatus: FC<{ status: string }> = ({ status }) => {
+    const classes = useCommandStatusStyles();
 
     return (
         <div
@@ -375,7 +375,7 @@ const OrderStatus: FC<{ status: string }> = ({ status }) => {
     );
 };
 
-const useOrderStatusStyles = makeStyles(theme => ({
+const useCommandStatusStyles = makeStyles(theme => ({
     root: {
         maxWidth: 64,
         padding: theme.spacing(0.25, 1),
