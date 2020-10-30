@@ -334,21 +334,27 @@ const ReviewListItem = props => {
         >
             <ListItemText
                 primary={<Rating value={record.rating} readOnly />}
-                secondary={
-                    record.comment.length <= 150 ? (
-                        <Typography variant="caption" color="textPrimary">
-                            {record.comment}
-                        </Typography>
-                    ) : (
-                        <Tooltip title={record.comment}>
-                            <Typography variant="caption" color="textPrimary">
-                                {truncateString(record.comment, 150)}
-                            </Typography>
-                        </Tooltip>
-                    )
-                }
+                secondary={<ReviewComment comment={record.comment} />}
             />
         </ListItem>
+    );
+};
+
+const ReviewComment = ({ comment }) => {
+    return (
+        <div>
+            {comment.length <= 300 ? (
+                <Typography variant="caption" color="textPrimary">
+                    {comment}
+                </Typography>
+            ) : (
+                <Tooltip title={comment}>
+                    <Typography variant="caption" color="textPrimary">
+                        {truncateString(comment, 300)}
+                    </Typography>
+                </Tooltip>
+            )}
+        </div>
     );
 };
 
