@@ -1,8 +1,10 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
+import { useTranslate } from 'react-admin';
 import {
     Avatar,
     Box,
+    Grid,
     Link,
     ListItem,
     ListItemAvatar,
@@ -193,6 +195,9 @@ const CommandListItem = props => {
         content: { record },
     } = data;
 
+    const classes = useCommandListItemStyles();
+    const translate = useTranslate();
+
     if (!record) {
         return null;
     }
@@ -205,27 +210,61 @@ const CommandListItem = props => {
             onClick={onClick}
             alignItems="flex-start"
         >
-            <Box>
-                <Box>
-                    <Typography variant="caption" color="textPrimary">
-                        {record.date}
-                    </Typography>
-                    <Typography variant="caption" color="textPrimary">
-                        {record.status}
-                    </Typography>
-                </Box>
-                <Box>
-                    <Typography variant="caption" color="textPrimary">
-                        {record.reference}
-                    </Typography>
-                    <Typography variant="caption" color="textPrimary">
-                        {record.total}€
-                    </Typography>
-                </Box>
-            </Box>
+            <Grid className={classes.root} container spacing={2}>
+                <Grid container item xs={6}>
+                    <Grid item xs={12}>
+                        <Typography
+                            className={classes.reference}
+                            variant="body2"
+                            color="textPrimary"
+                            gutterBottom
+                        >
+                            {record.reference}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="body1"
+                            color="textPrimary"
+                            gutterBottom
+                        >
+                            {new Date(record.date).toLocaleDateString()}
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <Grid container item xs={6}>
+                    <Grid item xs={12}>
+                        <Typography
+                            className={classes.total}
+                            variant="caption"
+                            color="textPrimary"
+                        >
+                            {`${translate(
+                                'resources.commands.fields.basket.total'
+                            )} ${record.total}`}
+                            €
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <OrderStatus status={record.status} />
+                    </Grid>
+                </Grid>
+            </Grid>
         </ListItem>
     );
 };
+
+const useCommandListItemStyles = makeStyles(theme => ({
+    root: {
+        padding: theme.spacing(1, 0),
+    },
+    reference: {
+        fontWeight: theme.typography.fontWeightBold,
+    },
+    total: {
+        fontWeight: theme.typography.fontWeightBold,
+    },
+}));
 
 const OrderStatus = ({ status }) => {
     const classes = useOrderStatusStyles();
