@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import classnames from 'classnames';
-import { useTranslate } from 'react-admin';
+import { useTranslate, useDataProvider } from 'react-admin';
 import {
     Avatar,
     Box,
@@ -9,6 +9,7 @@ import {
     ListItem,
     ListItemAvatar,
     ListItemText,
+    CircularProgress,
     Tooltip,
     Typography,
 } from '@material-ui/core';
@@ -75,7 +76,10 @@ const CustomerListItem = props => {
         return null;
     }
 
-    const fullname = `${record.first_name} ${record.last_name}`;
+    const fullname = getFullname({
+        firstName: record.first_name,
+        lastName: record.last_name,
+    });
 
     return (
         <ListItem
@@ -199,7 +203,6 @@ const useProductListItemStyles = makeStyles(theme => ({
 
 const CommandListItem = props => {
     const { data, onClick } = props;
-
     const {
         content: { record },
     } = data;
@@ -220,7 +223,7 @@ const CommandListItem = props => {
             alignItems="flex-start"
         >
             <Grid className={classes.root} container spacing={2}>
-                <Grid container item xs={6}>
+                <Grid container item xs>
                     <Grid item xs={12}>
                         <Typography
                             className={classes.reference}
@@ -241,7 +244,7 @@ const CommandListItem = props => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <Grid container item xs={6}>
+                <Grid container item xs>
                     <Grid item xs={12}>
                         <Typography
                             className={classes.total}
@@ -256,6 +259,11 @@ const CommandListItem = props => {
                     </Grid>
                     <Grid item xs={12}>
                         <OrderStatus status={record.status} />
+                    </Grid>
+                </Grid>
+                <Grid container item xs>
+                    <Grid item xs={12}>
+                        <Customer customerId={record.customer_id} />
                     </Grid>
                 </Grid>
             </Grid>
@@ -322,6 +330,44 @@ const useOrderStatusStyles = makeStyles(theme => ({
     },
 }));
 
+const Customer = ({ customerId }) => {
+    const dataProvider = useDataProvider();
+
+    const [customerRecord, setCustomerRecord] = useState({
+        first_name: '',
+        last_name: '',
+    });
+    const [customerLoading, setCustomerLoading] = useState(true);
+
+    useEffect(() => {
+        if (!dataProvider || customerId == null) {
+            return;
+        }
+        dataProvider
+            .getOne('customers', { id: customerId })
+            .then(({ data }) => {
+                setCustomerRecord(data);
+                setCustomerLoading(false);
+            })
+            .catch(() => {
+                setCustomerLoading(false);
+            });
+    }, [dataProvider, customerId]);
+
+    const fullname = getFullname({
+        firstName: customerRecord.first_name,
+        lastName: customerRecord.last_name,
+    });
+
+    return customerLoading ? (
+        <CircularProgress size={20} />
+    ) : (
+        <Typography variant="body2" color="textPrimary" gutterBottom>
+            {fullname}
+        </Typography>
+    );
+};
+
 const ReviewListItem = props => {
     const { data, onClick } = props;
 
@@ -379,6 +425,10 @@ const CustomLink = props => {
         />
     );
 };
+
+function getFullname({ firstName, lastName }) {
+    return `${firstName} ${lastName}`;
+}
 
 function truncateString(text: string, max: number): string {
     // If the length of text is less than or equal to num
