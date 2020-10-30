@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import classnames from 'classnames';
 import {
     Avatar,
     Box,
@@ -9,7 +10,8 @@ import {
     Tooltip,
     Typography,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, lighten } from '@material-ui/core/styles';
+import { blue } from '@material-ui/core/colors';
 import { Rating } from '@material-ui/lab';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -224,6 +226,53 @@ const CommandListItem = props => {
         </ListItem>
     );
 };
+
+const OrderStatus = ({ status }) => {
+    const classes = useOrderStatusStyles();
+
+    return (
+        <div
+            className={classnames(classes.root, {
+                [classes.ordered]: status === 'ordered',
+                [classes.delivered]: status === 'delivered',
+                [classes.cancelled]: status === 'cancelled',
+            })}
+        >
+            <Typography className={classes.status} variant="caption">
+                {status}
+            </Typography>
+        </div>
+    );
+};
+
+const useOrderStatusStyles = makeStyles(theme => ({
+    root: {
+        maxWidth: 64,
+        padding: theme.spacing(0.25, 1),
+        borderRadius: theme.shape.borderRadius,
+        textAlign: 'center',
+    },
+    ordered: {
+        backgroundColor: lighten(blue[300], 0.3),
+        color: theme.palette.getContrastText(lighten(blue[300], 0.3)),
+    },
+    delivered: {
+        backgroundColor: lighten(theme.palette.success.main, 0.3),
+        color: theme.palette.getContrastText(
+            lighten(theme.palette.success.main, 0.3)
+        ),
+    },
+    cancelled: {
+        backgroundColor: lighten(theme.palette.error.main, 0.3),
+        color: theme.palette.getContrastText(
+            lighten(theme.palette.error.main, 0.3)
+        ),
+    },
+    status: {
+        color: 'inherit',
+        textTransform: 'capitalize',
+    },
+}));
 
 const ReviewListItem = props => {
     const { data, onClick } = props;
