@@ -44,7 +44,7 @@ const useSearchResultsPanelStyles = makeStyles(() => ({
 
 export default CustomSearch;
 
-const CustomSearchResultItem = props => {
+const CustomSearchResultItem: FC<any> = props => {
     const { data, onClose, ...rest } = props;
 
     if (!data) {
@@ -65,9 +65,8 @@ const CustomSearchResultItem = props => {
     }
 };
 
-const CustomerListItem = props => {
+const CustomerListItem: FC<any> = props => {
     const { data, onClick } = props;
-
     const {
         content: { record },
     } = data;
@@ -108,9 +107,8 @@ const CustomerListItem = props => {
     );
 };
 
-const ProductListItem = props => {
+const ProductListItem: FC<any> = props => {
     const { data, onClick } = props;
-
     const {
         content: { record },
     } = data;
@@ -201,7 +199,7 @@ const useProductListItemStyles = makeStyles(theme => ({
     },
 }));
 
-const CommandListItem = props => {
+const CommandListItem: FC<any> = props => {
     const { data, onClick } = props;
     const {
         content: { record },
@@ -283,7 +281,7 @@ const useCommandListItemStyles = makeStyles(theme => ({
     },
 }));
 
-const OrderStatus = ({ status }) => {
+const OrderStatus: FC<{ status: string }> = ({ status }) => {
     const classes = useOrderStatusStyles();
 
     return (
@@ -330,7 +328,7 @@ const useOrderStatusStyles = makeStyles(theme => ({
     },
 }));
 
-const Customer = ({ customerId }) => {
+const Customer: FC<{ customerId?: number | string }> = ({ customerId }) => {
     const dataProvider = useDataProvider();
 
     const [customerRecord, setCustomerRecord] = useState({
@@ -368,9 +366,8 @@ const Customer = ({ customerId }) => {
     );
 };
 
-const ReviewListItem = props => {
+const ReviewListItem: FC<any> = props => {
     const { data, onClick } = props;
-
     const {
         content: { record },
     } = data;
@@ -395,7 +392,7 @@ const ReviewListItem = props => {
     );
 };
 
-const ReviewComment = ({ comment }) => {
+const ReviewComment: FC<{ comment: string }> = ({ comment }) => {
     return (
         <div>
             {comment.length <= 300 ? (
@@ -413,7 +410,7 @@ const ReviewComment = ({ comment }) => {
     );
 };
 
-const CustomLink = props => {
+const CustomLink: FC<any> = props => {
     const { data, onClick, ...rest } = props;
 
     return (
@@ -426,7 +423,13 @@ const CustomLink = props => {
     );
 };
 
-function getFullname({ firstName, lastName }) {
+function getFullname({
+    firstName,
+    lastName,
+}: {
+    firstName: string;
+    lastName: string;
+}): string {
     return `${firstName} ${lastName}`;
 }
 
