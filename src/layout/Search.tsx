@@ -23,14 +23,23 @@ import {
 } from '@react-admin/ra-search';
 
 const CustomSearch: FC<SearchProps> = props => {
+    const resultsPanelClasses = useSearchResultsPanelStyles();
+
     return (
         <Search {...props}>
-            <SearchResultsPanel>
+            <SearchResultsPanel classes={resultsPanelClasses}>
                 <CustomSearchResultItem />
             </SearchResultsPanel>
         </Search>
     );
 };
+
+const useSearchResultsPanelStyles = makeStyles(() => ({
+    root: {
+        maxHeight: 'calc(100vh - 100px)',
+        maxWidth: 512,
+    },
+}));
 
 export default CustomSearch;
 
