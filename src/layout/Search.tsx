@@ -155,7 +155,7 @@ const ProductListItem: FC<any> = props => {
                         flexDirection="column"
                     >
                         <Typography variant="caption" color="textPrimary">
-                            {record.width} x {record.height}
+                            {record.width} x {record.height} cm
                         </Typography>
                         <Typography variant="caption" color="textPrimary">
                             {record.price}€

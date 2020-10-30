@@ -98,7 +98,7 @@ const Preview: FC<{ record: any }> = ({ record }) => {
                 <Typography variant="h1">{reference}</Typography>
                 <div className={classes.details}>
                     <Typography variant="caption">
-                        {width} x {height}
+                        {width} x {height} cm
                     </Typography>
                     <Typography variant="caption">{price}€</Typography>
                 </div>
