@@ -12,3 +12,6 @@ start: ## Run the project for development
 
 build: ## Build the project for production
 	yarn build
+
+deploy: ## Build and push to gh-pages to publish the site
+	yarn deploy
