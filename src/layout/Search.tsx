@@ -1,4 +1,4 @@
-import React, { cloneElement, FC } from 'react';
+import React, { cloneElement, FC, Fragment } from 'react';
 import * as inflection from 'inflection';
 import { useTranslate } from 'react-admin';
 import {
@@ -59,7 +59,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
     return (
         <List dense className={classes.root} {...rest}>
             {groupedData.map(group => (
-                <>
+                <Fragment key={group.label}>
                     <ListSubheader
                         role="presentation"
                         className={classes.header}
@@ -91,7 +91,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                             onClose,
                         })
                     )}
-                </>
+                </Fragment>
             ))}
         </List>
     );
