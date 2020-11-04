@@ -7,8 +7,15 @@ import {
     Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CommentIcon from '@material-ui/icons/Comment';
 
 import { SearchListItemLink } from './index';
+import { useTranslate } from 'react-admin';
+import { Stats } from './Stats';
+
+const secondaryTypographyProps = {
+    component: 'div',
+};
 
 export const ProductListItem: FC<any> = props => {
     const { data, onClick } = props;
@@ -17,6 +24,7 @@ export const ProductListItem: FC<any> = props => {
     } = data;
 
     const classes = useProductListItemStyles();
+    const translate = useTranslate();
 
     if (!record) {
         return null;
@@ -30,72 +38,54 @@ export const ProductListItem: FC<any> = props => {
             onClick={onClick}
             alignItems="flex-start"
         >
-            <ListItemAvatar>
-                <div className={classes.preview}>
-                    <div className={classes.frame}>
-                        <div className={classes.mat}>
-                            <div className={classes.art}>
-                                <img
-                                    src={record.thumbnail}
-                                    alt={record.reference}
-                                />
-                            </div>
-                        </div>
-                    </div>
+            <ListItemAvatar className={classes.avatar}>
+                <div className={classes.art}>
+                    <img src={record.thumbnail} alt={record.reference} />
                 </div>
             </ListItemAvatar>
             <ListItemText
                 primary={
-                    <Typography variant="body1" color="textPrimary">
+                    <Typography variant="h5" color="textPrimary">
                         {record.reference}
                     </Typography>
                 }
                 secondary={
                     <Box
+                        component="ul"
                         display="flex"
-                        alignItems="flex-start"
-                        justifyContent="center"
-                        flexDirection="column"
+                        justifyContent="space-between"
+                        padding={0}
+                        marginTop={2}
+                        marginBottom={2}
                     >
-                        <Typography variant="caption" color="textPrimary">
-                            {record.width} x {record.height} cm
-                        </Typography>
-                        <Typography variant="caption" color="textPrimary">
-                            {record.price}€
-                        </Typography>
+                        <Stats
+                            icon={<CommentIcon />}
+                            label={translate('resources.reviews.name', {
+                                smart_count: 2,
+                            })}
+                        >
+                            {record.reviews}
+                        </Stats>
                     </Box>
                 }
+                // @ts-ignore Could not make TS happy
+                secondaryTypographyProps={secondaryTypographyProps}
             />
         </ListItem>
     );
 };
 
 const useProductListItemStyles = makeStyles(theme => ({
-    preview: {
-        padding: theme.spacing(0, 1, 0, 0),
-    },
-    frame: {
-        position: 'relative',
-        width: '100%',
-        paddingBottom: '85%',
-        background: theme.palette.common.black,
-        boxShadow: '0 10px 7px -5px rgba(0, 0, 0, 0.3)',
+    avatar: {
+        width: 112, // Double the default MUI value
+        height: 112, // Double the default MUI value
+        paddingRight: theme.spacing(2),
     },
     mat: {
-        position: 'absolute',
         background: theme.palette.background.paper,
-        top: '3.0303%',
-        bottom: '3.0303%',
-        left: '2.5%',
-        right: '2.5%',
         boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.5) inset',
     },
     art: {
-        position: 'absolute',
-        top: '16.129%',
-        bottom: '16.129%',
-        left: '13.158%',
-        right: '13.158%',
         '& img': {
             width: '100%',
         },

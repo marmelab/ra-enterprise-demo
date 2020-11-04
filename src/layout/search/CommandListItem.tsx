@@ -1,11 +1,18 @@
 import React, { FC } from 'react';
 import classnames from 'classnames';
 import { useTranslate } from 'react-admin';
-import { Grid, ListItem, Typography } from '@material-ui/core';
+import {
+    Avatar,
+    Grid,
+    ListItem,
+    ListItemAvatar,
+    Typography,
+} from '@material-ui/core';
 import { makeStyles, lighten } from '@material-ui/core/styles';
 import { blue } from '@material-ui/core/colors';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-import { Customer, SearchListItemLink } from './index';
+import { SearchListItemLink } from './SearchListItemLink';
 
 export const CommandListItem: FC<any> = props => {
     const { data, onClick } = props;
@@ -28,6 +35,11 @@ export const CommandListItem: FC<any> = props => {
             onClick={onClick}
             alignItems="flex-start"
         >
+            <ListItemAvatar className={classes.avatar}>
+                <Avatar alt={record.reference}>
+                    <ShoppingCartIcon fontSize="large" />
+                </Avatar>
+            </ListItemAvatar>
             <Grid className={classes.root} container spacing={2}>
                 <Grid container item xs>
                     <Grid item xs={12}>
@@ -69,7 +81,13 @@ export const CommandListItem: FC<any> = props => {
                 </Grid>
                 <Grid container item xs>
                     <Grid item xs={12}>
-                        <Customer customerId={record.customer_id} />
+                        <Typography
+                            variant="body2"
+                            color="textPrimary"
+                            gutterBottom
+                        >
+                            {`${record.customer.first_name} ${record.customer.last_name}`}
+                        </Typography>
                     </Grid>
                 </Grid>
             </Grid>
@@ -78,6 +96,16 @@ export const CommandListItem: FC<any> = props => {
 };
 
 const useCommandListItemStyles = makeStyles(theme => ({
+    avatar: {
+        width: 112, // Double the default MUI value
+        height: 112, // Double the default MUI value
+        paddingRight: theme.spacing(2),
+
+        '& > *': {
+            width: '100%',
+            height: '100%',
+        },
+    },
     root: {
         padding: theme.spacing(1, 0),
     },

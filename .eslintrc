@@ -46,6 +46,9 @@
                 "ts-ignore": true
             }
         ],
+        "@typescript-eslint/ban-ts-ignore": [
+            "warn"
+        ],
         "react/prop-types": "off",
         "no-console": [
             "error",
