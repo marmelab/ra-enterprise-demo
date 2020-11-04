@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { ReactElement, ReactNode } from 'react';
-import { Box, BoxProps, Typography } from '@material-ui/core';
+import { Box, BoxProps, Link, Typography } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const Stats = ({
     children,
     label,
     icon,
+    to,
     ...rest
 }: {
     children: ReactNode;
     label: ReactNode;
     icon: ReactNode;
+    to: any;
 } & BoxProps): ReactElement => (
     <Box
         component="li"
@@ -24,6 +27,8 @@ export const Stats = ({
             <Box marginRight={1}>{icon}</Box>
             <Typography component="span">{children}</Typography>
         </Box>
-        <Typography variant="caption">{label}</Typography>
+        <Link component={RouterLink} variant="caption" to={to}>
+            {label}
+        </Link>
     </Box>
 );

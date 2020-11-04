@@ -63,6 +63,7 @@ export const ProductListItem: FC<any> = props => {
                             label={translate('resources.reviews.name', {
                                 smart_count: 2,
                             })}
+                            to={`/reviews?filter=%7B"product_id"%3A${record.id}%7D`}
                         >
                             {record.reviews}
                         </Stats>

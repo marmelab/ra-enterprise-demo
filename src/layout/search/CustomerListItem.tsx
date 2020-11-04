@@ -65,6 +65,7 @@ export const CustomerListItem: FC<any> = props => {
                         <Stats
                             icon={<ShoppingCartIcon />}
                             label={translate('pos.dashboard.pending_orders')}
+                            to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${record.id}%7D`}
                         >
                             {record.pending_orders}
                         </Stats>
@@ -73,6 +74,7 @@ export const CustomerListItem: FC<any> = props => {
                             label={translate(
                                 'resources.customers.fields.total_spent'
                             )}
+                            to={`/commands?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${record.id}%7D`}
                         >
                             {record.total_spent.toLocaleString()}
                         </Stats>
@@ -81,6 +83,7 @@ export const CustomerListItem: FC<any> = props => {
                             label={translate('resources.reviews.name', {
                                 smart_count: 2,
                             })}
+                            to={`/reviews?filter=%7B"customer_id"%3A${record.id}%7D`}
                         >
                             {record.reviews}
                         </Stats>
@@ -107,6 +110,7 @@ const useStyles = makeStyles(theme => ({
     stats: {
         '& li': {
             width: '33.33%',
+            minWidth: 150,
         },
     },
 }));
