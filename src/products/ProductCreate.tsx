@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     Create,
     FormTab,
@@ -25,7 +25,7 @@ export const styles = {
 
 const useStyles = makeStyles(styles);
 
-const ProductCreate = props => {
+const ProductCreate = (props): ReactElement => {
     useDefineAppLocation('catalog.products.create');
     const classes = useStyles();
     return (

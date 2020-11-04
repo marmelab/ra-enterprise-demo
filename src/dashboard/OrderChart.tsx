@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC } from 'react';
+import { ReactElement } from 'react';
 import { Card, CardHeader, CardContent } from '@material-ui/core';
 import {
     ResponsiveContainer,
@@ -46,7 +46,7 @@ const getRevenuePerDay = (orders: Order[]): TotalByDay[] => {
     }));
 };
 
-const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
+const OrderChart = ({ orders }: { orders?: Order[] }): ReactElement | null => {
     const translate = useTranslate();
     if (!orders) return null;
 
@@ -69,13 +69,13 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
                         <CartesianGrid strokeDasharray="3 3" />
                         <Tooltip
                             cursor={{ strokeDasharray: '3 3' }}
-                            formatter={value =>
+                            formatter={(value: number): string =>
                                 new Intl.NumberFormat(undefined, {
                                     style: 'currency',
                                     currency: 'USD',
                                 }).format(value as any)
                             }
-                            labelFormatter={(label: any) =>
+                            labelFormatter={(label: number): string =>
                                 dateFormatter(label)
                             }
                         />

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +9,7 @@ import { useShowController, ReferenceField, TextField } from 'react-admin';
 import Basket from '../orders/Basket';
 import { FieldProps, Customer } from '../types';
 
-const CustomerField: FC<FieldProps<Customer>> = ({ record }) =>
+const CustomerField = ({ record }: FieldProps<Customer>): ReactElement | null =>
     record ? (
         <Typography>
             {record.first_name} {record.last_name}
@@ -20,7 +20,7 @@ const CustomerField: FC<FieldProps<Customer>> = ({ record }) =>
         </Typography>
     ) : null;
 
-const InvoiceShow = (props: any) => {
+const InvoiceShow = (props): ReactElement | null => {
     const { record } = useShowController(props);
     const classes = useStyles();
 

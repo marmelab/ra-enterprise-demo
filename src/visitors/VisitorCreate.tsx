@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     Create,
     DateInput,
@@ -38,7 +38,7 @@ export const validatePasswords = ({
 }: {
     password: string;
     confirm_password: string;
-}) => {
+}): any => {
     const errors = {} as any;
 
     if (password && confirm_password && password !== confirm_password) {
@@ -50,7 +50,7 @@ export const validatePasswords = ({
     return errors;
 };
 
-const VisitorCreate = (props: any) => {
+const VisitorCreate = (props): ReactElement => {
     const classes = useStyles();
     useDefineAppLocation('audience.customers.create');
 
@@ -104,7 +104,7 @@ const VisitorCreate = (props: any) => {
 
 const requiredValidate = [required()];
 
-const SectionTitle = ({ label }: { label: string }) => {
+const SectionTitle = ({ label }: { label: string }): ReactElement => {
     const translate = useTranslate();
 
     return (
@@ -114,6 +114,6 @@ const SectionTitle = ({ label }: { label: string }) => {
     );
 };
 
-const Separator = () => <Box pt="1em" />;
+const Separator = (): ReactElement => <Box pt="1em" />;
 
 export default VisitorCreate;

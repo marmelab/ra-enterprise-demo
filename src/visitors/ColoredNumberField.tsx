@@ -1,11 +1,11 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, ReactElement } from 'react';
 import { NumberField } from 'react-admin';
 import { FieldProps } from '../types';
 
 const colored = <T extends FieldProps>(
     WrappedComponent: ComponentType<T>
 ): ComponentType<T> => {
-    const Colored = (props: T) =>
+    const Colored = (props: T): ReactElement | null =>
         props.record && props.source ? (
             props.record[props.source] > 500 ? (
                 <span style={{ color: 'red' }}>

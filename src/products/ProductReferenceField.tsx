@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ReferenceField, TextField } from 'react-admin';
 
-const ProductReferenceField = props => (
+const ProductReferenceField = (props: any): ReactElement => (
     <ReferenceField
         label="Product"
         source="product_id"

@@ -4,7 +4,7 @@ import { Create, useRefresh, useRedirect } from 'react-admin';
 interface PromptProps {
     label: string;
     record?: any;
-    save?: (data) => {};
+    save?: (data) => any;
 }
 
 const Prompt: FC<PromptProps> = ({

@@ -2,8 +2,8 @@ import React, {
     useState,
     useEffect,
     useCallback,
-    FC,
     CSSProperties,
+    ReactElement,
 } from 'react';
 import { useVersion, useDataProvider } from 'react-admin';
 import { useMediaQuery, Theme } from '@material-ui/core';
@@ -47,10 +47,10 @@ const styles = {
     singleCol: { marginTop: '1em', marginBottom: '1em' },
 };
 
-const Spacer = () => <span style={{ width: '1em' }} />;
-const VerticalSpacer = () => <span style={{ height: '1em' }} />;
+const Spacer = (): ReactElement => <span style={{ width: '1em' }} />;
+const VerticalSpacer = (): ReactElement => <span style={{ height: '1em' }} />;
 
-const Dashboard: FC = () => {
+const Dashboard = (): ReactElement => {
     const [state, setState] = useState<State>({});
     const version = useVersion();
     const dataProvider = useDataProvider();

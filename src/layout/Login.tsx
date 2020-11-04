@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field, withTypes } from 'react-final-form';
 import { useLocation } from 'react-router-dom';
@@ -61,7 +61,7 @@ const renderInput = ({
     meta: { touched, error } = { touched: false, error: undefined },
     input: { ...inputProps },
     ...props
-}) => (
+}: any): ReactElement => (
     <TextField
         error={!!(touched && error)}
         helperText={touched && error}
@@ -78,7 +78,7 @@ interface FormValues {
 
 const { Form } = withTypes<FormValues>();
 
-const Login = () => {
+const Login = (): ReactElement => {
     const [loading, setLoading] = useState(false);
     const translate = useTranslate();
     const classes = useStyles();
@@ -86,7 +86,7 @@ const Login = () => {
     const login = useLogin();
     const location = useLocation<{ nextPathname: string } | null>();
 
-    const handleSubmit = (auth: FormValues) => {
+    const handleSubmit = (auth: FormValues): void => {
         setLoading(true);
         login(auth, location.state ? location.state.nextPathname : '/').catch(
             (error: Error) => {
@@ -103,7 +103,7 @@ const Login = () => {
         );
     };
 
-    const validate = (values: FormValues) => {
+    const validate = (values: FormValues): any => {
         const errors: FormValues = {};
         if (!values.username) {
             errors.username = translate('ra.validation.required');
@@ -118,7 +118,7 @@ const Login = () => {
         <Form
             onSubmit={handleSubmit}
             validate={validate}
-            render={({ handleSubmit }) => (
+            render={({ handleSubmit }): ReactElement => (
                 <form onSubmit={handleSubmit} noValidate>
                     <div className={classes.main}>
                         <Card className={classes.card}>
@@ -185,7 +185,7 @@ Login.propTypes = {
 // We need to put the ThemeProvider decoration in another component
 // Because otherwise the useStyles() hook used in Login won't get
 // the right theme
-const LoginWithTheme = (props: any) => (
+const LoginWithTheme = (props: any): ReactElement => (
     <ThemeProvider theme={createMuiTheme(lightTheme)}>
         <Login {...props} />
     </ThemeProvider>

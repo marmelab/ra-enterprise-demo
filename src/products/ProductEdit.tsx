@@ -155,7 +155,6 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 <TextInput source="thumbnail" fullWidth />
                 <AccordionSection
                     label="resources.products.tabs.description"
-                    path="description"
                     classes={{
                         accordion: accordionClasses,
                     }}
@@ -166,7 +165,6 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 </AccordionSection>
                 <AccordionSection
                     label="resources.products.tabs.details"
-                    path="details"
                     classes={{
                         accordion: accordionClasses,
                     }}
@@ -215,7 +213,6 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 </AccordionSection>
                 <AccordionSection
                     label="resources.products.tabs.reviews"
-                    path="reviews"
                     classes={{
                         accordion: accordionClasses,
                     }}

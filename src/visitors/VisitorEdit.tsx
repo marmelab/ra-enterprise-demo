@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import {
     DateInput,
     Edit,
@@ -18,7 +18,7 @@ import SegmentsInput from './SegmentsInput';
 import { validatePasswords } from './VisitorCreate';
 import { Customer, FieldProps } from '../types';
 
-const VisitorEdit = (props: any) => {
+const VisitorEdit = (props): ReactElement => {
     return (
         <Edit
             title={<VisitorTitle />}
@@ -34,7 +34,7 @@ const VisitorEdit = (props: any) => {
 const VisitorTitle: FC<FieldProps<Customer>> = ({ record }) =>
     record ? <FullNameField record={record} size="32" /> : null;
 
-const VisitorForm = (props: any) => {
+const VisitorForm = (props: any): ReactElement => {
     const translate = useTranslate();
     useDefineAppLocation('audience.customers.edit', props);
 
@@ -42,7 +42,7 @@ const VisitorForm = (props: any) => {
         <FormWithRedirect
             {...props}
             validate={validatePasswords}
-            render={(formProps: any) => (
+            render={(formProps: any): ReactElement => (
                 <Card>
                     <form>
                         <CardContent>
