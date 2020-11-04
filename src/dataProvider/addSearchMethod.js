@@ -80,24 +80,31 @@ const searchInResource = async (
     const {
         label = defaultGetLabel,
         description = defaultGetDescription,
+        getResult,
     } = options;
 
     return {
-        data: data.map(record => ({
-            id: `${resource}/${record.id}`,
-            type: resource,
-            url: `/${resource}/${record.id}`,
-            content: {
-                id: record.id,
-                label:
-                    typeof label === 'string' ? record[label] : label(record),
-                description:
-                    typeof description === 'string'
-                        ? record[description]
-                        : description(record),
-                record,
-            },
-        })),
+        data: await Promise.all(
+            data.map(async record => ({
+                id: `${resource}/${record.id}`,
+                type: resource,
+                url: `/${resource}/${record.id}`,
+                content: {
+                    id: record.id,
+                    label:
+                        typeof label === 'string'
+                            ? record[label]
+                            : label(record),
+                    description:
+                        typeof description === 'string'
+                            ? record[description]
+                            : description(record),
+                    record: await (getResult
+                        ? getResult(record, dataProvider)
+                        : record),
+                },
+            }))
+        ),
         total,
     };
 };
