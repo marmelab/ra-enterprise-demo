@@ -81,8 +81,8 @@ export function truncateString(text: string, max: number): string {
 
 const useStyles = makeStyles(theme => ({
     avatar: {
-        width: 112, // Double the default MUI value
-        height: 112, // Double the default MUI value
+        width: 64,
+        height: 64,
         paddingRight: theme.spacing(2),
 
         '& > *': {

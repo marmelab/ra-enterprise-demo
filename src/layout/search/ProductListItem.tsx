@@ -45,7 +45,7 @@ export const ProductListItem: FC<any> = props => {
             </ListItemAvatar>
             <ListItemText
                 primary={
-                    <Typography variant="h5" color="textPrimary">
+                    <Typography variant="h6" color="textPrimary">
                         {record.reference}
                     </Typography>
                 }
@@ -55,8 +55,8 @@ export const ProductListItem: FC<any> = props => {
                         display="flex"
                         justifyContent="space-between"
                         padding={0}
-                        marginTop={2}
-                        marginBottom={2}
+                        marginTop={1}
+                        marginBottom={1}
                     >
                         <Stats
                             icon={<CommentIcon />}
@@ -77,8 +77,8 @@ export const ProductListItem: FC<any> = props => {
 
 const useProductListItemStyles = makeStyles(theme => ({
     avatar: {
-        width: 112, // Double the default MUI value
-        height: 112, // Double the default MUI value
+        width: 64,
+        height: 64,
         paddingRight: theme.spacing(2),
     },
     mat: {
