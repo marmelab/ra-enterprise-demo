@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { Create, useRefresh, useRedirect } from 'react-admin';
+import { Create, useRefresh, useRedirect, CreateProps } from 'react-admin';
 
 interface PromptProps {
     label: string;
@@ -19,12 +19,12 @@ const Prompt: FC<PromptProps> = ({
     return null;
 };
 
-const CategoryCreate: FC<any> = props => {
+const CategoryCreate: FC<CreateProps> = props => {
     const refresh = useRefresh();
     const redirect = useRedirect();
 
     const onSuccess = (): void => {
-        redirect(props.basePath);
+        redirect(props.basePath as string);
         refresh();
     };
 

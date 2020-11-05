@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC } from 'react';
+import { ReactElement, FC } from 'react';
 import { Box, Chip, useMediaQuery, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { InputProps } from 'ra-core';
@@ -18,10 +18,12 @@ import {
     useTranslate,
     useListContext,
     Filter,
+    ListProps,
+    FilterProps,
+    ListActionsProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-import { FilterProps, ListComponentProps } from '../types';
 import GridList from './GridList';
 import Aside from './Aside';
 
@@ -31,23 +33,15 @@ const useQuickFilterStyles = makeStyles(theme => ({
     },
 }));
 
-const QuickFilter: FC<InputProps> = ({ label }) => {
+const QuickFilter = ({ label }: InputProps): ReactElement => {
     const translate = useTranslate();
     const classes = useQuickFilterStyles();
     return <Chip className={classes.root} label={translate(label)} />;
 };
 
-interface FilterParams {
-    q?: string;
-    category_id?: string;
-    width_gte?: number;
-    width_lte?: number;
-    height_gte?: number;
-    height_lte?: number;
-    stock_lte?: number;
-}
-
-export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
+export const ProductFilter = (
+    props: Omit<FilterProps, 'children'>
+): ReactElement => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
         <ReferenceInput
@@ -69,7 +63,9 @@ export const ProductFilter: FC<FilterProps<FilterParams>> = props => (
     </Filter>
 );
 
-const ListActions: FC<any> = ({ isSmall }) => {
+const ListActions = ({
+    isSmall,
+}: ListActionsProps & { isSmall: boolean }): ReactElement => {
     const classes = useListActionsStyles();
 
     return (
@@ -89,7 +85,7 @@ const useListActionsStyles = makeStyles(theme => ({
     },
 }));
 
-const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
+const ProductList: FC<ListProps> = ({ actions, ...props }) => {
     useDefineAppLocation('catalog.products');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
@@ -113,22 +109,22 @@ const ProductList: FC<ListComponentProps> = ({ actions, ...props }) => {
 // The aside prop is only used to disable the aside here if explicitly set to false
 // If undefined, we consider the aside is not explicitly disabled an display the filter
 // vertical bar
-const ProductListView: FC<{
-    isSmall: boolean;
-    actions?: any;
-    aside?: boolean;
-    title?: string;
-}> = ({
+const ProductListView = ({
     isSmall,
     actions = <ListActions isSmall={isSmall} />,
     aside,
     title,
-}) => {
+}: {
+    isSmall: boolean;
+    actions?: ReactElement | false;
+    aside?: ReactElement | false;
+    title?: string | ReactElement;
+}): ReactElement => {
     const { defaultTitle } = useListContext();
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Title defaultTitle={title || defaultTitle} />
+            <Title title={title || defaultTitle} />
             {actions}
             {(isSmall || aside === false) && (
                 <Box m={1}>

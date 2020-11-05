@@ -2,6 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import {
     DateInput,
     Edit,
+    EditProps,
     NullableBooleanInput,
     TextInput,
     PasswordInput,
@@ -18,7 +19,7 @@ import SegmentsInput from './SegmentsInput';
 import { validatePasswords } from './VisitorCreate';
 import { Customer, FieldProps } from '../types';
 
-const VisitorEdit = (props): ReactElement => {
+const VisitorEdit: FC<EditProps> = props => {
     return (
         <Edit
             title={<VisitorTitle />}

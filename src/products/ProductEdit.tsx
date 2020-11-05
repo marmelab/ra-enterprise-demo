@@ -17,8 +17,8 @@ import {
     useNotify,
     SaveButton,
     Toolbar,
+    EditProps,
 } from 'react-admin';
-import { Identifier } from 'ra-core';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useLock, useHasLock } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
@@ -83,20 +83,10 @@ const useStyles = makeStyles({
     },
 });
 
-const useAccordionStyles = makeStyles(theme => ({
-    rounded: {
-        '&:first-child': {
-            borderTopLeftRadius: theme.spacing(0.5),
-            borderTopRightRadius: theme.spacing(0.5),
-        },
-        '&:last-child': {
-            borderBottomLeftRadius: theme.spacing(0.5),
-            borderBottomRightRadius: theme.spacing(0.5),
-        },
-    },
-}));
-
-const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
+const ProductEditFormWithPreview: FC<{ toolbar: any }> = ({
+    children,
+    ...props
+}) => {
     const classes = useStyles();
     useDefineAppLocation('catalog.products.edit', props);
     return (
@@ -107,7 +97,9 @@ const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
                     <div className={classes.container}>
                         <Card>
                             <CardContent className={classes.root}>
-                                <SimpleForm {...formProps} />
+                                <SimpleForm {...formProps}>
+                                    {children}
+                                </SimpleForm>
                             </CardContent>
                         </Card>
                         <div data-testid="product-edit-preview">
@@ -124,24 +116,28 @@ const ProductEditFormWithPreview: FC<{ toolbar: any }> = props => {
     );
 };
 
-const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
+const ProductEdit: FC<EditProps> = props => {
     const { resource, id } = props;
 
     const classes = useStyles();
-    const accordionClasses = useAccordionStyles();
     const notify = useNotify();
 
-    const { loading } = useLock(resource, id, 'todousername', {
-        onSuccess: () => {
-            notify('ra-realtime.notification.lock.lockedByMe');
-        },
-        onFailure: () => {
-            notify('ra-realtime.notification.lock.lockedBySomeoneElse');
-        },
-        onUnlockSuccess: () => {
-            notify('ra-realtime.notification.lock.unlocked');
-        },
-    });
+    const { loading } = useLock(
+        resource as string,
+        id as string,
+        'todousername',
+        {
+            onSuccess: () => {
+                notify('ra-realtime.notification.lock.lockedByMe');
+            },
+            onFailure: () => {
+                notify('ra-realtime.notification.lock.lockedBySomeoneElse');
+            },
+            onUnlockSuccess: () => {
+                notify('ra-realtime.notification.lock.unlocked');
+            },
+        }
+    );
 
     if (loading) {
         return <CircularProgress />;
@@ -155,9 +151,6 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 <TextInput source="thumbnail" fullWidth />
                 <AccordionSection
                     label="resources.products.tabs.description"
-                    classes={{
-                        accordion: accordionClasses,
-                    }}
                     data-tour-id="description-tab"
                     fullWidth
                 >
@@ -165,9 +158,6 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 </AccordionSection>
                 <AccordionSection
                     label="resources.products.tabs.details"
-                    classes={{
-                        accordion: accordionClasses,
-                    }}
                     fullWidth
                 >
                     <TextInput source="reference" />
@@ -213,9 +203,6 @@ const ProductEdit: FC<{ id: Identifier; resource: string }> = props => {
                 </AccordionSection>
                 <AccordionSection
                     label="resources.products.tabs.reviews"
-                    classes={{
-                        accordion: accordionClasses,
-                    }}
                     fullWidth
                 >
                     <ReferenceManyField

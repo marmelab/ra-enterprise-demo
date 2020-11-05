@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, FC } from 'react';
 import {
     AutocompleteInput,
     BooleanField,
@@ -13,6 +13,8 @@ import {
     TextField,
     TextInput,
     Filter,
+    ListProps,
+    ListControllerProps,
 } from 'react-admin';
 import {
     makeStyles,
@@ -24,18 +26,19 @@ import {
     lighten,
     darken,
     fade,
+    Theme,
 } from '@material-ui/core';
 import { RealTimeList } from '@react-admin/ra-realtime';
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import MobileGrid from './MobileGrid';
 
-const OrderFilter = props => (
+const OrderFilter: FC = props => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
         <ReferenceInput source="customer_id" reference="customers">
             <AutocompleteInput
-                optionText={choice =>
+                optionText={(choice): string =>
                     choice.first_name && choice.last_name
                         ? `${choice.first_name} ${choice.last_name}`
                         : ''
@@ -53,7 +56,7 @@ const useDatagridStyles = makeStyles({
     total: { fontWeight: 'bold' },
 });
 
-const orderRowStyle = (batchLevel, theme) => record => {
+const orderRowStyle = (batchLevel, theme) => (record): any => {
     let backgroundColor;
     switch (record.batch) {
         case batchLevel:
@@ -85,7 +88,13 @@ const tabs = [
     { id: 'cancelled', name: 'cancelled' },
 ];
 
-const TabbedDatagrid = props => {
+const TabbedDatagrid: FC<
+    Partial<ListControllerProps> & {
+        isXSmall: boolean;
+        classes: any;
+        batchLevel: number;
+    }
+> = props => {
     const [state, setState] = useState({
         ordered: [],
         delivered: [],
@@ -101,9 +110,11 @@ const TabbedDatagrid = props => {
         }
     }, [props.filterValues.status, props.ids, state]);
 
-    const handleChange = (event, value) => {
+    const handleChange = (event, value): void => {
         const { filterValues, setFilters } = props;
-        setFilters({ ...filterValues, status: value });
+        if (setFilters) {
+            setFilters({ ...filterValues, status: value }, {});
+        }
     };
 
     const theme = useTheme();
@@ -135,6 +146,7 @@ const TabbedDatagrid = props => {
                     {filterValues.status === 'ordered' && (
                         <Datagrid
                             {...rest}
+                            // @ts-ignore
                             ids={state.ordered}
                             optimized
                             rowClick="edit"
@@ -157,6 +169,7 @@ const TabbedDatagrid = props => {
                         </Datagrid>
                     )}
                     {filterValues.status === 'delivered' && (
+                        // @ts-ignore
                         <Datagrid {...rest} ids={state.delivered}>
                             <DateField source="date" showTime />
                             <TextField source="reference" />
@@ -175,6 +188,7 @@ const TabbedDatagrid = props => {
                         </Datagrid>
                     )}
                     {filterValues.status === 'cancelled' && (
+                        // @ts-ignore
                         <Datagrid {...rest} ids={state.cancelled}>
                             <DateField source="date" showTime />
                             <TextField source="reference" />
@@ -198,10 +212,13 @@ const TabbedDatagrid = props => {
     );
 };
 
-const StyledTabbedDatagrid = props => {
+const StyledTabbedDatagrid: FC<Partial<ListControllerProps>> = props => {
     const classes = useDatagridStyles();
-    const isXSmall = useMediaQuery(theme => theme.breakpoints.down('xs'));
-    const batchLevel = parseInt(localStorage.getItem('batchLevel'), 0) || 0;
+    const isXSmall = useMediaQuery<Theme>(theme =>
+        theme.breakpoints.down('xs')
+    );
+    const batchLevel =
+        parseInt(localStorage.getItem('batchLevel') || '0', 0) || 0;
     return (
         <TabbedDatagrid
             classes={classes}
@@ -212,7 +229,7 @@ const StyledTabbedDatagrid = props => {
     );
 };
 
-const OrderList = ({ classes, ...props }) => (
+const OrderList: FC<ListProps> = ({ classes, ...props }) => (
     <RealTimeList
         {...props}
         filterDefaultValues={{ status: 'ordered' }}

@@ -1,16 +1,17 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
+import { ListProps } from 'react-admin';
 import { TreeWithDetails, useTreeController } from '@react-admin/ra-tree';
-
-import CategoryEdit from './CategoryEdit';
-import CategoryCreate from './CategoryCreate';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-const CategoryList = (props: any): ReactElement => {
+import CategoryCreate from './CategoryCreate';
+import CategoryEdit from './CategoryEdit';
+
+const CategoryList: FC<ListProps> = props => {
     // We need to override the "category" location to highlight menu item in the sidebar
     useDefineAppLocation('catalog.categories');
 
     const { handleExpand } = useTreeController({
-        resource: props.resource,
+        resource: props.resource as string,
         titleField: 'name',
     });
 

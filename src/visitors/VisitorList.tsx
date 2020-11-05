@@ -8,6 +8,7 @@ import {
     NumberField,
     SearchInput,
     Filter,
+    ListProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { useMediaQuery, Theme, makeStyles } from '@material-ui/core';
@@ -46,7 +47,7 @@ const visitorListColumn = {
     segments: <SegmentsField />,
 };
 
-const VisitorList: FC = (props: any) => {
+const VisitorList: FC<ListProps> = props => {
     const isXsmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('xs')
     );

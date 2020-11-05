@@ -5,7 +5,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import LocalOfferIcon from '@material-ui/icons/LocalOfferOutlined';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import { FilterList, FilterListItem, FilterLiveSearch } from 'react-admin';
+import {
+    FilterList,
+    FilterListItem,
+    FilterLiveSearch,
+    ListProps,
+} from 'react-admin';
 import { useListFilterContext } from 'ra-core';
 import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
 
@@ -22,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const Aside = (props): ReactElement => {
+const Aside = (props: ListProps): ReactElement => {
     const { setFilters, filterValues, displayedFilters } = useListFilterContext(
         props
     );

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import {
     Create,
     DateInput,
@@ -7,6 +7,7 @@ import {
     useTranslate,
     PasswordInput,
     required,
+    CreateProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { Typography, Box } from '@material-ui/core';
@@ -50,7 +51,7 @@ export const validatePasswords = ({
     return errors;
 };
 
-const VisitorCreate = (props): ReactElement => {
+const VisitorCreate: FC<CreateProps> = props => {
     const classes = useStyles();
     useDefineAppLocation('audience.customers.create');
 

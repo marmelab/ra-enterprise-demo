@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { FC } from 'react';
 import {
     List,
     Datagrid,
@@ -8,19 +8,21 @@ import {
     NumberField,
     DateInput,
     Filter,
+    ListProps,
+    FilterProps,
 } from 'react-admin';
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';
 
-const ListFilters = (props): ReactElement => (
+const ListFilters: FC<Omit<FilterProps, 'children'>> = props => (
     <Filter {...props}>
         <DateInput source="date_gte" alwaysOn />
         <DateInput source="date_lte" alwaysOn />
     </Filter>
 );
 
-const InvoiceList = (props): ReactElement => (
+const InvoiceList: FC<ListProps> = props => (
     <List {...props} filters={<ListFilters />} perPage={25}>
         <Datagrid rowClick="expand" expand={<InvoiceShow />}>
             <TextField source="id" />
