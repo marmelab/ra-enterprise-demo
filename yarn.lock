@@ -1447,10 +1447,26 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.1.tgz#9990d0e0cb1e704e047b6328238b6e3bfc2bbc65"
   integrity sha512-lcLG7Ik6xlSnVscEou3LKrLrg9DLm0f5EaQnjzaYF43RTz+NordkZgsGr8XvNh4x6CgBIge4pKBGPGJqtKLLsQ==
 
-"@react-admin/ra-enterprise@^1.0.0", "@react-admin/ra-enterprise@^1.0.1":
+"@react-admin/ra-enterprise@^1.0.0":
   version "1.0.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-1.0.1.tgz#87f207b41a973275a1f392fdacaef235df7ef675"
   integrity sha512-+e8d02Gq1oer1t2hXN+kAMsI35Vw7hoBUFYQdzqm47WNnqSvS3Ody6LJooP0jNb2JtIQkAjrkU2AwgdSKB2phQ==
+  dependencies:
+    "@react-admin/ra-editable-datagrid" "^1.0.0"
+    "@react-admin/ra-form-layout" "^1.0.0"
+    "@react-admin/ra-markdown" "^1.0.0"
+    "@react-admin/ra-navigation" "^1.0.0"
+    "@react-admin/ra-preferences" "^1.0.0"
+    "@react-admin/ra-realtime" "^1.0.0"
+    "@react-admin/ra-relationships" "^1.0.0"
+    "@react-admin/ra-search" "^1.0.0"
+    "@react-admin/ra-tour" "^1.0.0"
+    "@react-admin/ra-tree" "^1.0.0"
+
+"@react-admin/ra-enterprise@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-1.0.2.tgz#fbaa663945021da2cdeda0455b95ced44e994d3c"
+  integrity sha512-fDoDdc3pwd9FIWH60kWRvahwIZyAyh/3q12JNJCz5tiEabY9j2xTeSWWikLI7X+z3QKOSFO8xupolcSXuHMbYw==
   dependencies:
     "@react-admin/ra-editable-datagrid" "^1.0.0"
     "@react-admin/ra-form-layout" "^1.0.0"
@@ -1468,6 +1484,11 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.5.1.tgz#ae171b19c67dbc749d13d819410560c76717eb6a"
   integrity sha512-aRnLk9D7AwT42csoaAx+B7wIg1gwif55Ybmzv6z0nCbETVCgEvsU16b8Bv5TJvHyW5/ZHDp1YgafR1A40vTZig==
 
+"@react-admin/ra-form-layout@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.5.2.tgz#dcc695222d9de01f1fbfb002b11a629215364cab"
+  integrity sha512-kb5n7VRKlvR2Yr5hMzoNpRR9hycmgDENws/bnrnQXfpn6G2UL7umixi0Nt5Gfc2oC0BprkkRveyPM0i74S2IJw==
+
 "@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.1.0":
   version "1.1.0"
   resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.1.0.tgz#ed83115e4fe2318db95e9930eb6ffe8e037c2de3"
@@ -1480,10 +1501,15 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.3.tgz#442b488eb5233efe6c45259cb49caa24396d8b8c"
   integrity sha512-rER2KjubQlRKywFp8LeKGStm8xGgLcD4so4vm49bIxQhx4huwJkQ71+CN5kY3VKhGCM1rSH8do+3ZSl9JbAgCw==
 
-"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.1.0", "@react-admin/ra-preferences@^1.1.1":
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.1.0":
   version "1.1.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.1.1.tgz#9cf952b29b63e985923fe489e554517ba38fa910"
   integrity sha512-xi0gnh5nibNx5aejDmmnqeQD91ExxpBeYJ65ZPW882XXffNHXadbq5cwQEmEXT56BtcEFrSH36UwrcR7B7FTLw==
+
+"@react-admin/ra-preferences@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.1.3.tgz#564ea89039096d99934fe69f8731a43af68f18f8"
+  integrity sha512-wxpgIqGNHv9z4TWMwTmIs5kxHUVxRouv38Y+tMYFx7us1pGKnfN3M/8C9EUs45sE0XvS4u6UbNVTbiKCw51gEA==
 
 "@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.2.0":
   version "1.2.0"
@@ -1503,6 +1529,11 @@
   version "1.1.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.1.tgz#c6180dcf332da818b2fe376e343e04d4f3f81afc"
   integrity sha512-CWNJ+GzQ4yahmBAZlDLivXylW1IG47NSfNNMMSgdxHwCF0+9/q9XDrATRsjbqAn59CSObUUe0ZrlidXLDrPo4Q==
+
+"@react-admin/ra-search@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.2.0.tgz#cfe8155db689a62a1f3c4c25d89d2255a16a09ab"
+  integrity sha512-FyhEfcGUZRF+tCwqMFC5QY7pYWeAA880Xsa6luqq8KPWPcWhyEemMvi4lfonN8nCuaVtT5jxc9oLLbAiU+Vn4Q==
 
 "@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.0":
   version "1.1.0"
@@ -1992,10 +2023,18 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.55":
+"@types/react@*":
   version "16.9.55"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.55.tgz#47078587f5bfe028a23b6b46c7b94ac0d436acff"
   integrity sha512-6KLe6lkILeRwyyy7yG9rULKJ0sXplUsl98MGoCfpteXf9sPWFWWMknDcsvubcpaTdBuxtsLF6HDUwdApZL/xIg==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@^16.9.56":
+  version "16.9.56"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.56.tgz#ea25847b53c5bec064933095fc366b1462e2adf0"
+  integrity sha512-gIkl4J44G/qxbuC6r2Xh+D3CGZpJ+NdWTItAPmZbR5mUS+JQ8Zvzpl0ea5qT/ZT3ZNTUcDKUVqV3xBE8wv/DyQ==
   dependencies:
     "@types/prop-types" "*"
     csstype "^3.0.2"
@@ -3872,7 +3911,7 @@ core-js@^2.4.0, core-js@^2.6.10, core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
 
-core-js@^3.0.0, core-js@^3.5.0, core-js@^3.6.5:
+core-js@^3.0.0, core-js@^3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
@@ -10115,7 +10154,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-promise@^8.0.3, promise@^8.1.0:
+promise@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/promise/-/promise-8.1.0.tgz#697c25c3dfe7435dd79fcd58c38a135888eaf05e"
   integrity sha512-W04AqnILOL/sPRXziNicCjSNRruLAuIHEOVBazepu0545DDNGYHz7ar9ZgZ1fMU8/MA4mVxp5rkBWRi6OXIy3Q==
@@ -10501,18 +10540,6 @@ react-admin@^3.8.5:
     react-router-dom "^5.1.0"
     redux "^3.7.2 || ^4.0.3"
     redux-saga "^1.0.0"
-
-react-app-polyfill@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-1.0.6.tgz#890f8d7f2842ce6073f030b117de9130a5f385f0"
-  integrity sha512-OfBnObtnGgLGfweORmdZbyEz+3dgVePQBb3zipiaDsMHV1NpWm0rDFYIVXFV/AK+x4VIIfWHhrdMIeoTLyRr2g==
-  dependencies:
-    core-js "^3.5.0"
-    object-assign "^4.1.1"
-    promise "^8.0.3"
-    raf "^3.4.1"
-    regenerator-runtime "^0.13.3"
-    whatwg-fetch "^3.0.0"
 
 react-app-polyfill@^2.0.0:
   version "2.0.0"
@@ -11039,7 +11066,7 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
-regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
+regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
