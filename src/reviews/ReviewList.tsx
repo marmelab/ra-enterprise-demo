@@ -1,8 +1,8 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { FC, Fragment, ReactElement, useCallback } from 'react';
 import classnames from 'classnames';
-import { BulkDeleteButton, List } from 'react-admin';
+import { BulkDeleteButton, List, ListProps } from 'react-admin';
 import { Route, useHistory } from 'react-router-dom';
-import { Drawer, useMediaQuery, makeStyles } from '@material-ui/core';
+import { Drawer, useMediaQuery, makeStyles, Theme } from '@material-ui/core';
 import BulkAcceptButton from './BulkAcceptButton';
 import BulkRejectButton from './BulkRejectButton';
 import ReviewListMobile from './ReviewListMobile';
@@ -10,7 +10,7 @@ import ReviewListDesktop from './ReviewListDesktop';
 import ReviewFilter from './ReviewFilter';
 import ReviewEdit from './ReviewEdit';
 
-const ReviewsBulkActionButtons = props => (
+const ReviewsBulkActionButtons: FC = ({ children, ...props }) => (
     <Fragment>
         <BulkAcceptButton {...props} />
         <BulkRejectButton {...props} />
@@ -37,9 +37,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ReviewList = props => {
+const ReviewList: FC<ListProps> = props => {
     const classes = useStyles();
-    const isXSmall = useMediaQuery(theme => theme.breakpoints.down('xs'));
+    const isXSmall = useMediaQuery<Theme>(theme =>
+        theme.breakpoints.down('xs')
+    );
     const history = useHistory();
 
     const handleClose = useCallback(() => {
@@ -49,7 +51,7 @@ const ReviewList = props => {
     return (
         <div className={classes.root}>
             <Route path="/reviews/:id">
-                {({ match }) => {
+                {({ match }): ReactElement => {
                     const isMatch = !!(
                         match &&
                         match.params &&
@@ -74,6 +76,7 @@ const ReviewList = props => {
                                     <ReviewListDesktop
                                         selectedRow={
                                             isMatch &&
+                                            !!match &&
                                             parseInt(match.params.id, 10)
                                         }
                                     />
@@ -89,7 +92,7 @@ const ReviewList = props => {
                                 }}
                             >
                                 {/* To avoid any errors if the route does not match, we don't render at all the component in this case */}
-                                {isMatch ? (
+                                {isMatch && !!match ? (
                                     <ReviewEdit
                                         id={match.params.id}
                                         onCancel={handleClose}

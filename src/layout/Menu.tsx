@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, ReactNode, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslate } from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
@@ -37,9 +37,8 @@ import { AppState } from '../types';
 import { segments } from '../visitors/segments';
 
 interface Props {
-    dense: boolean;
-    logout: () => void;
-    onMenuClick: () => void;
+    logout?: ReactNode;
+    onMenuClick?: () => void;
 }
 
 const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
@@ -224,7 +223,9 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
 
 export default Menu;
 
-const AudienceMenu: FC<{ onMenuClick: () => void }> = ({ onMenuClick }) => {
+const AudienceMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
+    onMenuClick,
+}) => {
     const translate = useTranslate();
 
     return (

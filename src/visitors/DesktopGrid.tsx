@@ -7,8 +7,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useTranslate } from 'react-admin';
 
 import AvatarField from './AvatarField';
-import { Identifier, linkToRecord } from 'ra-core';
-import { Customer } from '../types';
+import { linkToRecord, useListContext } from 'ra-core';
 
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
@@ -46,15 +45,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 interface Props {
-    ids?: Identifier[];
-    data?: { [key: string]: Customer };
-    basePath?: string;
     fields: any;
 }
 
-const DesktopGrid: FC<Props> = ({ ids, data, basePath, fields }) => {
+const DesktopGrid: FC<Props> = ({ fields, ...rest }) => {
     const translate = useTranslate();
     const classes = useStyles();
+    const { ids, data, basePath } = useListContext(rest);
 
     if (!ids || !data) {
         return null;
@@ -125,11 +122,6 @@ const DesktopGrid: FC<Props> = ({ ids, data, basePath, fields }) => {
             ))}
         </div>
     );
-};
-
-DesktopGrid.defaultProps = {
-    data: {},
-    ids: [],
 };
 
 export default DesktopGrid;

@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { FC, Fragment } from 'react';
 import MuiToolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { SaveButton, DeleteButton } from 'react-admin';
+import { SaveButton, DeleteButton, ToolbarProps } from 'react-admin';
 import AcceptButton from './AcceptButton';
 import RejectButton from './RejectButton';
 
@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ReviewEditToolbar = ({
+const ReviewEditToolbar: FC<ToolbarProps> = ({
     basePath,
     handleSubmitWithRedirect,
     invalid,
@@ -23,6 +23,10 @@ const ReviewEditToolbar = ({
     saving,
 }) => {
     const classes = useStyles();
+    if (!record) {
+        return null;
+    }
+
     return (
         <MuiToolbar className={classes.root}>
             {record.status === 'pending' ? (

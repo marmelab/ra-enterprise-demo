@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import { Customer, FieldProps } from '../types';
+import { Record } from 'react-admin';
 
-interface Props extends FieldProps<Customer> {
+interface Props {
     className?: string;
+    record?: Record;
     size?: string;
 }
 

@@ -36,7 +36,7 @@ export default {
             href: 'http://marmelab.com/react-admin',
             playedOn: null,
         },
-                {
+        {
             id: 3,
             image: 'images/tours/ra-tree.jpg',
             title: 'ra-tree',

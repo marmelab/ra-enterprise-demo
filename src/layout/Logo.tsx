@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SVGProps } from 'react';
 
-const Logo = (props: SVGProps<SVGSVGElement>) => (
+const Logo = (props: SVGProps<SVGSVGElement>): React.ReactElement => (
     <svg width={234.532} height={20.475} viewBox="0 0 62.053 5.417" {...props}>
         <g
             aria-label="~Posters Galore~"

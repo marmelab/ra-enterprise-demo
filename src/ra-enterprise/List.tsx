@@ -1,4 +1,13 @@
-import React, { cloneElement, useMemo, forwardRef } from 'react';
+import React, {
+    cloneElement,
+    useMemo,
+    forwardRef,
+    ReactElement,
+    FC,
+    ReactNode,
+    JSXElementConstructor,
+    useRef,
+} from 'react';
 
 import {
     List,
@@ -7,6 +16,8 @@ import {
     CreateButton,
     sanitizeListRestProps,
     ExportButton,
+    useListContext,
+    ListProps,
 } from 'react-admin';
 import classnames from 'classnames';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
@@ -25,6 +36,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { ColumnList } from '@react-admin/ra-preferences/esm/src/list/useSelectedColumns';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -56,7 +68,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ToolContainer = forwardRef(({ children }, ref) => {
+const ToolContainer = forwardRef<HTMLDivElement, any>(({ children }, ref) => {
     const classes = useStyles();
 
     return (
@@ -67,8 +79,12 @@ const ToolContainer = forwardRef(({ children }, ref) => {
 });
 ToolContainer.displayName = 'ToolContainer';
 
-const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
+const ColumnsTool: FC<{
+    preferenceKey: string;
+    defaultColumns: { [key: string]: ReactElement };
+}> = ({ preferenceKey, defaultColumns }) => {
     const classes = useStyles();
+    const ref = useRef<HTMLDivElement | null>(null);
 
     return (
         <>
@@ -77,6 +93,7 @@ const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
                 gutterBottom
                 key="columns-selector-tool-title"
                 component="div"
+                ref={ref}
             >
                 Columns to display
             </Typography>
@@ -84,14 +101,19 @@ const ColumnsTool = ({ preferenceKey, defaultColumns }) => {
                 key="columns-selector-tool-menu"
                 preference={preferenceKey}
                 columns={defaultColumns}
-                label=""
                 className={classes.columnsList}
             />
         </>
     );
 };
 
-const GridOrListTool = ({ view, setView }) => (
+type View = 'table' | 'grid' | 'small';
+type SetView = (view: View) => void;
+
+const GridOrListTool: FC<{
+    view: View;
+    setView: SetView;
+}> = ({ view, setView }) => (
     <>
         <Typography
             variant="overline"
@@ -105,14 +127,14 @@ const GridOrListTool = ({ view, setView }) => (
         <ButtonGroup key="view-selector-tool-menu">
             <Button
                 color={view === 'table' ? 'primary' : 'default'}
-                onClick={() => setView('table')}
+                onClick={(): void => setView('table')}
                 label="table"
             >
                 <TableChartIcon />
             </Button>
             <Button
                 color={view === 'grid' ? 'primary' : 'default'}
-                onClick={() => setView('grid')}
+                onClick={(): void => setView('grid')}
                 label="grid"
             >
                 <AppsIcon />
@@ -121,41 +143,53 @@ const GridOrListTool = ({ view, setView }) => (
     </>
 );
 
-const Actions = ({
-    preferenceKey,
-    currentSort,
+const Actions: FC<{
+    className?: string;
+    defaultColumns: { [key: string]: ReactElement };
+    filters?: ReactElement | false;
+    hasColumnsSelector?: boolean;
+    hasList?: boolean;
+    hasShow?: boolean;
+    hasViewSelector?: boolean;
+    maxResults?: number;
+    permanentFilter?: any;
+    preferenceKey: string;
+    setView: SetView;
+    view: View;
+}> = ({
     className,
-    resource,
+    defaultColumns,
     filters,
-    displayedFilters,
-    exporter, // you can hide ExportButton if exporter = (null || false)
-    filterValues,
-    permanentFilter,
+    hasColumnsSelector,
     hasList,
     hasShow,
-    hasCreate, // you can hide CreateButton if hasCreate = false
-    basePath,
-    selectedIds,
-    onUnselectItems,
-    showFilter,
-    maxResults,
-    total,
-    hasColumnsSelector,
-    defaultColumns,
     hasViewSelector,
-    view,
+    maxResults,
+    permanentFilter,
+    preferenceKey,
     setView,
+    view,
     ...rest
 }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const classes = useStyles();
     const open = Boolean(anchorEl);
+    const {
+        basePath,
+        currentSort,
+        displayedFilters,
+        exporter,
+        filterValues,
+        resource,
+        showFilter,
+        total,
+    } = useListContext();
 
-    const handleClick = event => {
+    const handleClick = (event): void => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = (): void => {
         setAnchorEl(null);
     };
 
@@ -180,7 +214,7 @@ const Actions = ({
                     disabled={total === 0}
                     resource={resource}
                     sort={currentSort}
-                    filter={{ ...filterValues, ...permanentFilter }}
+                    filterValues={{ ...filterValues, ...permanentFilter }}
                     exporter={exporter}
                     maxResults={maxResults}
                 />
@@ -210,11 +244,7 @@ const Actions = ({
                     >
                         {hasViewSelector && (
                             <ToolContainer>
-                                <GridOrListTool
-                                    preferenceKey={preferenceKey}
-                                    view={view}
-                                    setView={setView}
-                                />
+                                <GridOrListTool view={view} setView={setView} />
                             </ToolContainer>
                         )}
                         {hasColumnsSelector && (
@@ -231,20 +261,20 @@ const Actions = ({
         </TopToolbar>
     );
 };
-const elementHasProp = (element, name, value) =>
+const elementHasProp = (element, name, value): boolean =>
     element.props[name] && element.props[name] === value;
 
-const hasChildren = (element, type, props) => {
+const hasChildren = (element, type, props): boolean => {
     if (!React.isValidElement(element)) return false;
 
     let hasChildrenOfType = false;
 
     React.Children.map(element, child => {
         if (hasChildrenOfType) return;
-        if (!React.isValidElement(child)) return;
+        if (!React.isValidElement<{ children?: ReactNode }>(child)) return;
 
         if (
-            child.type.name === type &&
+            (child.type as JSXElementConstructor<any>).name === type &&
             Object.keys(props).every(propName =>
                 elementHasProp(child, propName, props[propName])
             )
@@ -259,13 +289,25 @@ const hasChildren = (element, type, props) => {
     return hasChildrenOfType;
 };
 
-const EnterpriseList = props => {
+const EnterpriseList: FC<
+    {
+        children: (props?: any) => ReactElement;
+        classes: any;
+        className?: string;
+        defaultColumns: ColumnList;
+        defaultOmittedColumns: string[];
+        defaultView?: View;
+        hasColumnsSelector?: boolean;
+        hasViewSelector?: boolean;
+        preferenceKey: string;
+    } & Omit<ListProps, 'children'>
+> = props => {
     const {
         className,
         preferenceKey,
 
         hasColumnsSelector = true,
-        defaultColumns = [],
+        defaultColumns = {},
         defaultOmittedColumns = [],
 
         hasViewSelector = true,
@@ -280,7 +322,7 @@ const EnterpriseList = props => {
         omit: defaultOmittedColumns,
     });
 
-    const [view, setView] = usePreferences(
+    const [view, setView] = usePreferences<View>(
         `${preferenceKey}.view`,
         defaultView
     );

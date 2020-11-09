@@ -1,13 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
 import ThumbUp from '@material-ui/icons/ThumbUp';
-import { useTranslate, useUpdate, useNotify, useRedirect } from 'react-admin';
+import {
+    useTranslate,
+    useUpdate,
+    useNotify,
+    useRedirect,
+    Record,
+} from 'react-admin';
 
 /**
  * This custom button demonstrate using useUpdate to update data
  */
-const AcceptButton = ({ record }) => {
+const AcceptButton: FC<{ record: Record }> = ({ record }) => {
     const translate = useTranslate();
     const notify = useNotify();
     const redirectTo = useRedirect();
@@ -36,6 +41,7 @@ const AcceptButton = ({ record }) => {
             },
         }
     );
+
     return record && record.status === 'pending' ? (
         <Button
             variant="outlined"
@@ -53,10 +59,6 @@ const AcceptButton = ({ record }) => {
     ) : (
         <span />
     );
-};
-
-AcceptButton.propTypes = {
-    record: PropTypes.object,
 };
 
 export default AcceptButton;

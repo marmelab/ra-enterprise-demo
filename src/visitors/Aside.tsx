@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     NumberField,
     TextField,
@@ -6,6 +6,10 @@ import {
     useTranslate,
     useGetList,
     linkToRecord,
+    Record as RaRecord,
+    ListProps,
+    Identifier,
+    RecordMap,
 } from 'react-admin';
 import PropTypes from 'prop-types';
 import {
@@ -27,6 +31,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import ProductReferenceField from '../products/ProductReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
+import { Order, Review } from '../types';
 
 const useAsideStyles = makeStyles(theme => ({
     root: {
@@ -37,7 +42,10 @@ const useAsideStyles = makeStyles(theme => ({
     },
 }));
 
-const Aside = ({ record, basePath }) => {
+const Aside: FC<{ record?: RaRecord; basePath?: string }> = ({
+    record,
+    basePath,
+}) => {
     const classes = useAsideStyles();
     return (
         <div className={classes.root}>
@@ -51,20 +59,28 @@ Aside.propTypes = {
     basePath: PropTypes.string,
 };
 
-const EventList = ({ record, basePath }) => {
+const EventList: FC<ListProps & { record?: RaRecord }> = ({
+    record,
+    basePath,
+}) => {
     const translate = useTranslate();
-    const { data: orders, ids: orderIds } = useGetList(
+    const { data: orders, ids: orderIds } = useGetList<Order>(
         'commands',
         { page: 1, perPage: 100 },
         { field: 'date', order: 'DESC' },
         { customer_id: record && record.id }
     );
-    const { data: reviews, ids: reviewIds } = useGetList(
+    const { data: reviews, ids: reviewIds } = useGetList<Review>(
         'reviews',
         { page: 1, perPage: 100 },
         { field: 'date', order: 'DESC' },
         { customer_id: record && record.id }
     );
+
+    if (!orders || !reviews || !orderIds || !reviewIds) {
+        return null;
+    }
+
     const events = mixOrdersAndReviews(orders, orderIds, reviews, reviewIds);
 
     return (
@@ -169,13 +185,13 @@ const EventList = ({ record, basePath }) => {
 
             {events.map(event =>
                 event.type === 'order' ? (
-                    <Order
+                    <OrderEvent
                         record={event.data}
                         key={`event_${event.data.id}`}
                         basePath={basePath}
                     />
                 ) : (
-                    <Review
+                    <ReviewEvent
                         record={event.data}
                         key={`review_${event.data.id}`}
                         basePath={basePath}
@@ -186,19 +202,34 @@ const EventList = ({ record, basePath }) => {
     );
 };
 
-const mixOrdersAndReviews = (orders, orderIds, reviews, reviewIds) => {
-    const eventsFromOrders = orderIds.map(id => ({
+type OrderReviewEvent = {
+    type: 'order' | 'review';
+    date: Date;
+    data: Order | Review;
+};
+
+const mixOrdersAndReviews = (
+    orders: RecordMap<Order>,
+    orderIds: Identifier[],
+    reviews: RecordMap<Review>,
+    reviewIds: Identifier[]
+): OrderReviewEvent[] => {
+    const eventsFromOrders = orderIds.map<OrderReviewEvent>(id => ({
         type: 'order',
         date: orders[id].date,
         data: orders[id],
     }));
-    const eventsFromReviews = reviewIds.map(id => ({
+
+    const eventsFromReviews = reviewIds.map<OrderReviewEvent>(id => ({
         type: 'review',
         date: reviews[id].date,
         data: reviews[id],
     }));
-    const events = eventsFromOrders.concat(eventsFromReviews);
-    events.sort((e1, e2) => new Date(e1.date) - new Date(e2.date));
+
+    const events = [...eventsFromOrders, ...eventsFromReviews];
+    events.sort(
+        (e1, e2) => new Date(e1.date).valueOf() - new Date(e2.date).valueOf()
+    );
     return events;
 };
 
@@ -217,9 +248,17 @@ const useEventStyles = makeStyles({
     },
 });
 
-const Order = ({ record, basePath }) => {
+const OrderEvent: FC<{ record?: RaRecord; basePath?: string }> = ({
+    record,
+    basePath,
+}) => {
     const translate = useTranslate();
     const classes = useEventStyles();
+
+    if (!record) {
+        return null;
+    }
+
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -229,7 +268,6 @@ const Order = ({ record, basePath }) => {
                         aria-label={translate('resources.commands.name', {
                             smart_count: 1,
                         })}
-                        className={classes.avatar}
                     >
                         <order.icon />
                     </Avatar>
@@ -270,9 +308,17 @@ const Order = ({ record, basePath }) => {
     );
 };
 
-const Review = ({ record, basePath }) => {
+const ReviewEvent: FC<{ record?: RaRecord; basePath?: string }> = ({
+    record,
+    basePath,
+}) => {
     const translate = useTranslate();
     const classes = useEventStyles();
+
+    if (!record) {
+        return null;
+    }
+
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -282,7 +328,6 @@ const Review = ({ record, basePath }) => {
                         aria-label={translate('resources.reviews.name', {
                             smart_count: 1,
                         })}
-                        className={classes.avatar}
                     >
                         <review.icon />
                     </Avatar>
@@ -312,7 +357,10 @@ const Review = ({ record, basePath }) => {
     );
 };
 
-const EditButton = ({ record, basePath }) => {
+const EditButton: FC<{ record?: RaRecord; basePath?: string }> = ({
+    record,
+    basePath,
+}) => {
     const translate = useTranslate();
     return (
         <Tooltip title={translate('ra.action.edit')}>

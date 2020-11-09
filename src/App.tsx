@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { Resource } from 'react-admin';
 
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
@@ -33,7 +33,7 @@ const messages = {
 
 const i18nProvider = buildI18nProvider(messages, 'en');
 
-const App: FC = () => {
+const App = (): ReactElement => {
     useEffect(() => {
         const restoreFetch = fakeServer();
         return (): void => {

@@ -119,7 +119,7 @@ const LoadedGridList: FC<GridProps> = ({ width }) => {
             className={classes.gridList}
             data-tour-id="grid-line"
         >
-            {ids.map((id: string) => {
+            {ids.map(id => {
                 const lock = locks.find((l: Lock) => l.recordId === id);
                 if (lock && !firstLockRecordId.current) {
                     firstLockRecordId.current = lock.recordId;

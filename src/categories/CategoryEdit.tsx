@@ -1,20 +1,19 @@
-import React, { FC } from 'react';
-import { Identifier, useTranslate } from 'ra-core';
+import React, { FC, ReactElement } from 'react';
+import { useTranslate } from 'ra-core';
 import {
-    ListActionsProps,
     TopToolbar,
     CreateButton,
     ExportButton,
     SortButton,
+    EditProps,
 } from 'ra-ui-materialui';
 import { Edit, TextInput } from 'react-admin';
 import { SimpleForm } from '@react-admin/ra-tree';
 
 import ProductList from '../products/ProductList';
 import { Typography, makeStyles } from '@material-ui/core';
-import { EditComponentProps, ListComponentProps } from '../types';
 
-const CategoryEdit: FC<EditComponentProps> = props => {
+const CategoryEdit: FC<EditProps> = props => {
     const translate = useTranslate();
     const classes = useStyles();
 
@@ -33,10 +32,7 @@ const CategoryEdit: FC<EditComponentProps> = props => {
     );
 };
 
-const CategoryEditAside: FC<ListComponentProps & { id: Identifier }> = ({
-    id,
-    ...rest
-}) => (
+const CategoryEditAside = ({ id, ...rest }: EditProps): ReactElement => (
     <ProductList
         {...rest}
         title=" "
@@ -47,13 +43,13 @@ const CategoryEditAside: FC<ListComponentProps & { id: Identifier }> = ({
         hasList={false}
         hasShow={false}
         filter={{ category_id: id }}
-        exporter={null}
-        aside={false}
+        exporter={false}
+        aside={undefined}
         actions={<ProductListActions />}
     />
 );
 
-const ProductListActions: FC<ListActionsProps> = () => (
+const ProductListActions = (): ReactElement => (
     <TopToolbar>
         <SortButton fields={['reference', 'sales', 'stock']} />
         <CreateButton

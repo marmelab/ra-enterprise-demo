@@ -1,9 +1,9 @@
 // in src/comments.js
-import React from 'react';
+import React, { FC } from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/';
 import {
     DateField,
     EditButton,
@@ -11,6 +11,7 @@ import {
     TextField,
     BooleanField,
     useTranslate,
+    ListControllerProps,
 } from 'react-admin';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
@@ -24,22 +25,30 @@ const useListStyles = makeStyles(theme => ({
     },
     cardTitleContent: {
         display: 'flex',
-        flexDirection: 'rows',
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
     cardContent: theme.typography.body1,
     cardContentRow: {
         display: 'flex',
-        flexDirection: 'rows',
+        flexDirection: 'row',
         alignItems: 'center',
         margin: '0.5rem 0',
     },
 }));
 
-const MobileGrid = ({ ids, data, basePath }) => {
+const MobileGrid: FC<Partial<ListControllerProps>> = ({
+    ids,
+    data,
+    basePath,
+}) => {
     const translate = useTranslate();
     const classes = useListStyles();
+
+    if (!ids || !data) {
+        return null;
+    }
     return (
         <div style={{ margin: '1em' }}>
             {ids.map(id => (
@@ -88,7 +97,6 @@ const MobileGrid = ({ ids, data, basePath }) => {
                                 record={data[id]}
                                 source="total"
                                 options={{ style: 'currency', currency: 'USD' }}
-                                className={classes.total}
                             />
                         </span>
                         <span className={classes.cardContentRow}>

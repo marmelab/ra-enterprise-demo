@@ -3,7 +3,7 @@ import { Redirect, useParams } from 'react-router';
 import { useTour } from '@react-admin/ra-tour';
 
 const TourLauncher: FC = () => {
-    const { tour } = useParams();
+    const { tour } = useParams<{ tour: string }>();
     const [{ running }, { start }] = useTour();
 
     useEffect(() => {

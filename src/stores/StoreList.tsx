@@ -6,6 +6,7 @@ import {
     DateInput,
     TextField,
     TextInput,
+    ListProps,
 } from 'react-admin';
 
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
@@ -34,7 +35,7 @@ const useListActionsStyles = makeStyles(theme => ({
     },
 }));
 
-export const StoreList: FC = (props: any) => {
+export const StoreList: FC<ListProps> = props => {
     const classes = useStyles();
     return (
         <List

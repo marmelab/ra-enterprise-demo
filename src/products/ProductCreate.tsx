@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     Create,
     FormTab,
@@ -8,6 +8,7 @@ import {
     TabbedForm,
     TextInput,
     required,
+    CreateProps,
 } from 'react-admin';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +26,7 @@ export const styles = {
 
 const useStyles = makeStyles(styles);
 
-const ProductCreate = props => {
+const ProductCreate: FC<CreateProps> = props => {
     useDefineAppLocation('catalog.products.create');
     const classes = useStyles();
     return (

@@ -2,11 +2,19 @@ import FakeRest from 'fakerest';
 import fetchMock from 'fetch-mock';
 import generateData from 'data-generator-retail';
 import { random } from 'faker/locale/en';
+import { Identifier } from 'react-admin';
 
 import demoData from './demo-data';
+import { Category, Product } from '../types';
 
-const getAllChildrenCategories = (categories, parentId) => {
+const getAllChildrenCategories = (
+    categories: Category[],
+    parentId: Identifier
+) => {
     const parentCategory = categories.find(({ id }) => id === parentId);
+    if (!parentCategory) {
+        return [];
+    }
     const children = parentCategory.children.map(childId =>
         getAllChildrenCategories(categories, childId)
     );
@@ -15,16 +23,24 @@ const getAllChildrenCategories = (categories, parentId) => {
 };
 
 const rebindProductToCategories = (
-    originalCategories,
-    newCategories
-) => product => {
+    originalCategories: Category[],
+    newCategories: Category[]
+) => (product: Product) => {
     const originalCategory = originalCategories.find(
         c => c.id === product.category_id
     );
 
+    if (!originalCategory) {
+        return product;
+    }
+
     const matchingNewCategory = newCategories.find(
         c => c.name === originalCategory.name
     );
+
+    if (!matchingNewCategory) {
+        return product;
+    }
 
     // If the new category does not have sub categories, just ensure we have the correct id
     if (matchingNewCategory.children.length === 0) {
@@ -44,7 +60,7 @@ const rebindProductToCategories = (
     };
 };
 
-export default () => {
+export default (): (() => void) => {
     const data = generateData({ serializeDate: true });
     const products = data.products.map(
         rebindProductToCategories(data.categories, demoData.categories)

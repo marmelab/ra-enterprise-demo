@@ -1,13 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FC } from 'react';
 import Button from '@material-ui/core/Button';
 import ThumbDown from '@material-ui/icons/ThumbDown';
-import { useTranslate, useUpdate, useNotify, useRedirect } from 'react-admin';
+import {
+    useTranslate,
+    useUpdate,
+    useNotify,
+    useRedirect,
+    Record,
+} from 'react-admin';
 
 /**
  * This custom button demonstrate using a custom action to update data
  */
-const RejectButton = ({ record }) => {
+const RejectButton: FC<{ record: Record }> = ({ record }) => {
     const translate = useTranslate();
     const notify = useNotify();
     const redirectTo = useRedirect();
@@ -54,10 +59,6 @@ const RejectButton = ({ record }) => {
     ) : (
         <span />
     );
-};
-
-RejectButton.propTypes = {
-    record: PropTypes.object,
 };
 
 export default RejectButton;

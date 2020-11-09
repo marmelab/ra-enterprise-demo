@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useMemo } from 'react';
+import { useMemo, ReactElement } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -12,7 +12,7 @@ import { useTranslate, useQueryWithStore } from 'react-admin';
 import CardWithIcon from './CardWithIcon';
 import { Customer } from '../types';
 
-const NewCustomers = () => {
+const NewCustomers = (): ReactElement | null => {
     const translate = useTranslate();
     const aMonthAgo = useMemo(() => {
         const date = new Date();
