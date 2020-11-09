@@ -15,6 +15,8 @@ import {
     Filter,
     ListProps,
     ListControllerProps,
+    ListContextProvider,
+    useListContext,
 } from 'react-admin';
 import {
     makeStyles,
@@ -120,6 +122,7 @@ const TabbedDatagrid: FC<
     const theme = useTheme();
     const { isXSmall, classes, filterValues, batchLevel, ...rest } = props;
     const rowStyle = orderRowStyle(batchLevel, theme);
+    const listContext = useListContext(props);
 
     return (
         <Fragment>
@@ -144,67 +147,83 @@ const TabbedDatagrid: FC<
             ) : (
                 <div>
                     {filterValues.status === 'ordered' && (
-                        <Datagrid
-                            {...rest}
-                            // @ts-ignore
-                            ids={state.ordered}
-                            optimized
-                            rowClick="edit"
-                            rowStyle={rowStyle}
-                            data-testid="order-ordered-datagrid"
+                        <ListContextProvider
+                            value={{
+                                ...listContext,
+                                ids: state.ordered,
+                            }}
                         >
-                            <TextField source="id" />
-                            <DateField source="date" showTime />
-                            <TextField source="reference" />
-                            <CustomerReferenceField />
-                            <NbItemsField />
-                            <NumberField
-                                source="total"
-                                options={{
-                                    style: 'currency',
-                                    currency: 'USD',
-                                }}
-                                className={classes.total}
-                            />
-                        </Datagrid>
+                            <Datagrid
+                                optimized
+                                rowClick="edit"
+                                rowStyle={rowStyle}
+                                data-testid="order-ordered-datagrid"
+                            >
+                                <TextField source="id" />
+                                <DateField source="date" showTime />
+                                <TextField source="reference" />
+                                <CustomerReferenceField />
+                                <NbItemsField />
+                                <NumberField
+                                    source="total"
+                                    options={{
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    }}
+                                    className={classes.total}
+                                />
+                            </Datagrid>
+                        </ListContextProvider>
                     )}
                     {filterValues.status === 'delivered' && (
-                        // @ts-ignore
-                        <Datagrid {...rest} ids={state.delivered}>
-                            <DateField source="date" showTime />
-                            <TextField source="reference" />
-                            <CustomerReferenceField />
-                            <NbItemsField />
-                            <NumberField
-                                source="total"
-                                options={{
-                                    style: 'currency',
-                                    currency: 'USD',
-                                }}
-                                className={classes.total}
-                            />
-                            <BooleanField source="returned" />
-                            <EditButton />
-                        </Datagrid>
+                        <ListContextProvider
+                            value={{
+                                ...listContext,
+                                ids: state.delivered,
+                            }}
+                        >
+                            <Datagrid>
+                                <DateField source="date" showTime />
+                                <TextField source="reference" />
+                                <CustomerReferenceField />
+                                <NbItemsField />
+                                <NumberField
+                                    source="total"
+                                    options={{
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    }}
+                                    className={classes.total}
+                                />
+                                <BooleanField source="returned" />
+                                <EditButton />
+                            </Datagrid>
+                        </ListContextProvider>
                     )}
                     {filterValues.status === 'cancelled' && (
-                        // @ts-ignore
-                        <Datagrid {...rest} ids={state.cancelled}>
-                            <DateField source="date" showTime />
-                            <TextField source="reference" />
-                            <CustomerReferenceField />
-                            <NbItemsField />
-                            <NumberField
-                                source="total"
-                                options={{
-                                    style: 'currency',
-                                    currency: 'USD',
-                                }}
-                                className={classes.total}
-                            />
-                            <BooleanField source="returned" />
-                            <EditButton />
-                        </Datagrid>
+                        <ListContextProvider
+                            value={{
+                                ...listContext,
+                                ids: state.cancelled,
+                            }}
+                        >
+                            <Datagrid>
+                                <DateField source="date" showTime />
+                                <TextField source="reference" />
+                                <CustomerReferenceField />
+                                <NbItemsField />
+                                <NumberField
+                                    source="total"
+                                    options={{
+                                        style: 'currency',
+                                        currency: 'USD',
+                                    }}
+                                    className={classes.total}
+                                />
+                                <BooleanField source="returned" />
+                                <EditButton />
+                            </Datagrid>
+                        </ListContextProvider>
                     )}
                 </div>
             )}

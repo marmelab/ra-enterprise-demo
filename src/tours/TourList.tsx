@@ -1,4 +1,4 @@
-import React, { cloneElement } from 'react';
+import React, { cloneElement, FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import RotateLeftIcon from '@material-ui/icons/RotateLeft';
@@ -10,6 +10,9 @@ import {
     Pagination,
     useMutation,
     useRefresh,
+    ListActionsProps,
+    useListContext,
+    ListProps,
 } from 'react-admin';
 
 import Tour from './Tour';
@@ -29,26 +32,15 @@ const useListStyles = makeStyles({
     },
 });
 
-const ListActions = ({
-    currentSort,
-    className,
-    resource,
-    filters,
-    displayedFilters,
-    exporter, // you can hide ExportButton if exporter = (null || false)
-    filterValues,
-    permanentFilter,
-    hasCreate, // you can hide CreateButton if hasCreate = false
-    basePath,
-    selectedIds,
-    onUnselectItems,
-    showFilter,
-    maxResults,
-    total,
-    ids,
-    ...rest
-}) => {
+const ListActions: FC<ListActionsProps> = ({ className, filters, ...rest }) => {
     const refresh = useRefresh();
+    const {
+        ids,
+        filterValues,
+        resource,
+        displayedFilters,
+        showFilter,
+    } = useListContext(rest);
 
     const [reset, { loading: resetLoading }] = useMutation(
         {
@@ -101,8 +93,9 @@ const ListActions = ({
     );
 };
 
-const GridList = ({ ids, data }) => {
+const GridList: FC = () => {
     const classes = useListStyles();
+    const { ids, data } = useListContext();
     return (
         <div className={classes.gridContainer}>
             {ids.map(id => (
@@ -112,7 +105,7 @@ const GridList = ({ ids, data }) => {
     );
 };
 
-const TourList = props => {
+const TourList: FC<ListProps> = props => {
     const classes = useStyles();
 
     return (

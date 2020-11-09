@@ -1,4 +1,6 @@
-const VALID_UNTIL = new Date() + 3600 * 24 * 365;
+import { DataProvider } from 'react-admin';
+
+const VALID_UNTIL = new Date(new Date().valueOf() + 3600 * 24 * 365);
 
 const mergeById = (a, b) => {
     const notInB = a.filter(aItem => !b.find(bItem => aItem.id === bItem.id));
@@ -13,13 +15,17 @@ const mergeById = (a, b) => {
         ...notInA,
     ].sort((c, d) => c.id - d.id);
 };
-export default (defaultState = {}) => {
-    const get = name => {
-        const collection = JSON.parse(localStorage.getItem(name)) || [];
+export default (defaultState = {}): DataProvider => {
+    const get = (name: string) => {
+        const item = localStorage.getItem(name);
+        if (!item) {
+            return [];
+        }
+        const collection = JSON.parse(item) || [];
         return mergeById(defaultState[name], collection);
     };
 
-    const set = (name, item) => {
+    const set = (name: string, item: any) => {
         return localStorage.setItem(name, JSON.stringify(item));
     };
 
@@ -86,10 +92,10 @@ export default (defaultState = {}) => {
                 );
             }
 
-            return {
+            return Promise.resolve({
                 data: collection,
                 total,
-            };
+            });
         },
 
         getOne: (resource, { id }) => {
@@ -97,21 +103,21 @@ export default (defaultState = {}) => {
 
             const item = collection.find(item => item.id === id);
 
-            return {
+            return Promise.resolve({
                 data: item,
                 validUntil: VALID_UNTIL,
-            };
+            });
         },
 
         getMany: (resource, { ids }) => {
             const collection = get(resource);
 
-            const items = collection.filter(item => ids.include(item.id));
+            const items = collection.filter(item => ids.includes(item.id));
 
-            return {
+            return Promise.resolve({
                 data: items,
                 validUntil: VALID_UNTIL,
-            };
+            });
         },
 
         getManyReference: (resource, { filter, sort, pagination }) => {
@@ -141,21 +147,23 @@ export default (defaultState = {}) => {
                 );
             }
 
-            return {
+            return Promise.resolve({
                 data: collection,
                 total,
-            };
+            });
         },
 
-        update,
+        update: (resource, params) => {
+            return Promise.resolve(update(resource, params));
+        },
         updateMany: (resource, { ids, data }) => {
             const updateResults = ids.map(id => update(resource, { id, data }));
 
-            return {
+            return Promise.resolve({
                 data: updateResults
                     .filter(res => res.data && res.data.id)
                     .map(res => res.data.id),
-            };
+            });
         },
 
         create: (resource, { data }) => {
@@ -165,7 +173,7 @@ export default (defaultState = {}) => {
             const item = collection.find(item => item.id === id);
 
             if (item) {
-                return;
+                return Promise.resolve({ data: item });
             }
 
             const newItem = { ...data, id: id };
@@ -173,19 +181,19 @@ export default (defaultState = {}) => {
 
             set(resource, collection);
 
-            return newItem;
+            return Promise.resolve({ data: newItem });
         },
 
-        delete: remove,
+        delete: (resource, params) => Promise.resolve(remove(resource, params)),
 
         deleteMany: (resource, { ids }) => {
             const deleteResults = ids.map(id => remove(resource, { id }));
 
-            return {
+            return Promise.resolve({
                 data: deleteResults
                     .filter(res => res.data && res.data.id)
                     .map(res => res.data.id),
-            };
+            });
         },
     };
 };

@@ -65,8 +65,7 @@ const VisitorList: FC<ListProps> = props => {
             defaultColumns={visitorListColumn}
             defaultOmittedColumns={['last_seen']}
             hasViewSelector
-            defaultView
-            filters={isSmall ? <VisitorFilter /> : null}
+            filters={isSmall ? <VisitorFilter /> : undefined}
             aside={<VisitorListAside />}
             sort={{ field: 'last_seen', order: 'DESC' }}
             perPage={25}

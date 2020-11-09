@@ -10,8 +10,7 @@ import { DateField, EditButton, useTranslate, NumberField } from 'react-admin';
 import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
-import { Identifier } from 'ra-core';
-import { Customer } from '../types';
+import { useListContext } from 'ra-core';
 
 const useStyles = makeStyles(theme => ({
     root: { margin: '1em' },
@@ -34,15 +33,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-interface Props {
-    ids?: Identifier[];
-    data?: { [key: string]: Customer };
-    basePath?: string;
-}
-
-const MobileGrid: FC<Props> = ({ ids, data, basePath }) => {
+const MobileGrid: FC = props => {
     const translate = useTranslate();
     const classes = useStyles();
+    const { ids, data, basePath } = useListContext(props);
 
     if (!ids || !data) {
         return null;
@@ -106,11 +100,6 @@ const MobileGrid: FC<Props> = ({ ids, data, basePath }) => {
             ))}
         </div>
     );
-};
-
-MobileGrid.defaultProps = {
-    data: {},
-    ids: [],
 };
 
 export default MobileGrid;

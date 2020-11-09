@@ -134,7 +134,6 @@ const Login = (): ReactElement => {
                                 <div className={classes.input}>
                                     <Field
                                         name="username"
-                                        // @ts-ignore
                                         component={renderInput}
                                         label={translate('ra.auth.username')}
                                         disabled={loading}
@@ -143,7 +142,6 @@ const Login = (): ReactElement => {
                                 <div className={classes.input}>
                                     <Field
                                         name="password"
-                                        // @ts-ignore
                                         component={renderInput}
                                         label={translate('ra.auth.password')}
                                         type="password"

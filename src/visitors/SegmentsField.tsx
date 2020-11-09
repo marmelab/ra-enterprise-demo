@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import Chip from '@material-ui/core/Chip';
-import { useTranslate } from 'react-admin';
+import { FieldProps, useTranslate } from 'react-admin';
 import segments from '../segments/data';
-import { FieldProps, Customer } from '../types';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -15,7 +14,7 @@ const useStyles = makeStyles({
     chip: { margin: 4 },
 });
 
-const SegmentsField: FC<FieldProps<Customer>> = ({ record }) => {
+const SegmentsField: FC<FieldProps> = ({ record }) => {
     const translate = useTranslate();
     const classes = useStyles();
 

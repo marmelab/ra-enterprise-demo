@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Datagrid, DateField, TextField } from 'react-admin';
+import React, { FC, useEffect } from 'react';
+import { Datagrid, DateField, TextField, useListContext } from 'react-admin';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
     useAppLocationState,
@@ -31,28 +31,29 @@ const useListStyles = makeStyles({
     },
 });
 
-const ReviewListDesktop = ({ selectedRow, ...props }) => {
+const ReviewListDesktop: FC<{ selectedRow: number | false }> = ({
+    selectedRow,
+    ...props
+}) => {
     const classes = useListStyles();
     const theme = useTheme();
     const [, setLocation] = useAppLocationState();
     const resourceLocation = useResourceAppLocation();
+    const { filterValues } = useListContext();
 
+    const effectDependency = JSON.stringify({
+        resourceLocation,
+        filter: filterValues,
+    });
     useEffect(() => {
-        const { status } = props.filterValues;
+        const { status } = filterValues;
         if (typeof status !== 'undefined') {
             setLocation('reviews.status_filter', { status });
         } else {
             setLocation('reviews');
         }
-    }, [
-        setLocation,
-        props.filterValues,
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        JSON.stringify({
-            resourceLocation,
-            filter: props.filterValues,
-        }),
-    ]);
+    }, [setLocation, effectDependency]);
     return (
         <Datagrid
             rowClick="edit"

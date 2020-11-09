@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     AutocompleteInput,
     DateInput,
@@ -6,6 +6,8 @@ import {
     SearchInput,
     SelectInput,
     Filter,
+    FilterProps,
+    Record,
 } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -13,7 +15,7 @@ const useFilterStyles = makeStyles({
     status: { width: 150 },
 });
 
-const ReviewFilter = props => {
+const ReviewFilter: FC<Partial<FilterProps>> = props => {
     const classes = useFilterStyles();
     return (
         <Filter {...props}>
@@ -29,7 +31,7 @@ const ReviewFilter = props => {
             />
             <ReferenceInput source="customer_id" reference="customers">
                 <AutocompleteInput
-                    optionText={choice =>
+                    optionText={(choice: Record): string =>
                         `${choice.first_name} ${choice.last_name}`
                     }
                 />

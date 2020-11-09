@@ -1,5 +1,5 @@
-import React from 'react';
-import { useMutation, useRefresh } from 'react-admin';
+import React, { FC } from 'react';
+import { Record, useMutation, useRefresh } from 'react-admin';
 import { useTour } from '@react-admin/ra-tour';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -54,7 +54,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default ({ record }) => {
+const Tour: FC<{ record: Record }> = ({ record }) => {
     const classes = useStyles();
     const refresh = useRefresh();
     // eslint-disable-next-line no-unused-vars
@@ -71,8 +71,10 @@ export default ({ record }) => {
         }
     );
 
-    const handlePlayClicked = () => {
-        start(record.tour);
+    const handlePlayClicked = (): void => {
+        if (start) {
+            start(record.tour);
+        }
         setPlayed();
     };
 
@@ -124,3 +126,5 @@ export default ({ record }) => {
         </Card>
     );
 };
+
+export default Tour;

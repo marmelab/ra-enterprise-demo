@@ -1,3 +1,6 @@
+import { Lock } from '@react-admin/ra-realtime';
+import { Identifier } from 'react-admin';
+
 const defaultIdentities = [
     'Stacey Warner',
     'Jasmine Morgan',
@@ -11,11 +14,19 @@ const defaultIdentities = [
     'Yasmine Hoffman',
 ];
 
-export function generateIdentity(identities = defaultIdentities) {
+export function generateIdentity(identities = defaultIdentities): string {
     return identities[Math.floor(Math.random() * identities.length)];
 }
 
-export function generateLock({ id = 0, resource = 'products', recordId = 0 }) {
+export function generateLock({
+    id = 0,
+    resource = 'products',
+    recordId = 0,
+}: {
+    id: Identifier;
+    resource: string;
+    recordId?: Identifier;
+}): Lock {
     const identity = generateIdentity();
     const createdAt = new Date();
 
@@ -28,7 +39,7 @@ export function generateLock({ id = 0, resource = 'products', recordId = 0 }) {
     };
 }
 
-export function generateLocks({ resource = 'products' }) {
+export function generateLocks(resource = 'products'): Lock[] {
     return Array(20)
         .fill(0)
         .filter((_, i) => i % (1 + Math.floor(Math.random() * 6)) === 0)
@@ -46,7 +57,7 @@ export function generateLocks({ resource = 'products' }) {
  * This generator assumes that:
  * - Product ids exist up to 20
  */
-const randomLockBuilder = () => {
+const randomLockBuilder = (): { data: Lock[]; total: number } => {
     const locks = generateLocks();
 
     return {

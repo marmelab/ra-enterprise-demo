@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
     useEditController,
     useTranslate,
     TextInput,
     SimpleForm,
     DateField,
+    EditProps,
 } from 'react-admin';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
@@ -41,7 +42,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const ReviewEdit = ({ onCancel, ...props }) => {
+const ReviewEdit: FC<EditProps & { onCancel?: () => void }> = ({
+    onCancel,
+    ...props
+}) => {
     const classes = useStyles();
     const controllerProps = useEditController(props);
     const translate = useTranslate();
