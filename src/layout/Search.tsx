@@ -1,5 +1,4 @@
 import React, { cloneElement, FC, Fragment } from 'react';
-import * as inflection from 'inflection';
 import { useTranslate } from 'react-admin';
 import {
     List,
@@ -13,8 +12,8 @@ import {
     Search,
     SearchProps,
     SearchPanelProps,
-    SearchResultDataItem,
     useSearchResults,
+    groupSearchResultsByResource,
 } from '@react-admin/ra-search';
 
 import {
@@ -136,39 +135,3 @@ const CustomSearchResultItem: FC<any> = props => {
             return null;
     }
 };
-
-type GroupedSearchResultItem = {
-    label: string;
-    data: SearchResultDataItem[];
-};
-
-type Translate = (key: string, options?: any) => string;
-
-function groupSearchResultsByResource(
-    data: SearchResultDataItem[],
-    translate: Translate
-): GroupedSearchResultItem[] {
-    const groupedSearchResultItems = data.reduce((acc, item) => {
-        if (!acc[item.type]) {
-            const resourceName = translate(`resources.${item.type}.name`, {
-                smart_count: 2,
-                _: inflection.capitalize(
-                    inflection.humanize(inflection.pluralize(item.type))
-                ),
-            });
-
-            acc[item.type] = {
-                label: resourceName,
-                data: [],
-            };
-        }
-
-        acc[item.type].data.push(item);
-        return acc;
-    }, {});
-
-    return Object.keys(groupedSearchResultItems).map(key => ({
-        label: groupedSearchResultItems[key].label,
-        data: groupedSearchResultItems[key].data,
-    }));
-}
