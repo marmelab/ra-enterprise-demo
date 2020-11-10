@@ -11,7 +11,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 
 import { SearchListItemLink } from './index';
 import { useTranslate } from 'react-admin';
-import { Stats } from './Stats';
+import { LinkedData } from './LinkedData';
 
 const secondaryTypographyProps = {
     component: 'div',
@@ -19,14 +19,12 @@ const secondaryTypographyProps = {
 
 export const ProductListItem: FC<any> = props => {
     const { data, onClick } = props;
-    const {
-        content: { record },
-    } = data;
+    const { content } = data;
 
     const classes = useProductListItemStyles();
     const translate = useTranslate();
 
-    if (!record) {
+    if (!content) {
         return null;
     }
 
@@ -40,13 +38,13 @@ export const ProductListItem: FC<any> = props => {
         >
             <ListItemAvatar className={classes.avatar}>
                 <div className={classes.art}>
-                    <img src={record.thumbnail} alt={record.reference} />
+                    <img src={content.thumbnail} alt={content.reference} />
                 </div>
             </ListItemAvatar>
             <ListItemText
                 primary={
                     <Typography variant="h6" color="textPrimary">
-                        {record.reference}
+                        {content.reference}
                     </Typography>
                 }
                 secondary={
@@ -58,15 +56,15 @@ export const ProductListItem: FC<any> = props => {
                         marginTop={1}
                         marginBottom={1}
                     >
-                        <Stats
+                        <LinkedData
                             icon={<CommentIcon />}
                             label={translate('resources.reviews.name', {
                                 smart_count: 2,
                             })}
-                            to={`/reviews?filter=%7B"product_id"%3A${record.id}%7D`}
+                            to={`/reviews?filter=%7B"product_id"%3A${content.id}%7D`}
                         >
-                            {record.reviews}
-                        </Stats>
+                            {content.reviews}
+                        </LinkedData>
                     </Box>
                 }
                 // @ts-ignore Could not make TS happy

@@ -16,14 +16,12 @@ import { SearchListItemLink } from './SearchListItemLink';
 
 export const CommandListItem: FC<any> = props => {
     const { data, onClick } = props;
-    const {
-        content: { record },
-    } = data;
+    const { content } = data;
 
     const classes = useCommandListItemStyles();
     const translate = useTranslate();
 
-    if (!record) {
+    if (!content) {
         return null;
     }
 
@@ -36,7 +34,7 @@ export const CommandListItem: FC<any> = props => {
             alignItems="flex-start"
         >
             <ListItemAvatar className={classes.avatar}>
-                <Avatar alt={record.reference}>
+                <Avatar alt={content.reference}>
                     <ShoppingCartIcon fontSize="large" />
                 </Avatar>
             </ListItemAvatar>
@@ -49,7 +47,7 @@ export const CommandListItem: FC<any> = props => {
                             color="textPrimary"
                             gutterBottom
                         >
-                            {record.reference}
+                            {content.reference}
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
@@ -58,7 +56,7 @@ export const CommandListItem: FC<any> = props => {
                             color="textPrimary"
                             gutterBottom
                         >
-                            {new Date(record.date).toLocaleDateString()}
+                            {new Date(content.date).toLocaleDateString()}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -71,12 +69,12 @@ export const CommandListItem: FC<any> = props => {
                         >
                             {`${translate(
                                 'resources.commands.fields.basket.total'
-                            )} ${record.total}`}
+                            )} ${content.total}`}
                             €
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <CommandStatus status={record.status} />
+                        <CommandStatus status={content.status} />
                     </Grid>
                 </Grid>
                 <Grid container item xs>
@@ -86,7 +84,7 @@ export const CommandListItem: FC<any> = props => {
                             color="textPrimary"
                             gutterBottom
                         >
-                            {`${record.customer.first_name} ${record.customer.last_name}`}
+                            {`${content.customer.first_name} ${content.customer.last_name}`}
                         </Typography>
                     </Grid>
                 </Grid>

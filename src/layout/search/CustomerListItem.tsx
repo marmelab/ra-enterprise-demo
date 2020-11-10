@@ -14,7 +14,7 @@ import DollarIcon from '@material-ui/icons/AttachMoney';
 
 import { SearchListItemLink } from './SearchListItemLink';
 import { useTranslate } from 'react-admin';
-import { Stats } from './Stats';
+import { LinkedData } from './LinkedData';
 
 const secondaryTypographyProps = {
     component: 'div',
@@ -22,18 +22,16 @@ const secondaryTypographyProps = {
 
 export const CustomerListItem: FC<any> = props => {
     const { data, onClick } = props;
-    const {
-        content: { record },
-    } = data;
+    const { content } = data;
 
     const classes = useStyles();
     const translate = useTranslate();
 
-    if (!record) {
+    if (!content) {
         return null;
     }
 
-    const fullname = `${record.first_name} ${record.last_name}`;
+    const fullname = `${content.first_name} ${content.last_name}`;
 
     return (
         <ListItem
@@ -44,7 +42,7 @@ export const CustomerListItem: FC<any> = props => {
             alignItems="flex-start"
         >
             <ListItemAvatar className={classes.avatar}>
-                <Avatar alt={fullname} src={record.avatar} />
+                <Avatar alt={fullname} src={content.avatar} />
             </ListItemAvatar>
             <ListItemText
                 primary={
@@ -62,31 +60,31 @@ export const CustomerListItem: FC<any> = props => {
                         marginTop={1}
                         marginBottom={1}
                     >
-                        <Stats
+                        <LinkedData
                             icon={<ShoppingCartIcon />}
                             label={translate('pos.dashboard.pending_orders')}
-                            to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${record.id}%7D`}
+                            to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${content.id}%7D`}
                         >
-                            {record.pending_orders}
-                        </Stats>
-                        <Stats
+                            {content.pending_orders}
+                        </LinkedData>
+                        <LinkedData
                             icon={<DollarIcon />}
                             label={translate(
                                 'resources.customers.fields.total_spent'
                             )}
-                            to={`/commands?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${record.id}%7D`}
+                            to={`/commands?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${content.id}%7D`}
                         >
-                            {record.total_spent.toLocaleString()}
-                        </Stats>
-                        <Stats
+                            {content.total_spent.toLocaleString()}
+                        </LinkedData>
+                        <LinkedData
                             icon={<CommentIcon />}
                             label={translate('resources.reviews.name', {
                                 smart_count: 2,
                             })}
-                            to={`/reviews?filter=%7B"customer_id"%3A${record.id}%7D`}
+                            to={`/reviews?filter=%7B"customer_id"%3A${content.id}%7D`}
                         >
-                            {record.reviews}
-                        </Stats>
+                            {content.reviews}
+                        </LinkedData>
                     </Box>
                 }
                 // @ts-ignore Could not make TS happy

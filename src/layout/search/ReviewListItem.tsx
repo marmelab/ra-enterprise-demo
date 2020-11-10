@@ -20,11 +20,9 @@ const secondaryTypographyProps = {
 export const ReviewListItem: FC<any> = props => {
     const { data, onClick } = props;
     const classes = useStyles();
-    const {
-        content: { record },
-    } = data;
+    const { content } = data;
 
-    if (!record) {
+    if (!content) {
         return null;
     }
 
@@ -37,13 +35,13 @@ export const ReviewListItem: FC<any> = props => {
             alignItems="flex-start"
         >
             <ListItemAvatar className={classes.avatar}>
-                <Avatar alt={record.reference}>
+                <Avatar alt={content.reference}>
                     <CommentIcon fontSize="large" />
                 </Avatar>
             </ListItemAvatar>
             <ListItemText
-                primary={<Rating value={record.rating} readOnly />}
-                secondary={<ReviewComment comment={record.comment} />}
+                primary={<Rating value={content.rating} readOnly />}
+                secondary={<ReviewComment comment={content.comment} />}
                 // @ts-ignore Could not make TS happy
                 secondaryTypographyProps={secondaryTypographyProps}
             />
