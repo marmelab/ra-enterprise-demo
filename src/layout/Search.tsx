@@ -1,4 +1,4 @@
-import React, { cloneElement, FC, Fragment } from 'react';
+import React, { FC, Fragment } from 'react';
 import { useTranslate } from 'react-admin';
 import {
     List,
@@ -26,9 +26,7 @@ import {
 const CustomSearch: FC<SearchProps> = props => {
     return (
         <Search {...props}>
-            <CustomSearchPanel>
-                <CustomSearchResultItem />
-            </CustomSearchPanel>
+            <CustomSearchPanel></CustomSearchPanel>
         </Search>
     );
 };
@@ -36,15 +34,14 @@ const CustomSearch: FC<SearchProps> = props => {
 export default CustomSearch;
 
 const CustomSearchPanel: FC<SearchPanelProps> = props => {
-    const { children = <CustomSearchResultItem />, ...rest } = props;
     const translate = useTranslate();
-    const classes = useCustomSearchPanelStyles(rest);
+    const classes = useCustomSearchPanelStyles(props);
 
     const { data, onClose } = useSearchResults();
 
     if (!data || data.length === 0) {
         return (
-            <List dense {...rest}>
+            <List dense {...props}>
                 <ListItem>
                     <ListItemText
                         primary={translate('ra.navigation.no_results')}
@@ -56,7 +53,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
     const groupedData = groupSearchResultsByResource(data, translate);
 
     return (
-        <List dense className={classes.root} {...rest}>
+        <List dense className={classes.root} {...props}>
             {groupedData.map(group => (
                 <Fragment key={group.label}>
                     <ListSubheader
@@ -67,7 +64,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                         <>
                             <Typography
                                 className={classes.headerGroup}
-                                variant="subtitle1"
+                                variant="h6"
                             >
                                 {translate(group.label.toString(), {
                                     _: group.label,
@@ -75,7 +72,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                             </Typography>
                             <Typography
                                 className={classes.headerCount}
-                                variant="subtitle1"
+                                variant="h6"
                             >
                                 {translate('ra-search.result', {
                                     smart_count: group.data.length,
@@ -83,13 +80,13 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                             </Typography>
                         </>
                     </ListSubheader>
-                    {group.data.map(searchResultItem =>
-                        cloneElement(children, {
-                            key: searchResultItem.id,
-                            data: searchResultItem,
-                            onClose,
-                        })
-                    )}
+                    {group.data.map(searchResultItem => (
+                        <CustomSearchResultItem
+                            key={searchResultItem.id}
+                            data={searchResultItem}
+                            onClose={onClose}
+                        />
+                    ))}
                 </Fragment>
             ))}
         </List>
