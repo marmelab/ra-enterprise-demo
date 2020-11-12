@@ -1,14 +1,22 @@
 import { ThemeOptions } from '@react-admin/ra-enterprise';
+import { fade } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
+import createPalette from '@material-ui/core/styles/createPalette';
+
+const darkPalette = createPalette({
+    type: 'dark', // Switching the dark mode on is a single property value change.
+    primary: {
+        main: '#90caf9',
+    },
+});
 
 export const darkTheme: ThemeOptions = {
-    palette: {
-        type: 'dark', // Switching the dark mode on is a single property value change.
-        primary: {
-            main: '#90caf9',
-        },
-    },
+    palette: darkPalette,
     overrides: {
+        MuiAppBar: {
+            // Hide MenuItemCategory shadow behind the appbar
+            zIndex: 9999,
+        },
         RaAppBar: {
             menuButton: {
                 // Since sub-<Menu /> hide labels when sidebar is closed
@@ -16,15 +24,36 @@ export const darkTheme: ThemeOptions = {
                 display: 'none',
             },
         },
+        RaSearchInput: {
+            root: {
+                color: darkPalette.common.white,
+                backgroundColor: fade(darkPalette.common.black, 0.04),
+                '&:hover': {
+                    backgroundColor: fade(darkPalette.common.black, 0.13),
+                },
+                '&:focus': {
+                    backgroundColor: fade(darkPalette.common.black, 0.13),
+                },
+                '&:focus-within': {
+                    backgroundColor: fade(darkPalette.common.black, 0.13),
+                },
+            },
+            inputBase: {
+                background: fade(darkPalette.common.black, 0.04),
+                borderRadius: 10,
+                '&:hover': {
+                    background: fade(darkPalette.common.black, 0.1),
+                },
+            },
+            inputAdornmentStart: {
+                color: darkPalette.common.white,
+            },
+        },
         RaSidebar: {
             drawerPaper: {
                 paddingRight: 16,
                 width: 'auto',
             },
-        },
-        MuiAppBar: {
-            // Hide MenuItemCategory shadow behind the appbar
-            zIndex: 9999,
         },
         RaMenuItemCategory: {
             closeButton: {
@@ -48,28 +77,32 @@ export const darkTheme: ThemeOptions = {
         RaFilterFormInput: {
             body: {
                 // Fixes search filter breadcrumb overlap
-                '& > div': { marginTop: 8 },
+                '& > div': {
+                    marginTop: 8,
+                },
             },
         },
     },
 };
 
-export const lightTheme: ThemeOptions = {
-    palette: {
-        type: 'light',
-        primary: {
-            main: '#4f3cc9',
-        },
-        secondary: {
-            light: '#5f5fc4',
-            main: '#283593',
-            dark: '#001064',
-            contrastText: '#fff',
-        },
-        background: {
-            default: '#fcfcfe',
-        },
+const lightPalette = createPalette({
+    type: 'light',
+    primary: {
+        main: '#4f3cc9',
     },
+    secondary: {
+        light: '#5f5fc4',
+        main: '#283593',
+        dark: '#001064',
+        contrastText: '#fff',
+    },
+    background: {
+        default: '#fcfcfe',
+    },
+});
+
+export const lightTheme: ThemeOptions = {
+    palette: lightPalette,
     shape: {
         borderRadius: 10,
     },
@@ -79,6 +112,31 @@ export const lightTheme: ThemeOptions = {
                 // Since sub-<Menu /> hide labels when sidebar is closed
                 // We need to disallow sidebar closing (hiding button is simpler)
                 display: 'none',
+            },
+        },
+        RaSearchInput: {
+            root: {
+                color: lightPalette.text.primary,
+                backgroundColor: fade(lightPalette.common.black, 0.04),
+                '&:hover': {
+                    backgroundColor: fade(lightPalette.common.black, 0.13),
+                },
+                '&:focus': {
+                    backgroundColor: fade(lightPalette.common.black, 0.13),
+                },
+                '&:focus-within': {
+                    backgroundColor: fade(lightPalette.common.black, 0.13),
+                },
+            },
+            inputBase: {
+                background: fade(lightPalette.common.black, 0.04),
+                borderRadius: 10,
+                '&:hover': {
+                    background: fade(lightPalette.common.black, 0.1),
+                },
+            },
+            inputAdornmentStart: {
+                color: lightPalette.text.hint,
             },
         },
         RaMenuItemLink: {
@@ -157,7 +215,9 @@ export const lightTheme: ThemeOptions = {
         RaFilterFormInput: {
             body: {
                 // Fixes search filter breadcrumb overlap
-                '& > div': { marginTop: 8 },
+                '& > div': {
+                    marginTop: 8,
+                },
             },
         },
     },

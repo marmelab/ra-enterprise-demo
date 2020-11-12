@@ -4,15 +4,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
+import TourIcon from '@material-ui/icons/Flag';
 import { Link } from 'react-router-dom';
-
 import {
     ToggleThemeButton,
     LanguageSwitcher,
 } from '@react-admin/ra-preferences';
 
-import TourIcon from '@material-ui/icons/Flag';
-
+import { Search } from './index';
 import Logo from './Logo';
 
 const useStyles = makeStyles(theme => ({
@@ -27,7 +26,8 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: theme.spacing(1),
     },
     logo: {
-        [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(0, 2),
+        [theme.breakpoints.up('lg')]: {
             position: 'absolute',
             left: '50%',
             top: '50%',
@@ -59,6 +59,7 @@ const CustomAppBar: FC = props => {
                 id="react-admin-title"
             />
             <Logo className={classes.logo} />
+            <Search />
             <IconButton to="/tours" component={Link} color="inherit">
                 <Badge badgeContent={numberOfTours} color="error" variant="dot">
                     <TourIcon />

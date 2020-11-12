@@ -40,17 +40,13 @@
             }
         ],
         "@typescript-eslint/no-use-before-define": "off",
-        "@typescript-eslint/ban-ts-comment": [
-            "warn",
-            {
-                "ts-ignore": true
-            }
-        ],
+        "@typescript-eslint/ban-ts-comment": "off",
         "react/prop-types": "off",
         "no-console": [
             "error",
             {
                 "allow": [
+                    "log",
                     "warn"
                 ]
             }

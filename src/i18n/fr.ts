@@ -17,6 +17,9 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 add_root: 'Ajouter une catégorie de produits',
             },
         },
+        'ra-search': {
+            result: `1 résultat |||| %{smart_count} résultats`,
+        },
         pos: {
             search: 'Rechercher',
             configuration: 'Configuration',
