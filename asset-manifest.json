@@ -1,24 +1,19 @@
 {
   "files": {
-    "main.css": "/ra-enterprise-demo/static/css/main.4ed98fe3.chunk.css",
-    "main.js": "/ra-enterprise-demo/static/js/main.ff0b2d86.chunk.js",
-    "main.js.map": "/ra-enterprise-demo/static/js/main.ff0b2d86.chunk.js.map",
+    "main.css": "/ra-enterprise-demo/static/css/main.af3584c1.chunk.css",
+    "main.js": "/ra-enterprise-demo/static/js/main.7959a318.chunk.js",
     "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.a576929f.js",
-    "runtime-main.js.map": "/ra-enterprise-demo/static/js/runtime-main.a576929f.js.map",
-    "static/css/2.fedc6cde.chunk.css": "/ra-enterprise-demo/static/css/2.fedc6cde.chunk.css",
-    "static/js/2.8696e0e0.chunk.js": "/ra-enterprise-demo/static/js/2.8696e0e0.chunk.js",
-    "static/js/2.8696e0e0.chunk.js.map": "/ra-enterprise-demo/static/js/2.8696e0e0.chunk.js.map",
+    "static/css/2.19e12e85.chunk.css": "/ra-enterprise-demo/static/css/2.19e12e85.chunk.css",
+    "static/js/2.1d962c63.chunk.js": "/ra-enterprise-demo/static/js/2.1d962c63.chunk.js",
     "index.html": "/ra-enterprise-demo/index.html",
-    "static/css/2.fedc6cde.chunk.css.map": "/ra-enterprise-demo/static/css/2.fedc6cde.chunk.css.map",
-    "static/css/main.4ed98fe3.chunk.css.map": "/ra-enterprise-demo/static/css/main.4ed98fe3.chunk.css.map",
-    "static/js/2.8696e0e0.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.8696e0e0.chunk.js.LICENSE.txt",
+    "static/js/2.1d962c63.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.1d962c63.chunk.js.LICENSE.txt",
     "static/media/welcome_illustration.cd84d2be.svg": "/ra-enterprise-demo/static/media/welcome_illustration.cd84d2be.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.a576929f.js",
-    "static/css/2.fedc6cde.chunk.css",
-    "static/js/2.8696e0e0.chunk.js",
-    "static/css/main.4ed98fe3.chunk.css",
-    "static/js/main.ff0b2d86.chunk.js"
+    "static/css/2.19e12e85.chunk.css",
+    "static/js/2.1d962c63.chunk.js",
+    "static/css/main.af3584c1.chunk.css",
+    "static/js/main.7959a318.chunk.js"
   ]
 }
