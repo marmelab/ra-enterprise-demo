@@ -72,9 +72,15 @@ const ReviewEdit: FC<EditProps & { onCancel?: () => void }> = ({
                 resource="reviews"
                 toolbar={<ReviewEditToolbar />}
             >
-                <CustomerReferenceField formClassName={classes.inlineField} />
+                <CustomerReferenceField
+                    label="resources.reviews.fields.customer_id"
+                    formClassName={classes.inlineField}
+                />
 
-                <ProductReferenceField formClassName={classes.inlineField} />
+                <ProductReferenceField
+                    label="resources.reviews.fields.product_id"
+                    formClassName={classes.inlineField}
+                />
                 <DateField source="date" formClassName={classes.inlineField} />
                 <StarRatingField formClassName={classes.inlineField} />
                 <TextInput source="comment" rowsMax={15} multiline fullWidth />

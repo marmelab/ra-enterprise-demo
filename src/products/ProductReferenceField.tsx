@@ -3,7 +3,7 @@ import { ReferenceField, ReferenceFieldProps, TextField } from 'react-admin';
 
 const ProductReferenceField: FC<Omit<
     ReferenceFieldProps,
-    'children' | 'label' | 'source' | 'reference'
+    'children' | 'source' | 'reference'
 >> = props => (
     <ReferenceField
         label="Product"
