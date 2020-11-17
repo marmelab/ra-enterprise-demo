@@ -18,10 +18,7 @@ const mergeById = (a, b) => {
 export default (defaultState = {}): DataProvider => {
     const get = (name: string) => {
         const item = localStorage.getItem(name);
-        if (!item) {
-            return [];
-        }
-        const collection = JSON.parse(item) || [];
+        const collection = item ? JSON.parse(item) : [];
         return mergeById(defaultState[name], collection);
     };
 
