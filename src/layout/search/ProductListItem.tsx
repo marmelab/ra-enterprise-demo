@@ -48,24 +48,26 @@ export const ProductListItem: FC<any> = props => {
                     </Typography>
                 }
                 secondary={
-                    <Box
-                        component="ul"
-                        display="flex"
-                        justifyContent="space-between"
-                        padding={0}
-                        marginTop={1}
-                        marginBottom={1}
-                    >
-                        <LinkedData
-                            icon={<CommentIcon />}
-                            label={translate('resources.reviews.name', {
-                                smart_count: 2,
-                            })}
-                            to={`/reviews?filter=%7B"product_id"%3A${content.id}%7D`}
+                    content.reviews > 0 ? (
+                        <Box
+                            component="ul"
+                            display="flex"
+                            justifyContent="space-between"
+                            padding={0}
+                            marginTop={1}
+                            marginBottom={1}
                         >
-                            {content.reviews}
-                        </LinkedData>
-                    </Box>
+                            <LinkedData
+                                icon={<CommentIcon />}
+                                label={translate('resources.reviews.name', {
+                                    smart_count: 2,
+                                })}
+                                to={`/reviews?filter=%7B"product_id"%3A${content.id}%7D`}
+                            >
+                                {content.reviews}
+                            </LinkedData>
+                        </Box>
+                    ) : undefined
                 }
                 // @ts-ignore Could not make TS happy
                 secondaryTypographyProps={secondaryTypographyProps}

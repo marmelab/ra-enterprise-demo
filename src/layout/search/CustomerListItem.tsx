@@ -60,31 +60,40 @@ export const CustomerListItem: FC<any> = props => {
                         marginTop={1}
                         marginBottom={1}
                     >
-                        <LinkedData
-                            icon={<ShoppingCartIcon />}
-                            label={translate('pos.dashboard.pending_orders')}
-                            to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${content.id}%7D`}
-                        >
-                            {content.pending_orders}
-                        </LinkedData>
-                        <LinkedData
-                            icon={<DollarIcon />}
-                            label={translate(
-                                'resources.customers.fields.total_spent'
-                            )}
-                            to={`/commands?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${content.id}%7D`}
-                        >
-                            {content.total_spent.toLocaleString()}
-                        </LinkedData>
-                        <LinkedData
-                            icon={<CommentIcon />}
-                            label={translate('resources.reviews.name', {
-                                smart_count: 2,
-                            })}
-                            to={`/reviews?filter=%7B"customer_id"%3A${content.id}%7D`}
-                        >
-                            {content.reviews}
-                        </LinkedData>
+                        {content.pending_orders > 0 ? (
+                            <LinkedData
+                                icon={<ShoppingCartIcon />}
+                                label={translate(
+                                    'pos.dashboard.pending_orders'
+                                )}
+                                to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${content.id}%7D`}
+                            >
+                                {content.pending_orders}
+                            </LinkedData>
+                        ) : null}
+
+                        {content.total_spent > 0 ? (
+                            <LinkedData
+                                icon={<DollarIcon />}
+                                label={translate(
+                                    'resources.customers.fields.total_spent'
+                                )}
+                                to={`/commands?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${content.id}%7D`}
+                            >
+                                {content.total_spent.toLocaleString()}
+                            </LinkedData>
+                        ) : null}
+                        {content.reviews > 0 ? (
+                            <LinkedData
+                                icon={<CommentIcon />}
+                                label={translate('resources.reviews.name', {
+                                    smart_count: 2,
+                                })}
+                                to={`/reviews?filter=%7B"customer_id"%3A${content.id}%7D`}
+                            >
+                                {content.reviews}
+                            </LinkedData>
+                        ) : null}
                     </Box>
                 }
                 // @ts-ignore Could not make TS happy
