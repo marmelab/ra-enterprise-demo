@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import {
     Create,
     DateInput,
@@ -51,8 +51,8 @@ export const validatePasswords = ({
     return errors;
 };
 
-const VisitorCreate: FC<CreateProps> = props => {
-    const classes = useStyles();
+const VisitorCreate = (props: CreateProps): ReactElement => {
+    const classes = useStyles(props);
     useDefineAppLocation('audience.customers.create');
 
     return (
