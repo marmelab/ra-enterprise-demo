@@ -46,7 +46,7 @@ const Welcome: FC = () => {
                     <Typography variant="h5" component="h2" gutterBottom>
                         {translate('pos.dashboard.welcome.title')}
                     </Typography>
-                    <Box maxWidth="40em">
+                    <Box maxWidth="50em">
                         <Typography variant="body1" component="p" gutterBottom>
                             {translate('pos.dashboard.welcome.subtitle')}
                         </Typography>

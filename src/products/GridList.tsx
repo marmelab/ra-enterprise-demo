@@ -78,28 +78,25 @@ const ProductTile: FC<ProductTitleProps> = ({ record }) => {
     const classes = useStyles();
 
     return (
-        <>
-            <img src={record.thumbnail} alt="" />
-            <GridListTileBar
-                className={classes.tileBar}
-                title={record.reference}
-                subtitle={
-                    <span>
-                        {record.width}x{record.height},{' '}
-                        <NumberField
-                            className={classes.price}
-                            source="price"
-                            record={record}
-                            color="inherit"
-                            options={{
-                                style: 'currency',
-                                currency: 'USD',
-                            }}
-                        />
-                    </span>
-                }
-            />
-        </>
+        <GridListTileBar
+            className={classes.tileBar}
+            title={record.reference}
+            subtitle={
+                <span>
+                    {record.width}x{record.height},{' '}
+                    <NumberField
+                        className={classes.price}
+                        source="price"
+                        record={record}
+                        color="inherit"
+                        options={{
+                            style: 'currency',
+                            currency: 'USD',
+                        }}
+                    />
+                </span>
+            }
+        />
     );
 };
 
@@ -139,6 +136,7 @@ const LoadedGridList: FC<GridProps> = ({ width }) => {
                             isFirstLock ? 'productlocktile' : undefined
                         }
                     >
+                        <img src={data[id].thumbnail} alt="" />
                         <ProductTile record={data[id]} />
                         {lock && <LockOverlay lock={lock} />}
                     </GridListTile>

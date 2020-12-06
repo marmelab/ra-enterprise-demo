@@ -109,7 +109,7 @@ const ProductList: FC<ListProps> = ({ actions, ...props }) => {
 // The aside prop is only used to disable the aside here if explicitly set to false
 // If undefined, we consider the aside is not explicitly disabled an display the filter
 // vertical bar
-const ProductListView = ({
+export const ProductListView = ({
     isSmall,
     actions = <ListActions isSmall={isSmall} />,
     aside,
@@ -126,7 +126,7 @@ const ProductListView = ({
         <div className={classes.root}>
             <Title title={title || defaultTitle} />
             {actions}
-            {(isSmall || aside === false) && (
+            {isSmall && (
                 <Box m={1}>
                     <ProductFilter context="form" />
                 </Box>
