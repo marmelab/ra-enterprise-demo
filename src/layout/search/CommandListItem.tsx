@@ -40,51 +40,32 @@ export const CommandListItem: FC<any> = props => {
             </ListItemAvatar>
             <Grid className={classes.root} container spacing={2}>
                 <Grid container item xs>
-                    <Grid item xs={12}>
-                        <Typography
-                            className={classes.reference}
-                            variant="body2"
-                            color="textPrimary"
-                            gutterBottom
-                        >
-                            {content.reference}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={8}>
                         <Typography
                             variant="body1"
                             color="textPrimary"
                             gutterBottom
                         >
-                            {new Date(content.date).toLocaleDateString()}
+                            Ref. {content.reference}
                         </Typography>
                     </Grid>
-                </Grid>
-                <Grid container item xs>
-                    <Grid item xs={12}>
-                        <Typography
-                            className={classes.total}
-                            variant="caption"
-                            color="textPrimary"
-                        >
-                            {`${translate(
-                                'resources.commands.fields.basket.total'
-                            )} ${content.total}`}
-                            €
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
+                    <Grid item xs={4}>
                         <CommandStatus status={content.status} />
                     </Grid>
-                </Grid>
-                <Grid container item xs>
                     <Grid item xs={12}>
                         <Typography
                             variant="body2"
                             color="textPrimary"
                             gutterBottom
                         >
+                            {new Date(content.date).toLocaleDateString()}
+                            &nbsp;-&nbsp;
                             {`${content.customer.first_name} ${content.customer.last_name}`}
+                            &nbsp;-&nbsp;
+                            {`${translate(
+                                'resources.commands.fields.basket.total'
+                            )} ${content.total}`}
+                            €
                         </Typography>
                     </Grid>
                 </Grid>
@@ -95,20 +76,15 @@ export const CommandListItem: FC<any> = props => {
 
 const useCommandListItemStyles = makeStyles(theme => ({
     avatar: {
-        width: 64,
-        height: 64,
-        paddingRight: theme.spacing(2),
-
-        '& > *': {
-            width: '100%',
-            height: '100%',
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        '& svg': {
+            width: 30,
+            height: 30,
         },
     },
     root: {
         padding: theme.spacing(1, 0),
-    },
-    reference: {
-        fontWeight: theme.typography.fontWeightBold,
     },
     total: {
         fontWeight: theme.typography.fontWeightBold,

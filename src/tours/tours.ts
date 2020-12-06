@@ -214,11 +214,18 @@ const tours: { [id: string]: TourType } = {
                     [[1], [2], [3], [4]].reduce(
                         acc =>
                             acc.then(async () => {
+                                const {
+                                    data: customers,
+                                } = await dataProvider.getList('customers', {
+                                    filter: { has_ordered: true },
+                                    pagination: { page: 1, perPage: 100 },
+                                    sort: { field: 'id', order: 'ASC' },
+                                });
                                 // Add a new Order
                                 const {
                                     data: newCommand,
                                 } = await dataProvider.create('commands', {
-                                    data: randomCommandBuilder(1),
+                                    data: randomCommandBuilder(1, customers),
                                 });
 
                                 newCommandsIds.push(newCommand.id);
@@ -257,18 +264,26 @@ const tours: { [id: string]: TourType } = {
             {
                 before: async ({ dataProvider }) => {
                     localStorage.setItem('batchLevel', '2');
+                    const { data: customers } = await dataProvider.getList(
+                        'customers',
+                        {
+                            filter: { has_ordered: true },
+                            pagination: { page: 1, perPage: 100 },
+                            sort: { field: 'id', order: 'ASC' },
+                        }
+                    );
                     // Add a new Order
                     const { data: newCommand1 } = await dataProvider.create(
                         'commands',
                         {
-                            data: randomCommandBuilder(2),
+                            data: randomCommandBuilder(2, customers),
                         }
                     );
                     newCommandsIds.push(newCommand1.id);
                     const { data: newCommand2 } = await dataProvider.create(
                         'commands',
                         {
-                            data: randomCommandBuilder(2),
+                            data: randomCommandBuilder(2, customers),
                         }
                     );
                     newCommandsIds.push(newCommand2.id);

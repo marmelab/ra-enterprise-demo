@@ -1,25 +1,35 @@
-import React, { Fragment, useState, useEffect, FC } from 'react';
+import * as React from 'react';
+import {
+    FC,
+    Fragment,
+    ChangeEvent,
+    useCallback,
+    useEffect,
+    useState,
+} from 'react';
 import {
     AutocompleteInput,
     BooleanField,
     Datagrid,
+    DatagridProps,
     DateField,
     DateInput,
-    EditButton,
+    Filter,
+    FilterProps,
+    Identifier,
+    ListContextProvider,
+    ListProps,
     NullableBooleanInput,
     NumberField,
     ReferenceInput,
+    ReferenceField,
     SearchInput,
     TextField,
     TextInput,
-    Filter,
-    ListProps,
-    ListControllerProps,
-    ListContextProvider,
+    useGetList,
     useListContext,
 } from 'react-admin';
 import {
-    makeStyles,
     useMediaQuery,
     Divider,
     Tabs,
@@ -30,18 +40,22 @@ import {
     fade,
     Theme,
 } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { RealTimeList } from '@react-admin/ra-realtime';
+
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
+import AddressField from '../visitors/AddressField';
 import MobileGrid from './MobileGrid';
+import { Customer } from '../types';
 
-const OrderFilter: FC = props => (
+const OrderFilter: FC<Omit<FilterProps, 'children'>> = props => (
     <Filter {...props}>
         <SearchInput source="q" alwaysOn />
         <ReferenceInput source="customer_id" reference="customers">
             <AutocompleteInput
-                optionText={(choice): string =>
-                    choice.first_name && choice.last_name
+                optionText={(choice: Customer): string =>
+                    choice.id // the empty choice is { id: '' }
                         ? `${choice.first_name} ${choice.last_name}`
                         : ''
                 }
@@ -90,39 +104,89 @@ const tabs = [
     { id: 'cancelled', name: 'cancelled' },
 ];
 
-const TabbedDatagrid: FC<
-    Partial<ListControllerProps> & {
-        isXSmall: boolean;
-        classes: any;
-        batchLevel: number;
-    }
-> = props => {
-    const [state, setState] = useState({
-        ordered: [],
-        delivered: [],
-        cancelled: [],
-    });
+type TabbedDatagridProps = DatagridProps;
+
+const useGetTotals = (filterValues: any): any => {
+    const { total: totalOrdered } = useGetList(
+        'commands',
+        { perPage: 1, page: 1 },
+        { field: 'id', order: 'ASC' },
+        { ...filterValues, status: 'ordered' }
+    );
+    const { total: totalDelivered } = useGetList(
+        'commands',
+        { perPage: 1, page: 1 },
+        { field: 'id', order: 'ASC' },
+        { ...filterValues, status: 'delivered' }
+    );
+    const { total: totalCancelled } = useGetList(
+        'commands',
+        { perPage: 1, page: 1 },
+        { field: 'id', order: 'ASC' },
+        { ...filterValues, status: 'cancelled' }
+    );
+
+    return {
+        ordered: totalOrdered,
+        delivered: totalDelivered,
+        cancelled: totalCancelled,
+    };
+};
+
+const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
+    const listContext = useListContext();
+    const { ids, filterValues, setFilters, displayedFilters } = listContext;
+    const classes = useDatagridStyles();
+    const isXSmall = useMediaQuery<Theme>(theme =>
+        theme.breakpoints.down('xs')
+    );
+    const [ordered, setOrdered] = useState<Identifier[]>([] as Identifier[]);
+    const [delivered, setDelivered] = useState<Identifier[]>(
+        [] as Identifier[]
+    );
+    const [cancelled, setCancelled] = useState<Identifier[]>(
+        [] as Identifier[]
+    );
+    const totals = useGetTotals(filterValues) as any;
 
     useEffect(() => {
-        if (props.ids !== state[props.filterValues.status]) {
-            setState(prevState => ({
-                ...prevState,
-                [props.filterValues.status]: props.ids,
-            }));
+        if (ids && ids !== filterValues.status) {
+            switch (filterValues.status) {
+                case 'ordered':
+                    setOrdered(ids);
+                    break;
+                case 'delivered':
+                    setDelivered(ids);
+                    break;
+                case 'cancelled':
+                    setCancelled(ids);
+                    break;
+            }
         }
-    }, [props.filterValues.status, props.ids, state]);
+    }, [ids, filterValues.status]);
 
-    const handleChange = (event, value): void => {
-        const { filterValues, setFilters } = props;
-        if (setFilters) {
-            setFilters({ ...filterValues, status: value }, {});
-        }
-    };
+    const handleChange = useCallback(
+        (event: ChangeEvent<unknown>, value: any) => {
+            setFilters &&
+                setFilters(
+                    { ...filterValues, status: value },
+                    displayedFilters
+                );
+        },
+        [displayedFilters, filterValues, setFilters]
+    );
 
     const theme = useTheme();
-    const { isXSmall, classes, filterValues, batchLevel, ...rest } = props;
+    const batchLevel =
+        parseInt(localStorage.getItem('batchLevel') || '0', 0) || 0;
     const rowStyle = orderRowStyle(batchLevel, theme);
-    const listContext = useListContext(props);
+
+    const selectedIds =
+        filterValues.status === 'ordered'
+            ? ordered
+            : filterValues.status === 'delivered'
+            ? delivered
+            : cancelled;
 
     return (
         <Fragment>
@@ -136,33 +200,46 @@ const TabbedDatagrid: FC<
                 {tabs.map(choice => (
                     <Tab
                         key={choice.id}
-                        label={choice.name}
+                        label={
+                            totals[choice.name]
+                                ? `${choice.name} (${totals[choice.name]})`
+                                : choice.name
+                        }
                         value={choice.id}
                     />
                 ))}
             </Tabs>
             <Divider />
             {isXSmall ? (
-                <MobileGrid {...rest} ids={state[filterValues.status]} />
+                <ListContextProvider
+                    value={{ ...listContext, ids: selectedIds }}
+                >
+                    <MobileGrid {...props} ids={selectedIds} />
+                </ListContextProvider>
             ) : (
                 <div>
                     {filterValues.status === 'ordered' && (
                         <ListContextProvider
-                            value={{
-                                ...listContext,
-                                ids: state.ordered,
-                            }}
+                            value={{ ...listContext, ids: ordered }}
                         >
                             <Datagrid
+                                {...props}
                                 optimized
                                 rowClick="edit"
                                 rowStyle={rowStyle}
                                 data-testid="order-ordered-datagrid"
                             >
-                                <TextField source="id" />
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
                                 <CustomerReferenceField />
+                                <ReferenceField
+                                    source="customer_id"
+                                    reference="customers"
+                                    link={false}
+                                    label="resources.commands.fields.address"
+                                >
+                                    <AddressField />
+                                </ReferenceField>
                                 <NbItemsField />
                                 <NumberField
                                     source="total"
@@ -177,15 +254,20 @@ const TabbedDatagrid: FC<
                     )}
                     {filterValues.status === 'delivered' && (
                         <ListContextProvider
-                            value={{
-                                ...listContext,
-                                ids: state.delivered,
-                            }}
+                            value={{ ...listContext, ids: delivered }}
                         >
-                            <Datagrid>
+                            <Datagrid {...props} rowClick="edit">
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
                                 <CustomerReferenceField />
+                                <ReferenceField
+                                    source="customer_id"
+                                    reference="customers"
+                                    link={false}
+                                    label="resources.commands.fields.address"
+                                >
+                                    <AddressField />
+                                </ReferenceField>
                                 <NbItemsField />
                                 <NumberField
                                     source="total"
@@ -196,21 +278,25 @@ const TabbedDatagrid: FC<
                                     className={classes.total}
                                 />
                                 <BooleanField source="returned" />
-                                <EditButton />
                             </Datagrid>
                         </ListContextProvider>
                     )}
                     {filterValues.status === 'cancelled' && (
                         <ListContextProvider
-                            value={{
-                                ...listContext,
-                                ids: state.cancelled,
-                            }}
+                            value={{ ...listContext, ids: cancelled }}
                         >
-                            <Datagrid>
+                            <Datagrid {...props} rowClick="edit">
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
                                 <CustomerReferenceField />
+                                <ReferenceField
+                                    source="customer_id"
+                                    reference="customers"
+                                    link={false}
+                                    label="resources.commands.fields.address"
+                                >
+                                    <AddressField />
+                                </ReferenceField>
                                 <NbItemsField />
                                 <NumberField
                                     source="total"
@@ -221,7 +307,6 @@ const TabbedDatagrid: FC<
                                     className={classes.total}
                                 />
                                 <BooleanField source="returned" />
-                                <EditButton />
                             </Datagrid>
                         </ListContextProvider>
                     )}
@@ -231,24 +316,7 @@ const TabbedDatagrid: FC<
     );
 };
 
-const StyledTabbedDatagrid: FC<Partial<ListControllerProps>> = props => {
-    const classes = useDatagridStyles();
-    const isXSmall = useMediaQuery<Theme>(theme =>
-        theme.breakpoints.down('xs')
-    );
-    const batchLevel =
-        parseInt(localStorage.getItem('batchLevel') || '0', 0) || 0;
-    return (
-        <TabbedDatagrid
-            classes={classes}
-            isXSmall={isXSmall}
-            batchLevel={batchLevel}
-            {...props}
-        />
-    );
-};
-
-const OrderList: FC<ListProps> = ({ classes, ...props }) => (
+const OrderList: FC<ListProps> = props => (
     <RealTimeList
         {...props}
         filterDefaultValues={{ status: 'ordered' }}
@@ -256,7 +324,7 @@ const OrderList: FC<ListProps> = ({ classes, ...props }) => (
         perPage={25}
         filters={<OrderFilter />}
     >
-        <StyledTabbedDatagrid />
+        <TabbedDatagrid />
     </RealTimeList>
 );
 

@@ -129,6 +129,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                         total: 'Total',
                         unit_price: 'P.U.',
                     },
+                    address: 'Adresse',
                     customer_id: 'Client',
                     date_gte: 'Emises depuis',
                     date_lte: 'Emises avant',

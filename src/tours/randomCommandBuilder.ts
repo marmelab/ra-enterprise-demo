@@ -1,4 +1,5 @@
 import { Order } from '../types';
+import { Record } from 'react-admin';
 
 /**
  * Generate random commands
@@ -7,14 +8,16 @@ import { Order } from '../types';
  * - Customer ids exist until 50
  * - Product ids exist until 20
  */
-const randomCommandBuilder = (batchLevel: number): Order => {
+const randomCommandBuilder = (
+    batchLevel: number,
+    customers: Record[]
+): Omit<Order, 'id'> => {
     const basket = new Array(Math.round(Math.random() * 2) + 1).map(() => ({
         product_id: Math.round(Math.random() * 20),
         quantity: Math.round(Math.random() * 2) + 1,
     }));
 
     return {
-        id: Math.round(Math.random() * 50),
         date: new Date(),
         total: (Math.round(Math.random() * 10000) / 100) * basket.length,
         status: 'ordered',
@@ -23,7 +26,7 @@ const randomCommandBuilder = (batchLevel: number): Order => {
             .replace(/[^a-z]+/g, '')
             .substr(0, 6)
             .toUpperCase(),
-        customer_id: Math.round(Math.random() * 50),
+        customer_id: customers[Math.round(Math.random() * customers.length)].id,
         basket,
         batch: batchLevel,
     };

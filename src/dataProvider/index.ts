@@ -41,7 +41,7 @@ const delayedDataProvider = new Proxy(restProvider, {
             }
 
             return new Promise(resolve =>
-                setTimeout(() => resolve(provider[name](resource, params)), 500)
+                setTimeout(() => resolve(provider[name](resource, params)), 200)
             );
         };
     },

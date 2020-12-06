@@ -64,7 +64,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                         <>
                             <Typography
                                 className={classes.headerGroup}
-                                variant="h6"
+                                variant="subtitle1"
                             >
                                 {translate(group.label.toString(), {
                                     _: group.label,
@@ -72,7 +72,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                             </Typography>
                             <Typography
                                 className={classes.headerCount}
-                                variant="h6"
+                                variant="subtitle1"
                             >
                                 {translate('ra-search.result', {
                                     smart_count: group.data.length,
@@ -97,6 +97,7 @@ const useCustomSearchPanelStyles = makeStyles(theme => ({
     root: {
         maxHeight: 'calc(100vh - 100px)',
         maxWidth: 512,
+        overflowX: 'hidden',
     },
     header: {
         display: 'flex',

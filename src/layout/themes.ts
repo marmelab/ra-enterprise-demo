@@ -220,5 +220,12 @@ export const lightTheme: ThemeOptions = {
                 },
             },
         },
+        RaLinkedData: {
+            root: {
+                '&:hover': {
+                    backgroundColor: '#ddd',
+                },
+            },
+        },
     },
 };

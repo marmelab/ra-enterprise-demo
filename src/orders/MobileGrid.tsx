@@ -1,9 +1,8 @@
 // in src/comments.js
-import React, { FC } from 'react';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import { makeStyles } from '@material-ui/core/';
+import * as React from 'react';
+import { FC } from 'react';
+import { Card, CardHeader, CardContent } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import {
     DateField,
     EditButton,
@@ -11,7 +10,9 @@ import {
     TextField,
     BooleanField,
     useTranslate,
-    ListControllerProps,
+    RecordMap,
+    Identifier,
+    Record,
 } from 'react-admin';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
@@ -38,17 +39,20 @@ const useListStyles = makeStyles(theme => ({
     },
 }));
 
-const MobileGrid: FC<Partial<ListControllerProps>> = ({
-    ids,
-    data,
-    basePath,
-}) => {
+interface MobileGridProps {
+    ids?: Identifier[];
+    data?: RecordMap<Record>;
+    basePath?: string;
+}
+
+const MobileGrid: FC<MobileGridProps> = ({ ids, data, basePath }) => {
     const translate = useTranslate();
     const classes = useListStyles();
 
-    if (!ids || !data) {
+    if (!ids || !data || !basePath) {
         return null;
     }
+
     return (
         <div style={{ margin: '1em' }}>
             {ids.map(id => (

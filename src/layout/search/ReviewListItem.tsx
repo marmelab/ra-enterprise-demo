@@ -52,14 +52,14 @@ export const ReviewListItem: FC<any> = props => {
 const ReviewComment: FC<{ comment: string }> = ({ comment }) => {
     return (
         <div>
-            {comment.length <= 300 ? (
+            {comment.length <= 200 ? (
                 <Typography variant="caption" color="textPrimary">
                     {comment}
                 </Typography>
             ) : (
                 <Tooltip title={comment}>
                     <Typography variant="caption" color="textPrimary">
-                        {truncateString(comment, 300)}
+                        {truncateString(comment, 200)}
                     </Typography>
                 </Tooltip>
             )}

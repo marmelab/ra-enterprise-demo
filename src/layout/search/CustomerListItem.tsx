@@ -46,16 +46,13 @@ export const CustomerListItem: FC<any> = props => {
             </ListItemAvatar>
             <ListItemText
                 primary={
-                    <Typography variant="h6" color="textPrimary">
-                        {fullname}
-                    </Typography>
+                    <Typography color="textPrimary">{fullname}</Typography>
                 }
                 secondary={
                     <Box
                         component="ul"
                         display="flex"
-                        justifyContent="space-between"
-                        className={classes.stats}
+                        justifyContent="flex-start"
                         padding={0}
                         marginTop={1}
                         marginBottom={1}
@@ -105,19 +102,11 @@ export const CustomerListItem: FC<any> = props => {
 
 const useStyles = makeStyles(theme => ({
     avatar: {
-        width: 64,
-        height: 64,
-        paddingRight: theme.spacing(2),
-
-        '& > *': {
-            width: '100%',
-            height: '100%',
-        },
-    },
-    stats: {
-        '& li': {
-            width: '33.33%',
-            minWidth: 150,
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        '& img': {
+            width: 50,
+            height: 50,
         },
     },
 }));

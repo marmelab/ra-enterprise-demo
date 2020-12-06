@@ -43,7 +43,7 @@ export const ProductListItem: FC<any> = props => {
             </ListItemAvatar>
             <ListItemText
                 primary={
-                    <Typography variant="h6" color="textPrimary">
+                    <Typography color="textPrimary">
                         {content.reference}
                     </Typography>
                 }

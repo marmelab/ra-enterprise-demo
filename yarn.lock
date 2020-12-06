@@ -1514,10 +1514,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.1.tgz#c6180dcf332da818b2fe376e343e04d4f3f81afc"
   integrity sha512-CWNJ+GzQ4yahmBAZlDLivXylW1IG47NSfNNMMSgdxHwCF0+9/q9XDrATRsjbqAn59CSObUUe0ZrlidXLDrPo4Q==
 
-"@react-admin/ra-search@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.2.1.tgz#ebe4347428f6817403f4ded8fb6757e04ac00048"
-  integrity sha512-0u1C8gagd0jsyli9wM4IKq/SXlq9oai2juVvcez899M5asPtJUexJiTWYXOkhMyn65U1zzCO9J1S7rMdAqZ/Zg==
+"@react-admin/ra-search@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.2.2.tgz#3d99f95fe31fc96e4dc117f5b13e95858529c5af"
+  integrity sha512-/WpizJffZ/7DtyI51SCHy7w+q+wwNKTF7oF5/xwWWsP4tqMTjDtqop2Ui+27OsQxV+zc4HHvp8A8Nxi85orM3Q==
 
 "@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.0":
   version "1.1.0"

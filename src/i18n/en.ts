@@ -128,6 +128,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                         total: 'Total',
                         unit_price: 'Unit Price',
                     },
+                    address: 'Address',
                     customer_id: 'Customer',
                     date_gte: 'Passed Since',
                     date_lte: 'Passed Before',
