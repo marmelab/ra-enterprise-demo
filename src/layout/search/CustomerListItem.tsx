@@ -40,6 +40,7 @@ export const CustomerListItem: FC<any> = props => {
             data={data}
             onClick={onClick}
             alignItems="flex-start"
+            className={classes.root}
         >
             <ListItemAvatar className={classes.avatar}>
                 <Avatar alt={fullname} src={content.avatar} />
@@ -101,6 +102,18 @@ export const CustomerListItem: FC<any> = props => {
 };
 
 const useStyles = makeStyles(theme => ({
+    root: {
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'none',
+        },
+        '& a': {
+            textDecoration: 'none',
+        },
+        '& a:hover': {
+            textDecoration: 'none',
+        },
+    },
     avatar: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
