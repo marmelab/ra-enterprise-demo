@@ -7,6 +7,7 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOnOutlined';
 import MailIcon from '@material-ui/icons/MailOutline';
 import LocalOfferIcon from '@material-ui/icons/LocalOfferOutlined';
 import { FilterList, FilterListItem, FilterLiveSearch } from 'react-admin';
+import { SavedQueriesList } from '@react-admin/ra-preferences';
 import {
     endOfYesterday,
     startOfWeek,
@@ -34,6 +35,7 @@ const Card = withStyles(theme => ({
 const Aside: FC = () => (
     <Card>
         <CardContent>
+            <SavedQueriesList />
             <FilterLiveSearch />
 
             <FilterList

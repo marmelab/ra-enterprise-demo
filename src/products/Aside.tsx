@@ -13,6 +13,7 @@ import {
 } from 'react-admin';
 import { useListFilterContext } from 'ra-core';
 import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
+import { SavedQueriesList } from '@react-admin/ra-preferences';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -66,6 +67,7 @@ const Aside = (props: ListProps): ReactElement => {
     return (
         <Card className={classes.root}>
             <CardContent>
+                <SavedQueriesList />
                 <FilterLiveSearch />
 
                 <FilterList

@@ -17,12 +17,12 @@ import {
     Title,
     useTranslate,
     useListContext,
-    Filter,
     ListProps,
     FilterProps,
     ListActionsProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { FilterWithSave } from '@react-admin/ra-preferences';
 
 import GridList from './GridList';
 import Aside from './Aside';
@@ -42,7 +42,7 @@ const QuickFilter = ({ label }: InputProps): ReactElement => {
 export const ProductFilter = (
     props: Omit<FilterProps, 'children'>
 ): ReactElement => (
-    <Filter {...props}>
+    <FilterWithSave {...props}>
         <SearchInput source="q" alwaysOn />
         <ReferenceInput
             source="category_id"
@@ -60,7 +60,7 @@ export const ProductFilter = (
             source="stock_lte"
             defaultValue={10}
         />
-    </Filter>
+    </FilterWithSave>
 );
 
 const ListActions = ({
