@@ -1320,28 +1320,28 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@material-ui/core@^4.11.1":
-  version "4.11.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.1.tgz#5bb94adc4257165d6ca1670fd71923a27f07d478"
-  integrity sha512-aesI8lOaaw0DRIfNG+Anepf61NH5Q+cmkxJOZvI1oHkmD5cKubkZ0C7INqFKjfFpSFlFnqHkTasoM7ogFAvzOg==
+"@material-ui/core@^4.11.1", "@material-ui/core@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.2.tgz#f8276dfa40d88304e6ceb98962af73803d27d42d"
+  integrity sha512-/D1+AQQeYX/WhT/FUk78UCRj8ch/RCglsQLYujYTIqPSJlwZHKcvHidNeVhODXeApojeXjkl0tWdk5C9ofwOkQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/styles" "^4.11.1"
-    "@material-ui/system" "^4.9.14"
+    "@material-ui/styles" "^4.11.2"
+    "@material-ui/system" "^4.11.2"
     "@material-ui/types" "^5.1.0"
-    "@material-ui/utils" "^4.10.2"
+    "@material-ui/utils" "^4.11.2"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.4"
     hoist-non-react-statics "^3.3.2"
     popper.js "1.16.1-lts"
     prop-types "^15.7.2"
-    react-is "^16.8.0"
+    react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
-"@material-ui/icons@^4.9.1":
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.9.1.tgz#fdeadf8cb3d89208945b33dbc50c7c616d0bd665"
-  integrity sha512-GBitL3oBWO0hzBhvA9KxqcowRUsA0qzwKkURyC8nppnC3fw54KPKZ+d4V1Eeg/UnDRSzDaI9nGCdel/eh9AQMg==
+"@material-ui/icons@^4.9.1", "@material-ui/icons@^4.9.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
+  integrity sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
 
@@ -1356,15 +1356,15 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@material-ui/styles@^4.11.1":
-  version "4.11.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.11.1.tgz#089338637e9c358eddccd75c32f0bafd0237d573"
-  integrity sha512-GqzsFsVWT8jXa8OWAd1WD6WIaqtXr2mUPbRZ1EjkiM3Dlta4mCRaToDxkFVv6ZHfXlFjMJzdaIEvCpZOCvZTvg==
+"@material-ui/styles@^4.11.1", "@material-ui/styles@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.11.2.tgz#e70558be3f41719e8c0d63c7a3c9ae163fdc84cb"
+  integrity sha512-xbItf8zkfD3FuGoD9f2vlcyPf9jTEtj9YTJoNNV+NMWaSAHXgrW6geqRoo/IwBuMjqpwqsZhct13e2nUyU9Ljw==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@emotion/hash" "^0.8.0"
     "@material-ui/types" "^5.1.0"
-    "@material-ui/utils" "^4.9.6"
+    "@material-ui/utils" "^4.11.2"
     clsx "^1.0.4"
     csstype "^2.5.2"
     hoist-non-react-statics "^3.3.2"
@@ -1378,13 +1378,13 @@
     jss-plugin-vendor-prefixer "^10.0.3"
     prop-types "^15.7.2"
 
-"@material-ui/system@^4.9.14":
-  version "4.9.14"
-  resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.9.14.tgz#4b00c48b569340cefb2036d0596b93ac6c587a5f"
-  integrity sha512-oQbaqfSnNlEkXEziDcJDDIy8pbvwUmZXWNqlmIwDqr/ZdCK8FuV3f4nxikUh7hvClKV2gnQ9djh5CZFTHkZj3w==
+"@material-ui/system@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.11.2.tgz#7f0a754bba3673ed5fdbfa02fe438096c104b1f6"
+  integrity sha512-BELFJEel5E+5DMiZb6XXT3peWRn6UixRvBtKwSxqntmD0+zwbbfCij6jtGwwdJhN1qX/aXrKu10zX31GBaeR7A==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/utils" "^4.9.6"
+    "@material-ui/utils" "^4.11.2"
     csstype "^2.5.2"
     prop-types "^15.7.2"
 
@@ -1393,14 +1393,14 @@
   resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-5.1.0.tgz#efa1c7a0b0eaa4c7c87ac0390445f0f88b0d88f2"
   integrity sha512-7cqRjrY50b8QzRSYyhSpx4WRw2YuO0KKIGQEVk5J8uoz2BanawykgZGoWEqKm7pVIbzFDN0SpPcVV4IhOFkl8A==
 
-"@material-ui/utils@^4.10.2", "@material-ui/utils@^4.9.6":
-  version "4.10.2"
-  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.10.2.tgz#3fd5470ca61b7341f1e0468ac8f29a70bf6df321"
-  integrity sha512-eg29v74P7W5r6a4tWWDAAfZldXIzfyO1am2fIsC39hdUUHm/33k6pGOKPbgDjg/U/4ifmgAePy/1OjkKN6rFRw==
+"@material-ui/utils@^4.10.2", "@material-ui/utils@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/utils/-/utils-4.11.2.tgz#f1aefa7e7dff2ebcb97d31de51aecab1bb57540a"
+  integrity sha512-Uul8w38u+PICe2Fg2pDKCaIG7kOyhowZ9vjiC1FsVwPABTW8vPPKfF6OvxRq3IiBaI1faOJmgdvMG7rMJARBhA==
   dependencies:
     "@babel/runtime" "^7.4.4"
     prop-types "^15.7.2"
-    react-is "^16.8.0"
+    react-is "^16.8.0 || ^17.0.0"
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
@@ -1447,10 +1447,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.1.tgz#9990d0e0cb1e704e047b6328238b6e3bfc2bbc65"
   integrity sha512-lcLG7Ik6xlSnVscEou3LKrLrg9DLm0f5EaQnjzaYF43RTz+NordkZgsGr8XvNh4x6CgBIge4pKBGPGJqtKLLsQ==
 
-"@react-admin/ra-enterprise@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-1.0.3.tgz#dd79fb3a90a41d7962ce58b4559b0800f7083feb"
-  integrity sha512-Y71C2zfOLGM7rO/e/44xuULuJzUiS3KvhrSbTadHo0ymA2PqYJFq9x/Pk61pSzl66PlRpsly1zD+exZr8G9X4w==
+"@react-admin/ra-enterprise@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-1.0.4.tgz#1aadf98f3609d5771c0f2bca9c5afa831ef063c9"
+  integrity sha512-LfXskQTj2B+FusyP7Rm4OSPZDhFE3/vdbRBgt31rc+VQGyj/tmFh0nHetWPxK+cYa50KS/foyE8zJh/z9AFm+A==
   dependencies:
     "@react-admin/ra-editable-datagrid" "^1.0.0"
     "@react-admin/ra-form-layout" "^1.0.0"
@@ -1490,15 +1490,24 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.1.1.tgz#9cf952b29b63e985923fe489e554517ba38fa910"
   integrity sha512-xi0gnh5nibNx5aejDmmnqeQD91ExxpBeYJ65ZPW882XXffNHXadbq5cwQEmEXT56BtcEFrSH36UwrcR7B7FTLw==
 
-"@react-admin/ra-preferences@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.1.3.tgz#564ea89039096d99934fe69f8731a43af68f18f8"
-  integrity sha512-wxpgIqGNHv9z4TWMwTmIs5kxHUVxRouv38Y+tMYFx7us1pGKnfN3M/8C9EUs45sE0XvS4u6UbNVTbiKCw51gEA==
+"@react-admin/ra-preferences@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.0.tgz#0c0732ca64c9be0f19b35a0599b6750423e3e771"
+  integrity sha512-8tame56xEVVYOzDGRIettPS2Wqj4zhaY3hyREMDuvAto5xlHGOuJKwftwuHfR2eK28k+XPHAh/8vizUR26GBNw==
 
-"@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.2.0":
+"@react-admin/ra-realtime@^1.0.0":
   version "1.2.0"
   resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.2.0.tgz#b7cee751888c32a0ffecb7b7c5fec73b0fccadaa"
   integrity sha512-jC0FeY8a4bUII/s74owIVrtD2fLgI6mh9kUpWStvr6gkF/jJ1akkA5raVo7AI+lXXuMmsrmmrFU+KcpezFuwEA==
+  dependencies:
+    event-source-polyfill "^1.0.15"
+    querystring "^0.2.0"
+    whatwg-fetch "^3.0.0"
+
+"@react-admin/ra-realtime@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.2.1.tgz#d9ba4cfb45587bc1fe2ec9e1639e1e97f51d2e0d"
+  integrity sha512-LJU/qesWVJQC3UD3J2u2pZ1F78+bbY0pTgv5YfwQUTz1wREQ/gDH5ZuQ55AheAiFi7XkmIedWYVyTIFLAmTYLg==
   dependencies:
     event-source-polyfill "^1.0.15"
     querystring "^0.2.0"
@@ -1514,10 +1523,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.1.1.tgz#c6180dcf332da818b2fe376e343e04d4f3f81afc"
   integrity sha512-CWNJ+GzQ4yahmBAZlDLivXylW1IG47NSfNNMMSgdxHwCF0+9/q9XDrATRsjbqAn59CSObUUe0ZrlidXLDrPo4Q==
 
-"@react-admin/ra-search@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.2.2.tgz#3d99f95fe31fc96e4dc117f5b13e95858529c5af"
-  integrity sha512-/WpizJffZ/7DtyI51SCHy7w+q+wwNKTF7oF5/xwWWsP4tqMTjDtqop2Ui+27OsQxV+zc4HHvp8A8Nxi85orM3Q==
+"@react-admin/ra-search@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-1.2.3.tgz#9c37a97bc59b1888b6ca8a6b0f442f0a4e5e5886"
+  integrity sha512-iL2NU2gPmZSYIW5qEdaKJdoYkKFGL0U72OxKF28VeBXhJQWW6fF2mju0T1n25TGOPbVOrFIyhHmfGvxSUJ2slA==
 
 "@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.0":
   version "1.1.0"
@@ -1527,10 +1536,21 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.3.0":
+"@react-admin/ra-tree@^1.0.0":
   version "1.3.0"
   resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.3.0.tgz#db4bd9ccd9aff2e160cefc279971d8e764b1d389"
   integrity sha512-8aCdh6FwAhaBaIZb6P84fWhSLO0tzArwHH5ytDQ2Mh1E/8JBoyk8axF9s/2S8M9LmNq02DTQ4N0p0GcEHqX0Uw==
+  dependencies:
+    "@atlaskit/tree" "^6.0.5"
+    prop-types "^15.6.1"
+    rc-tree "^3.1.5"
+    react-dnd "^5.0.0"
+    react-dnd-touch-backend "^0.5.1"
+
+"@react-admin/ra-tree@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.3.1.tgz#01cda86648bb5e02d8408119eafb45c335442617"
+  integrity sha512-6X6orztz81voHs1Tsalw1KEEIglFp3Ck6kX2vCcc0uLoaazHIagQtzdW5vSuoZzm0EXfeESshtP7G6ef06XV4g==
   dependencies:
     "@atlaskit/tree" "^6.0.5"
     prop-types "^15.6.1"
@@ -10661,7 +10681,7 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.5.2, react-is@^16.6.0, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-is@^17.0.1:
+"react-is@^16.8.0 || ^17.0.0", react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
