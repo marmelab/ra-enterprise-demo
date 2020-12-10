@@ -35,7 +35,9 @@ const Card = withStyles(theme => ({
 const Aside: FC = () => (
     <Card>
         <CardContent>
-            <SavedQueriesList />
+            <span id="persisted-queries">
+                <SavedQueriesList />
+            </span>
             <FilterLiveSearch />
 
             <FilterList

@@ -1,5 +1,6 @@
 import { TourType } from '@react-admin/ra-tour';
 import { fireEvent } from '@testing-library/react';
+import { endOfYesterday } from 'date-fns';
 import randomCommandBuilder from './randomCommandBuilder';
 import { generateIdentity } from './randomLockBuilder';
 
@@ -88,13 +89,58 @@ const tours: { [id: string]: TourType } = {
                 target: "button[aria-label='Toggle Theme'] + button",
                 content: 'Or this language switcher...',
                 after: ({ redirect }) => {
+                    const params = JSON.stringify({
+                        last_seen_gte: endOfYesterday().toISOString(),
+                        nb_commands_gte: 1,
+                    });
+
+                    redirect(
+                        `/customers?filter=${encodeURIComponent(
+                            params
+                        )}&order=DESC&page=1&perPage=25&sort=last_seen`
+                    );
+                },
+            },
+            {
+                target: "button[aria-label='Save current query...']",
+                content:
+                    "It features persisted queries too. For example, let's persist the filters for today visitors who actually ordered something.",
+                after: async ({ target }) => {
+                    target.click();
+                    await new Promise(resolve => setTimeout(resolve, 500));
+                    const nameInput = document.querySelector(
+                        'body > .MuiDialog-root #name'
+                    );
+
+                    if (!nameInput) {
+                        return;
+                    }
+
+                    fireEvent.change(nameInput, {
+                        target: { value: 'Today customers' },
+                    });
+                    await new Promise(resolve => setTimeout(resolve, 500));
+
+                    const saveButton: HTMLButtonElement | null = document.querySelector(
+                        'body > .MuiDialog-root button:nth-child(2)'
+                    );
+                    if (!saveButton) {
+                        return;
+                    }
+                    fireEvent.click(saveButton);
+                },
+            },
+            {
+                target: '#persisted-queries ul',
+                content: "It's persisted locally in the browser now!",
+                after: ({ redirect }) => {
                     redirect('/customers');
                 },
             },
             {
                 target: 'button[aria-controls=user-preference-menu]',
                 content:
-                    'Even more advanced ones like this list customization tool.',
+                    'It even has more advanced components like this list customization tool.',
                 disableBeacon: false,
                 after: ({ target }) => {
                     target.click();
