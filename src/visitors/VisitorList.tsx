@@ -7,11 +7,11 @@ import {
     NullableBooleanInput,
     NumberField,
     SearchInput,
-    Filter,
     ListProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { useMediaQuery, Theme, makeStyles } from '@material-ui/core';
+import { FilterWithSave } from '@react-admin/ra-preferences';
 
 import EnterpriseList from '../ra-enterprise/List';
 import SegmentsField from './SegmentsField';
@@ -23,13 +23,13 @@ import DesktopGrid from './DesktopGrid';
 import VisitorListAside from './VisitorListAside';
 
 const VisitorFilter: FC = (props: any) => (
-    <Filter {...props}>
+    <FilterWithSave {...props}>
         <SearchInput source="q" alwaysOn />
         <DateInput source="last_seen_gte" />
         <NullableBooleanInput source="has_ordered" />
         <NullableBooleanInput source="has_newsletter" defaultValue />
         <SegmentInput />
-    </Filter>
+    </FilterWithSave>
 );
 
 const visitorListColumn = {
