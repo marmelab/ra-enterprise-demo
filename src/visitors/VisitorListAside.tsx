@@ -35,11 +35,10 @@ const Card = withStyles(theme => ({
 const Aside: FC = () => (
     <Card>
         <CardContent>
+            <FilterLiveSearch />
             <span id="persisted-queries">
                 <SavedQueriesList />
             </span>
-            <FilterLiveSearch />
-
             <FilterList
                 label="resources.customers.filters.last_visited"
                 icon={<AccessTimeIcon />}

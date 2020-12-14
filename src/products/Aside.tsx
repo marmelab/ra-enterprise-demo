@@ -67,8 +67,8 @@ const Aside = (props: ListProps): ReactElement => {
     return (
         <Card className={classes.root}>
             <CardContent>
-                <SavedQueriesList />
                 <FilterLiveSearch />
+                <SavedQueriesList />
 
                 <FilterList
                     label="resources.products.filters.sales"
