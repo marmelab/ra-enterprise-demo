@@ -27,12 +27,6 @@ const useStyles = makeStyles(theme => ({
     },
     logo: {
         padding: theme.spacing(0, 2),
-        [theme.breakpoints.up('lg')]: {
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            transform: 'translate(-50%, -50%)',
-        },
     },
 }));
 
@@ -52,13 +46,13 @@ const CustomAppBar: FC = props => {
 
     return (
         <AppBar {...props} elevation={1}>
+            <Logo className={classes.logo} />
             <Typography
                 variant="h6"
                 color="inherit"
                 className={classes.title}
                 id="react-admin-title"
             />
-            <Logo className={classes.logo} />
             <Search />
             <IconButton to="/tours" component={Link} color="inherit">
                 <Badge badgeContent={numberOfTours} color="error" variant="dot">
