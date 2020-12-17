@@ -30,7 +30,7 @@
         "@react-admin/ra-navigation": "^1.2.2",
         "@react-admin/ra-preferences": "^1.2.0",
         "@react-admin/ra-realtime": "^1.2.1",
-        "@react-admin/ra-search": "^1.2.3",
+        "@react-admin/ra-search": "^2.0.0",
         "@react-admin/ra-tour": "^1.1.0",
         "@react-admin/ra-tree": "^1.3.1",
         "data-generator-retail": "^3.10.3",

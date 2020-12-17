@@ -1,13 +1,11 @@
 import { SearchResult, SearchResultDataItem } from '@react-admin/ra-search';
 
-const defaultFacets = ['customers', 'products', 'commands', 'reviews'];
-
 const addSearchMethod = dataProvider => {
     return {
         ...dataProvider,
-        search: async ({ facets, query }) => {
+        search: async query => {
             const resultsByResource = await Promise.all<SearchResult>(
-                (facets || defaultFacets).map(resource =>
+                ['customers', 'products', 'commands', 'reviews'].map(resource =>
                     searchInResource(dataProvider, resource, query)
                 )
             );
@@ -45,7 +43,7 @@ const searchInResource = async (dataProvider, resource, query) => {
                 type: resource,
                 url: `/${resource}/${record.id}`,
                 content: await ResultBuilders[resource](record, dataProvider),
-            }))
+            })) as SearchResultDataItem[]
         ),
         total,
     };
