@@ -641,7 +641,7 @@ const tours: { [id: string]: TourType } = {
             {
                 target: '[data-testid="search-panel"]',
                 content:
-                    "The search results are customizables at will and can redirect to a specific resource. For example, let's click on the first customer",
+                    "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer",
                 after: ({ target }) => {
                     fireEvent.click(
                         target.querySelector('[data-testid="customer"]')
