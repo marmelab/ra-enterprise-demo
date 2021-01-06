@@ -41,6 +41,7 @@ export const CustomerListItem: FC<any> = props => {
             onClick={onClick}
             alignItems="flex-start"
             className={classes.root}
+            data-testid="customer"
         >
             <ListItemAvatar className={classes.avatar}>
                 <Avatar alt={fullname} src={content.avatar} />

@@ -25,9 +25,11 @@ import {
 
 const CustomSearch: FC<SearchProps> = props => {
     return (
-        <Search {...props}>
-            <CustomSearchPanel></CustomSearchPanel>
-        </Search>
+        <div data-testid="search">
+            <Search {...props}>
+                <CustomSearchPanel></CustomSearchPanel>
+            </Search>
+        </div>
     );
 };
 
@@ -41,7 +43,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
 
     if (!data || data.length === 0) {
         return (
-            <List dense {...props}>
+            <List data-testid="search-panel" dense {...props}>
                 <ListItem>
                     <ListItemText
                         primary={translate('ra.navigation.no_results')}
@@ -53,7 +55,12 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
     const groupedData = groupSearchResultsByResource(data, translate);
 
     return (
-        <List dense className={classes.root} {...props}>
+        <List
+            data-testid="search-panel"
+            dense
+            className={classes.root}
+            {...props}
+        >
             {groupedData.map(group => (
                 <Fragment key={group.label}>
                     <ListSubheader
