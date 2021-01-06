@@ -52,7 +52,7 @@ const searchInResource = async (dataProvider, resource, query) => {
 const ResultBuilders = {
     customers: async (record, dataProvider) => {
         const orders = await dataProvider.getList('commands', {
-            filter: { customer_id: record.id, status: 'ordered' },
+            filter: { customer_id: record.id },
             pagination: { page: 1, perPage: 1 },
             sort: { field: 'id', order: 'ASC' },
         });
