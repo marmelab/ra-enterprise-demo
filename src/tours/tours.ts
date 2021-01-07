@@ -625,6 +625,42 @@ const tours: { [id: string]: TourType } = {
             },
         ],
     },
+    'ra-search': {
+        steps: [
+            {
+                target: '[data-testid="search"]',
+                content:
+                    'This is the smart Omnisearch box. It allows users to search across all resources. ',
+                after: ({ target }) => {
+                    fireEvent.change(target.querySelector('input'), {
+                        target: { value: 'B' },
+                    });
+                    return new Promise(resolve => setTimeout(resolve, 1000));
+                },
+            },
+            {
+                target: '[data-testid="search-panel"]',
+                content:
+                    "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer",
+                after: ({ target }) => {
+                    fireEvent.click(
+                        target.querySelector('[data-testid="customer"]')
+                    );
+                },
+            },
+            {
+                target: '[data-testid="search"]',
+                content:
+                    'The search query and results are preserved after navigation',
+                before: ({ target }) => {
+                    setTimeout(
+                        () => target.querySelector('input').focus(),
+                        1000
+                    );
+                },
+            },
+        ],
+    },
 };
 
 export default tours;

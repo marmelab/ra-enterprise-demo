@@ -10,6 +10,15 @@ export default {
             playedOn: null,
         },
         {
+            id: 7,
+            image: 'images/tours/ra-search.png',
+            title: 'ra-search',
+            tour: 'ra-search',
+            comment: `Plug your search engine and let users search across all resources via a smart Omnisearch box`,
+            href: 'http://marmelab.com/react-admin',
+            playedOn: null,
+        },
+        {
             id: 6,
             image: 'images/tours/ra-navigation-breadcrumb.jpg',
             title: 'ra-navigation: Breadcrumb',
