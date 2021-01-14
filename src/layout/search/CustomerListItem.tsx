@@ -62,9 +62,9 @@ export const CustomerListItem: FC<any> = props => {
                         {content.pending_orders > 0 ? (
                             <LinkedData
                                 icon={<ShoppingCartIcon />}
-                                label={translate(
-                                    'pos.dashboard.pending_orders'
-                                )}
+                                label={translate('resources.commands.name', {
+                                    smart_count: 2,
+                                })}
                                 to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${content.id}%7D`}
                             >
                                 {content.pending_orders}
