@@ -4,13 +4,12 @@ import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link as RouterLink } from 'react-router-dom';
 
-import { useTranslate } from 'react-admin';
-
-import AvatarField from './AvatarField';
-import { linkToRecord, useListContext } from 'ra-core';
+import { linkToRecord, useListContext, useTranslate } from 'react-admin';
 
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from '@material-ui/core/IconButton';
+
+import AvatarField from './AvatarField';
 
 const useStyles = makeStyles(theme => ({
     root: {

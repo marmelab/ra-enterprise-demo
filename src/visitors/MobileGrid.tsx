@@ -5,12 +5,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { DateField, EditButton, useTranslate, NumberField } from 'react-admin';
+import {
+    DateField,
+    EditButton,
+    NumberField,
+    useTranslate,
+    useListContext,
+} from 'react-admin';
 
 import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
-import { useListContext } from 'ra-core';
 
 const useStyles = makeStyles(theme => ({
     root: { margin: '1em' },

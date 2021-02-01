@@ -5,7 +5,7 @@ import {
     BreadcrumbItem,
     ResourceBreadcrumbItems,
 } from '@react-admin/ra-navigation';
-import { linkToRecord, useTranslate, Record } from 'ra-core';
+import { linkToRecord, useTranslate, Record } from 'react-admin';
 
 const CustomBreadcrumb: FC = props => {
     const classes = useStyles();
