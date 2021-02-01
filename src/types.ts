@@ -1,17 +1,17 @@
 import { ReactChildren } from 'react';
 import {
-    useListController,
-    ReduxState,
-    Record,
     Identifier,
-    usePermissions,
+    ListControllerProps,
+    Record as RaRecord,
     RedirectionSideEffect,
-} from 'ra-core';
+    ReduxState,
+    useListController,
+    usePermissions,
+} from 'react-admin';
 import { RouteComponentProps } from 'react-router-dom';
 import { StaticContext } from 'react-router';
 import { LocationState } from 'history';
 import { ClassNameMap } from '@material-ui/core/styles/withStyles';
-import { ListControllerProps } from 'ra-core/esm/controller/useListController';
 import { FormRenderProps } from 'react-final-form';
 
 export type ThemeName = 'light' | 'dark';
@@ -20,11 +20,11 @@ export interface AppState extends ReduxState {
     theme: ThemeName;
 }
 
-export interface Category extends Record {
+export interface Category extends RaRecord {
     name: string;
 }
 
-export interface Product extends Record {
+export interface Product extends RaRecord {
     category_id: Identifier;
     description: string;
     height: number;
@@ -36,7 +36,7 @@ export interface Product extends Record {
     width: number;
 }
 
-export interface Customer extends Record {
+export interface Customer extends RaRecord {
     first_name: string;
     last_name: string;
     address: string;
@@ -56,7 +56,7 @@ export interface Customer extends Record {
 
 export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';
 
-export interface Order extends Record {
+export interface Order extends RaRecord {
     status: OrderStatus;
     basket: BasketItem[];
     date: Date;
@@ -71,7 +71,7 @@ export interface BasketItem {
 /**
  * Types to eventually add in react-admin
  */
-export interface FieldProps<T extends Record = Record> {
+export interface FieldProps<T extends RaRecord = RaRecord> {
     addLabel?: boolean;
     label?: string;
     record?: T;
@@ -81,7 +81,7 @@ export interface FieldProps<T extends Record = Record> {
     formClassName?: string;
 }
 
-export interface ReferenceFieldProps<T extends Record = Record>
+export interface ReferenceFieldProps<T extends RaRecord = RaRecord>
     extends FieldProps<T> {
     reference: string;
     children: ReactChildren;
@@ -91,7 +91,7 @@ export interface ReferenceFieldProps<T extends Record = Record>
 
 export type ReviewStatus = 'accepted' | 'pending' | 'rejected';
 
-export interface Review extends Record {
+export interface Review extends RaRecord {
     date: Date;
     status: ReviewStatus;
     customer_id: Identifier;
@@ -105,7 +105,7 @@ export interface ResourceMatch {
 
 type FilterClassKey = 'button' | 'form';
 
-export interface ToolbarProps<T extends Record = Record> {
+export interface ToolbarProps<RecordType extends RaRecord = RaRecord> {
     handleSubmitWithRedirect?: (redirect: RedirectionSideEffect) => void;
     handleSubmit?: FormRenderProps['handleSubmit'];
     invalid?: boolean;
@@ -114,19 +114,19 @@ export interface ToolbarProps<T extends Record = Record> {
     submitOnEnter?: boolean;
     redirect?: RedirectionSideEffect;
     basePath?: string;
-    record?: T;
+    record?: RecordType;
     resource?: string;
     undoable?: boolean;
 }
 
-export interface BulkActionProps<Params = {}> {
+export interface BulkActionProps<Params = unknown> {
     basePath?: string;
     filterValues?: Params;
     resource?: string;
     selectedIds?: Identifier[];
 }
 
-export interface FilterProps<Params = {}> {
+export interface FilterProps<Params = unknown> {
     classes?: ClassNameMap<FilterClassKey>;
     context?: 'form' | 'button';
     displayedFilters?: { [K in keyof Params]?: boolean };
@@ -137,19 +137,19 @@ export interface FilterProps<Params = {}> {
     resource?: string;
 }
 
-export interface DatagridProps<RecordType = Record>
-    extends Partial<ListControllerProps<Record>> {
+export interface DatagridProps<RecordType extends RaRecord = RaRecord>
+    extends Partial<ListControllerProps<RecordType>> {
     hasBulkActions?: boolean;
 }
 
 export interface ResourceComponentProps<
-    Params extends { [K in keyof Params]?: string } = {},
+    Params extends { [K in keyof Params]?: string } = any,
     C extends StaticContext = StaticContext,
     S = LocationState
 > extends RouteComponentProps<Params, C, S> {
     basePath: string;
     resource: string;
-    options: object;
+    options: Record<string, unknown>;
     hasList: boolean;
     hasEdit: boolean;
     hasShow: boolean;
@@ -159,7 +159,7 @@ export interface ResourceComponentProps<
     exporter: any;
 }
 
-export interface ListComponentProps<Params = {}>
+export interface ListComponentProps<Params = unknown>
     extends ResourceComponentProps<Params> {
     title?: string;
     aside?: boolean;

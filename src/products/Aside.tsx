@@ -10,8 +10,8 @@ import {
     FilterListItem,
     FilterLiveSearch,
     ListProps,
+    useListFilterContext,
 } from 'react-admin';
-import { useListFilterContext } from 'ra-core';
 import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
 import { SavedQueriesList } from '@react-admin/ra-preferences';
 

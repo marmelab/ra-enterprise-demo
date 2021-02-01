@@ -1,11 +1,11 @@
 import React, { FC, ReactElement } from 'react';
-import { useTranslate } from 'ra-core';
 import {
     Edit,
-    TextInput,
     EditProps,
-    useGetList,
     ListContextProvider,
+    TextInput,
+    useGetList,
+    useTranslate,
 } from 'react-admin';
 import { SimpleForm } from '@react-admin/ra-tree';
 

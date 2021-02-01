@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { useTranslate, SelectArrayInput } from 'react-admin';
-import { InputProps } from 'ra-core';
+import { InputProps, SelectArrayInput, useTranslate } from 'react-admin';
 
 import segments from '../segments/data';
 
