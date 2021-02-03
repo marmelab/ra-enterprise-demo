@@ -1446,15 +1446,10 @@
     "@react-admin/ra-tour" "^1.0.0"
     "@react-admin/ra-tree" "^1.0.0"
 
-"@react-admin/ra-form-layout@^1.0.0":
-  version "1.5.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.5.2.tgz#dcc695222d9de01f1fbfb002b11a629215364cab"
-  integrity sha512-kb5n7VRKlvR2Yr5hMzoNpRR9hycmgDENws/bnrnQXfpn6G2UL7umixi0Nt5Gfc2oC0BprkkRveyPM0i74S2IJw==
-
-"@react-admin/ra-form-layout@^1.5.3":
-  version "1.5.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.5.3.tgz#6a36b34eaba0583c681f6d25e5d6ad8df9965523"
-  integrity sha512-FBn7LrZa/21P27ZvXgUbRUk9/IBl5Iicus/qpd3XejoLZWYA5a1hURMjvCV8c4ElHWnpckhI+mLgC0RqFjUpoQ==
+"@react-admin/ra-form-layout@^1.0.0", "@react-admin/ra-form-layout@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.5.4.tgz#883f07419e507b2fbe9b1da4362e8d4a47f63d7a"
+  integrity sha512-dA0tkq+J6S3RSa41EiatyQY5d9PQvmC8LBv7IhGaYWHXGqt1EL1zAxplYOGfA45WY2hIznBtTdoIZ2fok3OEZQ==
 
 "@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.1.0":
   version "1.1.0"
@@ -1468,15 +1463,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-1.2.4.tgz#5c7a5ae85bb0c89365d649e0964a5d93b68091d5"
   integrity sha512-KVZ8WNnFUM7meTcNjE2QPA7U2jSvWYRPFxPAVTv7KEwkj8/aQ8jgIiumcuNwE+bgUUfJXy2EgdTOnLunxcUweQ==
 
-"@react-admin/ra-preferences@^1.0.0":
-  version "1.2.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.0.tgz#0c0732ca64c9be0f19b35a0599b6750423e3e771"
-  integrity sha512-8tame56xEVVYOzDGRIettPS2Wqj4zhaY3hyREMDuvAto5xlHGOuJKwftwuHfR2eK28k+XPHAh/8vizUR26GBNw==
-
-"@react-admin/ra-preferences@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.2.tgz#05e903c488ef99c2d22a590af9980dc23fbed329"
-  integrity sha512-d3+U2oZg6ffJuoFOJ80Hv4kRO2cMw+F8++wHA0NpZ+AWTXQLyHgiEUq5Ap7h2YakLy7vshIF2BsG+gYxSwhZpA==
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.3.tgz#2b2dbedc0398c6d9bb50ca3804c0023cfd90236d"
+  integrity sha512-thwYGF67SEXGRJlbsfK5cdj9mK2/BdzBl2KLHsATCyMrUIU64DJtXKbbIjnyhaZmCw5vgQjhSfB2n0bpX1u4Rg==
 
 "@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.2.1":
   version "1.2.1"
@@ -9985,22 +9975,7 @@ quill@~1.3.6:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
-ra-core@^3.11.2:
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-3.11.2.tgz#22a6b93e093ddcbbb45f04904f74020c6c4d8fde"
-  integrity sha512-1oYCnXER5iSmEwHi3Hy2CkAuJXkC/6AjkJlVf0trnhzvUxkzusMOV9dm4ONyyrPDwGFc7oStNA793F7qNZbXog==
-  dependencies:
-    "@testing-library/react" "^8.0.7"
-    classnames "~2.2.5"
-    date-fns "^1.29.0"
-    eventemitter3 "^3.0.0"
-    inflection "~1.12.0"
-    lodash "~4.17.5"
-    prop-types "^15.6.1"
-    query-string "^5.1.1"
-    reselect "~3.0.0"
-
-ra-core@^3.11.4:
+ra-core@^3.11.2, ra-core@^3.11.4:
   version "3.11.4"
   resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-3.11.4.tgz#7f4d1366f1e94a72a30bdbff69e33e02560a29af"
   integrity sha512-9DgEHb16p3guMLfhX12fGL+1qkNTZnWl+ew58abMuSxNM4yICbJaXWSGJFy9fiaafjA8lxxEo0j3C0WfxgUyNw==
@@ -10029,15 +10004,7 @@ ra-data-simple-rest@^3.10.4:
   dependencies:
     query-string "^5.1.1"
 
-ra-i18n-polyglot@^3.11.2:
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-3.11.2.tgz#b0d4e00c371f927bd082f5ac9f2bc2af02ad2967"
-  integrity sha512-hTZuWzuFydopFMobVYmohuXauu+2RIv0Wceg6QUtrvYFkBnTlg5qRwFvoqCy3Oq5ZGqiMQDbu05ldo42BuWbgQ==
-  dependencies:
-    node-polyglot "^2.2.2"
-    ra-core "^3.11.2"
-
-ra-i18n-polyglot@^3.11.4:
+ra-i18n-polyglot@^3.11.2, ra-i18n-polyglot@^3.11.4:
   version "3.11.4"
   resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-3.11.4.tgz#f145769b286ae03905188e3d09361e6f698ed35a"
   integrity sha512-6GaxsdWhjG6Z3GaODVztRBW4kBcElXj6tliihMhW6Z872qgRMGKitLUgXpaJ3cClT4e7cbFg4+2eM+dufp90ZQ==
@@ -10055,14 +10022,7 @@ ra-input-rich-text@^3.10.1:
     prop-types "^15.6.0"
     quill "~1.3.6"
 
-ra-language-english@^3.11.2:
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-3.11.2.tgz#eeab5aefaadae4e064dfd8df4fb041477b9936ea"
-  integrity sha512-ainBiE4+4ITJgU4+nLu0I3Lu+nsDzYOW8iFU+T+xcXW/Dni4lfUr5PGzvCefhNx5E5mXzUxJUkmpbYzUaMlILg==
-  dependencies:
-    ra-core "^3.11.2"
-
-ra-language-english@^3.11.4:
+ra-language-english@^3.11.2, ra-language-english@^3.11.4:
   version "3.11.4"
   resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-3.11.4.tgz#92c46d0e5359932abad8087e2a30e1f72e826254"
   integrity sha512-IGhknqQETWvyFnaQVP9JtddjNxObYECvzyjIDfo8xOX9bDkczF7Eu+PudHbmovY8/qF/kprdSzlZY2R7+fOoEg==
