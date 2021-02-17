@@ -92,7 +92,7 @@ const ProductEditFormWithPreview: FC<{ toolbar: any }> = ({
     return (
         <FormWithRedirect
             {...props}
-            render={(formProps): JSX.Element => {
+            render={({ component, ...formProps }): JSX.Element => {
                 return (
                     <div className={classes.container}>
                         <Card>
