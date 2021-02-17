@@ -66,44 +66,6 @@ object-assign
         PERFORMANCE OF THIS SOFTWARE.
         ***************************************************************************** */
 
-/*! ../collections */
-
-/*! ./../webpack/buildin/module.js */
-
-/*! ./cjs/react-is.development.js */
-
-/*! ./collections */
-
-/*! ./conversions */
-
-/*! ./escapeHTML */
-
-/*! ./lib/markup */
-
-/*! ./plugins/AsymmetricMatcher */
-
-/*! ./plugins/ConvertAnsi */
-
-/*! ./plugins/DOMCollection */
-
-/*! ./plugins/DOMElement */
-
-/*! ./plugins/Immutable */
-
-/*! ./plugins/ReactElement */
-
-/*! ./plugins/ReactTestComponent */
-
-/*! ./route */
-
-/*! ansi-regex */
-
-/*! ansi-styles */
-
-/*! color-convert */
-
-/*! color-name */
-
 /*! decimal.js-light v2.5.1 https://github.com/MikeMcl/decimal.js-light/LICENCE */
 
 /*! http://mths.be/endswith v0.2.0 by @mathias */
@@ -111,90 +73,6 @@ object-assign
 /*! http://mths.be/fromcodepoint v0.2.1 by @mathias */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-
-/*! no static exports found */
-
-/*! react-is */
-
-/*!***********************************!*\
-        !*** (webpack)/buildin/module.js ***!
-        \***********************************/
-
-/*!****************************************!*\
-        !*** ./node_modules/react-is/index.js ***!
-        \****************************************/
-
-/*!******************************************!*\
-        !*** ./node_modules/ansi-regex/index.js ***!
-        \******************************************/
-
-/*!******************************************!*\
-        !*** ./node_modules/color-name/index.js ***!
-        \******************************************/
-
-/*!*******************************************!*\
-        !*** ./node_modules/ansi-styles/index.js ***!
-        \*******************************************/
-
-/*!*********************************************!*\
-        !*** ./node_modules/color-convert/index.js ***!
-        \*********************************************/
-
-/*!*********************************************!*\
-        !*** ./node_modules/color-convert/route.js ***!
-        \*********************************************/
-
-/*!*********************************************!*\
-        !*** ./packages/pretty-format/src/index.ts ***!
-        \*********************************************/
-
-/*!***************************************************!*\
-        !*** ./node_modules/color-convert/conversions.js ***!
-        \***************************************************/
-
-/*!***************************************************!*\
-        !*** ./packages/pretty-format/src/collections.ts ***!
-        \***************************************************/
-
-/*!*********************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/Immutable.ts ***!
-        \*********************************************************/
-
-/*!**********************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/DOMElement.ts ***!
-        \**********************************************************/
-
-/*!**********************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/lib/markup.ts ***!
-        \**********************************************************/
-
-/*!***********************************************************!*\
-        !*** ./node_modules/react-is/cjs/react-is.development.js ***!
-        \***********************************************************/
-
-/*!***********************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/ConvertAnsi.ts ***!
-        \***********************************************************/
-
-/*!************************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/ReactElement.ts ***!
-        \************************************************************/
-
-/*!*************************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/DOMCollection.ts ***!
-        \*************************************************************/
-
-/*!**************************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/lib/escapeHTML.ts ***!
-        \**************************************************************/
-
-/*!*****************************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/AsymmetricMatcher.ts ***!
-        \*****************************************************************/
-
-/*!******************************************************************!*\
-        !*** ./packages/pretty-format/src/plugins/ReactTestComponent.ts ***!
-        \******************************************************************/
 
 /**
  * A better abstraction over CSS.
@@ -235,15 +113,6 @@ object-assign
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-/** @license React v16.8.6
-         * react-is.development.js
-         *
-         * Copyright (c) Facebook, Inc. and its affiliates.
-         *
-         * This source code is licensed under the MIT license found in the
-         * LICENSE file in the root directory of this source tree.
-         */
 
 /** @license React v17.0.1
  * react-dom-test-utils.production.min.js
