@@ -2222,15 +2222,7 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-2.0.1.tgz#388aca8fc526fb867756e234b082239104872007"
   integrity sha512-Bi8fstlONdiWosJezHAx8yCtRADjA7wCAnjox9D9gmHNa8ErwBb5BMvZR/YMCZYsmI+YrynVIIymM+5TFzIHEA==
 
-"@react-admin/ra-tour@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.1.0.tgz#b3d7e05ee2de85dae8ed23459a4c5dacdde8af3f"
-  integrity sha512-S3yEHiHxJYYlkoGr4Sb+MNc9GCGW+W2xM0fnkU/8rgbLHwJNP8aKMrzYl5OBtfOfWUvWSyoWebS5UCpk9K4lBQ==
-  dependencies:
-    react-error-boundary "^2.2.2"
-    react-joyride "^2.2.1"
-
-"@react-admin/ra-tour@^1.1.1":
+"@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.1":
   version "1.1.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.1.1.tgz#d184fcb32bdd2b008de1c02f9ba51844cd6684d7"
   integrity sha512-HtyGa1YRK2ldp9GJkrPKLiT6JRBP06l0XSvL831asJJKa1L29/hBzpUIv26idEAV1Wx8zJB86u80uR4Xzxvr7g==
@@ -2238,15 +2230,7 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.0.0":
-  version "1.3.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.3.2.tgz#e5c2fc1d8143d85c02d468d14085e4b29a096dc7"
-  integrity sha512-/9HwwlNtjciCJzim+GP0YM2w+SPG74opn2IwaJqMUNoby2Kee3vxqIDHG7AnbVHOmWrjmMj5+AcLGsPQ3g9HOQ==
-  dependencies:
-    prop-types "^15.6.1"
-    rc-tree "^3.1.5"
-
-"@react-admin/ra-tree@^1.3.3":
+"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.3.3":
   version "1.3.3"
   resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.3.3.tgz#1eaab3563b72cdce120bdf5411e82f0bc92c3cfa"
   integrity sha512-ohDqxilKW8R1+Xar4YRTnth+MJ9ny7aNi0weuoZ4c4QMZcHnQxch5HLe3AeDeOsb0tSaMrexUGeP6Y2xt0Ts3A==
