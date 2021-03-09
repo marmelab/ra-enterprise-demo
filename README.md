@@ -1,4 +1,4 @@
-# React-admin Demo
+# React-admin Enterprise Edition Demo
 
 This is a demo of the [react-admin](https://github.com/marmelab/react-admin) framework augmented by [Enterprise Edition modules](https://marmelab.com/ra-enterprise/#private-modules). It shows a working administration for a fake poster shop named Posters Galore. It is a modified version of the [Posters Galore Open-source demo](https://marmelab.com/react-admin-demo/#/). 
 
