@@ -48,6 +48,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                         "Ceci est le back-office d'un magasin de posters imaginaire mettant en oeuvre les modules de l'édition entreprise. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
                     ra_button: 'Site web de react-admin entreprise',
                     demo_button: 'Voir tous les modules',
+                    github_button: 'Voir le code source',
                 },
             },
             menu: {

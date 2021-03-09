@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Box, Card, CardActions, Button, Typography } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import TourIcon from '@material-ui/icons/Flag';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslate } from 'react-admin';
 
@@ -65,6 +66,14 @@ const Welcome: FC = () => {
                             startIcon={<HomeIcon />}
                         >
                             {translate('pos.dashboard.welcome.ra_button')}
+                        </Button>
+                        <Button
+                            variant="contained"
+                            href="https://github.com/marmelab/ra-enterprise-demo"
+                            target="demo_source_code"
+                            startIcon={<GitHubIcon />}
+                        >
+                            {translate('pos.dashboard.welcome.github_button')}
                         </Button>
                     </CardActions>
                 </Box>
