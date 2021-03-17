@@ -16,7 +16,7 @@ const interval = (callback, intervalMs, expirationMs) =>
         const intervalRef = setInterval(callback, intervalMs);
         setTimeout(() => {
             clearInterval(intervalRef);
-            resolve();
+            resolve(undefined);
         }, expirationMs);
     });
 
@@ -626,8 +626,12 @@ const tours: { [id: string]: TourType } = {
         ],
     },
     'ra-search': {
+        before: async () => {
+            window.scrollTo(0, 0);
+        },
         steps: [
             {
+                disableBeacon: true,
                 target: '[data-testid="search"]',
                 content:
                     'This is the smart Omnisearch box. It allows users to search across all resources. ',
