@@ -54,9 +54,14 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
             menu: {
                 sales: 'Ventes',
                 catalog: 'Catalogue',
-                audience: 'Audience',
+                my_queries: 'Mes recherches',
+                customers: 'Clients',
                 new_customers: 'Nouveaux clients',
-                former_customers: 'Anciens Clients',
+                all_customers: 'Tous les clients',
+                visitors: 'Visiteurs',
+                all_reviews: 'Tous les avis',
+                pending_reviews: 'Avis en attende de validation',
+                bad_reviews: 'Mauvais avis',
             },
             reviews: {
                 accepted: 'Acceptés',

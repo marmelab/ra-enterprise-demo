@@ -53,9 +53,14 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
             menu: {
                 sales: 'Sales',
                 catalog: 'Catalog',
-                audience: 'Audience',
+                my_queries: 'My queries',
+                customers: 'Customers',
                 new_customers: 'New Customers',
-                former_customers: 'Former Customers',
+                all_customers: 'All Customers',
+                visitors: 'Visitors',
+                all_reviews: 'All reviews',
+                pending_reviews: 'Pending reviews',
+                bad_reviews: 'Bad reviews',
             },
             reviews: {
                 accepted: 'Accepted',

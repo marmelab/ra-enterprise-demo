@@ -85,8 +85,8 @@ const CustomBreadcrumb: FC = props => {
                 />
             </BreadcrumbItem>
             <BreadcrumbItem
-                name="audience"
-                label={translate('pos.menu.audience', 1)}
+                name="customers"
+                label={translate('pos.menu.customers', 1)}
             >
                 <BreadcrumbItem
                     name="customers"
