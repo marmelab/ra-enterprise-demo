@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 const Segments: FC = () => {
     const translate = useTranslate();
     const classes = useStyles();
-    useDefineAppLocation('audience.segments');
+    useDefineAppLocation('customers.segments');
     return (
         <Card className={classes.root}>
             <Title title={translate('resources.segments.name')} />

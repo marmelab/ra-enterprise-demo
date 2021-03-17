@@ -37,7 +37,7 @@ const VisitorTitle: FC<FieldProps<Customer>> = ({ record }) =>
 
 const VisitorForm = (props: any): ReactElement => {
     const translate = useTranslate();
-    useDefineAppLocation('audience.customers.edit', props);
+    useDefineAppLocation('customers.customers.edit', props);
 
     return (
         <FormWithRedirect

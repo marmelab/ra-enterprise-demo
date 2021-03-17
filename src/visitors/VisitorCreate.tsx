@@ -53,7 +53,7 @@ export const validatePasswords = ({
 
 const VisitorCreate = (props: CreateProps): ReactElement => {
     const classes = useStyles(props);
-    useDefineAppLocation('audience.customers.create');
+    useDefineAppLocation('customers.customers.create');
 
     return (
         <Create {...props}>

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState, useEffect } from 'react';
+import React, { FC, ReactNode, useState, useEffect, ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslate } from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
@@ -6,6 +6,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AVTimerIcon from '@material-ui/icons/AvTimer';
 import BlockIcon from '@material-ui/icons/Block';
+import querystring from 'query-string';
 
 import {
     MultiLevelMenu,
@@ -35,6 +36,7 @@ import reviews from '../reviews';
 import stores from '../stores';
 import { AppState } from '../types';
 import { segments } from '../visitors/segments';
+import { useSavedQueries } from '@react-admin/ra-preferences';
 
 interface Props {
     logout?: ReactNode;
@@ -42,7 +44,7 @@ interface Props {
 }
 
 const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
-const formerCustomerFilter = { last_seen_lte: '2020-06-30T22:00:00.000Z' };
+const visitorsFilter = { nb_commands_lte: 0 };
 
 const useResourceChangeCounter = (resource: string): number => {
     const match = useAppLocationMatcher();
@@ -109,68 +111,60 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 label="ra.page.dashboard"
             />
             <MenuItemCategory
-                name="catalog"
+                name="sales"
                 icon={<products.icon />}
                 onClick={onMenuClick}
-                label={translate(`pos.menu.catalog`, { smart_count: 1 })}
+                label={translate(`pos.menu.sales`, { smart_count: 1 })}
             >
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
-                        {translate(`pos.menu.catalog`, { smart_count: 1 })}
+                        {translate(`pos.menu.sales`, { smart_count: 1 })}
                     </Typography>
                     <NavigationMenu>
+                        <StyledBadgeForText
+                            badgeContent={commandsChangeCount}
+                            color="primary"
+                        >
+                            <MenuItem
+                                name="commands"
+                                to="/commands"
+                                icon={<orders.icon />}
+                                onClick={onMenuClick}
+                                label={translate(`resources.commands.name`, {
+                                    smart_count: 2,
+                                })}
+                                data-testid="commands-menu"
+                            />
+                        </StyledBadgeForText>
                         <MenuItem
-                            name="products"
-                            to="/products"
-                            icon={<products.icon />}
+                            name="invoices"
+                            to="/invoices?filter={}"
+                            icon={<invoices.icon />}
                             onClick={onMenuClick}
-                            label={translate(`resources.products.name`, {
-                                smart_count: 2,
-                            })}
-                        />
-                        <MenuItem
-                            name="categories"
-                            to="/categories/5"
-                            icon={<categories.icon />}
-                            onClick={onMenuClick}
-                            label={translate(`resources.categories.name`, {
+                            label={translate(`resources.invoices.name`, {
                                 smart_count: 2,
                             })}
                         />
                     </NavigationMenu>
                 </CardContent>
             </MenuItemCategory>
-            <StyledBadgeForText
-                badgeContent={commandsChangeCount}
-                color="primary"
-            >
-                <MenuItemCategory
-                    name="commands"
-                    to="/commands"
-                    icon={<orders.icon />}
-                    onClick={onMenuClick}
-                    label={translate(`resources.commands.name`, {
-                        smart_count: 2,
-                    })}
-                    data-testid="commands-menu"
-                />
-            </StyledBadgeForText>
             <MenuItemCategory
-                name="invoices"
-                to="/invoices?filter={}"
-                icon={<invoices.icon />}
+                name="catalog"
+                icon={<products.icon />}
                 onClick={onMenuClick}
-                label={translate(`resources.invoices.name`, {
-                    smart_count: 2,
-                })}
-            />
+                label={translate(`pos.menu.catalog`, { smart_count: 1 })}
+            >
+                <CardContent>
+                    <CatalogMenu onMenuClick={onMenuClick} />
+                </CardContent>
+            </MenuItemCategory>
             <MenuItemCategory
-                name="audience"
+                name="customers"
                 icon={<visitors.icon />}
                 onClick={onMenuClick}
-                label={translate(`pos.menu.audience`, { smart_count: 2 })}
+                label={translate(`pos.menu.customers`, { smart_count: 2 })}
             >
-                <AudienceMenu onMenuClick={onMenuClick} />
+                <CustomersMenu onMenuClick={onMenuClick} />
             </MenuItemCategory>
             <MenuItemCategory
                 name="reviews"
@@ -186,25 +180,25 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                     </Typography>{' '}
                     <NavigationMenu>
                         <MenuItem
-                            name="reviews.accepted"
-                            to={'/reviews?filter={"status": "accepted"}'}
+                            name="reviews.all"
+                            to={'/reviews?filter={}'}
                             icon={<CheckCircleOutlineIcon />}
                             onClick={onMenuClick}
-                            label="pos.reviews.accepted"
-                        />
-                        <MenuItem
-                            name="reviews.rejected"
-                            to={'/reviews?filter={"status": "rejected"}'}
-                            icon={<BlockIcon />}
-                            onClick={onMenuClick}
-                            label="pos.reviews.rejected"
+                            label="pos.menu.all_reviews"
                         />
                         <MenuItem
                             name="reviews.pending"
                             to={'/reviews?filter={"status": "pending"}'}
                             icon={<AVTimerIcon />}
                             onClick={onMenuClick}
-                            label="pos.reviews.pending"
+                            label="pos.menu.pending_reviews"
+                        />
+                        <MenuItem
+                            name="reviews.bad"
+                            to={'/reviews?filter={"rating_lte": "2"}'}
+                            icon={<BlockIcon />}
+                            onClick={onMenuClick}
+                            label="pos.menu.bad_reviews"
                         />
                     </NavigationMenu>
                 </CardContent>
@@ -223,10 +217,11 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
 
 export default Menu;
 
-const AudienceMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
+const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
     onMenuClick,
 }) => {
     const translate = useTranslate();
+    const savedQueriesMenuItems = usePersistedQueriesMenu('customers');
 
     return (
         <CardContent>
@@ -239,6 +234,14 @@ const AudienceMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                     </Typography>
                     <NavigationMenu>
                         <MenuItem
+                            name="customers.all_customers"
+                            to={`/customers?filter={}`}
+                            onClick={onMenuClick}
+                            label={translate(`pos.menu.all_customers`, {
+                                smart_count: 2,
+                            })}
+                        />
+                        <MenuItem
                             name="customers.newcomers"
                             to={`/customers?filter=${JSON.stringify(
                                 newCustomerFilter
@@ -249,18 +252,16 @@ const AudienceMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                             })}
                         />
                         <MenuItem
-                            name="customers.former_customers"
+                            name="customers.visitors"
                             to={`/customers?filter=${JSON.stringify(
-                                formerCustomerFilter
+                                visitorsFilter
                             )}`}
                             onClick={onMenuClick}
-                            label={translate(`pos.menu.former_customers`, {
+                            label={translate(`pos.menu.visitors`, {
                                 smart_count: 2,
                             })}
                         />
                     </NavigationMenu>
-                </Box>
-                <Box>
                     <Typography variant="h6" gutterBottom>
                         {translate(`resources.segments.name`, {
                             smart_count: 2,
@@ -283,7 +284,106 @@ const AudienceMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                         ))}
                     </NavigationMenu>
                 </Box>
+                {savedQueriesMenuItems.length > 0 && (
+                    <Box>
+                        <Typography variant="h6" gutterBottom>
+                            {translate(`pos.menu.my_queries`, {
+                                smart_count: 1,
+                            })}
+                        </Typography>
+                        <NavigationMenu>
+                            {savedQueriesMenuItems.map(({ label, to }) => (
+                                <MenuItem
+                                    key={label}
+                                    name="customers"
+                                    to={to}
+                                    onClick={onMenuClick}
+                                    label={label}
+                                />
+                            ))}
+                        </NavigationMenu>
+                    </Box>
+                )}
             </Box>
         </CardContent>
     );
+};
+
+const CatalogMenu = (props: {
+    onMenuClick: (() => void) | undefined;
+}): ReactElement => {
+    const { onMenuClick } = props;
+    const translate = useTranslate();
+    const savedQueriesMenuItems = usePersistedQueriesMenu('products');
+
+    return (
+        <Box display="flex" justifyContent="space-between">
+            <Box marginRight={savedQueriesMenuItems.length > 0 ? 2 : 0}>
+                <Typography variant="h6" gutterBottom>
+                    {translate(`pos.menu.catalog`, {
+                        smart_count: 1,
+                    })}
+                </Typography>
+                <NavigationMenu>
+                    <MenuItem
+                        name="products"
+                        to="/products"
+                        icon={<products.icon />}
+                        onClick={onMenuClick}
+                        label={translate(`resources.products.name`, {
+                            smart_count: 2,
+                        })}
+                    />
+                    <MenuItem
+                        name="categories"
+                        to="/categories/5"
+                        icon={<categories.icon />}
+                        onClick={onMenuClick}
+                        label={translate(`resources.categories.name`, {
+                            smart_count: 2,
+                        })}
+                    />
+                </NavigationMenu>
+            </Box>
+            {savedQueriesMenuItems.length > 0 && (
+                <Box>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`pos.menu.my_queries`, {
+                            smart_count: 1,
+                        })}
+                    </Typography>
+                    <NavigationMenu>
+                        {savedQueriesMenuItems.map(({ label, to }) => (
+                            <MenuItem
+                                key={label}
+                                name="products"
+                                to={to}
+                                onClick={onMenuClick}
+                                label={label}
+                            />
+                        ))}
+                    </NavigationMenu>
+                </Box>
+            )}
+        </Box>
+    );
+};
+
+const usePersistedQueriesMenu = (
+    resource: string
+): { label: string; to: string }[] => {
+    const [savedQueries] = useSavedQueries(resource);
+    const savedQueriesMenuItems = savedQueries.map(({ label, value }) => ({
+        label,
+        to: `/${resource}?${querystring.stringify({
+            filter: JSON.stringify(value.filter),
+            sort: value?.sort?.field,
+            order: value?.sort?.order,
+            page: 1,
+            perPage: value.perPage,
+            displayedFilters: value.displayedFilters,
+        })}`,
+    }));
+
+    return savedQueriesMenuItems;
 };
