@@ -29,6 +29,8 @@ const useListStyles = makeStyles({
     gridContainer: {
         display: 'flex',
         flexWrap: 'wrap',
+        marginLeft: '-20px',
+        marginRight: '-20px',
     },
 });
 
