@@ -127,14 +127,8 @@ const ProductEdit: FC<EditProps> = props => {
         id as string,
         'todousername',
         {
-            onSuccess: () => {
-                notify('ra-realtime.notification.lock.lockedByMe');
-            },
             onFailure: () => {
                 notify('ra-realtime.notification.lock.lockedBySomeoneElse');
-            },
-            onUnlockSuccess: () => {
-                notify('ra-realtime.notification.lock.unlocked');
             },
         }
     );
