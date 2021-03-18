@@ -50,26 +50,14 @@ export const newCustomerFilter = querystring.stringify({
     filter: JSON.stringify({
         last_seen_gte: endOfYesterday().toISOString(),
     }),
-    sort: 'last_seen',
-    order: 'DESC',
-    page: 1,
-    perPage: 25,
 });
 
 export const visitorsFilter = querystring.stringify({
     filter: JSON.stringify({ nb_commands_lte: 0 }),
-    sort: 'last_seen',
-    order: 'DESC',
-    page: 1,
-    perPage: 25,
 });
 
 export const pendingReviewFilter = querystring.stringify({
     filter: JSON.stringify({ status: 'pending' }),
-    sort: 'id',
-    order: 'DESC',
-    page: 1,
-    perPage: 25,
 });
 
 const useResourceChangeCounter = (resource: string): number => {
@@ -317,10 +305,6 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                                 name={`segments.${segment}`}
                                 to={`/customers?${querystring.stringify({
                                     filter: JSON.stringify({ groups: segment }),
-                                    sort: 'last_seen',
-                                    order: 'DESC',
-                                    page: 1,
-                                    perPage: 25,
                                 })}`}
                                 onClick={onMenuClick}
                                 label={translate(
