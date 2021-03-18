@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ra-enterprise-demo/static/css/main.af3584c1.chunk.css",
-    "main.js": "/ra-enterprise-demo/static/js/main.43f0df6c.chunk.js",
+    "main.js": "/ra-enterprise-demo/static/js/main.ca8ee8d3.chunk.js",
     "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.a576929f.js",
     "static/css/2.e625dec6.chunk.css": "/ra-enterprise-demo/static/css/2.e625dec6.chunk.css",
     "static/js/2.f6c5a777.chunk.js": "/ra-enterprise-demo/static/js/2.f6c5a777.chunk.js",
@@ -14,6 +14,6 @@
     "static/css/2.e625dec6.chunk.css",
     "static/js/2.f6c5a777.chunk.js",
     "static/css/main.af3584c1.chunk.css",
-    "static/js/main.43f0df6c.chunk.js"
+    "static/js/main.ca8ee8d3.chunk.js"
   ]
 }
