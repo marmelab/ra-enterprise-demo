@@ -21,7 +21,7 @@ import {
     List,
 } from '@material-ui/core';
 
-import { newCustomerFilter, visitorsFilter } from './Menu';
+import { newCustomerFilter, visitorsFilter, pendingReviewFilter } from './Menu';
 import categories from '../categories';
 import visitors from '../visitors';
 import orders from '../orders';
@@ -196,7 +196,7 @@ const MobileMenu: FC<{
                     />
                     <MenuItem
                         name="reviews.pending"
-                        to={'/reviews?filter={"status": "pending"}'}
+                        to={`/reviews?${pendingReviewFilter}`}
                         icon={<AVTimerIcon />}
                         onClick={onMenuClick}
                         label="pos.menu.pending_reviews"

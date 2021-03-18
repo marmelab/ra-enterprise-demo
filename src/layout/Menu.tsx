@@ -8,6 +8,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AVTimerIcon from '@material-ui/icons/AvTimer';
 import BlockIcon from '@material-ui/icons/Block';
 import querystring from 'query-string';
+import { endOfYesterday } from 'date-fns';
 
 import {
     MultiLevelMenu,
@@ -45,8 +46,31 @@ interface Props {
     onMenuClick?: () => void;
 }
 
-export const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
-export const visitorsFilter = { nb_commands_lte: 0 };
+export const newCustomerFilter = querystring.stringify({
+    filter: JSON.stringify({
+        last_seen_gte: endOfYesterday().toISOString(),
+    }),
+    sort: 'last_seen',
+    order: 'DESC',
+    page: 1,
+    perPage: 25,
+});
+
+export const visitorsFilter = querystring.stringify({
+    filter: JSON.stringify({ nb_commands_lte: 0 }),
+    sort: 'last_seen',
+    order: 'DESC',
+    page: 1,
+    perPage: 25,
+});
+
+export const pendingReviewFilter = querystring.stringify({
+    filter: JSON.stringify({ status: 'pending' }),
+    sort: 'id',
+    order: 'DESC',
+    page: 1,
+    perPage: 25,
+});
 
 const useResourceChangeCounter = (resource: string): number => {
     const match = useAppLocationMatcher();
@@ -207,7 +231,7 @@ const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
                         />
                         <MenuItem
                             name="reviews.pending"
-                            to={'/reviews?filter={"status": "pending"}'}
+                            to={`/reviews?${pendingReviewFilter}`}
                             icon={<AVTimerIcon />}
                             onClick={onMenuClick}
                             label="pos.menu.pending_reviews"
@@ -266,9 +290,7 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                         />
                         <MenuItem
                             name="customers.newcomers"
-                            to={`/customers?filter=${JSON.stringify(
-                                newCustomerFilter
-                            )}`}
+                            to={`/customers?${newCustomerFilter}`}
                             onClick={onMenuClick}
                             label={translate(`pos.menu.new_customers`, {
                                 smart_count: 2,
@@ -276,9 +298,7 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                         />
                         <MenuItem
                             name="customers.visitors"
-                            to={`/customers?filter=${JSON.stringify(
-                                visitorsFilter
-                            )}`}
+                            to={`/customers?${visitorsFilter}`}
                             onClick={onMenuClick}
                             label={translate(`pos.menu.visitors`, {
                                 smart_count: 2,
@@ -295,7 +315,13 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                             <MenuItem
                                 key={segment}
                                 name={`segments.${segment}`}
-                                to={`/customers?filter={"groups": "${segment}"}`}
+                                to={`/customers?${querystring.stringify({
+                                    filter: JSON.stringify({ groups: segment }),
+                                    sort: 'last_seen',
+                                    order: 'DESC',
+                                    page: 1,
+                                    perPage: 25,
+                                })}`}
                                 onClick={onMenuClick}
                                 label={translate(
                                     `resources.segments.data.${segment}`,
