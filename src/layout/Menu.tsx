@@ -110,44 +110,52 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 onClick={onMenuClick}
                 label="ra.page.dashboard"
             />
-            <MenuItemCategory
-                name="sales"
-                icon={<products.icon />}
-                onClick={onMenuClick}
-                label={translate(`pos.menu.sales`, { smart_count: 1 })}
+            <StyledBadgeForText
+                badgeContent={commandsChangeCount}
+                color="primary"
             >
-                <CardContent>
-                    <Typography variant="h6" gutterBottom>
-                        {translate(`pos.menu.sales`, { smart_count: 1 })}
-                    </Typography>
-                    <NavigationMenu>
-                        <StyledBadgeForText
-                            badgeContent={commandsChangeCount}
-                            color="primary"
-                        >
+                <MenuItemCategory
+                    name="sales"
+                    icon={<products.icon />}
+                    onClick={onMenuClick}
+                    label={translate(`pos.menu.sales`, { smart_count: 1 })}
+                    data-testid="commands-menu"
+                >
+                    <CardContent>
+                        <Typography variant="h6" gutterBottom>
+                            {translate(`pos.menu.sales`, { smart_count: 1 })}
+                        </Typography>
+                        <NavigationMenu>
+                            <StyledBadgeForText
+                                badgeContent={commandsChangeCount}
+                                color="primary"
+                            >
+                                <MenuItem
+                                    name="commands"
+                                    to="/commands"
+                                    icon={<orders.icon />}
+                                    onClick={onMenuClick}
+                                    label={translate(
+                                        `resources.commands.name`,
+                                        {
+                                            smart_count: 2,
+                                        }
+                                    )}
+                                />
+                            </StyledBadgeForText>
                             <MenuItem
-                                name="commands"
-                                to="/commands"
-                                icon={<orders.icon />}
+                                name="invoices"
+                                to="/invoices?filter={}"
+                                icon={<invoices.icon />}
                                 onClick={onMenuClick}
-                                label={translate(`resources.commands.name`, {
+                                label={translate(`resources.invoices.name`, {
                                     smart_count: 2,
                                 })}
-                                data-testid="commands-menu"
                             />
-                        </StyledBadgeForText>
-                        <MenuItem
-                            name="invoices"
-                            to="/invoices?filter={}"
-                            icon={<invoices.icon />}
-                            onClick={onMenuClick}
-                            label={translate(`resources.invoices.name`, {
-                                smart_count: 2,
-                            })}
-                        />
-                    </NavigationMenu>
-                </CardContent>
-            </MenuItemCategory>
+                        </NavigationMenu>
+                    </CardContent>
+                </MenuItemCategory>
+            </StyledBadgeForText>
             <MenuItemCategory
                 name="catalog"
                 icon={<products.icon />}
