@@ -41,13 +41,15 @@ import {
     Theme,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { RealTimeList } from '@react-admin/ra-realtime';
+import { ListActions, RealTimeList } from '@react-admin/ra-enterprise';
 
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import AddressField from '../visitors/AddressField';
 import MobileGrid from './MobileGrid';
 import { Customer } from '../types';
+import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 const OrderFilter: FC<Omit<FilterProps, 'children'>> = props => (
     <Filter {...props}>
@@ -135,6 +137,7 @@ const useGetTotals = (filterValues: any): any => {
 
 const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
     const listContext = useListContext();
+    useDefineAppLocation('sales.commands');
     const { ids, filterValues, setFilters, displayedFilters } = listContext;
     const classes = useDatagridStyles();
     const isXSmall = useMediaQuery<Theme>(theme =>
@@ -323,6 +326,7 @@ const OrderList: FC<ListProps> = props => (
         sort={{ field: 'date', order: 'DESC' }}
         perPage={25}
         filters={<OrderFilter />}
+        actions={<ListActions breadcrumb={<CustomBreadcrumbForActions />} />}
     >
         <TabbedDatagrid />
     </RealTimeList>

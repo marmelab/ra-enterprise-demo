@@ -1,7 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import {
     DateInput,
-    Edit,
     EditProps,
     NullableBooleanInput,
     TextInput,
@@ -10,6 +9,7 @@ import {
     useTranslate,
     FormWithRedirect,
 } from 'react-admin';
+import { Edit, EditActions } from '@react-admin/ra-enterprise';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { Box, Card, CardContent, Typography } from '@material-ui/core';
 
@@ -18,12 +18,16 @@ import FullNameField from './FullNameField';
 import SegmentsInput from './SegmentsInput';
 import { validatePasswords } from './VisitorCreate';
 import { Customer, FieldProps } from '../types';
+import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
 
 const VisitorEdit: FC<EditProps> = props => {
     return (
         <Edit
             title={<VisitorTitle />}
             aside={<Aside />}
+            actions={
+                <EditActions breadcrumb={<CustomBreadcrumbForActions />} />
+            }
             component="div"
             {...props}
         >
@@ -37,7 +41,7 @@ const VisitorTitle: FC<FieldProps<Customer>> = ({ record }) =>
 
 const VisitorForm = (props: any): ReactElement => {
     const translate = useTranslate();
-    useDefineAppLocation('customers.customers.edit', props);
+    useDefineAppLocation('customers.edit', props);
 
     return (
         <FormWithRedirect

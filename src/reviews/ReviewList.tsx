@@ -1,6 +1,7 @@
 import React, { FC, Fragment, ReactElement, useCallback } from 'react';
 import classnames from 'classnames';
-import { BulkDeleteButton, List, ListProps } from 'react-admin';
+import { BulkDeleteButton, ListProps } from 'react-admin';
+import { List, ListActions } from '@react-admin/ra-enterprise';
 import { Route, useHistory } from 'react-router-dom';
 import { Drawer, useMediaQuery, makeStyles, Theme } from '@material-ui/core';
 import BulkAcceptButton from './BulkAcceptButton';
@@ -9,6 +10,7 @@ import ReviewListMobile from './ReviewListMobile';
 import ReviewListDesktop from './ReviewListDesktop';
 import ReviewFilter from './ReviewFilter';
 import ReviewEdit from './ReviewEdit';
+import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
 
 const ReviewsBulkActionButtons: FC = ({ children, ...props }) => (
     <Fragment>
@@ -67,6 +69,13 @@ const ReviewList: FC<ListProps> = props => {
                                 })}
                                 bulkActionButtons={<ReviewsBulkActionButtons />}
                                 filters={<ReviewFilter />}
+                                actions={
+                                    <ListActions
+                                        breadcrumb={
+                                            <CustomBreadcrumbForActions />
+                                        }
+                                    />
+                                }
                                 perPage={25}
                                 sort={{ field: 'date', order: 'DESC' }}
                             >

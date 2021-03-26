@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import {
-    List,
     Datagrid,
     TextField,
     DateField,
@@ -11,19 +10,23 @@ import {
     ListProps,
     FilterProps,
 } from 'react-admin';
+import { List, ListActions } from '@react-admin/ra-enterprise';
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';
+import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-const ListFilters: FC<Omit<FilterProps, 'children'>> = props => (
+const ListFilters = (props: Omit<FilterProps, 'children'>): ReactElement => (
     <Filter {...props}>
         <DateInput source="date_gte" alwaysOn />
         <DateInput source="date_lte" alwaysOn />
     </Filter>
 );
 
-const InvoiceList: FC<ListProps> = props => (
-    <List {...props} filters={<ListFilters />} perPage={25}>
+const InvoicesDatagrid = (): ReactElement => {
+    useDefineAppLocation('sales.invoices');
+    return (
         <Datagrid rowClick="expand" expand={<InvoiceShow />}>
             <TextField source="id" />
             <DateField source="date" />
@@ -46,6 +49,16 @@ const InvoiceList: FC<ListProps> = props => (
             <NumberField source="taxes" />
             <NumberField source="total" />
         </Datagrid>
+    );
+};
+const InvoiceList = (props: ListProps): ReactElement => (
+    <List
+        {...props}
+        perPage={25}
+        filters={<ListFilters />}
+        actions={<ListActions breadcrumb={<CustomBreadcrumbForActions />} />}
+    >
+        <InvoicesDatagrid />
     </List>
 );
 

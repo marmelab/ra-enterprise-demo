@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import {
     Datagrid,
     DateField,
-    Edit,
     EditButton,
     SimpleForm,
     NumberInput,
@@ -19,6 +18,7 @@ import {
     Toolbar,
     EditProps,
 } from 'react-admin';
+import { Edit } from '@react-admin/ra-enterprise';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useLock, useHasLock } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
@@ -39,6 +39,7 @@ import { styles as createStyles } from './ProductCreate';
 import ProductPreview from './ProductPreview';
 
 import { Product } from '../types';
+import { EditActions } from '../layout/EditActions';
 
 interface ProductTitleProps {
     record?: Product;
@@ -92,7 +93,7 @@ const ProductEditFormWithPreview: FC<{ toolbar: any }> = ({
     return (
         <FormWithRedirect
             {...props}
-            render={({ component, ...formProps }): JSX.Element => {
+            render={(formProps): JSX.Element => {
                 return (
                     <div className={classes.container}>
                         <Card>
@@ -138,7 +139,13 @@ const ProductEdit: FC<EditProps> = props => {
     }
 
     return (
-        <Edit {...props} title={<ProductTitle />} component="div">
+        <Edit
+            {...props}
+            className={classes.root}
+            title={<ProductTitle />}
+            actions={<EditActions />}
+            component="div"
+        >
             <ProductEditFormWithPreview toolbar={<CustomToolbar />}>
                 <Poster />
                 <TextInput source="image" fullWidth />

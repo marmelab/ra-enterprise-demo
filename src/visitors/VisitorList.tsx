@@ -10,7 +10,7 @@ import {
     ListProps,
 } from 'react-admin';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import { useMediaQuery, Theme, makeStyles } from '@material-ui/core';
+import { useMediaQuery, Theme } from '@material-ui/core';
 import { FilterWithSave } from '@react-admin/ra-preferences';
 
 import EnterpriseList from '../ra-enterprise/List';
@@ -54,12 +54,9 @@ const VisitorList: FC<ListProps> = props => {
     useDefineAppLocation('customers.customers');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
-    const classes = useStyles();
-
     return (
         <EnterpriseList
             {...props}
-            classes={classes}
             preferenceKey="visitors.list"
             hasColumnsSelector
             defaultColumns={visitorListColumn}
@@ -96,9 +93,3 @@ const VisitorList: FC<ListProps> = props => {
 };
 
 export default VisitorList;
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginTop: -theme.spacing(7),
-    },
-}));

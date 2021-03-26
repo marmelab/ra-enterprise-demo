@@ -10,7 +10,6 @@ import React, {
 } from 'react';
 
 import {
-    List,
     Button,
     TopToolbar,
     CreateButton,
@@ -19,6 +18,8 @@ import {
     useListContext,
     ListProps,
 } from 'react-admin';
+
+import { List } from '@react-admin/ra-enterprise';
 import classnames from 'classnames';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Typography from '@material-ui/core/Typography';
@@ -37,11 +38,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ColumnList } from '@react-admin/ra-preferences/esm/src/list/useSelectedColumns';
+import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
     root: {
         paddingBottom: 0,
-        paddingTop: theme.spacing(4),
     },
     menuPaper: {
         padding: '1rem 0',
@@ -66,7 +67,7 @@ const useStyles = makeStyles(theme => ({
         margin: 0,
         background: '#eee',
     },
-}));
+});
 
 const ToolContainer = forwardRef<HTMLDivElement, any>(({ children }, ref) => {
     const classes = useStyles();
@@ -200,6 +201,7 @@ const Actions: FC<{
             className={classnames(className, classes.root)}
             {...sanitizeListRestProps(rest)}
         >
+            <CustomBreadcrumbForActions />
             {filters &&
                 cloneElement(filters, {
                     resource,
@@ -292,7 +294,7 @@ const hasChildren = (element, type, props): boolean => {
 const EnterpriseList: FC<
     {
         children: (props?: any) => ReactElement;
-        classes: any;
+        classes?: any;
         className?: string;
         defaultColumns: ColumnList;
         defaultOmittedColumns: string[];
