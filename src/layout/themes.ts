@@ -20,8 +20,8 @@ export const darkTheme: ThemeOptions = {
         RaAppBar: {
             menuButton: {
                 // Since sub-<Menu /> hide labels when sidebar is closed
-                // We need to disallow sidebar closing (hiding button is simpler)
-                display: 'none',
+                // We need to disallow sidebar closing in desktop (hiding button is simpler)
+                // display: 'none', // @TODO : Hide it only on desktop
             },
         },
         RaSearchInput: {
@@ -111,7 +111,7 @@ export const lightTheme: ThemeOptions = {
             menuButton: {
                 // Since sub-<Menu /> hide labels when sidebar is closed
                 // We need to disallow sidebar closing (hiding button is simpler)
-                display: 'none',
+                // display: 'none', // @TODO : Hide it only on desktop
             },
         },
         RaSearchInput: {

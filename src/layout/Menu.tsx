@@ -90,15 +90,104 @@ const StyledBadgeForText = withStyles(theme => ({
     },
 }))(Badge);
 
-const Menu: FC<Props> = ({ onMenuClick, logout }) => {
+const Menu: FC<Props> = ({ onMenuClick }) => {
+    useSelector((state: AppState) => state.theme); // force rerender on theme change
+    const isSmall = useMediaQuery((theme: Theme) =>
+        theme.breakpoints.down('sm')
+    );
+    const commandsChangeCount = useResourceChangeCounter('commands');
+    const translate = useTranslate();
+
+    if (isSmall) {
+        return (
+            <MultiLevelMenu>
+                <MenuItem
+                    name="dashboard"
+                    to="/"
+                    exact
+                    icon={<DashboardIcon />}
+                    onClick={onMenuClick}
+                    label="ra.page.dashboard"
+                />
+                <MenuItem
+                    name="sales"
+                    icon={<products.icon />}
+                    label={translate(`pos.menu.sales`, { smart_count: 1 })}
+                    data-testid="commands-menu"
+                    to="/"
+                >
+                    <StyledBadgeForText
+                        badgeContent={commandsChangeCount}
+                        color="primary"
+                    >
+                        <MenuItem
+                            name="commands"
+                            to="/commands"
+                            icon={<orders.icon />}
+                            onClick={onMenuClick}
+                            label={translate(`resources.commands.name`, {
+                                smart_count: 2,
+                            })}
+                        />
+                    </StyledBadgeForText>
+                    <MenuItem
+                        name="invoices"
+                        to="/invoices?filter={}"
+                        icon={<invoices.icon />}
+                        onClick={onMenuClick}
+                        label={translate(`resources.invoices.name`, {
+                            smart_count: 2,
+                        })}
+                    />
+                </MenuItem>
+                <Typography variant="h6" gutterBottom>
+                    {translate(`pos.menu.sales`, { smart_count: 1 })}
+                </Typography>
+
+                <CatalogMenu onMenuClick={onMenuClick} />
+                <MenuItem
+                    name="customers"
+                    to="/customers?filter={}"
+                    icon={<invoices.icon />}
+                    onClick={onMenuClick}
+                    label={translate(`pos.menu.customers`, { smart_count: 2 })}
+                >
+                    <CustomersMenu onMenuClick={onMenuClick} />
+                </MenuItem>
+                <MenuItem
+                    name="reviews.all"
+                    to={'/reviews?filter={}'}
+                    icon={<CheckCircleOutlineIcon />}
+                    onClick={onMenuClick}
+                    label="pos.menu.all_reviews"
+                >
+                    <MenuItem
+                        name="reviews.pending"
+                        to={'/reviews?filter={"status": "pending"}'}
+                        icon={<AVTimerIcon />}
+                        onClick={onMenuClick}
+                        label="pos.menu.pending_reviews"
+                    />
+                    <MenuItem
+                        name="reviews.bad"
+                        to={'/reviews?filter={"rating_lte": "2"}'}
+                        icon={<BlockIcon />}
+                        onClick={onMenuClick}
+                        label="pos.menu.bad_reviews"
+                    />
+                </MenuItem>
+            </MultiLevelMenu>
+        );
+    }
+
+    return <DesktopMenu onMenuClick={onMenuClick} />;
+};
+
+export default Menu;
+
+const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
     const translate = useTranslate();
     const commandsChangeCount = useResourceChangeCounter('commands');
-
-    const isXSmall = useMediaQuery((theme: Theme) =>
-        theme.breakpoints.down('xs')
-    );
-
-    useSelector((state: AppState) => state.theme); // force rerender on theme change
 
     return (
         <MultiLevelMenu variant="categories">
@@ -218,12 +307,9 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 onClick={onMenuClick}
                 label={translate(`resources.stores.name`, { smart_count: 2 })}
             />
-            {isXSmall && logout}
         </MultiLevelMenu>
     );
 };
-
-export default Menu;
 
 const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
     onMenuClick,

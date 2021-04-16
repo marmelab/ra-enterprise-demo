@@ -15,6 +15,14 @@ import { Search } from './index';
 import Logo from './Logo';
 
 const useStyles = makeStyles(theme => ({
+    appBarContent: {
+        display: 'flex',
+        flex: 1,
+        alignItems: 'center',
+        [theme.breakpoints.down('sm')]: {
+            display: 'none',
+        },
+    },
     root: {
         position: 'relative',
     },
@@ -45,28 +53,34 @@ const CustomAppBar: FC = props => {
     }
 
     return (
-        <AppBar {...props} elevation={1}>
-            <Logo className={classes.logo} />
-            <Typography
-                variant="h6"
-                color="inherit"
-                className={classes.title}
-                id="react-admin-title"
-            />
-            <Search />
-            <IconButton to="/tours" component={Link} color="inherit">
-                <Badge badgeContent={numberOfTours} color="error" variant="dot">
-                    <TourIcon />
-                </Badge>
-            </IconButton>
-            <ToggleThemeButton />
-            <LanguageSwitcher
-                languages={[
-                    { locale: 'en', name: 'English' },
-                    { locale: 'fr', name: 'Français' },
-                ]}
-                defaultLanguage="English"
-            />
+        <AppBar {...props} elevation={1} logout={undefined}>
+            <div className={classes.appBarContent}>
+                <Logo className={classes.logo} />
+                <Typography
+                    variant="h6"
+                    color="inherit"
+                    className={classes.title}
+                    id="react-admin-title"
+                />
+                <Search />
+                <IconButton to="/tours" component={Link} color="inherit">
+                    <Badge
+                        badgeContent={numberOfTours}
+                        color="error"
+                        variant="dot"
+                    >
+                        <TourIcon />
+                    </Badge>
+                </IconButton>
+                <ToggleThemeButton />
+                <LanguageSwitcher
+                    languages={[
+                        { locale: 'en', name: 'English' },
+                        { locale: 'fr', name: 'Français' },
+                    ]}
+                    defaultLanguage="English"
+                />
+            </div>
         </AppBar>
     );
 };
