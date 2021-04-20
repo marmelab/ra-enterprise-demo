@@ -9,7 +9,7 @@ import {
 
 import { List, ListActions } from '@react-admin/ra-enterprise';
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const StoreForm: FC = props => (
     <RowForm {...props}>
@@ -23,7 +23,10 @@ const StoreForm: FC = props => (
 );
 
 const StoreListActions: FC = props => (
-    <ListActions {...props} breadcrumb={<CustomBreadcrumbForActions />} />
+    <ListActions
+        {...props}
+        breadcrumb={<CustomBreadcrumb variant="actions" />}
+    />
 );
 
 export const StoreList: FC<ListProps> = props => (

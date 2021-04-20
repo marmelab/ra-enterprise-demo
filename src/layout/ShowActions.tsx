@@ -4,8 +4,11 @@ import {
     ShowActions as RaShowActions,
     ShowActionsProps,
 } from '@react-admin/ra-enterprise';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 export const ShowActions = (props: ShowActionsProps): ReactElement => (
-    <RaShowActions breadcrumb={<CustomBreadcrumbForActions />} {...props} />
+    <RaShowActions
+        breadcrumb={<CustomBreadcrumb variant="actions" />}
+        {...props}
+    />
 );

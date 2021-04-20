@@ -38,7 +38,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { ColumnList } from '@react-admin/ra-preferences/esm/src/list/useSelectedColumns';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const useStyles = makeStyles({
     root: {
@@ -201,7 +201,7 @@ const Actions: FC<{
             className={classnames(className, classes.root)}
             {...sanitizeListRestProps(rest)}
         >
-            <CustomBreadcrumbForActions />
+            <CustomBreadcrumb variant="actions" />
             {filters &&
                 cloneElement(filters, {
                     resource,

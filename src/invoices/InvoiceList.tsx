@@ -14,7 +14,7 @@ import { List, ListActions } from '@react-admin/ra-enterprise';
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 const ListFilters = (props: Omit<FilterProps, 'children'>): ReactElement => (
@@ -56,7 +56,9 @@ const InvoiceList = (props: ListProps): ReactElement => (
         {...props}
         perPage={25}
         filters={<ListFilters />}
-        actions={<ListActions breadcrumb={<CustomBreadcrumbForActions />} />}
+        actions={
+            <ListActions breadcrumb={<CustomBreadcrumb variant="actions" />} />
+        }
     >
         <InvoicesDatagrid />
     </List>

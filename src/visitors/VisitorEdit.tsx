@@ -18,7 +18,7 @@ import FullNameField from './FullNameField';
 import SegmentsInput from './SegmentsInput';
 import { validatePasswords } from './VisitorCreate';
 import { Customer, FieldProps } from '../types';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const VisitorEdit: FC<EditProps> = props => {
     return (
@@ -26,7 +26,9 @@ const VisitorEdit: FC<EditProps> = props => {
             title={<VisitorTitle />}
             aside={<Aside />}
             actions={
-                <EditActions breadcrumb={<CustomBreadcrumbForActions />} />
+                <EditActions
+                    breadcrumb={<CustomBreadcrumb variant="actions" />}
+                />
             }
             component="div"
             {...props}

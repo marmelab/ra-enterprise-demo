@@ -10,7 +10,7 @@ import ReviewListMobile from './ReviewListMobile';
 import ReviewListDesktop from './ReviewListDesktop';
 import ReviewFilter from './ReviewFilter';
 import ReviewEdit from './ReviewEdit';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const ReviewsBulkActionButtons: FC = ({ children, ...props }) => (
     <Fragment>
@@ -72,7 +72,7 @@ const ReviewList: FC<ListProps> = props => {
                                 actions={
                                     <ListActions
                                         breadcrumb={
-                                            <CustomBreadcrumbForActions />
+                                            <CustomBreadcrumb variant="actions" />
                                         }
                                     />
                                 }

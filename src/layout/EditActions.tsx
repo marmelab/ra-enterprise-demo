@@ -4,8 +4,11 @@ import {
     EditActions as RaEditActions,
     EditActionsProps,
 } from '@react-admin/ra-enterprise';
-import CustomBreadcrumbForActions from '../layout/BreadcrumbForActions';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 export const EditActions = (props: EditActionsProps): ReactElement => (
-    <RaEditActions breadcrumb={<CustomBreadcrumbForActions />} {...props} />
+    <RaEditActions
+        breadcrumb={<CustomBreadcrumb variant="actions" />}
+        {...props}
+    />
 );
