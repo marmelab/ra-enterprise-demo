@@ -5,7 +5,7 @@ import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 
 import './App.css';
 
-import { darkTheme, lightTheme } from './layout/themes';
+import { getThemes } from './layout/themes';
 import authProvider from './authProvider';
 import { Login, Layout } from './layout';
 import { Dashboard } from './dashboard';
@@ -25,6 +25,7 @@ import tours from './tours';
 
 import dataProvider from './dataProvider';
 import fakeServer from './fakeServer';
+import { useTheme } from '@material-ui/core';
 
 const messages = {
     en: englishMessages,
@@ -40,6 +41,8 @@ const App = (): ReactElement => {
             restoreFetch();
         };
     }, []);
+    const theme = useTheme();
+    const { darkTheme, lightTheme } = getThemes(theme);
 
     return (
         <Admin

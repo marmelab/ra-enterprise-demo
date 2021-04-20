@@ -12,10 +12,11 @@ import {
     MultiLevelMenu,
     MenuItem,
     MenuItemCategory,
-    Menu as NavigationMenu,
     useAppLocationMatcher,
     useResourceAppLocation,
+    Menu as NavigationMenu,
 } from '@react-admin/ra-navigation';
+import { useSavedQueries } from '@react-admin/ra-preferences';
 
 import {
     useMediaQuery,
@@ -27,6 +28,7 @@ import {
     Box,
 } from '@material-ui/core';
 
+import MobileMenu from './MobileMenu';
 import categories from '../categories';
 import visitors from '../visitors';
 import orders from '../orders';
@@ -36,15 +38,14 @@ import reviews from '../reviews';
 import stores from '../stores';
 import { AppState } from '../types';
 import { segments } from '../visitors/segments';
-import { useSavedQueries } from '@react-admin/ra-preferences';
 
 interface Props {
     logout?: ReactNode;
     onMenuClick?: () => void;
 }
 
-const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
-const visitorsFilter = { nb_commands_lte: 0 };
+export const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
+export const visitorsFilter = { nb_commands_lte: 0 };
 
 const useResourceChangeCounter = (resource: string): number => {
     const match = useAppLocationMatcher();
@@ -90,15 +91,24 @@ const StyledBadgeForText = withStyles(theme => ({
     },
 }))(Badge);
 
-const Menu: FC<Props> = ({ onMenuClick, logout }) => {
-    const translate = useTranslate();
-    const commandsChangeCount = useResourceChangeCounter('commands');
-
+const Menu: FC<Props> = ({ logout, onMenuClick }) => {
+    useSelector((state: AppState) => state.theme); // force rerender on theme change
     const isXSmall = useMediaQuery((theme: Theme) =>
         theme.breakpoints.down('xs')
     );
 
-    useSelector((state: AppState) => state.theme); // force rerender on theme change
+    return isXSmall ? (
+        <MobileMenu logout={logout} onMenuClick={onMenuClick} />
+    ) : (
+        <DesktopMenu onMenuClick={onMenuClick} />
+    );
+};
+
+export default Menu;
+
+const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
+    const translate = useTranslate();
+    const commandsChangeCount = useResourceChangeCounter('commands');
 
     return (
         <MultiLevelMenu variant="categories">
@@ -218,12 +228,9 @@ const Menu: FC<Props> = ({ onMenuClick, logout }) => {
                 onClick={onMenuClick}
                 label={translate(`resources.stores.name`, { smart_count: 2 })}
             />
-            {isXSmall && logout}
         </MultiLevelMenu>
     );
 };
-
-export default Menu;
 
 const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
     onMenuClick,
