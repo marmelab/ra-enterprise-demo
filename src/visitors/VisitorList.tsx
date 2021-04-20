@@ -63,7 +63,6 @@ const VisitorList: FC<ListProps> = props => {
             preferenceKey="visitors.list"
             hasColumnsSelector
             defaultColumns={visitorListColumn}
-            defaultOmittedColumns={['last_seen']}
             hasViewSelector
             filters={isSmall ? <VisitorFilter /> : undefined}
             aside={<VisitorListAside />}
