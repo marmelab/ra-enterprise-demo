@@ -6,11 +6,6 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AVTimerIcon from '@material-ui/icons/AvTimer';
 import BlockIcon from '@material-ui/icons/Block';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import TourIcon from '@material-ui/icons/Flag';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import { makeStyles } from '@material-ui/core/styles';
 import querystring from 'query-string';
 
 import {
@@ -21,11 +16,7 @@ import {
     useResourceAppLocation,
     Menu as NavigationMenu,
 } from '@react-admin/ra-navigation';
-import {
-    useSavedQueries,
-    usePreferences,
-    LanguageSwitcher,
-} from '@react-admin/ra-preferences';
+import { useSavedQueries } from '@react-admin/ra-preferences';
 
 import {
     useMediaQuery,
@@ -35,13 +26,9 @@ import {
     withStyles,
     Badge,
     Box,
-    Collapse,
-    Tooltip,
-    MenuItem as MUIMenuItem,
-    ListItemIcon,
-    List,
 } from '@material-ui/core';
 
+import MobileMenu from './MobileMenu';
 import categories from '../categories';
 import visitors from '../visitors';
 import orders from '../orders';
@@ -57,8 +44,8 @@ interface Props {
     onMenuClick?: () => void;
 }
 
-const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
-const visitorsFilter = { nb_commands_lte: 0 };
+export const newCustomerFilter = { last_seen_gte: '2020-07-31T22:00:00.000Z' };
+export const visitorsFilter = { nb_commands_lte: 0 };
 
 const useResourceChangeCounter = (resource: string): number => {
     const match = useAppLocationMatcher();
@@ -104,77 +91,13 @@ const StyledBadgeForText = withStyles(theme => ({
     },
 }))(Badge);
 
-const useStyles = makeStyles(theme => ({
-    icon: {
-        minWidth: theme.spacing(5),
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    subMenu: {
-        padding: `${theme.spacing(1.5)}px ${theme.spacing(2)}px`,
-    },
-}));
-
-const SubMenu: FC<{
-    dense?: boolean;
-    handleToggle: () => void;
-    icon: ReactElement;
-    isOpen: boolean;
-    name: string;
-    sidebarIsOpen: boolean;
-}> = ({
-    handleToggle,
-    sidebarIsOpen,
-    isOpen,
-    name,
-    icon,
-    children,
-    dense = false,
-}) => {
-    const translate = useTranslate();
-    const classes = useStyles();
-
-    const header = (
-        <MUIMenuItem
-            className={classes.subMenu}
-            dense={dense}
-            button
-            onClick={handleToggle}
-        >
-            <ListItemIcon className={classes.icon}>
-                {isOpen ? <ExpandMore /> : icon}
-            </ListItemIcon>
-            <Typography variant="inherit" color="textSecondary">
-                {translate(name)}
-            </Typography>
-        </MUIMenuItem>
-    );
-
-    return (
-        <>
-            {sidebarIsOpen || isOpen ? (
-                header
-            ) : (
-                <Tooltip title={translate(name)} placement="right">
-                    {header}
-                </Tooltip>
-            )}
-            <Collapse in={isOpen} timeout="auto" unmountOnExit>
-                <List dense={dense} component="div" disablePadding>
-                    {children}
-                </List>
-            </Collapse>
-        </>
-    );
-};
 const Menu: FC<Props> = ({ logout, onMenuClick }) => {
     useSelector((state: AppState) => state.theme); // force rerender on theme change
-    const isSmall = useMediaQuery((theme: Theme) =>
-        theme.breakpoints.down('sm')
+    const isXSmall = useMediaQuery((theme: Theme) =>
+        theme.breakpoints.down('xs')
     );
 
-    return isSmall || true ? (
+    return isXSmall ? (
         <MobileMenu logout={logout} onMenuClick={onMenuClick} />
     ) : (
         <DesktopMenu onMenuClick={onMenuClick} />
@@ -182,218 +105,6 @@ const Menu: FC<Props> = ({ logout, onMenuClick }) => {
 };
 
 export default Menu;
-
-const MobileMenu: FC<Props> = ({ logout, onMenuClick }) => {
-    const translate = useTranslate();
-    const classes = useStyles();
-    const [theme, setTheme] = usePreferences('theme', 'light');
-    const [menuState, setMenuState] = useState({
-        sales: false,
-        catalog: false,
-        customers: false,
-        segments: false,
-        reviews: false,
-    });
-    const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
-    const handleToggle = (
-        menu: 'sales' | 'catalog' | 'customers' | 'segments' | 'reviews'
-    ): void => {
-        setMenuState(state => ({ ...state, [menu]: !state[menu] }));
-    };
-
-    return (
-        <MultiLevelMenu>
-            <MenuItem
-                name="dashboard"
-                to="/"
-                exact
-                label="Dashboard"
-                icon={<DashboardIcon />}
-            />
-            <SubMenu
-                name="pos.menu.sales"
-                icon={<products.icon />}
-                handleToggle={(): void => handleToggle('sales')}
-                isOpen={menuState.sales}
-                data-testid="commands-menu"
-                sidebarIsOpen={open}
-            >
-                <MenuItem
-                    name="commands"
-                    to="/commands"
-                    icon={<orders.icon />}
-                    onClick={onMenuClick}
-                    label={translate(`resources.commands.name`, {
-                        smart_count: 2,
-                    })}
-                />
-                <MenuItem
-                    name="invoices"
-                    to="/invoices?filter={}"
-                    icon={<invoices.icon />}
-                    onClick={onMenuClick}
-                    label={translate(`resources.invoices.name`, {
-                        smart_count: 2,
-                    })}
-                />
-            </SubMenu>
-            <SubMenu
-                name="pos.menu.catalog"
-                icon={<products.icon />}
-                handleToggle={(): void => handleToggle('catalog')}
-                isOpen={menuState.catalog}
-                sidebarIsOpen={open}
-            >
-                <MenuItem
-                    name="reviews.all"
-                    to={'/reviews?filter={}'}
-                    icon={<CheckCircleOutlineIcon />}
-                    onClick={onMenuClick}
-                    label="pos.menu.all_reviews"
-                />
-                <MenuItem
-                    name="reviews.pending"
-                    to={'/reviews?filter={"status": "pending"}'}
-                    icon={<AVTimerIcon />}
-                    onClick={onMenuClick}
-                    label="pos.menu.pending_reviews"
-                />
-                <MenuItem
-                    name="reviews.bad"
-                    to={'/reviews?filter={"rating_lte": "2"}'}
-                    icon={<BlockIcon />}
-                    onClick={onMenuClick}
-                    label="pos.menu.bad_reviews"
-                />
-            </SubMenu>
-            <SubMenu
-                name="pos.menu.customers"
-                icon={<visitors.icon />}
-                handleToggle={(): void => handleToggle('customers')}
-                isOpen={menuState.customers}
-                sidebarIsOpen={open}
-            >
-                <MenuItem
-                    name="customers.all_customers"
-                    to={`/customers?filter={}`}
-                    onClick={onMenuClick}
-                    label={translate(`pos.menu.all_customers`, {
-                        smart_count: 2,
-                    })}
-                />
-                <MenuItem
-                    name="customers.newcomers"
-                    to={`/customers?filter=${JSON.stringify(
-                        newCustomerFilter
-                    )}`}
-                    onClick={onMenuClick}
-                    label={translate(`pos.menu.new_customers`, {
-                        smart_count: 2,
-                    })}
-                />
-                <MenuItem
-                    name="customers.visitors"
-                    to={`/customers?filter=${JSON.stringify(visitorsFilter)}`}
-                    onClick={onMenuClick}
-                    label={translate(`pos.menu.visitors`, {
-                        smart_count: 2,
-                    })}
-                />
-                <SubMenu
-                    name="resources.segments.name"
-                    icon={<visitors.icon />}
-                    handleToggle={(): void => handleToggle('segments')}
-                    isOpen={menuState.segments}
-                    sidebarIsOpen={open}
-                >
-                    {segments.map(segment => (
-                        <MenuItem
-                            key={segment}
-                            name={`segments.${segment}`}
-                            to={`/customers?filter={"groups": "${segment}"}`}
-                            onClick={onMenuClick}
-                            label={translate(
-                                `resources.segments.data.${segment}`,
-                                {
-                                    smart_count: 2,
-                                }
-                            )}
-                        />
-                    ))}
-                </SubMenu>
-            </SubMenu>
-            <SubMenu
-                name={translate(`resources.reviews.name`, { smart_count: 2 })}
-                icon={<reviews.icon />}
-                handleToggle={(): void => handleToggle('reviews')}
-                isOpen={menuState.reviews}
-                sidebarIsOpen={open}
-            >
-                <MenuItem
-                    name="reviews.all"
-                    to={'/reviews?filter={}'}
-                    icon={<CheckCircleOutlineIcon />}
-                    onClick={onMenuClick}
-                    label="pos.menu.all_reviews"
-                />
-                <MenuItem
-                    name="reviews.pending"
-                    to={'/reviews?filter={"status": "pending"}'}
-                    icon={<AVTimerIcon />}
-                    onClick={onMenuClick}
-                    label="pos.menu.pending_reviews"
-                />
-                <MenuItem
-                    name="reviews.bad"
-                    to={'/reviews?filter={"rating_lte": "2"}'}
-                    icon={<BlockIcon />}
-                    onClick={onMenuClick}
-                    label="pos.menu.bad_reviews"
-                />
-            </SubMenu>
-            <MenuItem
-                name="stores"
-                to="/stores"
-                icon={<stores.icon />}
-                onClick={onMenuClick}
-                label={translate(`resources.stores.name`, { smart_count: 2 })}
-            />
-            <MenuItem
-                name="tours"
-                to="/tours"
-                icon={<TourIcon />}
-                onClick={onMenuClick}
-                label="Tours"
-            />
-            <MUIMenuItem
-                className={classes.subMenu}
-                button
-                onClick={(): void =>
-                    setTheme(theme === 'light' ? 'dark' : 'light')
-                }
-            >
-                <ListItemIcon className={classes.icon}>
-                    {theme === 'light' ? (
-                        <Brightness4Icon />
-                    ) : (
-                        <Brightness7Icon />
-                    )}
-                </ListItemIcon>
-                <Typography variant="inherit" color="textSecondary">
-                    Toggle theme
-                </Typography>
-            </MUIMenuItem>
-            <LanguageSwitcher
-                languages={[
-                    { locale: 'en', name: 'English' },
-                    { locale: 'fr', name: 'Français' },
-                ]}
-                defaultLanguage="English"
-            />
-            <span style={{ paddingLeft: 8 }}>{logout}</span>
-        </MultiLevelMenu>
-    );
-};
 
 const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
     const translate = useTranslate();

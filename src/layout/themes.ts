@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@react-admin/ra-enterprise';
-import { fade } from '@material-ui/core';
+import { fade, Theme } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import createPalette from '@material-ui/core/styles/createPalette';
 
@@ -10,7 +10,13 @@ const darkPalette = createPalette({
     },
 });
 
-export const darkTheme: ThemeOptions = {
+export const getThemes = (
+    theme: Theme
+): { darkTheme: ThemeOptions; lightTheme: ThemeOptions } => {
+    return { darkTheme: darkTheme(theme), lightTheme: lightTheme(theme) };
+};
+
+const darkTheme = (theme: Theme): ThemeOptions => ({
     palette: darkPalette,
     overrides: {
         MuiAppBar: {
@@ -21,7 +27,10 @@ export const darkTheme: ThemeOptions = {
             menuButton: {
                 // Since sub-<Menu /> hide labels when sidebar is closed
                 // We need to disallow sidebar closing in desktop (hiding button is simpler)
-                // display: 'none', // @TODO : Hide it only on desktop
+                display: 'none',
+                [theme.breakpoints.down('xs')]: {
+                    display: 'block',
+                },
             },
         },
         RaSearchInput: {
@@ -83,7 +92,7 @@ export const darkTheme: ThemeOptions = {
             },
         },
     },
-};
+});
 
 const lightPalette = createPalette({
     type: 'light',
@@ -101,7 +110,7 @@ const lightPalette = createPalette({
     },
 });
 
-export const lightTheme: ThemeOptions = {
+export const lightTheme = (theme: Theme): ThemeOptions => ({
     palette: lightPalette,
     shape: {
         borderRadius: 10,
@@ -111,7 +120,10 @@ export const lightTheme: ThemeOptions = {
             menuButton: {
                 // Since sub-<Menu /> hide labels when sidebar is closed
                 // We need to disallow sidebar closing (hiding button is simpler)
-                // display: 'none', // @TODO : Hide it only on desktop
+                display: 'none',
+                [theme.breakpoints.down('xs')]: {
+                    display: 'block',
+                },
             },
         },
         RaSearchInput: {
@@ -228,4 +240,4 @@ export const lightTheme: ThemeOptions = {
             },
         },
     },
-};
+});

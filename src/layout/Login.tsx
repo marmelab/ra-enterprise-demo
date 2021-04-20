@@ -9,12 +9,12 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import TextField from '@material-ui/core/TextField';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles, useTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import LockIcon from '@material-ui/icons/Lock';
 
 import { Notification, useTranslate, useLogin, useNotify } from 'react-admin';
-import { lightTheme } from './themes';
+import { getThemes } from './themes';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -182,10 +182,14 @@ Login.propTypes = {
 // We need to put the ThemeProvider decoration in another component
 // Because otherwise the useStyles() hook used in Login won't get
 // the right theme
-const LoginWithTheme = (props: any): ReactElement => (
-    <ThemeProvider theme={createMuiTheme(lightTheme)}>
-        <Login {...props} />
-    </ThemeProvider>
-);
+const LoginWithTheme = (props: any): ReactElement => {
+    const theme = useTheme();
+    const { lightTheme } = getThemes(theme);
+    return (
+        <ThemeProvider theme={createMuiTheme(lightTheme)}>
+            <Login {...props} />
+        </ThemeProvider>
+    );
+};
 
 export default LoginWithTheme;

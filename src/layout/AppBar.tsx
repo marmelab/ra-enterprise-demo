@@ -5,12 +5,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import TourIcon from '@material-ui/icons/Flag';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
     ToggleThemeButton,
     LanguageSwitcher,
 } from '@react-admin/ra-preferences';
-
+import { useMediaQuery, Theme } from '@material-ui/core';
 import { Search } from './index';
 import Logo from './Logo';
 
@@ -40,7 +40,11 @@ const useStyles = makeStyles(theme => ({
 
 const CustomAppBar: FC = props => {
     const classes = useStyles();
+    const location = useLocation<{ pathname: string }>();
 
+    const isXSmall = useMediaQuery((theme: Theme) =>
+        theme.breakpoints.down('xs')
+    );
     const { data } = useQuery({
         type: 'getList',
         resource: 'tours',
@@ -51,36 +55,49 @@ const CustomAppBar: FC = props => {
     if (data) {
         numberOfTours = data.length;
     }
-
     return (
-        <AppBar {...props} elevation={1} logout={undefined}>
-            <div className={classes.appBarContent}>
-                <Logo className={classes.logo} />
-                <Typography
-                    variant="h6"
-                    color="inherit"
-                    className={classes.title}
-                    id="react-admin-title"
-                />
-                <Search />
-                <IconButton to="/tours" component={Link} color="inherit">
-                    <Badge
-                        badgeContent={numberOfTours}
-                        color="error"
-                        variant="dot"
-                    >
-                        <TourIcon />
-                    </Badge>
-                </IconButton>
-                <ToggleThemeButton />
-                <LanguageSwitcher
-                    languages={[
-                        { locale: 'en', name: 'English' },
-                        { locale: 'fr', name: 'Français' },
-                    ]}
-                    defaultLanguage="English"
-                />
-            </div>
+        <AppBar {...props} elevation={1}>
+            {isXSmall ? (
+                <>
+                    {location.pathname === '/' && (
+                        <Logo className={classes.logo} />
+                    )}
+                    <Typography
+                        variant="h6"
+                        color="inherit"
+                        className={classes.title}
+                        id="react-admin-title"
+                    />
+                </>
+            ) : (
+                <>
+                    <Logo className={classes.logo} />
+                    <Typography
+                        variant="h6"
+                        color="inherit"
+                        className={classes.title}
+                        id="react-admin-title"
+                    />
+                    <Search />
+                    <IconButton to="/tours" component={Link} color="inherit">
+                        <Badge
+                            badgeContent={numberOfTours}
+                            color="error"
+                            variant="dot"
+                        >
+                            <TourIcon />
+                        </Badge>
+                    </IconButton>
+                    <ToggleThemeButton />
+                    <LanguageSwitcher
+                        languages={[
+                            { locale: 'en', name: 'English' },
+                            { locale: 'fr', name: 'Français' },
+                        ]}
+                        defaultLanguage="English"
+                    />
+                </>
+            )}
         </AppBar>
     );
 };
