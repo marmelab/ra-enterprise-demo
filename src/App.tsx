@@ -21,7 +21,6 @@ import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
 import stores from './stores';
-import tours from './tours';
 
 import dataProvider from './dataProvider';
 import fakeServer from './fakeServer';
@@ -65,7 +64,6 @@ const App = (): ReactElement => {
             <Resource name="categories" {...categories} />
             <Resource name="reviews" {...reviews} />
             <Resource name="stores" {...stores} />
-            <Resource name="tours" {...tours} />
             <Resource name="locks" />
         </Admin>
     );

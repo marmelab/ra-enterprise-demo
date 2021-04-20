@@ -122,6 +122,10 @@ const CustomBreadcrumb: FC = props => {
                     label={translate('resources.segments.name', 2)}
                 />
             </BreadcrumbItem>
+            <BreadcrumbItem
+                name="tours"
+                label={translate('resources.tours.name', 2)}
+            />
         </Breadcrumb>
     );
 };

@@ -5,9 +5,6 @@ import { addTreeMethodsBasedOnChildren } from '@react-admin/ra-tree';
 
 import addRealtimeMethodsWithFakeTransport from './addRealtimeMethodsWithFakeTransport';
 import addSearchMethod from './addSearchMethod';
-import localStorageProvider from './localStorageProvider';
-
-import defaultState from '../tours/data';
 
 const restProvider = compose(
     addLocksMethodsBasedOnALockResource,
@@ -16,11 +13,6 @@ const restProvider = compose(
     addSearchMethod
 )(simpleRestProvider('http://localhost:4000'));
 
-const customProviders = {
-    tours: localStorageProvider(defaultState),
-};
-
-const customMethods = {};
 const delayedDataProvider = new Proxy(restProvider, {
     get: (target, name, self) => {
         if (name === 'then') {
@@ -28,20 +20,11 @@ const delayedDataProvider = new Proxy(restProvider, {
         }
 
         return (resource, params) => {
-            let provider = restProvider;
-            if (customProviders[resource]) {
-                provider = customProviders[resource];
-            }
-
-            if (customMethods[resource]) {
-                provider = {
-                    ...provider,
-                    ...customMethods[resource](provider),
-                };
-            }
-
             return new Promise(resolve =>
-                setTimeout(() => resolve(provider[name](resource, params)), 200)
+                setTimeout(
+                    () => resolve(restProvider[name](resource, params)),
+                    200
+                )
             );
         };
     },
