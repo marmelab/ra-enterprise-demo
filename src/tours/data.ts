@@ -6,7 +6,6 @@ export default [
         tour: 'ra-preferences',
         comment: `Persist user preferences (language, ui, filters, displayed columns, etc) in local storage`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
     {
         id: 7,
@@ -15,7 +14,6 @@ export default [
         tour: 'ra-search',
         comment: `Plug your search engine and let users search across all resources via a smart Omnisearch box`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
     {
         id: 6,
@@ -24,7 +22,6 @@ export default [
         tour: 'ra-navigation-breadcrumb',
         comment: `Keep a track of your location in the site and navigate easily.`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
     {
         id: 4,
@@ -33,7 +30,6 @@ export default [
         tour: 'ra-realtime',
         comment: `Enable realtime on menu, list, show and edit views - or anywhere you want.`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
     {
         id: 5,
@@ -42,7 +38,6 @@ export default [
         tour: 'ra-editable-datagrid',
         comment: `Quickly edit your data without leaving your datagrid.`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
     {
         id: 3,
@@ -51,7 +46,6 @@ export default [
         tour: 'ra-tree',
         comment: `Edit and visualize tree structures. Reorganize by drag and drop. Adapts to any data structure on the backend (parent_id, children, nested sets, etc)..`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
     {
         id: 1,
@@ -60,6 +54,5 @@ export default [
         tour: 'ra-markdown',
         comment: `Read Markdown data, and edit it using a WYSIWYG editor in your admin`,
         href: 'http://marmelab.com/react-admin',
-        playedOn: null,
     },
 ];
