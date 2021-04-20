@@ -15,14 +15,6 @@ import { Search } from './index';
 import Logo from './Logo';
 
 const useStyles = makeStyles(theme => ({
-    appBarContent: {
-        display: 'flex',
-        flex: 1,
-        alignItems: 'center',
-        [theme.breakpoints.down('sm')]: {
-            display: 'none',
-        },
-    },
     root: {
         position: 'relative',
     },
