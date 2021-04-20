@@ -32,13 +32,10 @@ export const useTourStates = (): [TourStateMap, TourStatesActions] => {
             setTourStates(newTourStates);
         },
         markAllAsPlayed: (): void => {
-            const newTourStates = Object.keys(storedTourStates).reduce(
-                (acc, key) => {
-                    acc[key] = new Date();
-                    return acc;
-                },
-                {}
-            );
+            const newTourStates = tours.reduce((acc, tour) => {
+                acc[tour.id] = new Date();
+                return acc;
+            }, {});
             setTourStates(newTourStates);
         },
         reset: (tourId): void => {
@@ -47,14 +44,7 @@ export const useTourStates = (): [TourStateMap, TourStatesActions] => {
             setTourStates(newTourStates);
         },
         resetAll: (): void => {
-            const newTourStates = Object.keys(storedTourStates).reduce(
-                (acc, key) => {
-                    acc[key] = undefined;
-                    return acc;
-                },
-                {}
-            );
-            setTourStates(newTourStates);
+            setTourStates({});
         },
     };
 
