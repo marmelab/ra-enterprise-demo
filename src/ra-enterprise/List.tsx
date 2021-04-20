@@ -295,7 +295,7 @@ const EnterpriseList: FC<
         classes: any;
         className?: string;
         defaultColumns: ColumnList;
-        defaultOmittedColumns: string[];
+        defaultOmittedColumns?: string[];
         defaultView?: View;
         hasColumnsSelector?: boolean;
         hasViewSelector?: boolean;
