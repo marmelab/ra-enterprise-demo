@@ -42,7 +42,7 @@ const useEditStyles = makeStyles({
 const OrderEditForm = (props: any): ReactElement => {
     useDefineAppLocation('sales.commands.edit', props);
     return (
-        <SimpleForm>
+        <SimpleForm {...props}>
             <DateInput source="date" />
             <ReferenceInput source="customer_id" reference="customers">
                 <AutocompleteInput
