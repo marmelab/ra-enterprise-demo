@@ -4,6 +4,7 @@ import {
 } from 'react-admin';
 import englishMessages from 'ra-language-english';
 import { RaTreeTranslationMessages } from '@react-admin/ra-tree';
+import { raAuditLogLanguageEnglish } from '@react-admin/ra-audit-log';
 
 export interface TranslationMessages
     extends RaTreeTranslationMessages,
@@ -11,6 +12,7 @@ export interface TranslationMessages
 
 const customEnglishMessages: TranslationMessages = mergeTranslations(
     englishMessages,
+    raAuditLogLanguageEnglish,
     {
         'ra-tree': {
             action: {
@@ -41,6 +43,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     items:
                         'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
                 },
+                timeline: 'Timeline',
                 welcome: {
                     title: 'Welcome to the react-admin enterprise edition demo',
                     subtitle:

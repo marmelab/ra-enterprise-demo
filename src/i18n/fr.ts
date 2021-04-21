@@ -4,6 +4,7 @@ import {
 } from 'react-admin';
 import frenchMessages from 'ra-language-french';
 import { RaTreeTranslationMessages } from '@react-admin/ra-tree';
+import { raAuditLogLanguageFrench } from '@react-admin/ra-audit-log';
 
 export interface TranslationMessages
     extends RaTreeTranslationMessages,
@@ -11,6 +12,7 @@ export interface TranslationMessages
 
 const customFrenchMessages: TranslationMessages = mergeTranslations(
     frenchMessages,
+    raAuditLogLanguageFrench,
     {
         'ra-tree': {
             action: {
@@ -41,6 +43,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     items:
                         'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
                 },
+                timeline: 'Timeline',
                 welcome: {
                     title:
                         'Bienvenue sur la démo de react-admin enterprise edition',

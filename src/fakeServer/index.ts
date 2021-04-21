@@ -3,9 +3,9 @@ import fetchMock from 'fetch-mock';
 import generateData from 'data-generator-retail';
 import { random } from 'faker/locale/en';
 import { Identifier } from 'react-admin';
-
 import demoData from './demo-data';
-import { Category, Product } from '../types';
+import { Category, Customer, Order, Product, Review } from '../types';
+import generateFakeEvents from './generateFakeEvents';
 
 const getAllChildrenCategories = (
     categories: Category[],
@@ -61,12 +61,14 @@ const rebindProductToCategories = (
 };
 
 export default (): (() => void) => {
-    const data = generateData({ serializeDate: true });
+    const data: Data = generateData({ serializeDate: true });
     const products = data.products.map(
         rebindProductToCategories(data.categories, demoData.categories)
     );
+    const events = generateFakeEvents(data);
+    // console.log(events);
 
-    const mergedData = { ...data, ...demoData, products };
+    const mergedData = { ...data, ...demoData, products, events };
 
     const restServer = new FakeRest.FetchServer('http://localhost:4000');
     if (window) {
@@ -93,3 +95,11 @@ export default (): (() => void) => {
     fetchMock.mock('begin:http://localhost:4000', restServer.getHandler());
     return () => fetchMock.restore();
 };
+
+export interface Data {
+    customers: Customer[];
+    categories: Category[];
+    products: Product[];
+    commands: Order[];
+    reviews: Review[];
+}

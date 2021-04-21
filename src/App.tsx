@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect } from 'react';
 import { Resource } from 'react-admin';
 
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
+import { addEventsForMutations, EventList } from '@react-admin/ra-audit-log';
 
 import './App.css';
 
@@ -34,6 +35,8 @@ const messages = {
 
 const i18nProvider = buildI18nProvider(messages, 'en');
 
+const enhancedDataProvider = addEventsForMutations(dataProvider, authProvider);
+
 const App = (): ReactElement => {
     useEffect(() => {
         const restoreFetch = fakeServer();
@@ -47,7 +50,7 @@ const App = (): ReactElement => {
     return (
         <Admin
             title=""
-            dataProvider={dataProvider}
+            dataProvider={enhancedDataProvider}
             customRoutes={customRoutes}
             authProvider={authProvider}
             dashboard={Dashboard}
@@ -67,6 +70,7 @@ const App = (): ReactElement => {
             <Resource name="stores" {...stores} />
             <Resource name="tours" {...tours} />
             <Resource name="locks" />
+            <Resource name="events" list={EventList} />
         </Admin>
     );
 };

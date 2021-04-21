@@ -7,7 +7,7 @@
       "DOM"
     ],
     "allowJs": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noImplicitAny": false,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
