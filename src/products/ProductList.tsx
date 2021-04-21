@@ -27,6 +27,7 @@ import { FilterWithSave } from '@react-admin/ra-preferences';
 
 import GridList from './GridList';
 import Aside from './Aside';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const useQuickFilterStyles = makeStyles(theme => ({
     root: {
@@ -71,6 +72,7 @@ const ListActions = ({
 
     return (
         <TopToolbar className={classes.root}>
+            <CustomBreadcrumb variant="actions" />
             {isSmall && <ProductFilter context="button" />}
             <SortButton fields={['reference', 'sales', 'stock']} />
             <CreateButton basePath="/products" />
@@ -82,7 +84,7 @@ const ListActions = ({
 const useListActionsStyles = makeStyles(theme => ({
     root: {
         paddingBottom: 0,
-        paddingTop: theme.spacing(4),
+        paddingTop: theme.spacing(7),
     },
 }));
 

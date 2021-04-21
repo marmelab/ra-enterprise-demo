@@ -5,6 +5,7 @@ import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import CategoryCreate from './CategoryCreate';
 import CategoryEdit from './CategoryEdit';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const CategoryList: FC<ListProps> = props => {
     // We need to override the "category" location to highlight menu item in the sidebar
@@ -21,15 +22,18 @@ const CategoryList: FC<ListProps> = props => {
     }, []);
 
     return (
-        <TreeWithDetails
-            create={CategoryCreate}
-            edit={CategoryEdit}
-            titleField="name"
-            draggable
-            allowMultipleRoots
-            defaultSelectedKeys={['5']}
-            {...props}
-        />
+        <>
+            <CustomBreadcrumb />
+            <TreeWithDetails
+                create={CategoryCreate}
+                edit={CategoryEdit}
+                titleField="name"
+                draggable
+                allowMultipleRoots
+                defaultSelectedKeys={['5']}
+                {...props}
+            />
+        </>
     );
 };
 

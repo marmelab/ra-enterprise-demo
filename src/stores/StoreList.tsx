@@ -1,7 +1,5 @@
 import React, { FC } from 'react';
 import {
-    List,
-    ListActions,
     DateField,
     DateInput,
     TextField,
@@ -9,8 +7,9 @@ import {
     ListProps,
 } from 'react-admin';
 
+import { List, ListActions } from '@react-admin/ra-enterprise';
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
-import { makeStyles } from '@material-ui/core';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
 const StoreForm: FC = props => (
     <RowForm {...props}>
@@ -23,47 +22,32 @@ const StoreForm: FC = props => (
     </RowForm>
 );
 
-const StoreListActions: FC = props => {
-    const classes = useListActionsStyles();
-    return <ListActions {...props} className={classes.root} />;
-};
+const StoreListActions: FC = props => (
+    <ListActions
+        {...props}
+        breadcrumb={<CustomBreadcrumb variant="actions" />}
+    />
+);
 
-const useListActionsStyles = makeStyles(theme => ({
-    root: {
-        paddingBottom: 0,
-        paddingTop: theme.spacing(4),
-    },
-}));
-
-export const StoreList: FC<ListProps> = props => {
-    const classes = useStyles();
-    return (
-        <List
-            {...props}
-            actions={<StoreListActions />}
-            className={classes.root}
-            hasCreate
-            empty={false}
-            perPage={25}
+export const StoreList: FC<ListProps> = props => (
+    <List
+        {...props}
+        actions={<StoreListActions />}
+        hasCreate
+        empty={false}
+        perPage={25}
+    >
+        <EditableDatagrid
+            data-testid="store-datagrid"
+            rowClick="edit"
+            createForm={<StoreForm />}
+            editForm={<StoreForm />}
         >
-            <EditableDatagrid
-                data-testid="store-datagrid"
-                rowClick="edit"
-                createForm={<StoreForm />}
-                editForm={<StoreForm />}
-            >
-                <TextField source="id" />
-                <TextField source="city" />
-                <TextField source="country" />
-                <TextField source="address" />
-                <DateField source="created_at" />
-            </EditableDatagrid>
-        </List>
-    );
-};
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginTop: -theme.spacing(7),
-    },
-}));
+            <TextField source="id" />
+            <TextField source="city" />
+            <TextField source="country" />
+            <TextField source="address" />
+            <DateField source="created_at" />
+        </EditableDatagrid>
+    </List>
+);
