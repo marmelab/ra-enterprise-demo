@@ -2212,10 +2212,10 @@
     querystring "^0.2.0"
     whatwg-fetch "^3.0.0"
 
-"@react-admin/ra-relationships@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-2.0.0.tgz#c8f68ecbd8257badf24f95a220804f30004a3431"
-  integrity sha512-aeCo6NncV9KlbxHaZ4ZHqzqSAUZQf2kP1nQTOTVR1P120vk4X5u5qLVaGerpyBK8/DBoNNxlQlPbtEdkdnUIOw==
+"@react-admin/ra-relationships@^2.0.0", "@react-admin/ra-relationships@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-2.1.4.tgz#bcb7a6a41ad35b5770cfce2105a3f708032f3b6d"
+  integrity sha512-1MNfWaHPMTpMqqGrEpkm0AxbVGBnfaqptrV5qfm1erfPJbkWyPPOLReq89nZFNej4gQJN4ZpjuKZ3ZDI6r29ew==
 
 "@react-admin/ra-search@^2.0.0", "@react-admin/ra-search@^2.0.1":
   version "2.0.1"
