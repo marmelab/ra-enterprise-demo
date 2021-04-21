@@ -91,6 +91,26 @@ const darkTheme = (theme: Theme): ThemeOptions => ({
                 },
             },
         },
+        RaTopToolbar: {
+            root: {
+                alignItems: 'center',
+                paddingTop: 0,
+            },
+        },
+        RaListToolbar: {
+            root: {
+                alignItems: 'center',
+                paddingTop: 0,
+            },
+            actions: {
+                alignItems: 'center',
+                paddingTop: 0,
+                minHeight: 'auto',
+            },
+            toolbar: {
+                minHeight: 'auto',
+            },
+        },
     },
 });
 
@@ -237,6 +257,26 @@ export const lightTheme = (theme: Theme): ThemeOptions => ({
                 '&:hover': {
                     backgroundColor: '#ddd',
                 },
+            },
+        },
+        RaTopToolbar: {
+            root: {
+                alignItems: 'center',
+                paddingTop: 0,
+            },
+        },
+        RaListToolbar: {
+            root: {
+                alignItems: 'center',
+                paddingTop: 0,
+            },
+            actions: {
+                alignItems: 'center',
+                minHeight: 'auto',
+                paddingTop: 0,
+            },
+            toolbar: {
+                minHeight: 'auto',
             },
         },
     },

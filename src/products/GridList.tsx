@@ -1,11 +1,16 @@
 import * as React from 'react';
-import { FC } from 'react';
+import { ReactElement } from 'react';
 import MuiGridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { WithWidth } from '@material-ui/core/withWidth';
-import { linkToRecord, NumberField, Record, useListContext } from 'react-admin';
+import {
+    linkToRecord,
+    NumberField,
+    TitleProps,
+    useListContext,
+} from 'react-admin';
 import { Link } from 'react-router-dom';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 import { Lock, useHasLocks } from '@react-admin/ra-realtime';
@@ -48,10 +53,10 @@ const getColsForWidth = (width: Breakpoint): number => {
 const times = (nbChildren: number, fn: (key: number) => any): Array<any> =>
     Array.from({ length: nbChildren }, (_, key) => fn(key));
 
-const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
+const LoadingGridList = ({
     width,
     nbItems = 20,
-}) => {
+}: GridProps & { nbItems?: number }): ReactElement => {
     const classes = useStyles();
 
     return (
@@ -69,20 +74,16 @@ const LoadingGridList: FC<GridProps & { nbItems?: number }> = ({
     );
 };
 
-type ProductTitleProps = {
-    record: Record;
-};
-
-const ProductTile: FC<ProductTitleProps> = ({ record }) => {
+const ProductTile = ({ record }: TitleProps): ReactElement => {
     const classes = useStyles();
 
     return (
         <GridListTileBar
             className={classes.tileBar}
-            title={record.reference}
+            title={record?.reference}
             subtitle={
                 <span>
-                    {record.width}x{record.height},{' '}
+                    {record?.width}x{record?.height},{' '}
                     <NumberField
                         className={classes.price}
                         source="price"
@@ -99,8 +100,8 @@ const ProductTile: FC<ProductTitleProps> = ({ record }) => {
     );
 };
 
-const LoadedGridList: FC<GridProps> = ({ width }) => {
-    const { ids, data, basePath, resource } = useListContext();
+const LoadedGridList = ({ width }: GridProps): ReactElement | null => {
+    const { ids, data, resource } = useListContext();
     const { data: locks } = useHasLocks(resource);
     const classes = useStyles();
 
@@ -127,7 +128,7 @@ const LoadedGridList: FC<GridProps> = ({ width }) => {
                     <GridListTile
                         key={id}
                         component={lock ? 'span' : Link}
-                        to={linkToRecord(basePath, id)}
+                        to={linkToRecord('/products', id)}
                         className={classes.tile}
                         data-productid={id}
                         data-lockidentity={lock ? lock.identity : undefined}
@@ -147,7 +148,7 @@ const LoadedGridList: FC<GridProps> = ({ width }) => {
 
 interface GridProps extends DatagridProps<Product>, WithWidth {}
 
-const GridList: FC<WithWidth> = ({ width }) => {
+const GridList = ({ width }: WithWidth): ReactElement => {
     const { loaded } = useListContext();
 
     return loaded ? (

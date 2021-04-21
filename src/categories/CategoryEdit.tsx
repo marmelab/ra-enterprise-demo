@@ -4,6 +4,7 @@ import {
     EditProps,
     ListContextProvider,
     TextInput,
+    TitleProps,
     useGetList,
     useTranslate,
 } from 'react-admin';
@@ -11,6 +12,7 @@ import { SimpleForm } from '@react-admin/ra-tree';
 
 import { ProductListView } from '../products/ProductList';
 import { Typography, makeStyles } from '@material-ui/core';
+import { useAppLocationState } from '@react-admin/ra-navigation';
 
 const CategoryEdit: FC<EditProps> = props => {
     const translate = useTranslate();
@@ -18,7 +20,7 @@ const CategoryEdit: FC<EditProps> = props => {
 
     return (
         <>
-            <Edit {...props}>
+            <Edit title={<CategoryTitle />} {...props}>
                 <SimpleForm>
                     <TextInput source="name" />
                 </SimpleForm>
@@ -31,7 +33,20 @@ const CategoryEdit: FC<EditProps> = props => {
     );
 };
 
-const CategoryEditAside = ({ id }: EditProps): ReactElement => {
+const CategoryTitle = (props: TitleProps): ReactElement => {
+    const [, setLocation] = useAppLocationState();
+
+    if (props.record?.id.toString() == '5') {
+        setLocation('catalog.categories');
+    } else {
+        setLocation('catalog.categories.edit', props);
+    }
+    return <span>{props.record?.name}</span>;
+};
+
+const CategoryEditAside = (props: EditProps): ReactElement => {
+    const { id } = props;
+
     const { data, ids, total, loaded } = useGetList(
         'products',
         { page: 1, perPage: 25 },

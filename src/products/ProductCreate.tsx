@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {
-    Create,
+    CreateProps,
     FormTab,
     NumberInput,
     ReferenceInput,
@@ -8,12 +8,13 @@ import {
     TabbedForm,
     TextInput,
     required,
-    CreateProps,
 } from 'react-admin';
 import { InputAdornment } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { Create } from '@react-admin/ra-enterprise';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { CreateActions } from '../layout/CreateActions';
 
 export const styles = {
     price: { width: '7em' },
@@ -30,7 +31,7 @@ const ProductCreate: FC<CreateProps> = props => {
     useDefineAppLocation('catalog.products.create');
     const classes = useStyles();
     return (
-        <Create {...props}>
+        <Create actions={<CreateActions />} {...props}>
             <TabbedForm>
                 <FormTab label="resources.products.tabs.image">
                     <TextInput source="image" fullWidth validate={required()} />

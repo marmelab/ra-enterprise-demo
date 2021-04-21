@@ -1,13 +1,15 @@
-import React, { FC } from 'react';
+import * as React from 'react';
+import { FC } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
     Breadcrumb,
     BreadcrumbItem,
+    BreadcrumbProps,
     ResourceBreadcrumbItems,
 } from '@react-admin/ra-navigation';
 import { linkToRecord, useTranslate, Record } from 'react-admin';
 
-const CustomBreadcrumb: FC = props => {
+const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
     const classes = useStyles();
     const translate = useTranslate();
 
@@ -15,9 +17,7 @@ const CustomBreadcrumb: FC = props => {
     const createLabel = translate('ra.action.create');
     return (
         <Breadcrumb className={classes.root} {...props}>
-            <ResourceBreadcrumbItems
-                resources={['invoices', 'stores', 'tours']}
-            />
+            <ResourceBreadcrumbItems resources={['stores', 'tours']} />
             <BreadcrumbItem
                 name="catalog"
                 label={translate('pos.menu.catalog', 1)}
@@ -49,7 +49,16 @@ const CustomBreadcrumb: FC = props => {
                 <BreadcrumbItem
                     name="categories"
                     label={translate('resources.categories.name', 2)}
-                />
+                >
+                    <BreadcrumbItem
+                        name="edit"
+                        label={({ record }: { record?: Record }): string =>
+                            `${editLabel} ${
+                                record ? `"${record.name}"` : '...'
+                            }`
+                        }
+                    />
+                </BreadcrumbItem>
             </BreadcrumbItem>
             <BreadcrumbItem
                 name="reviews"
@@ -65,61 +74,56 @@ const CustomBreadcrumb: FC = props => {
                     }
                 />
             </BreadcrumbItem>
-            <BreadcrumbItem
-                name="commands"
-                label={translate('resources.commands.name', 2)}
-                to="/commands"
-            >
+            <BreadcrumbItem name="sales" label={translate('pos.menu.sales', 1)}>
                 <BreadcrumbItem
-                    name="edit"
-                    label={({ record }: { record?: Record }): string =>
-                        `${editLabel} ${
-                            record ? `"${record.reference}"` : '...'
-                        }`
-                    }
-                    to={({ record }: { record?: Record }): string =>
-                        record
-                            ? `${linkToRecord('/products', record.id)}/edit`
-                            : ''
-                    }
-                />
-            </BreadcrumbItem>
-            <BreadcrumbItem
-                name="customers"
-                label={translate('pos.menu.customers', 1)}
-            >
-                <BreadcrumbItem
-                    name="customers"
-                    label={translate('resources.customers.name', 2)}
-                    to="/customers"
+                    name="commands"
+                    label={translate('resources.commands.name', 2)}
+                    to="/commands"
                 >
                     <BreadcrumbItem
                         name="edit"
                         label={({ record }: { record?: Record }): string =>
                             `${editLabel} ${
-                                record
-                                    ? `"${record.first_name} ${record.last_name}"`
-                                    : '...'
+                                record ? `"${record.reference}"` : '...'
                             }`
                         }
                         to={({ record }: { record?: Record }): string =>
                             record
-                                ? `${linkToRecord(
-                                      '/customers',
-                                      record.id
-                                  )}/edit`
+                                ? `${linkToRecord('/products', record.id)}/edit`
                                 : ''
                         }
                     />
-                    <BreadcrumbItem
-                        name="create"
-                        label={createLabel}
-                        to="/customers/create"
-                    />
                 </BreadcrumbItem>
                 <BreadcrumbItem
-                    name="segments"
-                    label={translate('resources.segments.name', 2)}
+                    name="invoices"
+                    label={translate('resources.invoices.name', 2)}
+                    to="/invoices"
+                />
+            </BreadcrumbItem>
+            <BreadcrumbItem
+                name="customers"
+                label={translate('resources.customers.name', 2)}
+                to="/customers"
+            >
+                <BreadcrumbItem
+                    name="edit"
+                    label={({ record }: { record?: Record }): string =>
+                        `${editLabel} ${
+                            record
+                                ? `"${record.first_name} ${record.last_name}"`
+                                : '...'
+                        }`
+                    }
+                    to={({ record }: { record?: Record }): string =>
+                        record
+                            ? `${linkToRecord('/customers', record.id)}/edit`
+                            : ''
+                    }
+                />
+                <BreadcrumbItem
+                    name="create"
+                    label={createLabel}
+                    to="/customers/create"
                 />
             </BreadcrumbItem>
         </Breadcrumb>

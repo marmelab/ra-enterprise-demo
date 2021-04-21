@@ -1,7 +1,6 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import {
     DateInput,
-    Edit,
     EditProps,
     NullableBooleanInput,
     TextInput,
@@ -9,7 +8,9 @@ import {
     Toolbar,
     useTranslate,
     FormWithRedirect,
+    TitleProps,
 } from 'react-admin';
+import { Edit, EditActions } from '@react-admin/ra-enterprise';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { Box, Card, CardContent, Typography } from '@material-ui/core';
 
@@ -17,13 +18,18 @@ import Aside from './Aside';
 import FullNameField from './FullNameField';
 import SegmentsInput from './SegmentsInput';
 import { validatePasswords } from './VisitorCreate';
-import { Customer, FieldProps } from '../types';
+import CustomBreadcrumb from '../layout/Breadcrumb';
 
-const VisitorEdit: FC<EditProps> = props => {
+const VisitorEdit = (props: EditProps): ReactElement => {
     return (
         <Edit
             title={<VisitorTitle />}
             aside={<Aside />}
+            actions={
+                <EditActions
+                    breadcrumb={<CustomBreadcrumb variant="actions" />}
+                />
+            }
             component="div"
             {...props}
         >
@@ -32,12 +38,15 @@ const VisitorEdit: FC<EditProps> = props => {
     );
 };
 
-const VisitorTitle: FC<FieldProps<Customer>> = ({ record }) =>
-    record ? <FullNameField record={record} size="32" /> : null;
+const VisitorTitle = (props: TitleProps): ReactElement | null => {
+    useDefineAppLocation('customers.edit', props);
+    return props.record ? (
+        <FullNameField record={props.record} size="32" />
+    ) : null;
+};
 
 const VisitorForm = (props: any): ReactElement => {
     const translate = useTranslate();
-    useDefineAppLocation('customers.customers.edit', props);
 
     return (
         <FormWithRedirect
