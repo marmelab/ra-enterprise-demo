@@ -49,7 +49,16 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
                 <BreadcrumbItem
                     name="categories"
                     label={translate('resources.categories.name', 2)}
-                />
+                >
+                    <BreadcrumbItem
+                        name="edit"
+                        label={({ record }: { record?: Record }): string =>
+                            `${editLabel} ${
+                                record ? `"${record.name}"` : '...'
+                            }`
+                        }
+                    />
+                </BreadcrumbItem>
             </BreadcrumbItem>
             <BreadcrumbItem
                 name="reviews"
@@ -85,43 +94,36 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
                         }
                     />
                 </BreadcrumbItem>
+                <BreadcrumbItem
+                    name="invoices"
+                    label={translate('resources.invoices.name', 2)}
+                    to="/invoices"
+                />
             </BreadcrumbItem>
             <BreadcrumbItem
                 name="customers"
-                label={translate('pos.menu.customers', 1)}
+                label={translate('resources.customers.name', 2)}
+                to="/customers"
             >
                 <BreadcrumbItem
-                    name="customers"
-                    label={translate('resources.customers.name', 2)}
-                    to="/customers"
-                >
-                    <BreadcrumbItem
-                        name="edit"
-                        label={({ record }: { record?: Record }): string =>
-                            `${editLabel} ${
-                                record
-                                    ? `"${record.first_name} ${record.last_name}"`
-                                    : '...'
-                            }`
-                        }
-                        to={({ record }: { record?: Record }): string =>
+                    name="edit"
+                    label={({ record }: { record?: Record }): string =>
+                        `${editLabel} ${
                             record
-                                ? `${linkToRecord(
-                                      '/customers',
-                                      record.id
-                                  )}/edit`
-                                : ''
-                        }
-                    />
-                    <BreadcrumbItem
-                        name="create"
-                        label={createLabel}
-                        to="/customers/create"
-                    />
-                </BreadcrumbItem>
+                                ? `"${record.first_name} ${record.last_name}"`
+                                : '...'
+                        }`
+                    }
+                    to={({ record }: { record?: Record }): string =>
+                        record
+                            ? `${linkToRecord('/customers', record.id)}/edit`
+                            : ''
+                    }
+                />
                 <BreadcrumbItem
-                    name="segments"
-                    label={translate('resources.segments.name', 2)}
+                    name="create"
+                    label={createLabel}
+                    to="/customers/create"
                 />
             </BreadcrumbItem>
         </Breadcrumb>
@@ -135,7 +137,6 @@ const useStyles = makeStyles(theme => ({
         // Display the Breadcrumb over the custom Layout of some pages by adding a zIndex and a maxWidth
         // @see "src/products/ProductList.tsx" or "src/visitors/VisitorList.tsx"
         maxWidth: '700px',
-        width: 'min-content',
         zIndex: 1,
         '& a': {
             pointerEvents: 'visible',

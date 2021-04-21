@@ -314,7 +314,7 @@ const EnterpriseList: FC<
 
         hasViewSelector = true,
         defaultView = 'small',
-
+        syncWithLocation,
         children,
         ...rest
     } = props;

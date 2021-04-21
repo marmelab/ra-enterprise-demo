@@ -51,7 +51,7 @@ const VisitorList: FC<ListProps> = props => {
     const isXsmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('xs')
     );
-    useDefineAppLocation('customers.customers');
+    useDefineAppLocation('customers');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
 
     return (

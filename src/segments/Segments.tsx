@@ -11,6 +11,7 @@ import { useTranslate, Title } from 'react-admin';
 import LinkToRelatedCustomers from './LinkToRelatedCustomers';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import segments from './data';
+import { Breadcrumb } from '../layout';
 
 const useStyles = makeStyles({
     root: {
@@ -23,29 +24,34 @@ const Segments: FC = () => {
     const classes = useStyles();
     useDefineAppLocation('customers.segments');
     return (
-        <Card className={classes.root}>
-            <Title title={translate('resources.segments.name')} />
-            <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>
-                            {translate('resources.segments.fields.name')}
-                        </TableCell>
-                        <TableCell />
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {segments.map(segment => (
-                        <TableRow key={segment.id}>
-                            <TableCell>{translate(segment.name)}</TableCell>
+        <>
+            <Breadcrumb />
+            <Card className={classes.root}>
+                <Title title={translate('resources.segments.name')} />
+                <Table size="small">
+                    <TableHead>
+                        <TableRow>
                             <TableCell>
-                                <LinkToRelatedCustomers segment={segment.id} />
+                                {translate('resources.segments.fields.name')}
                             </TableCell>
+                            <TableCell />
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </Card>
+                    </TableHead>
+                    <TableBody>
+                        {segments.map(segment => (
+                            <TableRow key={segment.id}>
+                                <TableCell>{translate(segment.name)}</TableCell>
+                                <TableCell>
+                                    <LinkToRelatedCustomers
+                                        segment={segment.id}
+                                    />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </Card>
+        </>
     );
 };
 

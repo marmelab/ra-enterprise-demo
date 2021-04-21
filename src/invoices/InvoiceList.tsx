@@ -24,44 +24,47 @@ const ListFilters = (props: Omit<FilterProps, 'children'>): ReactElement => (
     </Filter>
 );
 
-const InvoicesDatagrid = (): ReactElement => {
+const InvoicesDatagrid = (): ReactElement => (
+    <Datagrid rowClick="expand" expand={<InvoiceShow />}>
+        <TextField source="id" />
+        <DateField source="date" />
+        <ReferenceField source="customer_id" reference="customers">
+            <FullNameField />
+        </ReferenceField>
+        <ReferenceField
+            source="customer_id"
+            reference="customers"
+            link={false}
+            label="resources.invoices.fields.address"
+        >
+            <AddressField />
+        </ReferenceField>
+        <ReferenceField source="command_id" reference="commands">
+            <TextField source="reference" />
+        </ReferenceField>
+        <NumberField source="total_ex_taxes" />
+        <NumberField source="delivery_fees" />
+        <NumberField source="taxes" />
+        <NumberField source="total" />
+    </Datagrid>
+);
+
+const InvoiceList = (props: ListProps): ReactElement => {
     useDefineAppLocation('sales.invoices');
     return (
-        <Datagrid rowClick="expand" expand={<InvoiceShow />}>
-            <TextField source="id" />
-            <DateField source="date" />
-            <ReferenceField source="customer_id" reference="customers">
-                <FullNameField />
-            </ReferenceField>
-            <ReferenceField
-                source="customer_id"
-                reference="customers"
-                link={false}
-                label="resources.invoices.fields.address"
-            >
-                <AddressField />
-            </ReferenceField>
-            <ReferenceField source="command_id" reference="commands">
-                <TextField source="reference" />
-            </ReferenceField>
-            <NumberField source="total_ex_taxes" />
-            <NumberField source="delivery_fees" />
-            <NumberField source="taxes" />
-            <NumberField source="total" />
-        </Datagrid>
+        <List
+            {...props}
+            perPage={25}
+            filters={<ListFilters />}
+            actions={
+                <ListActions
+                    breadcrumb={<CustomBreadcrumb variant="actions" />}
+                />
+            }
+        >
+            <InvoicesDatagrid />
+        </List>
     );
 };
-const InvoiceList = (props: ListProps): ReactElement => (
-    <List
-        {...props}
-        perPage={25}
-        filters={<ListFilters />}
-        actions={
-            <ListActions breadcrumb={<CustomBreadcrumb variant="actions" />} />
-        }
-    >
-        <InvoicesDatagrid />
-    </List>
-);
 
 export default InvoiceList;
