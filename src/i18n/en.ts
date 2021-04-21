@@ -261,6 +261,9 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
             locks: {
                 overlay: 'Currently Edited by %{name}',
             },
+            events: {
+                name: 'Events',
+            },
         },
     }
 );

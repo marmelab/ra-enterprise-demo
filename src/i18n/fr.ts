@@ -267,6 +267,9 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
             locks: {
                 overlay: "En cours d'édition par %{name}",
             },
+            events: {
+                name: 'Événements',
+            },
         },
     }
 );

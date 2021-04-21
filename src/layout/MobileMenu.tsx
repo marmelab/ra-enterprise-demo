@@ -8,6 +8,7 @@ import BlockIcon from '@material-ui/icons/Block';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import TourIcon from '@material-ui/icons/Flag';
 import { makeStyles } from '@material-ui/core/styles';
+import EventsIcon from '@material-ui/icons/FormatListNumbered';
 
 import { MultiLevelMenu, MenuItem } from '@react-admin/ra-navigation';
 
@@ -223,6 +224,15 @@ const MobileMenu: FC<{
                     icon={<TourIcon />}
                     onClick={onMenuClick}
                     label="Tours"
+                />
+                <MenuItem
+                    name="events"
+                    to="/events"
+                    icon={<EventsIcon />}
+                    onClick={onMenuClick}
+                    label={translate(`resources.events.name`, {
+                        smart_count: 2,
+                    })}
                 />
                 <span style={{ paddingLeft: 8 }}>{logout}</span>
             </MultiLevelMenu>

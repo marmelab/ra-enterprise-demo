@@ -198,6 +198,8 @@ const Dashboard = (): ReactElement => {
                     orders={pendingOrders}
                     customers={pendingOrdersCustomers}
                 />
+                <VerticalSpacer />
+                <Timeline records={state.events} />
             </div>
         </div>
     ) : isSmall ? (
@@ -218,6 +220,9 @@ const Dashboard = (): ReactElement => {
                     orders={pendingOrders}
                     customers={pendingOrdersCustomers}
                 />
+            </div>
+            <div style={styles.singleCol}>
+                <Timeline records={state.events} />
             </div>
         </div>
     ) : (

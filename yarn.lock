@@ -2160,6 +2160,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@react-admin/ra-audit-log@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-audit-log/-/ra-audit-log-2.0.1.tgz#e594f27f90ef09a03dca51f57452a95034c0b983"
+  integrity sha512-O5VXwNBS6zmMvsCFOFQITOv9qCrjj8Yh0ISCPifJ2I5WdegIXuV7wIMoHgf3Sp+KZuX0MaRWFXzhBOoWwBnRFQ==
+
 "@react-admin/ra-editable-datagrid@^1.0.0", "@react-admin/ra-editable-datagrid@^1.1.0":
   version "1.1.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.1.tgz#9990d0e0cb1e704e047b6328238b6e3bfc2bbc65"
