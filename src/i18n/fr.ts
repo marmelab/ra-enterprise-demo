@@ -264,6 +264,9 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     created_at: 'Ouvert le',
                 },
             },
+            tours: {
+                name: 'Visites',
+            },
             locks: {
                 overlay: "En cours d'édition par %{name}",
             },

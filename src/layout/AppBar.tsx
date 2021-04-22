@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { AppBar, useQuery } from 'react-admin';
+import { AppBar } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +13,7 @@ import {
 import { useMediaQuery, Theme } from '@material-ui/core';
 import { Search } from './index';
 import Logo from './Logo';
+import { useTourStates } from '../tours/useTourState';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -37,16 +38,18 @@ const CustomAppBar: FC = props => {
     const isXSmall = useMediaQuery((theme: Theme) =>
         theme.breakpoints.down('xs')
     );
-    const { data } = useQuery({
-        type: 'getList',
-        resource: 'tours',
-        payload: { filter: { playedOn: null } },
-    });
+    const [tourStates] = useTourStates();
 
     let numberOfTours = 0;
-    if (data) {
-        numberOfTours = data.length;
+    if (tourStates) {
+        numberOfTours = Object.keys(tourStates).reduce((acc, tourId) => {
+            if (!tourStates[tourId]) {
+                return acc + 1;
+            }
+            return acc;
+        }, 0);
     }
+
     return (
         <AppBar {...props} elevation={1}>
             {isXSmall ? (

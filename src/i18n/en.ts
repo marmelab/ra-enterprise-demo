@@ -258,6 +258,9 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     created_at: 'Created at',
                 },
             },
+            tours: {
+                name: 'Tours',
+            },
             locks: {
                 overlay: 'Currently Edited by %{name}',
             },

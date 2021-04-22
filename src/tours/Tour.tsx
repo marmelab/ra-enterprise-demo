@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Record, useMutation, useRefresh } from 'react-admin';
+import { Record } from 'react-admin';
 import { useTour } from '@react-admin/ra-tour';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayArrow';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import { useTourState } from './useTourState';
 
 const useStyles = makeStyles({
     root: {
@@ -56,32 +57,21 @@ const useStyles = makeStyles({
 
 const Tour: FC<{ record: Record }> = ({ record }) => {
     const classes = useStyles();
-    const refresh = useRefresh();
+    const [playedOn, tourStateActions] = useTourState(record.id.toString());
     // eslint-disable-next-line no-unused-vars
     const [_, { start }] = useTour();
-
-    const [setPlayed] = useMutation(
-        {
-            type: 'update',
-            resource: 'tours',
-            payload: { id: record.id, data: { playedOn: new Date() } },
-        },
-        {
-            onSuccess: refresh,
-        }
-    );
 
     const handlePlayClicked = (): void => {
         if (start) {
             start(record.tour);
         }
-        setPlayed();
+        tourStateActions.markAsPlayed();
     };
 
     return (
         <Card
             className={classnames(classes.root, {
-                [classes.visited]: record.playedOn,
+                [classes.visited]: !!playedOn,
             })}
             onClick={handlePlayClicked}
         >
@@ -116,9 +106,9 @@ const Tour: FC<{ record: Record }> = ({ record }) => {
                     display="block"
                     color="textSecondary"
                 >
-                    {record.playedOn
+                    {!!playedOn
                         ? `Last played on ${new Date(
-                              record.playedOn
+                              playedOn
                           ).toLocaleString()}`
                         : `Never played before`}
                 </Typography>
