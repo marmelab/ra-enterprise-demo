@@ -35,6 +35,7 @@
         "@react-admin/ra-tour": "^1.1.1",
         "@react-admin/ra-tree": "^1.5.0",
         "data-generator-retail": "^3.11.3",
+        "date-fns": "^1.29.0",
         "fakerest": "^2.1.0",
         "fetch-mock": "^9.4.0",
         "gh-pages": "^3.1.0",

@@ -5,7 +5,6 @@ import { useTranslate } from 'ra-core';
 
 const MyTimeline = ({ records }: { records?: EventRecord[] }): ReactElement => {
     const translate = useTranslate();
-    console.log(records);
     return (
         <>
             <CardHeader title={translate('pos.dashboard.timeline')} />
