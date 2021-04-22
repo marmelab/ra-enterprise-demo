@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { FC } from 'react';
 import {
     List,
     ListItem,
     ListItemAvatar,
     ListItemText,
     Avatar,
+    Card,
+    CardHeader,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import CommentIcon from '@material-ui/icons/Comment';
@@ -15,12 +16,6 @@ import { useTranslate } from 'react-admin';
 import CardWithIcon from './CardWithIcon';
 import StarRatingField from '../reviews/StarRatingField';
 import { Customer, Review } from '../types';
-
-interface Props {
-    reviews?: Review[];
-    customers?: { [key: string]: Customer };
-    nb?: number;
-}
 
 const useStyles = makeStyles(theme => ({
     avatar: {
@@ -33,18 +28,40 @@ const useStyles = makeStyles(theme => ({
         WebkitLineClamp: 2,
         WebkitBoxOrient: 'vertical',
     },
+    root: {
+        flex: 1,
+    },
 }));
 
-const PendingReviews: FC<Props> = ({ reviews = [], customers = {}, nb }) => {
-    const classes = useStyles();
+export const NbPendingReviews = ({
+    value,
+}: {
+    value?: number;
+}): React.ReactElement => {
     const translate = useTranslate();
+
     return (
         <CardWithIcon
             to="/reviews"
             icon={CommentIcon}
             title={translate('pos.dashboard.pending_reviews')}
-            subtitle={nb}
-        >
+            subtitle={value}
+        />
+    );
+};
+
+const PendingReviews = ({
+    reviews = [],
+    customers = {},
+}: {
+    reviews?: Review[];
+    customers?: { [key: string]: Customer };
+}): React.ReactElement => {
+    const classes = useStyles();
+    const translate = useTranslate();
+    return (
+        <Card className={classes.root}>
+            <CardHeader title={translate('pos.dashboard.pending_reviews')} />
             <List>
                 {reviews.map((record: Review) => (
                     <ListItem
@@ -76,7 +93,7 @@ const PendingReviews: FC<Props> = ({ reviews = [], customers = {}, nb }) => {
                     </ListItem>
                 ))}
             </List>
-        </CardWithIcon>
+        </Card>
     );
 };
 

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useTranslate } from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import EventsIcon from '@material-ui/icons/FormatListNumbered';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AVTimerIcon from '@material-ui/icons/AvTimer';
 import BlockIcon from '@material-ui/icons/Block';
@@ -227,6 +228,13 @@ const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
                 icon={<stores.icon />}
                 onClick={onMenuClick}
                 label={translate(`resources.stores.name`, { smart_count: 2 })}
+            />
+            <MenuItemCategory
+                name="events"
+                to="/events"
+                icon={<EventsIcon />}
+                onClick={onMenuClick}
+                label={translate(`resources.events.name`, { smart_count: 2 })}
             />
         </MultiLevelMenu>
     );
