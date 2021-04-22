@@ -23,7 +23,7 @@
         "@material-ui/core": "^4.11.3",
         "@material-ui/icons": "^4.9.2",
         "@material-ui/lab": "^4.0.0-alpha.56",
-        "@react-admin/ra-audit-log": "^2.0.1",
+        "@react-admin/ra-audit-log": "^2.0.2",
         "@react-admin/ra-editable-datagrid": "^1.1.0",
         "@react-admin/ra-enterprise": "^4.1.0",
         "@react-admin/ra-form-layout": "^1.5.4",
