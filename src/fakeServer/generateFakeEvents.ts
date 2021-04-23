@@ -2,6 +2,7 @@ import * as fns from 'date-fns';
 import { Order, OrderStatus, Product } from '../types';
 import { EventRecord } from '@react-admin/ra-audit-log';
 import type { Data } from './index';
+import { demoUser } from '../authProvider';
 
 const createProductEvent = (
     product: Product,
@@ -41,10 +42,6 @@ const changePriceEvent = (
     };
 };
 
-const getRandomId = length => {
-    return Math.floor(Math.random() * length);
-};
-
 const changeOrderStatusEvent = (
     order: Order,
     newStatus: OrderStatus,
@@ -67,15 +64,37 @@ const changeOrderStatusEvent = (
     };
 };
 
+const getRandomId = length => {
+    return Math.floor(Math.random() * length);
+};
+
+const admins = [
+    demoUser,
+    {
+        id: 0,
+        fullName: 'Iris Bailey',
+    },
+    {
+        id: 1,
+        fullName: 'Toni Rosser',
+    },
+    {
+        id: 2,
+        fullName: 'Rocky Coon',
+    },
+    {
+        id: 3,
+        fullName: 'Victoria Scott',
+    },
+    {
+        id: 4,
+        fullName: 'Sharon Stephenson',
+    },
+];
+
 const generateFakeEvents = (data: Data): EventRecord[] => {
-    const pickRandomCustomerAsAuthor = (): EventRecord['author'] => {
-        const customer = data.customers[getRandomId(data.customers.length)];
-        return {
-            id: customer.id,
-            fullName: `${customer.first_name} ${customer.last_name}`,
-            avatar: customer.avatar,
-        };
-    };
+    const pickRandomAuthor = (): EventRecord['author'] =>
+        admins[getRandomId(admins.length)];
     const pickRandomProduct = () =>
         data.products[getRandomId(data.products.length)];
 
@@ -90,86 +109,86 @@ const generateFakeEvents = (data: Data): EventRecord[] => {
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 7), 5)
         ),
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 7), 4)
         ),
         createProductEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 7), 3)
         ),
         changePriceEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 7), 2)
         ),
         changePriceEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 7), 1)
         ),
         // Two day ago
         createProductEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 2), 4)
         ),
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 2), 2)
         ),
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 2), 1)
         ),
         changePriceEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.addHours(fns.subDays(now, 2), 1)
         ),
         // Yesterday
         changePriceEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 1), 4)
         ),
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 1), 2)
         ),
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 1), 1)
         ),
         createProductEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.addHours(fns.subDays(now, 1), 1)
         ),
         // Today
         createProductEvent(
             pickRandomProduct(),
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 1), 3)
         ),
         changeOrderStatusEvent(
             pickRandomOrder(),
             'delivered',
-            pickRandomCustomerAsAuthor(),
+            pickRandomAuthor(),
             fns.subHours(fns.subDays(now, 1), 2)
         ),
     ];
