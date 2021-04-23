@@ -8,7 +8,7 @@ const MyTimeline = (): ReactElement => {
     const { data: events, loaded } = useGetList<EventRecord>(
         'events',
         { perPage: 100, page: 1 },
-        { field: 'data', order: 'DESC' },
+        { field: 'date', order: 'DESC' },
         {}
     );
     const records = Object.values(events);
