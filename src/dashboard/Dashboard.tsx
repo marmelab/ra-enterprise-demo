@@ -45,7 +45,7 @@ const styles = {
     flex: { display: 'flex' },
     flexColumn: { display: 'flex', flexDirection: 'column' },
     leftCol: { flex: 1, marginRight: '0.5em' },
-    rightCol: { marginLeft: '0.5em' },
+    rightCol: { marginLeft: '0.5em', maxWidth: '30em' },
     singleCol: { marginTop: '1em', marginBottom: '1em' },
 };
 
@@ -155,25 +155,9 @@ const Dashboard = (): ReactElement => {
         }));
     }, [dataProvider]);
 
-    const fetchEvents = useCallback(async () => {
-        const { data: events } = await dataProvider.getList<EventRecord>(
-            'events',
-            {
-                filter: {},
-                sort: { field: 'date', order: 'DESC' },
-                pagination: { page: 1, perPage: 100 },
-            }
-        );
-        setState(state => ({
-            ...state,
-            events,
-        }));
-    }, [dataProvider]);
-
     useEffect(() => {
         fetchOrders();
         fetchReviews();
-        fetchEvents();
     }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const {
@@ -199,7 +183,7 @@ const Dashboard = (): ReactElement => {
                     customers={pendingOrdersCustomers}
                 />
                 <VerticalSpacer />
-                <Timeline records={state.events} />
+                <Timeline />
             </div>
         </div>
     ) : isSmall ? (
@@ -222,7 +206,7 @@ const Dashboard = (): ReactElement => {
                 />
             </div>
             <div style={styles.singleCol}>
-                <Timeline records={state.events} />
+                <Timeline />
             </div>
         </div>
     ) : (
@@ -257,7 +241,7 @@ const Dashboard = (): ReactElement => {
                     </div>
                 </div>
                 <div style={styles.rightCol}>
-                    <Timeline records={state.events} />
+                    <Timeline />
                 </div>
             </div>
         </>
