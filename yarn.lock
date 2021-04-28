@@ -2200,15 +2200,15 @@
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
-"@react-admin/ra-navigation@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-2.0.0.tgz#85188bb2165c04ae9031c73b70c0d8c42c96d2b8"
-  integrity sha512-TgXlWn+uNR5ui4ndm+qaTlrWzRxhf+6UUD3x6ePq5uIEp4jHFL8bS+jYTYeN9s9LuGCzH/72vXjXns0O6IOJRg==
+"@react-admin/ra-navigation@^2.0.0", "@react-admin/ra-navigation@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-2.2.1.tgz#b84ea7f57165f93a1172fc349424626c1690fa38"
+  integrity sha512-yFFQbzcaRGX0vGoGw9W8a/NKuYkZSSROuB2nOSc05bkUNNSUWoKxbpAkOj8ZINzhuQnUr73SCcz3Ub1Vo9Ikcw==
 
-"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.2.3":
-  version "1.2.3"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.3.tgz#2b2dbedc0398c6d9bb50ca3804c0023cfd90236d"
-  integrity sha512-thwYGF67SEXGRJlbsfK5cdj9mK2/BdzBl2KLHsATCyMrUIU64DJtXKbbIjnyhaZmCw5vgQjhSfB2n0bpX1u4Rg==
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.4.tgz#5bfe2531ce474e28de93b3233b55894a6e1640b9"
+  integrity sha512-7izgwZrHpnVdjpr/Z6lyKZhj8mPvmMO4wJEiPGiQV+4RXqsmOTBtYq9d3a4VK7U3A5+kMtj9Iy7ul+X1NNki/A==
 
 "@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.3.1":
   version "1.3.1"
@@ -10655,10 +10655,10 @@ quill@~1.3.6:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
-ra-core@^3.14.4:
-  version "3.14.4"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-3.14.4.tgz#b5b0baf1807c36ab547a8d2d2d50698bc6a6d13e"
-  integrity sha512-11wLFBhz8VR8b+YzGxpIJn8PCkkZZeBlZ9gC+tmHPpYi8VUjuS8SDW/jkj6rAwIkJDJcs0tewJCFYszBocM6Xw==
+ra-core@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-3.14.5.tgz#aec6102e3e5849552da315675001b94a962341e0"
+  integrity sha512-5pEmobyXwlsL0xhamrZvLGekMR13W3LdPq6HFYWGuwgviiPAU3jGcsVQOEFaerIBP6Xlm5qZnoZt4TcBh82z9A==
   dependencies:
     classnames "~2.2.5"
     date-fns "^1.29.0"
@@ -10683,13 +10683,13 @@ ra-data-simple-rest@^3.13.4:
   dependencies:
     query-string "^5.1.1"
 
-ra-i18n-polyglot@^3.14.4:
-  version "3.14.4"
-  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-3.14.4.tgz#a25690cd35af72aca4f167ff46f5315c9dd5801c"
-  integrity sha512-K9rdS5hONoW+bvUF1/yJDTTbA+bWR/X9S627jHwyxxoqUgfL4w9W+Tk9Vrp0aRFsuaAJfZZPDVvYK/E0P4V66A==
+ra-i18n-polyglot@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-3.14.5.tgz#a7fba22ab70f4c761d081b2236bf62ae0182c7c6"
+  integrity sha512-aXlMBPP2FvaegXEGO63i9KmuSoN6wIpdl3xpEARF8W3F5BvjYuqQbPs2ITM3HtUU53QGbTDJJz+hJkneN/aGCw==
   dependencies:
     node-polyglot "^2.2.2"
-    ra-core "^3.14.4"
+    ra-core "^3.14.5"
 
 ra-input-rich-text@^3.14.0:
   version "3.14.0"
@@ -10701,19 +10701,19 @@ ra-input-rich-text@^3.14.0:
     prop-types "^15.6.0"
     quill "~1.3.6"
 
-ra-language-english@^3.14.4:
-  version "3.14.4"
-  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-3.14.4.tgz#ae8dd92a538f2e48f9329be0cd8d24a9e8a4a87d"
-  integrity sha512-Xp94CudVzqz4jidJEbGQsk9l49SltLG1V5JovhT9AgCCOEyU9CAi55hGyGtBnFzFBxaaGuEmSVqLQZBYWX3Sig==
+ra-language-english@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-3.14.5.tgz#f28ce660c9091bd6efc6888ba4de4bac90c0607e"
+  integrity sha512-SROdgyBrGVvJ7HVLyC6+qYek2EKt/FeabgjrUfgtszXI4GGmh3Fgsz86PU/9gYDFUTNN+SiKP8riaVGIkoT59w==
   dependencies:
-    ra-core "^3.14.4"
+    ra-core "^3.14.5"
 
-ra-language-french@^3.14.4:
-  version "3.14.4"
-  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-3.14.4.tgz#749d790c4990f4399d27e56010c44184157bc420"
-  integrity sha512-J9387FHLegDqcfop2f1YUQRiOi94uTkOZdAQV9wXUHMMAjQ3xyN1eJsHT6chaJF4Dau3jYT0qZcO63rCjZ8aFQ==
+ra-language-french@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-3.14.5.tgz#85c678003af258b21b9e38912da035fcb2dd6079"
+  integrity sha512-T69RG2hdmsC2ICTsQXR0dFzf9SCa2asRmHz8M2GoGaT0lHoXZiF2IJuhCamgn2fdYBQ13r9PkiugFXPv1A0omg==
   dependencies:
-    ra-core "^3.14.4"
+    ra-core "^3.14.5"
 
 ra-test@^3.13.5:
   version "3.13.5"
@@ -10724,10 +10724,10 @@ ra-test@^3.13.5:
     classnames "~2.2.5"
     lodash "~4.17.5"
 
-ra-ui-materialui@^3.14.4:
-  version "3.14.4"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-3.14.4.tgz#967a778ae60c42417735926b6e13f46e50b75d63"
-  integrity sha512-geSTqTcdUofqi2bGcSa9LUUgHzsN5iC7oNPjLdJySDkma8lB7wsv1lXNOREBDWyhtteDCo+UWDomIqGHQb+fsg==
+ra-ui-materialui@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-3.14.5.tgz#f4439973a53b82bed5899f8468b2bf11f662de0e"
+  integrity sha512-EGkL093h7WJ+FJG+ZCozWYfjcyuM/a4qN0HoHdo9W4ivM3w5bcIQ6BmSByol0kLuooVyUpyGdDRQCqS5eExJlA==
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
@@ -10826,10 +10826,10 @@ rc-virtual-list@^3.0.1:
     rc-resize-observer "^0.2.3"
     rc-util "^5.0.7"
 
-react-admin@^3.14.4:
-  version "3.14.4"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-3.14.4.tgz#391008ec479f1b3edaa7e8e8e55914c5f711d89b"
-  integrity sha512-n52a8r0fYSVnz6Sec0+2QzSAUNKc0oqqQsGrSXrbXjcZLtMJvyECxZWb4Re2Mtm/K2Qb+PuoUCQg4tiUAdpt6A==
+react-admin@^3.14.5:
+  version "3.14.5"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-3.14.5.tgz#5fb71094c764693ce0e000e13875f4dbb2a8f36a"
+  integrity sha512-sgO0jItU/Cq0/ka5EPAiQvI4aVZAp59O3GHcuxzwth5oVTFAhyO13hs64I+m9UvCKKyMofjEcrwmWgedGKh2/A==
   dependencies:
     "@material-ui/core" "^4.11.2"
     "@material-ui/icons" "^4.11.2"
@@ -10837,10 +10837,10 @@ react-admin@^3.14.4:
     connected-react-router "^6.5.2"
     final-form "^4.20.2"
     final-form-arrays "^3.0.2"
-    ra-core "^3.14.4"
-    ra-i18n-polyglot "^3.14.4"
-    ra-language-english "^3.14.4"
-    ra-ui-materialui "^3.14.4"
+    ra-core "^3.14.5"
+    ra-i18n-polyglot "^3.14.5"
+    ra-language-english "^3.14.5"
+    ra-ui-materialui "^3.14.5"
     react-final-form "^6.5.2"
     react-final-form-arrays "^3.1.3"
     react-redux "^7.1.0"
