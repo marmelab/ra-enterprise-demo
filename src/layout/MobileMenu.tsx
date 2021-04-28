@@ -9,6 +9,7 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import TourIcon from '@material-ui/icons/Flag';
 import { makeStyles } from '@material-ui/core/styles';
 import EventsIcon from '@material-ui/icons/FormatListNumbered';
+import querystring from 'query-string';
 
 import { MultiLevelMenu, MenuItem } from '@react-admin/ra-navigation';
 
@@ -21,7 +22,7 @@ import {
     List,
 } from '@material-ui/core';
 
-import { newCustomerFilter, visitorsFilter } from './Menu';
+import { newCustomerFilter, visitorsFilter, pendingReviewFilter } from './Menu';
 import categories from '../categories';
 import visitors from '../visitors';
 import orders from '../orders';
@@ -166,7 +167,9 @@ const MobileMenu: FC<{
                                 className={classes.noIconPadding}
                                 key={segment}
                                 name={`segments.${segment}`}
-                                to={`/customers?filter={"groups": "${segment}"}`}
+                                to={`/customers?${querystring.stringify({
+                                    filter: JSON.stringify({ groups: segment }),
+                                })}`}
                                 onClick={onMenuClick}
                                 label={translate(
                                     `resources.segments.data.${segment}`,
@@ -196,7 +199,7 @@ const MobileMenu: FC<{
                     />
                     <MenuItem
                         name="reviews.pending"
-                        to={'/reviews?filter={"status": "pending"}'}
+                        to={`/reviews?${pendingReviewFilter}`}
                         icon={<AVTimerIcon />}
                         onClick={onMenuClick}
                         label="pos.menu.pending_reviews"

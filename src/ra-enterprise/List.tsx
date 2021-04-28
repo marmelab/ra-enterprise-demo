@@ -195,7 +195,6 @@ const Actions: FC<{
     };
 
     const hasTools = hasColumnsSelector || hasViewSelector;
-
     return (
         <TopToolbar
             className={classnames(className, classes.root)}
@@ -314,10 +313,10 @@ const EnterpriseList: FC<
 
         hasViewSelector = true,
         defaultView = 'small',
-        syncWithLocation,
         children,
         ...rest
     } = props;
+
     const visibleColumns = useSelectedColumns({
         preferences: `${preferenceKey}.columns`,
         columns: defaultColumns,
