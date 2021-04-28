@@ -81,7 +81,7 @@ const Tour: FC<{ record: Record }> = ({ record }) => {
                 title={record.title}
             />
             <CardContent className={classes.content}>
-                {!record.playedOn && (
+                {!playedOn && (
                     <NewReleasesIcon
                         color="error"
                         fontSize="large"
