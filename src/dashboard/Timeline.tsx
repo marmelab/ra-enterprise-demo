@@ -5,13 +5,13 @@ import { useTranslate, useGetList } from 'ra-core';
 
 const MyTimeline = (): ReactElement => {
     const translate = useTranslate();
-    const { data: events, loaded } = useGetList<EventRecord>(
+    const { data: events, loaded, ids } = useGetList<EventRecord>(
         'events',
         { perPage: 100, page: 1 },
         { field: 'date', order: 'DESC' },
         {}
     );
-    const records = Object.values(events);
+    const records = ids.map(id => events[id]);
     return (
         <>
             <CardHeader title={translate('pos.dashboard.timeline')} />
