@@ -53,7 +53,7 @@ const tours: { [id: string]: TourType } = {
                 target: "[data-tour-id='description-tab']",
                 content: 'The markdown editor is in the description tab',
                 after: ({ target }) => {
-                    target.click();
+                    target.children[0] && target.children[0].click();
                 },
             },
             {
