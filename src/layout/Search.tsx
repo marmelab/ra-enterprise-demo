@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useRef } from 'react';
 import { useTranslate } from 'react-admin';
 import {
     List,
@@ -14,6 +14,7 @@ import {
     SearchPanelProps,
     useSearchResults,
     groupSearchResultsByResource,
+    useArrowKeysToNavigate,
 } from '@react-admin/ra-search';
 
 import {
@@ -36,9 +37,12 @@ const CustomSearch: FC<SearchProps> = props => {
 export default CustomSearch;
 
 const CustomSearchPanel: FC<SearchPanelProps> = props => {
+    const listRef = useRef<HTMLUListElement>(null) as React.MutableRefObject<
+        HTMLUListElement
+    >;
     const translate = useTranslate();
     const classes = useCustomSearchPanelStyles(props);
-
+    useArrowKeysToNavigate(listRef);
     const { data, onClose } = useSearchResults();
 
     if (!data || data.length === 0) {
@@ -56,9 +60,10 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
 
     return (
         <List
+            className={classes.root}
             data-testid="search-panel"
             dense
-            className={classes.root}
+            innerRef={listRef}
             {...props}
         >
             {groupedData.map(group => (
