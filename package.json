@@ -26,7 +26,7 @@
         "@react-admin/ra-audit-log": "^2.0.2",
         "@react-admin/ra-editable-datagrid": "^1.1.0",
         "@react-admin/ra-enterprise": "^4.1.0",
-        "@react-admin/ra-form-layout": "^1.5.4",
+        "@react-admin/ra-form-layout": "^1.5.5",
         "@react-admin/ra-markdown": "^1.1.0",
         "@react-admin/ra-navigation": "^2.2.1",
         "@react-admin/ra-preferences": "^1.2.4",
