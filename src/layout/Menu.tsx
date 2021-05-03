@@ -121,7 +121,6 @@ export default Menu;
 
 const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
     const translate = useTranslate();
-    const commandsChangeCount = useResourceChangeCounter('commands');
 
     return (
         <MultiLevelMenu variant="categories">
@@ -133,52 +132,7 @@ const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
                 onClick={onMenuClick}
                 label="ra.page.dashboard"
             />
-            <StyledBadgeForText
-                badgeContent={commandsChangeCount}
-                color="primary"
-            >
-                <MenuItemCategory
-                    name="sales"
-                    icon={<products.icon />}
-                    onClick={onMenuClick}
-                    label={translate(`pos.menu.sales`, { smart_count: 1 })}
-                    data-testid="commands-menu"
-                >
-                    <CardContent>
-                        <Typography variant="h6" gutterBottom>
-                            {translate(`pos.menu.sales`, { smart_count: 1 })}
-                        </Typography>
-                        <NavigationMenu>
-                            <StyledBadgeForText
-                                badgeContent={commandsChangeCount}
-                                color="primary"
-                            >
-                                <MenuItem
-                                    name="commands"
-                                    to="/commands"
-                                    icon={<orders.icon />}
-                                    onClick={onMenuClick}
-                                    label={translate(
-                                        `resources.commands.name`,
-                                        {
-                                            smart_count: 2,
-                                        }
-                                    )}
-                                />
-                            </StyledBadgeForText>
-                            <MenuItem
-                                name="invoices"
-                                to="/invoices?filter={}"
-                                icon={<invoices.icon />}
-                                onClick={onMenuClick}
-                                label={translate(`resources.invoices.name`, {
-                                    smart_count: 2,
-                                })}
-                            />
-                        </NavigationMenu>
-                    </CardContent>
-                </MenuItemCategory>
-            </StyledBadgeForText>
+            <SalesMenuItem onMenuClick={onMenuClick} />
             <MenuItemCategory
                 name="catalog"
                 icon={<products.icon />}
@@ -339,6 +293,58 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                 )}
             </Box>
         </CardContent>
+    );
+};
+
+const SalesMenuItem = ({
+    onMenuClick,
+}: {
+    onMenuClick?: () => void;
+}): ReactElement => {
+    const commandsChangeCount = useResourceChangeCounter('commands');
+    const translate = useTranslate();
+
+    return (
+        <StyledBadgeForText badgeContent={commandsChangeCount} color="primary">
+            <MenuItemCategory
+                name="sales"
+                icon={<products.icon />}
+                onClick={onMenuClick}
+                label={translate(`pos.menu.sales`, { smart_count: 1 })}
+                data-testid="commands-menu"
+            >
+                <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                        {translate(`pos.menu.sales`, { smart_count: 1 })}
+                    </Typography>
+                    <NavigationMenu>
+                        <StyledBadgeForText
+                            badgeContent={commandsChangeCount}
+                            color="primary"
+                        >
+                            <MenuItem
+                                name="commands"
+                                to="/commands"
+                                icon={<orders.icon />}
+                                onClick={onMenuClick}
+                                label={translate(`resources.commands.name`, {
+                                    smart_count: 2,
+                                })}
+                            />
+                        </StyledBadgeForText>
+                        <MenuItem
+                            name="invoices"
+                            to="/invoices?filter={}"
+                            icon={<invoices.icon />}
+                            onClick={onMenuClick}
+                            label={translate(`resources.invoices.name`, {
+                                smart_count: 2,
+                            })}
+                        />
+                    </NavigationMenu>
+                </CardContent>
+            </MenuItemCategory>
+        </StyledBadgeForText>
     );
 };
 
