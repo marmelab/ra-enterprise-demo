@@ -95,6 +95,7 @@ const darkTheme = (theme: Theme): ThemeOptions => ({
             root: {
                 alignItems: 'center',
                 paddingTop: 0,
+                minHeight: 'auto',
             },
         },
         RaListToolbar: {
@@ -263,6 +264,7 @@ export const lightTheme = (theme: Theme): ThemeOptions => ({
             root: {
                 alignItems: 'center',
                 paddingTop: 0,
+                minHeight: 'auto',
             },
         },
         RaListToolbar: {
