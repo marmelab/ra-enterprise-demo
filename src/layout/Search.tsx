@@ -22,7 +22,7 @@ import {
     CustomerListItem,
     ProductListItem,
     ReviewListItem,
-} from './search';
+} from './SearchItems';
 
 const CustomSearch: FC<SearchProps> = props => {
     return (
