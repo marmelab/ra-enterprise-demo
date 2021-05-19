@@ -11,7 +11,9 @@
         "deploy": "gh-pages -d build",
         "lint": "eslint --ext .js,.ts,.tsx \"./src/**/*.{js,ts,tsx}\"",
         "lint:fix": "eslint --ext .js,.ts,.tsx \"./src/**/*.{js,ts,tsx}\" --fix",
-        "prettier": "prettier --config ./.prettierrc.js --write --list-different \"./src/**/*.{js,json,ts,tsx,css,md}\""
+        "prettier": "prettier --config ./.prettierrc.js --write --list-different \"./src/**/*.{js,json,ts,tsx,css,md}\"",
+        "e2e-dev": "cypress open",
+        "e2e": "cypress run"
     },
     "browserslist": [
         ">0.2%",
@@ -60,6 +62,7 @@
         "redux-saga": "^1.0.0"
     },
     "devDependencies": {
+        "@testing-library/cypress": "^7.0.6",
         "@types/classnames": "^2.2.10",
         "@types/jest": "^26.0.14",
         "@types/node": "^14.11.1",
@@ -71,6 +74,7 @@
         "@typescript-eslint/parser": "^4.0.0",
         "babel-eslint": "^10.0.0",
         "babel-loader": "^8.1.0",
+        "cypress": "^7.3.0",
         "eslint": "^7.5.0",
         "eslint-config-prettier": "^6.15.0",
         "eslint-config-react-app": "^6.0.0",

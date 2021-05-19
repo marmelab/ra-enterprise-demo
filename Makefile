@@ -13,5 +13,11 @@ start: ## Run the project for development
 build: ## Build the project for production
 	yarn build
 
+e2e-dev: ## Starts cypress
+	yarn e2e-dev
+
+e2e: ## Runs cypress
+	yarn e2e
+
 deploy: ## Build and push to gh-pages to publish the site
 	yarn deploy
