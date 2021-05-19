@@ -10,13 +10,11 @@ describe('Dashboard', () => {
         cy.findByText('Monthly Revenue')
             // Targets the container
             .parent()
-            .parent()
             // Can check the exact value as the data is generated
-            .contains(/\d+ \$US/);
+            .contains(/\d+/);
 
         cy.findByText('New Orders')
             // Targets the container
-            .parent()
             .parent()
             // Can check the exact value as the data is generated
             .contains(/\d+/);
