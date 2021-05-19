@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-    - 10
+    - 14
 env:
     - GENERATE_SOURCEMAP=false
 cache:
@@ -16,6 +16,7 @@ install:
 
 script:
     - yarn build
+    - yarn 
 
 deploy:
     provider: pages
