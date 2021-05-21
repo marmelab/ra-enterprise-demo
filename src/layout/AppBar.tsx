@@ -74,7 +74,12 @@ const CustomAppBar: FC = props => {
                         id="react-admin-title"
                     />
                     <Search />
-                    <IconButton to="/tours" component={Link} color="inherit">
+                    <IconButton
+                        aria-label="Tours"
+                        to="/tours"
+                        component={Link}
+                        color="inherit"
+                    >
                         <Badge
                             badgeContent={numberOfTours}
                             color="error"
