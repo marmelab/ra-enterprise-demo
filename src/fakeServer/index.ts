@@ -61,6 +61,7 @@ const rebindProductToCategories = (
 };
 
 export default (): (() => void) => {
+    // @ts-ignore
     const data: Data = generateData({ serializeDate: true });
     const products = data.products.map(
         rebindProductToCategories(data.categories, demoData.categories)

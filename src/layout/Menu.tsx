@@ -375,7 +375,7 @@ const CatalogMenu = (props: {
                     />
                     <MenuItem
                         name="categories"
-                        to="/categories/5"
+                        to="/categories"
                         icon={<categories.icon />}
                         onClick={onMenuClick}
                         label={translate(`resources.categories.name`, {

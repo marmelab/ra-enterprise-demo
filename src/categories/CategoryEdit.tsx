@@ -6,13 +6,14 @@ import {
     TextInput,
     TitleProps,
     useGetList,
+    usePaginationState,
     useTranslate,
 } from 'react-admin';
 import { SimpleForm } from '@react-admin/ra-tree';
 
 import { ProductListView } from '../products/ProductList';
 import { Typography, makeStyles } from '@material-ui/core';
-import { useAppLocationState } from '@react-admin/ra-navigation';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 const CategoryEdit: FC<EditProps> = props => {
     const translate = useTranslate();
@@ -34,22 +35,20 @@ const CategoryEdit: FC<EditProps> = props => {
 };
 
 const CategoryTitle = (props: TitleProps): ReactElement => {
-    const [, setLocation] = useAppLocationState();
-
-    if (props.record?.id.toString() == '5') {
-        setLocation('catalog.categories');
-    } else {
-        setLocation('catalog.categories.edit', props);
-    }
+    useDefineAppLocation('catalog.categories.edit', props);
     return <span>{props.record?.name}</span>;
 };
 
 const CategoryEditAside = (props: EditProps): ReactElement => {
     const { id } = props;
 
+    const { setPerPage, setPage, page, perPage } = usePaginationState({
+        page: 1,
+        perPage: 20,
+    });
     const { data, ids, total, loaded } = useGetList(
         'products',
-        { page: 1, perPage: 25 },
+        { page, perPage },
         { field: 'reference', order: 'ASC' },
         { category_id: id }
     );
@@ -65,9 +64,11 @@ const CategoryEditAside = (props: EditProps): ReactElement => {
                 showFilter: (): void => undefined,
                 hideFilter: (): void => undefined,
                 setSort: (): void => undefined,
+                setPage,
+                setPerPage,
                 currentSort: { field: 'reference', order: 'ASC' },
-                page: 1,
-                perPage: 25,
+                page,
+                perPage,
             }}
         >
             <ProductListView isSmall={false} aside={false} actions={false} />
