@@ -127,7 +127,7 @@ export const ProductListView = ({
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Title title={title || defaultTitle} />
+            {title && defaultTitle && <Title title={title || defaultTitle} />}
             {actions}
             {isSmall && (
                 <Box m={1}>

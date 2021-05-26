@@ -2172,11 +2172,12 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-editable-datagrid/-/ra-editable-datagrid-1.1.1.tgz#9990d0e0cb1e704e047b6328238b6e3bfc2bbc65"
   integrity sha512-lcLG7Ik6xlSnVscEou3LKrLrg9DLm0f5EaQnjzaYF43RTz+NordkZgsGr8XvNh4x6CgBIge4pKBGPGJqtKLLsQ==
 
-"@react-admin/ra-enterprise@^4.1.0":
-  version "4.1.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-4.1.0.tgz#bff1d2a12253780d7c3e8e700c4f70593e59b6db"
-  integrity sha512-pG2bLdLqMpqvWLFuCJUVblqsmolTFAx91zIJ0yBNjk8QI/2wVPelavX5lBeNQS7dwtD1gqqw+D0yderSWFofPw==
+"@react-admin/ra-enterprise@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-enterprise/-/ra-enterprise-4.1.2.tgz#a9845a0d6c71e4399f5ccbd4e99e6e64faa21fda"
+  integrity sha512-qy235Bg/F90AwEzM+RlVtDI8pT4dNyjD0wVHCqCVtJDpOfxrJTxNnt0z6K9vW+gi6R5R+R78mQ8lftdeOJjdyA==
   dependencies:
+    "@react-admin/ra-audit-log" "^2.0.2"
     "@react-admin/ra-editable-datagrid" "^1.0.0"
     "@react-admin/ra-form-layout" "^1.0.0"
     "@react-admin/ra-markdown" "^1.0.0"
@@ -2184,47 +2185,47 @@
     "@react-admin/ra-preferences" "^1.0.0"
     "@react-admin/ra-realtime" "^1.0.0"
     "@react-admin/ra-relationships" "^2.0.0"
-    "@react-admin/ra-search" "^2.0.0"
+    "@react-admin/ra-search" "^2.2.0"
     "@react-admin/ra-tour" "^1.0.0"
     "@react-admin/ra-tree" "^1.0.0"
 
-"@react-admin/ra-form-layout@^1.0.0", "@react-admin/ra-form-layout@^1.5.5":
-  version "1.5.5"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.5.5.tgz#866c87121ddccefdcbedf8ccef602e7c83c8d812"
-  integrity sha512-/NlvVmiTq8SOi3SkeUHpXOJuYwEAmEhOgSUG0+w/uR2u5gDr3DDapFEBPALAMiUi8Xt/AaG+rgkGzBd+JTWoCg==
+"@react-admin/ra-form-layout@^1.0.0", "@react-admin/ra-form-layout@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.6.0.tgz#6633223576a30762f8d564fcaaab8daf53baa08a"
+  integrity sha512-AySNUNn3NLj78WN8h7AgKmWTVK6urEiySQm3S2ZxRYh9166sLHijqjl8X0UITnRlAS6UXS0T5iwXnAup1Uc6aw==
 
-"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.1.0.tgz#ed83115e4fe2318db95e9930eb6ffe8e037c2de3"
-  integrity sha512-EhYt7uVsX+dZcscCQLhB4AGNImDdrfp0uN+k4RsDWaidMmVv0TJcEXQwk7fq9PTyqIh78HXaH1U5O7u5TvjzkQ==
+"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.2.0.tgz#7be88517a37ac6ec09b84d51f1eac585c2a1fbb7"
+  integrity sha512-oyOCd8vn3hKj/3habFtz29WsiZWQ9C110d1b5YYvg+2pdtvemLRZhfVDJRcIRNV4A2WA3DOShVBGyObio5uaqQ==
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
-"@react-admin/ra-navigation@^2.0.0", "@react-admin/ra-navigation@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-2.2.1.tgz#b84ea7f57165f93a1172fc349424626c1690fa38"
-  integrity sha512-yFFQbzcaRGX0vGoGw9W8a/NKuYkZSSROuB2nOSc05bkUNNSUWoKxbpAkOj8ZINzhuQnUr73SCcz3Ub1Vo9Ikcw==
+"@react-admin/ra-navigation@^2.0.0", "@react-admin/ra-navigation@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-2.2.3.tgz#b8f1fed3f3cf3323b4f08ab1502611a0d5bffaa0"
+  integrity sha512-QYx4vhaoz6COrYHAUKSOrROrIEe41Vub+G/Nxy8/GzV2TLiq8L5KFuJUJVtJB9p9wm0l31FUjXZ1AmtD8+Bg6Q==
 
-"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.2.4":
-  version "1.2.4"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.4.tgz#5bfe2531ce474e28de93b3233b55894a6e1640b9"
-  integrity sha512-7izgwZrHpnVdjpr/Z6lyKZhj8mPvmMO4wJEiPGiQV+4RXqsmOTBtYq9d3a4VK7U3A5+kMtj9Iy7ul+X1NNki/A==
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.2.5":
+  version "1.2.5"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.2.5.tgz#5e014b0aa6d7b9ff17bacffa9a4f51d4cfba14e7"
+  integrity sha512-KsHHknyLO0WLy9nlqccET1ddSgtYwRnrt1ziIOSNc28ORImcrtPnzEeKq5Dnxi0DB6PPkI8JiATgJJBlFm2GCw==
 
-"@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.3.1.tgz#024d1776846c4f129fff1d115e8fdf7c6a731303"
-  integrity sha512-8vDPF6D+JpgCJ4X0WqaMuYXPCNcGg7gLsKE3j1eriDzUGxjQvFrd3vvrlCZ7sD/LgJ1TCIbijkBpOhpmqP4LBA==
+"@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-realtime/-/ra-realtime-1.3.2.tgz#a1d971c3e79a123c3484a87a7e9c4f120dc9da86"
+  integrity sha512-2qnmwVTXeknxrLnouqnd72DLv8UBX/9Z8Y+Xyxb80ktfsmBn4sLmFtPV/dK4FBBpyh2MQedtuI+ZJ17jrZaoUg==
   dependencies:
     event-source-polyfill "^1.0.15"
     querystring "^0.2.0"
     whatwg-fetch "^3.0.0"
 
-"@react-admin/ra-relationships@^2.0.0", "@react-admin/ra-relationships@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-2.1.4.tgz#bcb7a6a41ad35b5770cfce2105a3f708032f3b6d"
-  integrity sha512-1MNfWaHPMTpMqqGrEpkm0AxbVGBnfaqptrV5qfm1erfPJbkWyPPOLReq89nZFNej4gQJN4ZpjuKZ3ZDI6r29ew==
+"@react-admin/ra-relationships@^2.0.0", "@react-admin/ra-relationships@^2.1.7":
+  version "2.1.7"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-relationships/-/ra-relationships-2.1.7.tgz#8898fc79d0b95dc27921ac89edd3772222e7528e"
+  integrity sha512-WPtnlZLxcef00j4frxym8FVLqjJYqGeOCFZQuhr5sSSbCPs/16rCvG2ACFk2/V5+H/Loi6q918WFdLK4CxfJAA==
 
-"@react-admin/ra-search@^2.0.0", "@react-admin/ra-search@^2.2.0":
+"@react-admin/ra-search@^2.2.0":
   version "2.2.0"
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-2.2.0.tgz#1cd3d718bb9013b9496ea4735613cce609a20e53"
   integrity sha512-jZt8ORSd9ky5s/7xgZHAPHW2X1bXjOCKUem8A6vhkYhtC96SjVibCRWxJ9CLYrrVtGDku8FZB1FDemKBZ66TUw==
@@ -2237,10 +2238,10 @@
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
 
-"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.5.0.tgz#2bb1a5ec8a7e2688fe11512bdf078b10b029560b"
-  integrity sha512-XQBmDRRT/SG97oi3B9eEL+h0PDhjVrKmG+9p3mdNRLn6I8eYN3ld/bXgltG1aIQDzC2BMv0ROizIv45hmvywHw==
+"@react-admin/ra-tree@^1.0.0", "@react-admin/ra-tree@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tree/-/ra-tree-1.6.3.tgz#836675b3c6635f85a6ee67a671e11927ba050380"
+  integrity sha512-RtUFqTXTToq96IhBnHRd1H/0q45AOcIQwE/4n12d0Bgu35CmhOlwzktpWC6sQAy6OMbg35fbmLCtG88/0xV6uw==
   dependencies:
     prop-types "^15.6.1"
     rc-tree "^3.1.5"
@@ -2663,10 +2664,10 @@
   dependencies:
     parchment "^1.1.2"
 
-"@types/react-dom@^17.0.2":
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.2.tgz#35654cf6c49ae162d5bc90843d5437dc38008d43"
-  integrity sha512-Icd9KEgdnFfJs39KyRyr0jQ7EKhq8U6CcHRMGAS45fp5qgUvxL3ujUCfWFttUK2UErqZNj97t9gsVPNAqcwoCg==
+"@types/react-dom@^17.0.5":
+  version "17.0.5"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-17.0.5.tgz#df44eed5b8d9e0b13bb0cd38e0ea6572a1231227"
+  integrity sha512-ikqukEhH4H9gr4iJCmQVNzTB307kROe3XFfHAOTxOXPOw7lAoEXnM5KWTkzeANGL5Ce6ABfiMl/zJBYNi7ObmQ==
   dependencies:
     "@types/react" "*"
 
@@ -2702,10 +2703,10 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/react@^17.0.3":
-  version "17.0.3"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.3.tgz#ba6e215368501ac3826951eef2904574c262cc79"
-  integrity sha512-wYOUxIgs2HZZ0ACNiIayItyluADNbONl7kt8lkLjVK8IitMH5QMyAh75Fwhmo37r1m7L2JaFj03sIfxBVDvRAg==
+"@types/react@^17.0.8":
+  version "17.0.8"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.8.tgz#fe76e3ba0fbb5602704110fd1e3035cf394778e3"
+  integrity sha512-3sx4c0PbXujrYAKwXxNONXUtRp9C+hE2di0IuxFyf5BELD+B+AXL8G7QrmSKhVwKZDbv0igiAjQAMhXj8Yg3aw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -3592,7 +3593,7 @@ babel-preset-react-app@^10.0.0:
     babel-plugin-macros "2.8.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"
 
-babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+babel-runtime@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
   integrity sha1-llxwWGaOgrVde/4E/yM3vItWR/4=
@@ -4958,10 +4959,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-data-generator-retail@^3.11.3:
-  version "3.11.3"
-  resolved "https://registry.yarnpkg.com/data-generator-retail/-/data-generator-retail-3.11.3.tgz#2093ecbb355b1058d095a4db064a2b046cc4dae0"
-  integrity sha512-XvUaoCERrEvmKVGwfwlP2zD2OmdSsmSr/k79CHfizfTmNYEQg4uhH+JhLWNtKM8lvZ7uNyYlgWDsoz044UrX0w==
+data-generator-retail@^3.15.1:
+  version "3.15.1"
+  resolved "https://registry.yarnpkg.com/data-generator-retail/-/data-generator-retail-3.15.1.tgz#877d463a75df74aa46b4c35830adf7b6da586244"
+  integrity sha512-wceBeBWRQREx3Z+OWR0MNybeK2cnO1skhsSOhlgvTWZ5Td99pjxnaeWQWC7K0gee20i6tH0eOKi949qt93o0ZQ==
   dependencies:
     date-fns "~1.29.0"
     faker "^4.1.0"
@@ -6072,17 +6073,18 @@ faker@^4.1.0:
   resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
   integrity sha1-HkW7vsxndLPBlfrSg1EJxtdIzD8=
 
-fakerest@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/fakerest/-/fakerest-2.2.0.tgz#68fc7663baee9243d998dcdb20c9f555ae7b6065"
-  integrity sha512-6ByPB2f7NfK7UJ7W4xt2oz6Cq/gefYCV5NJTCkDmZS+hh2scheLl7eLqOCmdx/yw67JinTvG8TgOufjhkM0UOg==
-  dependencies:
-    babel-runtime "^6.22.0"
-
 fakerest@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/fakerest/-/fakerest-3.1.0.tgz#1fe2ce1149affd2823a29a657d11a9515a4e0a85"
   integrity sha512-R16qzYYGl8m3K0eWLAeh/DmsndITKEX8gFykDqCMgv6HSvZwhPXInfGimY8gcXkHU2EnXmsbA90SyDlHIM7oiQ==
+  dependencies:
+    babel-runtime "^6.26.0"
+    lodash "^4.17.21"
+
+fakerest@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/fakerest/-/fakerest-3.3.0.tgz#81f41d096fd7145825b058ee3d4b9d518f4ed92b"
+  integrity sha512-D1y6a13dh34n738YMztecCX36JRKI5kxPaNVQukXUXvUyK7eANWyB5zczy0SMoMUDXC/ceKfjkgwbc1AYqYYOQ==
   dependencies:
     babel-runtime "^6.26.0"
     lodash "^4.17.21"
@@ -10655,10 +10657,10 @@ quill@~1.3.6:
     parchment "^1.1.4"
     quill-delta "^3.6.2"
 
-ra-core@^3.14.5:
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-3.14.5.tgz#aec6102e3e5849552da315675001b94a962341e0"
-  integrity sha512-5pEmobyXwlsL0xhamrZvLGekMR13W3LdPq6HFYWGuwgviiPAU3jGcsVQOEFaerIBP6Xlm5qZnoZt4TcBh82z9A==
+ra-core@^3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/ra-core/-/ra-core-3.15.2.tgz#a1e66d50d028554e4cf6562ad132480837d64f59"
+  integrity sha512-Ba7+j/g3deKj7AgFn0BItC3jDfmpwzojG+v2QlJKx5k9WOf6yu3ZRjBbArn3RVziap4WYmsDYCQPxORC/wWIHA==
   dependencies:
     classnames "~2.2.5"
     date-fns "^1.29.0"
@@ -10683,13 +10685,13 @@ ra-data-simple-rest@^3.13.4:
   dependencies:
     query-string "^5.1.1"
 
-ra-i18n-polyglot@^3.14.5:
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-3.14.5.tgz#a7fba22ab70f4c761d081b2236bf62ae0182c7c6"
-  integrity sha512-aXlMBPP2FvaegXEGO63i9KmuSoN6wIpdl3xpEARF8W3F5BvjYuqQbPs2ITM3HtUU53QGbTDJJz+hJkneN/aGCw==
+ra-i18n-polyglot@^3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/ra-i18n-polyglot/-/ra-i18n-polyglot-3.15.2.tgz#e8da42a61e5b0991457fca685a10f600274417a7"
+  integrity sha512-1AgywS7KBEMwaks4guH5UGeimXDBwcBMyGHEPQG/6QDOtorhCujByEQDiUN2hCDqnf7wMtyfdZzJT1mc6l8JMw==
   dependencies:
     node-polyglot "^2.2.2"
-    ra-core "^3.14.5"
+    ra-core "^3.15.2"
 
 ra-input-rich-text@^3.14.0:
   version "3.14.0"
@@ -10701,19 +10703,19 @@ ra-input-rich-text@^3.14.0:
     prop-types "^15.6.0"
     quill "~1.3.6"
 
-ra-language-english@^3.14.5:
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-3.14.5.tgz#f28ce660c9091bd6efc6888ba4de4bac90c0607e"
-  integrity sha512-SROdgyBrGVvJ7HVLyC6+qYek2EKt/FeabgjrUfgtszXI4GGmh3Fgsz86PU/9gYDFUTNN+SiKP8riaVGIkoT59w==
+ra-language-english@^3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/ra-language-english/-/ra-language-english-3.15.2.tgz#1eea58e4c8009616c77e4e21b0fe2fae54159f38"
+  integrity sha512-jFSqF8Qsf0ENraw44P5pBYNHXxyPsA48ACbTR95Ds0az2s7BAHRxLL6g57PbCaad5ND6Jl6phjJqbfQt0DizQg==
   dependencies:
-    ra-core "^3.14.5"
+    ra-core "^3.15.2"
 
-ra-language-french@^3.14.5:
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-3.14.5.tgz#85c678003af258b21b9e38912da035fcb2dd6079"
-  integrity sha512-T69RG2hdmsC2ICTsQXR0dFzf9SCa2asRmHz8M2GoGaT0lHoXZiF2IJuhCamgn2fdYBQ13r9PkiugFXPv1A0omg==
+ra-language-french@^3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/ra-language-french/-/ra-language-french-3.15.2.tgz#81bd2bfbf3bc7e514f2371b09ca6e6c3f670052c"
+  integrity sha512-CIy0QcL+w1NdDiBlHvvQGHN378ydmZFa3eVbll/Av54uaS3hVFLocs4eGjyiATsNOJqPG4mH4+X2nrZ9ml524Q==
   dependencies:
-    ra-core "^3.14.5"
+    ra-core "^3.15.2"
 
 ra-test@^3.13.5:
   version "3.13.5"
@@ -10724,10 +10726,10 @@ ra-test@^3.13.5:
     classnames "~2.2.5"
     lodash "~4.17.5"
 
-ra-ui-materialui@^3.14.5:
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-3.14.5.tgz#f4439973a53b82bed5899f8468b2bf11f662de0e"
-  integrity sha512-EGkL093h7WJ+FJG+ZCozWYfjcyuM/a4qN0HoHdo9W4ivM3w5bcIQ6BmSByol0kLuooVyUpyGdDRQCqS5eExJlA==
+ra-ui-materialui@^3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/ra-ui-materialui/-/ra-ui-materialui-3.15.2.tgz#f814a186f3d83e4b542be117d8ab9c67cd41b0b9"
+  integrity sha512-ksLjjaiDyC09MXR2Z1erMnsQ1lhkdbRNjzzpgn6d1lsqR7WFdmYoj4hvt+o/T1jFFMSPmUd+qJIohJFV1G3R+A==
   dependencies:
     autosuggest-highlight "^3.1.1"
     classnames "~2.2.5"
@@ -10826,10 +10828,10 @@ rc-virtual-list@^3.0.1:
     rc-resize-observer "^0.2.3"
     rc-util "^5.0.7"
 
-react-admin@^3.14.5:
-  version "3.14.5"
-  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-3.14.5.tgz#5fb71094c764693ce0e000e13875f4dbb2a8f36a"
-  integrity sha512-sgO0jItU/Cq0/ka5EPAiQvI4aVZAp59O3GHcuxzwth5oVTFAhyO13hs64I+m9UvCKKyMofjEcrwmWgedGKh2/A==
+react-admin@^3.15.2:
+  version "3.15.2"
+  resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-3.15.2.tgz#9b8e50381802a597d5d6e2f8e8ebd112f53b4c23"
+  integrity sha512-RVosY3f/hf3ZS5fiQZs21zLNMljmEe3RGMQCPOxc2VIMn9mw+EOAcaZt1F+piCizUzLjRXJFplXODZH3FmFPhg==
   dependencies:
     "@material-ui/core" "^4.11.2"
     "@material-ui/icons" "^4.11.2"
@@ -10837,10 +10839,10 @@ react-admin@^3.14.5:
     connected-react-router "^6.5.2"
     final-form "^4.20.2"
     final-form-arrays "^3.0.2"
-    ra-core "^3.14.5"
-    ra-i18n-polyglot "^3.14.5"
-    ra-language-english "^3.14.5"
-    ra-ui-materialui "^3.14.5"
+    ra-core "^3.15.2"
+    ra-i18n-polyglot "^3.15.2"
+    ra-language-english "^3.15.2"
+    ra-ui-materialui "^3.15.2"
     react-final-form "^6.5.2"
     react-final-form-arrays "^3.1.3"
     react-redux "^7.1.0"
@@ -10891,14 +10893,14 @@ react-dev-utils@^11.0.3:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^17.0.1:
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
-  integrity sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==
+react-dom@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
+  integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    scheduler "^0.20.1"
+    scheduler "^0.20.2"
 
 react-dropzone@^10.1.7:
   version "10.2.2"
@@ -11134,10 +11136,10 @@ react-transition-group@^4.4.0, react-transition-group@^4.4.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-react@^17.0.1:
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/react/-/react-17.0.1.tgz#6e0600416bd57574e3f86d92edba3d9008726127"
-  integrity sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w==
+react@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -11729,10 +11731,10 @@ saxes@^5.0.0:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.20.1:
-  version "0.20.1"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.1.tgz#da0b907e24026b01181ecbc75efdc7f27b5a000c"
-  integrity sha512-LKTe+2xNJBNxu/QhHvDR14wUXHRQbVY5ZOYpOGWRzhydZUqrLb2JBvLPY7cAqFmqrWuDED0Mjk7013SZiOz6Bw==
+scheduler@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
+  integrity sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
