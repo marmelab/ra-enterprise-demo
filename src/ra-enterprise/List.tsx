@@ -65,7 +65,6 @@ const useStyles = makeStyles({
         maxHeight: '250px',
         overflowY: 'auto',
         margin: 0,
-        background: '#eee',
     },
 });
 
