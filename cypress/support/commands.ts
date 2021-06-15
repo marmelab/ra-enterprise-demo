@@ -8,3 +8,18 @@ export const signIn = () => {
     cy.findByText('Jane Doe');
     cy.findByText('Welcome to the react-admin enterprise edition demo');
 };
+
+export const startTour = (tour: string) => {
+    cy.findByLabelText('Tours').click();
+    cy.findByText(tour).click();
+};
+
+export const waitForStepAndGoToNext = (
+    text?: string | RegExp,
+    buttonLabel: 'Next' | 'Last' = 'Next'
+) => {
+    if (text) {
+        cy.findByText(text);
+    }
+    cy.findByLabelText(buttonLabel).click();
+};
