@@ -9,9 +9,7 @@ import {
 
 const Prompt = (props: CreateProps) => {
     const resource = useResourceContext(props);
-    const { data } = useGetRootNodes(resource as string, {
-        enabled: true,
-    });
+    const { data } = useGetRootNodes(resource as string);
     const [addChildNode] = useAddChildNode(resource as string);
     const refresh = useRefresh();
     const redirect = useRedirect();

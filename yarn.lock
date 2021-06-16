@@ -2250,10 +2250,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-form-layout/-/ra-form-layout-1.6.0.tgz#6633223576a30762f8d564fcaaab8daf53baa08a"
   integrity sha512-AySNUNn3NLj78WN8h7AgKmWTVK6urEiySQm3S2ZxRYh9166sLHijqjl8X0UITnRlAS6UXS0T5iwXnAup1Uc6aw==
 
-"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.2.0.tgz#7be88517a37ac6ec09b84d51f1eac585c2a1fbb7"
-  integrity sha512-oyOCd8vn3hKj/3habFtz29WsiZWQ9C110d1b5YYvg+2pdtvemLRZhfVDJRcIRNV4A2WA3DOShVBGyObio5uaqQ==
+"@react-admin/ra-markdown@^1.0.0", "@react-admin/ra-markdown@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-markdown/-/ra-markdown-1.3.0.tgz#52e3daec545305b28ff15a282c75dbe2b6887de6"
+  integrity sha512-5L04X+fXoMquBlE1fa5TLZ2IV3HGW0zcRfdFyKKPqa2ycrfQDbvFJSaG1M8+p/hOgdW/Q9SsCfif5HbOngLHAA==
   dependencies:
     "@toast-ui/react-editor" "^2.2.0"
 
@@ -2262,10 +2262,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-navigation/-/ra-navigation-2.2.4.tgz#db50d20f02619c937567439a913a840fd9b727db"
   integrity sha512-5CqufoyjIsGI3fk0JcRcO3hSOhipB2Sc7CF4PG96iF71VOg6hb3HVsiTAKGLJP1cFMIWQF9ZhpJ1zw7SpAd+ZA==
 
-"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.3.0.tgz#169a390c0d9a4fcc97eeaf57991fc19abe50bb9c"
-  integrity sha512-2mPSlgqbbY7Fj4s5N/HGU0ohybZmZI8yX3EXb909v3zrncOb6esqHwYpLasB9flP0pvCHthzvd+t52ORWYi4Lg==
+"@react-admin/ra-preferences@^1.0.0", "@react-admin/ra-preferences@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-preferences/-/ra-preferences-1.3.1.tgz#8459e628e933e23547acc06cfe8da037c7fea000"
+  integrity sha512-6VlqwOXd1EDobqfSZzatVwi2ThCoSlWE41DX5/OhvkRPg2QN0fRS6Oom4V3g3z53QnlzK0LoCrmaNbtJ/e0mUg==
 
 "@react-admin/ra-realtime@^1.0.0", "@react-admin/ra-realtime@^1.4.0":
   version "1.4.0"
