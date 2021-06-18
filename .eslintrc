@@ -66,5 +66,24 @@
                 ]
             }
         ]
-    }
+    },
+    "overrides": [
+        {
+            "files": [
+                "**/*.tsx"
+            ],
+            "rules": {
+                "@typescript-eslint/explicit-function-return-type": "off"
+            }
+        },
+        {
+            "files": [
+                "cypress/**"
+            ],
+            "rules": {
+                "jest/expect-expect": "off",
+                "jest/valid-expect-in-promise": "off"
+            }
+        }
+    ]
 }

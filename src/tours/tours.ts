@@ -615,7 +615,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: "[aria-label='Breadcrumb']",
+                target: '#main-content',
                 content:
                     "By default, there is no breacrumb displayed on the home page.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
                 disableBeacon: true,

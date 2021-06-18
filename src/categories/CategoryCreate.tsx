@@ -1,38 +1,56 @@
-import React, { FC, useEffect } from 'react';
-import { Create, useRefresh, useRedirect, CreateProps } from 'react-admin';
+import { useAddChildNode, useGetRootNodes } from '@react-admin/ra-tree';
+import { useEffect, useRef } from 'react';
+import {
+    useRefresh,
+    useRedirect,
+    CreateProps,
+    useResourceContext,
+} from 'react-admin';
 
-interface PromptProps {
-    label: string;
-    record?: any;
-    save?: (data) => any;
-}
+const Prompt = (props: CreateProps) => {
+    const resource = useResourceContext(props);
+    const { data } = useGetRootNodes(resource as string);
+    const [addChildNode] = useAddChildNode(resource as string);
+    const refresh = useRefresh();
+    const redirect = useRedirect();
+    const prompted = useRef(false);
 
-const Prompt: FC<PromptProps> = ({
-    save = (): any => undefined,
-    record = {},
-}) => {
     useEffect(() => {
-        const result = window.prompt('Category', record.name);
-        save({ ...record, name: result, children: [], isRoot: true });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        if (prompted.current) {
+            return;
+        }
+        if (!data || data.length === 0) {
+            return;
+        }
+        const rootNodes = data.filter(node => node.isRoot);
+        if (!rootNodes || rootNodes.length === 0) {
+            return;
+        }
+        prompted.current = true;
+        const result = window.prompt('Category');
+        if (result) {
+            addChildNode(
+                {
+                    payload: {
+                        // We know that we only have one root node in this demo
+                        parentId: rootNodes[0].id,
+                        data: { name: result, children: [] },
+                    },
+                },
+                {
+                    onSuccess: () => {
+                        redirect(props.basePath as string);
+                        refresh();
+                    },
+                }
+            );
+            return;
+        }
+
+        redirect(props.basePath as string);
+    }, [data, props.basePath, redirect, refresh, addChildNode]);
+
     return null;
 };
 
-const CategoryCreate: FC<CreateProps> = props => {
-    const refresh = useRefresh();
-    const redirect = useRedirect();
-
-    const onSuccess = (): void => {
-        redirect(props.basePath as string);
-        refresh();
-    };
-
-    return (
-        <Create {...props} onSuccess={onSuccess}>
-            <Prompt label="Category name" />
-        </Create>
-    );
-};
-
-export default CategoryCreate;
+export default Prompt;

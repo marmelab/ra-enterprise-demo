@@ -132,6 +132,7 @@ const Login = (): ReactElement => {
                             <div className={classes.form}>
                                 <div className={classes.input}>
                                     <Field
+                                        id="username"
                                         name="username"
                                         component={renderInput}
                                         label={translate('ra.auth.username')}
@@ -140,6 +141,7 @@ const Login = (): ReactElement => {
                                 </div>
                                 <div className={classes.input}>
                                     <Field
+                                        id="password"
                                         name="password"
                                         component={renderInput}
                                         label={translate('ra.auth.password')}
