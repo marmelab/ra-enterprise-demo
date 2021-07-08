@@ -37,9 +37,9 @@ const CustomSearch: FC<SearchProps> = props => {
 export default CustomSearch;
 
 const CustomSearchPanel: FC<SearchPanelProps> = props => {
-    const listRef = useRef<HTMLUListElement>(null) as React.MutableRefObject<
-        HTMLUListElement
-    >;
+    const listRef = useRef<HTMLUListElement>(
+        null
+    ) as React.MutableRefObject<HTMLUListElement>;
     const translate = useTranslate();
     const classes = useCustomSearchPanelStyles(props);
     useArrowKeysToNavigate(listRef);

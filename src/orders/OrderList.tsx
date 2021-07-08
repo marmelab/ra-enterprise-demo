@@ -37,7 +37,7 @@ import {
     useTheme,
     lighten,
     darken,
-    fade,
+    alpha,
     Theme,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -74,31 +74,33 @@ const useDatagridStyles = makeStyles({
     total: { fontWeight: 'bold' },
 });
 
-const orderRowStyle = (batchLevel, theme) => (record): any => {
-    let backgroundColor;
-    switch (record.batch) {
-        case batchLevel:
-            backgroundColor =
-                theme.palette.type === 'light'
-                    ? lighten(fade(theme.palette.info.light, 1), 0.68)
-                    : darken(fade(theme.palette.info.dark, 1), 0.88);
-            break;
-        case 1:
-            if (batchLevel > 0) {
+const orderRowStyle =
+    (batchLevel, theme) =>
+    (record): any => {
+        let backgroundColor;
+        switch (record.batch) {
+            case batchLevel:
                 backgroundColor =
                     theme.palette.type === 'light'
-                        ? lighten(fade(theme.palette.info.light, 1), 0.78)
-                        : darken(fade(theme.palette.info.dark, 1), 0.78);
-            }
-            break;
-        default:
-            backgroundColor = theme.palette.background.paper;
-    }
+                        ? lighten(alpha(theme.palette.info.light, 1), 0.68)
+                        : darken(alpha(theme.palette.info.dark, 1), 0.88);
+                break;
+            case 1:
+                if (batchLevel > 0) {
+                    backgroundColor =
+                        theme.palette.type === 'light'
+                            ? lighten(alpha(theme.palette.info.light, 1), 0.78)
+                            : darken(alpha(theme.palette.info.dark, 1), 0.78);
+                }
+                break;
+            default:
+                backgroundColor = theme.palette.background.paper;
+        }
 
-    return {
-        backgroundColor,
+        return {
+            backgroundColor,
+        };
     };
-};
 
 const tabs = [
     { id: 'ordered', name: 'ordered' },

@@ -40,13 +40,11 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 new_customers: 'Nouveaux clients',
                 pending_orders: 'Commandes à traiter',
                 order: {
-                    items:
-                        'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
+                    items: 'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',
                 },
                 timeline: 'Timeline',
                 welcome: {
-                    title:
-                        'Bienvenue sur la démo de react-admin enterprise edition',
+                    title: 'Bienvenue sur la démo de react-admin enterprise edition',
                     subtitle:
                         "Ceci est le back-office d'un magasin de posters imaginaire mettant en oeuvre les modules de l'édition entreprise. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
                     ra_button: 'Site web de react-admin entreprise',

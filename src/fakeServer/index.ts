@@ -22,43 +22,42 @@ const getAllChildrenCategories = (
     return [parentId, ...children];
 };
 
-const rebindProductToCategories = (
-    originalCategories: Category[],
-    newCategories: Category[]
-) => (product: Product) => {
-    const originalCategory = originalCategories.find(
-        c => c.id === product.category_id
-    );
+const rebindProductToCategories =
+    (originalCategories: Category[], newCategories: Category[]) =>
+    (product: Product) => {
+        const originalCategory = originalCategories.find(
+            c => c.id === product.category_id
+        );
 
-    if (!originalCategory) {
-        return product;
-    }
+        if (!originalCategory) {
+            return product;
+        }
 
-    const matchingNewCategory = newCategories.find(
-        c => c.name === originalCategory.name
-    );
+        const matchingNewCategory = newCategories.find(
+            c => c.name === originalCategory.name
+        );
 
-    if (!matchingNewCategory) {
-        return product;
-    }
+        if (!matchingNewCategory) {
+            return product;
+        }
 
-    // If the new category does not have sub categories, just ensure we have the correct id
-    if (matchingNewCategory.children.length === 0) {
+        // If the new category does not have sub categories, just ensure we have the correct id
+        if (matchingNewCategory.children.length === 0) {
+            return {
+                ...product,
+                category_id: matchingNewCategory.id,
+            };
+        }
+
+        const newCategoryId = random.arrayElement(
+            matchingNewCategory.children || []
+        );
+
         return {
             ...product,
-            category_id: matchingNewCategory.id,
+            category_id: newCategoryId,
         };
-    }
-
-    const newCategoryId = random.arrayElement(
-        matchingNewCategory.children || []
-    );
-
-    return {
-        ...product,
-        category_id: newCategoryId,
     };
-};
 
 export default (): (() => void) => {
     // @ts-ignore
