@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/ra-enterprise-demo/static/css/main.af3584c1.chunk.css",
-    "main.js": "/ra-enterprise-demo/static/js/main.eb644768.chunk.js",
-    "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.a576929f.js",
-    "static/css/2.e625dec6.chunk.css": "/ra-enterprise-demo/static/css/2.e625dec6.chunk.css",
-    "static/js/2.f87f8f54.chunk.js": "/ra-enterprise-demo/static/js/2.f87f8f54.chunk.js",
+    "main.css": "/ra-enterprise-demo/static/css/main.ab951f32.chunk.css",
+    "main.js": "/ra-enterprise-demo/static/js/main.c96ce20d.chunk.js",
+    "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.85a25ab1.js",
+    "static/css/2.697b7f60.chunk.css": "/ra-enterprise-demo/static/css/2.697b7f60.chunk.css",
+    "static/js/2.ce44ec96.chunk.js": "/ra-enterprise-demo/static/js/2.ce44ec96.chunk.js",
     "index.html": "/ra-enterprise-demo/index.html",
-    "static/js/2.f87f8f54.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.f87f8f54.chunk.js.LICENSE.txt",
+    "static/js/2.ce44ec96.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.ce44ec96.chunk.js.LICENSE.txt",
     "static/media/welcome_illustration.cd84d2be.svg": "/ra-enterprise-demo/static/media/welcome_illustration.cd84d2be.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.a576929f.js",
-    "static/css/2.e625dec6.chunk.css",
-    "static/js/2.f87f8f54.chunk.js",
-    "static/css/main.af3584c1.chunk.css",
-    "static/js/main.eb644768.chunk.js"
+    "static/js/runtime-main.85a25ab1.js",
+    "static/css/2.697b7f60.chunk.css",
+    "static/js/2.ce44ec96.chunk.js",
+    "static/css/main.ab951f32.chunk.css",
+    "static/js/main.c96ce20d.chunk.js"
   ]
 }
