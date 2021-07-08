@@ -73,6 +73,7 @@ const VisitorList: FC<ListProps> = props => {
                 hasList,
                 hasEdit,
                 hasCreate,
+                syncWithLocation,
                 ...rest
             }): JSX.Element => {
                 if (isXsmall) {
