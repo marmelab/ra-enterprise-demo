@@ -40,8 +40,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 new_customers: 'New Customers',
                 pending_orders: 'Pending Orders',
                 order: {
-                    items:
-                        'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
+                    items: 'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
                 },
                 timeline: 'Timeline',
                 welcome: {

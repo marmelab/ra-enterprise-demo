@@ -29,9 +29,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Aside = (props: ListProps): ReactElement => {
-    const { setFilters, filterValues, displayedFilters } = useListFilterContext(
-        props
-    );
+    const { setFilters, filterValues, displayedFilters } =
+        useListFilterContext(props);
 
     const { data } = useGetTree('categories');
 

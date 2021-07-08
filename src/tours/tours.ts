@@ -121,9 +121,10 @@ const tours: { [id: string]: TourType } = {
                     });
                     await new Promise(resolve => setTimeout(resolve, 500));
 
-                    const saveButton: HTMLButtonElement | null = document.querySelector(
-                        'body > .MuiDialog-root button:nth-child(2)'
-                    );
+                    const saveButton: HTMLButtonElement | null =
+                        document.querySelector(
+                            'body > .MuiDialog-root button:nth-child(2)'
+                        );
                     if (!saveButton) {
                         return;
                     }
@@ -158,9 +159,10 @@ const tours: { [id: string]: TourType } = {
                     },
                 },
                 after: () => {
-                    const menuOverlay: HTMLElement | null = document.querySelector(
-                        'body > .MuiPopover-root div[aria-hidden=true]'
-                    );
+                    const menuOverlay: HTMLElement | null =
+                        document.querySelector(
+                            'body > .MuiPopover-root div[aria-hidden=true]'
+                        );
                     if (!menuOverlay) {
                         return;
                     }
@@ -260,19 +262,20 @@ const tours: { [id: string]: TourType } = {
                     [[1], [2], [3], [4]].reduce(
                         acc =>
                             acc.then(async () => {
-                                const {
-                                    data: customers,
-                                } = await dataProvider.getList('customers', {
-                                    filter: { has_ordered: true },
-                                    pagination: { page: 1, perPage: 100 },
-                                    sort: { field: 'id', order: 'ASC' },
-                                });
+                                const { data: customers } =
+                                    await dataProvider.getList('customers', {
+                                        filter: { has_ordered: true },
+                                        pagination: { page: 1, perPage: 100 },
+                                        sort: { field: 'id', order: 'ASC' },
+                                    });
                                 // Add a new Order
-                                const {
-                                    data: newCommand,
-                                } = await dataProvider.create('commands', {
-                                    data: randomCommandBuilder(1, customers),
-                                });
+                                const { data: newCommand } =
+                                    await dataProvider.create('commands', {
+                                        data: randomCommandBuilder(
+                                            1,
+                                            customers
+                                        ),
+                                    });
 
                                 newCommandsIds.push(newCommand.id);
                                 // Then notify the Real-time dataProvider
@@ -481,8 +484,7 @@ const tours: { [id: string]: TourType } = {
         },
         steps: [
             {
-                target:
-                    '[data-testid="store-datagrid"] > tbody > tr:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
                 content:
                     "Hovering on a row shows a toolbar allowing to either edit or delete the record. Let's see what happens when editing a row by clicking on the Edit button (or by directly clicking inside the row)",
             },
@@ -490,8 +492,7 @@ const tours: { [id: string]: TourType } = {
                 before: ({ target }) => {
                     target.querySelector('td:nth-child(2)').click();
                 },
-                target:
-                    '[data-testid="store-datagrid"] > tbody > tr:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
                 content:
                     "You can edit a record without leaving the Datagrid! Let's change the address.",
                 after: ({ target }) => {
@@ -501,8 +502,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target:
-                    '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
                 content:
                     'After edition, just click on the Save button in the row',
                 after: ({ target }) => {
@@ -531,14 +531,12 @@ const tours: { [id: string]: TourType } = {
                         target: { value: '2020-08-04' },
                     });
                 },
-                target:
-                    '[data-testid="store-datagrid"] > tbody > tr:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
                 content:
                     'A row edition / creation form can contain Inputs of any type (text, date, number, etc.).',
             },
             {
-                target:
-                    '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
                 content:
                     'Click on the Save button to submit the form and create a new record.',
                 after: ({ target }) => {

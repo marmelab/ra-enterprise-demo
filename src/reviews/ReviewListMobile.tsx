@@ -38,14 +38,8 @@ const ReviewMobileList: FC = () => {
     const classes = useStyles();
     const [, setLocation] = useAppLocationState();
     const resourceLocation = useResourceAppLocation();
-    const {
-        basePath,
-        data,
-        ids,
-        loading,
-        total,
-        filterValues,
-    } = useListContext();
+    const { basePath, data, ids, loading, total, filterValues } =
+        useListContext();
 
     const effectDependency = JSON.stringify({
         resourceLocation,
