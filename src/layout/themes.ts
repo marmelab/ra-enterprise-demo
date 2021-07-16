@@ -1,5 +1,5 @@
 import { ThemeOptions } from '@react-admin/ra-enterprise';
-import { alpha, Theme } from '@material-ui/core';
+import { fade, Theme } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import createPalette from '@material-ui/core/styles/createPalette';
 
@@ -36,22 +36,22 @@ const darkTheme = (theme: Theme): ThemeOptions => ({
         RaSearchInput: {
             root: {
                 color: darkPalette.common.white,
-                backgroundColor: alpha(darkPalette.common.black, 0.04),
+                backgroundColor: fade(darkPalette.common.black, 0.04),
                 '&:hover': {
-                    backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    backgroundColor: fade(darkPalette.common.black, 0.13),
                 },
                 '&:focus': {
-                    backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    backgroundColor: fade(darkPalette.common.black, 0.13),
                 },
                 '&:focus-within': {
-                    backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    backgroundColor: fade(darkPalette.common.black, 0.13),
                 },
             },
             inputBase: {
-                background: alpha(darkPalette.common.black, 0.04),
+                background: fade(darkPalette.common.black, 0.04),
                 borderRadius: 10,
                 '&:hover': {
-                    background: alpha(darkPalette.common.black, 0.1),
+                    background: fade(darkPalette.common.black, 0.1),
                 },
             },
             inputAdornmentStart: {
@@ -150,22 +150,22 @@ export const lightTheme = (theme: Theme): ThemeOptions => ({
         RaSearchInput: {
             root: {
                 color: lightPalette.text.primary,
-                backgroundColor: alpha(lightPalette.common.black, 0.04),
+                backgroundColor: fade(lightPalette.common.black, 0.04),
                 '&:hover': {
-                    backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    backgroundColor: fade(lightPalette.common.black, 0.13),
                 },
                 '&:focus': {
-                    backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    backgroundColor: fade(lightPalette.common.black, 0.13),
                 },
                 '&:focus-within': {
-                    backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    backgroundColor: fade(lightPalette.common.black, 0.13),
                 },
             },
             inputBase: {
-                background: alpha(lightPalette.common.black, 0.04),
+                background: fade(lightPalette.common.black, 0.04),
                 borderRadius: 10,
                 '&:hover': {
-                    background: alpha(lightPalette.common.black, 0.1),
+                    background: fade(lightPalette.common.black, 0.1),
                 },
             },
             inputAdornmentStart: {
