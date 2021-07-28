@@ -100,6 +100,6 @@
     "resolutions": {
         "@material-ui/core": "4.11.4",
         "@material-ui/system": "4.11.3",
-        "@material-ui/lab":"4.0.0-alpha.56"
+        "@material-ui/lab": "4.0.0-alpha.56"
     }
 }
