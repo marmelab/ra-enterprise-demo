@@ -4,7 +4,7 @@ export default [
         image: 'images/tours/ra-preferences.jpg',
         title: 'ra-preferences',
         tour: 'ra-preferences',
-        comment: `Persist user preferences (language, ui, filters, displayed columns, etc) in local storage`,
+        comment: 'tours.ra-preferences.comment',
         href: 'http://marmelab.com/react-admin',
     },
     {
@@ -12,7 +12,7 @@ export default [
         image: 'images/tours/ra-search.png',
         title: 'ra-search',
         tour: 'ra-search',
-        comment: `Plug your search engine and let users search across all resources via a smart Omnisearch box`,
+        comment: 'tours.ra-search.comment',
         href: 'http://marmelab.com/react-admin',
     },
     {
@@ -20,7 +20,7 @@ export default [
         image: 'images/tours/ra-navigation-breadcrumb.jpg',
         title: 'ra-navigation: Breadcrumb',
         tour: 'ra-navigation-breadcrumb',
-        comment: `Keep a track of your location in the site and navigate easily.`,
+        comment: 'tours.ra-navigation-breadcrumb.comment',
         href: 'http://marmelab.com/react-admin',
     },
     {
@@ -28,7 +28,7 @@ export default [
         image: 'images/tours/ra-realtime.jpg',
         title: 'ra-realtime',
         tour: 'ra-realtime',
-        comment: `Enable realtime on menu, list, show and edit views - or anywhere you want.`,
+        comment: 'tours.ra-realtime.comment',
         href: 'http://marmelab.com/react-admin',
     },
     {
@@ -36,7 +36,7 @@ export default [
         image: 'images/tours/ra-editable-datagrid.jpg',
         title: 'ra-editable-datagrid',
         tour: 'ra-editable-datagrid',
-        comment: `Quickly edit your data without leaving your datagrid.`,
+        comment: 'tours.ra-editable-datagrid.comment',
         href: 'http://marmelab.com/react-admin',
     },
     {
@@ -44,7 +44,7 @@ export default [
         image: 'images/tours/ra-tree.jpg',
         title: 'ra-tree',
         tour: 'ra-tree',
-        comment: `Edit and visualize tree structures. Reorganize by drag and drop. Adapts to any data structure on the backend (parent_id, children, nested sets, etc)..`,
+        comment: 'tours.ra-tree.comment',
         href: 'http://marmelab.com/react-admin',
     },
     {
@@ -52,7 +52,7 @@ export default [
         image: 'images/tours/ra-markdown.jpg',
         title: 'ra-markdown',
         tour: 'ra-markdown',
-        comment: `Read Markdown data, and edit it using a WYSIWYG editor in your admin`,
+        comment: 'tours.ra-markdown.comment',
         href: 'http://marmelab.com/react-admin',
     },
 ];

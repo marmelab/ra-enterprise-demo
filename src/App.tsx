@@ -1,8 +1,18 @@
 import React, { ReactElement, useEffect } from 'react';
-import { Resource } from 'react-admin';
+import { mergeTranslations, Resource } from 'react-admin';
 
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 import { addEventsForMutations, EventList } from '@react-admin/ra-audit-log';
+import {
+    reducer as tree,
+    raTreeLanguageEnglish,
+    raTreeLanguageFrench,
+} from '@react-admin/ra-tree';
+import {
+    raTourLanguageEnglish,
+    raTourLanguageFrench,
+} from '@react-admin/ra-tour';
+import { useTheme } from '@material-ui/core';
 
 import './App.css';
 
@@ -25,13 +35,20 @@ import stores from './stores';
 
 import dataProvider from './dataProvider';
 import fakeServer from './fakeServer';
-import { useTheme } from '@material-ui/core';
 
 const messages = {
-    en: englishMessages,
-    fr: frenchMessages,
+    en: mergeTranslations(
+        englishMessages,
+        raTreeLanguageEnglish,
+        raTourLanguageEnglish
+    ),
+    fr: mergeTranslations(
+        frenchMessages,
+        raTreeLanguageFrench,
+        raTourLanguageFrench
+    ),
 };
-
+console.log(messages.fr);
 const i18nProvider = buildI18nProvider(messages, 'en');
 
 const enhancedDataProvider = addEventsForMutations(dataProvider, authProvider);
@@ -51,12 +68,13 @@ const App = (): ReactElement => {
             title=""
             dataProvider={enhancedDataProvider}
             customRoutes={customRoutes}
+            customReducers={{ tree }}
             authProvider={authProvider}
             dashboard={Dashboard}
             loginPage={Login}
             layout={Layout}
             i18nProvider={i18nProvider}
-            // Ra-enterprise confirguration
+            // Ra-enterprise configuration
             lightTheme={lightTheme}
             darkTheme={darkTheme}
         >

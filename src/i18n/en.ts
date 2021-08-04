@@ -267,6 +267,91 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 name: 'Events',
             },
         },
+        tours: {
+            action: {
+                play: 'Play',
+            },
+            message: {
+                played_on: 'Last played on %{date}',
+                never_played: 'Never played before',
+            },
+            'ra-preferences': {
+                comment:
+                    'Persist user preferences (language, ui, filters, displayed columns, etc) in local storage',
+                intro: 'ra-preferences comes with a lot of built-in modules, like this theme switcher. Try it: it works!',
+                language_switcher: 'Or this language switcher...',
+                persisted_queries:
+                    "It features persisted queries too. For example, let's persist the filters for today visitors who actually ordered something.",
+                persisted_queries_result:
+                    "It's persisted locally in the browser now!",
+                list_customization:
+                    'It even has more advanced components like this list customization tool.',
+                list_customization_columns:
+                    'Where you can select how you want the list to be displayed, or the information you want to see.',
+                hook: 'It exposes simple hooks so that you can actually save whatever you want, too. For instance, the state of this particular step. Try to reload the page!',
+            },
+            'ra-search': {
+                comment:
+                    'Plug your search engine and let users search across all resources via a smart Omnisearch box',
+                intro: 'This is the smart Omnisearch box. It allows users to search across all resources. ',
+                customize:
+                    "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer.",
+                preserved_across_navigation:
+                    'The search query and results are preserved after navigation.',
+            },
+            'ra-navigation-breadcrumb': {
+                comment:
+                    'Keep a track of your location in the site and navigate easily.',
+                intro: 'The breadcrumb indicates that we are on the posters page.',
+                edit: "Let's edit one of these posters.",
+                sync: 'The breadcrumb has changed to follow us to this Edit page.',
+                navigate: "Let's try to navigate away using the Menu entry.",
+                sync2: 'The breadcrumb keeps showing our exact location.',
+                clickable:
+                    "Users can click on the breadcrumb items directly to navigate.\nLet's go to the home page.",
+                dashboard:
+                    "By default, there is no breacrumb displayed on the home page.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
+            },
+            'ra-realtime': {
+                comment:
+                    'Enable realtime on menu, list, show and edit views - or anywhere you want.',
+                intro: "Seems like you just had new orders, let's check...",
+                new_orders: 'Your new orders can stand-out from others.',
+                newest: "And newest orders even appear while you're on the page.",
+                locks: 'You can lock resources in realtime (this one will be unlocked in a few seconds).',
+            },
+            'ra-editable-datagrid': {
+                comment:
+                    'Quickly edit your data without leaving your datagrid.',
+                intro: "Hovering on a row shows a toolbar allowing to either edit or delete the record. Let's see what happens when editing a row by clicking on the Edit button (or by directly clicking inside the row).",
+                edit: "You can edit a record without leaving the Datagrid! Let's change the address.",
+                save: 'After edition, just click on the Save button in the row.',
+                create: 'The Editable Datagrid also supports inline creation.',
+                forms: 'A row edition / creation form can contain Inputs of any type (text, date, number, etc.).',
+                create_save:
+                    'Click on the Save button to submit the form and create a new record.',
+            },
+            'ra-tree': {
+                comment:
+                    'Edit and visualize tree structures. Reorganize by drag and drop. Adapts to any data structure on the backend (parent_id, children, nested sets, etc)...',
+                intro: 'ra-tree helps handling trees with ease, no matter the data structure you use on the backend.',
+                infinite_levels:
+                    'It supports expanding or collapsing nodes for an infinite amount of levels',
+                changes:
+                    'You can even add a new category, or reorder them, try it!',
+            },
+            'ra-markdown': {
+                comment:
+                    'Read Markdown data, and edit it using a WYSIWYG editor in your admin.',
+                intro: "This is a poster, one of the products our shop is selling, let's go to its details.",
+                editor_location:
+                    'The markdown editor is in the description tab.',
+                editor: 'Right here. Try playing with its markdown, make it bold, add headlines!',
+                wysiwyg: 'By default, you are in WYSIWYG mode.',
+                raw: 'But you can switch to raw markdown edition with this button.',
+                show: 'Parsed markdown can then be displayed in a preview or wherever you want.',
+            },
+        },
     }
 );
 
