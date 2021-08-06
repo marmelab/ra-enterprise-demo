@@ -6,10 +6,10 @@ describe('Tours', () => {
         startTour('ra-search');
         waitForStepAndGoToNext();
         waitForStepAndGoToNext(
-            "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer"
+            "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer."
         );
         waitForStepAndGoToNext(
-            'The search query and results are preserved after navigation',
+            'The search query and results are preserved after navigation.',
             'Last'
         );
     });

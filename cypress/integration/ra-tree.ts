@@ -6,7 +6,7 @@ describe('Tours', () => {
         startTour('ra-tree');
         waitForStepAndGoToNext();
         waitForStepAndGoToNext(
-            'It supports expanding or collapsing nodes for an infinite amount of levels'
+            'It supports expanding or collapsing nodes for an infinite amount of levels.'
         );
         // wait for expanding animations to complete
         cy.findByText('solid');

@@ -5,7 +5,9 @@ describe('Tours', () => {
         signIn();
         startTour('ra-markdown');
         waitForStepAndGoToNext();
-        waitForStepAndGoToNext('The markdown editor is in the description tab');
+        waitForStepAndGoToNext(
+            'The markdown editor is in the description tab.'
+        );
         waitForStepAndGoToNext(
             'Right here. Try playing with its markdown, make it bold, add headlines!'
         );
