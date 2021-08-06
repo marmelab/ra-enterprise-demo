@@ -1641,14 +1641,7 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@react-admin/ra-audit-log@^2.0.2":
-  version "2.4.0"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-audit-log/-/ra-audit-log-2.4.0.tgz#d9880fbf3c9daf297ae300bb000b12fd1781dca3"
-  integrity sha512-/UTlq0zkuZQis8IydTSHjmsP9qpWnG9zgGGQB6GuexIKM8sdC4WZnqTTgBLOGuDiLQD1TXQYt9tLJQ2zP+FMng==
-  dependencies:
-    date-fns "^2.21.1"
-
-"@react-admin/ra-audit-log@^2.4.1":
+"@react-admin/ra-audit-log@^2.0.2", "@react-admin/ra-audit-log@^2.4.1":
   version "2.4.1"
   resolved "https://registry.marmelab.com/@react-admin%2fra-audit-log/-/ra-audit-log-2.4.1.tgz#cf6b59fd205f2e0ed8232477580f5c9f2ba84ccc"
   integrity sha512-ViswUSW/im210O/oGw894c78ySdIrplV/WrnlhsKvTn5KCZq9W25WraJArHsHmvsfUsEic5+tMEB1xv8UjzGBg==
@@ -1718,10 +1711,10 @@
   resolved "https://registry.marmelab.com/@react-admin%2fra-search/-/ra-search-2.2.1.tgz#43c46529e8c7e2fc4cbcd6dc2aa3cd59e6e3e95e"
   integrity sha512-qAfq1aH4ogUrcHTbKIii0MiPVhfeUMv8xutG898XUm2K61CqLcFxp1sn1YLlqGs8EdGMOIvYmNy/gSFH2AZdAg==
 
-"@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.1.2.tgz#0c22e6c797c35ef4eb6fa31a6e571769a4dc7269"
-  integrity sha512-shE1skK/MAwzDVTXdmulwiMnl9cCUZN/e9/mln39ljNU03lMBDU1NKuR/GH1kvydvphkYmsLvjJHf7PbcaH3WA==
+"@react-admin/ra-tour@^1.0.0", "@react-admin/ra-tour@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.marmelab.com/@react-admin%2fra-tour/-/ra-tour-1.2.0.tgz#720795b9205ff1790de60b1920e722ba1a44401e"
+  integrity sha512-YHVehKLm03pzaVLhbpxl1Hfug+YkCs9xzhI5HMxCRlqO+uYnh6jROJh9CaRJRpGjTypLisS/8GEQll3ATxkz2w==
   dependencies:
     react-error-boundary "^2.2.2"
     react-joyride "^2.2.1"
