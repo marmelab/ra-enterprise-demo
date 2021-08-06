@@ -336,7 +336,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     'Edit and visualize tree structures. Reorganize by drag and drop. Adapts to any data structure on the backend (parent_id, children, nested sets, etc)...',
                 intro: 'ra-tree helps handling trees with ease, no matter the data structure you use on the backend.',
                 infinite_levels:
-                    'It supports expanding or collapsing nodes for an infinite amount of levels',
+                    'It supports expanding or collapsing nodes for an infinite amount of levels.',
                 changes:
                     'You can even add a new category, or reorder them, try it!',
             },

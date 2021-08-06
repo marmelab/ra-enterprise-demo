@@ -10,10 +10,10 @@ describe('Tours', () => {
             "You can edit a record without leaving the Datagrid! Let's change the address."
         );
         waitForStepAndGoToNext(
-            'After edition, just click on the Save button in the row'
+            'After edition, just click on the Save button in the row.'
         );
         waitForStepAndGoToNext(
-            'The Editable Datagrid also supports inline creation'
+            'The Editable Datagrid also supports inline creation.'
         );
         waitForStepAndGoToNext(
             'A row edition / creation form can contain Inputs of any type (text, date, number, etc.).'
