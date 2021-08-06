@@ -35,8 +35,7 @@ const tours: { [id: string]: TourType } = {
                     5
                 )})`,
                 disableBeacon: true,
-                content:
-                    "This is a poster, one of the products our shop is selling, let's go to its details",
+                content: 'tours.ra-markdown.intro',
                 joyrideProps: {
                     styles: {
                         beacon: {
@@ -51,29 +50,26 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: "[data-tour-id='description-tab']",
-                content: 'The markdown editor is in the description tab',
+                content: 'tours.ra-markdown.editor_location',
                 after: ({ target }) => {
                     target.children[0] && target.children[0].click();
                 },
             },
             {
                 target: '.tui-editor-defaultUI',
-                content:
-                    'Right here. Try playing with its markdown, make it bold, add headlines!',
+                content: 'tours.ra-markdown.editor',
             },
             {
                 target: '.te-switch-button.wysiwyg',
-                content: 'By default, you are in WYSIWYG mode.',
+                content: 'tours.ra-markdown.wysiwyg',
             },
             {
                 target: '.te-switch-button.markdown',
-                content:
-                    'But you can switch to raw markdown edition with this button.',
+                content: 'tours.ra-markdown.raw',
             },
             {
                 target: '[data-testid=product-edit-preview]',
-                content:
-                    'Parsed markdown can then be displayed in a preview or wherever you want.',
+                content: 'tours.ra-markdown.show',
             },
         ],
     },
@@ -82,12 +78,11 @@ const tours: { [id: string]: TourType } = {
             {
                 target: "button[aria-label='Toggle Theme']",
                 disableBeacon: true,
-                content:
-                    'ra-preferences comes with a lot of built-in modules, like this theme switcher. Try it: it works!',
+                content: 'tours.ra-preferences.intro',
             },
             {
                 target: "button[aria-label='Toggle Theme'] + button",
-                content: 'Or this language switcher...',
+                content: 'tours.ra-preferences.language_switcher',
                 after: ({ redirect }) => {
                     const params = JSON.stringify({
                         last_seen_gte: endOfYesterday().toISOString(),
@@ -103,8 +98,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: "button[aria-label='Save current query...']",
-                content:
-                    "It features persisted queries too. For example, let's persist the filters for today visitors who actually ordered something.",
+                content: 'tours.ra-preferences.persisted_queries',
                 after: async ({ target }) => {
                     target.click();
                     await new Promise(resolve => setTimeout(resolve, 500));
@@ -133,15 +127,14 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '#persisted-queries ul',
-                content: "It's persisted locally in the browser now!",
+                content: 'tours.ra-preferences.persisted_queries_result',
                 after: ({ redirect }) => {
                     redirect('/customers');
                 },
             },
             {
                 target: 'button[aria-controls=user-preference-menu]',
-                content:
-                    'It even has more advanced components like this list customization tool.',
+                content: 'tours.ra-preferences.list_customization',
                 disableBeacon: false,
                 after: ({ target }) => {
                     target.click();
@@ -149,8 +142,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '#user-preference-menu .MuiPaper-root',
-                content:
-                    'Where you can select how you want the list to be displayed, or the information you want to see.',
+                content: 'tours.ra-preferences.list_customization_columns',
                 joyrideProps: {
                     styles: {
                         options: {
@@ -174,8 +166,7 @@ const tours: { [id: string]: TourType } = {
                     setTourPreferences(state);
                 },
                 target: 'body',
-                content:
-                    'It exposes simple hooks so that you can actually save whatever you want, too. For instance, the state of this particular step. Try to reload the page!',
+                content: 'tours.ra-preferences.hook',
                 joyrideProps: {
                     styles: {
                         options: {
@@ -197,8 +188,7 @@ const tours: { [id: string]: TourType } = {
         steps: [
             {
                 target: '.rc-tree',
-                content:
-                    'ra-tree helps handling trees with ease, no matter the data structure you use on the backend',
+                content: 'tours.ra-tree.intro',
                 disableBeacon: true,
             },
             {
@@ -218,8 +208,7 @@ const tours: { [id: string]: TourType } = {
                     );
                 },
                 target: '.rc-tree',
-                content:
-                    'It supports expanding or collapsing nodes for an infinite amount of levels',
+                content: 'tours.ra-tree.infinite_levels',
                 after: async ({ target }) => {
                     await interval(
                         () => {
@@ -244,9 +233,8 @@ const tours: { [id: string]: TourType } = {
                         redirect('/categories/create');
                     }, 4000);
                 },
-                target: '[aria-label="Add a category of products"]',
-                content:
-                    'You can even add a new category, or reorder them, try it!',
+                target: '[href="#/categories/create"]',
+                content: 'tours.ra-tree.changes',
             },
         ],
     },
@@ -292,7 +280,7 @@ const tours: { [id: string]: TourType } = {
                     await timeout(1500); // would be so awesome if redirect was awaitable!
                 },
                 target: '[data-testid="commands-menu"]',
-                content: "Seems like you just had new orders, let's check...",
+                content: 'tours.ra-realtime.intro',
                 disableBeacon: true,
                 joyrideProps: {
                     hideBackButton: true,
@@ -305,7 +293,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '[data-testid=order-ordered-datagrid]',
-                content: 'Your new orders can stand-out from others',
+                content: 'tours.ra-realtime.new_orders',
                 joyrideProps: {
                     hideBackButton: true,
                 },
@@ -347,8 +335,7 @@ const tours: { [id: string]: TourType } = {
                     await timeout(1000);
                 },
                 target: '[data-testid=order-ordered-datagrid]',
-                content:
-                    "And newest orders even appear while you're on the page",
+                content: 'tours.ra-realtime.newest',
                 joyrideProps: {
                     hideBackButton: true,
                 },
@@ -422,8 +409,8 @@ const tours: { [id: string]: TourType } = {
                     }
                 },
                 target: '[data-testid=productlocktile]',
-                content:
-                    'You can lock resources in realtime (this one will be unlocked in a few seconds)',
+                content: 'tours.ra-realtime.locks',
+
                 joyrideProps: {
                     hideBackButton: true,
                 },
@@ -485,16 +472,14 @@ const tours: { [id: string]: TourType } = {
         steps: [
             {
                 target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
-                content:
-                    "Hovering on a row shows a toolbar allowing to either edit or delete the record. Let's see what happens when editing a row by clicking on the Edit button (or by directly clicking inside the row)",
+                content: 'tours.ra-editable-datagrid.intro',
             },
             {
                 before: ({ target }) => {
                     target.querySelector('td:nth-child(2)').click();
                 },
                 target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
-                content:
-                    "You can edit a record without leaving the Datagrid! Let's change the address.",
+                content: 'tours.ra-editable-datagrid.edit',
                 after: ({ target }) => {
                     fireEvent.change(target.querySelector('#address'), {
                         target: { value: '10 rue de Rivoli' },
@@ -503,15 +488,14 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
-                content:
-                    'After edition, just click on the Save button in the row',
+                content: 'tours.ra-editable-datagrid.save',
                 after: ({ target }) => {
                     target.click();
                 },
             },
             {
-                target: '[aria-label="Create"]',
-                content: 'The Editable Datagrid also supports inline creation',
+                target: '[href="#/stores/create"]',
+                content: 'tours.ra-editable-datagrid.create',
                 after: ({ target }) => {
                     target.click();
                 },
@@ -532,13 +516,11 @@ const tours: { [id: string]: TourType } = {
                     });
                 },
                 target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
-                content:
-                    'A row edition / creation form can contain Inputs of any type (text, date, number, etc.).',
+                content: 'tours.ra-editable-datagrid.forms',
             },
             {
                 target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
-                content:
-                    'Click on the Save button to submit the form and create a new record.',
+                content: 'tours.ra-editable-datagrid.create_save',
                 after: ({ target }) => {
                     target.click();
                 },
@@ -553,8 +535,7 @@ const tours: { [id: string]: TourType } = {
         steps: [
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(2)",
-                content:
-                    'The breadcrumb indicates that we are on the posters page',
+                content: 'tours.ra-navigation-breadcrumb.intro',
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -566,7 +547,7 @@ const tours: { [id: string]: TourType } = {
                     5
                 )})`,
                 disableBeacon: true,
-                content: "Let's edit one of these posters",
+                content: 'tours.ra-navigation-breadcrumb.edit',
                 after: ({ target, redirect }) => {
                     const productUrl = target.getAttribute('href').slice(1);
                     redirect(productUrl);
@@ -574,8 +555,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(3)",
-                content:
-                    'The breadcrumb has changed to follow us to this Edit page',
+                content: 'tours.ra-navigation-breadcrumb.sync',
                 disableBeacon: true,
                 joyrideProps: {
                     scrollOffset: 50,
@@ -583,7 +563,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '[data-testid="commands-menu"]',
-                content: "Let's try to navigate away using the Menu entry",
+                content: 'tours.ra-navigation-breadcrumb.navigate',
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -594,16 +574,15 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(2)",
-                content: 'The breadcrumb keeps showing our exact location.',
                 disableBeacon: true,
+                content: 'tours.ra-navigation-breadcrumb.sync2',
                 joyrideProps: {
                     disableScrolling: true,
                 },
             },
             {
                 target: "[aria-label='Breadcrumb'] li:nth-child(1)",
-                content:
-                    "Users can click on the breadcrumb items directly to navigate.\nLet's go to the home page",
+                content: 'tours.ra-navigation-breadcrumb.clickable',
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -614,8 +593,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '#main-content',
-                content:
-                    "By default, there is no breacrumb displayed on the home page.\n Now it's your turn to use the Breadcrumb component to build you own breadcrumb path!",
+                content: 'tours.ra-navigation-breadcrumb.dashboard',
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
@@ -631,8 +609,7 @@ const tours: { [id: string]: TourType } = {
             {
                 disableBeacon: true,
                 target: '[data-testid="search"]',
-                content:
-                    'This is the smart Omnisearch box. It allows users to search across all resources. ',
+                content: 'tours.ra-search.intro',
                 after: ({ target }) => {
                     fireEvent.change(target.querySelector('input'), {
                         target: { value: 'B' },
@@ -642,8 +619,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '[data-testid="search-panel"]',
-                content:
-                    "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer",
+                content: 'tours.ra-search.customize',
                 after: ({ target }) => {
                     fireEvent.click(
                         target.querySelector('[data-testid="customer"]')
@@ -652,8 +628,7 @@ const tours: { [id: string]: TourType } = {
             },
             {
                 target: '[data-testid="search"]',
-                content:
-                    'The search query and results are preserved after navigation',
+                content: 'tours.ra-search.preserved_across_navigation',
                 before: ({ target }) => {
                     setTimeout(
                         () => target.querySelector('input').focus(),

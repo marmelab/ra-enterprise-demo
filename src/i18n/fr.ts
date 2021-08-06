@@ -272,6 +272,94 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 name: 'Événements',
             },
         },
+        tours: {
+            action: {
+                play: 'Jouer',
+            },
+            message: {
+                played_on: 'Visité le %{date}',
+                never_played: 'Non visité',
+            },
+            'ra-preferences': {
+                comment:
+                    "Enregistre les preferences de l'utilisateur (langue, ui, filtres, colonnes affichées, etc) dans l'espace de stockage local du navigateur",
+                intro: 'ra-preferences apporte de nombreux modules pré-configués, comme ce sélecteur de thème. Essayez-le: il fonctionne!',
+                language_switcher: 'Ou ce sélecteur de langue...',
+                persisted_queries:
+                    "Il propose également des requêtes persistantes. Par exemple, enregistrons les filtres pour les visiteurs d'aujourd'hui qui ont effectivement commandé quelque chose.",
+                persisted_queries_result:
+                    'Elle est désormais enregistrée localement dans le navigateur !',
+                list_customization:
+                    'Il propose même des composants plus avancés, comme cet outil de personnalisation des listes.',
+                list_customization_columns:
+                    "Vous pouvez y sélectionner le mode d'affichage de la liste ou les informations que vous souhaitez voir",
+                hook: "Il expose des hooks afin que vous puissiez enregistrer ce que vous voulez également. Par exemple, l'état de cette étape particulière. Essayez de recharger la page!",
+            },
+            'ra-search': {
+                comment:
+                    "Connectez votre moteur de recherche et permettez aux utilisateurs d'effectuer des recherches dans toutes les ressources grâce à une boîte Omnisearch intelligente.",
+                intro: "Ceci est la boîte Omnisearch intelligente. Elle permet aux utilisateurs d'effectuer des recherches dans toutes les ressources.",
+                customize:
+                    "Vous pouvez personnaliser les résultats de la recherche à volonté et rediriger vers n'importe quelle ressource. Par exemple, cliquons sur le premier client.",
+                preserved_across_navigation:
+                    'La requête de recherche et les résultats sont conservés après la navigation.',
+            },
+            'ra-navigation-breadcrumb': {
+                comment:
+                    'Gardez une trace de votre localisation dans le site et naviguez facilement.',
+                intro: 'Le breacrumb indique que nous sommes sur la page des affiches.',
+                edit: "Éditons l'une de ces affiches.",
+                sync: "Le breacrumb a été modifié pour nous suivre jusqu'à cette page d'édition.",
+                navigate:
+                    'Essayons de naviguer ailleurs en utilisant une entrée du Menu.',
+                sync2: 'Le breadcrumb continue de montrer notre position exacte.',
+                clickable:
+                    "Les utilisateurs peuvent cliquer directement sur les éléments du breadcrumb pour naviguer. Allons à la page d'accueil.",
+                dashboard:
+                    "Par défaut, il n'y a pas de breadcrumb affiché sur la page d'accueil. Maintenant, c'est à vous d'utiliser le composant breadcrumb pour construire votre propre breadcrumb !",
+            },
+            'ra-realtime': {
+                comment:
+                    "Activez le temps réel sur les vues de menu, de liste, d'affichage et d'édition - ou partout où vous le souhaitez.",
+                intro: "On dirait que vous venez d'avoir de nouvelles commandes, vérifions...",
+                new_orders:
+                    'Vos nouvelles commandes peuvent se démarquer des autres',
+                newest: 'Et les commandes les plus récentes apparaissent même lorsque vous êtes sur la page.',
+                locks: 'Vous pouvez verrouiller les ressources en temps réel (celle-ci sera déverrouillée dans quelques secondes).',
+            },
+            'ra-editable-datagrid': {
+                comment:
+                    'Modifiez rapidement vos données sans quitter votre Datagrid.',
+
+                intro: "En passant la souris sur une ligne, une barre d'outils s'affiche, permettant de modifier ou de supprimer l'enregistrement. Voyons ce qui se passe lorsque l'on modifie une ligne en cliquant sur le bouton Modifier (ou en cliquant directement dans la ligne).",
+                edit: "Vous pouvez modifier un enregistrement sans quitter la grille de données ! Changeons l'adresse.",
+                save: "Après l'édition, cliquez sur le bouton Enregistrer dans la ligne.",
+                create: 'Le Datagrid modifiable prend également en charge la création en ligne.',
+                forms: "Un formulaire d'édition/création de ligne peut contenir des entrées de tout type (texte, date, nombre, etc.).",
+                create_save:
+                    'Cliquez sur le bouton Enregistrer pour soumettre le formulaire et créer un nouvel enregistrement.',
+            },
+            'ra-tree': {
+                comment:
+                    "Modifiez et visualisez des structures arborescentes. Réorganisez par glisser-déposer. S'adapte à toute structure de données sur le backend (parent_id, enfants, ensembles imbriqués, etc.)...",
+                intro: 'ra-tree permet de manipuler les arbres de données avec facilité, quelle que soit la structure de données que vous utilisez en arrière-plan.',
+                infinite_levels:
+                    "Il prend en charge l'expansion ou la réduction des nœuds pour un nombre infini de niveaux.",
+                changes:
+                    'Vous pouvez même ajouter une nouvelle catégorie, ou les réorganiser, essayez-le !',
+            },
+            'ra-markdown': {
+                comment:
+                    "Lire des données Markdown et les modifier à l'aide d'un éditeur WYSIWYG dans votre administration.",
+                intro: "Ceci est un poster, l'un des produits vendus par notre boutique, allons voir ses détails.",
+                editor_location:
+                    "L'éditeur markdown se trouve dans l'onglet description.",
+                editor: 'Ici. Essayez de jouer avec son markdown, mettez-le en gras, ajoutez des titres !',
+                wysiwyg: 'Par défaut, vous êtes en mode WYSIWYG.',
+                raw: "Mais vous pouvez passer à l'édition brute avec ce bouton.",
+                show: "Les données markdown transformées peuvent ensuite être affichées dans un aperçu ou à l'endroit de votre choix.",
+            },
+        },
     }
 );
 

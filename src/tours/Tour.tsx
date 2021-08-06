@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Record } from 'react-admin';
+import React from 'react';
+import { Record, useTranslate } from 'react-admin';
 import { useTour } from '@react-admin/ra-tour';
 import classnames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,8 +55,9 @@ const useStyles = makeStyles({
     },
 });
 
-const Tour: FC<{ record: Record }> = ({ record }) => {
+const Tour = ({ record }: { record: Record }) => {
     const classes = useStyles();
+    const translate = useTranslate();
     const [playedOn, tourStateActions] = useTourState(record.id.toString());
     // eslint-disable-next-line no-unused-vars
     const [_, { start }] = useTour();
@@ -92,12 +93,12 @@ const Tour: FC<{ record: Record }> = ({ record }) => {
                     {record.title}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                    {record.comment}
+                    {translate(record.comment, { _: record.comment })}
                 </Typography>
             </CardContent>
             <CardActions className={classes.actions}>
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
-                    Play
+                    {translate('tours.action.play')}
                 </Button>
             </CardActions>
             <div className={classes.playedOnIndicator}>
@@ -107,10 +108,10 @@ const Tour: FC<{ record: Record }> = ({ record }) => {
                     color="textSecondary"
                 >
                     {!!playedOn
-                        ? `Last played on ${new Date(
-                              playedOn
-                          ).toLocaleString()}`
-                        : `Never played before`}
+                        ? translate('tours.message.played_on', {
+                              date: new Date(playedOn).toLocaleString(),
+                          })
+                        : translate('tours.message.never_played')}
                 </Typography>
             </div>
         </Card>
