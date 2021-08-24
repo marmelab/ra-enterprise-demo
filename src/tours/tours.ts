@@ -534,7 +534,7 @@ const tours: { [id: string]: TourType } = {
         },
         steps: [
             {
-                target: "[aria-label='Breadcrumb'] li:nth-child(2)",
+                target: "[aria-label='Breadcrumb'] li:nth-child(3)",
                 content: 'tours.ra-navigation-breadcrumb.intro',
                 disableBeacon: true,
                 joyrideProps: {
@@ -554,7 +554,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: "[aria-label='Breadcrumb'] li:nth-child(3)",
+                target: "[aria-label='Breadcrumb'] li:nth-child(4)",
                 content: 'tours.ra-navigation-breadcrumb.sync',
                 disableBeacon: true,
                 joyrideProps: {
@@ -573,7 +573,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: "[aria-label='Breadcrumb'] li:nth-child(2)",
+                target: "[aria-label='Breadcrumb'] ",
                 disableBeacon: true,
                 content: 'tours.ra-navigation-breadcrumb.sync2',
                 joyrideProps: {
