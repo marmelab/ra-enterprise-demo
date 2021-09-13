@@ -12,6 +12,7 @@ const ColoredNumberField = (props: NumberFieldProps): ReactElement | null =>
         )
     ) : null;
 
+// @ts-ignore
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
 export default ColoredNumberField;
