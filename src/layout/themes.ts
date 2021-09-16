@@ -61,7 +61,10 @@ const darkTheme = (theme: Theme): ThemeOptions => ({
         RaSidebar: {
             drawerPaper: {
                 paddingRight: 16,
-                width: 'auto',
+                width: 64,
+            },
+            fixed: {
+                zIndex: 1200,
             },
         },
         RaMenuItemCategory: {
@@ -242,7 +245,10 @@ export const lightTheme = (theme: Theme): ThemeOptions => ({
         RaSidebar: {
             drawerPaper: {
                 paddingRight: 16,
-                width: 'auto',
+                width: 64,
+            },
+            fixed: {
+                zIndex: 1200,
             },
         },
         RaFilterFormInput: {
