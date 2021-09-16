@@ -72,6 +72,8 @@ object-assign
         PERFORMANCE OF THIS SOFTWARE.
         ***************************************************************************** */
 
+/*! Browser bundle of nunjucks 3.2.3  */
+
 /*! decimal.js-light v2.5.1 https://github.com/MikeMcl/decimal.js-light/LICENCE */
 
 /*! http://mths.be/fromcodepoint v0.2.1 by @mathias */
