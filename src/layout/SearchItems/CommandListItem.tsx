@@ -87,7 +87,7 @@ const useCommandListItemStyles = makeStyles(theme => ({
         padding: theme.spacing(1, 0),
     },
     total: {
-        fontWeight: theme.typography.fontWeightBold,
+        fontWeight: 'bold',
     },
 }));
 
