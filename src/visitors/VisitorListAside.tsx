@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { FC } from 'react';
-import { Card as MuiCard, CardContent } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOnOutlined';
-import MailIcon from '@material-ui/icons/MailOutline';
-import LocalOfferIcon from '@material-ui/icons/LocalOfferOutlined';
+import { Card, CardContent } from '@mui/material';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOnOutlined';
+import MailIcon from '@mui/icons-material/MailOutline';
+import LocalOfferIcon from '@mui/icons-material/LocalOfferOutlined';
 import { FilterList, FilterListItem, FilterLiveSearch } from 'react-admin';
-import { SavedQueriesList } from '@react-admin/ra-preferences';
 import {
     endOfYesterday,
     startOfWeek,
@@ -18,27 +15,23 @@ import {
 
 import segments from '../segments/data';
 
-const Card = withStyles(theme => ({
-    root: {
-        flexShrink: 0,
-        [theme.breakpoints.up('sm')]: {
+const Aside = () => (
+    <Card
+        sx={{
+            display: {
+                xs: 'none',
+                md: 'block',
+            },
             order: -1,
-            width: '15em',
-            marginRight: '1em',
-        },
-        [theme.breakpoints.down('sm')]: {
-            display: 'none',
-        },
-    },
-}))(MuiCard);
-
-const Aside: FC = () => (
-    <Card>
-        <CardContent>
+            flex: '0 0 15em',
+            mr: 2,
+            mt: 8,
+            alignSelf: 'flex-start',
+        }}
+    >
+        <CardContent sx={{ pt: 1 }}>
             <FilterLiveSearch />
-            <span id="persisted-queries">
-                <SavedQueriesList />
-            </span>
+
             <FilterList
                 label="resources.customers.filters.last_visited"
                 icon={<AccessTimeIcon />}

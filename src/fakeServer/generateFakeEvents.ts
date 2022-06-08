@@ -65,7 +65,7 @@ const changeOrderStatusEvent = (
     };
 };
 
-const getRandomId = length => {
+const getRandomId = (length: number) => {
     return Math.floor(Math.random() * length);
 };
 

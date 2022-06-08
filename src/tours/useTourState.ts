@@ -1,10 +1,11 @@
-import { usePreferences } from '@react-admin/ra-preferences';
+import { Identifier, useStore } from 'react-admin';
 import tours from './data';
 
 type TourStateMap = {
-    [key: string]: Date | false;
+    [key: string]: TourState;
 };
 
+type TourState = Date | undefined | false;
 type TourStatesActions = {
     markAsPlayed: (tourId: string) => void;
     markAllAsPlayed: () => void;
@@ -18,15 +19,18 @@ type TourStateActions = {
 };
 
 export const useTourStates = (): [TourStateMap, TourStatesActions] => {
-    const [storedTourStates, setTourStates] = usePreferences('tours', {});
+    const [storedTourStates, setTourStates] = useStore<TourStateMap>(
+        'tours',
+        {}
+    );
 
     const tourStates = tours.reduce((acc, tour) => {
         acc[tour.id] = storedTourStates[tour.id] || false;
         return acc;
-    }, {});
+    }, {} as TourStateMap);
 
     const actions = {
-        markAsPlayed: (tourId): void => {
+        markAsPlayed: (tourId: Identifier): void => {
             const newTourStates = { ...storedTourStates };
             newTourStates[tourId] = new Date();
             setTourStates(newTourStates);
@@ -35,11 +39,11 @@ export const useTourStates = (): [TourStateMap, TourStatesActions] => {
             const newTourStates = tours.reduce((acc, tour) => {
                 acc[tour.id] = new Date();
                 return acc;
-            }, {});
+            }, {} as TourStateMap);
             setTourStates(newTourStates);
         },
-        reset: (tourId): void => {
-            const newTourStates = { ...storedTourStates };
+        reset: (tourId: Identifier): void => {
+            const newTourStates = { ...storedTourStates } as TourStateMap;
             newTourStates[tourId] = undefined;
             setTourStates(newTourStates);
         },
@@ -51,9 +55,7 @@ export const useTourStates = (): [TourStateMap, TourStatesActions] => {
     return [tourStates, actions];
 };
 
-export const useTourState = (
-    tourId: string
-): [Date | false, TourStateActions] => {
+export const useTourState = (tourId: string): [TourState, TourStateActions] => {
     const [tourStates, tourStateActions] = useTourStates();
     const tourState = tourStates[tourId];
 

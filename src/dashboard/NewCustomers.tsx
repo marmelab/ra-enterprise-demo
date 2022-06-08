@@ -1,98 +1,49 @@
 import * as React from 'react';
-import { useMemo, ReactElement } from 'react';
-import CustomerIcon from '@material-ui/icons/PersonAdd';
-import { Link } from 'react-router-dom';
-import { useTranslate, useQueryWithStore } from 'react-admin';
-
 import {
-    Card,
-    makeStyles,
+    Avatar,
+    Box,
+    Button,
     List,
     ListItem,
     ListItemAvatar,
     ListItemText,
-    CircularProgress as Loading,
-    Avatar,
-    CardHeader,
-} from '@material-ui/core';
+} from '@mui/material';
+import CustomerIcon from '@mui/icons-material/PersonAdd';
+import { Link } from 'react-router-dom';
+import { useTranslate, useGetList } from 'react-admin';
+import { subDays } from 'date-fns';
 
 import CardWithIcon from './CardWithIcon';
 import { Customer } from '../types';
 
-export const NbNewCustomers = (): ReactElement => {
+const NewCustomers = () => {
     const translate = useTranslate();
-    const aMonthAgo = useMemo(() => {
-        const date = new Date();
-        date.setDate(date.getDate() - 30);
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        date.setMilliseconds(0);
-        return date;
-    }, []);
 
-    const { loaded, data: visitors } = useQueryWithStore({
-        type: 'getList',
-        resource: 'customers',
-        payload: {
-            filter: {
-                has_ordered: true,
-                first_seen_gte: aMonthAgo.toISOString(),
-            },
-            sort: { field: 'first_seen', order: 'DESC' },
-            pagination: { page: 1, perPage: 100 },
+    const aMonthAgo = subDays(new Date(), 30);
+    aMonthAgo.setDate(aMonthAgo.getDate() - 30);
+    aMonthAgo.setHours(0);
+    aMonthAgo.setMinutes(0);
+    aMonthAgo.setSeconds(0);
+    aMonthAgo.setMilliseconds(0);
+
+    const { isLoading, data: visitors } = useGetList<Customer>('customers', {
+        filter: {
+            has_ordered: true,
+            first_seen_gte: aMonthAgo.toISOString(),
         },
+        sort: { field: 'first_seen', order: 'DESC' },
+        pagination: { page: 1, perPage: 100 },
     });
 
-    if (!loaded) {
-        return <Loading />;
-    }
-
     const nb = visitors ? visitors.reduce((nb: number) => ++nb, 0) : 0;
-
     return (
         <CardWithIcon
             to="/customers"
             icon={CustomerIcon}
             title={translate('pos.dashboard.new_customers')}
             subtitle={nb}
-        />
-    );
-};
-
-const NewCustomers = (): ReactElement => {
-    const translate = useTranslate();
-    const classes = useStyles();
-    const aMonthAgo = useMemo(() => {
-        const date = new Date();
-        date.setDate(date.getDate() - 30);
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        date.setMilliseconds(0);
-        return date;
-    }, []);
-
-    const { loaded, data: visitors } = useQueryWithStore({
-        type: 'getList',
-        resource: 'customers',
-        payload: {
-            filter: {
-                has_ordered: true,
-                first_seen_gte: aMonthAgo.toISOString(),
-            },
-            sort: { field: 'first_seen', order: 'DESC' },
-            pagination: { page: 1, perPage: 100 },
-        },
-    });
-
-    if (!loaded) {
-        return <Loading />;
-    }
-    return (
-        <Card className={classes.root}>
-            <CardHeader title={translate('pos.dashboard.new_customers')} />
-            <List>
+        >
+            <List sx={{ display: isLoading ? 'none' : 'block' }}>
                 {visitors
                     ? visitors.map((record: Customer) => (
                           <ListItem
@@ -111,14 +62,20 @@ const NewCustomers = (): ReactElement => {
                       ))
                     : null}
             </List>
-        </Card>
+            <Box flexGrow={1}>&nbsp;</Box>
+            <Button
+                sx={{ borderRadius: 0 }}
+                component={Link}
+                to="/customers"
+                size="small"
+                color="primary"
+            >
+                <Box p={1} sx={{ color: 'primary.main' }}>
+                    {translate('pos.dashboard.all_customers')}
+                </Box>
+            </Button>
+        </CardWithIcon>
     );
 };
-
-const useStyles = makeStyles({
-    root: {
-        flex: 1,
-    },
-});
 
 export default NewCustomers;

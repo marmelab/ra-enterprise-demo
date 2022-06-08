@@ -1,10 +1,11 @@
-import { SearchResult, SearchResultDataItem } from '@react-admin/ra-search';
+import { SearchResultDataItem } from '@react-admin/ra-search';
+import { DataProvider } from 'react-admin';
 
-const addSearchMethod = dataProvider => {
+const addSearchMethod = (dataProvider: DataProvider) => {
     return {
         ...dataProvider,
-        search: async query => {
-            const resultsByResource = await Promise.all<SearchResult>(
+        search: async (query: string) => {
+            const resultsByResource = await Promise.all(
                 ['customers', 'products', 'commands', 'reviews'].map(resource =>
                     searchInResource(dataProvider, resource, query)
                 )
@@ -19,7 +20,9 @@ const addSearchMethod = dataProvider => {
                     [] as SearchResultDataItem[]
                 ),
                 total: resultsByResource.reduce(
-                    (acc, resultForResource) => acc + resultForResource.total,
+                    (acc, resultForResource) =>
+                        acc +
+                        (resultForResource ? resultForResource.total || 0 : 0),
                     0
                 ),
             };
@@ -29,7 +32,11 @@ const addSearchMethod = dataProvider => {
 
 export default addSearchMethod;
 
-const searchInResource = async (dataProvider, resource, query) => {
+const searchInResource = async (
+    dataProvider: DataProvider,
+    resource: string,
+    query: string
+) => {
     const { data, total } = await dataProvider.getList(resource, {
         filter: { q: query },
         pagination: { page: 1, perPage: 5 },
@@ -43,14 +50,14 @@ const searchInResource = async (dataProvider, resource, query) => {
                 type: resource,
                 url: `/${resource}/${record.id}`,
                 content: await ResultBuilders[resource](record, dataProvider),
-            })) as SearchResultDataItem[]
+            })) as unknown as SearchResultDataItem[]
         ),
         total,
     };
 };
 
-const ResultBuilders = {
-    customers: async (record, dataProvider) => {
+const ResultBuilders: Record<string, any> = {
+    customers: async (record: any, dataProvider: DataProvider) => {
         const orders = await dataProvider.getList('commands', {
             filter: { customer_id: record.id },
             pagination: { page: 1, perPage: 1 },
@@ -68,7 +75,7 @@ const ResultBuilders = {
             reviews: reviews.total,
         };
     },
-    products: async (record, dataProvider) => {
+    products: async (record: any, dataProvider: DataProvider) => {
         const reviews = await dataProvider.getList('reviews', {
             filter: { product_id: record.id },
             pagination: { page: 1, perPage: 1 },
@@ -80,7 +87,7 @@ const ResultBuilders = {
             reviews: reviews.total,
         };
     },
-    commands: async (record, dataProvider) => {
+    commands: async (record: any, dataProvider: DataProvider) => {
         const customer = await dataProvider.getOne('customers', {
             id: record.customer_id,
         });
@@ -90,7 +97,7 @@ const ResultBuilders = {
             customer: customer.data,
         };
     },
-    reviews: async record => {
+    reviews: async (record: any) => {
         return record;
     },
 };

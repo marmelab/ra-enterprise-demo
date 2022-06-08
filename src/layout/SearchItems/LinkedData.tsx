@@ -1,30 +1,7 @@
 import * as React from 'react';
 import { ReactElement, ReactNode } from 'react';
-import { Box, BoxProps, Link, Typography } from '@material-ui/core';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { Box, BoxProps, Link, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-
-const useStyles = makeStyles(
-    (theme: Theme) => ({
-        root: {
-            borderRadius: '3px',
-            padding: 5,
-            width: 100,
-            '&:hover': {
-                backgroundColor: theme.palette.background.default,
-            },
-        },
-        link: {
-            color: 'inherit',
-            '&:hover': {
-                textDecoration: 'none',
-            },
-        },
-    }),
-    {
-        name: 'RaLinkedData',
-    }
-);
 
 export const LinkedData = ({
     children,
@@ -38,16 +15,31 @@ export const LinkedData = ({
     icon: ReactNode;
     to: any;
 } & BoxProps): ReactElement => {
-    const classes = useStyles();
     return (
-        <Link component={RouterLink} to={to} className={classes.link}>
+        <Link
+            component={RouterLink}
+            to={to}
+            sx={{
+                color: 'inherit',
+                '&:hover': {
+                    textDecoration: 'none',
+                },
+            }}
+        >
             <Box
                 component="li"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
                 flexDirection="column"
-                className={classes.root}
+                sx={{
+                    borderRadius: '3px',
+                    padding: 1,
+                    width: 100,
+                    '&:hover': {
+                        backgroundColor: 'background.default',
+                    },
+                }}
                 {...rest}
             >
                 <Box display="flex" alignItems="center">

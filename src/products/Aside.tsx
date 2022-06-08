@@ -1,37 +1,19 @@
 import * as React from 'react';
-import { ReactElement } from 'react';
-import { Card, CardContent } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import LocalOfferIcon from '@material-ui/icons/LocalOfferOutlined';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import { Card, CardContent } from '@mui/material';
+import LocalOfferIcon from '@mui/icons-material/LocalOfferOutlined';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import {
     FilterList,
     FilterListItem,
     FilterLiveSearch,
-    ListProps,
-    useListFilterContext,
+    useListContext,
+    SavedQueriesList,
 } from 'react-admin';
 import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
-import { SavedQueriesList } from '@react-admin/ra-preferences';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        [theme.breakpoints.up('sm')]: {
-            width: '15em',
-            marginRight: '1em',
-            overflow: 'initial',
-        },
-        [theme.breakpoints.down('sm')]: {
-            display: 'none',
-        },
-    },
-}));
-
-const Aside = (props: ListProps): ReactElement => {
-    const { setFilters, filterValues, displayedFilters } =
-        useListFilterContext(props);
-
+const Aside = () => {
+    const { displayedFilters, filterValues, setFilters } = useListContext();
     const { data } = useGetTree('categories');
 
     const tree = data ? getRCTree(data, 'name') : undefined;
@@ -61,11 +43,18 @@ const Aside = (props: ListProps): ReactElement => {
             displayedFilters
         );
     };
-
-    const classes = useStyles();
     return (
-        <Card className={classes.root}>
-            <CardContent>
+        <Card
+            sx={{
+                display: { xs: 'none', md: 'block' },
+                order: -1,
+                width: '15em',
+                mr: 2,
+                alignSelf: 'flex-start',
+            }}
+        >
+            <CardContent sx={{ pt: 1 }}>
+                <SavedQueriesList />
                 <FilterLiveSearch />
                 <SavedQueriesList />
 
@@ -150,7 +139,7 @@ const Aside = (props: ListProps): ReactElement => {
                     icon={<LocalOfferIcon />}
                 >
                     <Tree
-                        // HACK: ensure the tree is updated and expland nodes correctly
+                        // HACK: ensure the tree is updated and expand nodes correctly
                         // see https://github.com/react-component/tree/issues/234#issuecomment-599297897
                         // I tried passing a JSON.stringify version of
                         // defaultSelectedKeys and defaultExpandedKeys without success

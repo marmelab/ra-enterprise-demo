@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useRef } from 'react';
+import React, { Fragment, useRef } from 'react';
 import { useTranslate } from 'react-admin';
 import {
     List,
@@ -6,8 +6,7 @@ import {
     ListItem,
     ListItemText,
     Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+} from '@mui/material';
 import {
     Search,
     SearchProps,
@@ -24,11 +23,11 @@ import {
     ReviewListItem,
 } from './SearchItems';
 
-const CustomSearch: FC<SearchProps> = props => {
+const CustomSearch = (props: SearchProps) => {
     return (
         <div data-testid="search">
             <Search {...props}>
-                <CustomSearchPanel></CustomSearchPanel>
+                <CustomSearchPanel />
             </Search>
         </div>
     );
@@ -36,12 +35,11 @@ const CustomSearch: FC<SearchProps> = props => {
 
 export default CustomSearch;
 
-const CustomSearchPanel: FC<SearchPanelProps> = props => {
+const CustomSearchPanel = (props: SearchPanelProps) => {
     const listRef = useRef<HTMLUListElement>(
         null
     ) as React.MutableRefObject<HTMLUListElement>;
     const translate = useTranslate();
-    const classes = useCustomSearchPanelStyles(props);
     useArrowKeysToNavigate(listRef);
     const { data, onClose } = useSearchResults();
 
@@ -60,22 +58,34 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
 
     return (
         <List
-            className={classes.root}
+            sx={{
+                maxHeight: 'calc(100vh - 100px)',
+                maxWidth: 512,
+                overflowX: 'hidden',
+            }}
             data-testid="search-panel"
             dense
-            innerRef={listRef}
+            ref={listRef}
             {...props}
         >
             {groupedData.map(group => (
                 <Fragment key={group.label}>
                     <ListSubheader
                         role="presentation"
-                        className={classes.header}
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            py: 1,
+                            px: 2,
+                        }}
                         disableSticky
                     >
                         <>
                             <Typography
-                                className={classes.headerGroup}
+                                sx={{
+                                    textTransform: 'capitalize',
+                                }}
                                 variant="subtitle1"
                             >
                                 {translate(group.label.toString(), {
@@ -83,7 +93,9 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
                                 })}
                             </Typography>
                             <Typography
-                                className={classes.headerCount}
+                                sx={{
+                                    textTransform: 'lowercase',
+                                }}
                                 variant="subtitle1"
                             >
                                 {translate('ra-search.result', {
@@ -105,27 +117,7 @@ const CustomSearchPanel: FC<SearchPanelProps> = props => {
     );
 };
 
-const useCustomSearchPanelStyles = makeStyles(theme => ({
-    root: {
-        maxHeight: 'calc(100vh - 100px)',
-        maxWidth: 512,
-        overflowX: 'hidden',
-    },
-    header: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: theme.spacing(1, 2),
-    },
-    headerGroup: {
-        textTransform: 'capitalize',
-    },
-    headerCount: {
-        textTransform: 'lowercase',
-    },
-}));
-
-const CustomSearchResultItem: FC<any> = props => {
+const CustomSearchResultItem = (props: any) => {
     const { data, onClose, ...rest } = props;
 
     if (!data) {

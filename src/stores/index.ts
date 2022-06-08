@@ -1,5 +1,5 @@
 import { StoreList } from './StoreList';
-import StoreIcon from '@material-ui/icons/Store';
+import StoreIcon from '@mui/icons-material/Store';
 
 export default {
     icon: StoreIcon,

@@ -1,17 +1,24 @@
+import { LocksDataProvider } from '@react-admin/ra-realtime';
 import { TourType } from '@react-admin/ra-tour';
 import { fireEvent } from '@testing-library/react';
 import { endOfYesterday } from 'date-fns';
+import { QueryClient } from 'react-query';
 import randomCommandBuilder from './randomCommandBuilder';
 import { generateIdentity } from './randomLockBuilder';
 
-const getRandomInt = (min, max) => {
+const getRandomInt = (min: number, max: number) => {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
-const interval = (callback, intervalMs, expirationMs) =>
+const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+const interval = (
+    callback: () => void,
+    intervalMs: number,
+    expirationMs: number
+) =>
     new Promise(resolve => {
         const intervalRef = setInterval(callback, intervalMs);
         setTimeout(() => {
@@ -30,10 +37,7 @@ const tours: { [id: string]: TourType } = {
         },
         steps: [
             {
-                target: `[data-tour-id='grid-line'] > a:nth-child(${getRandomInt(
-                    1,
-                    5
-                )})`,
+                target: `[data-tour-id='grid-line'] > a:nth-child(1)`,
                 disableBeacon: true,
                 content: 'tours.ra-markdown.intro',
                 joyrideProps: {
@@ -53,18 +57,20 @@ const tours: { [id: string]: TourType } = {
                 content: 'tours.ra-markdown.editor_location',
                 after: ({ target }) => {
                     target.children[0] && target.children[0].click();
+
+                    return new Promise(resolve => setTimeout(resolve, 500));
                 },
             },
             {
-                target: '.tui-editor-defaultUI',
+                target: '.toastui-editor-main-container',
                 content: 'tours.ra-markdown.editor',
             },
             {
-                target: '.te-switch-button.wysiwyg',
+                target: '.toastui-editor-mode-switch .tab-item.active',
                 content: 'tours.ra-markdown.wysiwyg',
             },
             {
-                target: '.te-switch-button.markdown',
+                target: '.toastui-editor-mode-switch .tab-item',
                 content: 'tours.ra-markdown.raw',
             },
             {
@@ -339,28 +345,17 @@ const tours: { [id: string]: TourType } = {
                 joyrideProps: {
                     hideBackButton: true,
                 },
-                after: async ({ dataProvider, dispatch, redirect }) => {
+                after: async ({ dataProvider, redirect }) => {
                     // Generate a lock on Products #1, #2 and #5
                     await Promise.all(
                         [1, 2, 5].map(recordId => {
-                            return dataProvider
-                                .lock('products', {
-                                    recordId,
+                            return (dataProvider as LocksDataProvider).lock(
+                                'products',
+                                {
+                                    id: recordId,
                                     identity: generateIdentity(),
-                                })
-                                .then(({ data: lock }) => {
-                                    dispatch({
-                                        type: 'RA/LOCK_SUCCESS',
-                                        payload: {
-                                            data: lock,
-                                        },
-                                        meta: {
-                                            fetchResponse: 'RA/LOCK',
-                                            resource: 'products',
-                                            recordId,
-                                        },
-                                    });
-                                });
+                                }
+                            );
                         })
                     );
 
@@ -369,7 +364,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                before: async ({ dataProvider, dispatch }) => {
+                before: async ({ dataProvider, queryClient }) => {
                     await timeout(100);
 
                     // Unlock the Products #1 after a few seconds
@@ -384,26 +379,19 @@ const tours: { [id: string]: TourType } = {
                             10
                         );
 
-                        const identity = lockTile.dataset.lockidentity;
+                        const identity = lockTile.dataset
+                            .lockidentity as string;
 
                         setTimeout(() => {
-                            dataProvider
+                            (dataProvider as LocksDataProvider)
                                 .unlock('products', {
-                                    recordId,
+                                    id: recordId,
                                     identity,
                                 })
-                                .then(({ data: lock }) => {
-                                    dispatch({
-                                        type: 'RA/UNLOCK_SUCCESS',
-                                        payload: {
-                                            data: lock,
-                                        },
-                                        meta: {
-                                            fetchResponse: 'RA/UNLOCK',
-                                            resource: 'products',
-                                            recordId,
-                                        },
-                                    });
+                                .then(() => {
+                                    (queryClient as QueryClient).refetchQueries(
+                                        ['products', 'getLocks']
+                                    );
                                 });
                         }, 4000);
                     }
@@ -414,7 +402,7 @@ const tours: { [id: string]: TourType } = {
                 joyrideProps: {
                     hideBackButton: true,
                 },
-                after: async ({ dataProvider, dispatch, refresh }) => {
+                after: async ({ dataProvider, queryClient }) => {
                     // Reset the locks on Products #2 and #5
                     // The lock on Procuct #1 has been deleted during the scenario
                     await Promise.all(
@@ -423,32 +411,26 @@ const tours: { [id: string]: TourType } = {
                                 `[data-productid="${recordId}"]`
                             );
                             if (lockTile instanceof HTMLElement) {
-                                const identity = lockTile.dataset.lockidentity;
+                                const identity = lockTile.dataset
+                                    .lockidentity as string;
 
-                                return dataProvider
+                                return (dataProvider as LocksDataProvider)
                                     .unlock('products', {
-                                        recordId,
+                                        id: recordId,
                                         identity,
                                     })
-                                    .then(({ data: lock }) => {
-                                        dispatch({
-                                            type: 'RA/UNLOCK_SUCCESS',
-                                            payload: {
-                                                data: lock,
-                                            },
-                                            meta: {
-                                                fetchResponse: 'RA/UNLOCK',
-                                                resource: 'products',
-                                                recordId,
-                                            },
-                                        });
+                                    .then(() => {
+                                        (
+                                            queryClient as QueryClient
+                                        ).refetchQueries([
+                                            'products',
+                                            'getLocks',
+                                        ]);
                                     });
                             }
                             return Promise.resolve();
                         })
-                    ).then(() => {
-                        refresh();
-                    });
+                    );
                 },
             },
         ],
@@ -471,14 +453,14 @@ const tours: { [id: string]: TourType } = {
         },
         steps: [
             {
-                target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:nth-child(3)',
                 content: 'tours.ra-editable-datagrid.intro',
             },
             {
                 before: ({ target }) => {
-                    target.querySelector('td:nth-child(2)').click();
+                    target.querySelector('td:nth-child(3)').click();
                 },
-                target: '[data-testid="store-datagrid"] > tbody > tr:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:nth-child(3)',
                 content: 'tours.ra-editable-datagrid.edit',
                 after: ({ target }) => {
                     fireEvent.change(target.querySelector('#address'), {
@@ -487,7 +469,7 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: '[data-testid="store-datagrid"] > tbody > tr:first-child button:first-child',
+                target: '[data-testid="store-datagrid"] > tbody > tr:nth-child(3) button:first-child',
                 content: 'tours.ra-editable-datagrid.save',
                 after: ({ target }) => {
                     target.click();

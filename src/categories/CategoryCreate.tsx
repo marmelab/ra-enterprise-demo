@@ -1,14 +1,21 @@
-import { useAddChildNode, useGetRootNodes } from '@react-admin/ra-tree';
 import { useEffect, useRef } from 'react';
 import {
     useRefresh,
     useRedirect,
-    CreateProps,
     useResourceContext,
+    Identifier,
 } from 'react-admin';
+import { useAddChildNode, useGetRootNodes } from '@react-admin/ra-tree';
+import { useLocation } from 'react-router';
 
-const Prompt = (props: CreateProps) => {
-    const resource = useResourceContext(props);
+type CategoryCreateLocationState = {
+    parentId?: Identifier;
+};
+
+const Prompt = () => {
+    const resource = useResourceContext();
+    const location = useLocation();
+    const state = location.state as CategoryCreateLocationState;
     const { data } = useGetRootNodes(resource as string);
     const [addChildNode] = useAddChildNode(resource as string);
     const refresh = useRefresh();
@@ -30,16 +37,15 @@ const Prompt = (props: CreateProps) => {
         const result = window.prompt('Category');
         if (result) {
             addChildNode(
+                'categories',
                 {
-                    payload: {
-                        // We know that we only have one root node in this demo
-                        parentId: rootNodes[0].id,
-                        data: { name: result, children: [] },
-                    },
+                    // We know that we only have one root node in this demo
+                    parentId: state?.parentId ?? rootNodes[0].id,
+                    data: { name: result, children: [] },
                 },
                 {
                     onSuccess: () => {
-                        redirect(props.basePath as string);
+                        redirect('/categories');
                         refresh();
                     },
                 }
@@ -47,8 +53,8 @@ const Prompt = (props: CreateProps) => {
             return;
         }
 
-        redirect(props.basePath as string);
-    }, [data, props.basePath, redirect, refresh, addChildNode]);
+        redirect('/categories');
+    }, [data, redirect, refresh, addChildNode, state]);
 
     return null;
 };

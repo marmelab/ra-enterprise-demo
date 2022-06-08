@@ -1,15 +1,13 @@
-import React, { FC, ReactNode } from 'react';
-import { FunctionField, FunctionFieldProps, Record } from 'react-admin';
+import * as React from 'react';
+import { FunctionField } from 'react-admin';
+import { Order } from '../types';
 
-const render = (record?: Record): ReactNode =>
-    record ? record.basket.length : null;
+const render = (record?: Order) => record && record.basket.length;
 
-const NbItemsField: FC<Omit<FunctionFieldProps, 'render'>> = props => (
-    <FunctionField {...props} render={render} />
-);
+const NbItemsField = () => <FunctionField<Order> render={render} />;
 
 NbItemsField.defaultProps = {
-    label: 'Nb Items',
+    label: 'resources.commands.fields.nb_items',
     textAlign: 'right',
 };
 

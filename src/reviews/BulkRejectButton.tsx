@@ -1,44 +1,38 @@
-import React, { FC } from 'react';
-import PropTypes from 'prop-types';
-import ThumbDown from '@material-ui/icons/ThumbDown';
+import * as React from 'react';
+import ThumbDown from '@mui/icons-material/ThumbDown';
+
 import {
     Button,
     useUpdateMany,
     useNotify,
-    useRedirect,
     useUnselectAll,
-    CRUD_UPDATE_MANY,
+    Identifier,
     useListContext,
 } from 'react-admin';
 
-const BulkRejectButton: FC = () => {
-    const notify = useNotify();
-    const redirectTo = useRedirect();
-    const unselectAll = useUnselectAll('reviews');
-    const { selectedIds } = useListContext();
+const noSelection: Identifier[] = [];
 
-    const [reject, { loading }] = useUpdateMany(
+const BulkRejectButton = () => {
+    const { selectedIds = noSelection } = useListContext();
+    const notify = useNotify();
+    const unselectAll = useUnselectAll('reviews');
+
+    const [updateMany, { isLoading }] = useUpdateMany(
         'reviews',
-        selectedIds,
-        { status: 'rejected' },
+        { ids: selectedIds, data: { status: 'rejected' } },
         {
-            action: CRUD_UPDATE_MANY,
-            undoable: true,
+            mutationMode: 'undoable',
             onSuccess: () => {
-                notify(
-                    'resources.reviews.notification.approved_success',
-                    'info',
-                    {},
-                    true
-                );
-                redirectTo('/reviews');
+                notify('resources.reviews.notification.approved_success', {
+                    type: 'info',
+                    undoable: true,
+                });
                 unselectAll();
             },
-            onFailure: () => {
-                notify(
-                    'resources.reviews.notification.approved_error',
-                    'warning'
-                );
+            onError: () => {
+                notify('resources.reviews.notification.approved_error', {
+                    type: 'warning',
+                });
             },
         }
     );
@@ -46,16 +40,12 @@ const BulkRejectButton: FC = () => {
     return (
         <Button
             label="resources.reviews.action.reject"
-            onClick={reject}
-            disabled={loading}
+            onClick={() => updateMany()}
+            disabled={isLoading}
         >
             <ThumbDown />
         </Button>
     );
-};
-
-BulkRejectButton.propTypes = {
-    selectedIds: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default BulkRejectButton;

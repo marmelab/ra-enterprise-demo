@@ -1,13 +1,5 @@
 export default [
     {
-        id: 2,
-        image: 'images/tours/ra-preferences.jpg',
-        title: 'ra-preferences',
-        tour: 'ra-preferences',
-        comment: 'tours.ra-preferences.comment',
-        href: 'http://marmelab.com/react-admin',
-    },
-    {
         id: 7,
         image: 'images/tours/ra-search.png',
         title: 'ra-search',

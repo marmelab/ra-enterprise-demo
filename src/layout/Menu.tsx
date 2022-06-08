@@ -1,34 +1,33 @@
-import React, { FC, ReactNode, useState, useEffect, ReactElement } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslate } from 'react-admin';
+import * as React from 'react';
+import { useState, useEffect, ReactElement } from 'react';
+import { useSavedQueries, useTranslate } from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import EventsIcon from '@material-ui/icons/FormatListNumbered';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import AVTimerIcon from '@material-ui/icons/AvTimer';
-import BlockIcon from '@material-ui/icons/Block';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import EventsIcon from '@mui/icons-material/FormatListNumbered';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import AVTimerIcon from '@mui/icons-material/AvTimer';
+import BlockIcon from '@mui/icons-material/Block';
 import querystring from 'query-string';
 import { endOfYesterday } from 'date-fns';
 
 import {
     MultiLevelMenu,
-    MenuItem,
+    MenuItemNode,
     MenuItemCategory,
     useAppLocationMatcher,
     useResourceAppLocation,
-    Menu as NavigationMenu,
+    MenuItemList,
 } from '@react-admin/ra-navigation';
-import { useSavedQueries } from '@react-admin/ra-preferences';
 
 import {
     useMediaQuery,
     Theme,
     CardContent,
     Typography,
-    withStyles,
+    styled,
     Badge,
     Box,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import MobileMenu from './MobileMenu';
 import categories from '../categories';
@@ -38,13 +37,7 @@ import invoices from '../invoices';
 import products from '../products';
 import reviews from '../reviews';
 import stores from '../stores';
-import { AppState } from '../types';
 import { segments } from '../visitors/segments';
-
-interface Props {
-    logout?: ReactNode;
-    onMenuClick?: () => void;
-}
 
 export const newCustomerFilter = querystring.stringify({
     filter: JSON.stringify({
@@ -65,7 +58,7 @@ const useResourceChangeCounter = (resource: string): number => {
     const location = useResourceAppLocation();
     const [countEvent, setCountEvent] = useState(0);
 
-    useSubscribeToRecordList(resource, ({ payload }) => {
+    useSubscribeToRecordList(({ payload }) => {
         if (!payload || !payload.ids) {
             return;
         }
@@ -84,7 +77,7 @@ const useResourceChangeCounter = (resource: string): number => {
         if (count) {
             setCountEvent(previous => previous + count);
         }
-    });
+    }, resource);
 
     useEffect(() => {
         if (match(resource)) {
@@ -95,31 +88,29 @@ const useResourceChangeCounter = (resource: string): number => {
     return countEvent;
 };
 
-const StyledBadgeForText = withStyles(theme => ({
+const StyledBadgeForText = styled(Badge)(({ theme }) => ({
+    width: '100%',
+    display: 'unset',
     badge: {
         top: 13,
         right: 13,
         border: `1px solid ${theme.palette.background.paper}`,
         padding: '0 4px',
+        width: '100%',
     },
-}))(Badge);
+}));
 
-const Menu: FC<Props> = ({ logout, onMenuClick }) => {
-    useSelector((state: AppState) => state.theme); // force rerender on theme change
+const Menu = () => {
     const isXSmall = useMediaQuery((theme: Theme) =>
-        theme.breakpoints.down('xs')
+        theme.breakpoints.down('md')
     );
 
-    return isXSmall ? (
-        <MobileMenu logout={logout} onMenuClick={onMenuClick} />
-    ) : (
-        <DesktopMenu onMenuClick={onMenuClick} />
-    );
+    return isXSmall ? <MobileMenu /> : <DesktopMenu />;
 };
 
 export default Menu;
 
-const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
+const DesktopMenu = () => {
     const translate = useTranslate();
 
     return (
@@ -127,34 +118,30 @@ const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
             <MenuItemCategory
                 name="dashboard"
                 to="/"
-                exact
+                end
                 icon={<DashboardIcon />}
-                onClick={onMenuClick}
                 label="ra.page.dashboard"
             />
-            <SalesMenuItem onMenuClick={onMenuClick} />
+            <SalesMenuItem />
             <MenuItemCategory
                 name="catalog"
                 icon={<products.icon />}
-                onClick={onMenuClick}
                 label={translate(`pos.menu.catalog`, { smart_count: 1 })}
             >
                 <CardContent>
-                    <CatalogMenu onMenuClick={onMenuClick} />
+                    <CatalogMenu />
                 </CardContent>
             </MenuItemCategory>
             <MenuItemCategory
                 name="customers"
                 icon={<visitors.icon />}
-                onClick={onMenuClick}
                 label={translate(`pos.menu.customers`, { smart_count: 2 })}
             >
-                <CustomersMenu onMenuClick={onMenuClick} />
+                <CustomersMenu />
             </MenuItemCategory>
             <MenuItemCategory
                 name="reviews"
                 icon={<reviews.icon />}
-                onClick={onMenuClick}
                 label={translate(`resources.reviews.name`, { smart_count: 2 })}
             >
                 <CardContent>
@@ -163,52 +150,45 @@ const DesktopMenu: FC<Props> = ({ onMenuClick }) => {
                             smart_count: 2,
                         })}
                     </Typography>{' '}
-                    <NavigationMenu>
-                        <MenuItem
+                    <MenuItemList>
+                        <MenuItemNode
                             name="reviews.all"
                             to={'/reviews?filter={}'}
                             icon={<CheckCircleOutlineIcon />}
-                            onClick={onMenuClick}
                             label="pos.menu.all_reviews"
                         />
-                        <MenuItem
+                        <MenuItemNode
                             name="reviews.pending"
                             to={`/reviews?${pendingReviewFilter}`}
                             icon={<AVTimerIcon />}
-                            onClick={onMenuClick}
                             label="pos.menu.pending_reviews"
                         />
-                        <MenuItem
+                        <MenuItemNode
                             name="reviews.bad"
                             to={'/reviews?filter={"rating_lte": "2"}'}
                             icon={<BlockIcon />}
-                            onClick={onMenuClick}
                             label="pos.menu.bad_reviews"
                         />
-                    </NavigationMenu>
+                    </MenuItemList>
                 </CardContent>
             </MenuItemCategory>
             <MenuItemCategory
                 name="stores"
                 to="/stores"
                 icon={<stores.icon />}
-                onClick={onMenuClick}
                 label={translate(`resources.stores.name`, { smart_count: 2 })}
             />
             <MenuItemCategory
                 name="events"
                 to="/events"
                 icon={<EventsIcon />}
-                onClick={onMenuClick}
                 label={translate(`resources.events.name`, { smart_count: 2 })}
             />
         </MultiLevelMenu>
     );
 };
 
-const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
-    onMenuClick,
-}) => {
+const CustomersMenu = () => {
     const translate = useTranslate();
     const savedQueriesMenuItems = usePersistedQueriesMenu('customers');
 
@@ -221,46 +201,42 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                             smart_count: 2,
                         })}
                     </Typography>
-                    <NavigationMenu>
-                        <MenuItem
+                    <MenuItemList>
+                        <MenuItemNode
                             name="customers.all_customers"
                             to={`/customers?filter={}`}
-                            onClick={onMenuClick}
                             label={translate(`pos.menu.all_customers`, {
                                 smart_count: 2,
                             })}
                         />
-                        <MenuItem
+                        <MenuItemNode
                             name="customers.newcomers"
                             to={`/customers?${newCustomerFilter}`}
-                            onClick={onMenuClick}
                             label={translate(`pos.menu.new_customers`, {
                                 smart_count: 2,
                             })}
                         />
-                        <MenuItem
+                        <MenuItemNode
                             name="customers.visitors"
                             to={`/customers?${visitorsFilter}`}
-                            onClick={onMenuClick}
                             label={translate(`pos.menu.visitors`, {
                                 smart_count: 2,
                             })}
                         />
-                    </NavigationMenu>
+                    </MenuItemList>
                     <Typography variant="h6" gutterBottom>
                         {translate(`resources.segments.name`, {
                             smart_count: 2,
                         })}
                     </Typography>
-                    <NavigationMenu>
+                    <MenuItemList>
                         {segments.map(segment => (
-                            <MenuItem
+                            <MenuItemNode
                                 key={segment}
                                 name={`segments.${segment}`}
                                 to={`/customers?${querystring.stringify({
                                     filter: JSON.stringify({ groups: segment }),
                                 })}`}
-                                onClick={onMenuClick}
                                 label={translate(
                                     `resources.segments.data.${segment}`,
                                     {
@@ -269,7 +245,7 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                                 )}
                             />
                         ))}
-                    </NavigationMenu>
+                    </MenuItemList>
                 </Box>
                 {savedQueriesMenuItems.length > 0 && (
                     <Box>
@@ -278,17 +254,16 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
                                 smart_count: 1,
                             })}
                         </Typography>
-                        <NavigationMenu>
+                        <MenuItemList>
                             {savedQueriesMenuItems.map(({ label, to }) => (
-                                <MenuItem
+                                <MenuItemNode
                                     key={label}
                                     name="customers"
                                     to={to}
-                                    onClick={onMenuClick}
                                     label={label}
                                 />
                             ))}
-                        </NavigationMenu>
+                        </MenuItemList>
                     </Box>
                 )}
             </Box>
@@ -296,11 +271,7 @@ const CustomersMenu: FC<{ onMenuClick: (() => void) | undefined }> = ({
     );
 };
 
-const SalesMenuItem = ({
-    onMenuClick,
-}: {
-    onMenuClick?: () => void;
-}): ReactElement => {
+const SalesMenuItem = (): ReactElement => {
     const commandsChangeCount = useResourceChangeCounter('commands');
     const translate = useTranslate();
 
@@ -309,7 +280,6 @@ const SalesMenuItem = ({
             <MenuItemCategory
                 name="sales"
                 icon={<products.icon />}
-                onClick={onMenuClick}
                 label={translate(`pos.menu.sales`, { smart_count: 1 })}
                 data-testid="commands-menu"
             >
@@ -317,72 +287,69 @@ const SalesMenuItem = ({
                     <Typography variant="h6" gutterBottom>
                         {translate(`pos.menu.sales`, { smart_count: 1 })}
                     </Typography>
-                    <NavigationMenu>
+                    <MenuItemList>
                         <StyledBadgeForText
                             badgeContent={commandsChangeCount}
                             color="primary"
                         >
-                            <MenuItem
+                            <MenuItemNode
                                 name="commands"
                                 to="/commands"
                                 icon={<orders.icon />}
-                                onClick={onMenuClick}
                                 label={translate(`resources.commands.name`, {
                                     smart_count: 2,
                                 })}
                             />
                         </StyledBadgeForText>
-                        <MenuItem
+                        <MenuItemNode
                             name="invoices"
                             to="/invoices?filter={}"
                             icon={<invoices.icon />}
-                            onClick={onMenuClick}
                             label={translate(`resources.invoices.name`, {
                                 smart_count: 2,
                             })}
                         />
-                    </NavigationMenu>
+                    </MenuItemList>
                 </CardContent>
             </MenuItemCategory>
         </StyledBadgeForText>
     );
 };
 
-const CatalogMenu = (props: {
-    onMenuClick: (() => void) | undefined;
-}): ReactElement => {
-    const { onMenuClick } = props;
+const CatalogMenu = (): ReactElement => {
     const translate = useTranslate();
     const savedQueriesMenuItems = usePersistedQueriesMenu('products');
 
     return (
-        <Box display="flex" justifyContent="space-between">
+        <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+        >
             <Box marginRight={savedQueriesMenuItems.length > 0 ? 2 : 0}>
                 <Typography variant="h6" gutterBottom>
                     {translate(`pos.menu.catalog`, {
                         smart_count: 1,
                     })}
                 </Typography>
-                <NavigationMenu>
-                    <MenuItem
+                <MenuItemList>
+                    <MenuItemNode
                         name="products"
                         to="/products"
                         icon={<products.icon />}
-                        onClick={onMenuClick}
                         label={translate(`resources.products.name`, {
                             smart_count: 2,
                         })}
                     />
-                    <MenuItem
+                    <MenuItemNode
                         name="categories"
                         to="/categories"
                         icon={<categories.icon />}
-                        onClick={onMenuClick}
                         label={translate(`resources.categories.name`, {
                             smart_count: 2,
                         })}
                     />
-                </NavigationMenu>
+                </MenuItemList>
             </Box>
             {savedQueriesMenuItems.length > 0 && (
                 <Box>
@@ -391,17 +358,16 @@ const CatalogMenu = (props: {
                             smart_count: 1,
                         })}
                     </Typography>
-                    <NavigationMenu>
+                    <MenuItemList>
                         {savedQueriesMenuItems.map(({ label, to }) => (
-                            <MenuItem
+                            <MenuItemNode
                                 key={label}
                                 name="products"
                                 to={to}
-                                onClick={onMenuClick}
                                 label={label}
                             />
                         ))}
-                    </NavigationMenu>
+                    </MenuItemList>
                 </Box>
             )}
         </Box>

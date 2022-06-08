@@ -1,20 +1,23 @@
-import React, { FC } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import { Record } from 'react-admin';
+import * as React from 'react';
+import { Avatar, SxProps } from '@mui/material';
+import { FieldProps, useRecordContext } from 'react-admin';
+import { Customer } from '../types';
 
-interface Props {
-    className?: string;
-    record?: Record;
+interface Props extends FieldProps<Customer> {
+    sx?: SxProps;
     size?: string;
 }
 
-const AvatarField: FC<Props> = ({ record, size = '25', className }) =>
-    record ? (
+const AvatarField = ({ size = '25', sx }: Props) => {
+    const record = useRecordContext<Customer>();
+    if (!record) return null;
+    return (
         <Avatar
             src={`${record.avatar}?size=${size}x${size}`}
             style={{ width: parseInt(size, 10), height: parseInt(size, 10) }}
-            className={className}
+            sx={sx}
         />
-    ) : null;
+    );
+};
 
 export default AvatarField;

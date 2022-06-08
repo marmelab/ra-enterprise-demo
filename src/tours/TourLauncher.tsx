@@ -1,19 +1,19 @@
-import React, { FC, useEffect } from 'react';
-import { Redirect, useParams } from 'react-router';
+import React, { useEffect } from 'react';
+import { Navigate, useParams } from 'react-router';
 import { useTour } from '@react-admin/ra-tour';
 
-const TourLauncher: FC = () => {
+const TourLauncher = () => {
     const { tour } = useParams<{ tour: string }>();
     const [{ running }, { start }] = useTour();
 
     useEffect(() => {
-        if (start && !running) {
+        if (start && !running && tour) {
             start(tour);
             return;
         }
-    });
+    }, [running, start, tour]);
 
-    return running ? <Redirect to="/" /> : null;
+    return running ? <Navigate to="/" /> : null;
 };
 
 export default TourLauncher;

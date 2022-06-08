@@ -1,10 +1,13 @@
-import { ThemeOptions } from '@react-admin/ra-enterprise';
-import { fade, Theme } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
-import createPalette from '@material-ui/core/styles/createPalette';
+import {
+    buildThemeFromTypeMethod,
+    ThemeOptions,
+} from '@react-admin/ra-enterprise';
+import { alpha, Theme } from '@mui/material';
+import createPalette from '@mui/material/styles/createPalette';
+import { grey } from '@mui/material/colors';
 
 const darkPalette = createPalette({
-    type: 'dark', // Switching the dark mode on is a single property value change.
+    mode: 'dark', // Switching the dark mode on is a single property value change.
     primary: {
         main: '#90caf9',
     },
@@ -13,113 +16,150 @@ const darkPalette = createPalette({
 export const getThemes = (
     theme: Theme
 ): { darkTheme: ThemeOptions; lightTheme: ThemeOptions } => {
-    return { darkTheme: darkTheme(theme), lightTheme: lightTheme(theme) };
+    const buildTheme = buildThemeFromTypeMethod(
+        theme,
+        getLightTheme(theme),
+        getDarkTheme(theme)
+    );
+    return {
+        darkTheme: buildTheme('dark'),
+        lightTheme: buildTheme('light'),
+    };
 };
 
-const darkTheme = (theme: Theme): ThemeOptions => ({
+export const getDarkTheme = (theme: Theme): ThemeOptions => ({
     palette: darkPalette,
-    overrides: {
+    components: {
         MuiAppBar: {
-            // Hide MenuItemCategory shadow behind the appbar
-            zIndex: 9999,
+            styleOverrides: {
+                root: {
+                    // Hide MenuItemCategory shadow behind the appbar
+                    zIndex: 9999,
+                },
+            },
         },
         RaAppBar: {
-            menuButton: {
-                // Since sub-<Menu /> hide labels when sidebar is closed
-                // We need to disallow sidebar closing in desktop (hiding button is simpler)
-                display: 'none',
-                [theme.breakpoints.down('xs')]: {
-                    display: 'block',
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#535353',
+                    borderColor: '#535353',
+                    color: '#fff',
+                    '& .RaAppBar-menuButton': {
+                        // Since sub-<Menu /> hide labels when sidebar is closed
+                        // We need to disallow sidebar closing on desktop (hiding button is simpler)
+                        display: 'block',
+                        [theme.breakpoints.up('md')]: {
+                            display: 'none',
+                        },
+                    },
                 },
             },
         },
         RaSearchInput: {
-            root: {
-                color: darkPalette.common.white,
-                backgroundColor: fade(darkPalette.common.black, 0.04),
-                '&:hover': {
-                    backgroundColor: fade(darkPalette.common.black, 0.13),
+            styleOverrides: {
+                root: {
+                    color: darkPalette.common.white,
+                    backgroundColor: alpha(darkPalette.common.black, 0.04),
+                    '&:hover': {
+                        backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    },
+                    '&:focus': {
+                        backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    },
+                    '&:focus-within': {
+                        backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    },
+                    '& .RaSearchInput-inputBase': {
+                        background: alpha(darkPalette.common.black, 0.04),
+                        borderRadius: 10,
+                        '&:hover': {
+                            background: alpha(darkPalette.common.black, 0.1),
+                        },
+                    },
+                    '& .RaSearchInput-inputAdornmentStart': {
+                        color: darkPalette.common.white,
+                    },
                 },
-                '&:focus': {
-                    backgroundColor: fade(darkPalette.common.black, 0.13),
-                },
-                '&:focus-within': {
-                    backgroundColor: fade(darkPalette.common.black, 0.13),
-                },
-            },
-            inputBase: {
-                background: fade(darkPalette.common.black, 0.04),
-                borderRadius: 10,
-                '&:hover': {
-                    background: fade(darkPalette.common.black, 0.1),
-                },
-            },
-            inputAdornmentStart: {
-                color: darkPalette.common.white,
             },
         },
         RaSidebar: {
-            drawerPaper: {
-                paddingRight: 16,
-                width: 64,
-            },
-            fixed: {
-                zIndex: 1200,
-            },
-        },
-        RaMenuItemCategory: {
-            closeButton: {
-                color: 'white',
-            },
-            popoverPaper: {
-                backgroundColor: '#424242',
-            },
-        },
-        RaMenuItem: {
-            root: {
-                color: 'white',
-            },
-            link: {
-                '&:hover': {
-                    color: 'black',
-                    backgroundColor: grey[200],
+            styleOverrides: {
+                root: {
+                    '& .RaSidebar-drawerPaper': {
+                        paddingRight: 16,
+                        [theme.breakpoints.up('md')]: {
+                            width: 64,
+                        },
+                    },
+                    '& .RaSidebar-fixed': {
+                        zIndex: 1200,
+                    },
                 },
             },
         },
-        RaFilterFormInput: {
-            body: {
-                // Fixes search filter breadcrumb overlap
-                '& > div': {
-                    marginTop: 8,
+        RaMultiLevelMenu: {
+            styleOverrides: {
+                root: {
+                    '& .RaMultiLevelMenu-navWithCategories': {
+                        backgroundColor: '#535353',
+                    },
+                },
+            },
+        },
+        RaMenuItemCategory: {
+            styleOverrides: {
+                root: {
+                    '& .RaMenuItemCategory-container': {
+                        color: 'white',
+                    },
+                    '& .RaMenuItemCategory-active': {
+                        color: '#535353',
+                    },
+                    '& .RaMenuItemCategory-popoverPaper': {
+                        backgroundColor: '#535353',
+                    },
                 },
             },
         },
         RaTopToolbar: {
-            root: {
-                alignItems: 'center',
-                paddingTop: 0,
-                minHeight: 'auto',
+            styleOverrides: {
+                root: {
+                    alignItems: 'center',
+                    paddingTop: 0,
+                    minHeight: 'auto',
+                    width: 'auto',
+                },
             },
         },
         RaListToolbar: {
-            root: {
-                alignItems: 'center',
-                paddingTop: 0,
+            styleOverrides: {
+                root: {
+                    alignItems: 'center',
+                    paddingTop: 0,
+                    '& .RaListToolbar-actions': {
+                        alignItems: 'center',
+                        paddingTop: 0,
+                        minHeight: 'auto',
+                    },
+                    '& .RaListToolbar-toolbar': {
+                        minHeight: 'auto',
+                    },
+                },
             },
-            actions: {
-                alignItems: 'center',
-                paddingTop: 0,
-                minHeight: 'auto',
-            },
-            toolbar: {
-                minHeight: 'auto',
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    borderColor: '#535353',
+                    backgroundColor: '#535353',
+                },
             },
         },
     },
 });
 
 const lightPalette = createPalette({
-    type: 'light',
+    mode: 'light',
     primary: {
         main: '#4f3cc9',
     },
@@ -134,157 +174,200 @@ const lightPalette = createPalette({
     },
 });
 
-export const lightTheme = (theme: Theme): ThemeOptions => ({
+export const getLightTheme = (theme: Theme): ThemeOptions => ({
     palette: lightPalette,
     shape: {
         borderRadius: 10,
     },
-    overrides: {
+    components: {
         RaAppBar: {
-            menuButton: {
-                // Since sub-<Menu /> hide labels when sidebar is closed
-                // We need to disallow sidebar closing (hiding button is simpler)
-                display: 'none',
-                [theme.breakpoints.down('xs')]: {
-                    display: 'block',
+            styleOverrides: {
+                root: {
+                    '& .RaAppBar-menuButton': {
+                        // Since sub-<Menu /> hide labels when sidebar is closed
+                        // We need to disallow sidebar closing on desktop (hiding button is simpler)
+                        display: 'block',
+                        [theme.breakpoints.up('md')]: {
+                            display: 'none',
+                        },
+                    },
                 },
             },
         },
         RaSearchInput: {
-            root: {
-                color: lightPalette.text.primary,
-                backgroundColor: fade(lightPalette.common.black, 0.04),
-                '&:hover': {
-                    backgroundColor: fade(lightPalette.common.black, 0.13),
+            styleOverrides: {
+                root: {
+                    color: lightPalette.text.primary,
+                    backgroundColor: alpha(lightPalette.common.black, 0.04),
+                    '&:hover': {
+                        backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    },
+                    '&:focus': {
+                        backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    },
+                    '&:focus-within': {
+                        backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    },
+                    '& .RaSearchInput-inputBase': {
+                        background: alpha(lightPalette.common.black, 0.04),
+                        borderRadius: 10,
+                        '&:hover': {
+                            background: alpha(lightPalette.common.black, 0.1),
+                        },
+                    },
+                    '& .RaSearchInput-inputAdornmentStart': {
+                        color: alpha('#000000', 0.38),
+                    },
                 },
-                '&:focus': {
-                    backgroundColor: fade(lightPalette.common.black, 0.13),
-                },
-                '&:focus-within': {
-                    backgroundColor: fade(lightPalette.common.black, 0.13),
-                },
-            },
-            inputBase: {
-                background: fade(lightPalette.common.black, 0.04),
-                borderRadius: 10,
-                '&:hover': {
-                    background: fade(lightPalette.common.black, 0.1),
-                },
-            },
-            inputAdornmentStart: {
-                color: lightPalette.text.hint,
             },
         },
         RaMenuItemLink: {
-            root: {
-                borderLeft: '3px solid #fff',
-            },
-            active: {
-                borderLeft: '3px solid #808080',
+            styleOverrides: {
+                root: {
+                    borderLeft: '3px solid #fff',
+                    '& .RaMenuItemLink-active': {
+                        borderLeft: '3px solid #808080',
+                    },
+                },
             },
         },
         RaMenuItemCategory: {
-            root: {
-                color: '#808080',
-                '&:hover': {
-                    color: 'black',
-                    backgroundColor: grey[200],
+            styleOverrides: {
+                root: {
+                    '& .RaMenuItemCategory-container': {
+                        color: '#808080',
+                        '&:hover': {
+                            color: 'black',
+                            backgroundColor: grey[200],
+                        },
+                    },
+                    '& .RaMenuItemCategory-popoverPaper': {
+                        boxShadow: theme.shadows[2],
+                        backgroundColor: lightPalette.background.paper,
+                    },
                 },
             },
         },
         RaMenuItem: {
-            root: {
-                color: '#808080',
+            styleOverrides: {
+                root: {
+                    color: '#808080',
+                },
             },
         },
         RaMultiLevelMenu: {
-            navWithCategories: {
-                backgroundColor: '#fff',
+            styleOverrides: {
+                root: {
+                    '& .RaMultiLevelMenu-navWithCategories': {
+                        backgroundColor: '#fff',
+                    },
+                },
             },
         },
         MuiPaper: {
-            elevation1: {
-                boxShadow: 'none',
-            },
-            root: {
-                border: '1px solid #e0e0e3',
-                backgroundClip: 'padding-box',
+            styleOverrides: {
+                elevation1: {
+                    boxShadow: 'none',
+                },
+                root: {
+                    border: '1px solid #e0e0e3',
+                    backgroundClip: 'padding-box',
+                },
             },
         },
         MuiButton: {
-            contained: {
-                backgroundColor: '#fff',
-                color: '#4f3cc9',
-                boxShadow: 'none',
+            styleOverrides: {
+                contained: {
+                    backgroundColor: '#fff',
+                    color: '#4f3cc9',
+                    boxShadow: 'none',
+                },
             },
         },
         MuiAppBar: {
-            // Hide MenuItemCategory shadow behind the appbar
-            root: { zIndex: 9999 },
-            colorSecondary: {
-                color: '#808080',
-                backgroundColor: '#fff',
+            styleOverrides: {
+                // Hide MenuItemCategory shadow behind the appbar
+                root: { zIndex: 9999 },
+                colorSecondary: {
+                    color: '#808080',
+                    backgroundColor: '#fff',
+                },
             },
         },
         MuiLinearProgress: {
-            colorPrimary: {
-                backgroundColor: '#f5f5f5',
-            },
-            barColorPrimary: {
-                backgroundColor: '#d7d7d7',
+            styleOverrides: {
+                colorPrimary: {
+                    backgroundColor: '#f5f5f5',
+                },
+                barColorPrimary: {
+                    backgroundColor: '#d7d7d7',
+                },
             },
         },
         MuiFilledInput: {
-            root: {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                '&$disabled': {
+            styleOverrides: {
+                root: {
                     backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    '&$disabled': {
+                        backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                    },
                 },
             },
         },
         RaSidebar: {
-            drawerPaper: {
-                paddingRight: 16,
-                width: 64,
-            },
-            fixed: {
-                zIndex: 1200,
-            },
-        },
-        RaFilterFormInput: {
-            body: {
-                // Fixes search filter breadcrumb overlap
-                '& > div': {
-                    marginTop: 8,
+            styleOverrides: {
+                root: {
+                    '& .RaSidebar-drawerPaper': {
+                        paddingRight: 16,
+                        [theme.breakpoints.up('md')]: {
+                            width: 64,
+                        },
+                    },
+                    '& .RaSidebar-fixed': {
+                        zIndex: 1200,
+                    },
+                    '&.MuiDrawer-docked .MuiPaper-root': {
+                        width: '96px',
+                    },
+                    '& .MuiPaper-root': {
+                        width: 'auto',
+                    },
                 },
             },
         },
         RaLinkedData: {
-            root: {
-                '&:hover': {
-                    backgroundColor: '#ddd',
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        backgroundColor: '#ddd',
+                    },
                 },
             },
         },
         RaTopToolbar: {
-            root: {
-                alignItems: 'center',
-                paddingTop: 0,
-                minHeight: 'auto',
+            styleOverrides: {
+                root: {
+                    alignItems: 'center',
+                    paddingTop: 0,
+                    minHeight: 'auto',
+                    width: 'auto',
+                },
             },
         },
         RaListToolbar: {
-            root: {
-                alignItems: 'center',
-                paddingTop: 0,
-            },
-            actions: {
-                alignItems: 'center',
-                minHeight: 'auto',
-                paddingTop: 0,
-            },
-            toolbar: {
-                minHeight: 'auto',
+            styleOverrides: {
+                root: {
+                    alignItems: 'center',
+                    paddingTop: 0,
+                    '& .RaListToolbar-actions': {
+                        alignItems: 'center',
+                        minHeight: 'auto',
+                        paddingTop: 0,
+                    },
+                    '& .RaListToolbar-toolbar': {
+                        minHeight: 'auto',
+                    },
+                },
             },
         },
     },

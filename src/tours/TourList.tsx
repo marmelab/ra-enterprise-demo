@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
-import RotateLeftIcon from '@material-ui/icons/RotateLeft';
+import { Grid } from '@mui/material';
+import PlaylistAddCheckIcon from '@mui/icons-material/PlaylistAddCheck';
+import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import { TopToolbar, Button } from 'react-admin';
 import tours from './data';
 
@@ -9,17 +9,8 @@ import Tour from './Tour';
 import { useTourStates } from './useTourState';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-const useListStyles = makeStyles({
-    gridContainer: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        marginLeft: '-20px',
-        marginRight: '-20px',
-    },
-});
-
 const ListActions = (): ReactElement => {
-    const [_, tourStatesActions] = useTourStates();
+    const [, tourStatesActions] = useTourStates();
 
     return (
         <TopToolbar>
@@ -40,16 +31,21 @@ const ListActions = (): ReactElement => {
 };
 
 const TourList = (): ReactElement => {
-    const classes = useListStyles();
     useDefineAppLocation('tours');
     return (
         <>
             <ListActions />
-            <div className={classes.gridContainer}>
+            <Grid
+                container
+                spacing={{ xs: 2, md: 4, lg: 6 }}
+                columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+            >
                 {tours.map(tour => (
-                    <Tour key={tour.id} record={tour} />
+                    <Grid key={tour.id} item>
+                        <Tour record={tour} />
+                    </Grid>
                 ))}
-            </div>
+            </Grid>
         </>
     );
 };

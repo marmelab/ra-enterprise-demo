@@ -1,24 +1,24 @@
-import React, { FC } from 'react';
-import classnames from 'classnames';
+import React from 'react';
 import { useTranslate } from 'react-admin';
 import {
     Avatar,
+    Box,
     Grid,
+    lighten,
     ListItem,
     ListItemAvatar,
     Typography,
-} from '@material-ui/core';
-import { makeStyles, lighten } from '@material-ui/core/styles';
-import { blue } from '@material-ui/core/colors';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+    useTheme,
+} from '@mui/material';
+import { blue } from '@mui/material/colors';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import { SearchListItemLink } from './SearchListItemLink';
 
-export const CommandListItem: FC<any> = props => {
+export const CommandListItem = (props: any) => {
     const { data, onClick } = props;
     const { content } = data;
 
-    const classes = useCommandListItemStyles();
     const translate = useTranslate();
 
     if (!content) {
@@ -33,12 +33,28 @@ export const CommandListItem: FC<any> = props => {
             onClick={onClick}
             alignItems="flex-start"
         >
-            <ListItemAvatar className={classes.avatar}>
+            <ListItemAvatar
+                sx={{
+                    marginLeft: 1,
+                    marginRight: 1,
+                    '& svg': {
+                        width: 30,
+                        height: 30,
+                    },
+                }}
+            >
                 <Avatar alt={content.reference}>
                     <ShoppingCartIcon fontSize="large" />
                 </Avatar>
             </ListItemAvatar>
-            <Grid className={classes.root} container spacing={2}>
+            <Grid
+                sx={{
+                    py: 1,
+                    px: 0,
+                }}
+                container
+                spacing={2}
+            >
                 <Grid container item xs>
                     <Grid item xs={8}>
                         <Typography
@@ -74,66 +90,50 @@ export const CommandListItem: FC<any> = props => {
     );
 };
 
-const useCommandListItemStyles = makeStyles(theme => ({
-    avatar: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        '& svg': {
-            width: 30,
-            height: 30,
+const CommandStatus = ({
+    status,
+}: {
+    status: 'ordered' | 'delivered' | 'cancelled';
+}) => {
+    const theme = useTheme();
+    const StatusStyles = {
+        ordered: {
+            color: theme.palette.getContrastText(lighten(blue[300], 0.3)),
+            backgroundColor: lighten(blue[300], 0.3),
         },
-    },
-    root: {
-        padding: theme.spacing(1, 0),
-    },
-    total: {
-        fontWeight: 'bold',
-    },
-}));
-
-const CommandStatus: FC<{ status: string }> = ({ status }) => {
-    const classes = useCommandStatusStyles();
-
+        delivered: {
+            backgroundColor: lighten(theme.palette.success.main, 0.3),
+            color: theme.palette.getContrastText(
+                lighten(theme.palette.success.main, 0.3)
+            ),
+        },
+        cancelled: {
+            backgroundColor: lighten(theme.palette.error.main, 0.3),
+            color: theme.palette.getContrastText(
+                lighten(theme.palette.error.main, 0.3)
+            ),
+        },
+    };
     return (
-        <div
-            className={classnames(classes.root, {
-                [classes.ordered]: status === 'ordered',
-                [classes.delivered]: status === 'delivered',
-                [classes.cancelled]: status === 'cancelled',
-            })}
+        <Box
+            sx={{
+                maxWidth: 64,
+                py: 0.25,
+                px: 1,
+                borderRadius: 1,
+                textAlign: 'center',
+                ...StatusStyles[status],
+            }}
         >
-            <Typography className={classes.status} variant="caption">
+            <Typography
+                sx={{
+                    color: 'inherit',
+                    textTransform: 'capitalize',
+                }}
+                variant="caption"
+            >
                 {status}
             </Typography>
-        </div>
+        </Box>
     );
 };
-
-const useCommandStatusStyles = makeStyles(theme => ({
-    root: {
-        maxWidth: 64,
-        padding: theme.spacing(0.25, 1),
-        borderRadius: theme.shape.borderRadius,
-        textAlign: 'center',
-    },
-    ordered: {
-        backgroundColor: lighten(blue[300], 0.3),
-        color: theme.palette.getContrastText(lighten(blue[300], 0.3)),
-    },
-    delivered: {
-        backgroundColor: lighten(theme.palette.success.main, 0.3),
-        color: theme.palette.getContrastText(
-            lighten(theme.palette.success.main, 0.3)
-        ),
-    },
-    cancelled: {
-        backgroundColor: lighten(theme.palette.error.main, 0.3),
-        color: theme.palette.getContrastText(
-            lighten(theme.palette.error.main, 0.3)
-        ),
-    },
-    status: {
-        color: 'inherit',
-        textTransform: 'capitalize',
-    },
-}));

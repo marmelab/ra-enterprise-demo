@@ -1,13 +1,12 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import {
     Box,
     ListItem,
     ListItemAvatar,
     ListItemText,
     Typography,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import CommentIcon from '@material-ui/icons/Comment';
+} from '@mui/material';
+import CommentIcon from '@mui/icons-material/Comment';
 
 import { SearchListItemLink } from './index';
 import { useTranslate } from 'react-admin';
@@ -17,11 +16,10 @@ const secondaryTypographyProps = {
     component: 'div',
 };
 
-export const ProductListItem: FC<any> = props => {
+export const ProductListItem = (props: any) => {
     const { data, onClick } = props;
     const { content } = data;
 
-    const classes = useProductListItemStyles();
     const translate = useTranslate();
 
     if (!content) {
@@ -35,12 +33,35 @@ export const ProductListItem: FC<any> = props => {
             data={data}
             onClick={onClick}
             alignItems="flex-start"
-            className={classes.root}
+            sx={{
+                textDecoration: 'none',
+                '&:hover': {
+                    textDecoration: 'none',
+                },
+                '& a': {
+                    textDecoration: 'none',
+                },
+                '& a:hover': {
+                    textDecoration: 'none',
+                },
+            }}
         >
-            <ListItemAvatar className={classes.avatar}>
-                <div className={classes.art}>
+            <ListItemAvatar
+                sx={{
+                    width: 64,
+                    height: 64,
+                    paddingRight: 2,
+                }}
+            >
+                <Box
+                    sx={{
+                        '& img': {
+                            width: '100%',
+                        },
+                    }}
+                >
                     <img src={content.thumbnail} alt={content.reference} />
-                </div>
+                </Box>
             </ListItemAvatar>
             <ListItemText
                 primary={
@@ -76,32 +97,3 @@ export const ProductListItem: FC<any> = props => {
         </ListItem>
     );
 };
-
-const useProductListItemStyles = makeStyles(theme => ({
-    root: {
-        textDecoration: 'none',
-        '&:hover': {
-            textDecoration: 'none',
-        },
-        '& a': {
-            textDecoration: 'none',
-        },
-        '& a:hover': {
-            textDecoration: 'none',
-        },
-    },
-    avatar: {
-        width: 64,
-        height: 64,
-        paddingRight: theme.spacing(2),
-    },
-    mat: {
-        background: theme.palette.background.paper,
-        boxShadow: '0px 0px 8px 0px rgba(0,0,0,0.5) inset',
-    },
-    art: {
-        '& img': {
-            width: '100%',
-        },
-    },
-}));

@@ -1,87 +1,93 @@
-import React, { FC, cloneElement } from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Children, ReactElement } from 'react';
+import { Box, Card, CardContent, IconButton, useTheme } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-import { linkToRecord, useListContext, useTranslate } from 'react-admin';
+import {
+    RecordContextProvider,
+    useCreatePath,
+    useListContext,
+    useResourceContext,
+    useTranslate,
+} from 'react-admin';
 
-import EditIcon from '@material-ui/icons/Edit';
-import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@mui/icons-material/Edit';
 
 import AvatarField from './AvatarField';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        margin: '1em',
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'stretch',
-        justifyContent: 'space-between',
-    },
-    card: {
-        width: 265,
-        display: 'flex',
-        flexDirection: 'column',
-        margin: '0.5rem 0',
-    },
-    cardTitleContent: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        position: 'relative',
-    },
-    editButton: {
-        position: 'absolute',
-        top: 0,
-        right: 0,
-    },
-    cardContent: {
-        ...theme.typography.body1,
-        display: 'flex',
-        flexDirection: 'column',
-    },
-}));
-
-interface Props {
-    fields: any;
-}
-
-const DesktopGrid: FC<Props> = ({ fields, ...rest }) => {
+const DesktopGrid = ({ children }: { children: ReactElement[] }) => {
     const translate = useTranslate();
-    const classes = useStyles();
-    const { ids, data, basePath } = useListContext(rest);
+    const { data } = useListContext();
+    const createPath = useCreatePath();
+    const resource = useResourceContext();
+    const theme = useTheme();
 
-    if (!ids || !data) {
+    if (!data) {
         return null;
     }
 
     return (
-        <div className={classes.root}>
-            {ids.map(id => (
-                <Card key={id} className={classes.card}>
-                    <CardContent className={classes.cardContent}>
-                        <div className={classes.cardTitleContent}>
-                            <AvatarField record={data[id]} size="120" />
-                            <h2>{`${data[id].first_name} ${data[id].last_name}`}</h2>
-
-                            <IconButton
-                                color="secondary"
-                                aria-label="Edit"
-                                component={RouterLink}
-                                className={classes.editButton}
-                                to={linkToRecord(basePath, id)}
+        <Box
+            sx={{
+                margin: '1em',
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'stretch',
+                justifyContent: 'space-between',
+            }}
+        >
+            {data.map(record => (
+                <RecordContextProvider value={record} key={record.id}>
+                    <Card
+                        sx={{
+                            width: 265,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            margin: '0.5rem 0',
+                        }}
+                    >
+                        <CardContent
+                            sx={{
+                                ...theme.typography.body1,
+                                display: 'flex',
+                                flexDirection: 'column',
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    position: 'relative',
+                                }}
                             >
-                                <EditIcon />
-                            </IconButton>
-                        </div>
-                        {fields
-                            .filter(
-                                field => field.props.source !== 'customer_id'
-                            ) // we already display customer up there
-                            .filter(field => !!data[id][field.props.source])
-                            .map(field => {
+                                <AvatarField record={record} size="120" />
+                                <h2>{`${record.first_name} ${record.last_name}`}</h2>
+
+                                <IconButton
+                                    color="secondary"
+                                    aria-label="Edit"
+                                    component={RouterLink}
+                                    sx={{
+                                        position: 'absolute',
+                                        top: 0,
+                                        right: 0,
+                                    }}
+                                    to={createPath({
+                                        resource,
+                                        id: record.id,
+                                        type: 'edit',
+                                    })}
+                                >
+                                    <EditIcon />
+                                </IconButton>
+                            </Box>
+                            {Children.map(children, field => {
                                 const fieldName = field.props.source;
+
+                                // We already display the customer above
+                                if (fieldName === 'customer_id') {
+                                    return null;
+                                }
 
                                 return (
                                     <div
@@ -109,17 +115,16 @@ const DesktopGrid: FC<Props> = ({ fields, ...rest }) => {
                                                 marginTop: '1em',
                                             }}
                                         >
-                                            {cloneElement(field, {
-                                                record: data[id],
-                                            })}
+                                            {field}
                                         </div>
                                     </div>
                                 );
                             })}
-                    </CardContent>
-                </Card>
+                        </CardContent>
+                    </Card>
+                </RecordContextProvider>
             ))}
-        </div>
+        </Box>
     );
 };
 

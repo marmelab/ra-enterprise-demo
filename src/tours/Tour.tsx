@@ -1,66 +1,24 @@
 import React from 'react';
-import { Record, useTranslate } from 'react-admin';
+import { RaRecord, useTranslate } from 'react-admin';
 import { useTour } from '@react-admin/ra-tour';
-import classnames from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import PlayIcon from '@material-ui/icons/PlayArrow';
-import NewReleasesIcon from '@material-ui/icons/NewReleases';
+import {
+    Box,
+    Card,
+    CardActions,
+    CardContent,
+    CardMedia,
+    Button,
+    Typography,
+} from '@mui/material';
+import PlayIcon from '@mui/icons-material/PlayArrow';
+import NewReleasesIcon from '@mui/icons-material/NewReleases';
 import { useTourState } from './useTourState';
 
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-        cursor: 'pointer',
-        margin: 20,
-        opacity: 0.9,
-        transition: 'opacity 0.3s ease-in-out',
-        '&:hover,&:focus-within': {
-            opacity: 1,
-        },
-    },
-    visited: {
-        opacity: 0.6,
-    },
-    media: {
-        height: 140,
-    },
-    rightButton: {
-        marginLeft: 'auto',
-    },
-    content: {
-        position: 'relative',
-        minHeight: 125,
-    },
-    newIcon: {
-        position: 'absolute',
-        top: 10,
-        right: 10,
-    },
-    actions: {
-        paddingBottom: 0,
-    },
-    buyIcon: {
-        marginLeft: 'auto !important',
-    },
-    playedOnIndicator: {
-        paddingLeft: 16,
-        paddingTop: 0,
-        paddingBottom: 16,
-    },
-});
-
-const Tour = ({ record }: { record: Record }) => {
-    const classes = useStyles();
+const Tour = ({ record }: { record: RaRecord }) => {
     const translate = useTranslate();
     const [playedOn, tourStateActions] = useTourState(record.id.toString());
     // eslint-disable-next-line no-unused-vars
-    const [_, { start }] = useTour();
+    const [, { start }] = useTour();
 
     const handlePlayClicked = (): void => {
         if (start) {
@@ -71,22 +29,39 @@ const Tour = ({ record }: { record: Record }) => {
 
     return (
         <Card
-            className={classnames(classes.root, {
-                [classes.visited]: !!playedOn,
-            })}
+            sx={{
+                maxWidth: 345,
+                cursor: 'pointer',
+                opacity: playedOn ? 0.6 : 0.9,
+                transition: 'opacity 0.3s ease-in-out',
+                '&:hover,&:focus-within': {
+                    opacity: 1,
+                },
+            }}
             onClick={handlePlayClicked}
         >
             <CardMedia
-                className={classes.media}
+                sx={{
+                    height: 140,
+                }}
                 image={`${process.env.PUBLIC_URL}/${record.image}`}
                 title={record.title}
             />
-            <CardContent className={classes.content}>
+            <CardContent
+                sx={{
+                    position: 'relative',
+                    minHeight: 125,
+                }}
+            >
                 {!playedOn && (
                     <NewReleasesIcon
                         color="error"
                         fontSize="large"
-                        className={classes.newIcon}
+                        sx={{
+                            position: 'absolute',
+                            top: 10,
+                            right: 10,
+                        }}
                     />
                 )}
                 <Typography variant="h5" component="h2" gutterBottom>
@@ -96,12 +71,22 @@ const Tour = ({ record }: { record: Record }) => {
                     {translate(record.comment, { _: record.comment })}
                 </Typography>
             </CardContent>
-            <CardActions className={classes.actions}>
+            <CardActions
+                sx={{
+                    paddingBottom: 0,
+                }}
+            >
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
                     {translate('tours.action.play')}
                 </Button>
             </CardActions>
-            <div className={classes.playedOnIndicator}>
+            <Box
+                sx={{
+                    paddingLeft: 16,
+                    paddingTop: 0,
+                    paddingBottom: 16,
+                }}
+            >
                 <Typography
                     variant="caption"
                     display="block"
@@ -113,7 +98,7 @@ const Tour = ({ record }: { record: Record }) => {
                           })
                         : translate('tours.message.never_played')}
                 </Typography>
-            </div>
+            </Box>
         </Card>
     );
 };

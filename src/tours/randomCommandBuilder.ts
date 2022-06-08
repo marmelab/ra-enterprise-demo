@@ -1,5 +1,5 @@
 import { Order } from '../types';
-import { Record } from 'react-admin';
+import { RaRecord } from 'react-admin';
 
 /**
  * Generate random commands
@@ -10,7 +10,7 @@ import { Record } from 'react-admin';
  */
 const randomCommandBuilder = (
     batchLevel: number,
-    customers: Record[]
+    customers: RaRecord[]
 ): Omit<Order, 'id'> => {
     const basket = new Array(Math.round(Math.random() * 2) + 1).map(() => ({
         product_id: Math.round(Math.random() * 20),

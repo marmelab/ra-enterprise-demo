@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import {
-    CreateProps,
+    Create,
     FormTab,
     NumberInput,
     ReferenceInput,
@@ -9,29 +9,14 @@ import {
     TextInput,
     required,
 } from 'react-admin';
-import { InputAdornment } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Create } from '@react-admin/ra-enterprise';
+import { InputAdornment, Stack } from '@mui/material';
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import { CreateActions } from '../layout/CreateActions';
 
-export const styles = {
-    price: { width: '7em' },
-    width: { width: '7em' },
-    height: { width: '7em' },
-    stock: { width: '7em' },
-    widthFormGroup: { display: 'inline-block' },
-    heightFormGroup: { display: 'inline-block', marginLeft: 32 },
-};
-
-const useStyles = makeStyles(styles);
-
-const ProductCreate: FC<CreateProps> = props => {
+const ProductCreate = () => {
     useDefineAppLocation('catalog.products.create');
-    const classes = useStyles();
     return (
-        <Create actions={<CreateActions />} {...props}>
+        <Create>
             <TabbedForm>
                 <FormTab label="resources.products.tabs.image">
                     <TextInput source="image" fullWidth validate={required()} />
@@ -41,12 +26,20 @@ const ProductCreate: FC<CreateProps> = props => {
                         validate={required()}
                     />
                 </FormTab>
-                <FormTab label="resources.products.tabs.details" path="details">
-                    <TextInput source="reference" validate={required()} />
+                <FormTab
+                    sx={{ maxWidth: '24em' }}
+                    label="resources.products.tabs.details"
+                    path="details"
+                >
+                    <TextInput
+                        source="reference"
+                        validate={required()}
+                        fullWidth
+                    />
                     <NumberInput
                         source="price"
                         validate={required()}
-                        className={classes.price}
+                        sx={{ width: '50%' }}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -55,43 +48,45 @@ const ProductCreate: FC<CreateProps> = props => {
                             ),
                         }}
                     />
-                    <NumberInput
-                        source="width"
-                        validate={required()}
-                        className={classes.width}
-                        formClassName={classes.widthFormGroup}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="start">
-                                    cm
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                    <NumberInput
-                        source="height"
-                        validate={required()}
-                        className={classes.height}
-                        formClassName={classes.heightFormGroup}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="start">
-                                    cm
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+                    <Stack direction="row" gap={2} sx={{ width: '100%' }}>
+                        <NumberInput
+                            source="width"
+                            validate={required()}
+                            sx={{ width: '50%' }}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="start">
+                                        cm
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <NumberInput
+                            source="height"
+                            validate={required()}
+                            sx={{
+                                width: '50%',
+                            }}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="start">
+                                        cm
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Stack>
                     <ReferenceInput
                         source="category_id"
                         reference="categories"
                         allowEmpty
                     >
-                        <SelectInput source="name" />
+                        <SelectInput source="name" fullWidth />
                     </ReferenceInput>
                     <NumberInput
                         source="stock"
                         validate={required()}
-                        className={classes.stock}
+                        sx={{ width: '50%' }}
                     />
                 </FormTab>
                 <FormTab

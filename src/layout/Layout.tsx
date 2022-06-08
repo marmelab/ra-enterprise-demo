@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { ReactElement } from 'react';
-import { Layout } from '@react-admin/ra-enterprise';
-
+import { Layout, LayoutProps } from '@react-admin/ra-enterprise';
 import AppBar from './AppBar';
 import Menu from './Menu';
+import CustomBreadcrumb from './Breadcrumb';
 import tours from '../tours/tours';
 
-const CustomLayout = (props): ReactElement => {
-    return <Layout {...props} appBar={AppBar} menu={Menu} tours={tours} />;
+export default (props: LayoutProps) => {
+    return (
+        <Layout
+            {...props}
+            appBar={AppBar}
+            menu={Menu}
+            breadcrumb={CustomBreadcrumb}
+            tours={tours}
+        />
+    );
 };
-
-export default CustomLayout;

@@ -1,170 +1,71 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import {
     Datagrid,
     DateField,
+    Edit,
     EditButton,
-    SimpleForm,
+    Form,
+    FormDataConsumer,
     NumberInput,
     Pagination,
     ReferenceInput,
     ReferenceManyField,
+    required,
     SelectInput,
     TextField,
     TextInput,
-    FormDataConsumer,
-    FormWithRedirect,
-    useNotify,
-    SaveButton,
+    useResourceContext,
+    useRecordContext,
     Toolbar,
-    EditProps,
+    SaveButton,
+    useNotify,
+    useGetIdentity,
 } from 'react-admin';
-import { Edit } from '@react-admin/ra-enterprise';
-import { MarkdownInput } from '@react-admin/ra-markdown';
-import { useLock, useHasLock } from '@react-admin/ra-realtime';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import { AccordionSection } from '@react-admin/ra-form-layout';
 import {
+    Box,
     Card,
     CardContent,
-    InputAdornment,
-    Typography,
     CircularProgress,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+    InputAdornment,
+    Stack,
+    Typography,
+} from '@mui/material';
+import { MarkdownInput } from '@react-admin/ra-markdown';
+import { useGetLock, useLockRecord } from '@react-admin/ra-realtime';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { AccordionSection } from '@react-admin/ra-form-layout';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
-import { styles as createStyles } from './ProductCreate';
 import ProductPreview from './ProductPreview';
-
 import { Product } from '../types';
-import { EditActions } from '../layout/EditActions';
 
-interface ProductTitleProps {
-    record?: Product;
-}
-
-const ProductTitle: FC<ProductTitleProps> = ({ record }) =>
-    record ? <span>Poster #{record.reference}</span> : null;
-
-const useStyles = makeStyles({
-    ...createStyles,
-    comment: {
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        maxWidth: 256,
-    },
-    container: {
-        display: 'flex',
-        '& > :first-child': {
-            flex: 1,
-            minWidth: '60%',
-            maxWidth: '70%',
-        },
-        '& > :last-child': {
-            width: '25%',
-            flexShrink: 0,
-        },
-    },
-    root: {
-        padding: '0 !important',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        '& .tabbed-form': {
-            display: 'flex',
-            flexDirection: 'column',
-            flex: 1,
-        },
-        '& .toolbar': {
-            marginTop: 'auto',
-        },
-    },
-});
-
-const ProductEditFormWithPreview: FC<{ toolbar: any }> = ({
-    children,
-    ...props
-}) => {
-    const classes = useStyles();
-    useDefineAppLocation('catalog.products.edit', props);
+const ProductEdit = () => {
     return (
-        <FormWithRedirect
-            {...props}
-            render={(formProps): JSX.Element => {
-                return (
-                    <div className={classes.container}>
-                        <Card>
-                            <CardContent className={classes.root}>
-                                <SimpleForm {...formProps}>
-                                    {children}
-                                </SimpleForm>
-                            </CardContent>
-                        </Card>
-                        <div data-testid="product-edit-preview">
-                            <FormDataConsumer>
-                                {({ formData }): JSX.Element => {
-                                    return <ProductPreview record={formData} />;
-                                }}
-                            </FormDataConsumer>
-                        </div>
-                    </div>
-                );
-            }}
-        />
-    );
-};
-
-const ProductEdit: FC<EditProps> = props => {
-    const { resource, id } = props;
-
-    const classes = useStyles();
-    const notify = useNotify();
-
-    const { loading } = useLock(
-        resource as string,
-        id as string,
-        'todousername',
-        {
-            onFailure: () => {
-                notify('ra-realtime.notification.lock.lockedBySomeoneElse');
-            },
-        }
-    );
-
-    if (loading) {
-        return <CircularProgress />;
-    }
-
-    return (
-        <Edit
-            {...props}
-            className={classes.root}
-            title={<ProductTitle />}
-            actions={<EditActions />}
-            component="div"
-        >
-            <ProductEditFormWithPreview toolbar={<CustomToolbar />}>
+        <Edit title={<ProductTitle />}>
+            <ProductEditFormWithPreview>
                 <Poster />
-                <TextInput source="image" fullWidth />
-                <TextInput source="thumbnail" fullWidth />
+                <TextInput source="image" fullWidth validate={req} />
+                <TextInput source="thumbnail" fullWidth validate={req} />
                 <AccordionSection
                     label="resources.products.tabs.description"
                     data-tour-id="description-tab"
                     fullWidth
                 >
-                    <MarkdownInput source="description" label="" />
+                    <MarkdownInput
+                        source="description"
+                        label=""
+                        validate={req}
+                    />
                 </AccordionSection>
                 <AccordionSection
                     label="resources.products.tabs.details"
                     fullWidth
                 >
-                    <TextInput source="reference" />
+                    <TextInput source="reference" fullWidth validate={req} />
                     <NumberInput
                         source="price"
-                        className={classes.price}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -172,11 +73,11 @@ const ProductEdit: FC<EditProps> = props => {
                                 </InputAdornment>
                             ),
                         }}
+                        validate={req}
+                        fullWidth
                     />
                     <NumberInput
                         source="width"
-                        className={classes.width}
-                        formClassName={classes.widthFormGroup}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="start">
@@ -184,11 +85,11 @@ const ProductEdit: FC<EditProps> = props => {
                                 </InputAdornment>
                             ),
                         }}
+                        validate={req}
+                        fullWidth
                     />
                     <NumberInput
                         source="height"
-                        className={classes.height}
-                        formClassName={classes.heightFormGroup}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="start">
@@ -196,31 +97,38 @@ const ProductEdit: FC<EditProps> = props => {
                                 </InputAdornment>
                             ),
                         }}
+                        validate={req}
+                        fullWidth
                     />
                     <ReferenceInput source="category_id" reference="categories">
-                        <SelectInput source="name" />
+                        <SelectInput source="name" validate={req} fullWidth />
                     </ReferenceInput>
-                    <NumberInput source="stock" className={classes.stock} />
+                    <NumberInput source="stock" validate={req} fullWidth />
                 </AccordionSection>
                 <AccordionSection
                     label="resources.products.tabs.reviews"
                     fullWidth
                 >
                     <ReferenceManyField
-                        label=""
                         reference="reviews"
                         target="product_id"
-                        pagination={<ReferenceManyFieldPagination />}
-                        fullWidth
+                        pagination={<Pagination />}
                     >
-                        <Datagrid>
+                        <Datagrid
+                            sx={{
+                                width: '100%',
+                                '& .column-comment': {
+                                    maxWidth: '20em',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                },
+                            }}
+                        >
                             <DateField source="date" />
                             <CustomerReferenceField />
                             <StarRatingField />
-                            <TextField
-                                source="comment"
-                                cellClassName={classes.comment}
-                            />
+                            <TextField source="comment" />
                             <TextField source="status" />
                             <EditButton />
                         </Datagrid>
@@ -231,50 +139,91 @@ const ProductEdit: FC<EditProps> = props => {
     );
 };
 
-const CustomToolbar: FC<any> = props => {
-    const { resource, record } = props;
+const req = [required()];
 
-    const { data: lock } = useHasLock(resource, record.id);
-    const isMeLocker = lock?.identity === 'todousername';
+const ProductTitle = () => {
+    const record = useRecordContext<Product>();
+    return record ? <span>Poster "{record.reference}"</span> : null;
+};
+
+const ProductEditFormWithPreview = ({ children, ...props }: any) => {
+    const resource = useResourceContext();
+    const record = useRecordContext();
+    useDefineAppLocation('catalog.products.edit', { record });
+    const notify = useNotify();
+
+    const { isLoading } = useLockRecord({
+        resource,
+        id: record.id,
+        lockMutationOptions: {
+            onError: () => {
+                notify('ra-realtime.notification.lock.lockedBySomeoneElse');
+            },
+        },
+    });
+
+    if (isLoading) {
+        return <CircularProgress />;
+    }
 
     return (
-        <Toolbar {...props}>
+        <Form {...props}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    '& > :first-child': {
+                        flex: 1,
+                        minWidth: '60%',
+                        maxWidth: '70%',
+                    },
+                    '& > :last-child': {
+                        width: '25%',
+                        flexShrink: 0,
+                    },
+                }}
+            >
+                <Card>
+                    <CardContent>
+                        <Stack alignItems="flex-start">{children}</Stack>
+                    </CardContent>
+                    <CustomToolbar />
+                </Card>
+                <div data-testid="product-edit-preview">
+                    <FormDataConsumer>
+                        {({ formData }) => {
+                            return <ProductPreview record={formData} />;
+                        }}
+                    </FormDataConsumer>
+                </div>
+            </Box>
+        </Form>
+    );
+};
+
+const CustomToolbar = () => {
+    const resource = useResourceContext();
+    const record = useRecordContext();
+
+    const { identity } = useGetIdentity();
+    const { data: lock } = useGetLock(resource, { id: record.id });
+    const isMeLocker = lock?.identity === identity?.id;
+
+    return (
+        <Toolbar>
             <SaveButton disabled={!isMeLocker} />
             {!isMeLocker && <LockMessage identity={lock?.identity} />}
         </Toolbar>
     );
 };
 
-const useLockMessageStyles = makeStyles(theme => ({
-    root: {
-        padding: theme.spacing(0, 1),
-    },
-}));
-
-const LockMessage: FC<any> = props => {
+const LockMessage = (props: any) => {
     const { identity, variant = 'body1' } = props;
-    const classes = useLockMessageStyles(props);
 
     return (
-        <Typography className={classes.root} variant={variant}>
+        <Typography py={0} px={1} variant={variant}>
             This record is locked by another user: {identity}.
         </Typography>
     );
 };
 
 export default ProductEdit;
-
-// There is an issue with the ReferenceManyField or the Pagination component
-// which do not sanitize some props (addLabel, fullWidth)
-// TODO: Fix react-admin and remove this component
-const ReferenceManyFieldPagination: FC = ({
-    addLabel,
-    fullWidth,
-    ...props
-}: {
-    addLabel?: boolean;
-    fullWidth?: boolean;
-    [key: string]: any;
-}) => {
-    return <Pagination {...props} />;
-};

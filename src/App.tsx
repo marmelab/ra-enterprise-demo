@@ -1,10 +1,14 @@
-import React, { ReactElement, useEffect } from 'react';
-import { mergeTranslations, Resource } from 'react-admin';
-
+import * as React from 'react';
+import { useEffect } from 'react';
+import {
+    CustomRoutes,
+    defaultTheme,
+    mergeTranslations,
+    Resource,
+} from 'react-admin';
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 import { addEventsForMutations, EventList } from '@react-admin/ra-audit-log';
 import {
-    reducer as tree,
     raTreeLanguageEnglish,
     raTreeLanguageFrench,
 } from '@react-admin/ra-tree';
@@ -12,18 +16,16 @@ import {
     raTourLanguageEnglish,
     raTourLanguageFrench,
 } from '@react-admin/ra-tour';
-import { useTheme } from '@material-ui/core';
+import { Route } from 'react-router';
+import { createTheme } from '@mui/material';
 
-import './App.css';
-
-import { getThemes } from './layout/themes';
 import authProvider from './authProvider';
 import { Login, Layout } from './layout';
 import { Dashboard } from './dashboard';
-import customRoutes from './routes';
-
 import englishMessages from './i18n/en';
 import frenchMessages from './i18n/fr';
+import { getThemes } from './layout/themes';
+import fakeServer from './fakeServer';
 
 import visitors from './visitors';
 import orders from './orders';
@@ -32,9 +34,11 @@ import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
 import stores from './stores';
-
 import dataProvider from './dataProvider';
-import fakeServer from './fakeServer';
+import Configuration from './configuration/Configuration';
+import Segments from './segments/Segments';
+import TourLauncher from './tours/TourLauncher';
+import TourList from './tours/TourList';
 
 const messages = {
     en: mergeTranslations(
@@ -48,36 +52,40 @@ const messages = {
         raTourLanguageFrench
     ),
 };
-console.log(messages.fr);
+
 const i18nProvider = buildI18nProvider(messages, 'en');
 
 const enhancedDataProvider = addEventsForMutations(dataProvider, authProvider);
-
-const App = (): ReactElement => {
+const App = () => {
     useEffect(() => {
         const restoreFetch = fakeServer();
         return (): void => {
             restoreFetch();
         };
     }, []);
-    const theme = useTheme();
+    const theme = createTheme(defaultTheme);
     const { darkTheme, lightTheme } = getThemes(theme);
 
     return (
         <Admin
             title=""
             dataProvider={enhancedDataProvider}
-            customRoutes={customRoutes}
-            customReducers={{ tree }}
             authProvider={authProvider}
             dashboard={Dashboard}
             loginPage={Login}
             layout={Layout}
             i18nProvider={i18nProvider}
-            // Ra-enterprise configuration
+            disableTelemetry
+            theme={lightTheme}
             lightTheme={lightTheme}
             darkTheme={darkTheme}
         >
+            <CustomRoutes>
+                <Route path="/configuration" element={<Configuration />} />
+                <Route path="/segments" element={<Segments />} />
+                <Route key="tours" path="/tours" element={<TourList />} />
+                <Route path="/tours/:tour" element={<TourLauncher />} />
+            </CustomRoutes>
             <Resource name="customers" {...visitors} />
             <Resource name="commands" {...orders} />
             <Resource name="invoices" {...invoices} />

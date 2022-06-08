@@ -1,45 +1,107 @@
-import React, { FC } from 'react';
-import { AppBar } from 'react-admin';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import TourIcon from '@material-ui/icons/Flag';
-import { Link, useLocation } from 'react-router-dom';
+import * as React from 'react';
+import { useContext } from 'react';
 import {
+    AppBar,
+    LocalesMenuButton,
+    Logout,
     ToggleThemeButton,
-    LanguageSwitcher,
-} from '@react-admin/ra-preferences';
-import { useMediaQuery, Theme } from '@material-ui/core';
-import { Search } from './index';
+    UserMenu,
+    useTranslate,
+} from 'react-admin';
+import { Link } from 'react-router-dom';
+import {
+    Badge,
+    Box,
+    IconButton,
+    MenuItem,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    useMediaQuery,
+    Theme,
+} from '@mui/material';
+import SettingsIcon from '@mui/icons-material/Settings';
+import TourIcon from '@mui/icons-material/Flag';
+import { ThemesContext } from '@react-admin/ra-enterprise';
+
+import Search from './Search';
 import Logo from './Logo';
 import { useTourStates } from '../tours/useTourState';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        position: 'relative',
-    },
-    title: {
-        flex: 1,
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        paddingLeft: theme.spacing(1),
-    },
-    logo: {
-        padding: theme.spacing(0, 2),
-    },
-}));
-
-const CustomAppBar: FC = props => {
-    const classes = useStyles();
-    const location = useLocation<{ pathname: string }>();
-
-    const isXSmall = useMediaQuery((theme: Theme) =>
-        theme.breakpoints.down('xs')
+const ConfigurationMenu = React.forwardRef((props, ref) => {
+    const translate = useTranslate();
+    return (
+        <MenuItem
+            component={Link}
+            // @ts-ignore
+            ref={ref}
+            {...props}
+            to="/configuration"
+        >
+            <ListItemIcon>
+                <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText>{translate('pos.configuration')}</ListItemText>
+        </MenuItem>
     );
-    const [tourStates] = useTourStates();
+});
+const CustomUserMenu = () => (
+    <UserMenu>
+        <ConfigurationMenu />
+        <Logout />
+    </UserMenu>
+);
 
+const CustomAppBar = (props: any) => {
+    const isLargeEnough = useMediaQuery<Theme>(theme =>
+        theme.breakpoints.up('md')
+    );
+    const { darkTheme, lightTheme } = useContext(ThemesContext);
+
+    return (
+        <AppBar
+            {...props}
+            color="secondary"
+            elevation={1}
+            userMenu={<CustomUserMenu />}
+        >
+            <Typography
+                variant="h6"
+                color="inherit"
+                sx={{
+                    flex: 1,
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    overflow: 'hidden',
+                }}
+                id="react-admin-title"
+            />
+            {isLargeEnough ? (
+                <>
+                    <Logo />
+                    <Box component="span" sx={{ flex: 1 }} />
+                    <Search />
+                    <Tours />
+                    <ToggleThemeButton
+                        darkTheme={darkTheme}
+                        lightTheme={lightTheme}
+                    />
+                    <LocalesMenuButton languages={languages} />
+                </>
+            ) : null}
+        </AppBar>
+    );
+};
+
+const languages = [
+    { locale: 'en', name: 'English' },
+    { locale: 'fr', name: 'Français' },
+];
+
+export default CustomAppBar;
+
+const Tours = () => {
+    const [tourStates] = useTourStates();
     let numberOfTours = 0;
     if (tourStates) {
         numberOfTours = Object.keys(tourStates).reduce((acc, tourId) => {
@@ -51,55 +113,15 @@ const CustomAppBar: FC = props => {
     }
 
     return (
-        <AppBar {...props} elevation={1}>
-            {isXSmall ? (
-                <>
-                    {location.pathname === '/' && (
-                        <Logo className={classes.logo} />
-                    )}
-                    <Typography
-                        variant="h6"
-                        color="inherit"
-                        className={classes.title}
-                        id="react-admin-title"
-                    />
-                </>
-            ) : (
-                <>
-                    <Logo className={classes.logo} />
-                    <Typography
-                        variant="h6"
-                        color="inherit"
-                        className={classes.title}
-                        id="react-admin-title"
-                    />
-                    <Search />
-                    <IconButton
-                        aria-label="Tours"
-                        to="/tours"
-                        component={Link}
-                        color="inherit"
-                    >
-                        <Badge
-                            badgeContent={numberOfTours}
-                            color="error"
-                            variant="dot"
-                        >
-                            <TourIcon />
-                        </Badge>
-                    </IconButton>
-                    <ToggleThemeButton />
-                    <LanguageSwitcher
-                        languages={[
-                            { locale: 'en', name: 'English' },
-                            { locale: 'fr', name: 'Français' },
-                        ]}
-                        defaultLanguage="English"
-                    />
-                </>
-            )}
-        </AppBar>
+        <IconButton
+            aria-label="Tours"
+            to="/tours"
+            component={Link}
+            color="inherit"
+        >
+            <Badge badgeContent={numberOfTours} color="error" variant="dot">
+                <TourIcon />
+            </Badge>
+        </IconButton>
     );
 };
-
-export default CustomAppBar;

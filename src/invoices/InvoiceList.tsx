@@ -1,68 +1,71 @@
-import React, { ReactElement } from 'react';
+import * as React from 'react';
 import {
+    List,
     Datagrid,
     TextField,
     DateField,
     ReferenceField,
     NumberField,
     DateInput,
-    Filter,
-    ListProps,
-    FilterProps,
 } from 'react-admin';
-import { List, ListActions } from '@react-admin/ra-enterprise';
+
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';
-import CustomBreadcrumb from '../layout/Breadcrumb';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-const ListFilters = (props: Omit<FilterProps, 'children'>): ReactElement => (
-    <Filter {...props}>
-        <DateInput source="date_gte" alwaysOn />
-        <DateInput source="date_lte" alwaysOn />
-    </Filter>
-);
+const listFilters = [
+    <DateInput source="date_gte" alwaysOn />,
+    <DateInput source="date_lte" alwaysOn />,
+];
 
-const InvoicesDatagrid = (): ReactElement => (
-    <Datagrid rowClick="expand" expand={<InvoiceShow />}>
-        <TextField source="id" />
-        <DateField source="date" />
-        <ReferenceField source="customer_id" reference="customers">
-            <FullNameField />
-        </ReferenceField>
-        <ReferenceField
-            source="customer_id"
-            reference="customers"
-            link={false}
-            label="resources.invoices.fields.address"
-        >
-            <AddressField />
-        </ReferenceField>
-        <ReferenceField source="command_id" reference="commands">
-            <TextField source="reference" />
-        </ReferenceField>
-        <NumberField source="total_ex_taxes" />
-        <NumberField source="delivery_fees" />
-        <NumberField source="taxes" />
-        <NumberField source="total" />
-    </Datagrid>
-);
-
-const InvoiceList = (props: ListProps): ReactElement => {
+const InvoiceList = () => {
     useDefineAppLocation('sales.invoices');
     return (
         <List
-            {...props}
+            filters={listFilters}
             perPage={25}
-            filters={<ListFilters />}
-            actions={
-                <ListActions
-                    breadcrumb={<CustomBreadcrumb variant="actions" />}
-                />
-            }
+            sort={{ field: 'date', order: 'desc' }}
         >
-            <InvoicesDatagrid />
+            <Datagrid
+                rowClick="expand"
+                expand={<InvoiceShow />}
+                sx={{
+                    '& .column-customer_id': {
+                        display: { xs: 'none', md: 'table-cell' },
+                    },
+                    '& .column-total_ex_taxes': {
+                        display: { xs: 'none', md: 'table-cell' },
+                    },
+                    '& .column-delivery_fees': {
+                        display: { xs: 'none', md: 'table-cell' },
+                    },
+                    '& .column-taxes': {
+                        display: { xs: 'none', md: 'table-cell' },
+                    },
+                }}
+            >
+                <TextField source="id" />
+                <DateField source="date" />
+                <ReferenceField source="customer_id" reference="customers">
+                    <FullNameField />
+                </ReferenceField>
+                <ReferenceField
+                    source="customer_id"
+                    reference="customers"
+                    link={false}
+                    label="resources.invoices.fields.address"
+                >
+                    <AddressField />
+                </ReferenceField>
+                <ReferenceField source="command_id" reference="commands">
+                    <TextField source="reference" />
+                </ReferenceField>
+                <NumberField source="total_ex_taxes" />
+                <NumberField source="delivery_fees" />
+                <NumberField source="taxes" />
+                <NumberField source="total" />
+            </Datagrid>
         </List>
     );
 };

@@ -1,28 +1,21 @@
-import React from 'react';
-import { ListProps } from 'react-admin';
+import * as React from 'react';
 import { TreeWithDetails } from '@react-admin/ra-tree';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 import CategoryCreate from './CategoryCreate';
 import CategoryEdit from './CategoryEdit';
-import CustomBreadcrumb from '../layout/Breadcrumb';
 
-const CategoryList = (props: ListProps) => {
+const CategoryList = () => {
     useDefineAppLocation('catalog.categories');
-
     return (
-        <>
-            <CustomBreadcrumb />
-            <TreeWithDetails
-                create={CategoryCreate}
-                edit={CategoryEdit}
-                titleField="name"
-                draggable
-                allowMultipleRoots
-                hideRootNodes
-                {...props}
-            />
-        </>
+        <TreeWithDetails
+            create={CategoryCreate}
+            edit={CategoryEdit}
+            titleField="name"
+            draggable
+            allowMultipleRoots
+            hideRootNodes
+        />
     );
 };
 

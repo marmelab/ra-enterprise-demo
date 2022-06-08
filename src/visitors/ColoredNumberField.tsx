@@ -1,18 +1,18 @@
-import React, { ReactElement } from 'react';
-import { NumberField, NumberFieldProps } from 'react-admin';
+import * as React from 'react';
+import { useRecordContext, NumberField, NumberFieldProps } from 'react-admin';
 
-const ColoredNumberField = (props: NumberFieldProps): ReactElement | null =>
-    props.record && props.source ? (
-        props.record[props.source] > 500 ? (
-            <span style={{ color: 'red' }}>
-                <NumberField {...props} />
-            </span>
-        ) : (
-            <NumberField {...props} />
-        )
-    ) : null;
+const ColoredNumberField = (props: NumberFieldProps) => {
+    const record = useRecordContext(props);
+    if (!record || !props.source) {
+        return null;
+    }
+    return record[props.source] > 500 ? (
+        <NumberField {...props} sx={{ color: 'red' }} />
+    ) : (
+        <NumberField {...props} />
+    );
+};
 
-// @ts-ignore
 ColoredNumberField.defaultProps = NumberField.defaultProps;
 
 export default ColoredNumberField;

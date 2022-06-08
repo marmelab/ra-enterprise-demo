@@ -1,6 +1,7 @@
 import FakeRest from 'fakerest';
 import fetchMock from 'fetch-mock';
 import generateData from 'data-generator-retail';
+// @ts-ignore
 import { random } from 'faker/locale/en';
 import { Identifier } from 'react-admin';
 import demoData from './demo-data';
@@ -15,7 +16,7 @@ const getAllChildrenCategories = (
     if (!parentCategory) {
         return [];
     }
-    const children = parentCategory.children.map(childId =>
+    const children = parentCategory.children.map((childId: any) =>
         getAllChildrenCategories(categories, childId)
     );
 
@@ -74,7 +75,7 @@ export default (): (() => void) => {
     if (window) {
         window.restServer = restServer; // give way to update data in the console
     }
-    restServer.addRequestInterceptor(request => {
+    restServer.addRequestInterceptor((request: any) => {
         // intercepts list of products with a category filter
         if (
             request.method === 'GET' &&

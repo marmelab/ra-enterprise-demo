@@ -1,9 +1,14 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import { ReferenceField, ReferenceFieldProps, TextField } from 'react-admin';
 
-const ProductReferenceField: FC<
-    Omit<ReferenceFieldProps, 'children' | 'source' | 'reference'>
-> = props => (
+interface Props {
+    source?: string;
+}
+
+const ProductReferenceField = (
+    props: Props &
+        Omit<Omit<ReferenceFieldProps, 'source'>, 'reference' | 'children'>
+) => (
     <ReferenceField
         label="Product"
         source="product_id"
@@ -15,7 +20,7 @@ const ProductReferenceField: FC<
 );
 
 ProductReferenceField.defaultProps = {
-    addLabel: true,
+    source: 'product_id',
 };
 
 export default ProductReferenceField;

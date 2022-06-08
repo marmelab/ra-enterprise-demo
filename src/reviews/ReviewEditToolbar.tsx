@@ -1,56 +1,60 @@
-import React, { FC, Fragment } from 'react';
-import MuiToolbar from '@material-ui/core/Toolbar';
-import { makeStyles } from '@material-ui/core/styles';
+import * as React from 'react';
+import { Fragment } from 'react';
+import Toolbar from '@mui/material/Toolbar';
 
-import { SaveButton, DeleteButton, ToolbarProps } from 'react-admin';
+import {
+    SaveButton,
+    DeleteButton,
+    ToolbarProps,
+    useRecordContext,
+    useNotify,
+    useRedirect,
+} from 'react-admin';
 import AcceptButton from './AcceptButton';
 import RejectButton from './RejectButton';
+import { Review } from '../types';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        backgroundColor: theme.palette.background.paper,
-        display: 'flex',
-        justifyContent: 'space-between',
-    },
-}));
+const ReviewEditToolbar = (props: ToolbarProps) => {
+    const { resource } = props;
+    const redirect = useRedirect();
+    const notify = useNotify();
 
-const ReviewEditToolbar: FC<ToolbarProps> = ({
-    basePath,
-    handleSubmitWithRedirect,
-    invalid,
-    record,
-    resource,
-    saving,
-}) => {
-    const classes = useStyles();
-    if (!record) {
-        return null;
-    }
+    const record = useRecordContext<Review>(props);
 
+    if (!record) return null;
     return (
-        <MuiToolbar className={classes.root}>
+        <Toolbar
+            sx={{
+                backgroundColor: 'background.paper',
+                display: 'flex',
+                justifyContent: 'space-between',
+                minHeight: { sm: 0 },
+            }}
+        >
             {record.status === 'pending' ? (
                 <Fragment>
-                    <AcceptButton record={record} />
-                    <RejectButton record={record} />
+                    <AcceptButton />
+                    <RejectButton />
                 </Fragment>
             ) : (
                 <Fragment>
                     <SaveButton
-                        handleSubmitWithRedirect={handleSubmitWithRedirect}
-                        invalid={invalid}
-                        saving={saving}
-                        redirect="list"
-                        submitOnEnter={true}
+                        mutationOptions={{
+                            onSuccess: () => {
+                                notify('ra.notification.updated', {
+                                    type: 'info',
+                                    messageArgs: { smart_count: 1 },
+                                    undoable: true,
+                                });
+                                redirect('list', 'reviews');
+                            },
+                        }}
+                        type="button"
                     />
-                    <DeleteButton
-                        basePath={basePath}
-                        record={record}
-                        resource={resource}
-                    />
+                    <DeleteButton record={record} resource={resource} />
                 </Fragment>
             )}
-        </MuiToolbar>
+        </Toolbar>
     );
 };
 

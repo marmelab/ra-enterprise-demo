@@ -1,29 +1,33 @@
-import React, { FC, ReactElement } from 'react';
+import * as React from 'react';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import {
     AutocompleteInput,
     BooleanInput,
     DateInput,
-    EditProps,
-    Record,
+    Edit,
     ReferenceInput,
     SelectInput,
     SimpleForm,
+    useRecordContext,
     useTranslate,
 } from 'react-admin';
-import { Edit } from '@react-admin/ra-enterprise';
-import { makeStyles } from '@material-ui/core/styles';
-
+import { Customer, Order } from '../types';
 import Basket from './Basket';
-import { EditActions } from '../layout/EditActions';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-const OrderTitle: FC<{ record?: Record }> = ({ record }) => {
+const OrderEdit = () => {
+    return (
+        <Edit title={<OrderTitle />} aside={<Basket />}>
+            <OrderForm />
+        </Edit>
+    );
+};
+
+const OrderTitle = () => {
     const translate = useTranslate();
-
+    const record = useRecordContext<Order>();
     if (!record) {
         return null;
     }
-
     return (
         <span>
             {translate('resources.commands.title', {
@@ -33,20 +37,16 @@ const OrderTitle: FC<{ record?: Record }> = ({ record }) => {
     );
 };
 
-const useEditStyles = makeStyles({
-    root: {
-        alignItems: 'flex-start',
-    },
-});
+const OrderForm = () => {
+    const record = useRecordContext();
+    useDefineAppLocation('sales.commands.edit', { record });
 
-const OrderEditForm = (props: any): ReactElement => {
-    useDefineAppLocation('sales.commands.edit', props);
     return (
-        <SimpleForm {...props}>
+        <SimpleForm sx={{ maxWidth: '50em' }}>
             <DateInput source="date" />
             <ReferenceInput source="customer_id" reference="customers">
                 <AutocompleteInput
-                    optionText={(choice: Record): string =>
+                    optionText={(choice: Customer): string =>
                         `${choice.first_name} ${choice.last_name}`
                     }
                 />
@@ -66,21 +66,6 @@ const OrderEditForm = (props: any): ReactElement => {
             />
             <BooleanInput source="returned" />
         </SimpleForm>
-    );
-};
-
-const OrderEdit: FC<EditProps> = props => {
-    const classes = useEditStyles();
-    return (
-        <Edit
-            title={<OrderTitle />}
-            aside={<Basket />}
-            classes={classes}
-            actions={<EditActions />}
-            {...props}
-        >
-            <OrderEditForm />
-        </Edit>
     );
 };
 

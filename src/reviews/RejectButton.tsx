@@ -1,43 +1,41 @@
-import React, { FC } from 'react';
-import Button from '@material-ui/core/Button';
-import ThumbDown from '@material-ui/icons/ThumbDown';
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import ThumbDown from '@mui/icons-material/ThumbDown';
 import {
     useTranslate,
     useUpdate,
     useNotify,
     useRedirect,
-    Record,
+    useRecordContext,
 } from 'react-admin';
+import { Review } from '../types';
 
 /**
  * This custom button demonstrate using a custom action to update data
  */
-const RejectButton: FC<{ record: Record }> = ({ record }) => {
+const RejectButton = () => {
     const translate = useTranslate();
     const notify = useNotify();
     const redirectTo = useRedirect();
+    const record = useRecordContext<Review>();
 
-    const [reject, { loading }] = useUpdate(
+    const [reject, { isLoading }] = useUpdate(
         'reviews',
-        record.id,
-        { status: 'rejected' },
-        record,
+        { id: record.id, data: { status: 'rejected' }, previousData: record },
         {
-            undoable: true,
+            mutationMode: 'undoable',
             onSuccess: () => {
-                notify(
-                    'resources.reviews.notification.rejected_success',
-                    'info',
-                    {},
-                    true
-                );
+                notify('resources.reviews.notification.rejected_success', {
+                    type: 'info',
+                    undoable: true,
+                });
                 redirectTo('/reviews');
             },
-            onFailure: () => {
-                notify(
-                    'resources.reviews.notification.rejected_error',
-                    'warning'
-                );
+            onError: () => {
+                notify('resources.reviews.notification.rejected_error', {
+                    type: 'warning',
+                });
             },
         }
     );
@@ -47,18 +45,19 @@ const RejectButton: FC<{ record: Record }> = ({ record }) => {
             variant="outlined"
             color="primary"
             size="small"
-            onClick={reject}
-            disabled={loading}
+            onClick={() => reject()}
+            startIcon={<ThumbDown sx={{ color: 'red' }} />}
+            disabled={isLoading}
         >
-            <ThumbDown
-                color="primary"
-                style={{ paddingRight: '0.5em', color: 'red' }}
-            />
             {translate('resources.reviews.action.reject')}
         </Button>
     ) : (
         <span />
     );
+};
+
+RejectButton.propTypes = {
+    record: PropTypes.any,
 };
 
 export default RejectButton;

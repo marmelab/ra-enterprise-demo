@@ -1,20 +1,11 @@
-import React, { FC } from 'react';
-import {
-    DateField,
-    DateInput,
-    TextField,
-    TextInput,
-    ListProps,
-} from 'react-admin';
+import * as React from 'react';
+import { DateField, DateInput, List, TextField, TextInput } from 'react-admin';
 
-import { List, ListActions } from '@react-admin/ra-enterprise';
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
-import CustomBreadcrumb from '../layout/Breadcrumb';
 
-const StoreForm: FC = props => (
-    <RowForm {...props}>
+const StoreForm = () => (
+    <RowForm>
         <TextField source="id" />
-        {/* eslint-disable-next-line */}
         <TextInput source="city" autoFocus />
         <TextInput source="country" />
         <TextInput source="address" />
@@ -22,21 +13,8 @@ const StoreForm: FC = props => (
     </RowForm>
 );
 
-const StoreListActions: FC = props => (
-    <ListActions
-        {...props}
-        breadcrumb={<CustomBreadcrumb variant="actions" />}
-    />
-);
-
-export const StoreList: FC<ListProps> = props => (
-    <List
-        {...props}
-        actions={<StoreListActions />}
-        hasCreate
-        empty={false}
-        perPage={25}
-    >
+export const StoreList = () => (
+    <List hasCreate empty={false} perPage={25}>
         <EditableDatagrid
             data-testid="store-datagrid"
             rowClick="edit"

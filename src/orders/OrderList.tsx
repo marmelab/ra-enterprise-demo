@@ -1,24 +1,13 @@
 import * as React from 'react';
-import {
-    FC,
-    Fragment,
-    ChangeEvent,
-    useCallback,
-    useEffect,
-    useState,
-} from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import {
     AutocompleteInput,
     BooleanField,
     Datagrid,
-    DatagridProps,
     DateField,
     DateInput,
-    Filter,
-    FilterProps,
-    Identifier,
+    RaRecord,
     ListContextProvider,
-    ListProps,
     NullableBooleanInput,
     NumberField,
     ReferenceInput,
@@ -29,68 +18,104 @@ import {
     useGetList,
     useListContext,
 } from 'react-admin';
+import { RealTimeList } from '@react-admin/ra-realtime';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import {
-    useMediaQuery,
+    alpha,
+    darken,
     Divider,
+    lighten,
     Tabs,
     Tab,
-    useTheme,
-    lighten,
-    darken,
-    fade,
     Theme,
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { ListActions, RealTimeList } from '@react-admin/ra-enterprise';
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 
 import NbItemsField from './NbItemsField';
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import AddressField from '../visitors/AddressField';
 import MobileGrid from './MobileGrid';
-import { Customer } from '../types';
-import CustomBreadcrumb from '../layout/Breadcrumb';
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { Customer, Order } from '../types';
 
-const OrderFilter: FC<Omit<FilterProps, 'children'>> = props => (
-    <Filter {...props}>
-        <SearchInput source="q" alwaysOn />
-        <ReferenceInput source="customer_id" reference="customers">
-            <AutocompleteInput
-                optionText={(choice: Customer): string =>
-                    choice.id // the empty choice is { id: '' }
-                        ? `${choice.first_name} ${choice.last_name}`
-                        : ''
-                }
-            />
-        </ReferenceInput>
-        <DateInput source="date_gte" />
-        <DateInput source="date_lte" />
-        <TextInput source="total_gte" />
-        <NullableBooleanInput source="returned" />
-    </Filter>
-);
+const OrderList = () => {
+    useDefineAppLocation('sales.commands');
+    return (
+        <RealTimeList
+            filterDefaultValues={{ status: 'ordered' }}
+            sort={{ field: 'date', order: 'DESC' }}
+            perPage={25}
+            filters={orderFilters}
+        >
+            <TabbedDatagrid />
+        </RealTimeList>
+    );
+};
 
-const useDatagridStyles = makeStyles({
-    total: { fontWeight: 'bold' },
-});
+const orderFilters = [
+    <SearchInput source="q" alwaysOn />,
+    <ReferenceInput source="customer_id" reference="customers">
+        <AutocompleteInput
+            optionText={(choice?: Customer) =>
+                choice?.id // the empty choice is { id: '' }
+                    ? `${choice.first_name} ${choice.last_name}`
+                    : ''
+            }
+        />
+    </ReferenceInput>,
+    <DateInput source="date_gte" />,
+    <DateInput source="date_lte" />,
+    <TextInput source="total_gte" />,
+    <NullableBooleanInput source="returned" />,
+];
+
+const tabs = [
+    { id: 'ordered', name: 'ordered' },
+    { id: 'delivered', name: 'delivered' },
+    { id: 'cancelled', name: 'cancelled' },
+];
+
+const useGetTotals = (filterValues: any) => {
+    const { total: totalOrdered } = useGetList('commands', {
+        pagination: { perPage: 1, page: 1 },
+        sort: { field: 'id', order: 'ASC' },
+        filter: { ...filterValues, status: 'ordered' },
+    });
+    const { total: totalDelivered } = useGetList('commands', {
+        pagination: { perPage: 1, page: 1 },
+        sort: { field: 'id', order: 'ASC' },
+        filter: { ...filterValues, status: 'delivered' },
+    });
+    const { total: totalCancelled } = useGetList('commands', {
+        pagination: { perPage: 1, page: 1 },
+        sort: { field: 'id', order: 'ASC' },
+        filter: { ...filterValues, status: 'cancelled' },
+    });
+
+    return {
+        ordered: totalOrdered,
+        delivered: totalDelivered,
+        cancelled: totalCancelled,
+    };
+};
 
 const orderRowStyle =
-    (batchLevel, theme) =>
-    (record): any => {
+    (batchLevel: number, theme: Theme) =>
+    (record: Order): any => {
         let backgroundColor;
         switch (record.batch) {
             case batchLevel:
                 backgroundColor =
-                    theme.palette.type === 'light'
-                        ? lighten(fade(theme.palette.info.light, 1), 0.68)
-                        : darken(fade(theme.palette.info.dark, 1), 0.88);
+                    theme.palette.mode === 'light'
+                        ? lighten(alpha(theme.palette.info.light, 1), 0.68)
+                        : darken(alpha(theme.palette.info.dark, 1), 0.88);
                 break;
             case 1:
                 if (batchLevel > 0) {
                     backgroundColor =
-                        theme.palette.type === 'light'
-                            ? lighten(fade(theme.palette.info.light, 1), 0.78)
-                            : darken(fade(theme.palette.info.dark, 1), 0.78);
+                        theme.palette.mode === 'light'
+                            ? lighten(alpha(theme.palette.info.light, 1), 0.78)
+                            : darken(alpha(theme.palette.info.dark, 1), 0.78);
                 }
                 break;
             default:
@@ -102,96 +127,58 @@ const orderRowStyle =
         };
     };
 
-const tabs = [
-    { id: 'ordered', name: 'ordered' },
-    { id: 'delivered', name: 'delivered' },
-    { id: 'cancelled', name: 'cancelled' },
-];
-
-type TabbedDatagridProps = DatagridProps;
-
-const useGetTotals = (filterValues: any): any => {
-    const { total: totalOrdered } = useGetList(
-        'commands',
-        { perPage: 1, page: 1 },
-        { field: 'id', order: 'ASC' },
-        { ...filterValues, status: 'ordered' }
-    );
-    const { total: totalDelivered } = useGetList(
-        'commands',
-        { perPage: 1, page: 1 },
-        { field: 'id', order: 'ASC' },
-        { ...filterValues, status: 'delivered' }
-    );
-    const { total: totalCancelled } = useGetList(
-        'commands',
-        { perPage: 1, page: 1 },
-        { field: 'id', order: 'ASC' },
-        { ...filterValues, status: 'cancelled' }
-    );
-
-    return {
-        ordered: totalOrdered,
-        delivered: totalDelivered,
-        cancelled: totalCancelled,
-    };
-};
-
-const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
+const TabbedDatagrid = () => {
     const listContext = useListContext();
-    useDefineAppLocation('sales.commands');
-    const { ids, filterValues, setFilters, displayedFilters } = listContext;
-    const classes = useDatagridStyles();
+    const { data, filterValues, setFilters, displayedFilters, isLoading } =
+        listContext;
     const isXSmall = useMediaQuery<Theme>(theme =>
-        theme.breakpoints.down('xs')
+        theme.breakpoints.down('sm')
     );
-    const [ordered, setOrdered] = useState<Identifier[]>([] as Identifier[]);
-    const [delivered, setDelivered] = useState<Identifier[]>(
-        [] as Identifier[]
-    );
-    const [cancelled, setCancelled] = useState<Identifier[]>(
-        [] as Identifier[]
-    );
+    const [ordered, setOrdered] = useState<RaRecord[]>([]);
+    const [delivered, setDelivered] = useState<RaRecord[]>([]);
+    const [cancelled, setCancelled] = useState<RaRecord[]>([]);
     const totals = useGetTotals(filterValues) as any;
 
     useEffect(() => {
-        if (ids && ids !== filterValues.status) {
-            switch (filterValues.status) {
-                case 'ordered':
-                    setOrdered(ids);
-                    break;
-                case 'delivered':
-                    setDelivered(ids);
-                    break;
-                case 'cancelled':
-                    setCancelled(ids);
-                    break;
-            }
+        if (isLoading) {
+            return;
         }
-    }, [ids, filterValues.status]);
+        switch (filterValues.status) {
+            case 'ordered':
+                setOrdered(data);
+                break;
+            case 'delivered':
+                setDelivered(data);
+                break;
+            case 'cancelled':
+                setCancelled(data);
+                break;
+        }
+    }, [data, isLoading, filterValues.status]);
 
     const handleChange = useCallback(
-        (event: ChangeEvent<unknown>, value: any) => {
+        (event: React.ChangeEvent<{}>, value: any) => {
             setFilters &&
                 setFilters(
                     { ...filterValues, status: value },
-                    displayedFilters
+                    displayedFilters,
+                    false // no debounce, we want the filter to fire immediately
                 );
         },
         [displayedFilters, filterValues, setFilters]
     );
 
-    const theme = useTheme();
-    const batchLevel =
-        parseInt(localStorage.getItem('batchLevel') || '0', 0) || 0;
-    const rowStyle = orderRowStyle(batchLevel, theme);
-
-    const selectedIds =
+    const selectedData =
         filterValues.status === 'ordered'
             ? ordered
             : filterValues.status === 'delivered'
             ? delivered
             : cancelled;
+
+    const theme = useTheme();
+    const batchLevel =
+        parseInt(localStorage.getItem('batchLevel') || '0', 0) || 0;
+    const rowStyle = orderRowStyle(batchLevel, theme);
 
     return (
         <Fragment>
@@ -217,22 +204,21 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
             <Divider />
             {isXSmall ? (
                 <ListContextProvider
-                    value={{ ...listContext, ids: selectedIds }}
+                    value={{ ...listContext, data: selectedData }}
                 >
-                    <MobileGrid {...props} ids={selectedIds} />
+                    <MobileGrid data={selectedData} />
                 </ListContextProvider>
             ) : (
-                <div>
+                <>
                     {filterValues.status === 'ordered' && (
                         <ListContextProvider
                             value={{ ...listContext, ids: ordered }}
                         >
                             <Datagrid
-                                {...props}
                                 optimized
                                 rowClick="edit"
-                                rowStyle={rowStyle}
                                 data-testid="order-ordered-datagrid"
+                                rowStyle={rowStyle}
                             >
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
@@ -252,7 +238,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
                                         style: 'currency',
                                         currency: 'USD',
                                     }}
-                                    className={classes.total}
+                                    sx={{ fontWeight: 'bold' }}
                                 />
                             </Datagrid>
                         </ListContextProvider>
@@ -261,7 +247,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
                         <ListContextProvider
                             value={{ ...listContext, ids: delivered }}
                         >
-                            <Datagrid {...props} rowClick="edit">
+                            <Datagrid rowClick="edit">
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
                                 <CustomerReferenceField />
@@ -280,9 +266,12 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
                                         style: 'currency',
                                         currency: 'USD',
                                     }}
-                                    className={classes.total}
+                                    sx={{ fontWeight: 'bold' }}
                                 />
-                                <BooleanField source="returned" />
+                                <BooleanField
+                                    source="returned"
+                                    sx={{ mt: -0.5, mb: -0.5 }}
+                                />
                             </Datagrid>
                         </ListContextProvider>
                     )}
@@ -290,7 +279,7 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
                         <ListContextProvider
                             value={{ ...listContext, ids: cancelled }}
                         >
-                            <Datagrid {...props} rowClick="edit">
+                            <Datagrid rowClick="edit">
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
                                 <CustomerReferenceField />
@@ -309,31 +298,19 @@ const TabbedDatagrid: FC<TabbedDatagridProps> = props => {
                                         style: 'currency',
                                         currency: 'USD',
                                     }}
-                                    className={classes.total}
+                                    sx={{ fontWeight: 'bold' }}
                                 />
-                                <BooleanField source="returned" />
+                                <BooleanField
+                                    source="returned"
+                                    sx={{ mt: -0.5, mb: -0.5 }}
+                                />
                             </Datagrid>
                         </ListContextProvider>
                     )}
-                </div>
+                </>
             )}
         </Fragment>
     );
 };
-
-const OrderList: FC<ListProps> = props => (
-    <RealTimeList
-        {...props}
-        filterDefaultValues={{ status: 'ordered' }}
-        sort={{ field: 'date', order: 'DESC' }}
-        perPage={25}
-        filters={<OrderFilter />}
-        actions={
-            <ListActions breadcrumb={<CustomBreadcrumb variant="actions" />} />
-        }
-    >
-        <TabbedDatagrid />
-    </RealTimeList>
-);
 
 export default OrderList;

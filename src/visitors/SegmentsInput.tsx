@@ -1,29 +1,15 @@
-import React, { FC } from 'react';
-import { InputProps, SelectArrayInput, useTranslate } from 'react-admin';
+import * as React from 'react';
+import { SelectArrayInput, SelectArrayInputProps } from 'react-admin';
 
 import segments from '../segments/data';
 
-interface Props extends Omit<InputProps, 'source'> {
-    source?: string;
-}
-
-const SegmentsInput: FC<Props> = ({ addField, ...rest }) => {
-    const translate = useTranslate();
-    return (
-        <SelectArrayInput
-            {...rest}
-            choices={segments.map(segment => ({
-                id: segment.id,
-                name: translate(segment.name),
-            }))}
-        />
-    );
-};
-
-SegmentsInput.defaultProps = {
-    addField: true,
-    source: 'groups',
-    resource: 'customers',
-};
+const SegmentsInput = (props: SelectArrayInputProps) => (
+    <SelectArrayInput
+        {...props}
+        source="groups"
+        translateChoice
+        choices={segments}
+    />
+);
 
 export default SegmentsInput;

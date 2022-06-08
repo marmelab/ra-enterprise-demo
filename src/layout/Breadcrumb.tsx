@@ -1,23 +1,34 @@
 import * as React from 'react';
-import { FC } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {
     Breadcrumb,
     BreadcrumbItem,
-    BreadcrumbProps,
     ResourceBreadcrumbItems,
 } from '@react-admin/ra-navigation';
-import { linkToRecord, useTranslate, Record } from 'react-admin';
+import { useCreatePath, useTranslate, RaRecord } from 'react-admin';
 
-const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
-    const classes = useStyles();
+const CustomBreadcrumb = () => {
     const translate = useTranslate();
+    const createPath = useCreatePath();
 
     const editLabel = translate('ra.action.edit');
     const createLabel = translate('ra.action.create');
     return (
-        <Breadcrumb className={classes.root} {...props}>
-            <ResourceBreadcrumbItems resources={['stores', 'tours']} />
+        <Breadcrumb
+            sx={{
+                paddingTop: 1,
+                fontSize: 'small',
+                // Display the Breadcrumb over the custom Layout of some pages by adding a zIndex and a maxWidth
+                // @see "src/products/ProductList.tsx" or "src/visitors/VisitorList.tsx"
+                maxWidth: '700px',
+                zIndex: 1,
+                '& a': {
+                    pointerEvents: 'visible',
+                },
+            }}
+        >
+            <ResourceBreadcrumbItems
+                resources={['stores', 'tours', 'events']}
+            />
             <BreadcrumbItem
                 name="catalog"
                 label={translate('pos.menu.catalog', 1)}
@@ -29,14 +40,18 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
                 >
                     <BreadcrumbItem
                         name="edit"
-                        label={({ record }: { record?: Record }): string =>
+                        label={({ record }: { record?: RaRecord }): string =>
                             `${editLabel} ${
                                 record ? `"${record.reference}"` : '...'
                             }`
                         }
-                        to={({ record }: { record?: Record }): string =>
+                        to={({ record }: { record?: RaRecord }): string =>
                             record
-                                ? `${linkToRecord('/products', record.id)}/edit`
+                                ? createPath({
+                                      resource: 'products',
+                                      id: record.id,
+                                      type: 'edit',
+                                  })
                                 : ''
                         }
                     />
@@ -52,7 +67,7 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
                 >
                     <BreadcrumbItem
                         name="edit"
-                        label={({ record }: { record?: Record }): string =>
+                        label={({ record }: { record?: RaRecord }): string =>
                             `${editLabel} ${
                                 record ? `"${record.name}"` : '...'
                             }`
@@ -82,14 +97,18 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
                 >
                     <BreadcrumbItem
                         name="edit"
-                        label={({ record }: { record?: Record }): string =>
+                        label={({ record }: { record?: RaRecord }): string =>
                             `${editLabel} ${
                                 record ? `"${record.reference}"` : '...'
                             }`
                         }
-                        to={({ record }: { record?: Record }): string =>
+                        to={({ record }: { record?: RaRecord }): string =>
                             record
-                                ? `${linkToRecord('/products', record.id)}/edit`
+                                ? createPath({
+                                      resource: 'products',
+                                      id: record.id,
+                                      type: 'edit',
+                                  })
                                 : ''
                         }
                     />
@@ -107,16 +126,20 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
             >
                 <BreadcrumbItem
                     name="edit"
-                    label={({ record }: { record?: Record }): string =>
+                    label={({ record }: { record?: RaRecord }): string =>
                         `${editLabel} ${
                             record
                                 ? `"${record.first_name} ${record.last_name}"`
                                 : '...'
                         }`
                     }
-                    to={({ record }: { record?: Record }): string =>
+                    to={({ record }: { record?: RaRecord }): string =>
                         record
-                            ? `${linkToRecord('/customers', record.id)}/edit`
+                            ? createPath({
+                                  resource: 'customers',
+                                  id: record.id,
+                                  type: 'edit',
+                              })
                             : ''
                     }
                 />
@@ -133,19 +156,5 @@ const CustomBreadcrumb: FC<BreadcrumbProps> = props => {
         </Breadcrumb>
     );
 };
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        paddingTop: theme.spacing(1),
-        fontSize: 'small',
-        // Display the Breadcrumb over the custom Layout of some pages by adding a zIndex and a maxWidth
-        // @see "src/products/ProductList.tsx" or "src/visitors/VisitorList.tsx"
-        maxWidth: '700px',
-        zIndex: 1,
-        '& a': {
-            pointerEvents: 'visible',
-        },
-    },
-}));
 
 export default CustomBreadcrumb;

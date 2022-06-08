@@ -1,64 +1,82 @@
-import React, { FC, ReactElement } from 'react';
+import * as React from 'react';
 import {
-    Edit,
-    EditProps,
     ListContextProvider,
+    Pagination,
+    SimpleForm,
     TextInput,
-    TitleProps,
+    useRecordContext,
     useGetList,
     usePaginationState,
     useTranslate,
 } from 'react-admin';
-import { SimpleForm } from '@react-admin/ra-tree';
-
-import { ProductListView } from '../products/ProductList';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Box, Theme, Typography, useMediaQuery } from '@mui/material';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { EditNode } from '@react-admin/ra-tree';
 
-const CategoryEdit: FC<EditProps> = props => {
+import ImageList from '../products/GridList';
+
+const CategoryEdit = () => {
     const translate = useTranslate();
-    const classes = useStyles();
 
     return (
-        <>
-            <Edit title={<CategoryTitle />} {...props}>
-                <SimpleForm>
-                    <TextInput source="name" />
-                </SimpleForm>
-            </Edit>
-            <Typography className={classes.subtitle} variant="h5">
-                {translate('resources.products.name', { smart_count: 2 })}
-            </Typography>
-            <CategoryEditAside {...props} />
-        </>
+        <EditNode
+            title={<CategoryTitle />}
+            sx={{
+                '& .RaEdit-main': {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    '& > *': { width: '100%' },
+                },
+            }}
+            aside={
+                <>
+                    <Typography marginTop={6} variant="h5">
+                        {translate('resources.products.name', {
+                            smart_count: 2,
+                        })}
+                    </Typography>
+                    <CategoryEditAside />
+                </>
+            }
+        >
+            <SimpleForm>
+                <TextInput source="name" />
+            </SimpleForm>
+        </EditNode>
     );
 };
 
-const CategoryTitle = (props: TitleProps): ReactElement => {
-    useDefineAppLocation('catalog.categories.edit', props);
-    return <span>{props.record?.name}</span>;
+const CategoryTitle = () => {
+    const record = useRecordContext();
+    useDefineAppLocation('catalog.categories.edit', { record });
+    return <span>{record?.name}</span>;
 };
 
-const CategoryEditAside = (props: EditProps): ReactElement => {
-    const { id } = props;
+const CategoryEditAside = () => {
+    const record = useRecordContext();
 
     const { setPerPage, setPage, page, perPage } = usePaginationState({
         page: 1,
         perPage: 20,
     });
-    const { data, ids, total, loaded } = useGetList(
+    const { data, total, isLoading } = useGetList(
         'products',
-        { page, perPage },
-        { field: 'reference', order: 'ASC' },
-        { category_id: id }
+        {
+            pagination: { page, perPage },
+            sort: { field: 'reference', order: 'ASC' },
+            filter: { category_id: record?.id },
+        },
+        {
+            enabled: record?.id != null,
+        }
     );
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <ListContextProvider
             value={{
                 data,
-                ids,
                 total,
-                loaded,
+                isLoading,
                 resource: 'products',
                 filterValues: {},
                 showFilter: (): void => undefined,
@@ -71,15 +89,12 @@ const CategoryEditAside = (props: EditProps): ReactElement => {
                 perPage,
             }}
         >
-            <ProductListView isSmall={false} aside={false} actions={false} />
+            <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
+                <ImageList />
+                <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
+            </Box>
         </ListContextProvider>
     );
 };
 
 export default CategoryEdit;
-
-const useStyles = makeStyles(theme => ({
-    subtitle: {
-        marginTop: theme.spacing(6),
-    },
-}));

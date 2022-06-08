@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { ReactElement, FC } from 'react';
-import { Box, Chip, useMediaQuery, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box, Chip, useMediaQuery, Theme } from '@mui/material';
 import {
     CreateButton,
     ExportButton,
-    FilterProps,
+    FilterButton,
+    FilterForm,
+    FilterContext,
     InputProps,
-    ListActionsProps,
     ListBase,
-    ListProps,
     NumberInput,
     Pagination,
     ReferenceInput,
@@ -19,142 +17,70 @@ import {
     Title,
     TopToolbar,
     useTranslate,
-    useListContext,
+    useGetResourceLabel,
 } from 'react-admin';
-
-import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import { FilterWithSave } from '@react-admin/ra-preferences';
-
-import GridList from './GridList';
+import ImageList from './GridList';
 import Aside from './Aside';
-import CustomBreadcrumb from '../layout/Breadcrumb';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
-const useQuickFilterStyles = makeStyles(theme => ({
-    root: {
-        marginBottom: theme.spacing(3),
-    },
-}));
-
-const QuickFilter = ({ label }: InputProps): ReactElement => {
-    const translate = useTranslate();
-    const classes = useQuickFilterStyles();
-    return <Chip className={classes.root} label={translate(label)} />;
-};
-
-export const ProductFilter = (
-    props: Omit<FilterProps, 'children'>
-): ReactElement => (
-    <FilterWithSave {...props}>
-        <SearchInput source="q" alwaysOn />
-        <ReferenceInput
-            source="category_id"
-            reference="categories"
-            sort={{ field: 'id', order: 'ASC' }}
-        >
-            <SelectInput source="name" />
-        </ReferenceInput>
-        <NumberInput source="width_gte" />
-        <NumberInput source="width_lte" />
-        <NumberInput source="height_gte" />
-        <NumberInput source="height_lte" />
-        <QuickFilter
-            label="resources.products.fields.stock_lte"
-            source="stock_lte"
-            defaultValue={10}
-        />
-    </FilterWithSave>
-);
-
-const ListActions = ({
-    isSmall,
-}: ListActionsProps & { isSmall: boolean }): ReactElement => {
-    const classes = useListActionsStyles();
-
-    return (
-        <TopToolbar className={classes.root}>
-            <CustomBreadcrumb variant="actions" />
-            {isSmall && <ProductFilter context="button" />}
-            <SortButton fields={['reference', 'sales', 'stock']} />
-            <CreateButton basePath="/products" />
-            <ExportButton />
-        </TopToolbar>
-    );
-};
-
-const useListActionsStyles = makeStyles(theme => ({
-    root: {
-        paddingBottom: 0,
-        paddingTop: theme.spacing(7),
-    },
-}));
-
-const ProductList: FC<ListProps> = ({ actions, ...props }) => {
+const ProductList = () => {
+    const getResourceLabel = useGetResourceLabel();
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     useDefineAppLocation('catalog.products');
-    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
-
     return (
-        <ListBase
-            filters={isSmall ? <ProductFilter /> : undefined}
-            perPage={20}
-            sort={{ field: 'reference', order: 'ASC' }}
-            {...props}
-        >
-            <ProductListView
-                actions={actions}
-                isSmall={isSmall}
-                aside={props.aside}
-                title={props.title}
-            />
+        <ListBase perPage={24} sort={{ field: 'reference', order: 'ASC' }}>
+            <Title defaultTitle={getResourceLabel('products', 2)} />
+            <FilterContext.Provider value={productFilters}>
+                <ListActions isSmall={isSmall} />
+                {isSmall && (
+                    <Box m={1}>
+                        <FilterForm />
+                    </Box>
+                )}
+            </FilterContext.Provider>
+            <Box display="flex">
+                <Aside />
+                <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
+                    <ImageList />
+                    <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
+                </Box>
+            </Box>
         </ListBase>
     );
 };
 
-// The aside prop is only used to disable the aside here if explicitly set to false
-// If undefined, we consider the aside is not explicitly disabled an display the filter
-// vertical bar
-export const ProductListView = ({
-    isSmall,
-    actions = <ListActions isSmall={isSmall} />,
-    aside,
-    title,
-}: {
-    isSmall: boolean;
-    actions?: ReactElement | false;
-    aside?: ReactElement | false;
-    title?: string | ReactElement;
-}): ReactElement => {
-    const { defaultTitle } = useListContext();
-    const classes = useStyles();
-    return (
-        <div className={classes.root}>
-            {title && defaultTitle && <Title title={title || defaultTitle} />}
-            {actions}
-            {isSmall && (
-                <Box m={1}>
-                    <ProductFilter context="form" />
-                </Box>
-            )}
-            <Box display="flex">
-                {aside !== false ? <Aside /> : null}
-                <Box
-                    width={
-                        isSmall || aside === false
-                            ? 'auto'
-                            : 'calc(100% - 16em)'
-                    }
-                >
-                    <GridList />
-                    <Pagination rowsPerPageOptions={[10, 20, 40]} />
-                </Box>
-            </Box>
-        </div>
-    );
+const QuickFilter = ({ label }: InputProps) => {
+    const translate = useTranslate();
+    return <Chip sx={{ mb: 1 }} label={translate(label as string)} />;
 };
 
-export default ProductList;
+export const productFilters = [
+    <SearchInput source="q" alwaysOn />,
+    <ReferenceInput
+        source="category_id"
+        reference="categories"
+        sort={{ field: 'id', order: 'ASC' }}
+    >
+        <SelectInput source="name" />
+    </ReferenceInput>,
+    <NumberInput source="width_gte" />,
+    <NumberInput source="width_lte" />,
+    <NumberInput source="height_gte" />,
+    <NumberInput source="height_lte" />,
+    <QuickFilter
+        label="resources.products.fields.stock_lte"
+        source="stock_lte"
+        defaultValue={10}
+    />,
+];
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        marginTop: -theme.spacing(7),
-    },
-}));
+const ListActions = ({ isSmall }: any) => (
+    <TopToolbar sx={{ minHeight: { sm: 56 } }}>
+        {isSmall && <FilterButton />}
+        <SortButton fields={['reference', 'sales', 'stock']} />
+        <CreateButton />
+        <ExportButton />
+    </TopToolbar>
+);
+
+export default ProductList;

@@ -1,26 +1,26 @@
-import React, { FC, ReactNode, useState, ReactElement } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslate } from 'react-admin';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import AVTimerIcon from '@material-ui/icons/AvTimer';
-import BlockIcon from '@material-ui/icons/Block';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import TourIcon from '@material-ui/icons/Flag';
-import { makeStyles } from '@material-ui/core/styles';
-import EventsIcon from '@material-ui/icons/FormatListNumbered';
+import * as React from 'react';
+import { ReactNode, useState, ReactElement } from 'react';
+import { Logout, useSidebarState, useTranslate } from 'react-admin';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import AVTimerIcon from '@mui/icons-material/AvTimer';
+import BlockIcon from '@mui/icons-material/Block';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import TourIcon from '@mui/icons-material/Flag';
+import EventsIcon from '@mui/icons-material/FormatListNumbered';
 import querystring from 'query-string';
 
-import { MultiLevelMenu, MenuItem } from '@react-admin/ra-navigation';
+import { MultiLevelMenu, MenuItemNode } from '@react-admin/ra-navigation';
 
 import {
+    Box,
     Typography,
     Collapse,
     Tooltip,
     MenuItem as MUIMenuItem,
     ListItemIcon,
     List,
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { newCustomerFilter, visitorsFilter, pendingReviewFilter } from './Menu';
 import categories from '../categories';
@@ -30,14 +30,9 @@ import invoices from '../invoices';
 import products from '../products';
 import reviews from '../reviews';
 import stores from '../stores';
-import { AppState } from '../types';
 import { segments } from '../visitors/segments';
 
-const MobileMenu: FC<{
-    logout?: ReactNode;
-    onMenuClick?: () => void;
-}> = ({ logout, onMenuClick }) => {
-    const classes = useStyles();
+const MobileMenu = () => {
     const translate = useTranslate();
     const [menuState, setMenuState] = useState({
         sales: false,
@@ -46,7 +41,7 @@ const MobileMenu: FC<{
         segments: false,
         reviews: false,
     });
-    const open = useSelector((state: AppState) => state.admin.ui.sidebarOpen);
+    const [open] = useSidebarState();
     const handleToggle = (
         menu: 'sales' | 'catalog' | 'customers' | 'segments' | 'reviews'
     ): void => {
@@ -54,15 +49,18 @@ const MobileMenu: FC<{
     };
 
     return (
-        <div className={classes.menu}>
+        <Box
+            sx={{
+                minWidth: '50vw',
+            }}
+        >
             <MultiLevelMenu>
-                <MenuItem
+                <MenuItemNode
                     name="dashboard"
                     to="/"
-                    exact
+                    end
                     label="ra.page.dashboard"
                     icon={<DashboardIcon />}
-                    onClick={onMenuClick}
                 />
                 <SubMenu
                     icon={<products.icon />}
@@ -72,20 +70,18 @@ const MobileMenu: FC<{
                     sidebarIsOpen={open}
                     label={translate('pos.menu.sales')}
                 >
-                    <MenuItem
+                    <MenuItemNode
                         name="commands"
                         to="/commands"
                         icon={<orders.icon />}
-                        onClick={onMenuClick}
                         label={translate(`resources.commands.name`, {
                             smart_count: 2,
                         })}
                     />
-                    <MenuItem
+                    <MenuItemNode
                         name="invoices"
                         to="/invoices?filter={}"
                         icon={<invoices.icon />}
-                        onClick={onMenuClick}
                         label={translate(`resources.invoices.name`, {
                             smart_count: 2,
                         })}
@@ -98,20 +94,18 @@ const MobileMenu: FC<{
                     sidebarIsOpen={open}
                     label={translate('pos.menu.catalog')}
                 >
-                    <MenuItem
+                    <MenuItemNode
                         name="products"
                         to="/products"
                         icon={<products.icon />}
-                        onClick={onMenuClick}
                         label={translate(`resources.products.name`, {
                             smart_count: 2,
                         })}
                     />
-                    <MenuItem
+                    <MenuItemNode
                         name="categories"
                         to="/categories"
                         icon={<categories.icon />}
-                        onClick={onMenuClick}
                         label={translate(`resources.categories.name`, {
                             smart_count: 2,
                         })}
@@ -124,33 +118,36 @@ const MobileMenu: FC<{
                     sidebarIsOpen={open}
                     label={translate('pos.menu.customers')}
                 >
-                    <MenuItem
-                        className={classes.noIconPadding}
+                    <MenuItemNode
+                        sx={{
+                            paddingLeft: 1,
+                        }}
                         name="customers.all_customers"
                         to={`/customers?filter={}`}
-                        onClick={onMenuClick}
                         label={translate(`pos.menu.all_customers`, {
                             smart_count: 2,
                         })}
                     />
-                    <MenuItem
-                        className={classes.noIconPadding}
+                    <MenuItemNode
+                        sx={{
+                            paddingLeft: 1,
+                        }}
                         name="customers.newcomers"
                         to={`/customers?filter=${JSON.stringify(
                             newCustomerFilter
                         )}`}
-                        onClick={onMenuClick}
                         label={translate(`pos.menu.new_customers`, {
                             smart_count: 2,
                         })}
                     />
-                    <MenuItem
-                        className={classes.noIconPadding}
+                    <MenuItemNode
+                        sx={{
+                            paddingLeft: 1,
+                        }}
                         name="customers.visitors"
                         to={`/customers?filter=${JSON.stringify(
                             visitorsFilter
                         )}`}
-                        onClick={onMenuClick}
                         label={translate(`pos.menu.visitors`, {
                             smart_count: 2,
                         })}
@@ -163,14 +160,15 @@ const MobileMenu: FC<{
                         label={translate('resources.segments.name')}
                     >
                         {segments.map(segment => (
-                            <MenuItem
-                                className={classes.noIconPadding}
+                            <MenuItemNode
+                                sx={{
+                                    paddingLeft: 1,
+                                }}
                                 key={segment}
                                 name={`segments.${segment}`}
                                 to={`/customers?${querystring.stringify({
                                     filter: JSON.stringify({ groups: segment }),
                                 })}`}
-                                onClick={onMenuClick}
                                 label={translate(
                                     `resources.segments.data.${segment}`,
                                     {
@@ -190,69 +188,58 @@ const MobileMenu: FC<{
                         smart_count: 2,
                     })}
                 >
-                    <MenuItem
+                    <MenuItemNode
                         name="reviews.all"
                         to={'/reviews?filter={}'}
                         icon={<CheckCircleOutlineIcon />}
-                        onClick={onMenuClick}
                         label="pos.menu.all_reviews"
                     />
-                    <MenuItem
+                    <MenuItemNode
                         name="reviews.pending"
                         to={`/reviews?${pendingReviewFilter}`}
                         icon={<AVTimerIcon />}
-                        onClick={onMenuClick}
                         label="pos.menu.pending_reviews"
                     />
-                    <MenuItem
+                    <MenuItemNode
                         name="reviews.bad"
                         to={'/reviews?filter={"rating_lte": "2"}'}
                         icon={<BlockIcon />}
-                        onClick={onMenuClick}
                         label="pos.menu.bad_reviews"
                     />
                 </SubMenu>
-                <MenuItem
+                <MenuItemNode
                     name="stores"
                     to="/stores"
                     icon={<stores.icon />}
-                    onClick={onMenuClick}
                     label={translate(`resources.stores.name`, {
                         smart_count: 2,
                     })}
                 />
-                <MenuItem
+                <MenuItemNode
                     name="tours"
                     to="/tours"
                     icon={<TourIcon />}
-                    onClick={onMenuClick}
                     label="Tours"
                 />
-                <MenuItem
+                <MenuItemNode
                     name="events"
                     to="/events"
                     icon={<EventsIcon />}
-                    onClick={onMenuClick}
                     label={translate(`resources.events.name`, {
                         smart_count: 2,
                     })}
                 />
-                <span style={{ paddingLeft: 8 }}>{logout}</span>
+                <span style={{ paddingLeft: 8 }}>
+                    <Logout />
+                </span>
             </MultiLevelMenu>
-        </div>
+        </Box>
     );
 };
 
 export default MobileMenu;
 
-const SubMenu: FC<{
-    dense?: boolean;
-    handleToggle: () => void;
-    icon: ReactElement;
-    isOpen: boolean;
-    label: string;
-    sidebarIsOpen: boolean;
-}> = ({
+const SubMenu = ({
     handleToggle,
     sidebarIsOpen,
     isOpen,
@@ -260,17 +247,32 @@ const SubMenu: FC<{
     label,
     children,
     dense = false,
+}: {
+    children: ReactNode;
+    dense?: boolean;
+    handleToggle: () => void;
+    icon: ReactElement;
+    isOpen: boolean;
+    label: string;
+    sidebarIsOpen: boolean;
 }) => {
-    const classes = useStyles();
-
     const header = (
         <MUIMenuItem
-            className={classes.subMenuItem}
+            sx={{
+                py: '1.5px',
+                px: '2px',
+            }}
             dense={dense}
-            button
             onClick={handleToggle}
         >
-            <ListItemIcon className={classes.icon}>
+            <ListItemIcon
+                sx={{
+                    minWidth: 5,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
                 {isOpen ? <ExpandMore /> : icon}
             </ListItemIcon>
             <Typography variant="inherit" color="textSecondary">
@@ -290,7 +292,9 @@ const SubMenu: FC<{
             )}
             <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List
-                    className={classes.subMenuContainer}
+                    sx={{
+                        paddingLeft: 1.5,
+                    }}
                     dense={dense}
                     component="div"
                     disablePadding
@@ -301,24 +305,3 @@ const SubMenu: FC<{
         </>
     );
 };
-
-const useStyles = makeStyles(theme => ({
-    menu: {
-        minWidth: '50vw',
-    },
-    icon: {
-        minWidth: theme.spacing(5),
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    subMenuItem: {
-        padding: `${theme.spacing(1.5)}px ${theme.spacing(2)}px`,
-    },
-    subMenuContainer: {
-        paddingLeft: theme.spacing(1.5),
-    },
-    noIconPadding: {
-        paddingLeft: theme.spacing(1),
-    },
-}));

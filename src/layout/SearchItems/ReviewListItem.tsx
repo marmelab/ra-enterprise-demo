@@ -1,15 +1,14 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import {
     Avatar,
     ListItem,
     ListItemAvatar,
     ListItemText,
-    makeStyles,
+    Rating,
     Tooltip,
     Typography,
-} from '@material-ui/core';
-import { Rating } from '@material-ui/lab';
-import CommentIcon from '@material-ui/icons/Comment';
+} from '@mui/material';
+import CommentIcon from '@mui/icons-material/Comment';
 
 import { SearchListItemLink } from './index';
 
@@ -17,9 +16,8 @@ const secondaryTypographyProps = {
     component: 'div',
 };
 
-export const ReviewListItem: FC<any> = props => {
+export const ReviewListItem = (props: any) => {
     const { data, onClick } = props;
-    const classes = useStyles();
     const { content } = data;
 
     if (!content) {
@@ -34,7 +32,18 @@ export const ReviewListItem: FC<any> = props => {
             onClick={onClick}
             alignItems="flex-start"
         >
-            <ListItemAvatar className={classes.avatar}>
+            <ListItemAvatar
+                sx={{
+                    width: 64,
+                    height: 64,
+                    paddingRight: 2,
+
+                    '& > *': {
+                        width: '100%',
+                        height: '100%',
+                    },
+                }}
+            >
                 <Avatar alt={content.reference}>
                     <CommentIcon fontSize="large" />
                 </Avatar>
@@ -49,7 +58,7 @@ export const ReviewListItem: FC<any> = props => {
     );
 };
 
-const ReviewComment: FC<{ comment: string }> = ({ comment }) => {
+const ReviewComment = ({ comment }: { comment: string }) => {
     return (
         <div>
             {comment.length <= 200 ? (
@@ -76,16 +85,3 @@ export function truncateString(text: string, max: number): string {
     // Return text truncated with '...' concatenated to the end of text.
     return text.slice(0, max) + '...';
 }
-
-const useStyles = makeStyles(theme => ({
-    avatar: {
-        width: 64,
-        height: 64,
-        paddingRight: theme.spacing(2),
-
-        '& > *': {
-            width: '100%',
-            height: '100%',
-        },
-    },
-}));

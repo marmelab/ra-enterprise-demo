@@ -1,16 +1,15 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import {
     Avatar,
     Box,
     ListItem,
     ListItemAvatar,
     ListItemText,
-    makeStyles,
     Typography,
-} from '@material-ui/core';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import CommentIcon from '@material-ui/icons/Comment';
-import DollarIcon from '@material-ui/icons/AttachMoney';
+} from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CommentIcon from '@mui/icons-material/Comment';
+import DollarIcon from '@mui/icons-material/AttachMoney';
 
 import { SearchListItemLink } from './SearchListItemLink';
 import { useTranslate } from 'react-admin';
@@ -20,11 +19,10 @@ const secondaryTypographyProps = {
     component: 'div',
 };
 
-export const CustomerListItem: FC<any> = props => {
+export const CustomerListItem = (props: any) => {
     const { data, onClick } = props;
     const { content } = data;
 
-    const classes = useStyles();
     const translate = useTranslate();
 
     if (!content) {
@@ -40,10 +38,30 @@ export const CustomerListItem: FC<any> = props => {
             data={data}
             onClick={onClick}
             alignItems="flex-start"
-            className={classes.root}
+            sx={{
+                textDecoration: 'none',
+                '&:hover': {
+                    textDecoration: 'none',
+                },
+                '& a': {
+                    textDecoration: 'none',
+                },
+                '& a:hover': {
+                    textDecoration: 'none',
+                },
+            }}
             data-testid="customer"
         >
-            <ListItemAvatar className={classes.avatar}>
+            <ListItemAvatar
+                sx={{
+                    marginLeft: 1,
+                    marginRight: 1,
+                    '& img': {
+                        width: 50,
+                        height: 50,
+                    },
+                }}
+            >
                 <Avatar alt={fullname} src={content.avatar} />
             </ListItemAvatar>
             <ListItemText
@@ -101,26 +119,3 @@ export const CustomerListItem: FC<any> = props => {
         </ListItem>
     );
 };
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        textDecoration: 'none',
-        '&:hover': {
-            textDecoration: 'none',
-        },
-        '& a': {
-            textDecoration: 'none',
-        },
-        '& a:hover': {
-            textDecoration: 'none',
-        },
-    },
-    avatar: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        '& img': {
-            width: 50,
-            height: 50,
-        },
-    },
-}));
