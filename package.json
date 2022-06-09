@@ -61,6 +61,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "@testing-library/react": "^11.2.2",
         "@types/fetch-mock": "^7.3.2",
         "@types/jest": "^26.0.19",
         "@types/node": "^12.12.14",
