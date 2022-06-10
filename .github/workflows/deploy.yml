@@ -22,6 +22,7 @@ jobs:
       run: make build-website
       env:
         CI: true
+        GENERATE_SOURCEMAP: false
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
