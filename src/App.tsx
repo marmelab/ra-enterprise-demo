@@ -18,7 +18,6 @@ import {
 } from '@react-admin/ra-tour';
 import { Route } from 'react-router';
 import { createTheme } from '@mui/material';
-
 import authProvider from './authProvider';
 import { Login, Layout } from './layout';
 import { Dashboard } from './dashboard';

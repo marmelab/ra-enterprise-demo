@@ -51,7 +51,15 @@
         "analyze": "source-map-explorer 'build/static/js/*.js'",
         "start": "react-scripts start",
         "build": "yarn node ./build.js",
-        "eject": "react-scripts test"
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d build",
+        "lint": "eslint --ext .js,.ts,.tsx \"./src/**/*.{js,ts,tsx}\"",
+        "lint:fix": "eslint --ext .js,.ts,.tsx \"./src/**/*.{js,ts,tsx}\" --fix",
+        "prettier": "prettier --config ./.prettierrc.js --write --list-different \"./src/**/*.{js,json,ts,tsx,css,md}\"",
+        "e2e-dev": "cypress open",
+        "e2e-run": "cypress run --browser chrome --headless",
+        "e2e-serve": "cd build && serve -c ../cypress/serve.json -l 3000",
+        "e2e": "start-server-and-test e2e-serve http://localhost:3000 e2e-run"
     },
     "homepage": ".",
     "browserslist": [
