@@ -15,10 +15,11 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '16.x'
-    - uses: bahmutov/npm-install@v2
+    - uses: bahmutov/npm-install@v1
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
+        useRollingCache: true
         install-command: yarn --frozen-lockfile --silent
     - name: Build Website
       run: make build-website
