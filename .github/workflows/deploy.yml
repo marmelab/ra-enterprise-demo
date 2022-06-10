@@ -16,6 +16,8 @@ jobs:
       with:
         node-version: '16.x'
     - uses: bahmutov/npm-install@v1
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
         install-command: yarn --frozen-lockfile --silent
     - name: Build Website
