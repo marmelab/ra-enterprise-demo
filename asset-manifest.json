@@ -1,19 +1,13 @@
 {
   "files": {
-    "main.css": "/ra-enterprise-demo/static/css/main.ab951f32.chunk.css",
-    "main.js": "/ra-enterprise-demo/static/js/main.28b6bb8e.chunk.js",
-    "runtime-main.js": "/ra-enterprise-demo/static/js/runtime-main.85a25ab1.js",
-    "static/css/2.34df7307.chunk.css": "/ra-enterprise-demo/static/css/2.34df7307.chunk.css",
-    "static/js/2.772d7d15.chunk.js": "/ra-enterprise-demo/static/js/2.772d7d15.chunk.js",
-    "index.html": "/ra-enterprise-demo/index.html",
-    "static/js/2.772d7d15.chunk.js.LICENSE.txt": "/ra-enterprise-demo/static/js/2.772d7d15.chunk.js.LICENSE.txt",
-    "static/media/welcome_illustration.cd84d2be.svg": "/ra-enterprise-demo/static/media/welcome_illustration.cd84d2be.svg"
+    "main.css": "./static/css/main.8e87cbdd.css",
+    "main.js": "./static/js/main.8a08788c.js",
+    "static/media/index.cjs": "./static/media/index.1e3d64b0fcde879f0060.cjs",
+    "static/media/welcome_illustration.svg": "./static/media/welcome_illustration.cd84d2be0e7683dface66dfee9959989.svg",
+    "index.html": "./index.html"
   },
   "entrypoints": [
-    "static/js/runtime-main.85a25ab1.js",
-    "static/css/2.34df7307.chunk.css",
-    "static/js/2.772d7d15.chunk.js",
-    "static/css/main.ab951f32.chunk.css",
-    "static/js/main.28b6bb8e.chunk.js"
+    "static/css/main.8e87cbdd.css",
+    "static/js/main.8a08788c.js"
   ]
 }
