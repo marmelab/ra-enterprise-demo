@@ -20,6 +20,7 @@ jobs:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       with:
         useRollingCache: true
+        useYarn: true
         install-command: yarn --frozen-lockfile --silent
     - name: Build Website
       run: make build-website
