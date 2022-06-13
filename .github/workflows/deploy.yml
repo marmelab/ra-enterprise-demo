@@ -20,7 +20,7 @@ jobs:
       env:
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: Build Website
-      run: make build-website
+      run: make build
       env:
         CI: true
         GENERATE_SOURCEMAP: false
