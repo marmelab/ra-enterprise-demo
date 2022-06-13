@@ -17,6 +17,8 @@ jobs:
         node-version: '16.x'
     - name: Install
       run: make install
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: Build Website
       run: make build-website
       env:
