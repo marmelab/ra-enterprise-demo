@@ -39,6 +39,8 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 pending_reviews: 'Pending Reviews',
                 new_customers: 'New Customers',
                 pending_orders: 'Pending Orders',
+                all_customers: 'All Customers',
+                all_reviews: 'All reviews',
                 order: {
                     items: 'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
                 },

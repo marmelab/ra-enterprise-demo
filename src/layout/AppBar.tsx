@@ -53,8 +53,11 @@ const CustomUserMenu = () => (
 );
 
 const CustomAppBar = (props: any) => {
-    const isLargeEnough = useMediaQuery<Theme>(theme =>
+    const isMediumAndUp = useMediaQuery<Theme>(theme =>
         theme.breakpoints.up('md')
+    );
+    const isLargeAndUp = useMediaQuery<Theme>(theme =>
+        theme.breakpoints.up('lg')
     );
     const { darkTheme, lightTheme } = useContext(ThemesContext);
 
@@ -65,6 +68,7 @@ const CustomAppBar = (props: any) => {
             elevation={1}
             userMenu={<CustomUserMenu />}
         >
+            {isMediumAndUp && <Logo />}
             <Typography
                 variant="h6"
                 color="inherit"
@@ -76,17 +80,22 @@ const CustomAppBar = (props: any) => {
                 }}
                 id="react-admin-title"
             />
-            {isLargeEnough ? (
+            <Box component="span" sx={{ flex: 1 }} />
+            {isMediumAndUp && (
                 <>
-                    <Logo />
-                    <Box component="span" sx={{ flex: 1 }} />
                     <Search />
+                    <Box component="span" sx={{ flex: '0 0 2rem' }} />
+                </>
+            )}
+            {isLargeAndUp ? (
+                <>
                     <Tours />
                     <ToggleThemeButton
                         darkTheme={darkTheme}
                         lightTheme={lightTheme}
                     />
                     <LocalesMenuButton languages={languages} />
+                    <Box component="span" sx={{ flex: '0 0 2rem' }} />
                 </>
             ) : null}
         </AppBar>

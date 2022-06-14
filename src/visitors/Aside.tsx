@@ -33,6 +33,7 @@ import {
     Review as ReviewRecord,
     Customer,
 } from '../types';
+import { USDFormat } from '../formatUtils';
 
 const Aside = () => {
     const record = useRecordContext<Customer>();
@@ -217,10 +218,7 @@ const Order = () => {
                     _: '1 item |||| %{smart_count} items',
                 })}
                 &nbsp;-&nbsp;
-                <NumberField
-                    source="total"
-                    options={{ style: 'currency', currency: 'USD' }}
-                />
+                <NumberField source="total" options={USDFormat(2)} />
                 &nbsp;-&nbsp;
                 <TextField source="status" />
             </Typography>

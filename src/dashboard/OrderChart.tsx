@@ -13,6 +13,7 @@ import { useTranslate } from 'react-admin';
 import { format, subDays, addDays } from 'date-fns';
 
 import { Order } from '../types';
+import { formatNumberAsUSD } from '../formatUtils';
 
 const lastDay = new Date();
 const lastMonthDays = Array.from({ length: 30 }, (_, i) => subDays(lastDay, i));
@@ -84,19 +85,20 @@ const OrderChart = (props: { orders?: Order[] }) => {
                                 ]}
                                 tickFormatter={dateFormatter}
                             />
-                            <YAxis dataKey="total" name="Revenue" unit="€" />
+                            <YAxis
+                                dataKey="total"
+                                name="Revenue"
+                                tickFormatter={(value: number) =>
+                                    formatNumberAsUSD(value, 0)
+                                }
+                            />
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip
                                 cursor={{ strokeDasharray: '3 3' }}
-                                formatter={(value: any) =>
-                                    new Intl.NumberFormat(undefined, {
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }).format(value)
+                                formatter={(value: number) =>
+                                    formatNumberAsUSD(value, 2)
                                 }
-                                labelFormatter={(label: any) =>
-                                    dateFormatter(label)
-                                }
+                                labelFormatter={dateFormatter}
                             />
                             <Area
                                 type="monotone"

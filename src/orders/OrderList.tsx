@@ -37,6 +37,7 @@ import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import AddressField from '../visitors/AddressField';
 import MobileGrid from './MobileGrid';
 import { Customer, Order } from '../types';
+import { USDFormat } from '../formatUtils';
 
 const OrderList = () => {
     useDefineAppLocation('sales.commands');
@@ -213,12 +214,12 @@ const TabbedDatagrid = () => {
                     {filterValues.status === 'ordered' && (
                         <ListContextProvider
                             value={{ ...listContext, ids: ordered }}
+                            {...rowStyle}
                         >
                             <Datagrid
                                 optimized
                                 rowClick="edit"
                                 data-testid="order-ordered-datagrid"
-                                rowStyle={rowStyle}
                             >
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />
@@ -234,10 +235,7 @@ const TabbedDatagrid = () => {
                                 <NbItemsField />
                                 <NumberField
                                     source="total"
-                                    options={{
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }}
+                                    options={USDFormat(2)}
                                     sx={{ fontWeight: 'bold' }}
                                 />
                             </Datagrid>
@@ -246,6 +244,7 @@ const TabbedDatagrid = () => {
                     {filterValues.status === 'delivered' && (
                         <ListContextProvider
                             value={{ ...listContext, ids: delivered }}
+                            {...rowStyle}
                         >
                             <Datagrid rowClick="edit">
                                 <DateField source="date" showTime />
@@ -262,10 +261,7 @@ const TabbedDatagrid = () => {
                                 <NbItemsField />
                                 <NumberField
                                     source="total"
-                                    options={{
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }}
+                                    options={USDFormat(2)}
                                     sx={{ fontWeight: 'bold' }}
                                 />
                                 <BooleanField
@@ -278,6 +274,7 @@ const TabbedDatagrid = () => {
                     {filterValues.status === 'cancelled' && (
                         <ListContextProvider
                             value={{ ...listContext, ids: cancelled }}
+                            {...rowStyle}
                         >
                             <Datagrid rowClick="edit">
                                 <DateField source="date" showTime />
@@ -294,10 +291,7 @@ const TabbedDatagrid = () => {
                                 <NbItemsField />
                                 <NumberField
                                     source="total"
-                                    options={{
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }}
+                                    options={USDFormat(2)}
                                     sx={{ fontWeight: 'bold' }}
                                 />
                                 <BooleanField

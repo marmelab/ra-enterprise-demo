@@ -7,7 +7,8 @@ import AVTimerIcon from '@mui/icons-material/AvTimer';
 import BlockIcon from '@mui/icons-material/Block';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import TourIcon from '@mui/icons-material/Flag';
-import EventsIcon from '@mui/icons-material/FormatListNumbered';
+import EventNoteIcon from '@mui/icons-material/EventNote';
+
 import querystring from 'query-string';
 
 import { MultiLevelMenu, MenuItemNode } from '@react-admin/ra-navigation';
@@ -63,7 +64,7 @@ const MobileMenu = () => {
                     icon={<DashboardIcon />}
                 />
                 <SubMenu
-                    icon={<products.icon />}
+                    icon={<products.iconSales />}
                     handleToggle={(): void => handleToggle('sales')}
                     isOpen={menuState.sales}
                     data-testid="commands-menu"
@@ -224,7 +225,7 @@ const MobileMenu = () => {
                 <MenuItemNode
                     name="events"
                     to="/events"
-                    icon={<EventsIcon />}
+                    icon={<EventNoteIcon />}
                     label={translate(`resources.events.name`, {
                         smart_count: 2,
                     })}

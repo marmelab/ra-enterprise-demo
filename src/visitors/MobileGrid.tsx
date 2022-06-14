@@ -14,6 +14,7 @@ import AvatarField from './AvatarField';
 import ColoredNumberField from './ColoredNumberField';
 import SegmentsField from './SegmentsField';
 import { Customer } from '../types';
+import { USDFormat } from '../formatUtils';
 
 const MobileGrid = () => {
     const translate = useTranslate();
@@ -58,10 +59,7 @@ const MobileGrid = () => {
                                 :&nbsp;
                                 <ColoredNumberField
                                     source="total_spent"
-                                    options={{
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }}
+                                    options={USDFormat(2)}
                                 />
                             </Typography>
                         </CardContent>

@@ -24,6 +24,7 @@ import VisitorListAside from './VisitorListAside';
 import { ListViewButton } from './ListViewButton';
 import { useListView } from './useListView';
 import DesktopGrid from './DesktopGrid';
+import { USDFormat } from '../formatUtils';
 
 const visitorFilters = [
     <SearchInput source="q" alwaysOn />,
@@ -93,7 +94,7 @@ const columns = [
     <ColoredNumberField
         source="total_spent"
         key="total_spent"
-        options={{ style: 'currency', currency: 'USD' }}
+        options={USDFormat(2)}
     />,
     <DateField source="latest_purchase" key="latest_purchase" showTime />,
     <BooleanField source="has_newsletter" key="has_newsletter" label="News." />,

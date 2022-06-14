@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useRecordContext } from 'react-admin';
 import { MarkdownField } from '@react-admin/ra-markdown';
 import { Box, lighten, darken, Typography, useTheme } from '@mui/material';
+import { formatNumberAsUSD } from '../formatUtils';
 
 const ProductPreview = (props: any) => {
     const record = useRecordContext(props);
@@ -95,7 +96,9 @@ const ProductPreview = (props: any) => {
                     <Typography variant="caption">
                         {width} x {height} cm
                     </Typography>
-                    <Typography variant="caption">{price}€</Typography>
+                    <Typography variant="caption">
+                        {formatNumberAsUSD(price, 2)}
+                    </Typography>
                 </Box>
                 <MarkdownField record={record} label="" source="description" />
             </Box>

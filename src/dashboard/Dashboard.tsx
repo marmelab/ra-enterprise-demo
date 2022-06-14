@@ -23,7 +23,7 @@ interface State {
     nbNewOrders?: number;
     pendingOrders?: Order[];
     recentOrders?: Order[];
-    revenue?: string;
+    revenue?: number;
 }
 
 const styles = {
@@ -75,12 +75,7 @@ const Dashboard = () => {
             );
         return {
             recentOrders: orders,
-            revenue: aggregations.revenue.toLocaleString(undefined, {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-            }),
+            revenue: aggregations.revenue,
             nbNewOrders: aggregations.nbNewOrders,
             pendingOrders: aggregations.pendingOrders,
         };

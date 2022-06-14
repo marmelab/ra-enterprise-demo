@@ -69,7 +69,7 @@ const ProductEdit = () => {
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    €
+                                    $
                                 </InputAdornment>
                             ),
                         }}

@@ -11,6 +11,7 @@ import { Link, useTranslate, useGetMany, useRecordContext } from 'react-admin';
 
 import { Order, Product } from '../types';
 import { TableCellRight } from './TableCellRight';
+import { formatNumberAsUSD } from '../formatUtils';
 
 const Basket = () => {
     const record = useRecordContext<Order>();
@@ -68,22 +69,18 @@ const Basket = () => {
                                 </Link>
                             </TableCell>
                             <TableCellRight>
-                                {productsById[
-                                    item.product_id
-                                ].price.toLocaleString(undefined, {
-                                    style: 'currency',
-                                    currency: 'USD',
-                                })}
+                                {formatNumberAsUSD(
+                                    productsById[item.product_id].price,
+                                    2
+                                )}
                             </TableCellRight>
                             <TableCellRight>{item.quantity}</TableCellRight>
                             <TableCellRight>
-                                {(
+                                {formatNumberAsUSD(
                                     productsById[item.product_id].price *
-                                    item.quantity
-                                ).toLocaleString(undefined, {
-                                    style: 'currency',
-                                    currency: 'USD',
-                                })}
+                                        item.quantity,
+                                    2
+                                )}
                             </TableCellRight>
                         </TableRow>
                     ))}
@@ -93,10 +90,7 @@ const Basket = () => {
                             {translate('resources.commands.fields.basket.sum')}
                         </TableCell>
                         <TableCellRight>
-                            {record?.total_ex_taxes.toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
+                            {formatNumberAsUSD(record?.total_ex_taxes, 2)}
                         </TableCellRight>
                     </TableRow>
                     <TableRow>
@@ -107,10 +101,7 @@ const Basket = () => {
                             )}
                         </TableCell>
                         <TableCellRight>
-                            {record?.delivery_fees.toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
+                            {formatNumberAsUSD(record?.delivery_fees, 2)}
                         </TableCellRight>
                     </TableRow>
                     <TableRow>
@@ -121,9 +112,7 @@ const Basket = () => {
                             )}
                         </TableCell>
                         <TableCellRight>
-                            {record.tax_rate.toLocaleString(undefined, {
-                                style: 'percent',
-                            })}
+                            {formatNumberAsUSD(record.tax_rate, 2)}
                         </TableCellRight>
                     </TableRow>
                     <TableRow>
@@ -134,10 +123,7 @@ const Basket = () => {
                             )}
                         </TableCell>
                         <TableCellRight sx={{ fontWeight: 'bold' }}>
-                            {record?.total.toLocaleString(undefined, {
-                                style: 'currency',
-                                currency: 'USD',
-                            })}
+                            {formatNumberAsUSD(record?.total, 2)}
                         </TableCellRight>
                     </TableRow>
                 </TableBody>

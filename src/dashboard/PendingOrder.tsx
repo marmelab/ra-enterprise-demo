@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useTranslate, useReference } from 'react-admin';
 
 import { Customer, Order } from '../types';
+import { formatNumberAsUSD } from '../formatUtils';
 
 interface Props {
     order: Order;
@@ -56,7 +57,7 @@ export const PendingOrder = (props: Props) => {
                         color: 'text.primary',
                     }}
                 >
-                    {order.total}$
+                    {formatNumberAsUSD(order.total, 2)}
                 </Box>
             </ListItemSecondaryAction>
         </ListItem>

@@ -13,6 +13,7 @@ import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
 import InvoiceShow from './InvoiceShow';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+import { USDFormat } from '../formatUtils';
 
 const listFilters = [
     <DateInput source="date_gte" alwaysOn />,
@@ -61,10 +62,10 @@ const InvoiceList = () => {
                 <ReferenceField source="command_id" reference="commands">
                     <TextField source="reference" />
                 </ReferenceField>
-                <NumberField source="total_ex_taxes" />
-                <NumberField source="delivery_fees" />
-                <NumberField source="taxes" />
-                <NumberField source="total" />
+                <NumberField source="total_ex_taxes" options={USDFormat(2)} />
+                <NumberField source="delivery_fees" options={USDFormat(2)} />
+                <NumberField source="taxes" options={USDFormat(2)} />
+                <NumberField source="total" options={USDFormat(2)} />
             </Datagrid>
         </List>
     );

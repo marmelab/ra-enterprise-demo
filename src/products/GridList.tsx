@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Lock, useGetLocks } from '@react-admin/ra-realtime';
 import { LockOverlay } from './LockOverlay';
+import { USDFormat } from '../formatUtils';
 
 const GridList = () => {
     const { isLoading } = useListContext();
@@ -101,10 +102,7 @@ const LoadedGridList = () => {
                                         source="price"
                                         record={record}
                                         color="inherit"
-                                        options={{
-                                            style: 'currency',
-                                            currency: 'USD',
-                                        }}
+                                        options={USDFormat(2)}
                                         sx={{
                                             display: 'inline',
                                             fontSize: '1em',

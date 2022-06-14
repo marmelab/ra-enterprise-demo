@@ -15,6 +15,7 @@ import {
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import { Order } from '../types';
+import { USDFormat } from '../formatUtils';
 
 interface MobileGridProps {
     data?: RaRecord[];
@@ -60,10 +61,7 @@ const MobileGrid = (props: MobileGridProps) => {
                                 :&nbsp;
                                 <NumberField
                                     source="total"
-                                    options={{
-                                        style: 'currency',
-                                        currency: 'USD',
-                                    }}
+                                    options={USDFormat(2)}
                                 />
                             </Typography>
                             <Typography variant="body2" gutterBottom>

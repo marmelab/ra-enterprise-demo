@@ -1,4 +1,5 @@
 import ProductIcon from '@mui/icons-material/Collections';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 import ProductList from './ProductList';
 import ProductEdit from './ProductEdit';
 import ProductCreate from './ProductCreate';
@@ -8,4 +9,5 @@ export default {
     create: ProductCreate,
     edit: ProductEdit,
     icon: ProductIcon,
+    iconSales: ReceiptIcon,
 };

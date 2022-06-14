@@ -38,6 +38,8 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 new_orders: 'Nouvelles commandes',
                 pending_reviews: 'Commentaires à modérer',
                 new_customers: 'Nouveaux clients',
+                all_customers: 'Tous les clients',
+                all_reviews: 'Tous les avis',
                 pending_orders: 'Commandes à traiter',
                 order: {
                     items: 'par %{customer_name}, un poster |||| par %{customer_name}, %{nb_items} posters',

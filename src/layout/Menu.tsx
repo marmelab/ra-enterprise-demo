@@ -3,7 +3,7 @@ import { useState, useEffect, ReactElement } from 'react';
 import { useSavedQueries, useTranslate } from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import EventsIcon from '@mui/icons-material/FormatListNumbered';
+import EventNoteIcon from '@mui/icons-material/EventNote';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import AVTimerIcon from '@mui/icons-material/AvTimer';
 import BlockIcon from '@mui/icons-material/Block';
@@ -181,7 +181,7 @@ const DesktopMenu = () => {
             <MenuItemCategory
                 name="events"
                 to="/events"
-                icon={<EventsIcon />}
+                icon={<EventNoteIcon />}
                 label={translate(`resources.events.name`, { smart_count: 2 })}
             />
         </MultiLevelMenu>
@@ -279,7 +279,7 @@ const SalesMenuItem = (): ReactElement => {
         <StyledBadgeForText badgeContent={commandsChangeCount} color="primary">
             <MenuItemCategory
                 name="sales"
-                icon={<products.icon />}
+                icon={<products.iconSales />}
                 label={translate(`pos.menu.sales`, { smart_count: 1 })}
                 data-testid="commands-menu"
             >
