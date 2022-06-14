@@ -53,7 +53,10 @@ export const pendingReviewFilter = querystring.stringify({
     filter: JSON.stringify({ status: 'pending' }),
 });
 
-const useResourceChangeCounter = (resource: string): number => {
+const useResourceChangeCounter = (
+    resource: string,
+    appLocation: string
+): number => {
     const match = useAppLocationMatcher();
     const location = useResourceAppLocation();
     const [countEvent, setCountEvent] = useState(0);
@@ -65,7 +68,7 @@ const useResourceChangeCounter = (resource: string): number => {
 
         let count = payload.ids.length;
 
-        if (location && match(resource)) {
+        if (location && match(appLocation)) {
             const { record } = location && (location.values || {});
             if (!record || record.id == null) {
                 return;
@@ -80,10 +83,10 @@ const useResourceChangeCounter = (resource: string): number => {
     }, resource);
 
     useEffect(() => {
-        if (match(resource)) {
+        if (match(appLocation)) {
             setCountEvent(0);
         }
-    }, [match, resource]);
+    }, [match, appLocation]);
 
     return countEvent;
 };
@@ -272,7 +275,10 @@ const CustomersMenu = () => {
 };
 
 const SalesMenuItem = (): ReactElement => {
-    const commandsChangeCount = useResourceChangeCounter('commands');
+    const commandsChangeCount = useResourceChangeCounter(
+        'commands',
+        'sales.commands'
+    );
     const translate = useTranslate();
 
     return (
