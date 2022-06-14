@@ -58,7 +58,7 @@
         "prettier": "prettier --config ./.prettierrc.js --write --list-different \"./src/**/*.{js,json,ts,tsx,css,md}\"",
         "e2e-dev": "cypress open",
         "e2e-run": "cypress run --browser chrome --headless",
-        "e2e-serve": "cd build && serve -c ../cypress/serve.json -l 3000",
+        "e2e-serve": "serve -s -c ../cypress/serve.json -l 3000 build",
         "e2e": "start-server-and-test e2e-serve http://localhost:3000 e2e-run"
     },
     "homepage": ".",
@@ -69,6 +69,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
+        "@testing-library/cypress": "^7.0.6",
         "@testing-library/react": "^11.2.2",
         "@types/fetch-mock": "^7.3.2",
         "@types/jest": "^26.0.19",
@@ -78,7 +79,9 @@
         "@types/react-dom": "^17.0.9",
         "cypress": "^7.3.0",
         "rewire": "^5.0.0",
+        "serve": "^13.0.2",
         "source-map-explorer": "^2.0.0",
+        "start-server-and-test": "^1.12.2",
         "typescript": "^4.4.0"
     }
 }
