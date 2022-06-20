@@ -246,14 +246,6 @@ PERFORMANCE OF THIS SOFTWARE.
  * @license MIT
  */
 
-/**
-* @license nested-property https://github.com/cosmosio/nested-property
-*
-* The MIT License (MIT)
-*
-* Copyright (c) 2014-2015 Olivier Scherrer <pode.fr@gmail.com>
-*/
-
 /** @license
  * eventsource.js
  * Available under MIT License (MIT)
