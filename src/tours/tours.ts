@@ -402,7 +402,7 @@ const tours: { [id: string]: TourType } = {
                 joyrideProps: {
                     hideBackButton: true,
                 },
-                after: async ({ dataProvider, queryClient }) => {
+                after: async ({ dataProvider, queryClient, redirect }) => {
                     // Reset the locks on Products #2 and #5
                     // The lock on Procuct #1 has been deleted during the scenario
                     await Promise.all(
@@ -431,6 +431,14 @@ const tours: { [id: string]: TourType } = {
                             return Promise.resolve();
                         })
                     );
+                    redirect('/tours');
+                },
+            },
+            {
+                target: '[data-testid=tourlist]',
+                content: 'tours.ra-realtime.end',
+                joyrideProps: {
+                    hideBackButton: true,
                 },
             },
         ],

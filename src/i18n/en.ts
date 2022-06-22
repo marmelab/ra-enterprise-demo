@@ -321,6 +321,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 new_orders: 'Your new orders can stand-out from others.',
                 newest: "And newest orders even appear while you're on the page.",
                 locks: 'You can lock resources in realtime (this one will be unlocked in a few seconds).',
+                end: "That's it for ra-realtime. Have a look at the other tours to discover more enterprise features!",
             },
             'ra-editable-datagrid': {
                 comment:

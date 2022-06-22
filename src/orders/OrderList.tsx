@@ -102,7 +102,7 @@ const useGetTotals = (filterValues: any) => {
 
 const orderRowStyle =
     (batchLevel: number, theme: Theme) =>
-    (record: Order): any => {
+    (record: Order): { backgroundColor: string | undefined } => {
         let backgroundColor;
         switch (record.batch) {
             case batchLevel:
@@ -214,12 +214,12 @@ const TabbedDatagrid = () => {
                     {filterValues.status === 'ordered' && (
                         <ListContextProvider
                             value={{ ...listContext, ids: ordered }}
-                            {...rowStyle}
                         >
                             <Datagrid
                                 optimized
                                 rowClick="edit"
                                 data-testid="order-ordered-datagrid"
+                                rowStyle={rowStyle}
                             >
                                 <DateField source="date" showTime />
                                 <TextField source="reference" />

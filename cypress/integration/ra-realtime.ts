@@ -12,7 +12,10 @@ describe('Tours', () => {
             "And newest orders even appear while you're on the page."
         );
         waitForStepAndGoToNext(
-            'You can lock resources in realtime (this one will be unlocked in a few seconds).',
+            'You can lock resources in realtime (this one will be unlocked in a few seconds).'
+        );
+        waitForStepAndGoToNext(
+            "That's it for ra-realtime. Have a look at the other tours to discover more enterprise features!",
             'Last'
         );
     });

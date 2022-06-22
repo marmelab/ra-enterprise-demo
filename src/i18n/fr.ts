@@ -328,6 +328,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     'Vos nouvelles commandes peuvent se démarquer des autres',
                 newest: 'Et les commandes les plus récentes apparaissent même lorsque vous êtes sur la page.',
                 locks: 'Vous pouvez verrouiller les ressources en temps réel (celle-ci sera déverrouillée dans quelques secondes).',
+                end: "Voilà pour ra-realtime. Jetez un oeil aux autres visites pour découvrir d'autres fonctionnalités de la version entreprise !",
             },
             'ra-editable-datagrid': {
                 comment:

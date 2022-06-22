@@ -39,6 +39,7 @@ const TourList = (): ReactElement => {
                 container
                 spacing={{ xs: 2, md: 4, lg: 6 }}
                 columns={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+                data-testid="tourlist"
             >
                 {tours.map(tour => (
                     <Grid key={tour.id} item>
