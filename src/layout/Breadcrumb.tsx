@@ -15,7 +15,6 @@ const CustomBreadcrumb = () => {
     return (
         <Breadcrumb
             sx={{
-                paddingTop: 1,
                 fontSize: 'small',
                 // Display the Breadcrumb over the custom Layout of some pages by adding a zIndex and a maxWidth
                 // @see "src/products/ProductList.tsx" or "src/visitors/VisitorList.tsx"

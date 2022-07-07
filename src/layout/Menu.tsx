@@ -11,12 +11,12 @@ import querystring from 'query-string';
 import { endOfYesterday } from 'date-fns';
 
 import {
-    MultiLevelMenu,
     MenuItemNode,
     MenuItemCategory,
     useAppLocationMatcher,
     useResourceAppLocation,
     MenuItemList,
+    IconMenu,
 } from '@react-admin/ra-navigation';
 
 import {
@@ -117,8 +117,8 @@ const DesktopMenu = () => {
     const translate = useTranslate();
 
     return (
-        <MultiLevelMenu variant="categories">
-            <MenuItemCategory
+        <IconMenu>
+            <IconMenu.Item
                 name="dashboard"
                 to="/"
                 end
@@ -126,7 +126,7 @@ const DesktopMenu = () => {
                 label="ra.page.dashboard"
             />
             <SalesMenuItem />
-            <MenuItemCategory
+            <IconMenu.Item
                 name="catalog"
                 icon={<products.icon />}
                 label={translate(`pos.menu.catalog`, { smart_count: 1 })}
@@ -134,15 +134,15 @@ const DesktopMenu = () => {
                 <CardContent>
                     <CatalogMenu />
                 </CardContent>
-            </MenuItemCategory>
-            <MenuItemCategory
+            </IconMenu.Item>
+            <IconMenu.Item
                 name="customers"
                 icon={<visitors.icon />}
                 label={translate(`pos.menu.customers`, { smart_count: 2 })}
             >
                 <CustomersMenu />
-            </MenuItemCategory>
-            <MenuItemCategory
+            </IconMenu.Item>
+            <IconMenu.Item
                 name="reviews"
                 icon={<reviews.icon />}
                 label={translate(`resources.reviews.name`, { smart_count: 2 })}
@@ -174,20 +174,20 @@ const DesktopMenu = () => {
                         />
                     </MenuItemList>
                 </CardContent>
-            </MenuItemCategory>
-            <MenuItemCategory
+            </IconMenu.Item>
+            <IconMenu.Item
                 name="stores"
                 to="/stores"
                 icon={<stores.icon />}
                 label={translate(`resources.stores.name`, { smart_count: 2 })}
             />
-            <MenuItemCategory
+            <IconMenu.Item
                 name="events"
                 to="/events"
                 icon={<EventNoteIcon />}
                 label={translate(`resources.events.name`, { smart_count: 2 })}
             />
-        </MultiLevelMenu>
+        </IconMenu>
     );
 };
 
