@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Card, CardHeader, CardContent } from '@mui/material';
+import {
+    Card,
+    CardHeader,
+    CardContent,
+    useTheme,
+    SimplePaletteColorOptions,
+} from '@mui/material';
 import {
     ResponsiveContainer,
     AreaChart,
@@ -45,8 +51,11 @@ const getRevenuePerDay = (orders: Order[]): TotalByDay[] => {
 const OrderChart = (props: { orders?: Order[] }) => {
     const { orders } = props;
     const translate = useTranslate();
-    if (!orders) return null;
+    const theme = useTheme();
 
+    if (!orders || !theme) return null;
+
+    const primaryColor = theme?.palette?.primary as SimplePaletteColorOptions;
     return (
         <Card>
             <CardHeader title={translate('pos.dashboard.month_history')} />
@@ -64,13 +73,13 @@ const OrderChart = (props: { orders?: Order[] }) => {
                                 >
                                     <stop
                                         offset="5%"
-                                        stopColor="#8884d8"
+                                        stopColor={primaryColor.light}
                                         stopOpacity={0.8}
                                     />
                                     <stop
                                         offset="95%"
-                                        stopColor="#8884d8"
-                                        stopOpacity={0}
+                                        stopColor={primaryColor.light}
+                                        stopOpacity={0.2}
                                     />
                                 </linearGradient>
                             </defs>
@@ -99,11 +108,18 @@ const OrderChart = (props: { orders?: Order[] }) => {
                                     formatNumberAsUSD(value, 2)
                                 }
                                 labelFormatter={dateFormatter}
+                                contentStyle={{
+                                    border: `${theme.palette?.background?.paper} 1px solid`,
+                                    borderRadius: theme.shape?.borderRadius,
+                                    background:
+                                        theme.palette?.background?.paper,
+                                    opacity: 0.8,
+                                }}
                             />
                             <Area
                                 type="monotone"
                                 dataKey="total"
-                                stroke="#8884d8"
+                                stroke={primaryColor.light}
                                 strokeWidth={2}
                                 fill="url(#colorUv)"
                             />

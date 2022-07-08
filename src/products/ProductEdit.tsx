@@ -27,6 +27,7 @@ import {
     CardContent,
     CircularProgress,
     InputAdornment,
+    useTheme,
     Stack,
     Typography,
 } from '@mui/material';
@@ -48,92 +49,105 @@ const ProductEdit = () => {
                 <Poster />
                 <TextInput source="image" fullWidth validate={req} />
                 <TextInput source="thumbnail" fullWidth validate={req} />
-                <AccordionSection
-                    label="resources.products.tabs.description"
-                    data-tour-id="description-tab"
-                    fullWidth
-                >
-                    <MarkdownInput
-                        source="description"
-                        label=""
-                        validate={req}
-                    />
-                </AccordionSection>
-                <AccordionSection
-                    label="resources.products.tabs.details"
-                    fullWidth
-                >
-                    <TextInput source="reference" fullWidth validate={req} />
-                    <NumberInput
-                        source="price"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    $
-                                </InputAdornment>
-                            ),
-                        }}
-                        validate={req}
+                <div>
+                    <AccordionSection
+                        label="resources.products.tabs.description"
+                        data-tour-id="description-tab"
                         fullWidth
-                    />
-                    <NumberInput
-                        source="width"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="start">
-                                    cm
-                                </InputAdornment>
-                            ),
-                        }}
-                        validate={req}
-                        fullWidth
-                    />
-                    <NumberInput
-                        source="height"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="start">
-                                    cm
-                                </InputAdornment>
-                            ),
-                        }}
-                        validate={req}
-                        fullWidth
-                    />
-                    <ReferenceInput source="category_id" reference="categories">
-                        <SelectInput source="name" validate={req} fullWidth />
-                    </ReferenceInput>
-                    <NumberInput source="stock" validate={req} fullWidth />
-                </AccordionSection>
-                <AccordionSection
-                    label="resources.products.tabs.reviews"
-                    fullWidth
-                >
-                    <ReferenceManyField
-                        reference="reviews"
-                        target="product_id"
-                        pagination={<Pagination />}
                     >
-                        <Datagrid
-                            sx={{
-                                width: '100%',
-                                '& .column-comment': {
-                                    maxWidth: '20em',
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                },
+                        <MarkdownInput
+                            source="description"
+                            label=""
+                            validate={req}
+                        />
+                    </AccordionSection>
+                    <AccordionSection
+                        label="resources.products.tabs.details"
+                        fullWidth
+                    >
+                        <TextInput
+                            source="reference"
+                            fullWidth
+                            validate={req}
+                        />
+                        <NumberInput
+                            source="price"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        $
+                                    </InputAdornment>
+                                ),
                             }}
+                            validate={req}
+                            fullWidth
+                        />
+                        <NumberInput
+                            source="width"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="start">
+                                        cm
+                                    </InputAdornment>
+                                ),
+                            }}
+                            validate={req}
+                            fullWidth
+                        />
+                        <NumberInput
+                            source="height"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="start">
+                                        cm
+                                    </InputAdornment>
+                                ),
+                            }}
+                            validate={req}
+                            fullWidth
+                        />
+                        <ReferenceInput
+                            source="category_id"
+                            reference="categories"
                         >
-                            <DateField source="date" />
-                            <CustomerReferenceField />
-                            <StarRatingField />
-                            <TextField source="comment" />
-                            <TextField source="status" />
-                            <EditButton />
-                        </Datagrid>
-                    </ReferenceManyField>
-                </AccordionSection>
+                            <SelectInput
+                                source="name"
+                                validate={req}
+                                fullWidth
+                            />
+                        </ReferenceInput>
+                        <NumberInput source="stock" validate={req} fullWidth />
+                    </AccordionSection>
+                    <AccordionSection
+                        label="resources.products.tabs.reviews"
+                        fullWidth
+                    >
+                        <ReferenceManyField
+                            reference="reviews"
+                            target="product_id"
+                            pagination={<Pagination />}
+                        >
+                            <Datagrid
+                                sx={{
+                                    width: '100%',
+                                    '& .column-comment': {
+                                        maxWidth: '20em',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        whiteSpace: 'nowrap',
+                                    },
+                                }}
+                            >
+                                <DateField source="date" />
+                                <CustomerReferenceField />
+                                <StarRatingField />
+                                <TextField source="comment" />
+                                <TextField source="status" />
+                                <EditButton />
+                            </Datagrid>
+                        </ReferenceManyField>
+                    </AccordionSection>
+                </div>
             </ProductEditFormWithPreview>
         </Edit>
     );
@@ -149,8 +163,9 @@ const ProductTitle = () => {
 const ProductEditFormWithPreview = ({ children, ...props }: any) => {
     const resource = useResourceContext();
     const record = useRecordContext();
-    useDefineAppLocation('catalog.products.edit', { record });
+    const theme = useTheme();
     const notify = useNotify();
+    useDefineAppLocation('catalog.products.edit', { record });
 
     const { isLoading } = useLockRecord({
         resource,
@@ -175,6 +190,10 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
                         flex: 1,
                         minWidth: '60%',
                         maxWidth: '70%',
+                        borderWidth: '0 1px 0 0',
+                        borderRadius: `${theme?.shape?.borderRadius || 0} 0 0 ${
+                            theme?.shape?.borderRadius || 0
+                        }`,
                     },
                     '& > :last-child': {
                         width: '25%',

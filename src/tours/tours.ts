@@ -1,6 +1,6 @@
 import { LocksDataProvider } from '@react-admin/ra-realtime';
 import { TourType } from '@react-admin/ra-tour';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { endOfYesterday } from 'date-fns';
 import { QueryClient } from 'react-query';
 import randomCommandBuilder from './randomCommandBuilder';
@@ -47,18 +47,18 @@ const tours: { [id: string]: TourType } = {
                         },
                     },
                 },
-                after: ({ target, redirect }) => {
-                    const productUrl = target.getAttribute('href').slice(1);
-                    redirect(productUrl);
+                after: async ({ target, redirect }) => {
+                    target.click();
+                    await screen.findAllByText("Description");
                 },
             },
             {
                 target: "[data-tour-id='description-tab']",
                 content: 'tours.ra-markdown.editor_location',
-                after: ({ target }) => {
+                after: async ({ target }) => {
                     target.children[0] && target.children[0].click();
-
-                    return new Promise(resolve => setTimeout(resolve, 500));
+                    await screen.findByLabelText('Headings');
+                    await new Promise(resolve => setTimeout(resolve, 500));
                 },
             },
             {

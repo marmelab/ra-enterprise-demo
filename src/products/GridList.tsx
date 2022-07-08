@@ -36,13 +36,23 @@ const times = (nbChildren: number, fn: (key: number) => any) =>
     Array.from({ length: nbChildren }, (_, key) => fn(key));
 
 const LoadingGridList = () => {
+    const theme = useTheme();
     const { perPage } = useListContext();
     const cols = useColsForWidth();
     return (
-        <ImageList rowHeight={180} cols={cols} sx={{ m: 0 }}>
+        <ImageList
+            rowHeight={180}
+            cols={cols}
+            sx={{ m: 0 }}
+            gap={parseInt(theme.spacing(1))}
+        >
             {times(perPage, key => (
                 <ImageListItem key={key}>
-                    <Box bgcolor="grey.300" height="100%" />
+                    <Box
+                        bgcolor="grey.500"
+                        height="100%"
+                        sx={{ opacity: 0.5 }}
+                    />
                 </ImageListItem>
             ))}
         </ImageList>
@@ -50,6 +60,7 @@ const LoadingGridList = () => {
 };
 
 const LoadedGridList = () => {
+    const theme = useTheme();
     const { data } = useListContext();
     const resource = useResourceContext();
     const { data: locks } = useGetLocks(resource);
@@ -64,6 +75,7 @@ const LoadedGridList = () => {
             data-tour-id="grid-line"
             rowHeight={180}
             cols={cols}
+            gap={parseInt(theme.spacing(1))}
             sx={{ m: 0 }}
         >
             {data.map(record => {

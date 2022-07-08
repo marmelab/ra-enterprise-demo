@@ -4,9 +4,6 @@ import { Card, Box, Typography, Divider } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ReactNode } from 'react';
 
-import cartouche from './cartouche.png';
-import cartoucheDark from './cartoucheDark.png';
-
 interface Props {
     icon: FC<any>;
     to: string;
@@ -35,22 +32,27 @@ const CardWithIcon = (props: Props) => {
             <Link to={to}>
                 <Box
                     sx={{
-                        overflow: 'inherit',
+                        position: 'relative',
+                        overflow: 'hidden',
                         padding: '16px',
-                        background: theme =>
-                            `url(${
-                                theme.palette.mode === 'dark'
-                                    ? cartoucheDark
-                                    : cartouche
-                            }) no-repeat`,
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
                         '& .icon': {
-                            color: theme =>
-                                theme.palette.mode === 'dark'
-                                    ? 'inherit'
-                                    : '#dc2440',
+                            color: 'secondary.main',
+                        },
+                        '&:before': {
+                            position: 'absolute',
+                            top: '50%',
+                            left: 0,
+                            display: 'block',
+                            content: `''`,
+                            height: '200%',
+                            aspectRatio: '1',
+                            transform: 'translate(-30%, -60%)',
+                            borderRadius: '50%',
+                            backgroundColor: 'secondary.main',
+                            opacity: 0.15,
                         },
                     }}
                 >

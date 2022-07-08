@@ -8,6 +8,7 @@ import {
 } from 'react-admin';
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 import { addEventsForMutations, EventList } from '@react-admin/ra-audit-log';
+import CssBaseline from '@mui/material/CssBaseline';
 import {
     raTreeLanguageEnglish,
     raTreeLanguageFrench,
@@ -75,10 +76,10 @@ const App = () => {
             layout={Layout}
             i18nProvider={i18nProvider}
             disableTelemetry
-            theme={lightTheme}
             lightTheme={lightTheme}
             darkTheme={darkTheme}
         >
+            <CssBaseline />
             <CustomRoutes>
                 <Route path="/configuration" element={<Configuration />} />
                 <Route path="/segments" element={<Segments />} />

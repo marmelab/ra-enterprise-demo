@@ -1,6 +1,6 @@
-import React, { useMemo, CSSProperties } from 'react';
+import React, { useMemo } from 'react';
 import { useGetList } from 'react-admin';
-import { useMediaQuery, Theme } from '@mui/material';
+import { Grid, useMediaQuery, Theme } from '@mui/material';
 import { subDays, startOfDay } from 'date-fns';
 
 import Welcome from './Welcome';
@@ -25,17 +25,6 @@ interface State {
     recentOrders?: Order[];
     revenue?: number;
 }
-
-const styles = {
-    flex: { display: 'flex' },
-    flexColumn: { display: 'flex', flexDirection: 'column' },
-    leftCol: { flex: 1, marginRight: '0.5em' },
-    rightCol: { flex: 1, marginLeft: '0.5em' },
-    singleCol: { marginTop: '1em', marginBottom: '1em' },
-};
-
-const Spacer = () => <span style={{ width: '1em' }} />;
-const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
 const Dashboard = () => {
     const isXSmall = useMediaQuery((theme: Theme) =>
@@ -81,61 +70,70 @@ const Dashboard = () => {
         };
     }, [orders]);
 
+    const BLOCKS_SPACING = 2;
+
     const { nbNewOrders, pendingOrders, revenue, recentOrders } = aggregation;
     return isXSmall ? (
-        <div>
-            <div style={styles.flexColumn as CSSProperties}>
+        <Grid container spacing={1}>
+            <Grid item xs={12}>
                 <Welcome />
+            </Grid>
+            <Grid item xs={12}>
                 <MonthlyRevenue value={revenue} />
-                <VerticalSpacer />
+            </Grid>
+            <Grid item xs={12}>
                 <NbNewOrders value={nbNewOrders} />
-                <VerticalSpacer />
+            </Grid>
+            <Grid item xs={12}>
                 <PendingOrders orders={pendingOrders} />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     ) : isSmall ? (
-        <div style={styles.flexColumn as CSSProperties}>
-            <div style={styles.singleCol}>
+        <Grid container spacing={BLOCKS_SPACING} padding={1}>
+            <Grid item xs={12}>
                 <Welcome />
-            </div>
-            <div style={styles.flex}>
+            </Grid>
+            <Grid item xs={6}>
                 <MonthlyRevenue value={revenue} />
-                <Spacer />
+            </Grid>
+            <Grid item xs={6}>
                 <NbNewOrders value={nbNewOrders} />
-            </div>
-            <div style={styles.singleCol}>
+            </Grid>
+            <Grid item xs={12}>
                 <OrderChart orders={recentOrders} />
-            </div>
-            <div style={styles.singleCol}>
+            </Grid>
+            <Grid item xs={12}>
                 <PendingOrders orders={pendingOrders} />
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     ) : (
-        <>
-            <Welcome />
-            <div style={styles.flex}>
-                <div style={styles.leftCol}>
-                    <div style={styles.flex}>
+        <Grid container spacing={BLOCKS_SPACING} padding={1}>
+            <Grid item xs={12}>
+                <Welcome />
+            </Grid>
+            <Grid item xs={6}>
+                <Grid container spacing={BLOCKS_SPACING}>
+                    <Grid item xs={6}>
                         <MonthlyRevenue value={revenue} />
-                        <Spacer />
+                    </Grid>
+                    <Grid item xs={6}>
                         <NbNewOrders value={nbNewOrders} />
-                    </div>
-                    <div style={styles.singleCol}>
+                    </Grid>
+                    <Grid item xs={12}>
                         <OrderChart orders={recentOrders} />
-                    </div>
-                    <div style={styles.singleCol}>
+                    </Grid>
+                    <Grid item xs={12}>
                         <PendingOrders orders={pendingOrders} />
-                    </div>
-                </div>
-                <div style={styles.rightCol}>
-                    <div style={styles.flex}>
-                        <PendingReviews />
-                        <Spacer />
-                        <NewCustomers />
-                    </div>
-                </div>
-            </div>
-        </>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item xs={3}>
+                <PendingReviews />
+            </Grid>
+            <Grid item xs={3}>
+                <NewCustomers />
+            </Grid>
+        </Grid>
     );
 };
 

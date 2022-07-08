@@ -6,21 +6,16 @@ import {
     Logout,
     ToggleThemeButton,
     UserMenu,
-    useTranslate,
 } from 'react-admin';
 import { Link } from 'react-router-dom';
 import {
     Badge,
     Box,
     IconButton,
-    MenuItem,
-    ListItemIcon,
-    ListItemText,
     Typography,
     useMediaQuery,
     Theme,
 } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
 import TourIcon from '@mui/icons-material/Flag';
 import { ThemesContext } from '@react-admin/ra-enterprise';
 
@@ -28,26 +23,8 @@ import Search from './Search';
 import Logo from './Logo';
 import { useTourStates } from '../tours/useTourState';
 
-const ConfigurationMenu = React.forwardRef((props, ref) => {
-    const translate = useTranslate();
-    return (
-        <MenuItem
-            component={Link}
-            // @ts-ignore
-            ref={ref}
-            {...props}
-            to="/configuration"
-        >
-            <ListItemIcon>
-                <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText>{translate('pos.configuration')}</ListItemText>
-        </MenuItem>
-    );
-});
 const CustomUserMenu = () => (
     <UserMenu>
-        <ConfigurationMenu />
         <Logout />
     </UserMenu>
 );

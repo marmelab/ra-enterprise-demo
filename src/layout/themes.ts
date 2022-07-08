@@ -7,11 +7,42 @@ import createPalette from '@mui/material/styles/createPalette';
 import { grey } from '@mui/material/colors';
 
 const borderRadius = 10;
-
+const lightPalette = createPalette({
+    mode: 'light',
+    primary: {
+        dark: '#2e3e54',
+        main: '#495e84',
+        light: '#698baf',
+        contrastText: '#fff',
+    },
+    secondary: {
+        dark: '#7d6327',
+        main: '#b48e38',
+        light: '#c3a45f',
+        contrastText: '#fff',
+    },
+    background: {
+        paper: '#ffffff',
+        default: '#fafafa',
+    },
+});
 const darkPalette = createPalette({
     mode: 'dark', // Switching the dark mode on is a single property value change.
     primary: {
-        main: '#90caf9',
+        dark: '#495e84',
+        main: '#698baf',
+        light: '#7ba8c9',
+        contrastText: '#fff',
+    },
+    secondary: {
+        dark: '#7d6327',
+        main: '#b48e38',
+        light: '#c3a45f',
+        contrastText: '#fff',
+    },
+    background: {
+        paper: '#202020',
+        default: '#161616',
     },
 });
 
@@ -30,13 +61,24 @@ export const getThemes = (
 };
 
 export const getDarkTheme = (theme: Theme): ThemeOptions => {
-    const cardBackground = '#1A1A1A';
     return {
         palette: darkPalette,
         shape: {
             borderRadius,
         },
         components: {
+            RaLayout: {
+                styleOverrides: {
+                    root: {
+                        '& .RaLayout-content': {
+                            padding: `${theme.spacing(1)}`,
+                            [theme.breakpoints.up('md')]: {
+                                padding: `${theme.spacing(2)}`,
+                            },
+                        },
+                    },
+                },
+            },
             MuiAppBar: {
                 styleOverrides: {
                     root: {
@@ -48,8 +90,7 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
             RaAppBar: {
                 styleOverrides: {
                     root: {
-                        backgroundColor: cardBackground,
-                        borderColor: cardBackground,
+                        backgroundColor: darkPalette.background.paper,
                         color: '#fff',
                         '& .RaAppBar-menuButton': {
                             // Since sub-<Menu /> hide labels when sidebar is closed
@@ -103,14 +144,13 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
             RaSidebar: {
                 styleOverrides: {
                     root: {
-                        '& .RaSidebar-drawerPaper': {
-                            paddingRight: 16,
-                            [theme.breakpoints.up('md')]: {
-                                width: 64,
-                            },
-                        },
+                        '& .RaSidebar-drawerPaper': {},
                         '& .RaSidebar-fixed': {
                             zIndex: 1200,
+                            width: 76,
+                        },
+                        '&.MuiDrawer-docked .MuiPaper-root': {
+                            width: 76,
                         },
                     },
                 },
@@ -119,7 +159,7 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
                 styleOverrides: {
                     root: {
                         '& .RaMultiLevelMenu-navWithCategories': {
-                            backgroundColor: cardBackground,
+                            backgroundColor: darkPalette.background.paper,
                         },
                     },
                 },
@@ -135,7 +175,7 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
                             backgroundColor: grey[800],
                         },
                         '& .RaMenuItemCategory-popoverPaper': {
-                            backgroundColor: cardBackground,
+                            backgroundColor: darkPalette.background.paper,
                         },
                     },
                 },
@@ -143,9 +183,10 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
             RaTopToolbar: {
                 styleOverrides: {
                     root: {
-                        alignItems: 'center',
                         paddingTop: 0,
+                        width: 'auto',
                         minHeight: 'auto',
+                        alignItems: 'flex-end',
                     },
                 },
             },
@@ -168,30 +209,14 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
             MuiPaper: {
                 styleOverrides: {
                     root: {
-                        borderColor: cardBackground,
-                        backgroundColor: cardBackground,
+                        border: 'none',
+                        background: darkPalette.background.paper,
                     },
                 },
             },
         },
     };
 };
-
-const lightPalette = createPalette({
-    mode: 'light',
-    primary: {
-        main: '#4f3cc9',
-    },
-    secondary: {
-        light: '#5f5fc4',
-        main: '#283593',
-        dark: '#001064',
-        contrastText: '#fff',
-    },
-    background: {
-        default: '#f2f2f2',
-    },
-});
 
 export const getLightTheme = (theme: Theme): ThemeOptions => {
     return {
@@ -200,8 +225,17 @@ export const getLightTheme = (theme: Theme): ThemeOptions => {
             borderRadius,
         },
         components: {
-            shape: {
-                borderRadius,
+            RaLayout: {
+                styleOverrides: {
+                    root: {
+                        '& .RaLayout-content': {
+                            padding: `${theme.spacing(1)}`,
+                            [theme.breakpoints.up('md')]: {
+                                padding: `${theme.spacing(2)}`,
+                            },
+                        },
+                    },
+                },
             },
             RaAppBar: {
                 styleOverrides: {
@@ -313,8 +347,6 @@ export const getLightTheme = (theme: Theme): ThemeOptions => {
             MuiButton: {
                 styleOverrides: {
                     contained: {
-                        backgroundColor: '#fff',
-                        color: '#4f3cc9',
                         boxShadow: 'none',
                     },
                 },
@@ -352,20 +384,13 @@ export const getLightTheme = (theme: Theme): ThemeOptions => {
             RaSidebar: {
                 styleOverrides: {
                     root: {
-                        '& .RaSidebar-drawerPaper': {
-                            paddingRight: 16,
-                            [theme.breakpoints.up('md')]: {
-                                width: 64,
-                            },
-                        },
+                        '& .RaSidebar-drawerPaper': {},
                         '& .RaSidebar-fixed': {
                             zIndex: 1200,
+                            width: 76,
                         },
                         '&.MuiDrawer-docked .MuiPaper-root': {
-                            width: '96px',
-                        },
-                        '& .MuiPaper-root': {
-                            width: 'auto',
+                            width: 76,
                         },
                     },
                 },
@@ -382,9 +407,10 @@ export const getLightTheme = (theme: Theme): ThemeOptions => {
             RaTopToolbar: {
                 styleOverrides: {
                     root: {
-                        alignItems: 'center',
                         paddingTop: 0,
+                        width: 'auto',
                         minHeight: 'auto',
+                        alignItems: 'flex-end',
                     },
                 },
             },

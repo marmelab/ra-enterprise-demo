@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Box, Card, CardActions, Button, Typography } from '@mui/material';
+import {
+    Box,
+    Card,
+    CardActions,
+    Button,
+    Typography,
+    useTheme,
+    SimplePaletteColorOptions,
+} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CodeIcon from '@mui/icons-material/Code';
 import { useTranslate } from 'react-admin';
@@ -8,18 +16,17 @@ import publishArticleImage from './welcome_illustration.svg';
 
 const Welcome = () => {
     const translate = useTranslate();
+    const theme = useTheme();
+
+    const primaryColor = theme?.palette?.primary as SimplePaletteColorOptions;
 
     return (
         <Card
             sx={{
                 background: theme =>
-                    theme.palette.mode === 'dark'
-                        ? '#282828'
-                        : `linear-gradient(to right, #8975fb 0%, #746be7 35%), linear-gradient(to bottom, #8975fb 0%, #6f4ceb 50%), #6f4ceb`,
+                    `linear-gradient(to bottom, #ffffff33, #ffffff00), linear-gradient(to bottom, ${primaryColor.light}00, ${primaryColor.dark}ff), ${primaryColor.main}`,
                 color: '#fff',
                 padding: '20px',
-                marginTop: 2,
-                marginBottom: '1em',
             }}
         >
             <Box display="flex">
@@ -64,6 +71,7 @@ const Welcome = () => {
                     sx={{
                         background: `url(${publishArticleImage}) top right / cover`,
                         marginLeft: 'auto',
+                        alignSelf: 'center',
                     }}
                     width="16em"
                     height="9em"
