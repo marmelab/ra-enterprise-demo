@@ -22,6 +22,5 @@ export const waitForStepAndGoToNext = (
         cy.findByText(text);
     }
     
-    cy.wait(500);
     cy.findByLabelText(buttonLabel).click();
 };

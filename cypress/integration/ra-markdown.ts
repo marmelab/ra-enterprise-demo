@@ -5,6 +5,8 @@ describe('Tours', () => {
         signIn();
         startTour('ra-markdown');
         waitForStepAndGoToNext();
+        cy.url().should('match', /.+\/products\/\d+/);
+        cy.findAllByText('Description').should('have.length', 2);
         waitForStepAndGoToNext(
             'The markdown editor is in the description tab.'
         );

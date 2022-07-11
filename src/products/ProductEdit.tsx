@@ -25,7 +25,6 @@ import {
     Box,
     Card,
     CardContent,
-    CircularProgress,
     InputAdornment,
     useTheme,
     Stack,
@@ -177,10 +176,6 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
         },
     });
 
-    if (isLoading) {
-        return <CircularProgress />;
-    }
-
     return (
         <Form {...props}>
             <Box
@@ -205,7 +200,7 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
                     <CardContent>
                         <Stack alignItems="flex-start">{children}</Stack>
                     </CardContent>
-                    <CustomToolbar />
+                    <CustomToolbar disabled={isLoading} />
                 </Card>
                 <div data-testid="product-edit-preview">
                     <FormDataConsumer>
@@ -219,7 +214,7 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
     );
 };
 
-const CustomToolbar = () => {
+const CustomToolbar = ({ disabled } : { disabled?: boolean }) => {
     const resource = useResourceContext();
     const record = useRecordContext();
 
@@ -229,7 +224,7 @@ const CustomToolbar = () => {
 
     return (
         <Toolbar>
-            <SaveButton disabled={!isMeLocker} />
+            <SaveButton disabled={disabled === true || !isMeLocker} />
             {!isMeLocker && <LockMessage identity={lock?.identity} />}
         </Toolbar>
     );
