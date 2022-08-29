@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback } from 'react';
 import {
     AutocompleteInput,
     BooleanField,
     Datagrid,
     DateField,
     DateInput,
-    RaRecord,
-    ListContextProvider,
     NullableBooleanInput,
     NumberField,
     ReferenceInput,
@@ -130,32 +128,11 @@ const orderRowStyle =
 
 const TabbedDatagrid = () => {
     const listContext = useListContext();
-    const { data, filterValues, setFilters, displayedFilters, isLoading } =
-        listContext;
+    const { filterValues, setFilters, displayedFilters } = listContext;
     const isXSmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('sm')
     );
-    const [ordered, setOrdered] = useState<RaRecord[]>([]);
-    const [delivered, setDelivered] = useState<RaRecord[]>([]);
-    const [cancelled, setCancelled] = useState<RaRecord[]>([]);
     const totals = useGetTotals(filterValues) as any;
-
-    useEffect(() => {
-        if (isLoading) {
-            return;
-        }
-        switch (filterValues.status) {
-            case 'ordered':
-                setOrdered(data);
-                break;
-            case 'delivered':
-                setDelivered(data);
-                break;
-            case 'cancelled':
-                setCancelled(data);
-                break;
-        }
-    }, [data, isLoading, filterValues.status]);
 
     const handleChange = useCallback(
         (event: React.ChangeEvent<{}>, value: any) => {
@@ -168,13 +145,6 @@ const TabbedDatagrid = () => {
         },
         [displayedFilters, filterValues, setFilters]
     );
-
-    const selectedData =
-        filterValues.status === 'ordered'
-            ? ordered
-            : filterValues.status === 'delivered'
-            ? delivered
-            : cancelled;
 
     const theme = useTheme();
     const batchLevel =
@@ -204,102 +174,84 @@ const TabbedDatagrid = () => {
             </Tabs>
             <Divider />
             {isXSmall ? (
-                <ListContextProvider
-                    value={{ ...listContext, data: selectedData }}
-                >
-                    <MobileGrid data={selectedData} />
-                </ListContextProvider>
+                <MobileGrid />
             ) : (
                 <>
                     {filterValues.status === 'ordered' && (
-                        <ListContextProvider
-                            value={{ ...listContext, ids: ordered }}
+                        <Datagrid
+                            optimized
+                            rowClick="edit"
+                            data-testid="order-ordered-datagrid"
+                            rowStyle={rowStyle}
                         >
-                            <Datagrid
-                                optimized
-                                rowClick="edit"
-                                data-testid="order-ordered-datagrid"
-                                rowStyle={rowStyle}
+                            <DateField source="date" showTime />
+                            <TextField source="reference" />
+                            <CustomerReferenceField />
+                            <ReferenceField
+                                source="customer_id"
+                                reference="customers"
+                                link={false}
+                                label="resources.commands.fields.address"
                             >
-                                <DateField source="date" showTime />
-                                <TextField source="reference" />
-                                <CustomerReferenceField />
-                                <ReferenceField
-                                    source="customer_id"
-                                    reference="customers"
-                                    link={false}
-                                    label="resources.commands.fields.address"
-                                >
-                                    <AddressField />
-                                </ReferenceField>
-                                <NbItemsField />
-                                <NumberField
-                                    source="total"
-                                    options={USDFormat(2)}
-                                    sx={{ fontWeight: 'bold' }}
-                                />
-                            </Datagrid>
-                        </ListContextProvider>
+                                <AddressField />
+                            </ReferenceField>
+                            <NbItemsField />
+                            <NumberField
+                                source="total"
+                                options={USDFormat(2)}
+                                sx={{ fontWeight: 'bold' }}
+                            />
+                        </Datagrid>
                     )}
                     {filterValues.status === 'delivered' && (
-                        <ListContextProvider
-                            value={{ ...listContext, ids: delivered }}
-                            {...rowStyle}
-                        >
-                            <Datagrid rowClick="edit">
-                                <DateField source="date" showTime />
-                                <TextField source="reference" />
-                                <CustomerReferenceField />
-                                <ReferenceField
-                                    source="customer_id"
-                                    reference="customers"
-                                    link={false}
-                                    label="resources.commands.fields.address"
-                                >
-                                    <AddressField />
-                                </ReferenceField>
-                                <NbItemsField />
-                                <NumberField
-                                    source="total"
-                                    options={USDFormat(2)}
-                                    sx={{ fontWeight: 'bold' }}
-                                />
-                                <BooleanField
-                                    source="returned"
-                                    sx={{ mt: -0.5, mb: -0.5 }}
-                                />
-                            </Datagrid>
-                        </ListContextProvider>
+                        <Datagrid rowClick="edit">
+                            <DateField source="date" showTime />
+                            <TextField source="reference" />
+                            <CustomerReferenceField />
+                            <ReferenceField
+                                source="customer_id"
+                                reference="customers"
+                                link={false}
+                                label="resources.commands.fields.address"
+                            >
+                                <AddressField />
+                            </ReferenceField>
+                            <NbItemsField />
+                            <NumberField
+                                source="total"
+                                options={USDFormat(2)}
+                                sx={{ fontWeight: 'bold' }}
+                            />
+                            <BooleanField
+                                source="returned"
+                                sx={{ mt: -0.5, mb: -0.5 }}
+                            />
+                        </Datagrid>
                     )}
                     {filterValues.status === 'cancelled' && (
-                        <ListContextProvider
-                            value={{ ...listContext, ids: cancelled }}
-                            {...rowStyle}
-                        >
-                            <Datagrid rowClick="edit">
-                                <DateField source="date" showTime />
-                                <TextField source="reference" />
-                                <CustomerReferenceField />
-                                <ReferenceField
-                                    source="customer_id"
-                                    reference="customers"
-                                    link={false}
-                                    label="resources.commands.fields.address"
-                                >
-                                    <AddressField />
-                                </ReferenceField>
-                                <NbItemsField />
-                                <NumberField
-                                    source="total"
-                                    options={USDFormat(2)}
-                                    sx={{ fontWeight: 'bold' }}
-                                />
-                                <BooleanField
-                                    source="returned"
-                                    sx={{ mt: -0.5, mb: -0.5 }}
-                                />
-                            </Datagrid>
-                        </ListContextProvider>
+                        <Datagrid rowClick="edit">
+                            <DateField source="date" showTime />
+                            <TextField source="reference" />
+                            <CustomerReferenceField />
+                            <ReferenceField
+                                source="customer_id"
+                                reference="customers"
+                                link={false}
+                                label="resources.commands.fields.address"
+                            >
+                                <AddressField />
+                            </ReferenceField>
+                            <NbItemsField />
+                            <NumberField
+                                source="total"
+                                options={USDFormat(2)}
+                                sx={{ fontWeight: 'bold' }}
+                            />
+                            <BooleanField
+                                source="returned"
+                                sx={{ mt: -0.5, mb: -0.5 }}
+                            />
+                        </Datagrid>
                     )}
                 </>
             )}

@@ -73,21 +73,23 @@ const CategoryEditAside = () => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <ListContextProvider
-            value={{
-                data,
-                total,
-                isLoading,
-                resource: 'products',
-                filterValues: {},
-                showFilter: (): void => undefined,
-                hideFilter: (): void => undefined,
-                setSort: (): void => undefined,
-                setPage,
-                setPerPage,
-                currentSort: { field: 'reference', order: 'ASC' },
-                page,
-                perPage,
-            }}
+            value={
+                {
+                    data,
+                    total,
+                    isLoading,
+                    resource: 'products',
+                    filterValues: {},
+                    showFilter: (): void => undefined,
+                    hideFilter: (): void => undefined,
+                    setSort: (): void => undefined,
+                    setPage,
+                    setPerPage,
+                    sort: { field: 'reference', order: 'ASC' },
+                    page,
+                    perPage,
+                } as any
+            }
         >
             <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
                 <ImageList />
