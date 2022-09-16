@@ -104,8 +104,8 @@ const OrderChart = (props: { orders?: Order[] }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip
                                 cursor={{ strokeDasharray: '3 3' }}
-                                formatter={(value: number) =>
-                                    formatNumberAsUSD(value, 2)
+                                formatter={(value: any) =>
+                                    formatNumberAsUSD(Number(value), 2)
                                 }
                                 labelFormatter={dateFormatter}
                                 contentStyle={{
