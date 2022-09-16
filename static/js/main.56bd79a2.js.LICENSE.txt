@@ -5,15 +5,15 @@ object-assign
 */
 
 /*!
-  Copyright (c) 2015 Jed Watson.
-  Based on code that is Copyright 2013-2015, Facebook, Inc.
-  All rights reserved.
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
 */
 
 /*!
-  Copyright (c) 2018 Jed Watson.
-  Licensed under the MIT License (MIT), see
-  http://jedwatson.github.io/classnames
+  Copyright (c) 2015 Jed Watson.
+  Based on code that is Copyright 2013-2015, Facebook, Inc.
+  All rights reserved.
 */
 
 /*!
@@ -228,14 +228,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * @toast-ui/editor
- * @version 3.2.0 | Fri Aug 05 2022
- * @author NHN Cloud FE Development Lab <dl_javascript@nhn.com>
- * @license MIT
- */
-
-/**
- * React Router DOM v6.3.0
+ * @remix-run/router v1.0.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -246,7 +239,25 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * React Router v6.3.0
+ * @toast-ui/editor
+ * @version 3.2.0 | Fri Aug 05 2022
+ * @author NHN Cloud FE Development Lab <dl_javascript@nhn.com>
+ * @license MIT
+ */
+
+/**
+ * React Router DOM v6.4.0
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+
+/**
+ * React Router v6.4.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -262,7 +273,7 @@ PERFORMANCE OF THIS SOFTWARE.
  * https://github.com/Yaffle/EventSource/
  */
 
-/** @license MUI v5.10.3
+/** @license MUI v5.10.5
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
