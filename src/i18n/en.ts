@@ -22,6 +22,13 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
         'ra-search': {
             result: `1 result |||| %{smart_count} results`,
         },
+        'ra-realtime': {
+            notification: {
+                lock: {
+                    lockedBySomeoneElse: 'The record is locked by someone else',
+                },
+            },
+        },
         pos: {
             search: 'Search',
             configuration: 'Configuration',

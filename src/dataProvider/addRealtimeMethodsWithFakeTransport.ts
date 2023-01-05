@@ -24,10 +24,12 @@ const addRealtimeMethodsWithFakeTransport = (
 
         publish: (topic, event) => {
             if (!topic) {
-                return Promise.reject(new Error('ra.realTime.error.topic'));
+                return Promise.reject(new Error('The topic is missing'));
             }
             if (!event.type) {
-                return Promise.reject(new Error('ra.realTime.error.type'));
+                return Promise.reject(
+                    new Error('The type of the event is missing')
+                );
             }
             subscriptions.map(
                 subscription =>

@@ -31,7 +31,7 @@ import {
     Typography,
 } from '@mui/material';
 import { MarkdownInput } from '@react-admin/ra-markdown';
-import { useGetLock, useLockRecord } from '@react-admin/ra-realtime';
+import { useGetLock, useLockOnMount } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { AccordionSection } from '@react-admin/ra-form-layout';
 
@@ -166,7 +166,7 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
     const notify = useNotify();
     useDefineAppLocation('catalog.products.edit', { record });
 
-    const { isLoading } = useLockRecord({
+    const { isLoading } = useLockOnMount({
         resource,
         id: record.id,
         lockMutationOptions: {
@@ -214,7 +214,7 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
     );
 };
 
-const CustomToolbar = ({ disabled } : { disabled?: boolean }) => {
+const CustomToolbar = ({ disabled }: { disabled?: boolean }) => {
     const resource = useResourceContext();
     const record = useRecordContext();
 

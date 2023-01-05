@@ -49,7 +49,7 @@ const tours: { [id: string]: TourType } = {
                 },
                 after: async ({ target, redirect }) => {
                     target.click();
-                    await screen.findAllByText("Description");
+                    await screen.findAllByText('Description');
                 },
             },
             {
@@ -276,7 +276,6 @@ const tours: { [id: string]: TourType } = {
                                 const topic = 'resource/commands';
                                 dataProvider.publish(topic, {
                                     type: 'created',
-                                    topic: topic,
                                     payload: { ids: [newCommand.id] },
                                     date: new Date(),
                                 });
@@ -334,7 +333,6 @@ const tours: { [id: string]: TourType } = {
                     const topic = 'resource/commands';
                     dataProvider.publish(topic, {
                         type: 'created',
-                        topic,
                         payload: { ids: [newCommand1.id, newCommand2.id] },
                         date: new Date(),
                     });

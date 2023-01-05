@@ -22,6 +22,14 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
         'ra-search': {
             result: `1 résultat |||| %{smart_count} résultats`,
         },
+        'ra-realtime': {
+            notification: {
+                lock: {
+                    lockedBySomeoneElse:
+                        'Cet enregistrement est verrouillé par un autre utilisateur',
+                },
+            },
+        },
         pos: {
             search: 'Rechercher',
             configuration: 'Configuration',
