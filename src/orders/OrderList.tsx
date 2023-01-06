@@ -16,7 +16,7 @@ import {
     useGetList,
     useListContext,
 } from 'react-admin';
-import { RealTimeList } from '@react-admin/ra-realtime';
+import { ListLive } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import {
     alpha,
@@ -40,14 +40,14 @@ import { USDFormat } from '../formatUtils';
 const OrderList = () => {
     useDefineAppLocation('sales.commands');
     return (
-        <RealTimeList
+        <ListLive
             filterDefaultValues={{ status: 'ordered' }}
             sort={{ field: 'date', order: 'DESC' }}
             perPage={25}
             filters={orderFilters}
         >
             <TabbedDatagrid />
-        </RealTimeList>
+        </ListLive>
     );
 };
 
