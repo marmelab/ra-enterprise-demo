@@ -18,7 +18,7 @@ object-assign
 
 /*!
  * @toast-ui/editor
- * @version 3.2.1 | Thu Sep 29 2022
+ * @version 3.2.2 | Fri Feb 17 2023
  * @author NHN Cloud FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
@@ -228,7 +228,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * @mui/styled-engine v5.11.9
+ * @mui/styled-engine v5.11.11
  *
  * @license MIT
  * This source code is licensed under the MIT license found in the
@@ -236,7 +236,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * @remix-run/router v1.3.2
+ * @remix-run/router v1.3.3
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -248,13 +248,13 @@ PERFORMANCE OF THIS SOFTWARE.
 
 /**
  * @toast-ui/editor
- * @version 3.2.1 | Thu Sep 29 2022
+ * @version 3.2.2 | Fri Feb 17 2023
  * @author NHN Cloud FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
 
 /**
- * React Router DOM v6.8.1
+ * React Router DOM v6.8.2
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -265,7 +265,7 @@ PERFORMANCE OF THIS SOFTWARE.
  */
 
 /**
- * React Router v6.8.1
+ * React Router v6.8.2
  *
  * Copyright (c) Remix Software Inc.
  *
