@@ -23,7 +23,8 @@ const CustomBreadcrumb = () => {
                 '& a': {
                     pointerEvents: 'visible',
                 },
-                marginBottom: [0, -3],
+                marginTop: [0, -1],
+                marginBottom: [0, -2],
             }}
         >
             <ResourceBreadcrumbItems

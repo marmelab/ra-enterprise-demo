@@ -13,6 +13,7 @@ const ReviewList = () => {
     const isXSmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('sm')
     );
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ const ReviewList = () => {
                             duration: theme.transitions.duration.enteringScreen,
                         }),
                     marginRight: !!match ? '400px' : 0,
+                    marginTop: isSmall ? undefined : 1,
                 }}
                 filters={reviewFilters}
                 perPage={25}

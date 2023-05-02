@@ -7,7 +7,7 @@ import {
     Resource,
 } from 'react-admin';
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
-import { addEventsForMutations, EventList } from '@react-admin/ra-audit-log';
+import { addEventsForMutations } from '@react-admin/ra-audit-log';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
     raTreeLanguageEnglish,
@@ -39,6 +39,7 @@ import Configuration from './configuration/Configuration';
 import Segments from './segments/Segments';
 import TourLauncher from './tours/TourLauncher';
 import TourList from './tours/TourList';
+import { EventList } from './EventList';
 
 const messages = {
     en: mergeTranslations(

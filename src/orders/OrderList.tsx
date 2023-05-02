@@ -39,12 +39,14 @@ import { USDFormat } from '../formatUtils';
 
 const OrderList = () => {
     useDefineAppLocation('sales.commands');
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <ListLive
             filterDefaultValues={{ status: 'ordered' }}
             sort={{ field: 'date', order: 'DESC' }}
             perPage={25}
             filters={orderFilters}
+            sx={{ marginTop: isSmall ? undefined : 1 }}
         >
             <TabbedDatagrid />
         </ListLive>

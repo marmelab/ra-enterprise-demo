@@ -5,7 +5,7 @@
     "dependencies": {
         "@apollo/client": "^3.3.19",
         "@react-admin/ra-enterprise": "^6.0.3",
-        "@react-admin/ra-audit-log": "^4.0.1",
+        "@react-admin/ra-audit-log": "^4.0.4",
         "@react-admin/ra-editable-datagrid": "^4.0.1",
         "@react-admin/ra-form-layout": "^4.1.2",
         "@react-admin/ra-markdown": "^4.0.1",

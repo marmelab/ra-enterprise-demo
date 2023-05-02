@@ -8,6 +8,7 @@ import {
     NumberField,
     DateInput,
 } from 'react-admin';
+import { useMediaQuery, Theme } from '@mui/material';
 
 import FullNameField from '../visitors/FullNameField';
 import AddressField from '../visitors/AddressField';
@@ -22,11 +23,13 @@ const listFilters = [
 
 const InvoiceList = () => {
     useDefineAppLocation('sales.invoices');
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <List
             filters={listFilters}
             perPage={25}
             sort={{ field: 'date', order: 'desc' }}
+            sx={{ marginTop: isSmall ? undefined : 1 }}
         >
             <Datagrid
                 rowClick="expand"

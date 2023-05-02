@@ -59,6 +59,7 @@ const VisitorList = () => {
             perPage={25}
             aside={<VisitorListAside />}
             actions={<ListActions />}
+            sx={{ marginTop: isSmall ? undefined : -6 }}
         >
             {isXsmall ? (
                 <MobileGrid />

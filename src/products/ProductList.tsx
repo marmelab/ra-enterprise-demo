@@ -75,7 +75,7 @@ export const productFilters = [
 ];
 
 const ListActions = ({ isSmall }: any) => (
-    <TopToolbar sx={{ minHeight: { sm: 56 } }}>
+    <TopToolbar sx={{ minHeight: { sm: 56 }, marginTop: isSmall ? undefined : -5 }}>
         {isSmall && <FilterButton />}
         <SortButton fields={['reference', 'sales', 'stock']} />
         <CreateButton />
