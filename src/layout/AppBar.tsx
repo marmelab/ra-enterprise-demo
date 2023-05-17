@@ -45,7 +45,12 @@ const CustomAppBar = (props: any) => {
             elevation={1}
             userMenu={<CustomUserMenu />}
         >
-            {isMediumAndUp && <Logo />}
+            {isMediumAndUp && (
+                <Link to="/" style={{ textDecoration: 'none' }}>
+                    <Logo />
+                </Link>
+            )}
+
             <Typography
                 variant="h6"
                 color="inherit"
