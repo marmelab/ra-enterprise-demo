@@ -4,7 +4,13 @@ import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import { useTranslate, useLocaleState, useTheme, Title } from 'react-admin';
+import {
+    useTranslate,
+    useLocaleState,
+    useTheme,
+    Title,
+    RaThemeOptions,
+} from 'react-admin';
 import { ThemesContext } from '@react-admin/ra-enterprise';
 
 const Configuration = () => {
@@ -12,6 +18,8 @@ const Configuration = () => {
     const [locale, setLocale] = useLocaleState();
     const { darkTheme, lightTheme } = useContext(ThemesContext);
     const [theme, setTheme] = useTheme();
+
+    const currentMode = (theme as RaThemeOptions)?.palette?.mode ?? theme;
 
     return (
         <Card>
@@ -23,11 +31,7 @@ const Configuration = () => {
                 <Button
                     variant="contained"
                     sx={{ margin: '1em' }}
-                    color={
-                        theme?.palette?.mode === 'light'
-                            ? 'primary'
-                            : 'secondary'
-                    }
+                    color={currentMode === 'light' ? 'primary' : 'secondary'}
                     onClick={() => setTheme(lightTheme)}
                 >
                     {translate('pos.theme.light')}
@@ -35,11 +39,7 @@ const Configuration = () => {
                 <Button
                     variant="contained"
                     sx={{ margin: '1em' }}
-                    color={
-                        theme?.palette?.mode === 'dark'
-                            ? 'primary'
-                            : 'secondary'
-                    }
+                    color={currentMode === 'dark' ? 'primary' : 'secondary'}
                     onClick={() => setTheme(darkTheme)}
                 >
                     {translate('pos.theme.dark')}
