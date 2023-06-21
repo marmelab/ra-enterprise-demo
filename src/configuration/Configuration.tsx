@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useContext } from 'react';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
@@ -10,13 +9,13 @@ import {
     useTheme,
     Title,
     RaThemeOptions,
+    useThemesContext,
 } from 'react-admin';
-import { ThemesContext } from '@react-admin/ra-enterprise';
 
 const Configuration = () => {
     const translate = useTranslate();
     const [locale, setLocale] = useLocaleState();
-    const { darkTheme, lightTheme } = useContext(ThemesContext);
+    const { darkTheme, lightTheme } = useThemesContext();
     const [theme, setTheme] = useTheme();
 
     const currentMode = (theme as RaThemeOptions)?.palette?.mode ?? theme;

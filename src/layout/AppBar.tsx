@@ -1,12 +1,5 @@
 import * as React from 'react';
-import { useContext } from 'react';
-import {
-    AppBar,
-    LocalesMenuButton,
-    Logout,
-    ToggleThemeButton,
-    UserMenu,
-} from 'react-admin';
+import { AppBar, LocalesMenuButton, Logout, UserMenu } from 'react-admin';
 import { Link } from 'react-router-dom';
 import {
     Badge,
@@ -17,7 +10,6 @@ import {
     Theme,
 } from '@mui/material';
 import TourIcon from '@mui/icons-material/Flag';
-import { ThemesContext } from '@react-admin/ra-enterprise';
 
 import Search from './Search';
 import Logo from './Logo';
@@ -36,7 +28,6 @@ const CustomAppBar = (props: any) => {
     const isLargeAndUp = useMediaQuery<Theme>(theme =>
         theme.breakpoints.up('lg')
     );
-    const { darkTheme, lightTheme } = useContext(ThemesContext);
 
     return (
         <AppBar
@@ -72,10 +63,6 @@ const CustomAppBar = (props: any) => {
             {isLargeAndUp ? (
                 <>
                     <Tours />
-                    <ToggleThemeButton
-                        darkTheme={darkTheme}
-                        lightTheme={lightTheme}
-                    />
                     <LocalesMenuButton languages={languages} />
                     <Box component="span" sx={{ flex: '0 0 2rem' }} />
                 </>
