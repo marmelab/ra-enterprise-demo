@@ -16,10 +16,11 @@ export const startTour = (tour: string) => {
 
 export const waitForStepAndGoToNext = (
     text?: string | RegExp,
-    buttonLabel: 'Next' | 'Last' = 'Next'
+    buttonLabel: 'Next' | 'Last' = 'Next',
+    timeout: number = 10000
 ) => {
     if (text) {
-        cy.findByText(text);
+        cy.findByText(text, { timeout });
     }
     
     cy.findByLabelText(buttonLabel).click();

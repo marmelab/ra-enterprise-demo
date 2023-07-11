@@ -29,9 +29,17 @@ const interval = (
 
 let newCommandsIds: number[] = [];
 
+const clearStorage = () => {
+    Object.keys(localStorage).forEach(key => {
+        if (key === 'username') return;
+        localStorage.removeItem(key);
+    });
+};
+
 const tours: { [id: string]: TourType } = {
     'ra-markdown': {
         before: async ({ redirect }) => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             redirect('/products');
             await timeout(1000); // would be so awesome if redirect was awaitable!
         },
@@ -80,6 +88,9 @@ const tours: { [id: string]: TourType } = {
         ],
     },
     'ra-preferences': {
+        before: async () => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
+        },
         steps: [
             {
                 target: "button[aria-label='Toggle Theme']",
@@ -188,6 +199,7 @@ const tours: { [id: string]: TourType } = {
     },
     'ra-tree': {
         before: async ({ redirect }) => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             redirect('/categories/5');
             await timeout(1000); // would be so awesome if redirect was awaitable!
         },
@@ -246,6 +258,7 @@ const tours: { [id: string]: TourType } = {
     },
     'ra-realtime': {
         before: async () => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             localStorage.setItem('batchLevel', '0');
         },
         steps: [
@@ -454,6 +467,7 @@ const tours: { [id: string]: TourType } = {
     },
     'ra-editable-datagrid': {
         before: async ({ redirect }) => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             redirect('/stores');
             await timeout(1000); // would be so awesome if redirect was awaitable!
         },
@@ -517,6 +531,7 @@ const tours: { [id: string]: TourType } = {
     },
     'ra-navigation-breadcrumb': {
         before: async ({ redirect }) => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             redirect('/products');
             await timeout(1000); // would be so awesome if redirect was awaitable!
         },
@@ -591,6 +606,7 @@ const tours: { [id: string]: TourType } = {
     },
     'ra-search': {
         before: async () => {
+            clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             window.scrollTo(0, 0);
         },
         steps: [
