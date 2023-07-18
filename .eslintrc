@@ -1,5 +1,8 @@
 {
     "extends": ["react-app"],
+    "parserOptions": {
+        "warnOnUnsupportedTypeScriptVersion": false
+    },
     "rules": {
         "import/no-anonymous-default-export": "off"
     }
