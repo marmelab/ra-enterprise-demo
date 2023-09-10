@@ -25,7 +25,11 @@ const ReviewEdit = ({ onCancel, ...props }: Props) => {
     const translate = useTranslate();
     return (
         <EditBase {...props}>
-            <Box pt={5} width={{ xs: '100vW', sm: 400 }} mt={{ xs: 2, sm: 1 }}>
+            <Box
+                width={{ xs: '100vW', sm: 400 }}
+                pt={{ xs: 5, sm: 0 }}
+                mt={{ xs: 2, sm: 0 }}
+            >
                 <Stack direction="row" p={2}>
                     <Typography variant="h6" flex="1">
                         {translate('resources.reviews.detail')}

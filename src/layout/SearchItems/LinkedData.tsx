@@ -29,22 +29,23 @@ export const LinkedData = ({
             <Box
                 component="li"
                 display="flex"
-                alignItems="center"
+                alignItems="flex-start"
                 justifyContent="center"
                 flexDirection="column"
                 sx={{
                     borderRadius: '3px',
-                    padding: 1,
-                    width: 100,
+                    pr: 2,
                     '&:hover': {
                         backgroundColor: 'background.default',
                     },
                 }}
                 {...rest}
             >
-                <Box display="flex" alignItems="center">
-                    <Box marginRight={1}>{icon}</Box>
-                    <Typography component="span">{children}</Typography>
+                <Box display="flex" alignItems="flex-start">
+                    <Box mr={0.5}>{icon}</Box>
+                    <Typography component="span" variant="body2">
+                        {children}
+                    </Typography>
                 </Box>
                 <Typography variant="caption">{label}</Typography>
             </Box>

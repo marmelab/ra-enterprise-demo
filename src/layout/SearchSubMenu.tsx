@@ -1,6 +1,14 @@
-import React, { Fragment, useRef } from 'react';
+import React, {
+    Fragment,
+    useRef,
+    useState,
+    useMemo,
+    useCallback,
+    ChangeEvent,
+} from 'react';
 import { useTranslate } from 'react-admin';
 import {
+    Box,
     List,
     ListSubheader,
     ListItem,
@@ -8,13 +16,16 @@ import {
     Typography,
 } from '@mui/material';
 import {
-    Search,
-    SearchProps,
+    SearchInput,
     SearchPanelProps,
+    useSearch,
     useSearchResults,
     groupSearchResultsByResource,
     useArrowKeysToNavigate,
+    SearchResultContextProvider,
 } from '@react-admin/ra-search';
+import { useSolarSidebarActiveMenu } from '@react-admin/ra-navigation';
+import debounce from 'lodash/debounce';
 
 import {
     CommandListItem,
@@ -23,13 +34,42 @@ import {
     ReviewListItem,
 } from './SearchItems';
 
-const CustomSearch = (props: SearchProps) => (
-    <Search {...props}>
-        <CustomSearchPanel />
-    </Search>
-);
+export const SearchSubMenu = () => {
+    const [query, setQuery] = useState('');
+    const [search, state] = useSearch();
+    const debouncedSearch = useMemo(() => debounce(search, 500), [search]);
+    const [, setActiveMenu] = useSolarSidebarActiveMenu();
 
-export default CustomSearch;
+    const handleChange = useCallback(
+        (event: ChangeEvent<HTMLInputElement>): void => {
+            const query = event.target
+                ? event.target.value
+                : (event as unknown as string);
+            setQuery(query);
+            debouncedSearch(query);
+        },
+        [setQuery, debouncedSearch]
+    );
+
+    return (
+        <Box data-testid="search" m={-1}>
+            <SearchInput
+                onChange={handleChange}
+                value={query}
+                sx={{ m: 1, '& .RaSearchInput-input': { width: 170 } }}
+                autoFocus
+            />
+            <SearchResultContextProvider
+                value={{
+                    ...state,
+                    onClose: () => setActiveMenu(''),
+                }}
+            >
+                <CustomSearchPanel />
+            </SearchResultContextProvider>
+        </Box>
+    );
+};
 
 const CustomSearchPanel = (props: SearchPanelProps) => {
     const listRef = useRef<HTMLUListElement>(
@@ -37,11 +77,14 @@ const CustomSearchPanel = (props: SearchPanelProps) => {
     ) as React.MutableRefObject<HTMLUListElement>;
     const translate = useTranslate();
     useArrowKeysToNavigate(listRef);
-    const { data, onClose } = useSearchResults();
+    const { query, isLoading, data, onClose } = useSearchResults();
 
+    if (!query || isLoading) {
+        return null;
+    }
     if (!data || data.length === 0) {
         return (
-            <List data-testid="search-panel" dense {...props}>
+            <List data-testid="search-panel" dense sx={{ px: 1 }} {...props}>
                 <ListItem>
                     <ListItemText
                         primary={translate('ra.navigation.no_results')}
@@ -55,10 +98,11 @@ const CustomSearchPanel = (props: SearchPanelProps) => {
     return (
         <List
             sx={{
-                maxHeight: 'calc(100vh - 100px)',
-                maxWidth: 512,
+                maxHeight: 'calc(100vh - 65px)',
+                maxWidth: '18em',
                 overflowX: 'hidden',
-                p: 1,
+                marginBlockEnd: 0,
+                px: 1,
             }}
             data-testid="search-panel"
             dense
@@ -66,35 +110,27 @@ const CustomSearchPanel = (props: SearchPanelProps) => {
             {...props}
         >
             {groupedData.map(group => (
-                <Fragment key={group.label}>
+                <Box key={group.label} mb={1}>
                     <ListSubheader
                         role="presentation"
                         sx={{
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'space-between',
-                            py: 1,
-                            px: 2,
+                            p: 0,
                         }}
                         disableSticky
                     >
                         <>
                             <Typography
-                                sx={{
-                                    textTransform: 'capitalize',
-                                }}
+                                sx={{ textTransform: 'capitalize' }}
                                 variant="subtitle1"
                             >
                                 {translate(group.label.toString(), {
                                     _: group.label,
                                 })}
                             </Typography>
-                            <Typography
-                                sx={{
-                                    textTransform: 'lowercase',
-                                }}
-                                variant="subtitle1"
-                            >
+                            <Typography variant="subtitle1">
                                 {translate('ra-search.result', {
                                     smart_count: group.data.length,
                                 })}
@@ -108,7 +144,7 @@ const CustomSearchPanel = (props: SearchPanelProps) => {
                             onClose={onClose}
                         />
                     ))}
-                </Fragment>
+                </Box>
             ))}
         </List>
     );

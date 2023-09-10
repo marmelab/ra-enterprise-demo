@@ -36,8 +36,7 @@ describe('Dashboard', () => {
             .find('a')
             .should('have.length.above', 0);
         */
-
-        cy.findAllByText('English').eq(0).click();
+        cy.findByLabelText('Profile').click();
         cy.findByText('Français').click();
         cy.findByText(
             'Bienvenue sur la démo de react-admin enterprise edition'

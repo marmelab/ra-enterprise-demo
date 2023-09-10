@@ -44,6 +44,7 @@ export const ProductListItem = (props: any) => {
                 '& a:hover': {
                     textDecoration: 'none',
                 },
+                px: 0,
             }}
         >
             <ListItemAvatar
@@ -51,21 +52,20 @@ export const ProductListItem = (props: any) => {
                     width: 64,
                     height: 64,
                     paddingRight: 2,
+                    mt: 0.5,
                 }}
             >
-                <Box
-                    sx={{
-                        '& img': {
-                            width: '100%',
-                        },
-                    }}
-                >
+                <Box sx={{ '& img': { width: '100%' } }}>
                     <img src={content.thumbnail} alt={content.reference} />
                 </Box>
             </ListItemAvatar>
             <ListItemText
                 primary={
-                    <Typography color="textPrimary">
+                    <Typography
+                        color="textPrimary"
+                        variant="body2"
+                        gutterBottom
+                    >
                         {content.reference}
                     </Typography>
                 }
@@ -75,9 +75,8 @@ export const ProductListItem = (props: any) => {
                             component="ul"
                             display="flex"
                             justifyContent="space-between"
-                            padding={0}
-                            marginTop={1}
-                            marginBottom={1}
+                            p={0}
+                            m={0}
                         >
                             <LinkedData
                                 icon={<CommentIcon />}
@@ -93,6 +92,7 @@ export const ProductListItem = (props: any) => {
                 }
                 // @ts-ignore Could not make TS happy
                 secondaryTypographyProps={secondaryTypographyProps}
+                sx={{ my: 0 }}
             />
         </ListItem>
     );

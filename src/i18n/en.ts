@@ -56,6 +56,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     title: 'Welcome to the react-admin enterprise edition demo',
                     subtitle:
                         "This is the admin of an imaginary poster shop showcasing enterprise edition private modules usage. Feel free to explore and modify the data - it's local to your computer, and will reset each time you reload.",
+                    tour_button: 'Take the tour',
                     ra_button: 'react-admin enterprise edition site',
                     demo_button: 'See the showcase',
                     github_button: 'See the source code',
@@ -300,13 +301,13 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 hook: 'It exposes simple hooks so that you can actually save whatever you want, too. For instance, the state of this particular step. Try to reload the page!',
             },
             'ra-search': {
+                button: 'This is the search button. It opens the search panel.',
                 comment:
                     'Plug your search engine and let users search across all resources via a smart Omnisearch box',
-                intro: 'This is the smart Omnisearch box. It allows users to search across all resources. ',
+                intro: 'The smart Omnisearch box allows users to search across all resources.',
                 customize:
                     "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer.",
-                preserved_across_navigation:
-                    'The search query and results are preserved after navigation.',
+                end: 'The search components let users search across all resources, work with all search backends, and can be customized to fit your needs.',
             },
             'ra-navigation-breadcrumb': {
                 comment:

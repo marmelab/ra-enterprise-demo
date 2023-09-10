@@ -141,45 +141,6 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
                     },
                 },
             },
-            RaSidebar: {
-                styleOverrides: {
-                    root: {
-                        '& .RaSidebar-drawerPaper': {},
-                        '& .RaSidebar-fixed': {
-                            zIndex: 1200,
-                            width: 76,
-                        },
-                        '&.MuiDrawer-docked .MuiPaper-root': {
-                            width: 76,
-                        },
-                    },
-                },
-            },
-            RaMultiLevelMenu: {
-                styleOverrides: {
-                    root: {
-                        '& .RaMultiLevelMenu-navWithCategories': {
-                            backgroundColor: darkPalette.background.paper,
-                        },
-                    },
-                },
-            },
-            RaMenuItemCategory: {
-                styleOverrides: {
-                    root: {
-                        '& .RaMenuItemCategory-container': {
-                            color: 'white',
-                        },
-                        '& .RaMenuItemCategory-active': {
-                            color: 'cardBackground',
-                            backgroundColor: grey[800],
-                        },
-                        '& .RaMenuItemCategory-popoverPaper': {
-                            backgroundColor: darkPalette.background.paper,
-                        },
-                    },
-                },
-            },
             RaTopToolbar: {
                 styleOverrides: {
                     root: {

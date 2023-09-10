@@ -54,7 +54,6 @@ const Aside = () => {
             }}
         >
             <CardContent sx={{ pt: 1 }}>
-                <SavedQueriesList />
                 <FilterLiveSearch />
                 <SavedQueriesList />
 

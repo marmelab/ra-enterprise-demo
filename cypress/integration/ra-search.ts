@@ -4,13 +4,14 @@ describe('Tours', () => {
     it('Runs the ra-search tour correctly', () => {
         signIn();
         startTour('ra-search');
-        waitForStepAndGoToNext();
         waitForStepAndGoToNext(
-            "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer."
+            'This is the search button. It opens the search panel.'
         );
         waitForStepAndGoToNext(
-            'The search query and results are preserved after navigation.',
-            'Last'
+            'The smart Omnisearch box allows users to search across all resources.'
+        );
+        waitForStepAndGoToNext(
+            "You can customize the search results at will and redirect to any resource. For example, let's click on the first customer."
         );
     });
 });

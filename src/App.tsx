@@ -19,14 +19,15 @@ import {
 } from '@react-admin/ra-tour';
 import { Route } from 'react-router';
 import { createTheme } from '@mui/material';
+
+import fakeServer from './fakeServer';
+import dataProvider from './dataProvider';
 import authProvider from './authProvider';
-import { Login, Layout } from './layout';
-import { Dashboard } from './dashboard';
 import englishMessages from './i18n/en';
 import frenchMessages from './i18n/fr';
+import { Login, Layout } from './layout';
 import { getThemes } from './layout/themes';
-import fakeServer from './fakeServer';
-
+import { Dashboard } from './dashboard';
 import visitors from './visitors';
 import orders from './orders';
 import products from './products';
@@ -34,7 +35,6 @@ import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
 import stores from './stores';
-import dataProvider from './dataProvider';
 import Configuration from './configuration/Configuration';
 import Segments from './segments/Segments';
 import TourLauncher from './tours/TourLauncher';
@@ -54,9 +54,13 @@ const messages = {
     ),
 };
 
-const i18nProvider = buildI18nProvider(messages, 'en');
+const i18nProvider = buildI18nProvider(messages, 'en', [
+    { locale: 'en', name: 'English' },
+    { locale: 'fr', name: 'Français' },
+]);
 
 const enhancedDataProvider = addEventsForMutations(dataProvider, authProvider);
+
 const App = () => {
     useEffect(() => {
         const restoreFetch = fakeServer();

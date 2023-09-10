@@ -57,6 +57,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     title: 'Bienvenue sur la démo de react-admin enterprise edition',
                     subtitle:
                         "Ceci est le back-office d'un magasin de posters imaginaire mettant en oeuvre les modules de l'édition entreprise. N'hésitez pas à explorer et à modifier les données. La démo s'exécute en local dans votre navigateur, et se remet à zéro chaque fois que vous rechargez la page.",
+                    tour_button: 'Démarrer la visite guidée',
                     ra_button: 'Site web de react-admin entreprise',
                     demo_button: 'Voir tous les modules',
                     github_button: 'Voir le code source',
@@ -306,13 +307,13 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 hook: "Il expose des hooks afin que vous puissiez enregistrer ce que vous voulez également. Par exemple, l'état de cette étape particulière. Essayez de recharger la page!",
             },
             'ra-search': {
+                button: 'Ce bouton de recherche ouvre le panneau de recherche.',
                 comment:
                     "Connectez votre moteur de recherche et permettez aux utilisateurs d'effectuer des recherches dans toutes les ressources grâce à une boîte Omnisearch intelligente.",
-                intro: "Ceci est la boîte Omnisearch intelligente. Elle permet aux utilisateurs d'effectuer des recherches dans toutes les ressources.",
+                intro: "La boîte Omnisearch intelligente permet aux utilisateurs d'effectuer des recherches dans toutes les ressources.",
                 customize:
                     "Vous pouvez personnaliser les résultats de la recherche à volonté et rediriger vers n'importe quelle ressource. Par exemple, cliquons sur le premier client.",
-                preserved_across_navigation:
-                    'La requête de recherche et les résultats sont conservés après la navigation.',
+                end: "Les composants de recherche permettent de trouver facilement des données dans votre application. Ils fonctionnent avec tous les serveurs de recherche. Continuez à explorer les autres visites pour découvrir d'autres fonctionnalités de l'édition entreprise !",
             },
             'ra-navigation-breadcrumb': {
                 comment:

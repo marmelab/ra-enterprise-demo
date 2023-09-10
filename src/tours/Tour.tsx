@@ -30,29 +30,25 @@ const Tour = ({ record }: { record: RaRecord }) => {
     return (
         <Card
             sx={{
-                maxWidth: 345,
                 cursor: 'pointer',
                 opacity: playedOn ? 0.6 : 0.9,
                 transition: 'opacity 0.3s ease-in-out',
                 '&:hover,&:focus-within': {
                     opacity: 1,
                 },
+                height: '100%',
             }}
             onClick={handlePlayClicked}
         >
             <CardMedia
                 sx={{
                     height: 140,
+                    filter: 'brightness(0.9) drop-shadow(0 0 0 blue)',
                 }}
                 image={`${process.env.PUBLIC_URL}/${record.image}`}
                 title={record.title}
             />
-            <CardContent
-                sx={{
-                    position: 'relative',
-                    minHeight: 125,
-                }}
-            >
+            <CardContent sx={{ position: 'relative' }}>
                 {!playedOn && (
                     <NewReleasesIcon
                         color="error"
@@ -71,34 +67,20 @@ const Tour = ({ record }: { record: RaRecord }) => {
                     {translate(record.comment, { _: record.comment })}
                 </Typography>
             </CardContent>
-            <CardActions
-                sx={{
-                    paddingBottom: 0,
-                }}
-            >
+            <CardActions>
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
                     {translate('tours.action.play')}
                 </Button>
+                <Box pl={1}>
+                    <Typography variant="caption" color="textSecondary">
+                        {!!playedOn
+                            ? translate('tours.message.played_on', {
+                                  date: new Date(playedOn).toLocaleString(),
+                              })
+                            : translate('tours.message.never_played')}
+                    </Typography>
+                </Box>
             </CardActions>
-            <Box
-                sx={{
-                    paddingLeft: 16,
-                    paddingTop: 0,
-                    paddingBottom: 16,
-                }}
-            >
-                <Typography
-                    variant="caption"
-                    display="block"
-                    color="textSecondary"
-                >
-                    {!!playedOn
-                        ? translate('tours.message.played_on', {
-                              date: new Date(playedOn).toLocaleString(),
-                          })
-                        : translate('tours.message.never_played')}
-                </Typography>
-            </Box>
         </Card>
     );
 };

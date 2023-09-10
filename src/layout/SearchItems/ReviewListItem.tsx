@@ -31,21 +31,18 @@ export const ReviewListItem = (props: any) => {
             data={data}
             onClick={onClick}
             alignItems="flex-start"
+            sx={{ pl: 0, pr: 1 }}
         >
             <ListItemAvatar
                 sx={{
                     width: 64,
                     height: 64,
                     paddingRight: 2,
-
-                    '& > *': {
-                        width: '100%',
-                        height: '100%',
-                    },
+                    mt: 0,
                 }}
             >
                 <Avatar alt={content.reference}>
-                    <CommentIcon fontSize="large" />
+                    <CommentIcon fontSize="small" />
                 </Avatar>
             </ListItemAvatar>
             <ListItemText
@@ -53,6 +50,7 @@ export const ReviewListItem = (props: any) => {
                 secondary={<ReviewComment comment={content.comment} />}
                 // @ts-ignore Could not make TS happy
                 secondaryTypographyProps={secondaryTypographyProps}
+                sx={{ my: 0 }}
             />
         </ListItem>
     );

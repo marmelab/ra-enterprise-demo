@@ -2,11 +2,11 @@ import React from 'react';
 import { useTranslate } from 'react-admin';
 import {
     Avatar,
-    Box,
-    Grid,
+    Chip,
     lighten,
     ListItem,
     ListItemAvatar,
+    ListItemText,
     Typography,
     useTheme,
 } from '@mui/material';
@@ -32,60 +32,47 @@ export const CommandListItem = (props: any) => {
             data={data}
             onClick={onClick}
             alignItems="flex-start"
+            sx={{
+                textDecoration: 'none',
+                '&:hover': {
+                    textDecoration: 'none',
+                },
+                '& a': {
+                    textDecoration: 'none',
+                },
+                '& a:hover': {
+                    textDecoration: 'none',
+                },
+                px: 0,
+            }}
         >
             <ListItemAvatar
                 sx={{
-                    marginLeft: 1,
-                    marginRight: 1,
-                    '& svg': {
-                        width: 30,
-                        height: 30,
-                    },
+                    paddingRight: 2,
+                    mt: 0.5,
                 }}
             >
                 <Avatar alt={content.reference}>
-                    <ShoppingCartIcon fontSize="large" />
+                    <ShoppingCartIcon fontSize="small" />
                 </Avatar>
             </ListItemAvatar>
-            <Grid
-                sx={{
-                    py: 1,
-                    px: 0,
-                }}
-                container
-                spacing={2}
-            >
-                <Grid container item xs>
-                    <Grid item xs={8}>
-                        <Typography
-                            variant="body1"
-                            color="textPrimary"
-                            gutterBottom
-                        >
-                            Ref. {content.reference}
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <CommandStatus status={content.status} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography
-                            variant="body2"
-                            color="textPrimary"
-                            gutterBottom
-                        >
-                            {new Date(content.date).toLocaleDateString()}
-                            &nbsp;-&nbsp;
-                            {`${content.customer.first_name} ${content.customer.last_name}`}
-                            &nbsp;-&nbsp;
-                            {`${translate(
-                                'resources.commands.fields.basket.total'
-                            )} ${content.total}`}
-                            €
-                        </Typography>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <ListItemText>
+                <Typography variant="body2" color="textPrimary" display="flex">
+                    Ref. {content.reference}{' '}
+                    <CommandStatus status={content.status} />
+                </Typography>
+
+                <Typography variant="caption" color="textPrimary" gutterBottom>
+                    {new Date(content.date).toLocaleDateString()}
+                    &nbsp;-&nbsp;
+                    {`${content.customer.first_name} ${content.customer.last_name}`}
+                    &nbsp;-&nbsp;
+                    {`${translate('resources.commands.fields.basket.total')} ${
+                        content.total
+                    }`}
+                    €
+                </Typography>
+            </ListItemText>
         </ListItem>
     );
 };
@@ -115,25 +102,13 @@ const CommandStatus = ({
         },
     };
     return (
-        <Box
+        <Chip
+            size="small"
             sx={{
-                maxWidth: 64,
-                py: 0.25,
-                px: 1,
-                borderRadius: 1,
-                textAlign: 'center',
                 ...StatusStyles[status],
+                marginLeft: 'auto',
             }}
-        >
-            <Typography
-                sx={{
-                    color: 'inherit',
-                    textTransform: 'capitalize',
-                }}
-                variant="caption"
-            >
-                {status}
-            </Typography>
-        </Box>
+            label={status}
+        />
     );
 };

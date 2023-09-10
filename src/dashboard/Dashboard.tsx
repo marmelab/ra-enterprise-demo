@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useGetList } from 'react-admin';
-import { Grid, useMediaQuery, Theme } from '@mui/material';
+import { Grid, Box, useMediaQuery, Theme } from '@mui/material';
 import { subDays, startOfDay } from 'date-fns';
 
 import Welcome from './Welcome';
@@ -10,6 +10,7 @@ import PendingOrders from './PendingOrders';
 import PendingReviews from './PendingReviews';
 import NewCustomers from './NewCustomers';
 import OrderChart from './OrderChart';
+import { Logo } from '../layout/Logo';
 
 import { Order } from '../types';
 
@@ -75,6 +76,9 @@ const Dashboard = () => {
     const { nbNewOrders, pendingOrders, revenue, recentOrders } = aggregation;
     return isXSmall ? (
         <Grid container spacing={1}>
+            <Box ml={1}>
+                <Logo />
+            </Box>
             <Grid item xs={12}>
                 <Welcome />
             </Grid>
@@ -90,6 +94,9 @@ const Dashboard = () => {
         </Grid>
     ) : isSmall ? (
         <Grid container spacing={BLOCKS_SPACING} padding={1}>
+            <Box mt={1} ml={1}>
+                <Logo />
+            </Box>
             <Grid item xs={12}>
                 <Welcome />
             </Grid>
@@ -108,6 +115,9 @@ const Dashboard = () => {
         </Grid>
     ) : (
         <Grid container spacing={BLOCKS_SPACING} padding={1}>
+            <Box mt={1} ml={2}>
+                <Logo />
+            </Box>
             <Grid item xs={12}>
                 <Welcome />
             </Grid>

@@ -49,13 +49,13 @@ export const CustomerListItem = (props: any) => {
                 '& a:hover': {
                     textDecoration: 'none',
                 },
+                px: 0,
             }}
             data-testid="customer"
         >
             <ListItemAvatar
                 sx={{
-                    marginLeft: 1,
-                    marginRight: 1,
+                    m: 0,
                     '& img': {
                         width: 50,
                         height: 50,
@@ -66,20 +66,25 @@ export const CustomerListItem = (props: any) => {
             </ListItemAvatar>
             <ListItemText
                 primary={
-                    <Typography color="textPrimary">{fullname}</Typography>
+                    <Typography
+                        color="textPrimary"
+                        variant="body2"
+                        gutterBottom
+                    >
+                        {fullname}
+                    </Typography>
                 }
                 secondary={
                     <Box
                         component="ul"
                         display="flex"
                         justifyContent="flex-start"
-                        padding={0}
-                        marginTop={1}
-                        marginBottom={1}
+                        p={0}
+                        m={0}
                     >
                         {content.pending_orders > 0 ? (
                             <LinkedData
-                                icon={<ShoppingCartIcon />}
+                                icon={<ShoppingCartIcon fontSize="small" />}
                                 label={translate('resources.commands.name', {
                                     smart_count: 2,
                                 })}
@@ -91,7 +96,7 @@ export const CustomerListItem = (props: any) => {
 
                         {content.total_spent > 0 ? (
                             <LinkedData
-                                icon={<DollarIcon />}
+                                icon={<DollarIcon fontSize="small" />}
                                 label={translate(
                                     'resources.customers.fields.total_spent'
                                 )}
@@ -102,7 +107,7 @@ export const CustomerListItem = (props: any) => {
                         ) : null}
                         {content.reviews > 0 ? (
                             <LinkedData
-                                icon={<CommentIcon />}
+                                icon={<CommentIcon fontSize="small" />}
                                 label={translate('resources.reviews.name', {
                                     smart_count: 2,
                                 })}
@@ -115,6 +120,7 @@ export const CustomerListItem = (props: any) => {
                 }
                 // @ts-ignore Could not make TS happy
                 secondaryTypographyProps={secondaryTypographyProps}
+                sx={{ my: 0 }}
             />
         </ListItem>
     );

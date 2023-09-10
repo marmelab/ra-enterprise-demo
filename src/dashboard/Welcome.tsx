@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+    Badge,
     Box,
     Card,
     CardActions,
@@ -10,13 +11,26 @@ import {
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CodeIcon from '@mui/icons-material/Code';
+import FlagIcon from '@mui/icons-material/Flag';
 import { useTranslate } from 'react-admin';
 
 import publishArticleImage from './welcome_illustration.svg';
+import { Link } from 'react-router-dom';
+import { useTourStates } from '../tours/useTourState';
 
 const Welcome = () => {
     const translate = useTranslate();
     const theme = useTheme();
+    const [tourStates] = useTourStates();
+    let numberOfTours = 0;
+    if (tourStates) {
+        numberOfTours = Object.keys(tourStates).reduce((acc, tourId) => {
+            if (!tourStates[tourId]) {
+                return acc + 1;
+            }
+            return acc;
+        }, 0);
+    }
 
     const primaryColor = theme?.palette?.primary as SimplePaletteColorOptions;
 
@@ -41,18 +55,24 @@ const Welcome = () => {
                     </Box>
                     <CardActions
                         sx={{
-                            padding: { xs: 0, xl: null },
+                            px: 0,
                             flexWrap: { xs: 'wrap', xl: null },
-                            '& a': {
-                                marginTop: { xs: '1em', xl: null },
-                                marginLeft: { xs: '0!important', xl: null },
-                                marginRight: { xs: '1em', xl: null },
-                            },
+                            gap: 2,
                         }}
                     >
+                        <Badge badgeContent={numberOfTours} color="error">
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                to="/tours"
+                                startIcon={<FlagIcon />}
+                            >
+                                {translate('pos.dashboard.welcome.tour_button')}
+                            </Button>
+                        </Badge>
                         <Button
                             variant="contained"
-                            href="https://marmelab.com/react-admin"
+                            href="https://marmelab.com/ra-enterprise"
                             startIcon={<HomeIcon />}
                         >
                             {translate('pos.dashboard.welcome.ra_button')}
@@ -62,7 +82,7 @@ const Welcome = () => {
                             href="https://github.com/marmelab/ra-enterprise-demo"
                             startIcon={<CodeIcon />}
                         >
-                            {translate('pos.dashboard.welcome.demo_button')}
+                            {translate('pos.dashboard.welcome.github_button')}
                         </Button>
                     </CardActions>
                 </Box>

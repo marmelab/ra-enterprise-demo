@@ -5,12 +5,11 @@ export const signIn = () => {
     cy.findByLabelText(/Username/).type('demo');
     cy.findByLabelText(/Password/).type('demo');
     cy.findByText('Sign in').click();
-    cy.findByText('Jane Doe');
     cy.findByText('Welcome to the react-admin enterprise edition demo');
 };
 
 export const startTour = (tour: string) => {
-    cy.findByLabelText('Tours').click();
+    cy.findByText('Take the tour').click();
     cy.findByText(tour).click();
 };
 
@@ -22,6 +21,6 @@ export const waitForStepAndGoToNext = (
     if (text) {
         cy.findByText(text, { timeout });
     }
-    
+
     cy.findByLabelText(buttonLabel).click();
 };

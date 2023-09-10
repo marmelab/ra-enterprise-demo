@@ -18,13 +18,11 @@ const CustomBreadcrumb = () => {
                 fontSize: 'small',
                 // Display the Breadcrumb over the custom Layout of some pages by adding a zIndex and a maxWidth
                 // @see "src/products/ProductList.tsx" or "src/visitors/VisitorList.tsx"
-                maxWidth: '700px',
-                zIndex: 1,
                 '& a': {
                     pointerEvents: 'visible',
                 },
-                marginTop: [0, -1],
-                marginBottom: [0, -2],
+                mb: -1,
+                ml: 1,
             }}
         >
             <ResourceBreadcrumbItems

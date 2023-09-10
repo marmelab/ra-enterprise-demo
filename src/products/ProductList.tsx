@@ -28,24 +28,26 @@ const ProductList = () => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     useDefineAppLocation('catalog.products');
     return (
-        <ListBase perPage={24} sort={{ field: 'reference', order: 'ASC' }}>
-            <Title defaultTitle={getResourceLabel('products', 2)} />
-            <FilterContext.Provider value={productFilters}>
-                <ListActions isSmall={isSmall} />
-                {isSmall && (
-                    <Box m={1}>
-                        <FilterForm />
+        <Box mt={1}>
+            <ListBase perPage={24} sort={{ field: 'reference', order: 'ASC' }}>
+                <Title defaultTitle={getResourceLabel('products', 2)} />
+                <FilterContext.Provider value={productFilters}>
+                    <ListActions isSmall={isSmall} />
+                    {isSmall && (
+                        <Box m={1}>
+                            <FilterForm />
+                        </Box>
+                    )}
+                </FilterContext.Provider>
+                <Box display="flex">
+                    <Aside />
+                    <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
+                        <ImageList />
+                        <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
                     </Box>
-                )}
-            </FilterContext.Provider>
-            <Box display="flex">
-                <Aside />
-                <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
-                    <ImageList />
-                    <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
                 </Box>
-            </Box>
-        </ListBase>
+            </ListBase>
+        </Box>
     );
 };
 
@@ -75,7 +77,9 @@ export const productFilters = [
 ];
 
 const ListActions = ({ isSmall }: any) => (
-    <TopToolbar sx={{ minHeight: { sm: 56 }, marginTop: isSmall ? undefined : -5 }}>
+    <TopToolbar
+        sx={{ minHeight: { sm: 56 }, marginTop: isSmall ? undefined : -5 }}
+    >
         {isSmall && <FilterButton />}
         <SortButton fields={['reference', 'sales', 'stock']} />
         <CreateButton />

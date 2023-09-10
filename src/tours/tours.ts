@@ -612,6 +612,15 @@ const tours: { [id: string]: TourType } = {
         steps: [
             {
                 disableBeacon: true,
+                target: '[data-testid="search-button"]',
+                content: 'tours.ra-search.button',
+                after: ({ target }) => {
+                    fireEvent.click(target);
+                    return new Promise(resolve => setTimeout(resolve, 1000));
+                },
+            },
+            {
+                disableBeacon: true,
                 target: '[data-testid="search"]',
                 content: 'tours.ra-search.intro',
                 after: ({ target }) => {
@@ -631,13 +640,11 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: '[data-testid="search"]',
-                content: 'tours.ra-search.preserved_across_navigation',
-                before: ({ target }) => {
-                    setTimeout(
-                        () => target.querySelector('input').focus(),
-                        1000
-                    );
+                target: '#main-content',
+                content: 'tours.ra-search.end',
+                disableBeacon: true,
+                joyrideProps: {
+                    disableScrolling: true,
                 },
             },
         ],
