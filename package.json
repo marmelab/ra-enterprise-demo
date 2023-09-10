@@ -16,6 +16,7 @@
         "@react-admin/ra-tour": "^4.0.2",
         "@react-admin/ra-tree": "^4.0.2",
         "@types/inflection": "^1.5.28",
+        "@types/lodash": "^4.14.168",
         "@types/recharts": "^1.8.10",
         "clsx": "^1.1.1",
         "data-generator-retail": "^4.5.0",
