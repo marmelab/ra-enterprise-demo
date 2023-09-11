@@ -6,12 +6,9 @@ import {
     EditButton,
     Form,
     FormDataConsumer,
-    NumberInput,
     Pagination,
-    ReferenceInput,
     ReferenceManyField,
     required,
-    SelectInput,
     TextField,
     TextInput,
     useResourceContext,
@@ -25,7 +22,6 @@ import {
     Box,
     Card,
     CardContent,
-    InputAdornment,
     useTheme,
     Stack,
     Typography,
@@ -40,6 +36,7 @@ import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import ProductPreview from './ProductPreview';
 import { Product } from '../types';
+import { ProductEditDetails } from './ProductEditDetails';
 
 const ProductEdit = () => {
     return (
@@ -64,58 +61,7 @@ const ProductEdit = () => {
                         label="resources.products.tabs.details"
                         fullWidth
                     >
-                        <TextInput
-                            source="reference"
-                            fullWidth
-                            validate={req}
-                        />
-                        <NumberInput
-                            source="price"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        $
-                                    </InputAdornment>
-                                ),
-                            }}
-                            validate={req}
-                            fullWidth
-                        />
-                        <NumberInput
-                            source="width"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="start">
-                                        cm
-                                    </InputAdornment>
-                                ),
-                            }}
-                            validate={req}
-                            fullWidth
-                        />
-                        <NumberInput
-                            source="height"
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="start">
-                                        cm
-                                    </InputAdornment>
-                                ),
-                            }}
-                            validate={req}
-                            fullWidth
-                        />
-                        <ReferenceInput
-                            source="category_id"
-                            reference="categories"
-                        >
-                            <SelectInput
-                                source="name"
-                                validate={req}
-                                fullWidth
-                            />
-                        </ReferenceInput>
-                        <NumberInput source="stock" validate={req} fullWidth />
+                        <ProductEditDetails />
                     </AccordionSection>
                     <AccordionSection
                         label="resources.products.tabs.reviews"
