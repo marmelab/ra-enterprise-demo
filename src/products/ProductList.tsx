@@ -28,26 +28,24 @@ const ProductList = () => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     useDefineAppLocation('catalog.products');
     return (
-        <Box mt={1}>
-            <ListBase perPage={24} sort={{ field: 'reference', order: 'ASC' }}>
-                <Title defaultTitle={getResourceLabel('products', 2)} />
-                <FilterContext.Provider value={productFilters}>
-                    <ListActions isSmall={isSmall} />
-                    {isSmall && (
-                        <Box m={1}>
-                            <FilterForm />
-                        </Box>
-                    )}
-                </FilterContext.Provider>
-                <Box display="flex">
-                    <Aside />
-                    <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
-                        <ImageList />
-                        <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
+        <ListBase perPage={24} sort={{ field: 'reference', order: 'ASC' }}>
+            <Title defaultTitle={getResourceLabel('products', 2)} />
+            <FilterContext.Provider value={productFilters}>
+                <ListActions isSmall={isSmall} />
+                {isSmall && (
+                    <Box m={1}>
+                        <FilterForm />
                     </Box>
+                )}
+            </FilterContext.Provider>
+            <Box display="flex">
+                <Aside />
+                <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
+                    <ImageList />
+                    <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
                 </Box>
-            </ListBase>
-        </Box>
+            </Box>
+        </ListBase>
     );
 };
 

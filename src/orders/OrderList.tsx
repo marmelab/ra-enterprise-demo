@@ -46,7 +46,7 @@ const OrderList = () => {
             sort={{ field: 'date', order: 'DESC' }}
             perPage={25}
             filters={orderFilters}
-            sx={{ marginTop: isSmall ? undefined : 1 }}
+            sx={{ marginTop: isSmall ? undefined : -1 }}
         >
             <TabbedDatagrid />
         </ListLive>

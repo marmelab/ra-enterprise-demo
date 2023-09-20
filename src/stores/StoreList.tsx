@@ -20,7 +20,7 @@ export const StoreList = () => {
             hasCreate
             empty={false}
             perPage={25}
-            sx={{ marginTop: isSmall ? undefined : -6 }}
+            sx={{ marginTop: isSmall ? undefined : -4 }}
         >
             <EditableDatagrid
                 data-testid="store-datagrid"

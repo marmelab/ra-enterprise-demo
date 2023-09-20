@@ -5,13 +5,11 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Paper,
 } from '@mui/material';
 import { Link, useTranslate, useGetMany, useRecordContext } from 'react-admin';
 
 import { Order, Product } from '../types';
 import { TableCellRight } from './TableCellRight';
-import { formatNumberAsUSD } from '../formatUtils';
 
 const Basket = () => {
     const record = useRecordContext<Order>();
@@ -34,101 +32,58 @@ const Basket = () => {
     if (isLoading || !record || !products) return null;
 
     return (
-        <Paper sx={{ minWidth: '35em', marginLeft: '1em' }}>
-            <Table>
-                <TableHead>
-                    <TableRow>
+        <Table>
+            <TableHead>
+                <TableRow>
+                    <TableCell>
+                        {translate(
+                            'resources.commands.fields.basket.reference'
+                        )}
+                    </TableCell>
+                    <TableCellRight>
+                        {translate(
+                            'resources.commands.fields.basket.unit_price'
+                        )}
+                    </TableCellRight>
+                    <TableCellRight>
+                        {translate('resources.commands.fields.basket.quantity')}
+                    </TableCellRight>
+                    <TableCellRight>
+                        {translate('resources.commands.fields.basket.total')}
+                    </TableCellRight>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {record.basket.map((item: any) => (
+                    <TableRow key={item.product_id}>
                         <TableCell>
-                            {translate(
-                                'resources.commands.fields.basket.reference'
-                            )}
+                            <Link to={`/products/${item.product_id}`}>
+                                {productsById[item.product_id].reference}
+                            </Link>
                         </TableCell>
                         <TableCellRight>
-                            {translate(
-                                'resources.commands.fields.basket.unit_price'
+                            {productsById[item.product_id].price.toLocaleString(
+                                undefined,
+                                {
+                                    style: 'currency',
+                                    currency: 'USD',
+                                }
                             )}
                         </TableCellRight>
+                        <TableCellRight>{item.quantity}</TableCellRight>
                         <TableCellRight>
-                            {translate(
-                                'resources.commands.fields.basket.quantity'
-                            )}
-                        </TableCellRight>
-                        <TableCellRight>
-                            {translate(
-                                'resources.commands.fields.basket.total'
-                            )}
+                            {(
+                                productsById[item.product_id].price *
+                                item.quantity
+                            ).toLocaleString(undefined, {
+                                style: 'currency',
+                                currency: 'USD',
+                            })}
                         </TableCellRight>
                     </TableRow>
-                </TableHead>
-                <TableBody>
-                    {record.basket.map((item: any) => (
-                        <TableRow key={item.product_id}>
-                            <TableCell>
-                                <Link to={`/products/${item.product_id}`}>
-                                    {productsById[item.product_id].reference}
-                                </Link>
-                            </TableCell>
-                            <TableCellRight>
-                                {formatNumberAsUSD(
-                                    productsById[item.product_id].price,
-                                    2
-                                )}
-                            </TableCellRight>
-                            <TableCellRight>{item.quantity}</TableCellRight>
-                            <TableCellRight>
-                                {formatNumberAsUSD(
-                                    productsById[item.product_id].price *
-                                        item.quantity,
-                                    2
-                                )}
-                            </TableCellRight>
-                        </TableRow>
-                    ))}
-                    <TableRow>
-                        <TableCell colSpan={2} />
-                        <TableCell>
-                            {translate('resources.commands.fields.basket.sum')}
-                        </TableCell>
-                        <TableCellRight>
-                            {formatNumberAsUSD(record?.total_ex_taxes, 2)}
-                        </TableCellRight>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell colSpan={2} />
-                        <TableCell>
-                            {translate(
-                                'resources.commands.fields.basket.delivery'
-                            )}
-                        </TableCell>
-                        <TableCellRight>
-                            {formatNumberAsUSD(record?.delivery_fees, 2)}
-                        </TableCellRight>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell colSpan={2} />
-                        <TableCell>
-                            {translate(
-                                'resources.commands.fields.basket.tax_rate'
-                            )}
-                        </TableCell>
-                        <TableCellRight>
-                            {formatNumberAsUSD(record.tax_rate, 2)}
-                        </TableCellRight>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell colSpan={2} />
-                        <TableCell sx={{ fontWeight: 'bold' }}>
-                            {translate(
-                                'resources.commands.fields.basket.total'
-                            )}
-                        </TableCell>
-                        <TableCellRight sx={{ fontWeight: 'bold' }}>
-                            {formatNumberAsUSD(record?.total, 2)}
-                        </TableCellRight>
-                    </TableRow>
-                </TableBody>
-            </Table>
-        </Paper>
+                ))}
+            </TableBody>
+        </Table>
     );
 };
 

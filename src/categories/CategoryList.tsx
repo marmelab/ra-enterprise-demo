@@ -19,7 +19,7 @@ const CategoryList = () => {
             hideRootNodes
             sx={{
                 marginTop: isSmall ? undefined : 0,
-                '& .edit-page': { marginTop: isSmall ? undefined : -6 },
+                '& .edit-page': { marginTop: isSmall ? undefined : -4 },
             }}
         />
     );

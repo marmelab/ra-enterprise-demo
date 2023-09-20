@@ -144,6 +144,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                         quantity: 'Quantité',
                         sum: 'Sous-total',
                         tax_rate: 'TVA',
+                        taxes: 'TVA',
                         total: 'Total',
                         unit_price: 'P.U.',
                     },
@@ -156,6 +157,13 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     returned: 'Annulée',
                     status: 'Etat',
                     total_gte: 'Montant minimum',
+                },
+                section: {
+                    order: 'Commande',
+                    customer: 'Client',
+                    shipping_address: 'Adresse de livraison',
+                    items: 'Articles',
+                    total: 'Total',
                 },
             },
             invoices: {

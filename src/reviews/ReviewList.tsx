@@ -33,7 +33,7 @@ const ReviewList = () => {
                             duration: theme.transitions.duration.enteringScreen,
                         }),
                     marginRight: !!match ? '400px' : 0,
-                    marginTop: isSmall ? undefined : 1,
+                    marginTop: isSmall ? undefined : -1,
                 }}
                 filters={reviewFilters}
                 perPage={25}

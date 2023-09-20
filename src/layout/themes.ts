@@ -141,32 +141,6 @@ export const getDarkTheme = (theme: Theme): ThemeOptions => {
                     },
                 },
             },
-            RaTopToolbar: {
-                styleOverrides: {
-                    root: {
-                        paddingTop: 0,
-                        width: 'auto',
-                        minHeight: 'auto',
-                        alignItems: 'flex-end',
-                    },
-                },
-            },
-            RaListToolbar: {
-                styleOverrides: {
-                    root: {
-                        alignItems: 'center',
-                        paddingTop: 0,
-                        '& .RaListToolbar-actions': {
-                            alignItems: 'center',
-                            paddingTop: 0,
-                            minHeight: 'auto',
-                        },
-                        '& .RaListToolbar-toolbar': {
-                            minHeight: 'auto',
-                        },
-                    },
-                },
-            },
             MuiPaper: {
                 styleOverrides: {
                     root: {
@@ -361,32 +335,6 @@ export const getLightTheme = (theme: Theme): ThemeOptions => {
                     root: {
                         '&:hover': {
                             backgroundColor: '#ddd',
-                        },
-                    },
-                },
-            },
-            RaTopToolbar: {
-                styleOverrides: {
-                    root: {
-                        paddingTop: 0,
-                        width: 'auto',
-                        minHeight: 'auto',
-                        alignItems: 'flex-end',
-                    },
-                },
-            },
-            RaListToolbar: {
-                styleOverrides: {
-                    root: {
-                        alignItems: 'center',
-                        paddingTop: 0,
-                        '& .RaListToolbar-actions': {
-                            alignItems: 'center',
-                            minHeight: 'auto',
-                            paddingTop: 0,
-                        },
-                        '& .RaListToolbar-toolbar': {
-                            minHeight: 'auto',
                         },
                     },
                 },

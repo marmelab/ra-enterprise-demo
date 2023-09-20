@@ -30,7 +30,6 @@ export const Logo = (props: SVGProps<SVGSVGElement>) => {
             viewBox={`0 0 ${logoSize.x} ${logoSize.y}`}
             width={logoSize.x}
             height={logoSize.y}
-            preserveAspectRatio="xMin yMin meet"
         >
             <g fill={themeTweaks.layer1Color}>
                 <path

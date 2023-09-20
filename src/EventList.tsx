@@ -8,7 +8,7 @@ export const EventList = () => {
         <RaEventList
             sx={{
                 marginTop: isSmall ? undefined : 2,
-                '& .RaList-main': { marginTop: isSmall ? undefined : -8 },
+                '& .RaList-main': { marginTop: isSmall ? undefined : -6 },
             }}
         />
     );

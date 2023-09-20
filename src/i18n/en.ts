@@ -143,6 +143,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                         quantity: 'Quantity',
                         sum: 'Sum',
                         tax_rate: 'Tax Rate',
+                        taxes: 'Tax',
                         total: 'Total',
                         unit_price: 'Unit Price',
                     },
@@ -155,6 +156,13 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     returned: 'Returned',
                     status: 'Status',
                     total_gte: 'Min amount',
+                },
+                section: {
+                    order: 'Order',
+                    customer: 'Customer',
+                    shipping_address: 'Shipping Address',
+                    items: 'Items',
+                    total: 'Totals',
                 },
             },
             invoices: {
