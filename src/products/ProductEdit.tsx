@@ -17,6 +17,11 @@ import {
     SaveButton,
     useNotify,
     useGetIdentity,
+    WithRecord,
+    SimpleForm,
+    ReferenceInput,
+    AutocompleteInput,
+    DateInput,
 } from 'react-admin';
 import {
     Box,
@@ -29,7 +34,10 @@ import {
 import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useGetLock, useLockOnMount } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
-import { AccordionSection } from '@react-admin/ra-form-layout';
+import {
+    AccordionSection,
+    CreateInDialogButton,
+} from '@react-admin/ra-form-layout';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
@@ -37,6 +45,7 @@ import Poster from './Poster';
 import ProductPreview from './ProductPreview';
 import { Product } from '../types';
 import { ProductEditDetails } from './ProductEditDetails';
+import StarRatingInput from '../reviews/StarRatingInput';
 
 const ProductEdit = () => {
     return (
@@ -72,6 +81,52 @@ const ProductEdit = () => {
                             target="product_id"
                             pagination={<Pagination />}
                         >
+                            <WithRecord
+                                render={record => (
+                                    <CreateInDialogButton
+                                        record={{ product_id: record.id }}
+                                    >
+                                        <SimpleForm>
+                                            <ReferenceInput
+                                                source="customer_id"
+                                                reference="customers"
+                                            >
+                                                <AutocompleteInput
+                                                    optionText={
+                                                        customerOptionRenderer
+                                                    }
+                                                    validate={req}
+                                                />
+                                            </ReferenceInput>
+                                            <ReferenceInput
+                                                source="product_id"
+                                                reference="products"
+                                            >
+                                                <AutocompleteInput
+                                                    optionText="reference"
+                                                    validate={req}
+                                                />
+                                            </ReferenceInput>
+                                            <DateInput
+                                                source="date"
+                                                defaultValue={new Date()}
+                                                validate={req}
+                                            />
+                                            <StarRatingInput
+                                                source="rating"
+                                                defaultValue={2}
+                                            />
+                                            <TextInput
+                                                source="comment"
+                                                multiline
+                                                fullWidth
+                                                resettable
+                                                validate={req}
+                                            />
+                                        </SimpleForm>
+                                    </CreateInDialogButton>
+                                )}
+                            />
                             <Datagrid
                                 sx={{
                                     width: '100%',
@@ -185,5 +240,8 @@ const LockMessage = (props: any) => {
         </Typography>
     );
 };
+
+const customerOptionRenderer = (choice: any) =>
+    `${choice.first_name} ${choice.last_name}`;
 
 export default ProductEdit;
