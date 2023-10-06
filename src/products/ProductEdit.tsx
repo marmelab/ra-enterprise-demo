@@ -86,7 +86,11 @@ const ProductEdit = () => {
                                     <CreateInDialogButton
                                         record={{ product_id: record.id }}
                                     >
-                                        <SimpleForm>
+                                        <SimpleForm
+                                            defaultValues={{
+                                                status: 'pending',
+                                            }}
+                                        >
                                             <ReferenceInput
                                                 source="customer_id"
                                                 reference="customers"
