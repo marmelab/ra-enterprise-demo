@@ -85,6 +85,8 @@ const ProductEdit = () => {
                                 render={record => (
                                     <CreateInDialogButton
                                         record={{ product_id: record.id }}
+                                        fullWidth
+                                        maxWidth="sm"
                                     >
                                         <SimpleForm
                                             defaultValues={{
@@ -100,21 +102,14 @@ const ProductEdit = () => {
                                                         customerOptionRenderer
                                                     }
                                                     validate={req}
-                                                />
-                                            </ReferenceInput>
-                                            <ReferenceInput
-                                                source="product_id"
-                                                reference="products"
-                                            >
-                                                <AutocompleteInput
-                                                    optionText="reference"
-                                                    validate={req}
+                                                    fullWidth
                                                 />
                                             </ReferenceInput>
                                             <DateInput
                                                 source="date"
                                                 defaultValue={new Date()}
                                                 validate={req}
+                                                fullWidth
                                             />
                                             <StarRatingInput
                                                 source="rating"
