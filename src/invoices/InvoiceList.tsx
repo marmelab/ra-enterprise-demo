@@ -17,8 +17,8 @@ import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { USDFormat } from '../formatUtils';
 
 const listFilters = [
-    <DateInput source="date_gte" alwaysOn />,
-    <DateInput source="date_lte" alwaysOn />,
+    <DateInput key="date_gte" source="date_gte" alwaysOn />,
+    <DateInput key="date_lte" source="date_lte" alwaysOn />,
 ];
 
 const InvoiceList = () => {

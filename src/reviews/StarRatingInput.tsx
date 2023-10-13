@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Box, Rating, Typography, styled } from '@mui/material';
 import Icon from '@mui/icons-material/Stars';
 import { InputProps, useInput, useTranslate } from 'react-admin';

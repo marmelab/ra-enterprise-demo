@@ -51,7 +51,7 @@ export interface BasketItem {
     quantity: number;
 }
 
-export interface Invoice extends RaRecord {}
+export type Invoice = RaRecord;
 
 export type ReviewStatus = 'accepted' | 'pending' | 'rejected';
 

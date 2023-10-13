@@ -54,8 +54,12 @@ const OrderList = () => {
 };
 
 const orderFilters = [
-    <SearchInput source="q" alwaysOn />,
-    <ReferenceInput source="customer_id" reference="customers">
+    <SearchInput key="q" source="q" alwaysOn />,
+    <ReferenceInput
+        key="customer_id"
+        source="customer_id"
+        reference="customers"
+    >
         <AutocompleteInput
             optionText={(choice?: Customer) =>
                 choice?.id // the empty choice is { id: '' }
@@ -64,10 +68,10 @@ const orderFilters = [
             }
         />
     </ReferenceInput>,
-    <DateInput source="date_gte" />,
-    <DateInput source="date_lte" />,
-    <TextInput source="total_gte" />,
-    <NullableBooleanInput source="returned" />,
+    <DateInput key="date_gte" source="date_gte" />,
+    <DateInput key="date_lte" source="date_lte" />,
+    <TextInput key="total_gte" source="total_gte" />,
+    <NullableBooleanInput key="returned" source="returned" />,
 ];
 
 const tabs = [
@@ -137,7 +141,7 @@ const TabbedDatagrid = () => {
     const totals = useGetTotals(filterValues) as any;
 
     const handleChange = useCallback(
-        (event: React.ChangeEvent<{}>, value: any) => {
+        (event: React.ChangeEvent<any>, value: any) => {
             setFilters &&
                 setFilters(
                     { ...filterValues, status: value },

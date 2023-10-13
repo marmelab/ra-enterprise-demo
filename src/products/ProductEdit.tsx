@@ -156,7 +156,7 @@ const req = [required()];
 
 const ProductTitle = () => {
     const record = useRecordContext<Product>();
-    return record ? <span>Poster "{record.reference}"</span> : null;
+    return record ? <span>Poster &quot;{record.reference}&quot;</span> : null;
 };
 
 const ProductEditFormWithPreview = ({ children, ...props }: any) => {

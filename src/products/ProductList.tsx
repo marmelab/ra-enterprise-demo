@@ -55,20 +55,22 @@ const QuickFilter = ({ label }: InputProps) => {
 };
 
 export const productFilters = [
-    <SearchInput source="q" alwaysOn />,
+    <SearchInput key="q" source="q" alwaysOn />,
     <ReferenceInput
+        key="category_id"
         source="category_id"
         reference="categories"
         sort={{ field: 'id', order: 'ASC' }}
     >
         <SelectInput source="name" />
     </ReferenceInput>,
-    <NumberInput source="width_gte" />,
-    <NumberInput source="width_lte" />,
-    <NumberInput source="height_gte" />,
-    <NumberInput source="height_lte" />,
+    <NumberInput key="width_gte" source="width_gte" />,
+    <NumberInput key="width_lte" source="width_lte" />,
+    <NumberInput key="height_gte" source="height_gte" />,
+    <NumberInput key="height_lte" source="height_lte" />,
     <QuickFilter
         label="resources.products.fields.stock_lte"
+        key="stock_lte"
         source="stock_lte"
         defaultValue={10}
     />,

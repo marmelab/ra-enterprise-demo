@@ -98,6 +98,7 @@ const Login = () => {
                     <Box sx={{ padding: '0 1em 1em 1em' }}>
                         <Box sx={{ marginTop: '1em' }}>
                             <TextInput
+                                // eslint-disable-next-line jsx-a11y/no-autofocus
                                 autoFocus
                                 source="username"
                                 label={translate('ra.auth.username')}

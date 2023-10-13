@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Stack, Chip } from '@mui/material';
-import { FieldProps, useTranslate, useRecordContext } from 'react-admin';
+import { useTranslate, useRecordContext, FieldProps } from 'react-admin';
 import segments from '../segments/data';
 import { Customer } from '../types';
 
@@ -9,6 +9,7 @@ const segmentsById = segments.reduce((acc, segment) => {
     return acc;
 }, {} as { [key: string]: any });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SegmentsField = (props: FieldProps) => {
     const translate = useTranslate();
     const record = useRecordContext<Customer>();

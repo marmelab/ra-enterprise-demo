@@ -6,8 +6,6 @@ import {
     CardActions,
     Button,
     Typography,
-    useTheme,
-    SimplePaletteColorOptions,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import CodeIcon from '@mui/icons-material/Code';
@@ -20,7 +18,6 @@ import { useTourStates } from '../tours/useTourState';
 
 const Welcome = () => {
     const translate = useTranslate();
-    const theme = useTheme();
     const [tourStates] = useTourStates();
     let numberOfTours = 0;
     if (tourStates) {
@@ -32,13 +29,11 @@ const Welcome = () => {
         }, 0);
     }
 
-    const primaryColor = theme?.palette?.primary as SimplePaletteColorOptions;
-
     return (
         <Card
             sx={{
                 background: theme =>
-                    `linear-gradient(to bottom, #ffffff33, #ffffff00), linear-gradient(to bottom, ${primaryColor.light}00, ${primaryColor.dark}ff), ${primaryColor.main}`,
+                    `linear-gradient(to bottom, #ffffff33, #ffffff00), linear-gradient(to bottom, ${theme?.palette?.primary.light}00, ${theme?.palette?.primary.dark}ff), ${theme?.palette?.primary.main}`,
                 color: '#fff',
                 padding: '20px',
             }}

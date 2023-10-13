@@ -27,11 +27,15 @@ import DesktopGrid from './DesktopGrid';
 import { USDFormat } from '../formatUtils';
 
 const visitorFilters = [
-    <SearchInput source="q" alwaysOn />,
-    <DateInput source="last_seen_gte" />,
-    <NullableBooleanInput source="has_ordered" />,
-    <NullableBooleanInput source="has_newsletter" defaultValue />,
-    <SegmentInput source="groups" />,
+    <SearchInput key="q" source="q" alwaysOn />,
+    <DateInput key="last_seen_gte" source="last_seen_gte" />,
+    <NullableBooleanInput key="has_ordered" source="has_ordered" />,
+    <NullableBooleanInput
+        key="has_newsletter"
+        source="has_newsletter"
+        defaultValue
+    />,
+    <SegmentInput key="groups" source="groups" />,
 ];
 
 const VisitorListActions = () => {

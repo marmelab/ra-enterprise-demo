@@ -7,6 +7,7 @@ import { useDefineAppLocation } from '@react-admin/ra-navigation';
 const StoreForm = () => (
     <RowForm>
         <TextField source="id" />
+        {/* eslint-disable-next-line jsx-a11y/no-autofocus */}
         <TextInput source="city" autoFocus />
         <TextInput source="country" />
         <TextInput source="address" />

@@ -9,7 +9,6 @@ import {
     BooleanField,
     useTranslate,
     useListContext,
-    RaRecord,
     RecordContextProvider,
 } from 'react-admin';
 
@@ -17,11 +16,7 @@ import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import { Order } from '../types';
 import { USDFormat } from '../formatUtils';
 
-interface MobileGridProps {
-    data?: RaRecord[];
-}
-
-const MobileGrid = (props: MobileGridProps) => {
+const MobileGrid = () => {
     const { data, isLoading } = useListContext<Order>();
     const translate = useTranslate();
     if (isLoading || data.length === 0) {

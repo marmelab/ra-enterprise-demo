@@ -57,6 +57,7 @@ export const SearchSubMenu = () => {
                 onChange={handleChange}
                 value={query}
                 sx={{ m: 1, '& .RaSearchInput-input': { width: 170 } }}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
             />
             <SearchResultContextProvider

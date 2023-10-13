@@ -10,7 +10,7 @@ const Img = styled('img')({
     verticalAlign: 'middle',
 });
 
-const ThumbnailField = (props: { source: string; label?: string }) => {
+const ThumbnailField = () => {
     const record = useRecordContext<Product>();
     if (!record) return null;
     return <Img src={record.thumbnail} alt="" />;

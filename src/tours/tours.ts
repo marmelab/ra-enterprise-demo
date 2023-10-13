@@ -190,7 +190,7 @@ const tours: { [id: string]: TourType } = {
                         },
                     },
                 },
-                after: async ({ target, redirect }) => {
+                after: async ({ target }) => {
                     target.click();
                     await screen.findAllByText('Description');
                 },

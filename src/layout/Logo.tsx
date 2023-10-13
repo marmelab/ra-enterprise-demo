@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { SVGProps } from 'react';
 import { SimplePaletteColorOptions } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-export const Logo = (props: SVGProps<SVGSVGElement>) => {
+export const Logo = () => {
     const theme = useTheme();
     const primary = theme?.palette?.primary as SimplePaletteColorOptions;
     const secondary = theme?.palette?.secondary as SimplePaletteColorOptions;

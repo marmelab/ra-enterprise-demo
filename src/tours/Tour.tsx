@@ -45,7 +45,7 @@ const Tour = ({ record }: { record: RaRecord }) => {
                     height: 140,
                     filter: 'brightness(0.9) drop-shadow(0 0 0 blue)',
                 }}
-                image={`${process.env.PUBLIC_URL}/${record.image}`}
+                image={`/${record.image}`}
                 title={record.title}
             />
             <CardContent sx={{ position: 'relative' }}>

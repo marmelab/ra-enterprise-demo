@@ -9,8 +9,9 @@ import {
 import { Customer } from '../types';
 
 const reviewFilters = [
-    <SearchInput source="q" alwaysOn />,
+    <SearchInput key="q" source="q" alwaysOn />,
     <SelectInput
+        key="status"
         source="status"
         choices={[
             { id: 'accepted', name: 'Accepted' },
@@ -18,7 +19,11 @@ const reviewFilters = [
             { id: 'rejected', name: 'Rejected' },
         ]}
     />,
-    <ReferenceInput source="customer_id" reference="customers">
+    <ReferenceInput
+        key="customer_id"
+        source="customer_id"
+        reference="customers"
+    >
         <AutocompleteInput
             optionText={(choice?: Customer) =>
                 choice?.id // the empty choice is { id: '' }
@@ -27,11 +32,11 @@ const reviewFilters = [
             }
         />
     </ReferenceInput>,
-    <ReferenceInput source="product_id" reference="products">
+    <ReferenceInput key="product_id" source="product_id" reference="products">
         <AutocompleteInput optionText="reference" />
     </ReferenceInput>,
-    <DateInput source="date_gte" />,
-    <DateInput source="date_lte" />,
+    <DateInput key="date_gte" source="date_gte" />,
+    <DateInput key="date_lte" source="date_lte" />,
 ];
 
 export default reviewFilters;

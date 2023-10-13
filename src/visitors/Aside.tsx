@@ -234,7 +234,7 @@ const Review = () => {
         <>
             <Typography variant="body2" gutterBottom>
                 <Link to={`/reviews/${record.id}`} component={RouterLink}>
-                    {translate('resources.reviews.relative_to_poster')} "
+                    {translate('resources.reviews.relative_to_poster')} &quot;
                     <ReferenceField
                         source="product_id"
                         reference="products"
@@ -243,7 +243,7 @@ const Review = () => {
                     >
                         <TextField source="reference" component="span" />
                     </ReferenceField>
-                    "
+                    &quot;
                 </Link>
             </Typography>
             <Typography variant="body2" color="textSecondary" gutterBottom>
