@@ -284,6 +284,36 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
             events: {
                 name: 'Events',
             },
+            visits: {
+                name: 'Visits',
+                event: {
+                    title: 'Visit store in %{city}',
+                },
+                freq: {
+                    repeats: 'Repeats all',
+                    daily: 'Days',
+                    weekly: 'Weeks',
+                    monthly: 'Months',
+                    yearly: 'Years',
+                    until: 'Recurrence ends after',
+                    occurrences: 'occurrences',
+                },
+                fields: {
+                    storeId: 'Store',
+                    start: 'Start',
+                    end: 'End',
+                    freq: 'Frequency',
+                    interval: 'Interval',
+                    count: 'Count',
+                    color: 'Color',
+                },
+                edit: {
+                    title: 'Edit visit to %{city} store',
+                },
+                create: {
+                    title: 'Create visit',
+                },
+            },
         },
         tours: {
             action: {
@@ -369,6 +399,27 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 wysiwyg: 'By default, you are in WYSIWYG mode.',
                 raw: 'But you can switch to raw markdown edition with this button.',
                 show: 'Parsed markdown can then be displayed in a preview or wherever you want.',
+            },
+            'ra-calendar': {
+                comment: 'Embed a fully featured calendar in your admin.',
+                intro: "Here is the list of our stores. The Posters Galore central staff is visiting them regularly. Let's see the visits on a calendar.",
+                fullcalendar:
+                    'Here it is! In this calendar, we can see the visits of our stores.',
+                prevnext: 'Use these arrows to show the previous / next month.',
+                today: 'Click on this button to go back to the current month.',
+                switchview:
+                    'With these buttons, you can switch between views. Try switching to the week view!',
+                firstevent:
+                    'Here is the first event of the week. Let’s go see its details.',
+                eventedit:
+                    'As you can see, this opens a dialog with an Edit view. Let’s change the color for instance!',
+                createbutton: 'Now, let’s create a new visit.',
+                eventcreate:
+                    'Let’s create a visit for the store in Dijon. The store will be visited every 2 weeks, starting today.',
+                eventcreated:
+                    'As you can see, a recurring event has been created. Feel free to use the previous / next buttons to see the next visits.',
+                conclusion:
+                    'That wraps it up for the calendar tour. Have a look at https://fullcalendar.io/docs/ to discover all the features supported by FullCalendar, or at the other tours to discover more enterprise features!',
             },
         },
     }

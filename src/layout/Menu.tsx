@@ -26,6 +26,7 @@ import invoices from '../invoices';
 import products from '../products';
 import reviews from '../reviews';
 import stores from '../stores';
+import visits from '../visits';
 import { segments } from '../visitors/segments';
 
 export const newCustomerFilter = querystring.stringify({
@@ -99,12 +100,7 @@ export const Menu = () => (
         <CatalogMenuItem />
         <CustomersMenuItem />
         <ReviewsMenuItem />
-        <SolarMenu.Item
-            name="stores"
-            to="/stores"
-            icon={<stores.icon />}
-            label="resources.stores.name"
-        />
+        <StoresMenuItem />
         <SolarMenu.Item
             name="events"
             to="/events"
@@ -333,6 +329,43 @@ const ReviewsMenuItem = () => {
                         label="pos.menu.bad_reviews"
                     />
                 </SolarMenu.List>
+            }
+        />
+    );
+};
+
+const StoresMenuItem = (): ReactElement => {
+    const translate = useTranslate();
+    return (
+        <SolarMenu.Item
+            name="stores"
+            icon={<stores.icon />}
+            label="resources.stores.name"
+            data-testid="stores-menu"
+            subMenu={
+                <>
+                    <Typography variant="h6" gutterBottom ml={1}>
+                        {translate(`resources.stores.name`, { smart_count: 1 })}
+                    </Typography>
+                    <SolarMenu.List dense>
+                        <SolarMenu.Item
+                            name="stores.stores"
+                            to="/stores"
+                            icon={<stores.icon />}
+                            label={translate(`resources.stores.name`, {
+                                smart_count: 2,
+                            })}
+                        />
+                        <SolarMenu.Item
+                            name="stores.visits"
+                            to="/visits"
+                            icon={<visits.icon />}
+                            label={translate(`resources.visits.name`, {
+                                smart_count: 2,
+                            })}
+                        />
+                    </SolarMenu.List>
+                </>
             }
         />
     );

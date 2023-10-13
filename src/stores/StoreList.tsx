@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DateField, DateInput, List, TextField, TextInput } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
 import { EditableDatagrid, RowForm } from '@react-admin/ra-editable-datagrid';
+import { useDefineAppLocation } from '@react-admin/ra-navigation';
 
 const StoreForm = () => (
     <RowForm>
@@ -14,6 +15,7 @@ const StoreForm = () => (
 );
 
 export const StoreList = () => {
+    useDefineAppLocation('stores');
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <List

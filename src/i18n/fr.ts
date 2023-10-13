@@ -290,6 +290,36 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
             events: {
                 name: 'Événements',
             },
+            visits: {
+                name: 'Visites',
+                event: {
+                    title: 'Visiter le magasin de %{city}',
+                },
+                freq: {
+                    repeats: 'Se répète tous les',
+                    daily: 'Jours',
+                    weekly: 'Semaines',
+                    monthly: 'Mois',
+                    yearly: 'Ans',
+                    until: 'Se termine après',
+                    occurrences: 'occurrences',
+                },
+                fields: {
+                    storeId: 'Magasin',
+                    start: 'Début',
+                    end: 'Fin',
+                    freq: 'Fréquence',
+                    interval: 'Intervalle',
+                    count: 'Nombre',
+                    color: 'Couleur',
+                },
+                edit: {
+                    title: 'Modifier la visite du magasin de %{city}',
+                },
+                create: {
+                    title: 'Créer une visite',
+                },
+            },
         },
         tours: {
             action: {
@@ -378,6 +408,28 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 wysiwyg: 'Par défaut, vous êtes en mode WYSIWYG.',
                 raw: "Mais vous pouvez passer à l'édition brute avec ce bouton.",
                 show: "Les données markdown transformées peuvent ensuite être affichées dans un aperçu ou à l'endroit de votre choix.",
+            },
+            'ra-calendar': {
+                comment: 'Intégrez un calendrier complet à votre admin.',
+                intro: 'Voici la liste de nos magasins. Le personnel de Posters Galore doit les visiter régulièrement. Allons voir les visites prévues au calendrier.',
+                fullcalendar:
+                    'Les voici ! Dans ce calendrier, on peut voir les différentes visites planifiées pour chaque magasin.',
+                prevnext:
+                    'Utilisez les flèches pour naviguer au mois précédent / suivant.',
+                today: 'Cliquer sur ce bouton pour revenir au mois courant.',
+                switchview:
+                    "Avec ces boutons, vous pouvez basculer entre les vues. Essayez d'ouvrir la vue semaine !",
+                firstevent:
+                    'Voici la première visite de la semaine. Voyons voir ses détails.',
+                eventedit:
+                    'Comme vous pouvez le voir, cela ouvre une vue Edit dans une modale. Essayons de changer la couleur par exemple !',
+                createbutton: 'Maintenant, planifions une nouvelle visite.',
+                eventcreate:
+                    "Créons une visite pour notre magasin à Dijon. Nous allons planifier une visite toutes les deux semaines, la première étant aujourd'hui.",
+                eventcreated:
+                    "Comme vous le voyez, un évènement récurrent a été créé. N'hésitez pas à utiliser les boutons précédent / suivant pour voir les autres visites.",
+                conclusion:
+                    'Voilà qui conclut notre tour de ra-calendar. Rendez-vous sur https://fullcalendar.io/docs/ pour découvrir les autres fonctionnalités offertes par FullCalendar, ou bien jetez un oeil aux autres tours pour découvrir plus de fonctionnalités entreprise !',
             },
         },
     }

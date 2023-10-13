@@ -35,6 +35,7 @@ import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
 import stores from './stores';
+import visits from './visits';
 import Configuration from './configuration/Configuration';
 import Segments from './segments/Segments';
 import TourLauncher from './tours/TourLauncher';
@@ -98,6 +99,7 @@ const App = () => {
             <Resource name="categories" {...categories} />
             <Resource name="reviews" {...reviews} />
             <Resource name="stores" {...stores} />
+            <Resource name="visits" {...visits} />
             <Resource name="locks" />
             <Resource name="events" list={EventList} />
         </Admin>

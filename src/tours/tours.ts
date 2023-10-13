@@ -1,7 +1,7 @@
 import { LocksDataProvider } from '@react-admin/ra-realtime';
 import { TourType } from '@react-admin/ra-tour';
 import { fireEvent, screen } from '@testing-library/react';
-import { endOfYesterday } from 'date-fns';
+import { endOfYesterday, addHours } from 'date-fns';
 import { QueryClient } from 'react-query';
 import randomCommandBuilder from './randomCommandBuilder';
 import { generateIdentity } from './randomLockBuilder';
@@ -37,6 +37,141 @@ const clearStorage = () => {
 };
 
 const tours: { [id: string]: TourType } = {
+    'ra-calendar': {
+        before: async ({ redirect }) => {
+            redirect('/stores');
+            await timeout(1000);
+        },
+        steps: [
+            {
+                target: `.RaDatagrid-root`,
+                content: 'tours.ra-calendar.intro',
+                disableBeacon: true,
+                after: async ({ target, redirect }) => {
+                    redirect('/visits');
+                    await timeout(1000);
+                },
+            },
+            {
+                target: '.RaList-main .MuiBox-root',
+                content: 'tours.ra-calendar.fullcalendar',
+            },
+            {
+                target: '.fc-toolbar-chunk .fc-button-group',
+                content: 'tours.ra-calendar.prevnext',
+            },
+            {
+                target: '.fc-today-button',
+                content: 'tours.ra-calendar.today',
+                after: ({ target }) => {
+                    target.click();
+                },
+            },
+            {
+                target: '.fc-toolbar-chunk:nth-of-type(3) .fc-button-group',
+                content: 'tours.ra-calendar.switchview',
+                after: ({ target }) => {
+                    // Click the Week button
+                    target.querySelector('.fc-button:nth-of-type(2)').click();
+                    // Also click the Today button, to make sure we are in the current week
+                    // and not in the first week of the month
+                    document
+                        .querySelector<HTMLButtonElement>('.fc-today-button')
+                        ?.click();
+                },
+            },
+            {
+                target: '.fc-event',
+                content: 'tours.ra-calendar.firstevent',
+                after: ({ target }) => {
+                    target.click();
+                },
+            },
+            {
+                target: "[role='dialog']",
+                joyrideProps: {
+                    styles: {
+                        options: {
+                            zIndex: 9999,
+                        },
+                    },
+                },
+                content: 'tours.ra-calendar.eventedit',
+                after: async ({ target }) => {
+                    fireEvent.mouseDown(
+                        await screen.findByLabelText(/Color|Couleur/)
+                    );
+                    fireEvent.click(await screen.findByText('#189ab4'));
+                    await timeout(1000);
+                    // Click the Save button
+                    target.querySelector("button[type='submit']").click();
+                    await timeout(1000);
+                },
+            },
+            {
+                target: '.RaCreateButton-root',
+                content: 'tours.ra-calendar.createbutton',
+                after: ({ target }) => {
+                    target.click();
+                },
+            },
+            {
+                target: "[role='dialog']",
+                joyrideProps: {
+                    styles: {
+                        options: {
+                            zIndex: 9999,
+                        },
+                    },
+                },
+                content: 'tours.ra-calendar.eventcreate',
+                after: async ({ target }) => {
+                    fireEvent.mouseDown(
+                        await screen.findByLabelText(/Store \*|Magasin \*/)
+                    );
+                    fireEvent.click(await screen.findByText('Dijon'));
+                    const start = new Date();
+                    const end = addHours(start, 2);
+                    fireEvent.change(await screen.findByTestId('start-input'), {
+                        target: {
+                            value: start.toISOString().replace('Z', ''),
+                        },
+                    });
+                    fireEvent.change(await screen.findByTestId('end-input'), {
+                        target: { value: end.toISOString().replace('Z', '') },
+                    });
+                    fireEvent.change(
+                        await screen.findByTestId('interval-input'),
+                        {
+                            target: { value: '2' },
+                        }
+                    );
+                    fireEvent.change(await screen.findByTestId('freq-input'), {
+                        target: { value: 'weekly' },
+                    });
+                    fireEvent.change(await screen.findByTestId('count-input'), {
+                        target: { value: '4' },
+                    });
+                    fireEvent.mouseDown(
+                        await screen.findByLabelText(/Color|Couleur/)
+                    );
+                    fireEvent.click(await screen.findByText('#d6ad60'));
+                    await timeout(1000);
+                    // Click the Save button
+                    target.querySelector("button[type='submit']").click();
+                    await timeout(1000);
+                },
+            },
+            {
+                target: '.RaList-main .MuiBox-root',
+                content: 'tours.ra-calendar.eventcreated',
+            },
+            {
+                target: '.RaList-main .MuiBox-root',
+                content: 'tours.ra-calendar.conclusion',
+            },
+        ],
+    },
     'ra-markdown': {
         before: async ({ redirect }) => {
             clearStorage(); // clear the storage to avoid other tours changed to alter this tour

@@ -25,9 +25,7 @@ const CustomBreadcrumb = () => {
                 ml: 1,
             }}
         >
-            <ResourceBreadcrumbItems
-                resources={['stores', 'tours', 'events']}
-            />
+            <ResourceBreadcrumbItems resources={['tours', 'events']} />
             <BreadcrumbItem
                 name="catalog"
                 label={translate('pos.menu.catalog', 1)}
@@ -86,6 +84,17 @@ const CustomBreadcrumb = () => {
                             `pos.reviews.${status}`
                         )}"`
                     }
+                />
+            </BreadcrumbItem>
+            <BreadcrumbItem
+                name="stores"
+                label={translate('resources.stores.name', 2)}
+                to="/stores"
+            >
+                <BreadcrumbItem
+                    name="visits"
+                    label={translate('resources.visits.name', 2)}
+                    to="/visits"
                 />
             </BreadcrumbItem>
             <BreadcrumbItem name="sales" label={translate('pos.menu.sales', 1)}>

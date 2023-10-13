@@ -7,6 +7,7 @@ import { Identifier } from 'react-admin';
 import demoData from './demo-data';
 import { Category, Customer, Order, Product, Review } from '../types';
 import generateFakeEvents from './generateFakeEvents';
+import generateFakeVisits from './generateFakeVisits';
 
 const getAllChildrenCategories = (
     categories: Category[],
@@ -67,9 +68,9 @@ export default (): (() => void) => {
         rebindProductToCategories(data.categories, demoData.categories)
     );
     const events = generateFakeEvents(data);
-    // console.log(events);
+    const visits = generateFakeVisits(demoData);
 
-    const mergedData = { ...data, ...demoData, products, events };
+    const mergedData = { ...data, ...demoData, products, events, visits };
 
     const restServer = new FakeRest.FetchServer('http://localhost:4000');
     if (window) {

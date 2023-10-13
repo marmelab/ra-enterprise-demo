@@ -4,7 +4,9 @@
     "private": true,
     "dependencies": {
         "@apollo/client": "^3.3.19",
+        "@fullcalendar/rrule": "^6.1.9",
         "@react-admin/ra-audit-log": "^4.0.4",
+        "@react-admin/ra-calendar": "^5.0.0",
         "@react-admin/ra-editable-datagrid": "^4.0.1",
         "@react-admin/ra-enterprise": "^7.0.0",
         "@react-admin/ra-form-layout": "^4.1.2",
@@ -46,7 +48,8 @@
         "react-router": "^6.1.0",
         "react-router-dom": "^6.1.0",
         "react-scripts": "^5.0.0",
-        "recharts": "^2.1.5"
+        "recharts": "^2.1.5",
+        "rrule": "^2.7.2"
     },
     "scripts": {
         "analyze": "source-map-explorer 'build/static/js/*.js'",

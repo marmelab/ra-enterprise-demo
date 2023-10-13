@@ -1,4 +1,4 @@
-import { RaRecord, Identifier } from 'react-admin';
+import { Identifier, RaRecord } from 'react-admin';
 
 export type ThemeName = 'light' | 'dark';
 
@@ -60,6 +60,23 @@ export interface Review extends RaRecord {
     status: ReviewStatus;
     customer_id: Identifier;
     product_id: Identifier;
+}
+
+export interface Store extends RaRecord {
+    city: string;
+    country: string;
+    address: string;
+    created_at: Date;
+}
+
+export interface Visit extends RaRecord {
+    storeId: Identifier;
+    start: string;
+    end: string;
+    freq: 'daily' | 'weekly' | 'monthly' | 'yearly';
+    interval: number;
+    count: number;
+    color: string;
 }
 
 declare global {
