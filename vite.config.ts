@@ -4,24 +4,29 @@ import fs from 'fs';
 import react from '@vitejs/plugin-react';
 import visualizer from 'rollup-plugin-visualizer';
 
-const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));
-const aliases = packages.reduce((acc, dirName) => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const packageJson = require(path.resolve(
-        __dirname,
-        '../packages',
-        dirName,
-        'package.json'
-    ));
-    acc[packageJson.name] = path.resolve(
-        __dirname,
-        `${path.resolve('..')}/packages/${packageJson.name.replace(
-            '@react-admin',
-            ''
-        )}/src`
-    );
-    return acc;
-}, {});
+let aliases = {};
+// Check whether we are in the enterprise monorepo and add aliases to local packages
+// to ease local development if so.
+if (fs.existsSync(path.resolve(__dirname, '../packages'))) {
+    const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));
+    aliases = packages.reduce((acc, dirName) => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const packageJson = require(path.resolve(
+            __dirname,
+            '../packages',
+            dirName,
+            'package.json'
+        ));
+        acc[packageJson.name] = path.resolve(
+            __dirname,
+            `${path.resolve('..')}/packages/${packageJson.name.replace(
+                '@react-admin',
+                ''
+            )}/src`
+        );
+        return acc;
+    }, {});
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
