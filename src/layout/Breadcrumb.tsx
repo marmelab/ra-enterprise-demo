@@ -23,6 +23,8 @@ const CustomBreadcrumb = () => {
                 },
                 mb: -1,
                 ml: 1,
+                zIndex: 10, // ensure it goes above actions bar
+                maxWidth: 'fit-content', // ensure it doesn't cover the actions bar
             }}
         >
             <ResourceBreadcrumbItems resources={['tours', 'events']} />

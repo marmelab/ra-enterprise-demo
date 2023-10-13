@@ -34,11 +34,27 @@ const visitorFilters = [
     <SegmentInput source="groups" />,
 ];
 
-const ListActions = () => {
+const VisitorListActions = () => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
+    const [showFilter, setShowFilter] = React.useState(false);
+
+    // When resizing manually the window to go from large to small, the useMediaQuery used here
+    // triggers its change before the one in the VisitorList. This leads to an error because the
+    // FilterButton requires the filters prop to be set.
+    React.useEffect(() => {
+        // Needed to avoid react warnings
+        let isMounted = true;
+        setImmediate(() => {
+            if (isMounted) setShowFilter(isSmall);
+        });
+        return () => {
+            isMounted = false;
+        };
+    }, [isSmall]);
+
     return (
         <TopToolbar>
-            {isSmall ? <FilterButton /> : null}
+            {showFilter ? <FilterButton /> : null}
             <CreateButton />
             <ExportButton />
             <ListViewButton />
@@ -58,7 +74,7 @@ const VisitorList = () => {
             sort={{ field: 'last_seen', order: 'DESC' }}
             perPage={25}
             aside={<VisitorListAside />}
-            actions={<ListActions />}
+            actions={<VisitorListActions />}
             sx={{ marginTop: isSmall ? undefined : -4 }}
         >
             {isXsmall ? (
