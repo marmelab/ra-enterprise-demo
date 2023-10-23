@@ -48,9 +48,9 @@ const VisitorListActions = () => {
     React.useEffect(() => {
         // Needed to avoid react warnings
         let isMounted = true;
-        setImmediate(() => {
+        setTimeout(() => {
             if (isMounted) setShowFilter(isSmall);
-        });
+        }, 0);
         return () => {
             isMounted = false;
         };

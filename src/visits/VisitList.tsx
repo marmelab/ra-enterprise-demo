@@ -8,7 +8,7 @@ import { Theme, useMediaQuery } from '@mui/material';
 import { CompleteCalendar } from '@react-admin/ra-calendar';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { differenceInMilliseconds, parseISO } from 'date-fns';
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import {
     useGetList,
     useGetOne,

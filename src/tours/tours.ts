@@ -47,7 +47,7 @@ const tours: { [id: string]: TourType } = {
                 target: `.RaDatagrid-root`,
                 content: 'tours.ra-calendar.intro',
                 disableBeacon: true,
-                after: async ({ target, redirect }) => {
+                after: async ({ redirect }) => {
                     redirect('/visits');
                     await timeout(1000);
                 },
