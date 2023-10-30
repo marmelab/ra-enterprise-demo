@@ -27,6 +27,8 @@ const Tour = ({ record }: { record: RaRecord }) => {
         tourStateActions.markAsPlayed();
     };
 
+    const basePath = import.meta.env.BASE_URL;
+
     return (
         <Card
             sx={{
@@ -45,7 +47,7 @@ const Tour = ({ record }: { record: RaRecord }) => {
                     height: 140,
                     filter: 'brightness(0.9) drop-shadow(0 0 0 blue)',
                 }}
-                image={`/${record.image}`}
+                image={`${basePath}${record.image}`}
                 title={record.title}
             />
             <CardContent sx={{ position: 'relative' }}>
