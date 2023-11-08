@@ -1,24 +1,16 @@
 {
     "rewrites": [
         {
-            "source": "/ra-enterprise-demo/static/css/:id",
-            "destination": "/static/css/:id"
+            "source": "/ra-enterprise-demo/assets/:id",
+            "destination": "/assets/:id"
         },
         {
-            "source": "/ra-enterprise-demo/static/js/:id",
-            "destination": "/static/js/:id"
+            "source": "/ra-enterprise-demo/images/tours/:id",
+            "destination": "/images/tours/:id"
         },
         {
-            "source": "/ra-enterprise-demo/static/media/:id",
-            "destination": "/static/media/:id"
-        },
-        {
-            "source": "/ra-enterprise-demo/manifest.json",
-            "destination": "/manifest.json"
-        },
-        {
-            "source": "/ra-enterprise-demo/favicon.ico",
-            "destination": "/favicon.ico"
+            "source": "/ra-enterprise-demo/:id",
+            "destination": "/:id"
         }
     ]
 }

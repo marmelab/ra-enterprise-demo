@@ -30,6 +30,7 @@ export const SearchSubMenu = () => {
                         px: 1,
                     }}
                     disablePadding
+                    data-testid="search-panel"
                 >
                     <CustomSearchResultItem />
                 </SearchResultsPanel>

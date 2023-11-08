@@ -53,7 +53,7 @@
         "prettier": "prettier --config ./.prettierrc.js --write --list-different \"./src/**/*.{js,json,ts,tsx,css,md}\"",
         "e2e-dev": "cypress open",
         "e2e-run": "cypress run --browser chrome --headless",
-        "e2e-serve": "serve -s -c ../cypress/serve.json -l 3000 build",
+        "e2e-serve": "serve -c ../cypress/serve.json -l 3000 build",
         "e2e": "start-server-and-test e2e-serve http://localhost:3000 e2e-run"
     },
     "homepage": ".",
