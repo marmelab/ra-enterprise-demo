@@ -10,8 +10,13 @@ import {
     required,
 } from 'react-admin';
 import { InputAdornment, Stack } from '@mui/material';
-import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
+
+const MarkdownInput = React.lazy(() =>
+    import('@react-admin/ra-markdown').then(module => ({
+        default: module.MarkdownInput,
+    }))
+);
 
 const ProductCreate = () => {
     useDefineAppLocation('catalog.products.create');

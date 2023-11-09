@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { useRecordContext } from 'react-admin';
-import { MarkdownField } from '@react-admin/ra-markdown';
 import { Box, lighten, darken, Typography, useTheme } from '@mui/material';
 import { formatNumberAsUSD } from '../formatUtils';
+
+const MarkdownField = React.lazy(() =>
+    import('@react-admin/ra-markdown').then(module => ({
+        default: module.MarkdownField,
+    }))
+);
 
 const ProductPreview = (props: any) => {
     const record = useRecordContext(props);

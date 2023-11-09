@@ -31,7 +31,6 @@ import {
     Stack,
     Typography,
 } from '@mui/material';
-import { MarkdownInput } from '@react-admin/ra-markdown';
 import { useGetLock, useLockOnMount } from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import {
@@ -46,6 +45,12 @@ import ProductPreview from './ProductPreview';
 import { Product } from '../types';
 import { ProductEditDetails } from './ProductEditDetails';
 import StarRatingInput from '../reviews/StarRatingInput';
+
+const MarkdownInput = React.lazy(() =>
+    import('@react-admin/ra-markdown').then(module => ({
+        default: module.MarkdownInput,
+    }))
+);
 
 const ProductEdit = () => {
     return (

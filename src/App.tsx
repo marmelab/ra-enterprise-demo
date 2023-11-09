@@ -38,8 +38,6 @@ import stores from './stores';
 import visits from './visits';
 import Configuration from './configuration/Configuration';
 import Segments from './segments/Segments';
-import TourLauncher from './tours/TourLauncher';
-import TourList from './tours/TourList';
 import { EventList } from './EventList';
 
 const messages = {
@@ -61,6 +59,17 @@ const i18nProvider = buildI18nProvider(messages, 'en', [
 ]);
 
 const enhancedDataProvider = addEventsForMutations(dataProvider, authProvider);
+
+const TourList = React.lazy(() =>
+    import('./tours/TourList').then(module => ({
+        default: module.default,
+    }))
+);
+const TourLauncher = React.lazy(() =>
+    import('./tours/TourLauncher').then(module => ({
+        default: module.default,
+    }))
+);
 
 const App = () => {
     useEffect(() => {

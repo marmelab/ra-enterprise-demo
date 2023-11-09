@@ -1,10 +1,15 @@
 import * as React from 'react';
-import { TreeWithDetails } from '@react-admin/ra-tree';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import { useMediaQuery, Theme } from '@mui/material';
 
 import CategoryCreate from './CategoryCreate';
 import CategoryEdit from './CategoryEdit';
+
+const TreeWithDetails = React.lazy(() =>
+    import('@react-admin/ra-tree').then(module => ({
+        default: module.TreeWithDetails,
+    }))
+);
 
 const CategoryList = () => {
     useDefineAppLocation('catalog.categories');
