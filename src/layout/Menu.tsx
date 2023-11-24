@@ -1,8 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect, ReactElement } from 'react';
-import { useSavedQueries, useTranslate } from 'react-admin';
+import {
+    useAuthProvider,
+    useGetIdentity,
+    useSavedQueries,
+    useTranslate,
+} from 'react-admin';
 import { useSubscribeToRecordList } from '@react-admin/ra-realtime';
-import { Typography, styled, Badge } from '@mui/material';
+import { Avatar, Typography, styled, Badge } from '@mui/material';
 import {
     SolarMenu,
     useAppLocationMatcher,
@@ -28,6 +33,8 @@ import reviews from '../reviews';
 import stores from '../stores';
 import visits from '../visits';
 import { segments } from '../visitors/segments';
+import { ProfileSubMenu } from './ProfileSubMenu';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 export const newCustomerFilter = querystring.stringify({
     filter: JSON.stringify({
@@ -394,7 +401,7 @@ const CustomBottomToolbar = () => (
     <>
         <SearchMenuItem />
         <SolarMenu.LoadingIndicatorItem />
-        <SolarMenu.UserItem />
+        <SolarMenuUserItem />
     </>
 );
 
@@ -407,3 +414,34 @@ const SearchMenuItem = () => (
         data-testid="search-button"
     />
 );
+
+const SolarMenuUserItem = () => {
+    const { isLoading, identity } = useGetIdentity();
+    const authProvider = useAuthProvider();
+
+    if (isLoading) return null;
+    const avatarSx = { maxWidth: '1.4em', maxHeight: '1.4em' };
+    return (
+        <SolarMenu.Item
+            icon={
+                authProvider ? (
+                    identity?.avatar ? (
+                        <Avatar
+                            src={identity.avatar}
+                            alt={identity.fullName}
+                            sx={avatarSx}
+                        />
+                    ) : (
+                        <Avatar sx={avatarSx} />
+                    )
+                ) : (
+                    <SettingsIcon />
+                )
+            }
+            label="pos.profile"
+            name="profile"
+            subMenu={<ProfileSubMenu />}
+            data-testid="profile-button"
+        />
+    );
+};

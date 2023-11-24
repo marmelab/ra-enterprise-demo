@@ -33,9 +33,11 @@ const Welcome = () => {
         <Card
             sx={{
                 background: theme =>
-                    `linear-gradient(to bottom, #ffffff33, #ffffff00), linear-gradient(to bottom, ${theme?.palette?.primary.light}00, ${theme?.palette?.primary.dark}ff), ${theme?.palette?.primary.main}`,
-                color: '#fff',
+                    `linear-gradient(45deg, ${theme.palette.secondary.dark} 0%, ${theme.palette.secondary.light} 50%, ${theme.palette.primary.dark} 100%)`,
+                color: theme => theme.palette.primary.contrastText,
                 padding: '20px',
+                marginTop: 2,
+                marginBottom: '1em',
             }}
         >
             <Box display="flex">

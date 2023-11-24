@@ -7,7 +7,10 @@ const ColoredNumberField = (props: NumberFieldProps) => {
         return null;
     }
     return record[props.source] > 500 ? (
-        <NumberField {...props} sx={{ color: 'red' }} />
+        <NumberField
+            {...props}
+            sx={{ color: 'error.main', fontWeight: 'fontWeightBold' }}
+        />
     ) : (
         <NumberField {...props} />
     );

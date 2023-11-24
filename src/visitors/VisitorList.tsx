@@ -110,7 +110,7 @@ const columns = [
         source="nb_commands"
         key="nb_commands"
         label="resources.customers.fields.commands"
-        sx={{ color: 'purple' }}
+        sx={{ color: 'info.main', fontWeight: 'fontWeightBold' }}
     />,
     <ColoredNumberField
         source="total_spent"

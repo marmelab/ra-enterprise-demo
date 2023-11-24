@@ -2,9 +2,11 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import {
     CustomRoutes,
-    defaultTheme,
     mergeTranslations,
     Resource,
+    useStore,
+    StoreContextProvider,
+    localStorageStore,
 } from 'react-admin';
 import { Admin, buildI18nProvider } from '@react-admin/ra-enterprise';
 import { addEventsForMutations } from '@react-admin/ra-audit-log';
@@ -18,7 +20,6 @@ import {
     raTourLanguageFrench,
 } from '@react-admin/ra-tour';
 import { Route } from 'react-router';
-import { createTheme } from '@mui/material';
 
 import fakeServer from './fakeServer';
 import dataProvider from './dataProvider';
@@ -26,7 +27,6 @@ import authProvider from './authProvider';
 import englishMessages from './i18n/en';
 import frenchMessages from './i18n/fr';
 import { Login, Layout } from './layout';
-import { getThemes } from './layout/themes';
 import { Dashboard } from './dashboard';
 import visitors from './visitors';
 import orders from './orders';
@@ -39,6 +39,7 @@ import visits from './visits';
 import Configuration from './configuration/Configuration';
 import Segments from './segments/Segments';
 import { EventList } from './EventList';
+import { ThemeName, themes } from './themes/themes';
 
 const messages = {
     en: mergeTranslations(
@@ -71,6 +72,8 @@ const TourLauncher = React.lazy(() =>
     }))
 );
 
+const store = localStorageStore(undefined, 'EECommerce');
+
 const App = () => {
     useEffect(() => {
         const restoreFetch = fakeServer();
@@ -78,12 +81,14 @@ const App = () => {
             restoreFetch();
         };
     }, []);
-    const theme = createTheme(defaultTheme);
-    const { darkTheme, lightTheme } = getThemes(theme);
+    const [themeName] = useStore<ThemeName>('themeName', 'soft');
+    const lightTheme = themes.find(theme => theme.name === themeName)?.light;
+    const darkTheme = themes.find(theme => theme.name === themeName)?.dark;
 
     return (
         <Admin
             title=""
+            store={store}
             dataProvider={enhancedDataProvider}
             authProvider={authProvider}
             dashboard={Dashboard}
@@ -115,4 +120,10 @@ const App = () => {
     );
 };
 
-export default App;
+const AppWrapper = () => (
+    <StoreContextProvider value={store}>
+        <App />
+    </StoreContextProvider>
+);
+
+export default AppWrapper;

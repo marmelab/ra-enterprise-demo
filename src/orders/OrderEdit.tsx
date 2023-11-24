@@ -15,7 +15,15 @@ import {
     useTranslate,
 } from 'react-admin';
 import { Link as RouterLink } from 'react-router-dom';
-import { Card, CardContent, Box, Grid, Typography, Link } from '@mui/material';
+import {
+    Card,
+    CardContent,
+    Box,
+    Grid,
+    Typography,
+    Link,
+    Theme,
+} from '@mui/material';
 
 import { Order, Customer } from '../types';
 import Basket from './Basket';
@@ -95,8 +103,11 @@ const OrderForm = () => {
             >
                 <Box
                     display="inline"
-                    marginTop={-6}
-                    marginBottom={1}
+                    marginTop={(theme: Theme) =>
+                        `calc(${theme.spacing(-3.5)} - ${
+                            theme.typography.fontSize
+                        }px)`
+                    }
                     sx={{ '& nav': { display: 'inline-block' } }}
                 >
                     <PrevNextButtons

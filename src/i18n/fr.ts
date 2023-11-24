@@ -31,13 +31,16 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
             },
         },
         pos: {
+            profile: 'Profil',
             search: 'Rechercher',
             configuration: 'Configuration',
             language: 'Langue',
+            change_language: 'Changer la langue',
             theme: {
                 name: 'Theme',
                 light: 'Clair',
                 dark: 'Obscur',
+                change_theme: 'Changer le thème',
             },
             filter: 'Filtré par',
             dashboard: {

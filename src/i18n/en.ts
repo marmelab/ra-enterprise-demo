@@ -30,13 +30,16 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
             },
         },
         pos: {
+            profile: 'Profile',
             search: 'Search',
             configuration: 'Configuration',
             language: 'Language',
+            change_language: 'Change language',
             theme: {
                 name: 'Theme',
                 light: 'Light',
                 dark: 'Dark',
+                change_theme: 'Change theme',
             },
             filter: 'Filtered by',
             dashboard: {
