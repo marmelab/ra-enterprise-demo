@@ -94,7 +94,7 @@ const Dashboard = () => {
         </Grid>
     ) : isSmall ? (
         <Grid container spacing={BLOCKS_SPACING} padding={1}>
-            <Box mt={1} ml={1}>
+            <Box mt={1} ml={1} display="flex">
                 <Logo />
             </Box>
             <Grid item xs={12}>
@@ -115,7 +115,7 @@ const Dashboard = () => {
         </Grid>
     ) : (
         <Grid container spacing={BLOCKS_SPACING} padding={1}>
-            <Box mt={1} ml={2}>
+            <Box mt={1} ml={2} display="flex">
                 <Logo />
             </Box>
             <Grid item xs={12}>

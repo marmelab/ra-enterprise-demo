@@ -36,8 +36,6 @@ const Welcome = () => {
                     `linear-gradient(45deg, ${theme.palette.secondary.dark} 0%, ${theme.palette.secondary.light} 50%, ${theme.palette.primary.dark} 100%)`,
                 color: theme => theme.palette.primary.contrastText,
                 padding: '20px',
-                marginTop: 2,
-                marginBottom: '1em',
             }}
         >
             <Box display="flex">
@@ -53,7 +51,7 @@ const Welcome = () => {
                     <CardActions
                         sx={{
                             px: 0,
-                            flexWrap: { xs: 'wrap', xl: null },
+                            flexWrap: 'wrap',
                             gap: 2,
                         }}
                     >

@@ -21,8 +21,10 @@ const CustomBreadcrumb = () => {
                 '& a': {
                     pointerEvents: 'visible',
                 },
-                mb: -1,
-                ml: 1,
+                '& .RaBreadcrumb-list': {
+                    margin: 0,
+                    padding: 0,
+                },
                 zIndex: 10, // ensure it goes above actions bar
                 maxWidth: 'fit-content', // ensure it doesn't cover the actions bar
             }}
