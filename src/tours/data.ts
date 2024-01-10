@@ -1,5 +1,13 @@
 export default [
     {
+        id: 9,
+        image: 'images/tours/ra-history.jpg',
+        title: 'ra-history',
+        tour: 'ra-history',
+        comment: 'tours.ra-history.comment',
+        href: 'http://marmelab.com/react-admin',
+    },
+    {
         id: 8,
         image: 'images/tours/ra-calendar.png',
         title: 'ra-calendar',

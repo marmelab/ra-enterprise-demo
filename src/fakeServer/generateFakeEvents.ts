@@ -1,9 +1,8 @@
 import * as fns from 'date-fns';
 import { EventRecord } from '@react-admin/ra-audit-log';
 import type { Data } from './index';
-import avatars from './avatars';
 import { Order, OrderStatus, Product } from '../types';
-import { demoUser } from '../authProvider';
+import { admins } from './admins';
 
 const createProductEvent = (
     product: Product,
@@ -68,35 +67,6 @@ const changeOrderStatusEvent = (
 const getRandomId = (length: number) => {
     return Math.floor(Math.random() * length);
 };
-
-const admins = [
-    demoUser,
-    {
-        id: 0,
-        avatar: avatars[0],
-        fullName: 'Toni Rosser',
-    },
-    {
-        id: 1,
-        avatar: avatars[1],
-        fullName: 'Iris Bailey',
-    },
-    {
-        id: 2,
-        avatar: avatars[2],
-        fullName: 'Rocky Coon',
-    },
-    {
-        id: 3,
-        avatar: avatars[3],
-        fullName: 'Victoria Scott',
-    },
-    {
-        id: 4,
-        avatar: avatars[4],
-        fullName: 'Sharon Stephenson',
-    },
-];
 
 const generateFakeEvents = (data: Data): EventRecord[] => {
     const pickRandomAuthor = (): EventRecord['author'] =>

@@ -37,6 +37,128 @@ const clearStorage = () => {
 };
 
 const tours: { [id: string]: TourType } = {
+    'ra-history': {
+        before: async ({ redirect }) => {
+            redirect('/products/126');
+            await timeout(1000);
+        },
+        steps: [
+            {
+                target: '.RaAccordionSection-fullWidth:nth-of-type(4)',
+                content: 'tours.ra-history.intro',
+                disableBeacon: true,
+            },
+            {
+                target: '#image',
+                before: ({ target }) => {
+                    const inputValue = target.value;
+                    // value is like 'https://marmelab.com/posters/water-7.jpeg'
+                    // newValue increments the number
+                    const newValue = inputValue.replace(
+                        /(\d+)(?=\.\w+$)/,
+                        (_match: any, number: string) => {
+                            return parseInt(number, 10) + 1;
+                        }
+                    );
+                    fireEvent.change(target, { target: { value: newValue } });
+                },
+                content: 'tours.ra-history.edit',
+                after: () => {
+                    (
+                        document.querySelector(
+                            'button[type=submit]'
+                        ) as HTMLButtonElement
+                    )?.click();
+                },
+            },
+            {
+                target: '.MuiDialog-paper',
+                content: 'tours.ra-history.save_dialog',
+                joyrideProps: {
+                    styles: {
+                        options: {
+                            zIndex: 9999,
+                        },
+                    },
+                },
+                // disable the dialog submit button to avoid breaking the tour
+                before: async ({ target }) => {
+                    (
+                        target.querySelector(
+                            'button[type=submit]:nth-of-type(2)'
+                        ) as HTMLButtonElement
+                    ).disabled = true;
+                },
+            },
+            {
+                target: 'button[type=submit]:nth-of-type(2)',
+                before: () => {
+                    fireEvent.change(
+                        document.querySelector('input[name=message]')!,
+                        {
+                            target: {
+                                value: 'Update poster filename',
+                            },
+                        }
+                    );
+                },
+                content: 'tours.ra-history.save_revision',
+                joyrideProps: {
+                    styles: {
+                        options: {
+                            zIndex: 9999,
+                        },
+                    },
+                },
+                after: ({ target, redirect }) => {
+                    target.disabled = false;
+                    target.click();
+                    setTimeout(() => {
+                        redirect('/products/126');
+                        // close the notification
+                        fireEvent.keyDown(screen.getByText('Element updated'), {
+                            key: 'Escape',
+                            code: 'Escape',
+                        });
+                    }, 100);
+                },
+            },
+            {
+                target: '.RaAccordionSection-fullWidth:nth-of-type(4)',
+                content: 'tours.ra-history.revision_list',
+                before: async ({ target }) => {
+                    target.firstChild.click();
+                    await timeout(500);
+                },
+                after: () => {
+                    (
+                        document.querySelectorAll(
+                            '.MuiStep-vertical'
+                        )[1] as HTMLElement
+                    ).click();
+                    document.getElementById('revisions-button')?.click();
+                    // @ts-ignore
+                    document.querySelector('.MuiMenu-paper ul li')?.click();
+                },
+            },
+            {
+                target: '.revision_details',
+                content: 'tours.ra-history.revision_details',
+            },
+            {
+                target: '.revert-button',
+                content: 'tours.ra-history.revert',
+                after: ({ target }) => {
+                    target.click();
+                },
+            },
+            { target: '#image', content: 'tours.ra-history.revert_applied' },
+            {
+                target: '.RaAccordionSection-fullWidth:nth-of-type(4)',
+                content: 'tours.ra-history.conclusion',
+            },
+        ],
+    },
     'ra-calendar': {
         before: async ({ redirect }) => {
             redirect('/stores');

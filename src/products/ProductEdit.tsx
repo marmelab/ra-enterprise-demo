@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+    Count,
     Datagrid,
     DateField,
     Edit,
@@ -37,11 +38,19 @@ import {
     AccordionSection,
     CreateInDialogButton,
 } from '@react-admin/ra-form-layout';
+import {
+    RevisionListWithDetails,
+    CreateRevisionOnSave,
+    useApplyChangesBasedOnSearchParam,
+    useGetRevisions,
+} from '@react-admin/ra-history';
 
 import CustomerReferenceField from '../visitors/CustomerReferenceField';
 import StarRatingField from '../reviews/StarRatingField';
 import Poster from './Poster';
 import ProductPreview from './ProductPreview';
+import { ProductDiff } from './ProductDiff';
+import { AdminName } from '../admins';
 import { Product } from '../types';
 import { ProductEditDetails } from './ProductEditDetails';
 import StarRatingInput from '../reviews/StarRatingInput';
@@ -52,39 +61,56 @@ const MarkdownInput = React.lazy(() =>
     }))
 );
 
-const ProductEdit = () => {
-    return (
-        <Edit title={<ProductTitle />}>
-            <ProductEditFormWithPreview>
-                <Poster />
-                <TextInput source="image" fullWidth validate={req} />
-                <TextInput source="thumbnail" fullWidth validate={req} />
-                <div>
-                    <AccordionSection
-                        label="resources.products.tabs.description"
-                        data-tour-id="description-tab"
-                        fullWidth
-                    >
-                        <MarkdownInput
-                            source="description"
-                            label=""
-                            validate={req}
+const ProductEdit = () => (
+    <Edit title={<ProductTitle />}>
+        <ProductEditFormWithPreview>
+            <Poster />
+            <TextInput source="image" fullWidth validate={req} />
+            <TextInput source="thumbnail" fullWidth validate={req} />
+            <div>
+                <AccordionSection
+                    label="resources.products.tabs.description"
+                    data-tour-id="description-tab"
+                    fullWidth
+                >
+                    <MarkdownInput
+                        source="description"
+                        label=""
+                        validate={req}
+                    />
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.details"
+                    fullWidth
+                >
+                    <ProductEditDetails />
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.reviews"
+                    fullWidth
+                    count={
+                        <WithRecord
+                            render={record => (
+                                <Count
+                                    resource="reviews"
+                                    filter={{ product_id: record.id }}
+                                />
+                            )}
                         />
-                    </AccordionSection>
-                    <AccordionSection
-                        label="resources.products.tabs.details"
-                        fullWidth
+                    }
+                >
+                    <ReferenceManyField
+                        reference="reviews"
+                        target="product_id"
+                        pagination={<Pagination />}
                     >
-                        <ProductEditDetails />
-                    </AccordionSection>
-                    <AccordionSection
-                        label="resources.products.tabs.reviews"
-                        fullWidth
-                    >
-                        <ReferenceManyField
-                            reference="reviews"
-                            target="product_id"
-                            pagination={<Pagination />}
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                                mt: 1,
+                                mr: 2,
+                            }}
                         >
                             <WithRecord
                                 render={record => (
@@ -131,30 +157,56 @@ const ProductEdit = () => {
                                     </CreateInDialogButton>
                                 )}
                             />
-                            <Datagrid
-                                sx={{
-                                    width: '100%',
-                                    '& .column-comment': {
-                                        maxWidth: '20em',
-                                        overflow: 'hidden',
-                                        textOverflow: 'ellipsis',
-                                        whiteSpace: 'nowrap',
-                                    },
-                                }}
-                            >
-                                <DateField source="date" />
-                                <CustomerReferenceField />
-                                <StarRatingField />
-                                <TextField source="comment" />
-                                <TextField source="status" />
-                                <EditButton />
-                            </Datagrid>
-                        </ReferenceManyField>
-                    </AccordionSection>
-                </div>
-            </ProductEditFormWithPreview>
-        </Edit>
+                        </Box>
+                        <Datagrid
+                            sx={{
+                                width: '100%',
+                                '& .column-comment': {
+                                    maxWidth: '20em',
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                },
+                            }}
+                        >
+                            <DateField source="date" />
+                            <CustomerReferenceField />
+                            <StarRatingField />
+                            <TextField source="comment" />
+                            <TextField source="status" />
+                            <EditButton />
+                        </Datagrid>
+                    </ReferenceManyField>
+                </AccordionSection>
+                <AccordionSection
+                    label="resources.products.tabs.revisions"
+                    fullWidth
+                    count={<ProductRevisionsCount />}
+                >
+                    <RevisionListWithDetails
+                        sx={{ py: 1 }}
+                        diff={<ProductDiff />}
+                        renderName={id => <AdminName id={id} />}
+                        allowRevert
+                    />
+                </AccordionSection>
+                <CreateRevisionOnSave />
+                <ApplyChangesBasedOnSearchParam />
+            </div>
+        </ProductEditFormWithPreview>
+    </Edit>
+);
+
+const ProductRevisionsCount = () => {
+    const record = useRecordContext();
+    const { data: revisions } = useGetRevisions(
+        'products',
+        {
+            recordId: record?.id,
+        },
+        { enabled: !!record?.id }
     );
+    return revisions ? <>{revisions?.length}</> : null;
 };
 
 const req = [required()];
@@ -233,6 +285,11 @@ const CustomToolbar = ({ disabled }: { disabled?: boolean }) => {
             {!isMeLocker && <LockMessage identity={lock?.identity} />}
         </Toolbar>
     );
+};
+
+const ApplyChangesBasedOnSearchParam = () => {
+    useApplyChangesBasedOnSearchParam();
+    return null;
 };
 
 const LockMessage = (props: any) => {

@@ -1,6 +1,7 @@
 import simpleRestProvider from 'ra-data-simple-rest';
 import { addLocksMethodsBasedOnALockResource } from '@react-admin/ra-realtime';
 import { addTreeMethodsBasedOnChildren } from '@react-admin/ra-tree';
+import { addRevisionMethodsBasedOnRelatedResource } from '@react-admin/ra-history';
 
 import addRealtimeMethodsWithFakeTransport from './addRealtimeMethodsWithFakeTransport';
 import addSearchMethod from './addSearchMethod';
@@ -17,7 +18,8 @@ const restProvider = compose(
     addLocksMethodsBasedOnALockResource,
     addRealtimeMethodsWithFakeTransport,
     addTreeMethodsBasedOnChildren,
-    addSearchMethod
+    addSearchMethod,
+    addRevisionMethodsBasedOnRelatedResource
 )(simpleRestProvider('http://localhost:4000'));
 
 const delayedDataProvider = new Proxy(restProvider, {

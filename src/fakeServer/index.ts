@@ -4,10 +4,23 @@ import generateData from 'data-generator-retail';
 // @ts-ignore
 import { random } from 'faker/locale/en';
 import { Identifier } from 'react-admin';
+import { RecordRevision } from '@react-admin/ra-history';
+import { EventRecord } from '@react-admin/ra-audit-log';
+
 import demoData from './demo-data';
-import { Category, Customer, Order, Product, Review } from '../types';
+import { admins } from './admins';
+import {
+    Category,
+    Customer,
+    Order,
+    Product,
+    Review,
+    AdminUser,
+    Visit,
+} from '../types';
 import generateFakeEvents from './generateFakeEvents';
 import generateFakeVisits from './generateFakeVisits';
+import generateFakeRevisions from './generateFakeRevisions';
 
 const getAllChildrenCategories = (
     categories: Category[],
@@ -69,8 +82,17 @@ export default (): (() => void) => {
     );
     const events = generateFakeEvents(data);
     const visits = generateFakeVisits(demoData);
+    const product_revisions = generateFakeRevisions(data);
 
-    const mergedData = { ...data, ...demoData, products, events, visits };
+    const mergedData: Data = {
+        ...data,
+        ...demoData,
+        products,
+        product_revisions,
+        events,
+        visits,
+        admins,
+    };
 
     const restServer = new FakeRest.FetchServer('http://localhost:4000');
     if (window) {
@@ -99,9 +121,13 @@ export default (): (() => void) => {
 };
 
 export interface Data {
-    customers: Customer[];
+    admins: AdminUser[];
     categories: Category[];
-    products: Product[];
     commands: Order[];
+    customers: Customer[];
+    events: EventRecord[];
+    products: Product[];
+    product_revisions: Omit<RecordRevision, 'resource'>[];
     reviews: Review[];
+    visits: Visit[];
 }

@@ -208,6 +208,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     details: 'Détails',
                     description: 'Description',
                     reviews: 'Commentaires',
+                    revisions: 'Versions',
                 },
                 filters: {
                     categories: 'Catégories',
@@ -433,6 +434,25 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     "Comme vous le voyez, un évènement récurrent a été créé. N'hésitez pas à utiliser les boutons précédent / suivant pour voir les autres visites.",
                 conclusion:
                     'Voilà qui conclut notre tour de ra-calendar. Rendez-vous sur https://fullcalendar.io/docs/ pour découvrir les autres fonctionnalités offertes par FullCalendar, ou bien jetez un oeil aux autres tours pour découvrir plus de fonctionnalités entreprise !',
+            },
+            'ra-history': {
+                comment:
+                    'Conservez une trace de chaque modification, comparez deux versions, et revenez à une version précédente.',
+                intro: 'Chaque fois que vous modifiez un contenu, ra-history crée une nouvelle révision. Modifions cette affiche pour voir comment cela fonctionne.',
+                edit: 'Le titre de cette affiche est maintenant modifié. Lors du click sur le bouton Enregistrer...',
+                save_dialog:
+                    '...une boite de dialogue apparait pour demander un message de révision.',
+                save_revision:
+                    'Cliquez sur Enregistrer pour enregistrer les modifications et créer une nouvelle révision.',
+                revision_list:
+                    "La liste des révisions montre l'historique des modifications apportées au contenu.",
+                revision_details:
+                    'Pour chaque révision, vous pouvez voir le détail des modifications apportées au contenu.',
+                revert: 'Vous pouvez également revenir à une version précédente.',
+                revert_applied:
+                    'Cela applique les modifications de la révision au formulaire, et vous pouvez toujours modifier les données avant de les enregistrer.',
+                conclusion:
+                    "C'est tout pour la visite du module history. Jetez un oeil aux autres visites guidées pour découvrir plus de fonctionnalités entreprise !",
             },
         },
     }

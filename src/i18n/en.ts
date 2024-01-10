@@ -204,6 +204,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     details: 'Details',
                     description: 'Description',
                     reviews: 'Reviews',
+                    revisions: 'Revisions',
                 },
                 filters: {
                     categories: 'Categories',
@@ -423,6 +424,25 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     'As you can see, a recurring event has been created. Feel free to use the previous / next buttons to see the next visits.',
                 conclusion:
                     'That wraps it up for the calendar tour. Have a look at https://fullcalendar.io/docs/ to discover all the features supported by FullCalendar, or at the other tours to discover more enterprise features!',
+            },
+            'ra-history': {
+                comment:
+                    'Keep track of changes on content, compare revisions, and revert to a previous version.',
+                intro: "Each time you change a record, ra-history creates a new revision. Let's edit this poster to see how it works.",
+                edit: 'The image path was changed. Now when you save the form....',
+                save_dialog:
+                    '...you have to provide a message and a description for this revision.',
+                save_revision:
+                    'When you press Save, the form changes are saved, and a new revision is created.',
+                revision_list:
+                    'The list of revisions shows all the changes made to the record.',
+                revision_details:
+                    'For each revision, you can see the changes made to the record.',
+                revert: 'You can revert to any revision by clicking on the Revert button.',
+                revert_applied:
+                    'This applies the changes from the revision to the form, and you can still modify the data before saving it.',
+                conclusion:
+                    "That's it for the ra-history tour. Have a look at the other tours to discover more enterprise features!",
             },
         },
     }

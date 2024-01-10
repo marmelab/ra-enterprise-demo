@@ -79,6 +79,12 @@ export interface Visit extends RaRecord {
     color: string;
 }
 
+export interface AdminUser {
+    id: number | string;
+    avatar: string;
+    fullName: string;
+}
+
 declare global {
     interface Window {
         restServer: any;
