@@ -2,13 +2,25 @@
 
 This is a demo of the [react-admin](https://github.com/marmelab/react-admin) library for React.js. It creates a working administration for a fake poster shop named Posters Galore. You can test it online at https://marmelab.com/ra-enterprise-demo/.
 
-[![react-admin-demo](https://marmelab.com/react-admin/img/react-admin-demo-still.png)](https://player.vimeo.com/video/884005183)
+[![react-admin demo](./assets/react-admin-ee.png)](https://marmelab.com/ra-enterprise-demo/)
 
-React-admin usually requires a REST/GraphQL server to provide data. In this demo however, the API is simulated by the browser (using [FakeRest](https://github.com/marmelab/FakeRest)). The source data is generated at runtime by a package called [data-generator](https://github.com/marmelab/react-admin/tree/master/examples/data-generator).
+This project is a fork of the open-source [e-commerce demo](https://marmelab.com/react-admin-demo/) using the following [React-admin Enterprise Edition](https://marmelab.com/ra-enterprise/) modules:
+
+-   ra-audit-log
+-   ra-calendar
+-   ra-editable-datagrid
+-   ra-enterprise
+-   ra-form-layout
+-   ra-history
+-   ra-markdown
+-   ra-navigation
+-   ra-realtime
+-   ra-relationships
+-   ra-search
+-   ra-tour
+-   ra-tree
 
 To explore the source code, start with [src/App.tsx](https://github.com/marmelab/react-admin/blob/master/examples/demo/src/App.tsx).
-
-**Note**: This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## How to run
 
@@ -21,6 +33,8 @@ make build
 
 make run-demo
 ```
+
+**Note**: This demo requires a valid subscription to [React Admin Enterprise Edition](https://marmelab.com/ra-enterprise/).
 
 ## Available Scripts
 
