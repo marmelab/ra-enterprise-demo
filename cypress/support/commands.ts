@@ -16,7 +16,7 @@ export const startTour = (tour: string) => {
 export const waitForStepAndGoToNext = (
     text?: string | RegExp,
     buttonLabel: 'Next' | 'Last' = 'Next',
-    timeout: number = 10000
+    timeout = 10000
 ) => {
     if (text) {
         cy.findByText(text, { timeout });
