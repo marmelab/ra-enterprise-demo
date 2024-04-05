@@ -16,15 +16,11 @@ export const SearchSubMenu = () => {
         setActiveMenu('');
     };
     return (
-        <Box data-testid="search" m={-1}>
-            <SearchWithResult
-                onNavigate={handleClose}
-                sx={{ m: 1, width: 270 }}
-            >
+        <Box data-testid="search" m={-1} width={{ xs: '100%', md: 270 }}>
+            <SearchWithResult onNavigate={handleClose} sx={{ m: 1 }}>
                 <SearchResultsPanel
                     sx={{
                         maxHeight: 'calc(100vh - 65px)',
-                        maxWidth: '18em',
                         overflowX: 'hidden',
                         marginBlockEnd: 0,
                         px: 1,
