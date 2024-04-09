@@ -317,6 +317,10 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 create: {
                     title: 'Create visit',
                 },
+                error: {
+                    start_greater_than_end:
+                        'The end date must be later than the start date',
+                },
             },
         },
         tours: {

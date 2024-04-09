@@ -323,6 +323,10 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 create: {
                     title: 'Créer une visite',
                 },
+                error: {
+                    start_greater_than_end:
+                        'La date de fin doit être postérieure à la date de début.',
+                },
             },
         },
         tours: {

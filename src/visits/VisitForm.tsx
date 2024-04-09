@@ -7,9 +7,9 @@ import {
     SimpleForm,
     useTranslate,
     useRecordContext,
-    required,
 } from 'react-admin';
 import { Stack, Typography, Box } from '@mui/material';
+import { useWatch } from 'react-hook-form';
 
 const Color = () => {
     const record = useRecordContext();
@@ -30,30 +30,67 @@ const Color = () => {
     );
 };
 
+const EndDateInput = (props: any) => {
+    const value = useWatch({ name: 'start' });
+    return <DateTimeInput defaultValue={value} {...props} />;
+};
+
 export const VisitForm = () => {
     const translate = useTranslate();
+
+    const validateEvent = (values: {
+        storeId?: number;
+        start?: string | Date;
+        end?: string | Date;
+        interval?: number;
+        freq?: number;
+        count?: number;
+        color?: string;
+    }) => {
+        const errors: {
+            storeId?: string;
+            start?: string;
+            end?: string;
+            interval?: string;
+            freq?: string;
+            count?: string;
+            color?: string;
+        } = {};
+        if (!values.storeId) errors.storeId = 'ra.validation.required';
+        if (!values.start) errors.start = 'ra.validation.required';
+        if (!values.end) errors.end = 'ra.validation.required';
+        if (!values.interval) errors.interval = 'ra.validation.required';
+        if (!values.freq) errors.freq = 'ra.validation.required';
+        if (!values.count) errors.count = 'ra.validation.required';
+        if (!values.color) errors.color = 'ra.validation.required';
+        if (
+            values.start &&
+            values.end &&
+            new Date(values.start) > new Date(values.end)
+        ) {
+            errors.end = 'resources.visits.error.start_greater_than_end';
+        }
+        return errors;
+    };
+
     return (
-        <SimpleForm>
+        <SimpleForm validate={validateEvent}>
             <ReferenceInput source="storeId" reference="stores">
-                <SelectInput
-                    optionText="city"
-                    fullWidth
-                    validate={required()}
-                />
+                <SelectInput optionText="city" fullWidth isRequired />
             </ReferenceInput>
             <Box display={{ xs: 'block', sm: 'flex' }}>
                 <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                     <DateTimeInput
                         source="start"
-                        validate={required()}
                         inputProps={{ 'data-testid': 'start-input' }}
+                        isRequired
                     />
                 </Box>
                 <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                    <DateTimeInput
+                    <EndDateInput
                         source="end"
-                        validate={required()}
                         inputProps={{ 'data-testid': 'end-input' }}
+                        isRequired
                     />
                 </Box>
             </Box>
@@ -67,8 +104,8 @@ export const VisitForm = () => {
                     hiddenLabel
                     aria-label="interval"
                     sx={{ width: '4em' }}
-                    validate={required()}
                     inputProps={{ 'data-testid': 'interval-input' }}
+                    isRequired
                 />
                 <SelectInput
                     source="freq"
@@ -86,7 +123,7 @@ export const VisitForm = () => {
                     InputLabelProps={{ disabled: true }}
                     aria-label="freq"
                     inputProps={{ 'data-testid': 'freq-input' }}
-                    validate={required()}
+                    isRequired
                 />
             </Stack>
             <Stack direction="row" spacing={1}>
@@ -99,8 +136,8 @@ export const VisitForm = () => {
                     hiddenLabel
                     aria-label="count"
                     sx={{ width: '4em' }}
-                    validate={required()}
                     inputProps={{ 'data-testid': 'count-input' }}
+                    isRequired
                 />
                 <Typography sx={{ py: 1 }}>
                     {translate('resources.visits.freq.occurrences')}
@@ -118,7 +155,7 @@ export const VisitForm = () => {
                 ]}
                 optionText={<Color />}
                 fullWidth
-                validate={required()}
+                isRequired
             />
         </SimpleForm>
     );
