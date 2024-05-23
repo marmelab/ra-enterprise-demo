@@ -4,7 +4,7 @@ This is a demo of the [react-admin](https://github.com/marmelab/react-admin) lib
 
 [![react-admin demo](./assets/react-admin-ee.png)](https://marmelab.com/ra-enterprise-demo/)
 
-This project is a fork of the open-source [e-commerce demo](https://marmelab.com/react-admin-demo/) using the following [React-admin Enterprise Edition](https://marmelab.com/ra-enterprise/) modules:
+This project is a fork of the open-source [e-commerce demo](https://marmelab.com/react-admin-demo/) using the following [React-admin Enterprise Edition](https://react-admin-ee.marmelab.com/) modules:
 
 -   ra-audit-log
 -   ra-calendar
@@ -34,7 +34,7 @@ make build
 make run-demo
 ```
 
-**Note**: This demo requires a valid subscription to [React Admin Enterprise Edition](https://marmelab.com/ra-enterprise/).
+**Note**: This demo requires a valid subscription to [React Admin Enterprise Edition](https://react-admin-ee.marmelab.com/).
 
 ## Available Scripts
 
