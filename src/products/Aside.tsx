@@ -10,19 +10,17 @@ import {
     useListContext,
     SavedQueriesList,
 } from 'react-admin';
-import { useGetTree, Tree, getRCTree } from '@react-admin/ra-tree';
+import { useGetTree, Tree } from '@react-admin/ra-tree';
 
 const Aside = () => {
     const { displayedFilters, filterValues, setFilters } = useListContext();
     const { data } = useGetTree('categories');
 
-    const tree = data ? getRCTree(data, 'name') : undefined;
-
     const defaultExpandedKeys = filterValues.category_id
         ? [filterValues.category_id.toString()]
-        : !!tree
-        ? [tree[0].key]
-        : undefined;
+        : !!data
+          ? [data[0].id.toString()]
+          : undefined;
 
     const defaultSelectedKeys =
         filterValues.category_id !== undefined
@@ -142,12 +140,13 @@ const Aside = () => {
                         // see https://github.com/react-component/tree/issues/234#issuecomment-599297897
                         // I tried passing a JSON.stringify version of
                         // defaultSelectedKeys and defaultExpandedKeys without success
-                        key={Math.random()}
-                        treeData={tree ? tree[0].children : []}
+                        // key={Math.random()}
+                        data={data ?? []}
                         onSelect={handleSelectCategory}
-                        defaultSelectedKeys={defaultSelectedKeys}
                         defaultExpandedKeys={defaultExpandedKeys}
+                        defaultSelectedKeys={defaultSelectedKeys}
                         autoExpandParent
+                        titleField="name"
                     />
                 </FilterList>
             </CardContent>

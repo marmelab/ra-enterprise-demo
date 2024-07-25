@@ -26,7 +26,7 @@ const NewCustomers = () => {
     aMonthAgo.setSeconds(0);
     aMonthAgo.setMilliseconds(0);
 
-    const { isLoading, data: visitors } = useGetList<Customer>('customers', {
+    const { isPending, data: visitors } = useGetList<Customer>('customers', {
         filter: {
             has_ordered: true,
             first_seen_gte: aMonthAgo.toISOString(),
@@ -43,7 +43,7 @@ const NewCustomers = () => {
             title={translate('pos.dashboard.new_customers')}
             subtitle={nb}
         >
-            <List sx={{ display: isLoading ? 'none' : 'block' }}>
+            <List sx={{ display: isPending ? 'none' : 'block' }}>
                 {visitors
                     ? visitors.map((record: Customer) => (
                           <ListItem

@@ -18,9 +18,9 @@ import { USDFormat } from '../formatUtils';
 
 const MobileGrid = () => {
     const translate = useTranslate();
-    const { data, isLoading } = useListContext<Customer>();
+    const { data, error, isPending } = useListContext<Customer>();
 
-    if (isLoading || data.length === 0) {
+    if (error || isPending || data.length === 0) {
         return null;
     }
 
@@ -46,11 +46,11 @@ const MobileGrid = () => {
                         <CardContent sx={{ pt: 0 }}>
                             <Typography variant="body2">
                                 {translate(
-                                    'resources.commands.name',
-                                    record.nb_commands || 1
+                                    'resources.orders.name',
+                                    record.nb_orders || 1
                                 )}
                                 :&nbsp;
-                                <NumberField source="nb_commands" />
+                                <NumberField source="nb_orders" />
                             </Typography>
                             <Typography variant="body2">
                                 {translate(

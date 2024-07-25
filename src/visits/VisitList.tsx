@@ -23,7 +23,7 @@ const VisitEditTitle = () => {
     const visit = useRecordContext<Visit>();
     const { data: store } = useGetOne<Store>(
         'stores',
-        { id: visit?.storeId },
+        { id: visit!.storeId },
         { enabled: !!visit?.storeId }
     );
     const translate = useTranslate();

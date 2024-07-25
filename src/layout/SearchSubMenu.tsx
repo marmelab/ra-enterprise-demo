@@ -47,7 +47,7 @@ const CustomSearchResultItem = (props: any) => {
             return <CustomerListItem {...rest} data={data} onClick={onClose} />;
         case 'products':
             return <ProductListItem {...rest} data={data} onClick={onClose} />;
-        case 'commands':
+        case 'orders':
             return <CommandListItem {...rest} data={data} onClick={onClose} />;
         case 'reviews':
             return <ReviewListItem {...rest} data={data} onClick={onClose} />;

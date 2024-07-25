@@ -65,8 +65,8 @@ const ProductEdit = () => (
     <Edit title={<ProductTitle />}>
         <ProductEditFormWithPreview>
             <Poster />
-            <TextInput source="image" fullWidth validate={req} />
-            <TextInput source="thumbnail" fullWidth validate={req} />
+            <TextInput id="image" source="image" validate={req} />
+            <TextInput source="thumbnail" validate={req} />
             <div>
                 <AccordionSection
                     label="resources.products.tabs.description"
@@ -133,14 +133,12 @@ const ProductEdit = () => (
                                                         customerOptionRenderer
                                                     }
                                                     validate={req}
-                                                    fullWidth
                                                 />
                                             </ReferenceInput>
                                             <DateInput
                                                 source="date"
                                                 defaultValue={new Date()}
                                                 validate={req}
-                                                fullWidth
                                             />
                                             <StarRatingInput
                                                 source="rating"
@@ -149,7 +147,6 @@ const ProductEdit = () => (
                                             <TextInput
                                                 source="comment"
                                                 multiline
-                                                fullWidth
                                                 resettable
                                                 validate={req}
                                             />
@@ -171,7 +168,10 @@ const ProductEdit = () => (
                         >
                             <DateField source="date" />
                             <CustomerReferenceField />
-                            <StarRatingField />
+                            <StarRatingField
+                                label="resources.reviews.fields.rating"
+                                source="rating"
+                            />
                             <TextField source="comment" />
                             <TextField source="status" />
                             <EditButton />
@@ -190,8 +190,6 @@ const ProductEdit = () => (
                         allowRevert
                     />
                 </AccordionSection>
-                <CreateRevisionOnSave />
-                <ApplyChangesBasedOnSearchParam />
             </div>
         </ProductEditFormWithPreview>
     </Edit>
@@ -202,7 +200,7 @@ const ProductRevisionsCount = () => {
     const { data: revisions } = useGetRevisions(
         'products',
         {
-            recordId: record?.id,
+            recordId: record!.id,
         },
         { enabled: !!record?.id }
     );
@@ -225,7 +223,7 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
 
     const { isLoading } = useLockOnMount({
         resource,
-        id: record.id,
+        id: record?.id,
         lockMutationOptions: {
             onError: () => {
                 notify('ra-realtime.notification.lock.lockedBySomeoneElse');
@@ -234,40 +232,43 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
     });
 
     return (
-        <Form {...props}>
-            <Box
-                sx={{
-                    display: 'flex',
-                    '& > :first-child': {
-                        flex: 1,
-                        minWidth: '60%',
-                        maxWidth: '70%',
-                        borderWidth: '0 1px 0 0',
-                        borderRadius: `${theme?.shape?.borderRadius || 0} 0 0 ${
-                            theme?.shape?.borderRadius || 0
-                        }`,
-                    },
-                    '& > :last-child': {
-                        width: '25%',
-                        flexShrink: 0,
-                    },
-                }}
-            >
-                <Card>
-                    <CardContent>
-                        <Stack alignItems="flex-start">{children}</Stack>
-                    </CardContent>
-                    <CustomToolbar disabled={isLoading} />
-                </Card>
-                <div data-testid="product-edit-preview">
-                    <FormDataConsumer>
-                        {({ formData }) => {
-                            return <ProductPreview record={formData} />;
-                        }}
-                    </FormDataConsumer>
-                </div>
-            </Box>
-        </Form>
+        <CreateRevisionOnSave record={props.record} resource={props.resource}>
+            <Form {...props}>
+                <ApplyChangesBasedOnSearchParam />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        '& > :first-child': {
+                            flex: 1,
+                            minWidth: '60%',
+                            maxWidth: '70%',
+                            borderWidth: '0 1px 0 0',
+                            borderRadius: `${
+                                theme?.shape?.borderRadius || 0
+                            } 0 0 ${theme?.shape?.borderRadius || 0}`,
+                        },
+                        '& > :last-child': {
+                            width: '25%',
+                            flexShrink: 0,
+                        },
+                    }}
+                >
+                    <Card>
+                        <CardContent>
+                            <Stack>{children}</Stack>
+                        </CardContent>
+                        <CustomToolbar disabled={isLoading} />
+                    </Card>
+                    <div data-testid="product-edit-preview">
+                        <FormDataConsumer>
+                            {({ formData }) => {
+                                return <ProductPreview record={formData} />;
+                            }}
+                        </FormDataConsumer>
+                    </div>
+                </Box>
+            </Form>
+        </CreateRevisionOnSave>
     );
 };
 
@@ -276,7 +277,11 @@ const CustomToolbar = ({ disabled }: { disabled?: boolean }) => {
     const record = useRecordContext();
 
     const { identity } = useGetIdentity();
-    const { data: lock } = useGetLock(resource, { id: record.id });
+    const { data: lock } = useGetLock(
+        resource!,
+        { id: record!.id },
+        { enabled: !!resource && !!record?.id }
+    );
     const isMeLocker = lock?.identity === identity?.id;
 
     return (

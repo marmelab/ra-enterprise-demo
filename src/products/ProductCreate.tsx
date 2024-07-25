@@ -24,23 +24,15 @@ const ProductCreate = () => {
         <Create>
             <TabbedForm>
                 <FormTab label="resources.products.tabs.image">
-                    <TextInput source="image" fullWidth validate={required()} />
-                    <TextInput
-                        source="thumbnail"
-                        fullWidth
-                        validate={required()}
-                    />
+                    <TextInput source="image" validate={required()} />
+                    <TextInput source="thumbnail" validate={required()} />
                 </FormTab>
                 <FormTab
                     sx={{ maxWidth: '24em' }}
                     label="resources.products.tabs.details"
                     path="details"
                 >
-                    <TextInput
-                        source="reference"
-                        validate={required()}
-                        fullWidth
-                    />
+                    <TextInput source="reference" validate={required()} />
                     <NumberInput
                         source="price"
                         validate={required()}
@@ -86,7 +78,7 @@ const ProductCreate = () => {
                         reference="categories"
                         allowEmpty
                     >
-                        <SelectInput source="name" fullWidth />
+                        <SelectInput source="name" />
                     </ReferenceInput>
                     <NumberInput
                         source="stock"

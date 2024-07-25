@@ -8,10 +8,8 @@ import {
     radiantLightTheme,
     houseDarkTheme,
     houseLightTheme,
-    defaultTheme,
 } from 'react-admin';
-import { createTheme } from '@mui/material';
-import { getThemes } from './../layout/themes';
+import { softDarkTheme, softLightTheme } from './../layout/themes';
 
 export type ThemeName = 'soft' | 'default' | 'nano' | 'radiant' | 'house';
 
@@ -20,10 +18,6 @@ export interface Theme {
     light: RaThemeOptions;
     dark: RaThemeOptions;
 }
-
-const mySoftTheme = createTheme(defaultTheme);
-const { darkTheme: softDarkTheme, lightTheme: softLightTheme } =
-    getThemes(mySoftTheme);
 
 export const themes: Theme[] = [
     { name: 'soft', light: softLightTheme, dark: softDarkTheme },

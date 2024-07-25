@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Link, useRecordContext } from 'react-admin';
+import { FieldProps, Link, useRecordContext } from 'react-admin';
 
 import FullNameField from './FullNameField';
 import { Customer } from '../types';
 
-const CustomerLinkField = () => {
+const CustomerLinkField = (_props: FieldProps) => {
     const record = useRecordContext<Customer>();
     if (!record) {
         return null;
@@ -14,10 +14,6 @@ const CustomerLinkField = () => {
             <FullNameField />
         </Link>
     );
-};
-
-CustomerLinkField.defaultProps = {
-    source: 'customer_id',
 };
 
 export default CustomerLinkField;

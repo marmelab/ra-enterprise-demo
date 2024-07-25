@@ -59,7 +59,7 @@ const CategoryEditAside = () => {
         page: 1,
         perPage: 20,
     });
-    const { data, total, isLoading } = useGetList(
+    const { data, total, isPending } = useGetList(
         'products',
         {
             pagination: { page, perPage },
@@ -77,7 +77,7 @@ const CategoryEditAside = () => {
                 {
                     data,
                     total,
-                    isLoading,
+                    isPending,
                     resource: 'products',
                     filterValues: {},
                     showFilter: (): void => undefined,

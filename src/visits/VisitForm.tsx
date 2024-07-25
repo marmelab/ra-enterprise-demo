@@ -56,13 +56,13 @@ export const VisitForm = () => {
             count?: string;
             color?: string;
         } = {};
-        if (!values.storeId) errors.storeId = 'ra.validation.required';
+        if (values.storeId == null) errors.storeId = 'ra.validation.required';
         if (!values.start) errors.start = 'ra.validation.required';
         if (!values.end) errors.end = 'ra.validation.required';
         if (!values.interval) errors.interval = 'ra.validation.required';
         if (!values.freq) errors.freq = 'ra.validation.required';
-        if (!values.count) errors.count = 'ra.validation.required';
-        if (!values.color) errors.color = 'ra.validation.required';
+        if (values.count == null) errors.count = 'ra.validation.required';
+        if (values.color == null) errors.color = 'ra.validation.required';
         if (
             values.start &&
             values.end &&
@@ -124,6 +124,7 @@ export const VisitForm = () => {
                     aria-label="freq"
                     inputProps={{ 'data-testid': 'freq-input' }}
                     isRequired
+                    fullWidth={false}
                 />
             </Stack>
             <Stack direction="row" spacing={1}>

@@ -9,13 +9,11 @@ import {
     useTheme,
     Title,
     RaThemeOptions,
-    useThemesContext,
 } from 'react-admin';
 
 const Configuration = () => {
     const translate = useTranslate();
     const [locale, setLocale] = useLocaleState();
-    const { darkTheme, lightTheme } = useThemesContext();
     const [theme, setTheme] = useTheme();
 
     const currentMode = (theme as RaThemeOptions)?.palette?.mode ?? theme;
@@ -31,7 +29,7 @@ const Configuration = () => {
                     variant="contained"
                     sx={{ margin: '1em' }}
                     color={currentMode === 'light' ? 'primary' : 'secondary'}
-                    onClick={() => setTheme(lightTheme)}
+                    onClick={() => setTheme('light')}
                 >
                     {translate('pos.theme.light')}
                 </Button>
@@ -39,7 +37,7 @@ const Configuration = () => {
                     variant="contained"
                     sx={{ margin: '1em' }}
                     color={currentMode === 'dark' ? 'primary' : 'secondary'}
-                    onClick={() => setTheme(darkTheme)}
+                    onClick={() => setTheme('dark')}
                 >
                     {translate('pos.theme.dark')}
                 </Button>

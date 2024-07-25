@@ -83,6 +83,14 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 rejected: 'Rejetés',
                 pending: 'En attente',
             },
+            events: {
+                review: {
+                    title: 'Commente sur "%{product}"',
+                },
+                order: {
+                    title: 'Commande 1 poster |||| Commande %{smart_count} posters',
+                },
+            },
         },
         resources: {
             customers: {
@@ -91,7 +99,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     address: 'Rue',
                     birthday: 'Anniversaire',
                     city: 'Ville',
-                    commands: 'Commandes',
+                    orders: 'Commandes',
                     first_name: 'Prénom',
                     first_seen: 'Première visite',
                     groups: 'Segments',
@@ -106,7 +114,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     zipcode: 'Code postal',
                     password: 'Mot de passe',
                     confirm_password: 'Confirmez le mot de passe',
-                    nb_commands: 'Commandes',
+                    nb_orders: 'Commandes',
                 },
                 filters: {
                     last_visited: 'Dernière visite',
@@ -136,7 +144,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                         'La confirmation du mot de passe est différent du mot de passe.',
                 },
             },
-            commands: {
+            orders: {
                 name: 'Commande |||| Commandes',
                 amount: '1 commande |||| %{smart_count} commandes',
                 title: 'Commande n°%{reference}',
@@ -175,7 +183,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                     id: 'Numéro',
                     date: 'Date de facture',
                     customer_id: 'Client',
-                    command_id: 'Commande',
+                    order_id: 'Commande',
                     date_gte: 'Emises depuis',
                     date_lte: 'Emises avant',
                     address: 'Adresse',
@@ -241,7 +249,7 @@ const customFrenchMessages: TranslationMessages = mergeTranslations(
                 detail: 'Détail du commentaire',
                 fields: {
                     customer_id: 'Client',
-                    command_id: 'Commande',
+                    order_id: 'Commande',
                     product_id: 'Produit',
                     date_gte: 'Publié depuis',
                     date_lte: 'Publié avant',

@@ -6,7 +6,7 @@ import { FieldProps, useRecordContext } from 'react-admin';
 import AvatarField from './AvatarField';
 import { Customer } from '../types';
 
-interface Props extends FieldProps<Customer> {
+interface Props extends Omit<FieldProps<Customer>, 'source'> {
     size?: string;
     sx?: SxProps;
 }
@@ -35,11 +35,6 @@ const FullNameField = (props: Props) => {
             {record.first_name} {record.last_name}
         </Typography>
     ) : null;
-};
-
-FullNameField.defaultProps = {
-    source: 'last_name',
-    label: 'resources.customers.fields.name',
 };
 
 export default memo<Props>(FullNameField);

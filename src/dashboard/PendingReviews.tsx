@@ -28,7 +28,7 @@ const PendingReviews = () => {
     const {
         data: reviews,
         total,
-        isLoading,
+        isPending,
     } = useGetList<Review>('reviews', {
         filter: { status: 'pending' },
         sort: { field: 'date', order: 'DESC' },
@@ -41,9 +41,9 @@ const PendingReviews = () => {
     // if the first customer is loaded, then all the customers are loaded.
     const isCustomerDataLoaded = useIsDataLoaded(
         ['customers', 'getMany', { ids: [String(reviews?.[0].customer_id)] }],
-        { enabled: !isLoading && reviews && reviews.length > 0 }
+        { enabled: !isPending && reviews && reviews.length > 0 }
     );
-    const display = isLoading || !isCustomerDataLoaded ? 'none' : 'block';
+    const display = isPending || !isCustomerDataLoaded ? 'none' : 'block';
 
     return (
         <CardWithIcon
@@ -84,7 +84,12 @@ const PendingReviews = () => {
                         </ListItemAvatar>
 
                         <ListItemText
-                            primary={<StarRatingField record={record} />}
+                            primary={
+                                <StarRatingField
+                                    record={record}
+                                    source="rating"
+                                />
+                            }
                             secondary={record.comment}
                             sx={{
                                 overflowY: 'hidden',

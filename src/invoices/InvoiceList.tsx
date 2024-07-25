@@ -1,12 +1,17 @@
 import * as React from 'react';
 import {
     List,
-    Datagrid,
+    DatagridConfigurable,
     TextField,
     DateField,
     ReferenceField,
     NumberField,
     DateInput,
+    ReferenceInput,
+    TopToolbar,
+    FilterButton,
+    SelectColumnsButton,
+    ExportButton,
 } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
 
@@ -19,7 +24,25 @@ import { USDFormat } from '../formatUtils';
 const listFilters = [
     <DateInput key="date_gte" source="date_gte" alwaysOn />,
     <DateInput key="date_lte" source="date_lte" alwaysOn />,
+    <ReferenceInput
+        key="customer_id"
+        source="customer_id"
+        reference="customers"
+    />,
+    <ReferenceInput
+        key="command_id"
+        source="command_id"
+        reference="commands"
+    />,
 ];
+
+const ListActions = () => (
+    <TopToolbar>
+        <FilterButton />
+        <SelectColumnsButton />
+        <ExportButton />
+    </TopToolbar>
+);
 
 const InvoiceList = () => {
     useDefineAppLocation('sales.invoices');
@@ -30,8 +53,9 @@ const InvoiceList = () => {
             perPage={25}
             sort={{ field: 'date', order: 'DESC' }}
             sx={{ marginTop: isSmall ? undefined : 1 }}
+            actions={<ListActions />}
         >
-            <Datagrid
+            <DatagridConfigurable
                 rowClick="expand"
                 expand={<InvoiceShow />}
                 sx={{
@@ -62,14 +86,14 @@ const InvoiceList = () => {
                 >
                     <AddressField />
                 </ReferenceField>
-                <ReferenceField source="command_id" reference="commands">
+                <ReferenceField source="order_id" reference="orders">
                     <TextField source="reference" />
                 </ReferenceField>
                 <NumberField source="total_ex_taxes" options={USDFormat(2)} />
                 <NumberField source="delivery_fees" options={USDFormat(2)} />
                 <NumberField source="taxes" options={USDFormat(2)} />
                 <NumberField source="total" options={USDFormat(2)} />
-            </Datagrid>
+            </DatagridConfigurable>
         </List>
     );
 };

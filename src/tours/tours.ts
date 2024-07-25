@@ -1,9 +1,10 @@
 import { LocksDataProvider } from '@react-admin/ra-realtime';
 import { TourType } from '@react-admin/ra-tour';
-import { fireEvent, screen } from '@testing-library/react';
+// We can't use @testing-library/react as it will wrap all mutations in act() which is disabled in production mode
+import { fireEvent, screen } from '@testing-library/dom';
 import { endOfYesterday, addHours } from 'date-fns';
-import { QueryClient } from 'react-query';
-import randomCommandBuilder from './randomCommandBuilder';
+import { QueryClient } from '@tanstack/react-query';
+import randomOrderBuilder from './randomOrderBuilder';
 import { generateIdentity } from './randomLockBuilder';
 
 const getRandomInt = (min: number, max: number) => {
@@ -27,7 +28,7 @@ const interval = (
         }, expirationMs);
     });
 
-let newCommandsIds: number[] = [];
+let newOrdersIds: number[] = [];
 
 const clearStorage = () => {
     Object.keys(localStorage).forEach(key => {
@@ -110,24 +111,29 @@ const tours: { [id: string]: TourType } = {
                         },
                     },
                 },
-                after: ({ target, redirect }) => {
-                    target.disabled = false;
-                    target.click();
-                    setTimeout(() => {
-                        redirect('/products/126');
-                        // close the notification
-                        fireEvent.keyDown(screen.getByText('Element updated'), {
-                            key: 'Escape',
-                            code: 'Escape',
-                        });
-                    }, 100);
-                },
+                after: ({ target, redirect }) =>
+                    new Promise(resolve => {
+                        target.disabled = false;
+                        target.click();
+                        setTimeout(async () => {
+                            redirect('/products/126');
+                            // close the notification
+                            fireEvent.keyDown(
+                                await screen.findByText('Element updated'),
+                                {
+                                    key: 'Escape',
+                                    code: 'Escape',
+                                }
+                            );
+                            resolve();
+                        }, 100);
+                    }),
             },
             {
-                target: '.RaAccordionSection-fullWidth:nth-of-type(4)',
+                target: '.RaAccordionSection-fullWidth:last-child .RaAccordionSection-summary',
                 content: 'tours.ra-history.revision_list',
                 before: async ({ target }) => {
-                    target.firstChild.click();
+                    target.click();
                     await timeout(500);
                 },
                 after: () => {
@@ -360,7 +366,7 @@ const tours: { [id: string]: TourType } = {
                 after: ({ redirect }) => {
                     const params = JSON.stringify({
                         last_seen_gte: endOfYesterday().toISOString(),
-                        nb_commands_gte: 1,
+                        nb_orders_gte: 1,
                     });
 
                     redirect(
@@ -484,22 +490,20 @@ const tours: { [id: string]: TourType } = {
                 },
                 target: '.rc-tree',
                 content: 'tours.ra-tree.infinite_levels',
-                after: async ({ target }) => {
-                    await interval(
-                        () => {
-                            const switcher = target
-                                // not the first line or it collapses all the tree
-                                .querySelector(
-                                    '.rc-tree-treenode:not(:nth-child(1)) .rc-tree-switcher.rc-tree-switcher_open'
-                                );
+                after: async () => {
+                    let switcher = document
+                        // not the first line or it collapses all the tree
+                        .querySelector<HTMLButtonElement>(
+                            '.rc-tree .rc-tree-treenode .rc-tree-switcher.rc-tree-switcher_close'
+                        );
 
-                            if (switcher) {
-                                switcher.click();
-                            }
-                        },
-                        500,
-                        2000
-                    );
+                    while (switcher) {
+                        switcher.click();
+                        await timeout(250);
+                        switcher = document.querySelector(
+                            '.rc-tree .rc-tree-treenode .rc-tree-switcher.rc-tree-switcher_close'
+                        );
+                    }
                 },
             },
             {
@@ -533,20 +537,17 @@ const tours: { [id: string]: TourType } = {
                                         sort: { field: 'id', order: 'ASC' },
                                     });
                                 // Add a new Order
-                                const { data: newCommand } =
-                                    await dataProvider.create('commands', {
-                                        data: randomCommandBuilder(
-                                            1,
-                                            customers
-                                        ),
+                                const { data: newOrder } =
+                                    await dataProvider.create('orders', {
+                                        data: randomOrderBuilder(1, customers),
                                     });
 
-                                newCommandsIds.push(newCommand.id);
+                                newOrdersIds.push(newOrder.id);
                                 // Then notify the Real-time dataProvider
-                                const topic = 'resource/commands';
+                                const topic = 'resource/orders';
                                 dataProvider.publish(topic, {
                                     type: 'created',
-                                    payload: { ids: [newCommand.id] },
+                                    payload: { ids: [newOrder.id] },
                                     date: new Date(),
                                 });
                             }),
@@ -554,7 +555,7 @@ const tours: { [id: string]: TourType } = {
                     );
                     await timeout(1500); // would be so awesome if redirect was awaitable!
                 },
-                target: '[data-testid="commands-menu"]',
+                target: '[data-testid="orders-menu"]',
                 content: 'tours.ra-realtime.intro',
                 disableBeacon: true,
                 joyrideProps: {
@@ -563,7 +564,7 @@ const tours: { [id: string]: TourType } = {
                 after: async ({ redirect }) => {
                     localStorage.setItem('batchLevel', '1');
                     await timeout(500);
-                    redirect('/commands');
+                    redirect('/orders');
                 },
             },
             {
@@ -585,25 +586,25 @@ const tours: { [id: string]: TourType } = {
                         }
                     );
                     // Add a new Order
-                    const { data: newCommand1 } = await dataProvider.create(
-                        'commands',
+                    const { data: newOrder1 } = await dataProvider.create(
+                        'orders',
                         {
-                            data: randomCommandBuilder(2, customers),
+                            data: randomOrderBuilder(2, customers),
                         }
                     );
-                    newCommandsIds.push(newCommand1.id);
-                    const { data: newCommand2 } = await dataProvider.create(
-                        'commands',
+                    newOrdersIds.push(newOrder1.id);
+                    const { data: newOrder2 } = await dataProvider.create(
+                        'order',
                         {
-                            data: randomCommandBuilder(2, customers),
+                            data: randomOrderBuilder(2, customers),
                         }
                     );
-                    newCommandsIds.push(newCommand2.id);
+                    newOrdersIds.push(newOrder2.id);
                     // Then notify the Real-time dataProvider
-                    const topic = 'resource/commands';
+                    const topic = 'resource/orders';
                     dataProvider.publish(topic, {
                         type: 'created',
-                        payload: { ids: [newCommand1.id, newCommand2.id] },
+                        payload: { ids: [newOrder1.id, newOrder2.id] },
                         date: new Date(),
                     });
                     await timeout(1000);
@@ -658,7 +659,9 @@ const tours: { [id: string]: TourType } = {
                                 })
                                 .then(() => {
                                     (queryClient as QueryClient).refetchQueries(
-                                        ['products', 'getLocks']
+                                        {
+                                            queryKey: ['products', 'getLocks'],
+                                        }
                                     );
                                 });
                         }, 4000);
@@ -690,10 +693,9 @@ const tours: { [id: string]: TourType } = {
                                     .then(() => {
                                         (
                                             queryClient as QueryClient
-                                        ).refetchQueries([
-                                            'products',
-                                            'getLocks',
-                                        ]);
+                                        ).refetchQueries({
+                                            queryKey: ['products', 'getLocks'],
+                                        });
                                     });
                             }
                             return Promise.resolve();
@@ -714,12 +716,12 @@ const tours: { [id: string]: TourType } = {
             localStorage.setItem('batchLevel', '0');
             // Reset new Orders
             // We have to delete them to avoid having them reappear if the tour is restarted
-            await dataProvider.deleteMany('commands', {
-                ids: newCommandsIds,
+            await dataProvider.deleteMany('orders', {
+                ids: newOrdersIds,
             });
 
             refresh();
-            newCommandsIds = [];
+            newOrdersIds = [];
         },
     },
     'ra-editable-datagrid': {
@@ -822,14 +824,14 @@ const tours: { [id: string]: TourType } = {
                 },
             },
             {
-                target: '[data-testid="commands-menu"]',
+                target: '[data-testid="orders-menu"]',
                 content: 'tours.ra-navigation-breadcrumb.navigate',
                 disableBeacon: true,
                 joyrideProps: {
                     disableScrolling: true,
                 },
                 after: ({ redirect }) => {
-                    redirect('/commands');
+                    redirect('/orders');
                 },
             },
             {

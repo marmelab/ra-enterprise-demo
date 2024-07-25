@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
     BooleanField,
     CreateButton,
-    Datagrid,
+    DatagridConfigurable,
     DateField,
     DateInput,
     ExportButton,
@@ -11,6 +11,7 @@ import {
     NullableBooleanInput,
     NumberField,
     SearchInput,
+    SelectColumnsButton,
     TopToolbar,
 } from 'react-admin';
 import { useMediaQuery, Theme } from '@mui/material';
@@ -40,6 +41,7 @@ const visitorFilters = [
 
 const VisitorListActions = () => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
+    const [view] = useListView();
     const [showFilter, setShowFilter] = React.useState(false);
 
     // When resizing manually the window to go from large to small, the useMediaQuery used here
@@ -60,6 +62,7 @@ const VisitorListActions = () => {
         <TopToolbar>
             {showFilter ? <FilterButton /> : null}
             <CreateButton />
+            {view === 'table' ? <SelectColumnsButton /> : null}
             <ExportButton />
             <ListViewButton />
         </TopToolbar>
@@ -86,8 +89,7 @@ const VisitorList = () => {
             ) : view === 'grid' ? (
                 <DesktopGrid>{columns}</DesktopGrid>
             ) : (
-                <Datagrid
-                    optimized
+                <DatagridConfigurable
                     rowClick="edit"
                     sx={{
                         '& .column-groups': {
@@ -95,21 +97,22 @@ const VisitorList = () => {
                             lg: { display: 'table-cell' },
                         },
                     }}
+                    omit={['birthday']}
                 >
                     {columns}
-                </Datagrid>
+                </DatagridConfigurable>
             )}
         </List>
     );
 };
 
 const columns = [
-    <CustomerLinkField key="customer" />,
+    <CustomerLinkField key="customer" source="customer_id" />,
     <DateField source="last_seen" key="last_seen" />,
     <NumberField
-        source="nb_commands"
-        key="nb_commands"
-        label="resources.customers.fields.commands"
+        source="nb_orders"
+        key="nb_orders"
+        label="resources.customers.fields.orders"
         sx={{ color: 'info.main', fontWeight: 'fontWeightBold' }}
     />,
     <ColoredNumberField

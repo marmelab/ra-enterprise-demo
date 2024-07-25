@@ -7,14 +7,16 @@ const Poster = () => {
     const record = useRecordContext<Product>();
     if (!record) return null;
     return (
-        <Card sx={{ display: 'inline-block' }}>
-            <CardMedia
-                component="img"
-                image={record.image}
-                alt=""
-                sx={{ maxWidth: '42em', maxHeight: '15em' }}
-            />
-        </Card>
+        <div>
+            <Card sx={{ display: 'inline-block' }}>
+                <CardMedia
+                    component="img"
+                    image={record.image}
+                    alt=""
+                    sx={{ maxWidth: '42em', maxHeight: '15em' }}
+                />
+            </Card>
+        </div>
     );
 };
 

@@ -85,10 +85,10 @@ export const CustomerListItem = (props: any) => {
                         {content.pending_orders > 0 ? (
                             <LinkedData
                                 icon={<ShoppingCartIcon fontSize="small" />}
-                                label={translate('resources.commands.name', {
+                                label={translate('resources.orders.name', {
                                     smart_count: 2,
                                 })}
-                                to={`/commands?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${content.id}%7D`}
+                                to={`/orders?filter=%7B"status"%3A"ordered"%2C"customer_id"%3A${content.id}%7D`}
                             >
                                 {content.pending_orders}
                             </LinkedData>
@@ -100,7 +100,7 @@ export const CustomerListItem = (props: any) => {
                                 label={translate(
                                     'resources.customers.fields.total_spent'
                                 )}
-                                to={`/commands?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${content.id}%7D`}
+                                to={`/orders?filter=%7B"status"%3A"delivered"%2C"customer_id"%3A${content.id}%7D`}
                             >
                                 {content.total_spent.toLocaleString()}
                             </LinkedData>

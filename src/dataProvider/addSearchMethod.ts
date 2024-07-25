@@ -6,7 +6,7 @@ const addSearchMethod = (dataProvider: DataProvider) => {
         ...dataProvider,
         search: async (query: string) => {
             const resultsByResource = await Promise.all(
-                ['customers', 'products', 'commands', 'reviews'].map(resource =>
+                ['customers', 'products', 'orders', 'reviews'].map(resource =>
                     searchInResource(dataProvider, resource, query)
                 )
             );
@@ -58,7 +58,7 @@ const searchInResource = async (
 
 const ResultBuilders: Record<string, any> = {
     customers: async (record: any, dataProvider: DataProvider) => {
-        const orders = await dataProvider.getList('commands', {
+        const orders = await dataProvider.getList('orders', {
             filter: { customer_id: record.id },
             pagination: { page: 1, perPage: 1 },
             sort: { field: 'id', order: 'ASC' },
@@ -87,7 +87,7 @@ const ResultBuilders: Record<string, any> = {
             reviews: reviews.total,
         };
     },
-    commands: async (record: any, dataProvider: DataProvider) => {
+    orders: async (record: any, dataProvider: DataProvider) => {
         const customer = await dataProvider.getOne('customers', {
             id: record.customer_id,
         });

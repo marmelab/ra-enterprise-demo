@@ -67,7 +67,7 @@ export const CommandListItem = (props: any) => {
                     &nbsp;-&nbsp;
                     {`${content.customer.first_name} ${content.customer.last_name}`}
                     &nbsp;-&nbsp;
-                    {`${translate('resources.commands.fields.basket.total')} ${
+                    {`${translate('resources.orders.fields.basket.total')} ${
                         content.total
                     }`}
                     €

@@ -51,7 +51,7 @@ const changeOrderStatusEvent = (
     return {
         date: date.toISOString(),
         author,
-        resource: 'commands',
+        resource: 'orders',
         action: 'update',
         payload: {
             id: order.id,
@@ -74,8 +74,8 @@ const generateFakeEvents = (data: Data): EventRecord[] => {
     const pickRandomProduct = () =>
         data.products[getRandomId(data.products.length)];
 
-    const pendingOrders = data.commands.filter(
-        command => command.status === 'ordered'
+    const pendingOrders = data.orders.filter(
+        order => order.status === 'ordered'
     );
     const pickRandomOrder = () =>
         pendingOrders[getRandomId(pendingOrders.length)];

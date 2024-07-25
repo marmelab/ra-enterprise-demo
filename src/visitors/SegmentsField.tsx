@@ -10,7 +10,7 @@ const segmentsById = segments.reduce((acc, segment) => {
 }, {} as { [key: string]: any });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SegmentsField = (props: FieldProps) => {
+const SegmentsField = (_: Omit<FieldProps, 'source'> & { source?: string }) => {
     const translate = useTranslate();
     const record = useRecordContext<Customer>();
     if (!record || !record.groups) {

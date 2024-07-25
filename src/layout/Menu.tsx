@@ -43,7 +43,7 @@ export const newCustomerFilter = querystring.stringify({
 });
 
 export const visitorsFilter = querystring.stringify({
-    filter: JSON.stringify({ nb_commands_lte: 0 }),
+    filter: JSON.stringify({ nb_orders_lte: 0 }),
 });
 
 export const pendingReviewFilter = querystring.stringify({
@@ -118,18 +118,18 @@ export const Menu = () => (
 );
 
 const SalesMenuItem = (): ReactElement => {
-    const commandsChangeCount = useResourceChangeCounter(
-        'commands',
-        'sales.commands'
+    const ordersChangeCount = useResourceChangeCounter(
+        'orders',
+        'sales.orders'
     );
     const translate = useTranslate();
     return (
-        <StyledBadgeForText badgeContent={commandsChangeCount} color="primary">
+        <StyledBadgeForText badgeContent={ordersChangeCount} color="primary">
             <SolarMenu.Item
                 name="sales"
                 icon={<products.iconSales />}
                 label="pos.menu.sales"
-                data-testid="commands-menu"
+                data-testid="orders-menu"
                 subMenu={
                     <>
                         <Typography variant="h6" gutterBottom ml={1}>
@@ -137,17 +137,16 @@ const SalesMenuItem = (): ReactElement => {
                         </Typography>
                         <SolarMenu.List dense>
                             <StyledBadgeForText
-                                badgeContent={commandsChangeCount}
+                                badgeContent={ordersChangeCount}
                                 color="primary"
                             >
                                 <SolarMenu.Item
-                                    name="sales.commands"
-                                    to="/commands"
+                                    name="sales.orders"
+                                    to="/orders"
                                     icon={<orders.icon />}
-                                    label={translate(
-                                        `resources.commands.name`,
-                                        { smart_count: 2 }
-                                    )}
+                                    label={translate(`resources.orders.name`, {
+                                        smart_count: 2,
+                                    })}
                                 />
                             </StyledBadgeForText>
                             <SolarMenu.Item
@@ -416,10 +415,10 @@ const SearchMenuItem = () => (
 );
 
 const SolarMenuUserItem = () => {
-    const { isLoading, identity } = useGetIdentity();
+    const { isPending, identity } = useGetIdentity();
     const authProvider = useAuthProvider();
 
-    if (isLoading) return null;
+    if (isPending) return null;
     const avatarSx = { maxWidth: '1.4em', maxHeight: '1.4em' };
     return (
         <SolarMenu.Item

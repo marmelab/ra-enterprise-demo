@@ -6,6 +6,7 @@ import {
     Edit,
     Form,
     Labeled,
+    Link as RaLink,
     PrevNextButtons,
     ReferenceField,
     SelectInput,
@@ -14,7 +15,6 @@ import {
     useRecordContext,
     useTranslate,
 } from 'react-admin';
-import { Link as RouterLink } from 'react-router-dom';
 import {
     Card,
     CardContent,
@@ -40,7 +40,7 @@ const OrderTitle = () => {
     const record = useRecordContext<Order>();
     return record ? (
         <span>
-            {translate('resources.commands.title', {
+            {translate('resources.orders.title', {
                 reference: record.reference,
             })}
         </span>
@@ -50,25 +50,13 @@ const OrderTitle = () => {
 const CustomerDetails = () => {
     const record = useRecordContext<Customer>();
     return (
-        <div>
-            <Typography
-                component={RouterLink}
-                color="primary"
-                to={`/customers/${record?.id}`}
-                style={{ textDecoration: 'none' }}
-            >
+        <Typography>
+            <RaLink to={`/customers/${record?.id}`}>
                 {record?.first_name} {record?.last_name}
-            </Typography>
+            </RaLink>
             <br />
-            <Typography
-                component={Link}
-                color="primary"
-                href={`mailto:${record?.email}`}
-                style={{ textDecoration: 'none' }}
-            >
-                {record?.email}
-            </Typography>
-        </div>
+            <Link href={`mailto:${record?.email}`}>{record?.email}</Link>
+        </Typography>
     );
 };
 
@@ -92,7 +80,7 @@ const Spacer = () => <Box mb={1}>&nbsp;</Box>;
 const OrderForm = () => {
     const translate = useTranslate();
     const record = useRecordContext();
-    useDefineAppLocation('sales.commands.edit', { record });
+    useDefineAppLocation('sales.orders.edit', { record });
     return (
         <Form>
             <Box
@@ -121,7 +109,7 @@ const OrderForm = () => {
                             <Grid item xs={12} sm={12} md={8}>
                                 <Typography variant="h6" gutterBottom>
                                     {translate(
-                                        'resources.commands.section.order'
+                                        'resources.orders.section.order'
                                     )}
                                 </Typography>
                                 <Grid container>
@@ -159,6 +147,7 @@ const OrderForm = () => {
                                                     disabled: true,
                                                 },
                                             ]}
+                                            sx={{ width: '80%' }}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={12} md={6}>
@@ -174,7 +163,7 @@ const OrderForm = () => {
                             <Grid item xs={12} sm={12} md={4}>
                                 <Typography variant="h6" gutterBottom>
                                     {translate(
-                                        'resources.commands.section.customer'
+                                        'resources.orders.section.customer'
                                     )}
                                 </Typography>
                                 <ReferenceField
@@ -188,7 +177,7 @@ const OrderForm = () => {
 
                                 <Typography variant="h6" gutterBottom>
                                     {translate(
-                                        'resources.commands.section.shipping_address'
+                                        'resources.orders.section.shipping_address'
                                     )}
                                 </Typography>
                                 <ReferenceField
@@ -203,7 +192,7 @@ const OrderForm = () => {
                         <Spacer />
 
                         <Typography variant="h6" gutterBottom>
-                            {translate('resources.commands.section.items')}
+                            {translate('resources.orders.section.items')}
                         </Typography>
                         <div>
                             <Basket />
@@ -211,7 +200,7 @@ const OrderForm = () => {
                         <Spacer />
 
                         <Typography variant="h6" gutterBottom>
-                            {translate('resources.commands.section.total')}
+                            {translate('resources.orders.section.total')}
                         </Typography>
                         <div>
                             <Totals />

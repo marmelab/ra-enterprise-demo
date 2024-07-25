@@ -5,7 +5,6 @@ import {
     TextInput,
     SimpleForm,
     DateField,
-    EditProps,
     Labeled,
 } from 'react-admin';
 import { Box, Grid, Stack, IconButton, Typography } from '@mui/material';
@@ -17,14 +16,15 @@ import StarRatingField from './StarRatingField';
 import ReviewEditToolbar from './ReviewEditToolbar';
 import { Review } from '../types';
 
-interface Props extends EditProps<Review> {
+interface ReviewEditProps {
+    id: Review['id'];
     onCancel: () => void;
 }
 
-const ReviewEdit = ({ onCancel, ...props }: Props) => {
+const ReviewEdit = ({ id, onCancel }: ReviewEditProps) => {
     const translate = useTranslate();
     return (
-        <EditBase {...props}>
+        <EditBase id={id}>
             <Box
                 width={{ xs: '100vW', sm: 400 }}
                 pt={{ xs: 5, sm: 0 }}
@@ -44,12 +44,12 @@ const ReviewEdit = ({ onCancel, ...props }: Props) => {
                 >
                     <Grid container rowSpacing={1} mb={1}>
                         <Grid item xs={6}>
-                            <Labeled>
+                            <Labeled source="customer_id">
                                 <CustomerReferenceField />
                             </Labeled>
                         </Grid>
                         <Grid item xs={6}>
-                            <Labeled>
+                            <Labeled source="product_id">
                                 <ProductReferenceField />
                             </Labeled>
                         </Grid>
@@ -60,16 +60,11 @@ const ReviewEdit = ({ onCancel, ...props }: Props) => {
                         </Grid>
                         <Grid item xs={6}>
                             <Labeled>
-                                <StarRatingField />
+                                <StarRatingField source="rating" />
                             </Labeled>
                         </Grid>
                     </Grid>
-                    <TextInput
-                        source="comment"
-                        maxRows={15}
-                        multiline
-                        fullWidth
-                    />
+                    <TextInput source="comment" maxRows={15} multiline />
                 </SimpleForm>
             </Box>
         </EditBase>

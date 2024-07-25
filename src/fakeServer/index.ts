@@ -1,4 +1,3 @@
-import FakeRest from 'fakerest';
 import fetchMock from 'fetch-mock';
 import generateData from 'data-generator-retail';
 // @ts-ignore
@@ -21,11 +20,12 @@ import {
 import generateFakeEvents from './generateFakeEvents';
 import generateFakeVisits from './generateFakeVisits';
 import generateFakeRevisions from './generateFakeRevisions';
+import { FetchMockAdapter, Middleware } from 'fakerest';
 
 const getAllChildrenCategories = (
-    categories: Category[],
+    categories: (Category & { children: Identifier[] })[],
     parentId: Identifier
-) => {
+): Array<Identifier | any> => {
     const parentCategory = categories.find(({ id }) => id === parentId);
     if (!parentCategory) {
         return [];
@@ -38,7 +38,10 @@ const getAllChildrenCategories = (
 };
 
 const rebindProductToCategories =
-    (originalCategories: Category[], newCategories: Category[]) =>
+    (
+        originalCategories: Category[],
+        newCategories: (Category & { children: Identifier[] })[]
+    ) =>
     (product: Product) => {
         const originalCategory = originalCategories.find(
             c => c.id === product.category_id
@@ -76,7 +79,7 @@ const rebindProductToCategories =
 
 export default (): (() => void) => {
     // @ts-ignore
-    const data: Data = generateData({ serializeDate: true });
+    const data: Data = generateData();
     const products = data.products.map(
         rebindProductToCategories(data.categories, demoData.categories)
     );
@@ -94,36 +97,40 @@ export default (): (() => void) => {
         admins,
     };
 
-    const restServer = new FakeRest.FetchServer('http://localhost:4000');
+    const middleware: Middleware = async (context, next) => {
+        if (
+            context.method === 'GET' &&
+            context.collection === 'products' &&
+            context.params.filter &&
+            context.params.filter.category_id !== undefined
+        ) {
+            // to include all sub categories of the selected category in the filter
+            context.params.filter.category_id = getAllChildrenCategories(
+                mergedData.categories,
+                parseInt(context.params.filter.category_id)
+            );
+        }
+        return next(context);
+    };
+
+    const restServer = new FetchMockAdapter({
+        baseUrl: 'http://localhost:4000',
+        data: mergedData,
+        middlewares: [middleware],
+        loggingEnabled: true,
+    });
     if (window) {
         window.restServer = restServer; // give way to update data in the console
     }
-    restServer.addRequestInterceptor((request: any) => {
-        // intercepts list of products with a category filter
-        if (
-            request.method === 'GET' &&
-            request.url.includes('/products') &&
-            request.params.filter &&
-            request.params.filter.category_id !== undefined
-        ) {
-            // to include all sub categories of the selected category in the filter
-            request.params.filter.category_id = getAllChildrenCategories(
-                mergedData.categories,
-                parseInt(request.params.filter.category_id)
-            );
-        }
-        return request;
-    });
-    restServer.init(mergedData);
-    restServer.toggleLogging(); // logging is off by default, enable it
+
     fetchMock.mock('begin:http://localhost:4000', restServer.getHandler());
     return () => fetchMock.restore();
 };
 
-export interface Data {
+export interface Data extends Record<string, any> {
     admins: AdminUser[];
-    categories: Category[];
-    commands: Order[];
+    categories: (Category & { children: Identifier[] })[];
+    orders: Order[];
     customers: Customer[];
     events: EventRecord[];
     products: Product[];

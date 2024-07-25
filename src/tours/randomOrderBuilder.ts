@@ -1,24 +1,31 @@
-import { Order } from '../types';
-import { RaRecord } from 'react-admin';
+import { Customer, Order } from '../types';
 
 /**
- * Generate random commands
+ * Generate random orders
  *
  * This generator assumes that:
  * - Customer ids exist until 50
  * - Product ids exist until 20
  */
-const randomCommandBuilder = (
+const randomOrderBuilder = (
     batchLevel: number,
-    customers: RaRecord[]
-): Omit<Order, 'id'> => {
+    customers: Customer[]
+): Omit<
+    Order,
+    | 'id'
+    | 'total_ex_taxes'
+    | 'delivery_fees'
+    | 'tax_rate'
+    | 'taxes'
+    | 'returned'
+> & { batch: number } => {
     const basket = new Array(Math.round(Math.random() * 2) + 1).map(() => ({
         product_id: Math.round(Math.random() * 20),
         quantity: Math.round(Math.random() * 2) + 1,
     }));
 
     return {
-        date: new Date(),
+        date: new Date().toString(),
         total: (Math.round(Math.random() * 10000) / 100) * basket.length,
         status: 'ordered',
         reference: Math.random()
@@ -32,4 +39,4 @@ const randomCommandBuilder = (
     };
 };
 
-export default randomCommandBuilder;
+export default randomOrderBuilder;

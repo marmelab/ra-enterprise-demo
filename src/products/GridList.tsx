@@ -20,8 +20,8 @@ import { LockOverlay } from './LockOverlay';
 import { USDFormat } from '../formatUtils';
 
 const GridList = () => {
-    const { isLoading } = useListContext();
-    return isLoading ? <LoadingGridList /> : <LoadedGridList />;
+    const { isPending } = useListContext();
+    return isPending ? <LoadingGridList /> : <LoadedGridList />;
 };
 
 const useColsForWidth = () => {
@@ -69,7 +69,7 @@ const LoadedGridList = () => {
     const theme = useTheme();
     const { data } = useListContext();
     const resource = useResourceContext();
-    const { data: locks } = useGetLocks(resource);
+    const { data: locks } = useGetLocks(resource!, {}, { enabled: !!resource });
     const cols = useColsForWidth();
     const createPath = useCreatePath();
     const firstLockRecordId = React.useRef<Identifier>();

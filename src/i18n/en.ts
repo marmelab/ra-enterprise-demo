@@ -82,12 +82,20 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 rejected: 'Rejected',
                 pending: 'Pending',
             },
+            events: {
+                review: {
+                    title: 'Posted review on "%{product}"',
+                },
+                order: {
+                    title: 'Ordered 1 poster |||| Ordered %{smart_count} posters',
+                },
+            },
         },
         resources: {
             customers: {
                 name: 'Customer |||| Customers',
                 fields: {
-                    commands: 'Orders',
+                    orders: 'Orders',
                     first_seen: 'First seen',
                     groups: 'Segments',
                     last_seen: 'Last seen',
@@ -105,7 +113,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     last_name: 'Last name',
                     latest_purchase: 'Latest purchase',
                     zipcode: 'Postal code',
-                    nb_commands: 'Orders',
+                    nb_orders: 'Orders',
                 },
                 filters: {
                     last_visited: 'Last visited',
@@ -135,7 +143,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                         'The password confirmation is not the same as the password.',
                 },
             },
-            commands: {
+            orders: {
                 name: 'Order |||| Orders',
                 amount: '1 order |||| %{smart_count} orders',
                 title: 'Order %{reference}',
@@ -154,8 +162,8 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                     customer_id: 'Customer',
                     date_gte: 'Passed Since',
                     date_lte: 'Passed Before',
-                    nb_items: 'Nb articles',
-                    reference: 'Référence',
+                    nb_items: 'Nb items',
+                    reference: 'Reference',
                     returned: 'Returned',
                     status: 'Status',
                     total_gte: 'Min amount',
@@ -173,7 +181,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 fields: {
                     date: 'Invoice date',
                     customer_id: 'Customer',
-                    command_id: 'Order',
+                    order_id: 'Order',
                     date_gte: 'Passed Since',
                     date_lte: 'Passed Before',
                     total_gte: 'Min amount',
@@ -236,7 +244,7 @@ const customEnglishMessages: TranslationMessages = mergeTranslations(
                 detail: 'Review detail',
                 fields: {
                     customer_id: 'Customer',
-                    command_id: 'Order',
+                    order_id: 'Order',
                     product_id: 'Product',
                     date_gte: 'Posted since',
                     date_lte: 'Posted before',

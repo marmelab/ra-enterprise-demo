@@ -6,6 +6,7 @@ export const EventList = () => {
     const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('md'));
     return (
         <RaEventList
+            authorResource="admins"
             sx={{
                 marginTop: isSmall ? undefined : 2,
                 '& .RaList-main': { marginTop: isSmall ? undefined : -6 },

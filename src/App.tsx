@@ -98,6 +98,7 @@ const App = () => {
             disableTelemetry
             lightTheme={lightTheme}
             darkTheme={darkTheme}
+            defaultTheme="light"
         >
             <CssBaseline />
             <CustomRoutes>
@@ -107,7 +108,7 @@ const App = () => {
                 <Route path="/tours/:tour" element={<TourLauncher />} />
             </CustomRoutes>
             <Resource name="customers" {...visitors} />
-            <Resource name="commands" {...orders} />
+            <Resource name="orders" {...orders} />
             <Resource name="invoices" {...invoices} />
             <Resource name="products" {...products} />
             <Resource name="categories" {...categories} />

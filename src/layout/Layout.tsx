@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SolarLayout, SolarLayoutProps } from '@react-admin/ra-navigation';
-import { useQueryClient } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+import { useQueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import {
     useStore,
     useRedirect,
@@ -39,10 +39,7 @@ const Layout = (props: SolarLayoutProps) => {
             }}
         >
             <>
-                <ReactQueryDevtools
-                    initialIsOpen={false}
-                    position="bottom-right"
-                />
+                <ReactQueryDevtools initialIsOpen={false} />
                 <SolarLayout {...props} menu={Menu} appBar={AppBar}>
                     <CustomBreadcrumb />
                     {props.children}

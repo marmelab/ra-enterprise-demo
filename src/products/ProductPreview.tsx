@@ -11,8 +11,11 @@ const MarkdownField = React.lazy(() =>
 
 const ProductPreview = (props: any) => {
     const record = useRecordContext(props);
-    const { image, height, width, price, reference } = record;
     const theme = useTheme();
+
+    if (!record) return null;
+
+    const { image, height, width, price, reference } = record;
 
     return (
         <Box

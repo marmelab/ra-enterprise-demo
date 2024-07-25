@@ -13,8 +13,4 @@ const CustomerReferenceField = (
     </ReferenceField>
 );
 
-CustomerReferenceField.defaultProps = {
-    source: 'customer_id',
-};
-
 export default CustomerReferenceField;
