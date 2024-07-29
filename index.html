@@ -8,15 +8,22 @@
       body {
         margin: 0;
       }
+      /* 
+      Because the style prop no longer exist in TanStack Query v5,
+      we have to use this rule to customize ReactQueryDevtools button size:
+      */
+      .tsqd-transitions-container>div {
+        height: 30px;
+        width: 30px;
+      }
     </style>
-    <script type="module" crossorigin src="/ra-enterprise-demo/assets/index-6f7cd9b6.js"></script>
+    <script type="module" crossorigin src="./assets/index-DxYHxo6H.js"></script>
   </head>
   <body>
     <div id="root"></div>
     <script>
       window.global = window;
     </script>
-    
     <!-- This script adds the Roboto font to our project. For more detail go to this site:  http://www.google.com/fonts#UsePlace:use/Collection:Roboto:400,300,500 -->
     <script>
         var WebFontConfig = {
