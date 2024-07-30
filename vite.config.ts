@@ -32,7 +32,7 @@ export default defineConfig(async () => {
             react(),
             visualizer({
                 open: process.env.NODE_ENV !== 'CI',
-                filename: './dist/stats.html',
+                filename: './build/stats.html',
             }),
         ],
         define: {
