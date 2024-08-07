@@ -3,6 +3,7 @@ import {
     Avatar,
     ListItem,
     ListItemAvatar,
+    ListItemButton,
     ListItemText,
     Rating,
     Tooltip,
@@ -25,33 +26,33 @@ export const ReviewListItem = (props: any) => {
     }
 
     return (
-        <ListItem
-            button
-            component={SearchListItemLink}
-            data={data}
-            onClick={onClick}
-            alignItems="flex-start"
-            sx={{ pl: 0, pr: 1 }}
-        >
-            <ListItemAvatar
-                sx={{
-                    width: 64,
-                    height: 64,
-                    paddingRight: 2,
-                    mt: 0,
-                }}
+        <ListItem alignItems="flex-start" sx={{ pl: 0, pr: 1 }}>
+            <ListItemButton
+                data={data}
+                component={SearchListItemLink}
+                onClick={onClick}
             >
-                <Avatar alt={content.reference}>
-                    <CommentIcon fontSize="small" />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-                primary={<Rating value={content.rating} readOnly />}
-                secondary={<ReviewComment comment={content.comment} />}
-                // @ts-ignore Could not make TS happy
-                secondaryTypographyProps={secondaryTypographyProps}
-                sx={{ my: 0 }}
-            />
+                <ListItemAvatar
+                    sx={{
+                        width: 64,
+                        height: 64,
+                        paddingRight: 2,
+                        mt: 0,
+                    }}
+                >
+                    <Avatar alt={content.reference}>
+                        <CommentIcon fontSize="small" />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                    className="highlight"
+                    primary={<Rating value={content.rating} readOnly />}
+                    secondary={<ReviewComment comment={content.comment} />}
+                    // @ts-ignore Could not make TS happy
+                    secondaryTypographyProps={secondaryTypographyProps}
+                    sx={{ my: 0 }}
+                />
+            </ListItemButton>
         </ListItem>
     );
 };

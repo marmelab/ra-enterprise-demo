@@ -6,6 +6,7 @@ import {
     lighten,
     ListItem,
     ListItemAvatar,
+    ListItemButton,
     ListItemText,
     Typography,
     useTheme,
@@ -27,10 +28,7 @@ export const CommandListItem = (props: any) => {
 
     return (
         <ListItem
-            button
-            component={SearchListItemLink}
-            data={data}
-            onClick={onClick}
+            disablePadding
             alignItems="flex-start"
             sx={{
                 textDecoration: 'none',
@@ -46,33 +44,49 @@ export const CommandListItem = (props: any) => {
                 px: 0,
             }}
         >
-            <ListItemAvatar
-                sx={{
-                    paddingRight: 2,
-                    mt: 0.5,
-                }}
+            <ListItemButton
+                data={data}
+                component={SearchListItemLink}
+                onClick={onClick}
             >
-                <Avatar alt={content.reference}>
-                    <ShoppingCartIcon fontSize="small" />
-                </Avatar>
-            </ListItemAvatar>
-            <ListItemText>
-                <Typography variant="body2" color="textPrimary" display="flex">
-                    Ref. {content.reference}{' '}
-                    <CommandStatus status={content.status} />
-                </Typography>
+                <ListItemAvatar
+                    sx={{
+                        paddingRight: 2,
+                        mt: 0.5,
+                    }}
+                >
+                    <Avatar alt={content.reference}>
+                        <ShoppingCartIcon fontSize="small" />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText>
+                    <Typography
+                        variant="body2"
+                        color="textPrimary"
+                        display="flex"
+                        className="highlight"
+                    >
+                        Ref. {content.reference}{' '}
+                        <CommandStatus status={content.status} />
+                    </Typography>
 
-                <Typography variant="caption" color="textPrimary" gutterBottom>
-                    {new Date(content.date).toLocaleDateString()}
-                    &nbsp;-&nbsp;
-                    {`${content.customer.first_name} ${content.customer.last_name}`}
-                    &nbsp;-&nbsp;
-                    {`${translate('resources.orders.fields.basket.total')} ${
-                        content.total
-                    }`}
-                    €
-                </Typography>
-            </ListItemText>
+                    <Typography
+                        variant="caption"
+                        color="textPrimary"
+                        gutterBottom
+                        className="highlight"
+                    >
+                        {new Date(content.date).toLocaleDateString()}
+                        &nbsp;-&nbsp;
+                        {`${content.customer.first_name} ${content.customer.last_name}`}
+                        &nbsp;-&nbsp;
+                        {`${translate('resources.orders.fields.basket.total')} ${
+                            content.total
+                        }`}
+                        €
+                    </Typography>
+                </ListItemText>
+            </ListItemButton>
         </ListItem>
     );
 };
@@ -103,6 +117,7 @@ const CommandStatus = ({
     };
     return (
         <Chip
+            component="span"
             size="small"
             sx={{
                 ...StatusStyles[status],

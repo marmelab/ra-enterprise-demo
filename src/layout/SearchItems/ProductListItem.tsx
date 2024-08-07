@@ -3,6 +3,7 @@ import {
     Box,
     ListItem,
     ListItemAvatar,
+    ListItemButton,
     ListItemText,
     Typography,
 } from '@mui/material';
@@ -28,10 +29,6 @@ export const ProductListItem = (props: any) => {
 
     return (
         <ListItem
-            button
-            component={SearchListItemLink}
-            data={data}
-            onClick={onClick}
             alignItems="flex-start"
             sx={{
                 textDecoration: 'none',
@@ -47,53 +44,60 @@ export const ProductListItem = (props: any) => {
                 px: 0,
             }}
         >
-            <ListItemAvatar
-                sx={{
-                    width: 64,
-                    height: 64,
-                    paddingRight: 2,
-                    mt: 0.5,
-                }}
+            <ListItemButton
+                data={data}
+                component={SearchListItemLink}
+                onClick={onClick}
             >
-                <Box sx={{ '& img': { width: '100%' } }}>
-                    <img src={content.thumbnail} alt={content.reference} />
-                </Box>
-            </ListItemAvatar>
-            <ListItemText
-                primary={
-                    <Typography
-                        color="textPrimary"
-                        variant="body2"
-                        gutterBottom
-                    >
-                        {content.reference}
-                    </Typography>
-                }
-                secondary={
-                    content.reviews > 0 ? (
-                        <Box
-                            component="ul"
-                            display="flex"
-                            justifyContent="space-between"
-                            p={0}
-                            m={0}
+                <ListItemAvatar
+                    sx={{
+                        width: 64,
+                        height: 64,
+                        paddingRight: 2,
+                        mt: 0.5,
+                    }}
+                >
+                    <Box sx={{ '& img': { width: '100%' } }}>
+                        <img src={content.thumbnail} alt={content.reference} />
+                    </Box>
+                </ListItemAvatar>
+                <ListItemText
+                    className="highlight"
+                    primary={
+                        <Typography
+                            color="textPrimary"
+                            variant="body2"
+                            gutterBottom
                         >
-                            <LinkedData
-                                icon={<CommentIcon />}
-                                label={translate('resources.reviews.name', {
-                                    smart_count: 2,
-                                })}
-                                to={`/reviews?filter=%7B"product_id"%3A${content.id}%7D`}
+                            {content.reference}
+                        </Typography>
+                    }
+                    secondary={
+                        content.reviews > 0 ? (
+                            <Box
+                                component="ul"
+                                display="flex"
+                                justifyContent="space-between"
+                                p={0}
+                                m={0}
                             >
-                                {content.reviews}
-                            </LinkedData>
-                        </Box>
-                    ) : undefined
-                }
-                // @ts-ignore Could not make TS happy
-                secondaryTypographyProps={secondaryTypographyProps}
-                sx={{ my: 0 }}
-            />
+                                <LinkedData
+                                    icon={<CommentIcon />}
+                                    label={translate('resources.reviews.name', {
+                                        smart_count: 2,
+                                    })}
+                                    to={`/reviews?filter=%7B"product_id"%3A${content.id}%7D`}
+                                >
+                                    {content.reviews}
+                                </LinkedData>
+                            </Box>
+                        ) : undefined
+                    }
+                    // @ts-ignore Could not make TS happy
+                    secondaryTypographyProps={secondaryTypographyProps}
+                    sx={{ my: 0 }}
+                />
+            </ListItemButton>
         </ListItem>
     );
 };
