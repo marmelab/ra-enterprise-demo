@@ -42,6 +42,7 @@ const Prompt = () => {
                     // We know that we only have one root node in this demo
                     parentId: state?.parentId ?? rootNodes[0].id,
                     data: { name: result, children: [] },
+                    position: 0,
                 },
                 {
                     onSuccess: () => {
