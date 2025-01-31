@@ -39,7 +39,7 @@
         "react-dom": "^18.0.0",
         "react-router": "^6.22.0",
         "react-router-dom": "^6.22.0",
-        "recharts": "^2.1.5",
+        "recharts": "^2.15.1",
         "rrule": "^2.7.2"
     },
     "scripts": {
@@ -82,5 +82,9 @@
         "start-server-and-test": "^1.12.2",
         "typescript": "^5.1.3",
         "vite": "^5.0.11"
+    },
+    "resolutions": {
+        "react-router": "^6.28.2",
+        "react-router-dom": "^6.28.2"
     }
 }

@@ -3,6 +3,7 @@ import { Box, Card, CardContent, IconButton, useTheme } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 import {
+    FieldProps,
     RecordContextProvider,
     useCreatePath,
     useListContext,
@@ -82,7 +83,9 @@ const DesktopGrid = ({ children }: { children: ReactElement[] }) => {
                                 </IconButton>
                             </Box>
                             {Children.map(children, field => {
-                                const fieldName = field.props.source;
+                                const fieldName = (
+                                    field as ReactElement<FieldProps>
+                                ).props.source;
 
                                 // We already display the customer above
                                 if (fieldName === 'customer_id') {

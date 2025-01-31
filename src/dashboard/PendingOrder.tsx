@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
     ListItem,
-    ListItemSecondaryAction,
     ListItemAvatar,
     ListItemText,
     Avatar,
     Box,
+    ListItemButton,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useTranslate, useReference } from 'react-admin';
@@ -26,30 +26,9 @@ export const PendingOrder = (props: Props) => {
     });
 
     return (
-        <ListItem button component={Link} to={`/orders/${order.id}`}>
-            <ListItemAvatar>
-                {isPending ? (
-                    <Avatar />
-                ) : (
-                    <Avatar
-                        src={`${customer?.avatar}?size=32x32`}
-                        sx={{
-                            bgcolor: 'background.paper',
-                        }}
-                    />
-                )}
-            </ListItemAvatar>
-            <ListItemText
-                primary={new Date(order.date).toLocaleString('en-GB')}
-                secondary={translate('pos.dashboard.order.items', {
-                    smart_count: order.basket.length,
-                    nb_items: order.basket.length,
-                    customer_name: customer
-                        ? `${customer.first_name} ${customer.last_name}`
-                        : '',
-                })}
-            />
-            <ListItemSecondaryAction>
+        <ListItem
+            disablePadding
+            secondaryAction={
                 <Box
                     component="span"
                     sx={{
@@ -59,7 +38,32 @@ export const PendingOrder = (props: Props) => {
                 >
                     {formatNumberAsUSD(order.total, 2)}
                 </Box>
-            </ListItemSecondaryAction>
+            }
+        >
+            <ListItemButton component={Link} to={`/orders/${order.id}`}>
+                <ListItemAvatar>
+                    {isPending ? (
+                        <Avatar />
+                    ) : (
+                        <Avatar
+                            src={`${customer?.avatar}?size=32x32`}
+                            sx={{
+                                bgcolor: 'background.paper',
+                            }}
+                        />
+                    )}
+                </ListItemAvatar>
+                <ListItemText
+                    primary={new Date(order.date).toLocaleString('en-GB')}
+                    secondary={translate('pos.dashboard.order.items', {
+                        smart_count: order.basket.length,
+                        nb_items: order.basket.length,
+                        customer_name: customer
+                            ? `${customer.first_name} ${customer.last_name}`
+                            : '',
+                    })}
+                />
+            </ListItemButton>
         </ListItem>
     );
 };

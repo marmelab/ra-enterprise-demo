@@ -72,7 +72,7 @@ const LoadedGridList = () => {
     const { data: locks } = useGetLocks(resource!, {}, { enabled: !!resource });
     const cols = useColsForWidth();
     const createPath = useCreatePath();
-    const firstLockRecordId = React.useRef<Identifier>();
+    const firstLockRecordId = React.useRef<Identifier | undefined>(undefined);
 
     if (!data) return null;
 

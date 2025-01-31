@@ -4,8 +4,8 @@ import {
     Box,
     Button,
     List,
-    ListItem,
     ListItemAvatar,
+    ListItemButton,
     ListItemText,
 } from '@mui/material';
 import CustomerIcon from '@mui/icons-material/PersonAdd';
@@ -46,8 +46,7 @@ const NewCustomers = () => {
             <List sx={{ display: isPending ? 'none' : 'block' }}>
                 {visitors
                     ? visitors.map((record: Customer) => (
-                          <ListItem
-                              button
+                          <ListItemButton
                               to={`/customers/${record.id}`}
                               component={Link}
                               key={record.id}
@@ -58,7 +57,7 @@ const NewCustomers = () => {
                               <ListItemText
                                   primary={`${record.first_name} ${record.last_name}`}
                               />
-                          </ListItem>
+                          </ListItemButton>
                       ))
                     : null}
             </List>

@@ -4,8 +4,8 @@ import {
     Box,
     Button,
     List,
-    ListItem,
     ListItemAvatar,
+    ListItemButton,
     ListItemText,
 } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
@@ -54,9 +54,8 @@ const PendingReviews = () => {
         >
             <List sx={{ display }}>
                 {reviews?.map((record: Review) => (
-                    <ListItem
+                    <ListItemButton
                         key={record.id}
-                        button
                         component={Link}
                         to={`/reviews/${record.id}`}
                         alignItems="flex-start"
@@ -100,7 +99,7 @@ const PendingReviews = () => {
                                 paddingRight: 0,
                             }}
                         />
-                    </ListItem>
+                    </ListItemButton>
                 ))}
             </List>
             <Box flexGrow={1}>&nbsp;</Box>
