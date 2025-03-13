@@ -5,7 +5,7 @@
     "type": "module",
     "dependencies": {
         "@fullcalendar/rrule": "^6.1.9",
-        "@react-admin/ra-audit-log": "^5.0.0",
+        "@react-admin/ra-audit-log": "^6.0.0",
         "@react-admin/ra-calendar": "^6.0.0",
         "@react-admin/ra-editable-datagrid": "^5.0.0",
         "@react-admin/ra-enterprise": "^10.0.0",
