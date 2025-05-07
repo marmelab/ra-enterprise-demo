@@ -84,6 +84,10 @@
         "vite": "^5.4.15"
     },
     "resolutions": {
+        "@mui/icons-material": "^5.*",
+        "@mui/material": "^5.*",
+        "@types/react": "^18.*",
+        "@types/react-dom": "~18.*",
         "react-router": "^6.28.2",
         "react-router-dom": "^6.28.2"
     }
