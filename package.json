@@ -81,7 +81,7 @@
         "source-map-explorer": "^2.0.0",
         "start-server-and-test": "^2.0.11",
         "typescript": "^5.1.3",
-        "vite": "^5.4.15"
+        "vite": "^5.4.19"
     },
     "resolutions": {
         "@mui/icons-material": "^5.*",
