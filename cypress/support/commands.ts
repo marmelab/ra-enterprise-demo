@@ -1,5 +1,3 @@
-import '@testing-library/cypress/add-commands';
-
 export const signIn = () => {
     cy.visit('http://localhost:3000/');
     cy.findByLabelText(/Username/).type('demo');
