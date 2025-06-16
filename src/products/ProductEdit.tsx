@@ -301,7 +301,13 @@ const LockMessage = (props: any) => {
     const { identity, variant = 'body1' } = props;
 
     return (
-        <Typography py={0} px={1} variant={variant}>
+        <Typography
+            variant={variant}
+            sx={{
+                py: 0,
+                px: 1,
+            }}
+        >
             This record is locked by another user: {identity}.
         </Typography>
     );

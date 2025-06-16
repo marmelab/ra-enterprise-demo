@@ -4,10 +4,13 @@ import { useTranslate, useRecordContext, FieldProps } from 'react-admin';
 import segments from '../segments/data';
 import { Customer } from '../types';
 
-const segmentsById = segments.reduce((acc, segment) => {
-    acc[segment.id] = segment;
-    return acc;
-}, {} as { [key: string]: any });
+const segmentsById = segments.reduce(
+    (acc, segment) => {
+        acc[segment.id] = segment;
+        return acc;
+    },
+    {} as { [key: string]: any }
+);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SegmentsField = (_: Omit<FieldProps, 'source'> & { source?: string }) => {
@@ -17,7 +20,13 @@ const SegmentsField = (_: Omit<FieldProps, 'source'> & { source?: string }) => {
         return null;
     }
     return (
-        <Stack direction="row" gap={1} flexWrap="wrap">
+        <Stack
+            direction="row"
+            sx={{
+                gap: 1,
+                flexWrap: 'wrap',
+            }}
+        >
             {record.groups.map(segmentId => (
                 <Chip
                     size="small"

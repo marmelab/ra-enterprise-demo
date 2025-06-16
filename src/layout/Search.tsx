@@ -10,7 +10,6 @@ import {
 import {
     Search,
     SearchProps,
-    SearchPanelProps,
     useSearchResults,
     groupSearchResultsByResource,
     useArrowKeysToNavigate,
@@ -31,7 +30,7 @@ const CustomSearch = (props: SearchProps) => (
 
 export default CustomSearch;
 
-const CustomSearchPanel = (props: SearchPanelProps) => {
+const CustomSearchPanel = () => {
     const listRef = useRef<HTMLUListElement>(
         null
     ) as React.MutableRefObject<HTMLUListElement>;
@@ -41,7 +40,7 @@ const CustomSearchPanel = (props: SearchPanelProps) => {
 
     if (!data || data.length === 0) {
         return (
-            <List data-testid="search-panel" dense {...props}>
+            <List data-testid="search-panel" dense>
                 <ListItem>
                     <ListItemText
                         primary={translate('ra.navigation.no_results')}
@@ -63,7 +62,6 @@ const CustomSearchPanel = (props: SearchPanelProps) => {
             data-testid="search-panel"
             dense
             ref={listRef}
-            {...props}
         >
             {groupedData.map(group => (
                 <Fragment key={group.label}>

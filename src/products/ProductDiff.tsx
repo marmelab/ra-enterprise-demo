@@ -4,11 +4,20 @@ import { NumberField } from 'react-admin';
 import { FieldDiff, SmartFieldDiff } from '@react-admin/ra-history';
 
 export const ProductDiff = () => (
-    <Stack gap={1}>
+    <Stack
+        sx={{
+            gap: 1,
+        }}
+    >
         <FieldDiff source="reference" />
         <SmartFieldDiff source="description" />
         <SmartFieldDiff source="image" />
-        <Stack direction="row" gap={2}>
+        <Stack
+            direction="row"
+            sx={{
+                gap: 2,
+            }}
+        >
             <FieldDiff inline>
                 <NumberField source="width" />
             </FieldDiff>
@@ -16,7 +25,12 @@ export const ProductDiff = () => (
                 <NumberField source="height" />
             </FieldDiff>
         </Stack>
-        <Stack direction="row" gap={2}>
+        <Stack
+            direction="row"
+            sx={{
+                gap: 2,
+            }}
+        >
             <FieldDiff inline>
                 <NumberField source="price" />
             </FieldDiff>

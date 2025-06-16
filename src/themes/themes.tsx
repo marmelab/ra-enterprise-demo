@@ -1,5 +1,4 @@
 import {
-    RaThemeOptions,
     defaultLightTheme,
     defaultDarkTheme,
     nanoDarkTheme,
@@ -8,6 +7,7 @@ import {
     radiantLightTheme,
     houseDarkTheme,
     houseLightTheme,
+    RaThemeOptions,
 } from 'react-admin';
 import { softDarkTheme, softLightTheme } from './../layout/themes';
 

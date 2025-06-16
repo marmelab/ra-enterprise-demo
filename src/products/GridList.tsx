@@ -55,9 +55,11 @@ const LoadingGridList = () => {
             {times(perPage, key => (
                 <ImageListItem key={key}>
                     <Box
-                        bgcolor="grey.500"
-                        height="100%"
-                        sx={{ opacity: 0.5 }}
+                        sx={{
+                            bgcolor: 'grey.500',
+                            height: '100%',
+                            opacity: 0.5,
+                        }}
                     />
                 </ImageListItem>
             ))}

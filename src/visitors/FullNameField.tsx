@@ -12,16 +12,20 @@ interface Props extends Omit<FieldProps<Customer>, 'source'> {
 }
 
 const FullNameField = (props: Props) => {
-    const { size } = props;
+    const { size, sx } = props;
     const record = useRecordContext<Customer>();
     return record ? (
         <Typography
             variant="body2"
-            display="flex"
-            flexWrap="nowrap"
-            alignItems="center"
             component="div"
-            sx={props.sx}
+            sx={[
+                {
+                    display: 'flex',
+                    flexWrap: 'nowrap',
+                    alignItems: 'center',
+                },
+                ...(Array.isArray(sx) ? sx : [sx]),
+            ]}
         >
             <AvatarField
                 record={record}

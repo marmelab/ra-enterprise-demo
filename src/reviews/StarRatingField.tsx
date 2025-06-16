@@ -15,8 +15,8 @@ const StarRatingField = ({ size = 'large' }: FieldProps & OwnProps) => {
     return (
         <Box
             component="span"
-            display="flex"
             sx={{
+                display: 'flex',
                 opacity: 0.87,
                 whiteSpace: 'nowrap',
             }}

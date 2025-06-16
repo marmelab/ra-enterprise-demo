@@ -28,21 +28,36 @@ export const LinkedData = ({
         >
             <Box
                 component="li"
-                display="flex"
-                alignItems="flex-start"
-                justifyContent="center"
-                flexDirection="column"
-                sx={{
-                    borderRadius: '3px',
-                    pr: 2,
-                    '&:hover': {
-                        backgroundColor: 'background.default',
-                    },
-                }}
                 {...rest}
+                sx={[
+                    {
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        borderRadius: '3px',
+                        pr: 2,
+
+                        '&:hover': {
+                            backgroundColor: 'background.default',
+                        },
+                    },
+                    ...(Array.isArray(rest.sx) ? rest.sx : [rest.sx]),
+                ]}
             >
-                <Box display="flex" alignItems="flex-start">
-                    <Box mr={0.5}>{icon}</Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            mr: 0.5,
+                        }}
+                    >
+                        {icon}
+                    </Box>
                     <Typography component="span" variant="body2">
                         {children}
                     </Typography>

@@ -30,7 +30,12 @@ const CategoryEdit = () => {
             }}
             aside={
                 <>
-                    <Typography marginTop={6} variant="h5">
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            marginTop: 6,
+                        }}
+                    >
                         {translate('resources.products.name', {
                             smart_count: 2,
                         })}
@@ -91,7 +96,11 @@ const CategoryEditAside = () => {
                 } as any
             }
         >
-            <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
+            <Box
+                sx={{
+                    width: isSmall ? 'auto' : 'calc(100% - 16em)',
+                }}
+            >
                 <ImageList />
                 <Pagination rowsPerPageOptions={[12, 24, 48, 72]} />
             </Box>

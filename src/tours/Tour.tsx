@@ -73,7 +73,11 @@ const Tour = ({ record }: { record: RaRecord }) => {
                 <Button size="small" startIcon={<PlayIcon />} color="primary">
                     {translate('tours.action.play')}
                 </Button>
-                <Box pl={1}>
+                <Box
+                    sx={{
+                        pl: 1,
+                    }}
+                >
                     <Typography variant="caption" color="textSecondary">
                         {!!playedOn
                             ? translate('tours.message.played_on', {

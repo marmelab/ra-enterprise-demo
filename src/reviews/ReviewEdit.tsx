@@ -26,12 +26,24 @@ const ReviewEdit = ({ id, onCancel }: ReviewEditProps) => {
     return (
         <EditBase id={id}>
             <Box
-                width={{ xs: '100vW', sm: 400 }}
-                pt={{ xs: 5, sm: 0 }}
-                mt={{ xs: 2, sm: 0 }}
+                sx={{
+                    width: { xs: '100vW', sm: 400 },
+                    pt: { xs: 5, sm: 0 },
+                    mt: { xs: 2, sm: 0 },
+                }}
             >
-                <Stack direction="row" p={2}>
-                    <Typography variant="h6" flex="1">
+                <Stack
+                    direction="row"
+                    sx={{
+                        p: 2,
+                    }}
+                >
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            flex: '1',
+                        }}
+                    >
                         {translate('resources.reviews.detail')}
                     </Typography>
                     <IconButton onClick={onCancel} size="small">
@@ -42,23 +54,29 @@ const ReviewEdit = ({ id, onCancel }: ReviewEditProps) => {
                     sx={{ pt: 0, pb: 0 }}
                     toolbar={<ReviewEditToolbar />}
                 >
-                    <Grid container rowSpacing={1} mb={1}>
-                        <Grid item xs={6}>
+                    <Grid
+                        container
+                        rowSpacing={1}
+                        sx={{
+                            mb: 1,
+                        }}
+                    >
+                        <Grid size={6}>
                             <Labeled source="customer_id">
                                 <CustomerReferenceField />
                             </Labeled>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                             <Labeled source="product_id">
                                 <ProductReferenceField />
                             </Labeled>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                             <Labeled>
                                 <DateField source="date" />
                             </Labeled>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid size={6}>
                             <Labeled>
                                 <StarRatingField source="rating" />
                             </Labeled>

@@ -43,7 +43,7 @@ export default defineConfig(async () => {
             }),
         ],
         define: {
-            'process.env': process.env,
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         },
         server: {
             port: 8000,
@@ -65,6 +65,34 @@ export default defineConfig(async () => {
             alias: [
                 // allow profiling in production
                 { find: /^react-dom$/, replacement: 'react-dom/profiling' },
+                {
+                    find: '@mui/system',
+                    replacement: path.resolve(
+                        __dirname,
+                        './node_modules/@mui/system'
+                    ),
+                },
+                {
+                    find: '@mui/utils',
+                    replacement: path.resolve(
+                        __dirname,
+                        './node_modules/@mui/utils'
+                    ),
+                },
+                {
+                    find: '@mui/material',
+                    replacement: path.resolve(
+                        __dirname,
+                        './node_modules/@mui/material'
+                    ),
+                },
+                {
+                    find: '@mui/icons-material',
+                    replacement: path.resolve(
+                        __dirname,
+                        './node_modules/@mui/icons-material'
+                    ),
+                },
                 {
                     find: 'scheduler/tracing',
                     replacement: 'scheduler/tracing-profiling',

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useGetList } from 'react-admin';
-import { Grid, Box, useMediaQuery, Theme } from '@mui/material';
+import { Grid, useMediaQuery, Theme } from '@mui/material';
 import { subDays, startOfDay } from 'date-fns';
 
 import Welcome from './Welcome';
@@ -76,71 +76,94 @@ const Dashboard = () => {
     const { nbNewOrders, pendingOrders, revenue, recentOrders } = aggregation;
     return isXSmall ? (
         <Grid container spacing={1}>
-            <Box ml={1}>
+            <Grid size={12}>
                 <Logo />
-            </Box>
-            <Grid item xs={12}>
+            </Grid>
+            <Grid size={12}>
                 <Welcome />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
                 <MonthlyRevenue value={revenue} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
                 <NbNewOrders value={nbNewOrders} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
                 <PendingOrders orders={pendingOrders} />
             </Grid>
         </Grid>
     ) : isSmall ? (
-        <Grid container spacing={BLOCKS_SPACING} padding={1}>
-            <Box mt={1} ml={1} display="flex">
+        <Grid
+            container
+            spacing={BLOCKS_SPACING}
+            sx={{
+                padding: 1,
+            }}
+        >
+            <Grid
+                size={12}
+                sx={{
+                    display: 'flex',
+                }}
+            >
                 <Logo />
-            </Box>
-            <Grid item xs={12}>
+            </Grid>
+            <Grid size={12}>
                 <Welcome />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <MonthlyRevenue value={revenue} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <NbNewOrders value={nbNewOrders} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
                 <OrderChart orders={recentOrders} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>
                 <PendingOrders orders={pendingOrders} />
             </Grid>
         </Grid>
     ) : (
-        <Grid container spacing={BLOCKS_SPACING} padding={1}>
-            <Box mt={1} ml={2} display="flex">
+        <Grid
+            container
+            spacing={BLOCKS_SPACING}
+            sx={{
+                padding: 1,
+                pt: 0,
+            }}
+        >
+            <Grid
+                size={12}
+                sx={{
+                    display: 'flex',
+                }}
+            >
                 <Logo />
-            </Box>
-            <Grid item xs={12}>
+            </Grid>
+            <Grid size={12}>
                 <Welcome />
             </Grid>
-            <Grid item xs={6}>
+            <Grid size={6}>
                 <Grid container spacing={BLOCKS_SPACING}>
-                    <Grid item xs={6}>
+                    <Grid size={6}>
                         <MonthlyRevenue value={revenue} />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid size={6}>
                         <NbNewOrders value={nbNewOrders} />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <OrderChart orders={recentOrders} />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <PendingOrders orders={pendingOrders} />
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item xs={3}>
+            <Grid size={3}>
                 <PendingReviews />
             </Grid>
-            <Grid item xs={3}>
+            <Grid size={3}>
                 <NewCustomers />
             </Grid>
         </Grid>

@@ -31,7 +31,11 @@ const ProductPreview = (props: any) => {
                 },
             }}
         >
-            <Box padding={2}>
+            <Box
+                sx={{
+                    padding: 2,
+                }}
+            >
                 <Box
                     sx={{
                         position: 'relative',

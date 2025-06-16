@@ -80,10 +80,12 @@ export const CustomerListItem = (props: any) => {
                     secondary={
                         <Box
                             component="ul"
-                            display="flex"
-                            justifyContent="flex-start"
-                            p={0}
-                            m={0}
+                            sx={{
+                                display: 'flex',
+                                justifyContent: 'flex-start',
+                                p: 0,
+                                m: 0,
+                            }}
                         >
                             {content.pending_orders > 0 ? (
                                 <LinkedData

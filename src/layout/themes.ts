@@ -1,7 +1,6 @@
 import { alpha, Theme, createTheme } from '@mui/material';
-import createPalette from '@mui/material/styles/createPalette';
 import { grey } from '@mui/material/colors';
-import { RaThemeOptions } from 'react-admin';
+import merge from 'lodash/merge';
 
 const defaultThemeInvariants = {
     MuiAutocomplete: {
@@ -53,15 +52,39 @@ const defaultThemeInvariants = {
     },
 };
 
-const darkComponentsOverrides = (theme: Theme) => ({
+const darkColorScheme = {
+    palette: {
+        mode: 'dark', // Switching the dark mode on is a single property value change.
+        primary: {
+            dark: '#495e84',
+            main: '#698baf',
+            light: '#7ba8c9',
+            contrastText: '#fff',
+        },
+        secondary: {
+            dark: '#7d6327',
+            main: '#b48e38',
+            light: '#c3a45f',
+            contrastText: '#fff',
+        },
+        background: {
+            paper: '#202020',
+            default: '#161616',
+        },
+    },
+} as const;
+
+const defaultDarkTheme = createTheme(darkColorScheme);
+
+const darkComponentsOverrides = {
     ...defaultThemeInvariants,
     RaLayout: {
         styleOverrides: {
             root: {
                 '& .RaLayout-content': {
-                    padding: `${theme.spacing(1)}`,
-                    [theme.breakpoints.up('md')]: {
-                        padding: `${theme.spacing(2)}`,
+                    padding: `${defaultDarkTheme.spacing(1)}`,
+                    [defaultDarkTheme.breakpoints.up('md')]: {
+                        padding: `${defaultDarkTheme.spacing(2)}`,
                     },
                 },
             },
@@ -78,13 +101,13 @@ const darkComponentsOverrides = (theme: Theme) => ({
     RaAppBar: {
         styleOverrides: {
             root: {
-                backgroundColor: darkPalette.background.paper,
+                backgroundColor: defaultDarkTheme.palette.background.paper,
                 color: '#fff',
                 '& .RaAppBar-menuButton': {
                     // Since sub-<Menu /> hide labels when sidebar is closed
                     // We need to disallow sidebar closing on desktop (hiding button is simpler)
                     display: 'block',
-                    [theme.breakpoints.up('md')]: {
+                    [defaultDarkTheme.breakpoints.up('md')]: {
                         display: 'none',
                     },
                 },
@@ -94,25 +117,43 @@ const darkComponentsOverrides = (theme: Theme) => ({
     RaSearchInput: {
         styleOverrides: {
             root: {
-                color: darkPalette.common.white,
-                backgroundColor: alpha(darkPalette.common.black, 0.04),
+                color: defaultDarkTheme.palette.common.white,
+                backgroundColor: alpha(
+                    defaultDarkTheme.palette.common.black,
+                    0.04
+                ),
                 '&:hover': {
-                    backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    backgroundColor: alpha(
+                        defaultDarkTheme.palette.common.black,
+                        0.13
+                    ),
                 },
                 '&:focus': {
-                    backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    backgroundColor: alpha(
+                        defaultDarkTheme.palette.common.black,
+                        0.13
+                    ),
                 },
                 '&:focus-within': {
-                    backgroundColor: alpha(darkPalette.common.black, 0.13),
+                    backgroundColor: alpha(
+                        defaultDarkTheme.palette.common.black,
+                        0.13
+                    ),
                 },
                 '& .RaSearchInput-inputBase': {
-                    background: alpha(darkPalette.common.black, 0.04),
+                    background: alpha(
+                        defaultDarkTheme.palette.common.black,
+                        0.04
+                    ),
                     '&:hover': {
-                        background: alpha(darkPalette.common.black, 0.1),
+                        background: alpha(
+                            defaultDarkTheme.palette.common.black,
+                            0.1
+                        ),
                     },
                 },
                 '& .RaSearchInput-inputAdornmentStart': {
-                    color: darkPalette.common.white,
+                    color: defaultDarkTheme.palette.common.white,
                 },
             },
         },
@@ -121,41 +162,45 @@ const darkComponentsOverrides = (theme: Theme) => ({
         styleOverrides: {
             root: {
                 border: 'none',
-                background: darkPalette.background.paper,
+                background: darkColorScheme.palette!.background!.paper,
             },
         },
     },
-});
+};
 
-const darkPalette = createPalette({
-    mode: 'dark', // Switching the dark mode on is a single property value change.
-    primary: {
-        dark: '#495e84',
-        main: '#698baf',
-        light: '#7ba8c9',
-        contrastText: '#fff',
+const lightPalette = {
+    palette: {
+        mode: 'light',
+        primary: {
+            dark: '#2e3e54',
+            main: '#495e84',
+            light: '#698baf',
+            contrastText: '#fff',
+        },
+        secondary: {
+            dark: '#7d6327',
+            main: '#b48e38',
+            light: '#c3a45f',
+            contrastText: '#fff',
+        },
+        background: {
+            paper: '#ffffff',
+            default: '#fafafa',
+        },
     },
-    secondary: {
-        dark: '#7d6327',
-        main: '#b48e38',
-        light: '#c3a45f',
-        contrastText: '#fff',
-    },
-    background: {
-        paper: '#202020',
-        default: '#161616',
-    },
-});
+} as const;
 
-const lightComponentsOverrides = (theme: Theme) => ({
+const defaultLightTheme = createTheme(lightPalette);
+
+const lightComponentsOverrides = {
     ...defaultThemeInvariants,
     RaLayout: {
         styleOverrides: {
             root: {
                 '& .RaLayout-content': {
-                    padding: `${theme.spacing(1)}`,
-                    [theme.breakpoints.up('md')]: {
-                        padding: `${theme.spacing(2)}`,
+                    padding: `${defaultLightTheme.spacing(1)}`,
+                    [defaultLightTheme.breakpoints.up('md')]: {
+                        padding: `${defaultLightTheme.spacing(2)}`,
                     },
                 },
             },
@@ -168,7 +213,7 @@ const lightComponentsOverrides = (theme: Theme) => ({
                     // Since sub-<Menu /> hide labels when sidebar is closed
                     // We need to disallow sidebar closing on desktop (hiding button is simpler)
                     display: 'block',
-                    [theme.breakpoints.up('md')]: {
+                    [defaultLightTheme.breakpoints.up('md')]: {
                         display: 'none',
                     },
                 },
@@ -178,22 +223,40 @@ const lightComponentsOverrides = (theme: Theme) => ({
     RaSearchInput: {
         styleOverrides: {
             root: {
-                color: lightPalette.text.primary,
-                backgroundColor: alpha(lightPalette.common.black, 0.04),
+                color: defaultLightTheme.palette.text.primary,
+                backgroundColor: alpha(
+                    defaultLightTheme.palette.common.black,
+                    0.04
+                ),
                 '&:hover': {
-                    backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    backgroundColor: alpha(
+                        defaultLightTheme.palette.common.black,
+                        0.13
+                    ),
                 },
                 '&:focus': {
-                    backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    backgroundColor: alpha(
+                        defaultLightTheme.palette.common.black,
+                        0.13
+                    ),
                 },
                 '&:focus-within': {
-                    backgroundColor: alpha(lightPalette.common.black, 0.13),
+                    backgroundColor: alpha(
+                        defaultLightTheme.palette.common.black,
+                        0.13
+                    ),
                 },
                 '& .RaSearchInput-inputBase': {
                     borderRadius: 10,
-                    background: alpha(lightPalette.common.black, 0.04),
+                    background: alpha(
+                        defaultLightTheme.palette.common.black,
+                        0.04
+                    ),
                     '&:hover': {
-                        background: alpha(lightPalette.common.black, 0.1),
+                        background: alpha(
+                            defaultLightTheme.palette.common.black,
+                            0.1
+                        ),
                     },
                 },
                 '& .RaSearchInput-inputAdornmentStart': {
@@ -223,8 +286,8 @@ const lightComponentsOverrides = (theme: Theme) => ({
                     },
                 },
                 '& .RaMenuItemCategory-popoverPaper': {
-                    boxShadow: theme.shadows[2],
-                    backgroundColor: lightPalette.background.paper,
+                    boxShadow: defaultLightTheme.shadows[2],
+                    backgroundColor: defaultLightTheme.palette.background.paper,
                 },
             },
         },
@@ -307,48 +370,19 @@ const lightComponentsOverrides = (theme: Theme) => ({
             },
         },
     },
-});
-
-const lightPalette = createPalette({
-    mode: 'light',
-    primary: {
-        dark: '#2e3e54',
-        main: '#495e84',
-        light: '#698baf',
-        contrastText: '#fff',
-    },
-    secondary: {
-        dark: '#7d6327',
-        main: '#b48e38',
-        light: '#c3a45f',
-        contrastText: '#fff',
-    },
-    background: {
-        paper: '#ffffff',
-        default: '#fafafa',
-    },
-});
-
-const createSoftTheme = (
-    palette: RaThemeOptions['palette'],
-    componentsOverrides: (theme: Theme) => any
-) => {
-    const themeOptions = {
-        palette,
-        shape: {
-            borderRadius: 10,
-        },
-    };
-    const theme = createTheme(themeOptions);
-    theme.components = componentsOverrides(theme);
-    return theme;
 };
 
-export const softLightTheme = createSoftTheme(
-    lightPalette,
-    lightComponentsOverrides
-);
-export const softDarkTheme = createSoftTheme(
-    darkPalette,
-    darkComponentsOverrides
-);
+export const softLightTheme = merge({
+    palette: lightPalette.palette,
+    shape: {
+        borderRadius: 10,
+    },
+    components: lightComponentsOverrides,
+});
+export const softDarkTheme = merge({
+    palette: darkColorScheme.palette,
+    shape: {
+        borderRadius: 10,
+    },
+    components: darkComponentsOverrides,
+});

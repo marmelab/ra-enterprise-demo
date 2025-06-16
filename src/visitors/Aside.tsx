@@ -36,7 +36,12 @@ import {
 const Aside = () => {
     const record = useRecordContext<Customer>();
     return (
-        <Box width={400} display={{ xs: 'none', lg: 'block' }}>
+        <Box
+            sx={{
+                width: 400,
+                display: { xs: 'none', lg: 'block' },
+            }}
+        >
             {record && <EventList />}
         </Box>
     );
@@ -67,16 +72,30 @@ const EventList = () => {
     const events = mixOrdersAndReviews(orders, reviews);
 
     return (
-        <Box ml={2}>
+        <Box
+            sx={{
+                ml: 2,
+            }}
+        >
             <Card>
                 <CardContent>
                     <Typography variant="h6" gutterBottom>
                         {translate('resources.customers.fieldGroups.history')}
                     </Typography>
                     <Grid container rowSpacing={1} columnSpacing={1}>
-                        <Grid item xs={6} display="flex" gap={1}>
+                        <Grid
+                            sx={{
+                                display: 'flex',
+                                gap: 1,
+                            }}
+                            size={6}
+                        >
                             <AccessTimeIcon fontSize="small" color="disabled" />
-                            <Box flexGrow={1}>
+                            <Box
+                                sx={{
+                                    flexGrow: 1,
+                                }}
+                            >
                                 <Typography variant="body2">
                                     {translate(
                                         'resources.customers.fields.first_seen'
@@ -89,18 +108,39 @@ const EventList = () => {
                             </Box>
                         </Grid>
                         {orders && (
-                            <Grid item xs={6} display="flex" gap={1}>
+                            <Grid
+                                sx={{
+                                    display: 'flex',
+                                    gap: 1,
+                                }}
+                                size={6}
+                            >
                                 <order.icon fontSize="small" color="disabled" />
-                                <Typography variant="body2" flexGrow={1}>
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        flexGrow: 1,
+                                    }}
+                                >
                                     {translate('resources.orders.amount', {
                                         smart_count: orders.length,
                                     })}
                                 </Typography>
                             </Grid>
                         )}
-                        <Grid item xs={6} display="flex" gap={1}>
+                        <Grid
+                            sx={{
+                                display: 'flex',
+                                gap: 1,
+                            }}
+                            size={6}
+                        >
                             <AccessTimeIcon fontSize="small" color="disabled" />
-                            <Box flexGrow={1}>
+                            <Box
+                                sx={{
+                                    flexGrow: 1,
+                                }}
+                            >
                                 <Typography variant="body2">
                                     {translate(
                                         'resources.customers.fields.last_seen'
@@ -110,12 +150,23 @@ const EventList = () => {
                             </Box>
                         </Grid>
                         {reviews && (
-                            <Grid item xs={6} display="flex" gap={1}>
+                            <Grid
+                                sx={{
+                                    display: 'flex',
+                                    gap: 1,
+                                }}
+                                size={6}
+                            >
                                 <review.icon
                                     fontSize="small"
                                     color="disabled"
                                 />
-                                <Typography variant="body2" flexGrow={1}>
+                                <Typography
+                                    variant="body2"
+                                    sx={{
+                                        flexGrow: 1,
+                                    }}
+                                >
                                     {translate('resources.reviews.amount', {
                                         smart_count: reviews.length,
                                     })}
@@ -125,7 +176,6 @@ const EventList = () => {
                     </Grid>
                 </CardContent>
             </Card>
-
             {events && <Timeline events={events} />}
         </Box>
     );

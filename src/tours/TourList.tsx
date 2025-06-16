@@ -37,13 +37,23 @@ const TourList = (): ReactElement => {
             <ListActions />
             <Grid
                 container
-                alignItems="stretch"
                 spacing={2}
-                sx={{ px: 1 }}
                 data-testid="tourlist"
+                sx={{
+                    alignItems: 'stretch',
+                    px: 1,
+                }}
             >
                 {tours.map(tour => (
-                    <Grid item key={tour.id} xs={12} sm={6} md={4} lg={3}>
+                    <Grid
+                        key={tour.id}
+                        size={{
+                            xs: 12,
+                            sm: 6,
+                            md: 4,
+                            lg: 3,
+                        }}
+                    >
                         <Tour record={tour} />
                     </Grid>
                 ))}

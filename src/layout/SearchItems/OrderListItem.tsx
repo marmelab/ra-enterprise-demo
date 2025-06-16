@@ -63,8 +63,10 @@ export const CommandListItem = (props: any) => {
                     <Typography
                         variant="body2"
                         color="textPrimary"
-                        display="flex"
                         className="highlight"
+                        sx={{
+                            display: 'flex',
+                        }}
                     >
                         Ref. {content.reference}{' '}
                         <CommandStatus status={content.status} />

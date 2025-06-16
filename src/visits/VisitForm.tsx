@@ -16,7 +16,13 @@ const Color = () => {
     const color = record?.id;
     if (!color) return null;
     return (
-        <Stack direction="row" spacing={1} alignItems="center">
+        <Stack
+            direction="row"
+            spacing={1}
+            sx={{
+                alignItems: 'center',
+            }}
+        >
             <Box
                 sx={{
                     height: '1em',
@@ -78,15 +84,29 @@ export const VisitForm = () => {
             <ReferenceInput source="storeId" reference="stores">
                 <SelectInput optionText="city" fullWidth isRequired />
             </ReferenceInput>
-            <Box display={{ xs: 'block', sm: 'flex' }}>
-                <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+            <Box
+                sx={{
+                    display: { xs: 'block', sm: 'flex' },
+                }}
+            >
+                <Box
+                    sx={{
+                        flex: 1,
+                        mr: { xs: 0, sm: '0.5em' },
+                    }}
+                >
                     <DateTimeInput
                         source="start"
                         inputProps={{ 'data-testid': 'start-input' }}
                         isRequired
                     />
                 </Box>
-                <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+                <Box
+                    sx={{
+                        flex: 1,
+                        ml: { xs: 0, sm: '0.5em' },
+                    }}
+                >
                     <EndDateInput
                         source="end"
                         inputProps={{ 'data-testid': 'end-input' }}

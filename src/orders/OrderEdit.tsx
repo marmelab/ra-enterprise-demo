@@ -75,7 +75,15 @@ const CustomerAddress = () => {
     );
 };
 
-const Spacer = () => <Box mb={1}>&nbsp;</Box>;
+const Spacer = () => (
+    <Box
+        sx={{
+            mb: 1,
+        }}
+    >
+        &nbsp;
+    </Box>
+);
 
 const OrderForm = () => {
     const translate = useTranslate();
@@ -84,19 +92,24 @@ const OrderForm = () => {
     return (
         <Form>
             <Box
-                maxWidth="50em"
-                display="flex"
-                flexDirection="column"
-                alignItems="flex-end"
+                sx={{
+                    maxWidth: '50em',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-end',
+                }}
             >
                 <Box
-                    display="inline"
-                    marginTop={(theme: Theme) =>
-                        `calc(${theme.spacing(-3.5)} - ${
-                            theme.typography.fontSize
-                        }px)`
-                    }
-                    sx={{ '& nav': { display: 'inline-block' } }}
+                    sx={{
+                        display: 'inline',
+
+                        marginTop: (theme: Theme) =>
+                            `calc(${theme.spacing(-3.5)} - ${
+                                theme.typography.fontSize
+                            }px)`,
+
+                        '& nav': { display: 'inline-block' },
+                    }}
                 >
                     <PrevNextButtons
                         filterDefaultValues={{ status: 'ordered' }}
@@ -106,26 +119,50 @@ const OrderForm = () => {
                 <Card sx={{ width: '100%' }}>
                     <CardContent>
                         <Grid container spacing={1}>
-                            <Grid item xs={12} sm={12} md={8}>
+                            <Grid
+                                size={{
+                                    xs: 12,
+                                    sm: 12,
+                                    md: 8,
+                                }}
+                            >
                                 <Typography variant="h6" gutterBottom>
                                     {translate(
                                         'resources.orders.section.order'
                                     )}
                                 </Typography>
                                 <Grid container>
-                                    <Grid item xs={12} sm={12} md={6}>
+                                    <Grid
+                                        size={{
+                                            xs: 12,
+                                            sm: 12,
+                                            md: 6,
+                                        }}
+                                    >
                                         <Labeled source="date">
                                             <DateField source="date" />
                                         </Labeled>
                                     </Grid>
-                                    <Grid item xs={12} sm={12} md={6}>
+                                    <Grid
+                                        size={{
+                                            xs: 12,
+                                            sm: 12,
+                                            md: 6,
+                                        }}
+                                    >
                                         <Labeled source="reference">
                                             <TextField source="reference" />
                                         </Labeled>
                                     </Grid>
                                 </Grid>
                                 <Grid container>
-                                    <Grid item xs={12} sm={12} md={6}>
+                                    <Grid
+                                        size={{
+                                            xs: 12,
+                                            sm: 12,
+                                            md: 6,
+                                        }}
+                                    >
                                         <SelectInput
                                             source="status"
                                             choices={[
@@ -150,8 +187,18 @@ const OrderForm = () => {
                                             sx={{ width: '80%' }}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} sm={12} md={6}>
-                                        <Box mt={2}>
+                                    <Grid
+                                        size={{
+                                            xs: 12,
+                                            sm: 12,
+                                            md: 6,
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                mt: 2,
+                                            }}
+                                        >
                                             <BooleanInput
                                                 row={true}
                                                 source="returned"
@@ -160,7 +207,13 @@ const OrderForm = () => {
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={12} md={4}>
+                            <Grid
+                                size={{
+                                    xs: 12,
+                                    sm: 12,
+                                    md: 4,
+                                }}
+                            >
                                 <Typography variant="h6" gutterBottom>
                                     {translate(
                                         'resources.orders.section.customer'

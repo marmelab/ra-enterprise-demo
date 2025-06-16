@@ -45,7 +45,13 @@ const ProductCreate = () => {
                             ),
                         }}
                     />
-                    <Stack direction="row" gap={2} sx={{ width: '100%' }}>
+                    <Stack
+                        direction="row"
+                        sx={{
+                            gap: 2,
+                            width: '100%',
+                        }}
+                    >
                         <NumberInput
                             source="width"
                             validate={required()}

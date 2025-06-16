@@ -76,10 +76,12 @@ export const ProductListItem = (props: any) => {
                         content.reviews > 0 ? (
                             <Box
                                 component="ul"
-                                display="flex"
-                                justifyContent="space-between"
-                                p={0}
-                                m={0}
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    p: 0,
+                                    m: 0,
+                                }}
                             >
                                 <LinkedData
                                     icon={<CommentIcon />}
