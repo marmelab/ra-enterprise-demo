@@ -10,7 +10,7 @@ import {
     useListContext,
     SavedQueriesList,
 } from 'react-admin';
-import { useGetTree, Tree } from '@react-admin/ra-tree';
+import { useGetTree, Tree, TreeOnSelect } from '@react-admin/ra-tree';
 
 const Aside = () => {
     const { displayedFilters, filterValues, setFilters } = useListContext();
@@ -27,16 +27,11 @@ const Aside = () => {
             ? [filterValues.category_id.toString()]
             : [];
 
-    const handleSelectCategory = (
-        selectedKeys: any,
-        { selectedNodes }: any
-    ): void => {
-        const [{ id }] = selectedNodes;
-
+    const handleSelectCategory: TreeOnSelect = (event, record): void => {
         setFilters(
             {
                 ...filterValues,
-                category_id: id,
+                category_id: record?.id,
             },
             displayedFilters
         );

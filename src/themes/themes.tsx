@@ -1,4 +1,6 @@
 import {
+    bwDarkTheme,
+    bwLightTheme,
     defaultLightTheme,
     defaultDarkTheme,
     nanoDarkTheme,
@@ -11,7 +13,13 @@ import {
 } from 'react-admin';
 import { softDarkTheme, softLightTheme } from './../layout/themes';
 
-export type ThemeName = 'soft' | 'default' | 'nano' | 'radiant' | 'house';
+export type ThemeName =
+    | 'soft'
+    | 'B&W'
+    | 'default'
+    | 'nano'
+    | 'radiant'
+    | 'house';
 
 export interface Theme {
     name: ThemeName;
@@ -21,6 +29,7 @@ export interface Theme {
 
 export const themes: Theme[] = [
     { name: 'soft', light: softLightTheme, dark: softDarkTheme },
+    { name: 'B&W', light: bwLightTheme, dark: bwDarkTheme },
     { name: 'default', light: defaultLightTheme, dark: defaultDarkTheme },
     { name: 'nano', light: nanoLightTheme, dark: nanoDarkTheme },
     { name: 'radiant', light: radiantLightTheme, dark: radiantDarkTheme },
