@@ -262,11 +262,11 @@ const tours: { [id: string]: TourType } = {
                     const end = addHours(start, 2);
                     fireEvent.change(await screen.findByTestId('start-input'), {
                         target: {
-                            value: start.toISOString().replace('Z', ''),
+                            value: start.toISOString().substring(0, 16),
                         },
                     });
                     fireEvent.change(await screen.findByTestId('end-input'), {
-                        target: { value: end.toISOString().replace('Z', '') },
+                        target: { value: end.toISOString().substring(0, 16) },
                     });
                     fireEvent.change(
                         await screen.findByTestId('interval-input'),

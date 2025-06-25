@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
     Count,
-    Datagrid,
+    DataTable,
     DateField,
     Edit,
     EditButton,
@@ -10,7 +10,6 @@ import {
     Pagination,
     ReferenceManyField,
     required,
-    TextField,
     TextInput,
     useResourceContext,
     useRecordContext,
@@ -155,7 +154,7 @@ const ProductEdit = () => (
                                 )}
                             />
                         </Box>
-                        <Datagrid
+                        <DataTable
                             sx={{
                                 width: '100%',
                                 '& .column-comment': {
@@ -166,16 +165,21 @@ const ProductEdit = () => (
                                 },
                             }}
                         >
-                            <DateField source="date" />
-                            <CustomerReferenceField />
-                            <StarRatingField
-                                label="resources.reviews.fields.rating"
-                                source="rating"
-                            />
-                            <TextField source="comment" />
-                            <TextField source="status" />
-                            <EditButton />
-                        </Datagrid>
+                            <DataTable.Col source="date">
+                                <DateField source="date" />
+                            </DataTable.Col>
+                            <DataTable.Col>
+                                <CustomerReferenceField />
+                            </DataTable.Col>
+                            <DataTable.Col label="resources.reviews.fields.rating">
+                                <StarRatingField source="rating" />
+                            </DataTable.Col>
+                            <DataTable.Col source="comment" />
+                            <DataTable.Col source="status" />
+                            <DataTable.Col>
+                                <EditButton />
+                            </DataTable.Col>
+                        </DataTable>
                     </ReferenceManyField>
                 </AccordionSection>
                 <AccordionSection
