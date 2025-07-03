@@ -142,6 +142,7 @@ const Aside = () => {
                         defaultSelectedKeys={defaultSelectedKeys}
                         autoExpandParent
                         titleField="name"
+                        hideRootNodes
                     />
                 </FilterList>
             </CardContent>
