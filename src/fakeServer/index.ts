@@ -1,5 +1,6 @@
-import fetchMock from 'fetch-mock';
 import generateData from 'data-generator-retail';
+import { http } from 'msw';
+import { setupWorker } from 'msw/browser';
 // @ts-ignore
 import { random } from 'faker/locale/en';
 import { Identifier } from 'react-admin';
@@ -20,7 +21,7 @@ import {
 import generateFakeEvents from './generateFakeEvents';
 import generateFakeVisits from './generateFakeVisits';
 import generateFakeRevisions from './generateFakeRevisions';
-import { FetchMockAdapter, Middleware } from 'fakerest';
+import { Middleware, MswAdapter } from 'fakerest';
 
 const getAllChildrenCategories = (
     categories: (Category & { children: Identifier[] })[],
@@ -77,55 +78,56 @@ const rebindProductToCategories =
         };
     };
 
-export default (): (() => void) => {
-    // @ts-ignore
-    const data: Data = generateData();
-    const products = data.products.map(
-        rebindProductToCategories(data.categories, demoData.categories)
-    );
-    const events = generateFakeEvents(data);
-    const visits = generateFakeVisits(demoData);
-    const product_revisions = generateFakeRevisions(data);
+// @ts-ignore
+const data: Data = generateData();
+const products = data.products.map(
+    rebindProductToCategories(data.categories, demoData.categories)
+);
+const events = generateFakeEvents(data);
+const visits = generateFakeVisits(demoData);
+const product_revisions = generateFakeRevisions(data);
 
-    const mergedData: Data = {
-        ...data,
-        ...demoData,
-        products,
-        product_revisions,
-        events,
-        visits,
-        admins,
-    };
-
-    const middleware: Middleware = async (context, next) => {
-        if (
-            context.method === 'GET' &&
-            context.collection === 'products' &&
-            context.params.filter &&
-            context.params.filter.category_id !== undefined
-        ) {
-            // to include all sub categories of the selected category in the filter
-            context.params.filter.category_id = getAllChildrenCategories(
-                mergedData.categories,
-                parseInt(context.params.filter.category_id)
-            );
-        }
-        return next(context);
-    };
-
-    const restServer = new FetchMockAdapter({
-        baseUrl: 'http://localhost:4000',
-        data: mergedData,
-        middlewares: [middleware],
-        loggingEnabled: true,
-    });
-    if (window) {
-        window.restServer = restServer; // give way to update data in the console
-    }
-
-    fetchMock.mock('begin:http://localhost:4000', restServer.getHandler());
-    return () => fetchMock.restore();
+const mergedData: Data = {
+    ...data,
+    ...demoData,
+    products,
+    product_revisions,
+    events,
+    visits,
+    admins,
 };
+
+const middleware: Middleware = async (context, next) => {
+    if (
+        context.method === 'GET' &&
+        context.collection === 'products' &&
+        context.params.filter &&
+        context.params.filter.category_id !== undefined
+    ) {
+        // to include all sub categories of the selected category in the filter
+        context.params.filter.category_id = getAllChildrenCategories(
+            mergedData.categories,
+            parseInt(context.params.filter.category_id)
+        );
+    }
+    return next(context);
+};
+
+const restServer = new MswAdapter({
+    baseUrl: 'http://localhost:4000',
+    data: mergedData,
+    middlewares: [middleware],
+    loggingEnabled: true,
+});
+if (window) {
+    window.restServer = restServer; // give way to update data in the console
+}
+
+export const worker = setupWorker(
+    http.all(/http:\/\/localhost:4000/, restServer.getHandler())
+);
+
+export default () => worker;
 
 export interface Data extends Record<string, any> {
     admins: AdminUser[];

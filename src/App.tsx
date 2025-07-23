@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useEffect } from 'react';
 import {
     CustomRoutes,
     mergeTranslations,
@@ -21,7 +20,6 @@ import {
 } from '@react-admin/ra-tour';
 import { Route } from 'react-router';
 
-import fakeServer from './fakeServer';
 import dataProvider from './dataProvider';
 import authProvider from './authProvider';
 import englishMessages from './i18n/en';
@@ -75,12 +73,6 @@ const TourLauncher = React.lazy(() =>
 const store = localStorageStore(undefined, 'EECommerce');
 
 const App = () => {
-    useEffect(() => {
-        const restoreFetch = fakeServer();
-        return (): void => {
-            restoreFetch();
-        };
-    }, []);
     const [themeName] = useStore<ThemeName>('themeName', 'soft');
     const lightTheme = themes.find(theme => theme.name === themeName)?.light;
     const darkTheme = themes.find(theme => theme.name === themeName)?.dark;
