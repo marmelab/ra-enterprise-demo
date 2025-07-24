@@ -10,6 +10,11 @@ if (!container) {
 }
 const root = createRoot(container);
 
-worker.start({ onUnhandledRequest: 'bypass' }).then(() => {
-    root.render(<App />);
-});
+worker
+    .start({
+        onUnhandledRequest: 'bypass',
+        serviceWorker: { url: './mockServiceWorker.js' },
+    })
+    .then(() => {
+        root.render(<App />);
+    });
