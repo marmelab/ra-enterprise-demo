@@ -16,22 +16,18 @@ import {
     Toolbar,
     SaveButton,
     useNotify,
-    useGetIdentity,
     WithRecord,
     SimpleForm,
     ReferenceInput,
     AutocompleteInput,
     DateInput,
 } from 'react-admin';
+import { Box, Card, CardContent, useTheme, Stack } from '@mui/material';
 import {
-    Box,
-    Card,
-    CardContent,
-    useTheme,
-    Stack,
-    Typography,
-} from '@mui/material';
-import { useGetLock, useLockOnMount } from '@react-admin/ra-realtime';
+    useLockOnMount,
+    useLockCallbacks,
+    LockStatus,
+} from '@react-admin/ra-realtime';
 import { useDefineAppLocation } from '@react-admin/ra-navigation';
 import {
     AccordionSection,
@@ -277,21 +273,15 @@ const ProductEditFormWithPreview = ({ children, ...props }: any) => {
 };
 
 const CustomToolbar = ({ disabled }: { disabled?: boolean }) => {
-    const resource = useResourceContext();
-    const record = useRecordContext();
-
-    const { identity } = useGetIdentity();
-    const { data: lock } = useGetLock(
-        resource!,
-        { id: record!.id },
-        { enabled: !!resource && !!record?.id }
-    );
-    const isMeLocker = lock?.identity === identity?.id;
+    const { isLockedByCurrentUser } = useLockCallbacks();
 
     return (
         <Toolbar>
-            <SaveButton disabled={disabled === true || !isMeLocker} />
-            {!isMeLocker && <LockMessage identity={lock?.identity} />}
+            <SaveButton
+                disabled={disabled === true || !isLockedByCurrentUser}
+                sx={{ mr: 1 }}
+            />
+            <LockStatus />
         </Toolbar>
     );
 };
@@ -299,22 +289,6 @@ const CustomToolbar = ({ disabled }: { disabled?: boolean }) => {
 const ApplyChangesBasedOnSearchParam = () => {
     useApplyChangesBasedOnSearchParam();
     return null;
-};
-
-const LockMessage = (props: any) => {
-    const { identity, variant = 'body1' } = props;
-
-    return (
-        <Typography
-            variant={variant}
-            sx={{
-                py: 0,
-                px: 1,
-            }}
-        >
-            This record is locked by another user: {identity}.
-        </Typography>
-    );
 };
 
 const customerOptionRenderer = (choice: any) =>
