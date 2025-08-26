@@ -13,6 +13,7 @@ const root = createRoot(container);
 worker
     .start({
         onUnhandledRequest: 'bypass',
+        quiet: true,
         serviceWorker: { url: './mockServiceWorker.js' },
     })
     .then(() => {
