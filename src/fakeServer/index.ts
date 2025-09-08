@@ -114,7 +114,7 @@ const middleware: Middleware = async (context, next) => {
 };
 
 const restServer = new MswAdapter({
-    baseUrl: 'http://localhost:4000',
+    baseUrl: 'https://demo.api.react-admin-ee.marmelab.com',
     data: mergedData,
     middlewares: [middleware],
     loggingEnabled: true,
@@ -124,7 +124,10 @@ if (window) {
 }
 
 export const worker = setupWorker(
-    http.all(/http:\/\/localhost:4000/, restServer.getHandler())
+    http.all(
+        /https:\/\/demo\.api\.react-admin-ee\.marmelab\.com/,
+        restServer.getHandler()
+    )
 );
 
 export default () => worker;

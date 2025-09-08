@@ -20,7 +20,7 @@ const restProvider = compose(
     addTreeMethodsBasedOnChildren,
     addSearchMethod,
     addRevisionMethodsBasedOnRelatedResource
-)(simpleRestProvider('http://localhost:4000'));
+)(simpleRestProvider('https://demo.api.react-admin-ee.marmelab.com'));
 
 const delayedDataProvider = new Proxy(restProvider, {
     get: (target, name, self) => {
