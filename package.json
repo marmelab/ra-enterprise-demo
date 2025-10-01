@@ -18,7 +18,7 @@
         "@react-admin/ra-navigation": "^6.0.0",
         "@react-admin/ra-realtime": "^5.0.0",
         "@react-admin/ra-relationships": "^5.0.0",
-        "@react-admin/ra-search": "^5.1.0",
+        "@react-admin/ra-search": "^6.0.0",
         "@react-admin/ra-tour": "^5.0.0",
         "@react-admin/ra-tree": "^7.0.0",
         "@tanstack/react-query-devtools": "^5.8.4",
