@@ -304,7 +304,7 @@ const tours: { [id: string]: TourType } = {
         before: async ({ redirect }) => {
             clearStorage(); // clear the storage to avoid other tours changed to alter this tour
             redirect('/products');
-            await timeout(1000); // would be so awesome if redirect was awaitable!
+            await screen.findAllByText('Aerial Coast');
         },
         steps: [
             {
@@ -327,7 +327,9 @@ const tours: { [id: string]: TourType } = {
                 target: "[data-tour-id='description-tab']",
                 content: 'tours.ra-markdown.editor_location',
                 after: async ({ target }) => {
-                    target.children[0] && target.children[0].click();
+                    target.children[0] &&
+                        target.children[0].children[0] &&
+                        target.children[0].children[0].click();
                     await screen.findByLabelText('Headings');
                     await new Promise(resolve => setTimeout(resolve, 500));
                 },
