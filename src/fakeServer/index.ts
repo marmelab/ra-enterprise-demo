@@ -2,7 +2,7 @@ import generateData from 'data-generator-retail';
 import { http } from 'msw';
 import { setupWorker } from 'msw/browser';
 // @ts-ignore
-import { random } from 'faker/locale/en';
+import { faker } from '@faker-js/faker';
 import { Identifier } from 'react-admin';
 import { RecordRevision } from '@react-admin/ra-history';
 import { EventRecord } from '@react-admin/ra-audit-log';
@@ -24,7 +24,7 @@ import generateFakeRevisions from './generateFakeRevisions';
 import { Middleware, MswAdapter } from 'fakerest';
 
 const getAllChildrenCategories = (
-    categories: (Category & { children: Identifier[] })[],
+    categories: (Category & { children: number[] })[],
     parentId: Identifier
 ): Array<Identifier | any> => {
     const parentCategory = categories.find(({ id }) => id === parentId);
@@ -41,7 +41,7 @@ const getAllChildrenCategories = (
 const rebindProductToCategories =
     (
         originalCategories: Category[],
-        newCategories: (Category & { children: Identifier[] })[]
+        newCategories: (Category & { children: number[] })[]
     ) =>
     (product: Product) => {
         const originalCategory = originalCategories.find(
@@ -68,7 +68,7 @@ const rebindProductToCategories =
             };
         }
 
-        const newCategoryId = random.arrayElement(
+        const newCategoryId = faker.helpers.arrayElement(
             matchingNewCategory.children || []
         );
 
@@ -134,7 +134,7 @@ export default () => worker;
 
 export interface Data extends Record<string, any> {
     admins: AdminUser[];
-    categories: (Category & { children: Identifier[] })[];
+    categories: (Category & { children: number[] })[];
     orders: Order[];
     customers: Customer[];
     events: EventRecord[];
