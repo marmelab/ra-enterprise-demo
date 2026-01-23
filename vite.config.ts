@@ -12,7 +12,8 @@ export default defineConfig(async () => {
     if (fs.existsSync(path.resolve(__dirname, '../packages'))) {
         const packages = fs.readdirSync(path.resolve(__dirname, '../packages'));
         for (const dirName of packages) {
-            if (dirName === 'create-react-admin') continue;
+            if (dirName === 'create-react-admin' || dirName === 'trigger-ci.md')
+                continue;
             // eslint-disable-next-line prettier/prettier
             const packageJson = JSON.parse(
                 fs.readFileSync(
