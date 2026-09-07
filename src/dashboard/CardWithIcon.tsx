@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FC, createElement, ReactNode } from 'react';
 import { Card, Box, Typography, Divider } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { LinkBase } from 'react-admin';
 
 interface Props {
     icon: FC<any>;
@@ -28,7 +28,7 @@ const CardWithIcon = (props: Props) => {
                 },
             }}
         >
-            <Link to={to}>
+            <LinkBase to={to}>
                 <Box
                     sx={{
                         position: 'relative',
@@ -74,7 +74,7 @@ const CardWithIcon = (props: Props) => {
                         </Typography>
                     </Box>
                 </Box>
-            </Link>
+            </LinkBase>
             {children && <Divider />}
             {children}
         </Card>

@@ -9,7 +9,6 @@ import {
     ListItemText,
 } from '@mui/material';
 import CommentIcon from '@mui/icons-material/Comment';
-import { Link } from 'react-router-dom';
 
 import {
     ReferenceField,
@@ -17,6 +16,7 @@ import {
     useGetList,
     useTranslate,
     useIsDataLoaded,
+    LinkBase,
 } from 'react-admin';
 
 import CardWithIcon from './CardWithIcon';
@@ -56,7 +56,7 @@ const PendingReviews = () => {
                 {reviews?.map((record: Review) => (
                     <ListItemButton
                         key={record.id}
-                        component={Link}
+                        component={LinkBase}
                         to={`/reviews/${record.id}`}
                         alignItems="flex-start"
                     >
@@ -111,7 +111,7 @@ const PendingReviews = () => {
             </Box>
             <Button
                 sx={{ borderRadius: 0 }}
-                component={Link}
+                component={LinkBase}
                 to="/reviews"
                 size="small"
                 color="primary"

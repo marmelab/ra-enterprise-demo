@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 import {
     Avatar,
@@ -18,6 +17,7 @@ import {
     useTranslate,
     useLogin,
     useNotify,
+    useLocation,
 } from 'react-admin';
 
 const Login = () => {
@@ -39,8 +39,8 @@ const Login = () => {
                 typeof error === 'string'
                     ? error
                     : typeof error === 'undefined' || !error.message
-                    ? 'ra.auth.sign_in_error'
-                    : error.message,
+                      ? 'ra.auth.sign_in_error'
+                      : error.message,
                 {
                     type: 'warning',
                     messageArgs: {
@@ -48,8 +48,8 @@ const Login = () => {
                             typeof error === 'string'
                                 ? error
                                 : error && error.message
-                                ? error.message
-                                : undefined,
+                                  ? error.message
+                                  : undefined,
                     },
                 }
             );

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Navigate, useParams } from 'react-router';
 import { useTour } from '@react-admin/ra-tour';
+import { Navigate, useParams } from 'react-admin';
 
 const TourLauncher = () => {
     const { tour } = useParams<{ tour: string }>();

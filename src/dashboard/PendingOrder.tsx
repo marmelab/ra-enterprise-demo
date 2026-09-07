@@ -7,8 +7,7 @@ import {
     Box,
     ListItemButton,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useTranslate, useReference } from 'react-admin';
+import { useTranslate, useReference, LinkBase } from 'react-admin';
 
 import { Customer, Order } from '../types';
 import { formatNumberAsUSD } from '../formatUtils';
@@ -40,7 +39,7 @@ export const PendingOrder = (props: Props) => {
                 </Box>
             }
         >
-            <ListItemButton component={Link} to={`/orders/${order.id}`}>
+            <ListItemButton component={LinkBase} to={`/orders/${order.id}`}>
                 <ListItemAvatar>
                     {isPending ? (
                         <Avatar />

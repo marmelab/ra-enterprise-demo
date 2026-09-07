@@ -4,9 +4,9 @@ import {
     useRedirect,
     useResourceContext,
     Identifier,
+    useLocation,
 } from 'react-admin';
 import { useAddChildNode, useGetRootNodes } from '@react-admin/ra-tree';
-import { useLocation } from 'react-router';
 
 type CategoryCreateLocationState = {
     parentId?: Identifier;

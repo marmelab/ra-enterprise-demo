@@ -10,10 +10,9 @@ import {
 import HomeIcon from '@mui/icons-material/Home';
 import CodeIcon from '@mui/icons-material/Code';
 import FlagIcon from '@mui/icons-material/Flag';
-import { useTranslate } from 'react-admin';
+import { useTranslate, LinkBase } from 'react-admin';
 
 import publishArticleImage from './welcome_illustration.svg';
-import { Link } from 'react-router-dom';
 import { useTourStates } from '../tours/useTourState';
 
 const Welcome = () => {
@@ -70,7 +69,7 @@ const Welcome = () => {
                         <Badge badgeContent={numberOfTours} color="error">
                             <Button
                                 variant="contained"
-                                component={Link}
+                                component={LinkBase}
                                 to="/tours"
                                 startIcon={<FlagIcon />}
                             >

@@ -9,8 +9,7 @@ import {
     ListItemText,
 } from '@mui/material';
 import CustomerIcon from '@mui/icons-material/PersonAdd';
-import { Link } from 'react-router-dom';
-import { useTranslate, useGetList } from 'react-admin';
+import { useTranslate, useGetList, LinkBase } from 'react-admin';
 import { subDays } from 'date-fns';
 
 import CardWithIcon from './CardWithIcon';
@@ -48,7 +47,7 @@ const NewCustomers = () => {
                     ? visitors.map((record: Customer) => (
                           <ListItemButton
                               to={`/customers/${record.id}`}
-                              component={Link}
+                              component={LinkBase}
                               key={record.id}
                           >
                               <ListItemAvatar>
@@ -70,7 +69,7 @@ const NewCustomers = () => {
             </Box>
             <Button
                 sx={{ borderRadius: 0 }}
-                component={Link}
+                component={LinkBase}
                 to="/customers"
                 size="small"
                 color="primary"

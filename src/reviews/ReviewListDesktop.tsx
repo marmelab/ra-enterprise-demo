@@ -6,6 +6,7 @@ import {
     TextField,
     BulkDeleteButton,
     useCreatePath,
+    useNavigate,
 } from 'react-admin';
 
 import ProductReferenceField from '../products/ProductReferenceField';
@@ -15,7 +16,6 @@ import rowStyle from './rowStyle';
 
 import BulkAcceptButton from './BulkAcceptButton';
 import BulkRejectButton from './BulkRejectButton';
-import { useNavigate } from 'react-router';
 
 export interface ReviewListDesktopProps {
     selectedRow?: Identifier;

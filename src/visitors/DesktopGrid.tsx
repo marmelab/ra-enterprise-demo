@@ -1,6 +1,5 @@
 import React, { Children, ReactElement } from 'react';
 import { Box, Card, CardContent, IconButton, useTheme } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
 
 import {
     FieldProps,
@@ -9,6 +8,7 @@ import {
     useListContext,
     useResourceContext,
     useTranslate,
+    LinkBase,
 } from 'react-admin';
 
 import EditIcon from '@mui/icons-material/Edit';
@@ -67,7 +67,7 @@ const DesktopGrid = ({ children }: { children: ReactElement[] }) => {
                                 <IconButton
                                     color="secondary"
                                     aria-label="Edit"
-                                    component={RouterLink}
+                                    component={LinkBase}
                                     sx={{
                                         position: 'absolute',
                                         top: 0,

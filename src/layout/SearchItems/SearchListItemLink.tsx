@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
 import { Link } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { LinkBase } from 'react-admin';
 
 // This component could be added to ra-search
 export const SearchListItemLink = forwardRef<any, any>((props, ref) => {
@@ -9,7 +9,7 @@ export const SearchListItemLink = forwardRef<any, any>((props, ref) => {
 
     return (
         <Link
-            component={RouterLink}
+            component={LinkBase}
             to={data.url}
             onClick={onClick}
             ref={ref}

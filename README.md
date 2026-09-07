@@ -36,6 +36,35 @@ make run-demo
 
 **Note**: This demo requires a valid subscription to [React Admin Enterprise Edition](https://marmelab.com/ra-enterprise/).
 
+## Switching routers
+
+The demo runs on react-admin's default router, react-router. Set `VITE_ROUTER` to
+run the very same application on TanStack Router instead:
+
+```sh
+yarn start                       # react-router
+VITE_ROUTER=tanstack yarn start  # TanStack Router
+```
+
+Only `<Admin routerProvider>` changes between the two, see
+[src/routerProvider.ts](./src/routerProvider.ts). The rest of the demo is written
+against react-admin's router-agnostic primitives (`LinkBase`, `useLocation`,
+`useNavigate`, `useParams`, `useMatch`, `Navigate`) and never imports
+react-router. The one exception is `<Route>` inside `<CustomRoutes>`, which the
+router abstraction duck-types.
+
+Both routers use hash URLs, since react-admin creates a hash router by default,
+so a deep link such as `#/customers/1` works unchanged on either.
+
+Note that `VITE_ROUTER` is inlined when Vite serves the file, so switching routers
+means restarting the dev server, not just reloading the page. To compare the two,
+run them side by side on different ports:
+
+```sh
+yarn start --host                                                # react-router
+VITE_ROUTER=tanstack yarn start --host --port 8002 --strictPort   # TanStack Router
+```
+
 ## Available Scripts
 
 In the project directory, you can run:

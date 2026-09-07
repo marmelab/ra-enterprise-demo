@@ -10,8 +10,8 @@ import {
     useNotify,
     useRedirect,
     getRecordFromLocation,
+    useLocation,
 } from 'react-admin';
-import { useLocation } from 'react-router';
 
 import StarRatingInput from './StarRatingInput';
 

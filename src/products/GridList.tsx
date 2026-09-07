@@ -13,8 +13,8 @@ import {
     NumberField,
     useListContext,
     useResourceContext,
+    LinkBase,
 } from 'react-admin';
-import { Link } from 'react-router-dom';
 import { Lock, useGetLocks } from '@react-admin/ra-realtime';
 import { LockOverlay } from './LockOverlay';
 import { USDFormat } from '../formatUtils';
@@ -98,7 +98,7 @@ const LoadedGridList = () => {
 
                 return (
                     <ImageListItem
-                        component={Link}
+                        component={LinkBase}
                         key={record.id}
                         to={createPath({
                             resource: 'products',

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { useTranslate } from 'react-admin';
+import { useTranslate, LinkBase } from 'react-admin';
 import queryString from 'query-string';
 
 import visitors from '../visitors';
@@ -12,7 +11,7 @@ const LinkToRelatedCustomers = ({ segment }: { segment: string }) => {
         <Button
             size="small"
             color="primary"
-            component={Link}
+            component={LinkBase}
             to={{
                 pathname: '/customers',
                 search: queryString.stringify({

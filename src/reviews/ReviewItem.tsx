@@ -7,8 +7,8 @@ import {
     FunctionField,
     TextField,
     useRecordContext,
+    LinkBase,
 } from 'react-admin';
-import { Link } from 'react-router-dom';
 import AvatarField from '../visitors/AvatarField';
 import { Review, Customer } from './../types';
 
@@ -20,7 +20,7 @@ export const ReviewItem = () => {
     }
     return (
         <ListItemButton
-            component={Link}
+            component={LinkBase}
             to={createPath({
                 resource: 'reviews',
                 type: 'edit',

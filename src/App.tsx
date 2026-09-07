@@ -18,10 +18,10 @@ import {
     raTourLanguageEnglish,
     raTourLanguageFrench,
 } from '@react-admin/ra-tour';
-import { Route } from 'react-router';
 
 import dataProvider from './dataProvider';
 import authProvider from './authProvider';
+import { Route, routerProvider } from './routerProvider';
 import englishMessages from './i18n/en';
 import frenchMessages from './i18n/fr';
 import { Login, Layout } from './layout';
@@ -80,6 +80,7 @@ const App = () => {
     return (
         <Admin
             title=""
+            routerProvider={routerProvider}
             store={store}
             dataProvider={enhancedDataProvider}
             authProvider={authProvider}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactElement, ReactNode } from 'react';
 import { Box, BoxProps, Link, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { LinkBase } from 'react-admin';
 
 export const LinkedData = ({
     children,
@@ -17,7 +17,7 @@ export const LinkedData = ({
 } & BoxProps): ReactElement => {
     return (
         <Link
-            component={RouterLink}
+            component={LinkBase}
             to={to}
             sx={{
                 color: 'inherit',
