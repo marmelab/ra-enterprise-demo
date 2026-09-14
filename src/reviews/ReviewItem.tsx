@@ -64,7 +64,9 @@ export const ReviewItem = () => {
                     </Fragment>
                 }
                 secondary={record.comment}
-                secondaryTypographyProps={{ noWrap: true }}
+                slotProps={{
+                    secondary: { noWrap: true },
+                }}
             />
         </ListItemButton>
     );

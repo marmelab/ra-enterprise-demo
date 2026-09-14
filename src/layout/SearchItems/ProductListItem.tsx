@@ -13,10 +13,6 @@ import { SearchListItemLink } from './index';
 import { useTranslate } from 'react-admin';
 import { LinkedData } from './LinkedData';
 
-const secondaryTypographyProps = {
-    component: 'div',
-};
-
 export const ProductListItem = (props: any) => {
     const { data, onClick } = props;
     const { content } = data;
@@ -50,12 +46,7 @@ export const ProductListItem = (props: any) => {
                 onClick={onClick}
             >
                 <ListItemAvatar
-                    sx={{
-                        width: 64,
-                        height: 64,
-                        paddingRight: 2,
-                        mt: 0.5,
-                    }}
+                    sx={{ width: 64, height: 64, paddingRight: 2, mt: 0.5 }}
                 >
                     <Box sx={{ '& img': { width: '100%' } }}>
                         <img src={content.thumbnail} alt={content.reference} />
@@ -95,9 +86,8 @@ export const ProductListItem = (props: any) => {
                             </Box>
                         ) : undefined
                     }
-                    // @ts-ignore Could not make TS happy
-                    secondaryTypographyProps={secondaryTypographyProps}
                     sx={{ my: 0 }}
+                    slotProps={{ secondary: { component: 'div' } }}
                 />
             </ListItemButton>
         </ListItem>

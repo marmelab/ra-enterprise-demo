@@ -16,10 +16,6 @@ import { SearchListItemLink } from './SearchListItemLink';
 import { useTranslate } from 'react-admin';
 import { LinkedData } from './LinkedData';
 
-const secondaryTypographyProps = {
-    component: 'div',
-};
-
 export const CustomerListItem = (props: any) => {
     const { data, onClick } = props;
     const { content } = data;
@@ -123,9 +119,8 @@ export const CustomerListItem = (props: any) => {
                             ) : null}
                         </Box>
                     }
-                    // @ts-ignore Could not make TS happy
-                    secondaryTypographyProps={secondaryTypographyProps}
                     sx={{ my: 0 }}
+                    slotProps={{ secondary: { component: 'div' } }}
                 />
             </ListItemButton>
         </ListItem>

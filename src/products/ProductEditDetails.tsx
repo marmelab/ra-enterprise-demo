@@ -36,10 +36,12 @@ export const ProductEditDetails = () => (
         >
             <NumberInput
                 source="width"
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="start">cm</InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="start">cm</InputAdornment>
+                        ),
+                    },
                 }}
                 validate={req}
             />
@@ -52,10 +54,12 @@ export const ProductEditDetails = () => (
         >
             <NumberInput
                 source="height"
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment position="start">cm</InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        endAdornment: (
+                            <InputAdornment position="start">cm</InputAdornment>
+                        ),
+                    },
                 }}
                 validate={req}
             />
@@ -74,10 +78,12 @@ export const ProductEditDetails = () => (
         >
             <NumberInput
                 source="price"
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">€</InputAdornment>
-                    ),
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start">€</InputAdornment>
+                        ),
+                    },
                 }}
                 validate={req}
             />

@@ -16,13 +16,7 @@ const Color = () => {
     const color = record?.id;
     if (!color) return null;
     return (
-        <Stack
-            direction="row"
-            spacing={1}
-            sx={{
-                alignItems: 'center',
-            }}
-        >
+        <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
             <Box
                 sx={{
                     height: '1em',
@@ -97,7 +91,9 @@ export const VisitForm = () => {
                 >
                     <DateTimeInput
                         source="start"
-                        inputProps={{ 'data-testid': 'start-input' }}
+                        slotProps={{
+                            htmlInput: { 'data-testid': 'start-input' },
+                        }}
                         isRequired
                     />
                 </Box>
@@ -109,7 +105,9 @@ export const VisitForm = () => {
                 >
                     <EndDateInput
                         source="end"
-                        inputProps={{ 'data-testid': 'end-input' }}
+                        slotProps={{
+                            htmlInput: { 'data-testid': 'end-input' },
+                        }}
                         isRequired
                     />
                 </Box>
@@ -124,7 +122,9 @@ export const VisitForm = () => {
                     hiddenLabel
                     aria-label="interval"
                     sx={{ width: '4em' }}
-                    inputProps={{ 'data-testid': 'interval-input' }}
+                    slotProps={{
+                        htmlInput: { 'data-testid': 'interval-input' },
+                    }}
                     isRequired
                 />
                 <SelectInput
@@ -140,9 +140,11 @@ export const VisitForm = () => {
                     ]}
                     label={false}
                     hiddenLabel
-                    InputLabelProps={{ disabled: true }}
+                    slotProps={{
+                        inputLabel: { disabled: true },
+                        htmlInput: { 'data-testid': 'freq-input' },
+                    }}
                     aria-label="freq"
-                    inputProps={{ 'data-testid': 'freq-input' }}
                     isRequired
                     fullWidth={false}
                 />
@@ -157,7 +159,7 @@ export const VisitForm = () => {
                     hiddenLabel
                     aria-label="count"
                     sx={{ width: '4em' }}
-                    inputProps={{ 'data-testid': 'count-input' }}
+                    slotProps={{ htmlInput: { 'data-testid': 'count-input' } }}
                     isRequired
                 />
                 <Typography sx={{ py: 1 }}>

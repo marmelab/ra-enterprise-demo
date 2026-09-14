@@ -37,45 +37,43 @@ const ProductCreate = () => {
                         source="price"
                         validate={required()}
                         sx={{ width: '50%' }}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    €
-                                </InputAdornment>
-                            ),
+                        slotProps={{
+                            input: {
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        €
+                                    </InputAdornment>
+                                ),
+                            },
                         }}
                     />
-                    <Stack
-                        direction="row"
-                        sx={{
-                            gap: 2,
-                            width: '100%',
-                        }}
-                    >
+                    <Stack direction="row" sx={{ gap: 2, width: '100%' }}>
                         <NumberInput
                             source="width"
                             validate={required()}
                             sx={{ width: '50%' }}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="start">
-                                        cm
-                                    </InputAdornment>
-                                ),
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="start">
+                                            cm
+                                        </InputAdornment>
+                                    ),
+                                },
                             }}
                         />
                         <NumberInput
                             source="height"
                             validate={required()}
-                            sx={{
-                                width: '50%',
-                            }}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="start">
-                                        cm
-                                    </InputAdornment>
-                                ),
+                            sx={{ width: '50%' }}
+                            slotProps={{
+                                input: {
+                                    endAdornment: (
+                                        <InputAdornment position="start">
+                                            cm
+                                        </InputAdornment>
+                                    ),
+                                },
                             }}
                         />
                     </Stack>

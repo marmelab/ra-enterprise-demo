@@ -66,14 +66,6 @@ export default defineConfig(async () => {
             alias: [
                 // allow profiling in production
                 { find: /^react-dom$/, replacement: 'react-dom/profiling' },
-                // Needed to load the correct MUI version in our monorepo
-                {
-                    find: /^@mui\/(material|utils|system|icons-material)\/*(.*)$/,
-                    replacement: path.resolve(
-                        __dirname,
-                        'node_modules/@mui/$1/esm/$2'
-                    ),
-                },
                 {
                     find: 'scheduler/tracing',
                     replacement: 'scheduler/tracing-profiling',

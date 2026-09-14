@@ -13,10 +13,6 @@ import CommentIcon from '@mui/icons-material/Comment';
 
 import { SearchListItemLink } from './index';
 
-const secondaryTypographyProps = {
-    component: 'div',
-};
-
 export const ReviewListItem = (props: any) => {
     const { data, onClick } = props;
     const { content } = data;
@@ -33,12 +29,7 @@ export const ReviewListItem = (props: any) => {
                 onClick={onClick}
             >
                 <ListItemAvatar
-                    sx={{
-                        width: 64,
-                        height: 64,
-                        paddingRight: 2,
-                        mt: 0,
-                    }}
+                    sx={{ width: 64, height: 64, paddingRight: 2, mt: 0 }}
                 >
                     <Avatar alt={content.reference}>
                         <CommentIcon fontSize="small" />
@@ -48,9 +39,8 @@ export const ReviewListItem = (props: any) => {
                     className="highlight"
                     primary={<Rating value={content.rating} readOnly />}
                     secondary={<ReviewComment comment={content.comment} />}
-                    // @ts-ignore Could not make TS happy
-                    secondaryTypographyProps={secondaryTypographyProps}
                     sx={{ my: 0 }}
+                    slotProps={{ secondary: { component: 'div' } }}
                 />
             </ListItemButton>
         </ListItem>

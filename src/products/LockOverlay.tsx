@@ -22,12 +22,8 @@ export const LockOverlay = ({ lock, ...rest }: any) => {
             {...rest}
         >
             <LockIcon />
-            <Box
-                sx={{
-                    paddingTop: '1em',
-                }}
-            >
-                <Typography variant="body1" color="inherit">
+            <Box sx={{ paddingTop: '1em' }}>
+                <Typography variant="body1" sx={{ color: 'inherit' }}>
                     {translate('resources.locks.overlay', {
                         name: lock.identity,
                     })}

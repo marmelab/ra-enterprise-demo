@@ -23,11 +23,7 @@ const MobileGrid = () => {
         return null;
     }
     return (
-        <Box
-            sx={{
-                margin: '0.5em',
-            }}
-        >
+        <Box sx={{ margin: '0.5em' }}>
             {data.map(record => (
                 <RecordContextProvider key={record.id} value={record}>
                     <Card sx={{ margin: '0.5rem 0' }}>
@@ -41,8 +37,10 @@ const MobileGrid = () => {
                                     />
                                 </>
                             }
-                            titleTypographyProps={{ variant: 'body1' }}
                             action={<EditButton />}
+                            slotProps={{
+                                title: { variant: 'body1' },
+                            }}
                         />
                         <CardContent sx={{ pt: 0 }}>
                             <CustomerReferenceField

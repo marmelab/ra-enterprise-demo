@@ -15,7 +15,7 @@ import {
 } from '@react-admin/ra-navigation';
 import {
     EventNote as EventNoteIcon,
-    CheckCircleOutline as CheckCircleOutlineIcon,
+    CheckCircleOutlined as CheckCircleOutlineIcon,
     AvTimer as AvTimerIcon,
     Block as BlockIcon,
     Search as SearchIcon,
@@ -132,13 +132,7 @@ const SalesMenuItem = (): ReactElement => {
                 data-testid="orders-menu"
                 subMenu={
                     <>
-                        <Typography
-                            variant="h6"
-                            gutterBottom
-                            sx={{
-                                ml: 1,
-                            }}
-                        >
+                        <Typography variant="h6" gutterBottom sx={{ ml: 1 }}>
                             {translate(`pos.menu.sales`, { smart_count: 1 })}
                         </Typography>
                         <SolarMenu.List dense>
@@ -182,13 +176,7 @@ const CatalogMenuItem = (): ReactElement => {
             label="pos.menu.catalog"
             subMenu={
                 <>
-                    <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{
-                            ml: 1,
-                        }}
-                    >
+                    <Typography variant="h6" gutterBottom sx={{ ml: 1 }}>
                         {translate(`pos.menu.catalog`, {
                             smart_count: 1,
                         })}
@@ -216,10 +204,7 @@ const CatalogMenuItem = (): ReactElement => {
                             <Typography
                                 variant="h6"
                                 gutterBottom
-                                sx={{
-                                    mt: 2,
-                                    ml: 1,
-                                }}
+                                sx={{ mt: 2, ml: 1 }}
                             >
                                 {translate(`pos.menu.my_queries`, {
                                     smart_count: 1,
@@ -253,13 +238,7 @@ const CustomersMenuItem = () => {
             label="pos.menu.customers"
             subMenu={
                 <>
-                    <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{
-                            ml: 1,
-                        }}
-                    >
+                    <Typography variant="h6" gutterBottom sx={{ ml: 1 }}>
                         {translate(`resources.customers.name`, {
                             smart_count: 2,
                         })}
@@ -281,14 +260,7 @@ const CustomersMenuItem = () => {
                             label="pos.menu.visitors"
                         />
                     </SolarMenu.List>
-                    <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{
-                            mt: 2,
-                            ml: 1,
-                        }}
-                    >
+                    <Typography variant="h6" gutterBottom sx={{ mt: 2, ml: 1 }}>
                         {translate(`resources.segments.name`, {
                             smart_count: 2,
                         })}
@@ -313,10 +285,7 @@ const CustomersMenuItem = () => {
                             <Typography
                                 variant="h6"
                                 gutterBottom
-                                sx={{
-                                    mt: 2,
-                                    ml: 1,
-                                }}
+                                sx={{ mt: 2, ml: 1 }}
                             >
                                 {translate(`pos.menu.my_queries`, {
                                     smart_count: 1,
@@ -352,12 +321,7 @@ const ReviewsMenuItem = () => {
             label={reviewsLabel}
             subMenu={
                 <SolarMenu.List dense>
-                    <Typography
-                        variant="h6"
-                        sx={{
-                            ml: 1,
-                        }}
-                    >
+                    <Typography variant="h6" sx={{ ml: 1 }}>
                         {reviewsLabel}
                     </Typography>
                     <SolarMenu.Item
@@ -394,13 +358,7 @@ const StoresMenuItem = (): ReactElement => {
             data-testid="stores-menu"
             subMenu={
                 <>
-                    <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{
-                            ml: 1,
-                        }}
-                    >
+                    <Typography variant="h6" gutterBottom sx={{ ml: 1 }}>
                         {translate(`resources.stores.name`, { smart_count: 1 })}
                     </Typography>
                     <SolarMenu.List dense>
