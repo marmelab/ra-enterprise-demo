@@ -330,20 +330,21 @@ const tours: { [id: string]: TourType } = {
                     target.children[0] &&
                         target.children[0].children[0] &&
                         target.children[0].children[0].click();
-                    await screen.findByLabelText('Headings');
+                    // the editor is lazy loaded
+                    await screen.findByRole('button', { name: 'WYSIWYG' });
                     await new Promise(resolve => setTimeout(resolve, 500));
                 },
             },
             {
-                target: '.toastui-editor-main-container',
+                target: '.RaMarkdownInput-editor',
                 content: 'tours.ra-markdown.editor',
             },
             {
-                target: '.toastui-editor-mode-switch .tab-item.active',
+                target: '.RaMarkdownInput-modeSwitch [aria-pressed=true]',
                 content: 'tours.ra-markdown.wysiwyg',
             },
             {
-                target: '.toastui-editor-mode-switch .tab-item',
+                target: '.RaMarkdownInput-modeTab-markdown',
                 content: 'tours.ra-markdown.raw',
             },
             {
