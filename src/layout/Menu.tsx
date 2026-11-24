@@ -20,7 +20,7 @@ import {
     Block as BlockIcon,
     Search as SearchIcon,
 } from '@mui/icons-material';
-import querystring from 'query-string';
+import querystring from '@marmelab/query-string';
 import { endOfYesterday } from 'date-fns';
 
 import { SearchSubMenu } from './SearchSubMenu';

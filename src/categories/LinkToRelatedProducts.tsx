@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import { useTranslate, useRecordContext, LinkBase } from 'react-admin';
-import queryString from 'query-string';
+import queryString from '@marmelab/query-string';
 
 import products from '../products';
 import { Category } from '../types';
